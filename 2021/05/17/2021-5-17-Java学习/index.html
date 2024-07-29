@@ -47,7 +47,7 @@
   isHome: false,
   isHighlightShrink: false,
   isToc: true,
-  postUpdate: '2024-07-29 21:21:51',
+  postUpdate: '2024-07-29 21:39:53',
   postMainColor: '',
 }</script><noscript><style type="text/css">
   #nav {
@@ -220,26 +220,37 @@ if (true) {
 <li>大数据-hadoop</li>
 </ul>
 <h2 id="Java特性"><a href="#Java特性" class="headerlink" title="Java特性"></a>Java特性</h2><ol>
-<li>Java语言是面向对象的(oop)</li>
+<li>Java语言是<strong>面向对象</strong>的(oop)</li>
 <li>Java语言是健壮的。Java的强类型机制、异常处理、垃圾的自动收集等是Java程序健壮性的重要保证</li>
 <li>Java语言是跨平台性的。[即:一个编译好的.class文件可以在多个系统下运行，这种特性称为跨平台]</li>
-<li>Java语言是解释型的[了解]<br>解释性语言:javascript,PHP, java 编译性语言:c&#x2F; c++<br>区别是:解释性语言，编译后的代码，不能直接被机器执行,需要解释器来执行,编译性语言,编译后的代码，可以直接被机器执行, c&#x2F;c++</li>
+<li>Java语言是解释型的[了解]<br>解释性语言:javascript,PHP,java 编译性语言:c&#x2F; c++<br>区别是:解释性语言，编译后的代码，不能直接被机器执行,需要解释器来执行,编译性语言,编译后的代码，可以直接被机器执行, c&#x2F;c++</li>
 </ol>
 <h2 id="jdk介绍"><a href="#jdk介绍" class="headerlink" title="jdk介绍"></a>jdk介绍</h2><p>Java运行机制及运行过程</p>
 <ul>
-<li>Java核心机制-Java虚拟机[JVM java virtual machine]<br>√基本介绍</li>
+<li>Java核心机制-Java虚拟机[JVM java virtual machine]<blockquote>
+<p>基本介绍</p>
+</blockquote>
+</li>
 </ul>
 <ol>
 <li>JVM是一个虚拟的计算机，具有指令集并使用不同的存储区域。负责执行指管理数据、内存、寄存器，包含在JDK中.</li>
 <li>对于不同的平台，有不同的虚拟机。</li>
 <li>Java虚拟机机制屏蔽了底层运行平台的差别，实现了“一次编译，到处运行”[说明]</li>
 </ol>
+<blockquote>
 <p>什么是JDK、JRE<br>● JDK基本介绍</p>
+</blockquote>
 <ol>
 <li>JDK的全称(Java Development Kit Java开发工具包)<br>JDK &#x3D; JRE+ java的开发工具[java, javac,javadoc,javap等]</li>
-<li>JDK是提供给Java开发人员使用的，其中包含了java的开发工具,也包括了JRE所以安装了JDK，就不用在单独安装JRE了。<br>● JRE基本介绍</li>
+<li>JDK是提供给Java开发人员使用的，其中包含了java的开发工具,也包括了JRE所以安装了JDK，就不用在单独安装JRE了。</li>
+</ol>
+<p>● JRE基本介绍</p>
+<ol>
 <li>JRE(Java Runtime Environment Java运行环境)<br>JRE &#x3D; JVM +Java的核心类库[类]</li>
-<li>包括Java虚拟机(JVM Java Virtual Machine)和Java程序所需的核心类库等,如果想要运行一个开发好的Java程序，计算机中只需要安装JRE即可。<br>● JDK、JRE和JVM的包含关系</li>
+<li>包括Java虚拟机(JVM Java Virtual Machine)和Java程序所需的核心类库等,如果想要运行一个开发好的Java程序，计算机中只需要安装JRE即可。</li>
+</ol>
+<p>● JDK、JRE和JVM的包含关系</p>
+<ol>
 <li>JDK &#x3D; JRE ＋开发工具集（例如Javac,java编译工具等）</li>
 <li>JRE &#x3D; JVM + Java SE标准类库(java核心类库)</li>
 <li>如果只想运行开发好的.class文件只需要JRE</li>
@@ -252,12 +263,15 @@ if (true) {
 <li>编辑path环境变量，增加%JAVA HOME%\bin</li>
 <li>打开DOS命令行，任意目录下敲入javac&#x2F;java。如果出现javac的参数信息,配置成功。</li>
 </ol>
-<h2 id="Java快速入门"><a href="#Java快速入门" class="headerlink" title="Java快速入门"></a>Java快速入门</h2><p>● 需求说明<br>要求开发一个Hello.java程序，可以输出”hello,world!”<br>● 开发步骤</p>
+<h2 id="Java快速入门"><a href="#Java快速入门" class="headerlink" title="Java快速入门"></a>Java快速入门</h2><p>● 需求说明<br>要求开发一个Hello.java程序，可以输出”hello,world!”</p>
+<p>● 开发步骤</p>
 <ol>
-<li>将Java 代码编写到扩展名为Hello.java的文件中。[代码说明]</li>
-<li>通过javac命令对该java文件进行编译，生成.class文件。</li>
-<li>通过java命令对生成的class文件进行运行。<br>● 运行原理示意图<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//这是java的快速入内，演示java的开发步骤</span></span><br><span class="line"><span class="comment">//对代码的相关说明</span></span><br><span class="line"><span class="comment">//1. public class Hello表示Hello是一个类,是一个public公有的类</span></span><br><span class="line"><span class="comment">//2.Hello&#123; &#125; 表示一个类的开始和结束</span></span><br><span class="line"><span class="comment">// 3. public static void main(String[] args)表示一个主方法,即我们程序的入口</span></span><br><span class="line"><span class="comment">// 4. main()门&#125;表示方法的开始和结束</span></span><br><span class="line"><span class="comment">//5. System.out.println( &quot;hello,world~&quot; );表示输出&quot;hello, world~&quot;到屏幕</span></span><br><span class="line"><span class="comment">//6.;表示语句结束</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Hello</span> &#123;</span><br><span class="line"><span class="comment">//编写一个main方法</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(string[] args)</span> &#123;</span><br><span class="line">System.out.println( <span class="string">&quot;hello,world~&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>将Java代码编写到扩展名为Hello.java的文件中。[代码说明]</li>
+<li>通过<strong>javac</strong>命令对该java文件进行编译，生成.class文件。</li>
+<li>通过java命令对生成的class文件进行运行。<br>● 运行原理示意图<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/hh4.png"></li>
 </ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//这是java的快速入内，演示java的开发步骤</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Hello</span> &#123;</span><br><span class="line"><span class="comment">//编写一个main方法</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(string[] args)</span> &#123;</span><br><span class="line">    System.out.println( <span class="string">&quot;hello,world~&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//1. public class Hello表示Hello是一个类,是一个public公有的类</span></span><br><span class="line"><span class="comment">//2.Hello&#123; &#125; 表示一个类的开始和结束</span></span><br><span class="line"><span class="comment">//3. public static void main(String[] args)表示一个主方法,即我们程序的入口</span></span><br><span class="line"><span class="comment">//4. main()门&#125;表示方法的开始和结束</span></span><br><span class="line"><span class="comment">//5. System.out.println( &quot;hello,world~&quot; );表示输出&quot;hello, world~&quot;到屏幕</span></span><br><span class="line"><span class="comment">//6.;表示语句结束</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 <h2 id="转义字符"><a href="#转义字符" class="headerlink" title="转义字符"></a>转义字符</h2><p>Java常用的转义字符<br>在控制台，输入tab键，可以实现命令补全</p>
 <ol>
 <li>\t :一个制表位，实现对齐的功能</li>
@@ -275,7 +289,7 @@ if (true) {
 </ol>
 <h2 id="DOS命令"><a href="#DOS命令" class="headerlink" title="DOS命令"></a>DOS命令</h2><p>DOS介绍<br>Dos: Disk Operating System 磁盘操作系统,简单说一下windows的目录结构。[原理图]<br>●相关的知识补充:相对路径，绝对路径</p>
 <ul>
-<li>常用的dos命令</li>
+<li>常用的dos命令<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/hh3.png"></li>
 </ul>
 <ol>
 <li>查看当前目录是有什么dir dir d:\abc2\test200</li>
