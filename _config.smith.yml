@@ -632,21 +632,18 @@ site_verification:
 
 theme_color:
   enable: true
-  main: "#3b70fc"
-  dark_main: "#f2b94b"
-  paginator: "#3b70fc"
-  #   button_hover: "#FF7242"
-  text_selection: "#2128bd"
+  main: "#4f7cff"
+  dark_main: "#ffd166"
+  paginator: "#4f7cff"
+  text_selection: "#4f7cff33"
   link_color: "var(--anzhiyu-fontcolor)"
   meta_color: "var(--anzhiyu-fontcolor)"
-  hr_color: "#4259ef23"
+  hr_color: "#4f7cff23"
   code_foreground: "#fff"
   code_background: "var(--anzhiyu-code-stress)"
-  toc_color: "#3b70fc"
-  #   blockquote_padding_color: "#3b70fc"
-  #   blockquote_background_color: "#3b70fc"
+  toc_color: "#4f7cff"
   scrollbar_color: "var(--anzhiyu-scrollbar)"
-  meta_theme_color_light: "#f7f9fe"
+  meta_theme_color_light: "#fafaf8"
   meta_theme_color_dark: "#18171d"
 
 # 文章h2添加分隔线
@@ -1010,7 +1007,7 @@ aplayerInject:
 snackbar:
   enable: true
   position: top-center
-  bg_light: "#3b70fc" # The background color of Toast Notification in light mode
+  bg_light: "#4f7cff" # The background color of Toast Notification in light mode
   bg_dark: "#1f1f1f" # The background color of Toast Notification in dark mode
 
 # https://instant.page/
