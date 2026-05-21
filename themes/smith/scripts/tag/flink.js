@@ -17,8 +17,8 @@ const flinkFn = (args, content) => {
 
     let listResult = "";
     let listContainerClass = "";
-    if (i.flink_style === "anzhiyu") {
-      listContainerClass = "anzhiyu-flink-list";
+    if (i.flink_style === "smith") {
+      listContainerClass = "smith-flink-list";
       i.link_list.forEach(j => {
         listResult += `
             <div class="flink-list-item">

@@ -193,19 +193,19 @@ rm.writeClipImg = async function (imgsrc) {
   rm.hideRightMenu();
 
   if (rm.downloadimging) {
-    anzhiyu.snackbarShow("正在处理中，请稍候...");
+    smith.snackbarShow("正在处理中，请稍候...");
     return;
   }
 
   rm.downloadimging = true;
-  anzhiyu.snackbarShow("正在复制图片，请稍后...", false, 5000);
+  smith.snackbarShow("正在复制图片，请稍后...", false, 5000);
 
   try {
     await copyImage(imgsrc);
-    anzhiyu.snackbarShow("复制成功！图片已添加盲水印，请遵守版权协议");
+    smith.snackbarShow("复制成功！图片已添加盲水印，请遵守版权协议");
   } catch (error) {
     console.error("复制图片失败:", error);
-    anzhiyu.snackbarShow("复制失败，请尝试右键另存为图片");
+    smith.snackbarShow("复制失败，请尝试右键另存为图片");
   } finally {
     rm.downloadimging = false;
   }
@@ -308,7 +308,7 @@ rm.copyPageUrl = function (url) {
     url = window.location.href;
   }
   rm.copyUrl(url);
-  anzhiyu.snackbarShow("复制链接地址成功", false, 2000);
+  smith.snackbarShow("复制链接地址成功", false, 2000);
   rm.hideRightMenu();
 };
 
@@ -396,7 +396,7 @@ function replaceAll(string, search, replace) {
 
 // 百度搜索
 rm.searchBaidu = function () {
-  anzhiyu.snackbarShow("即将跳转到百度搜索", false, 2000);
+  smith.snackbarShow("即将跳转到百度搜索", false, 2000);
   setTimeout(function () {
     window.open("https://www.baidu.com/s?wd=" + selectTextNow);
   }, "2000");
@@ -406,7 +406,7 @@ rm.searchBaidu = function () {
 //分享链接
 rm.copyLink = function () {
   rm.rightmenuCopyText(domhref);
-  anzhiyu.snackbarShow("已复制链接地址");
+  smith.snackbarShow("已复制链接地址");
 };
 
 function addRightMenuClickEvent() {
@@ -426,7 +426,7 @@ function addRightMenuClickEvent() {
   });
 
   document.getElementById("menu-top").addEventListener("click", function () {
-    anzhiyu.scrollToDest(0, 500);
+    smith.scrollToDest(0, 500);
     rm.hideRightMenu();
   });
 
@@ -449,7 +449,7 @@ function addRightMenuClickEvent() {
     toRandomPost();
   });
 
-  document.getElementById("menu-commentBarrage").addEventListener("click", anzhiyu.switchCommentBarrage);
+  document.getElementById("menu-commentBarrage").addEventListener("click", smith.switchCommentBarrage);
 
   document.getElementById("rightmenu-mask").addEventListener("click", rm.hideRightMenu);
 
@@ -468,7 +468,7 @@ function addRightMenuClickEvent() {
     rm.rightmenuCopyText(selectTextNow);
     const copyright = GLOBAL_CONFIG.copyright;
     if (copyright.copy) {
-      anzhiyu.snackbarShow(copyright.languages.copySuccess);
+      smith.snackbarShow(copyright.languages.copySuccess);
     }
   });
 
@@ -484,7 +484,7 @@ function addRightMenuClickEvent() {
   document.getElementById("menu-copylink").addEventListener("click", rm.copyLink);
 
   document.getElementById("menu-downloadimg").addEventListener("click", function () {
-    anzhiyu.downloadImage(domImgSrc, "anzhiyu");
+    smith.downloadImage(domImgSrc, "smith");
   });
 
   document.getElementById("menu-newwindowimg").addEventListener("click", function () {
@@ -499,15 +499,15 @@ function addRightMenuClickEvent() {
   document.getElementById("menu-searchBaidu").addEventListener("click", rm.searchBaidu);
 
   //音乐
-  document.getElementById("menu-music-toggle").addEventListener("click", anzhiyu.musicToggle);
+  document.getElementById("menu-music-toggle").addEventListener("click", smith.musicToggle);
 
-  document.getElementById("menu-music-back").addEventListener("click", anzhiyu.musicSkipBack);
+  document.getElementById("menu-music-back").addEventListener("click", smith.musicSkipBack);
 
-  document.getElementById("menu-music-forward").addEventListener("click", anzhiyu.musicSkipForward);
+  document.getElementById("menu-music-forward").addEventListener("click", smith.musicSkipForward);
 
   document.getElementById("menu-music-copyMusicName").addEventListener("click", function () {
-    rm.rightmenuCopyText(anzhiyu.musicGetName());
-    anzhiyu.snackbarShow("复制歌曲名称成功", false, 3000);
+    rm.rightmenuCopyText(smith.musicGetName());
+    smith.snackbarShow("复制歌曲名称成功", false, 3000);
   });
 }
 

@@ -92,33 +92,33 @@ if (document.querySelector(".comment-barrage")) {
           <div class="barrageHead">
             <a class="barrageTitle ${
               data.mailMd5 === commentBarrageConfig.mailMd5 ? "barrageBloggerTitle" : ""
-            }" href="javascript:anzhiyu.scrollTo('#post-comment')"">
+            }" href="javascript:smith.scrollTo('#post-comment')"">
               ${data.mailMd5 === commentBarrageConfig.mailMd5 ? "博主" : "热评"}
             </a>
             <div class="barrageNick">${data.nick}</div>
             <img class="nolazyload barrageAvatar" src="https://cravatar.cn/avatar/${data.mailMd5}"/>
-            <a class="comment-barrage-close" href="javascript:anzhiyu.switchCommentBarrage()"><i class="anzhiyufont anzhiyu-icon-xmark"></i></a>
+            <a class="comment-barrage-close" href="javascript:smith.switchCommentBarrage()"><i class="smithfont smith-icon-xmark"></i></a>
           </div>
-          <anzhiyu class="barrageContent" onClick="window.location.hash = '${data.id}'">
+          <smith class="barrageContent" onClick="window.location.hash = '${data.id}'">
             ${data.comment}
-          </anzhiyu>
+          </smith>
         `;
 
-    // 获取anzhiyu标签内的所有pre元素
-    let anzhiyuPres = barrage.querySelectorAll("anzhiyu pre");
+    // 获取smith标签内的所有pre元素
+    let smithPres = barrage.querySelectorAll("smith pre");
 
     // 遍历每个pre元素，将其替换为"【代码】"
-    anzhiyuPres.forEach(pre => {
+    smithPres.forEach(pre => {
       let codePlaceholder = document.createElement("span");
       codePlaceholder.innerText = "【代码】";
       pre.parentNode.replaceChild(codePlaceholder, pre);
     });
 
-    // 获取anzhiyu标签内的所有图片元素
-    let anzhiyuImages = barrage.querySelectorAll("anzhiyu img");
+    // 获取smith标签内的所有图片元素
+    let smithImages = barrage.querySelectorAll("smith img");
 
     // 遍历每个图片元素，将其替换为"【图片】"，但排除带有class=tk-owo-emotion的图片
-    anzhiyuImages.forEach(image => {
+    smithImages.forEach(image => {
       if (!image.classList.contains("tk-owo-emotion")) {
         image.style.display = "none"; // 隐藏图片
         let placeholder = document.createElement("span");

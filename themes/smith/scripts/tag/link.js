@@ -48,20 +48,20 @@ function link(args) {
   const hasIcon = iconUrl || useAutoFavicon;
   const targetAttr = InsideStation ? "" : 'target="_blank" rel="noopener external nofollow noreferrer"';
 
-  return `<div class='anzhiyu-tag-link'><a class="tag-Link" ${targetAttr} href="${urlFor(link)}">
+  return `<div class='smith-tag-link'><a class="tag-Link" ${targetAttr} href="${urlFor(link)}">
     <div class="tag-link-tips">${InsideStation ? "站内地址" : "引用站外地址"}</div>
     <div class="tag-link-bottom">
         <div class="tag-link-left"${hasIcon ? ` data-icon="${iconUrl}"` : ""}>
           <img class="tag-link-favicon" src="${iconUrl}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" style="${
     hasIcon ? "" : "display:none"
   }" alt="favicon"/>
-          <i class="anzhiyufont anzhiyu-icon-link" style="${hasIcon ? "display:none" : "display:flex"}"></i>
+          <i class="smithfont smith-icon-link" style="${hasIcon ? "display:none" : "display:flex"}"></i>
         </div>
         <div class="tag-link-right">
             <div class="tag-link-title">${title}</div>
             <div class="tag-link-sitename">${sitename}</div>
         </div>
-        <i class="anzhiyufont anzhiyu-icon-angle-right"></i>
+        <i class="smithfont smith-icon-angle-right"></i>
     </div>
     </a></div>`;
 }

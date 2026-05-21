@@ -56,7 +56,7 @@ function gallery(args, content) {
     <span class="gallery-data">${dataStr}</span>
   </div><button class="gallery-load-more" style="${!lazyloadBtn ? "opacity:0" : ""}">
   <span>${loadMoreText}</span>
-  <i class="anzhiyufont anzhiyu-icon-arrow-down"></i>
+  <i class="smithfont smith-icon-arrow-down"></i>
   </button>`;
 
   return (html += `</div>`);
