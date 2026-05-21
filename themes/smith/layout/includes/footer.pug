@@ -12,7 +12,7 @@
             svg.icon(aria-hidden="true")
               use(xlink:href=`#`+ item.icon)
           else if (item.icon.startsWith("anzhiyu"))
-            i.anzhiyufont(class=`${item.icon}`)
+            i.smithfont(class=`${item.icon}`)
       img.footer_mini_logo(title=_p('footer.back_to_top'), alt=_p('footer.back_to_top') onclick="anzhiyu.scrollToDest(0, 500)", src=centerImg, size="50px")
       each item, index in rightInfo
         a.deal_link(href=url_for(item.link) title=item.title)
@@ -22,7 +22,7 @@
             svg.icon(aria-hidden="true")
               use(xlink:href=`#`+ item.icon)
           else if (item.icon.startsWith("anzhiyu"))
-            i.anzhiyufont(class=`${item.icon}`)
+            i.smithfont(class=`${item.icon}`)
 
   if theme.footer.owner.enable && !theme.footer.footerBar.enable
     - var nowYear = new Date().getFullYear()
@@ -55,7 +55,7 @@
           .footer-title-group
             .footer-title=_p('footer.friend_links')
             a.random-friends-btn#footer-random-friends-btn(href="javascript:addFriendLinksInFooter();" title=_p('footer.refresh_friends'))
-              i.anzhiyufont.anzhiyu-icon-arrow-rotate-right
+              i.smithfont.smith-icon-arrow-rotate-right
           .footer-links#friend-links-in-footer
 
   if theme.footer.bdageitem.enable
@@ -87,7 +87,7 @@ if theme.footer.footerBar && theme.footer.footerBar.enable
           a.footer-bar-link(href=url_for(item.link) title=item.text)=item.text
         if theme.footer.footerBar.cc.enable
           a.footer-bar-link.cc(href=url_for(theme.footer.footerBar.cc.link) title=_p('footer.cc_license'))
-            i.anzhiyufont.anzhiyu-icon-copyright-line
-            i.anzhiyufont.anzhiyu-icon-creative-commons-by-line
-            i.anzhiyufont.anzhiyu-icon-creative-commons-nc-line
-            i.anzhiyufont.anzhiyu-icon-creative-commons-nd-line
+            i.smithfont.smith-icon-copyright-line
+            i.smithfont.smith-icon-creative-commons-by-line
+            i.smithfont.smith-icon-creative-commons-nc-line
+            i.smithfont.smith-icon-creative-commons-nd-line

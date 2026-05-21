@@ -15,9 +15,9 @@ if home_top_config.enable
             include ../anzhiyu/tags-group-all.pug
 
           a#random-hover(href='javascript:toRandomPost()')
-            i.anzhiyufont.anzhiyu-icon-paper-plane
+            i.smithfont.smith-icon-paper-plane
             .bannerText 随便逛逛
-              i.anzhiyufont.anzhiyu-icon-arrow-right
+              i.smithfont.smith-icon-arrow-right
         .categoryGroup
           each item in home_top_config.category
             .categoryItem(style=`box-shadow:${item.shadow}`)
@@ -29,7 +29,7 @@ if home_top_config.enable
                   svg.icon(aria-hidden="true")
                     use(xlink:href=`#`+ item.icon)
                 else if (item.icon.startsWith("anzhiyu"))
-                  i.anzhiyufont(class=`${item.icon}`)
+                  i.smithfont(class=`${item.icon}`)
       if theme.home_top.swiper.enable
         #swiper_container_blog
           #swiper_container.blog-slider.swiper-container-fade.swiper-container-horizontal
@@ -90,7 +90,7 @@ if home_top_config.enable
             img.todayCard-cover(src=url_for(top_group_banner_image) onerror=`this.onerror=null;this.src='${url_for(theme.error_img.post_page)}'` alt='封面')
             .banner-button-group
               .banner-button(onclick='event.stopPropagation();event.preventDefault();anzhiyu.hideTodayCard();')
-                i.anzhiyufont.anzhiyu-icon-arrow-circle-right
+                i.smithfont.smith-icon-arrow-circle-right
                 span.banner-button-text 更多推荐
         
         link(rel="stylesheet", href=theme.home_top.banner.top_group_banner_css)

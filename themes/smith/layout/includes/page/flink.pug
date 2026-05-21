@@ -8,11 +8,11 @@
         .banner-button-group
           if (theme.friends_vue.apiurl)
             a.banner-button.secondary.no-text-decoration(onclick="friendChainRandomTransmission()")
-              i.anzhiyufont.anzhiyu-icon-paper-plane1
+              i.smithfont.smith-icon-paper-plane1
               span.banner-button-text=_p('flink.random_visit')
           if theme.linkPageTop.addFriendPlaceholder && theme.comments.use == 'Twikoo' && theme.twikoo.envId
             a.banner-button.no-text-decoration(onclick="anzhiyu.addFriendLink()")
-              i.anzhiyufont.anzhiyu-icon-arrow-circle-right
+              i.smithfont.smith-icon-arrow-circle-right
               span.banner-button-text=_p('flink.apply_link')
       #skills-tags-group-all
         .tags-group-wrapper
@@ -41,7 +41,7 @@
       .title-h2-a-left
         h2(style='padding-top:0;margin:.6rem 0 .6rem')=_p('flink.fishing')
         a.random-post-start.no-text-decoration(href='javascript:fetchRandomPost();')
-          i.anzhiyufont.anzhiyu-icon-arrow-rotate-right
+          i.smithfont.smith-icon-arrow-rotate-right
       .title-h2-a-right
         a.random-post-all.no-text-decoration(href='/link/')=_p('flink.all_links')
     #random-post
