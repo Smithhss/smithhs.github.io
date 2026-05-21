@@ -1,0 +1,414 @@
+- class_name: 世界各地夕阳与风景
+  path_name: /wordScenery
+  type: 2
+  description: 享受各地风景，荔枝旅行中国的小趴菜。
+  cover: https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog/x152.jpg
+  top_background: https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog/x153.jpg
+  rowHeight: 220
+  limit: 10
+  lazyload: true
+  btnLazyload: false
+  url: false
+  album_list:
+    - date: 2023/08/22 12:10:00
+      content: 青岛
+      address: 青岛
+      from: 青岛
+      image:
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog/x181.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog/x180.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog/x179.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog/x178.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog/x177.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog/x166.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog/x165.jpg
+    - date: 2023/08/20 01:56:00
+      content: 济南
+      address: 济南
+      from: 济南
+      image:
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog/x161.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog/x162.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog/x163.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog/x164.jpg
+    - date: 2022/10/26 01:00:00
+      content: 山
+      address: 山
+      from: 山
+      image:
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog/x147.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog/x148.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog/x149.jpg
+    - date: 2022/10/26 22:13:00
+      content: 花
+      address: 花
+      from: 花
+      image:
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog/x144.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog/x145.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog/x146.jpg
+    - date: 2022/7/15 12:00:00
+      content: 河北博物院
+      address: 河北博物院
+      from: 河北博物院
+      image:
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog/x134.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog/x133.jpg
+    - date: 2021/08/22
+      content: 北方
+      address: 北方
+      from: 北方
+      image:
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/menggu33.jpg 
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/menggu32.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/menggu31.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/menggu30.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/menggu29.jpg  
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/menggu28.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/menggu27.jpg 
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/menggu26.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/menggu25.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/menggu24.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/menggu23.jpg    
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/menggu22.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/menggu21.jpg     
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/menggu20.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/menggu19.jpg     
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/menggu18.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/menggu17.jpg     
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/menggu16.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/menggu15.jpg     
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/menggu14.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/menggu13.jpg     
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/menggu12.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/menggu11.jpg     
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/menggu10.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/menggu7.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/menggu6.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/menggu5.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/menggu4.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/menggu3.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/%E5%BC%A0%E5%AE%B6%E5%8F%A3.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/%E5%BC%A0%E5%AE%B6%E5%8F%A33.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/menggu1.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/menggu2.jpg
+    - date: 2022/11/26 22:10:00
+      content: 城墙
+      address: 城墙
+      from: 城墙
+      image:
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog/x150.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog/x151.jpg
+    - date: 2021/07/10
+      content: 大明湖畔的夏雨荷
+      address: 大明湖
+      from: 济南
+      image:
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/%E5%A4%A7%E6%98%8E%E6%B9%961.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/%E5%A4%A7%E6%98%8E%E6%B9%962.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/%E5%A4%A7%E6%98%8E%E6%B9%963.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/%E5%A4%A7%E6%98%8E%E6%B9%964.jpg
+    - date: 2020/08/14
+      content: 华清宫
+      address: 华清宫
+      from: 西安
+      image:
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/%E5%8D%8E%E6%B8%85%E5%AE%AB.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/%E5%8D%8E%E6%B8%85%E5%AE%AB2.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/%E5%8D%8E%E6%B8%85%E5%AE%AB3.jpg
+    - date: 2020/08/13
+      content: 秦始皇兵马俑
+      address: 秦始皇兵马俑
+      from: 西安
+      image:
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/%E5%85%B5%E9%A9%AC%E4%BF%91.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/%E5%85%B5%E9%A9%AC%E4%BF%913.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/%E5%85%B5%E9%A9%AC%E4%BF%912.jpg
+    - date: 2020/08/12
+      content: 西安部分大学
+      address: 西安
+      from: 西安
+      image:
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/%E4%BA%A4%E5%A4%A72.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/%E4%BA%A4%E5%A4%A7.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/%E7%94%B5%E7%A7%91%E5%A4%A74.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/%E7%94%B5%E7%A7%91%E5%A4%A73.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/%E7%94%B5%E7%A7%91%E5%A4%A72.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/%E8%A5%BF%E5%AE%89%E7%94%B5%E7%A7%91%E5%A4%A7.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/%E8%A5%BF%E5%AE%892.jpg
+    - date: 2020/08/10
+      content: 华山日出
+      address: 华山
+      from: 西安
+      image:
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/%E8%A5%BF%E5%AE%891.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/%E5%8D%8E%E5%B1%B11.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/%E5%8D%8E%E5%B1%B12.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/%E5%8D%8E%E5%B1%B13.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/%E5%8D%8E%E5%B1%B14.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/%E9%99%95%E8%A5%BF.jpg    
+    
+    - date: 2024/08/10
+      content: 洛阳
+      address: 洛阳
+      from: 洛阳
+      image:
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1721570887460.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1721570887444.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1721570887400.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1721570887393.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1721570887371.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1721570887364.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1721570887267.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1721570887502.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1721570887494.jpg
+
+    
+    - date: 2024/08/11
+      content: 重庆
+      address: 重庆
+      from: 重庆
+      image: 
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933945319.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933945311.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933945303.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933945296.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933945052.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933945059.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933945088.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933945265.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933945045.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933945039.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933945028.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933945016.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933945007.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933945419.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933945412.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933945382.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933945376.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933945368.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933945355.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933945348.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933945339.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933945332.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933945326.jpg
+        
+    - date: 2024/08/16
+      content: 云南
+      address: 云南
+      from: 云南
+      image:
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933944911.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933944904.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933944898.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933944885.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933944831.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933945289.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933944949.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933945159.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933945152.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933945102.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933945096.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933945145.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933945138.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933945133.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933945127.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933945122.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933945117.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933945112.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933945109.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933944954.jpg
+  
+    - date: 2024/08/20
+      content: 西藏
+      address: 西藏
+      from: 西藏
+      image:
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933944969.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933944988.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933944998.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933945174.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933945178.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933945183.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933945193.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933945201.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933945207.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933945213.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933945220.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933945244.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933945252.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933945270.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933945274.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724041069213.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724041069217.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724041069224.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724041069229.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933944800.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933944926.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933944934.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933944940.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933944962.jpg
+    
+    - date: 2024/08/25
+      content: 大西北
+      address: 大西北
+      from: 大西北
+      image:
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933944890.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933944879.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933944871.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933944866.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724933944817.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724041069276.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724041069251.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724041069246.jpg
+        - https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1724041069237.jpg
+
+    
+
+
+
+- class_name: 我的日常
+  path_name: /dailyPhoto
+  type: 1
+  description: 这里存放的是有关我自己的日常与有趣的事情。
+  cover: https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog/x157.jpg
+  top_background: https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog/x158.jpg
+  album_list:
+    - date: 2024/02/07
+      content: 看花灯
+      address: 正定
+      image:
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog/x293.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog/x292.jpg
+    - date: 2024/01/25 16:32:00
+      content: 又来观展咯
+      address: 河北博物院
+      image:
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog/x280.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog/x281.jpg
+    - date: 2024-01-15
+      content: 烤个面包😄
+      address: 家里
+      image:
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog/x277.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog/x276.jpg
+    - date: 2023-9-23
+      content: 商汤还真蛮不错的😄
+      image:
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog/x239.jpg
+    - date: 2023-9-10
+      content: 撸猫
+      image:
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog/x203.jpg
+    - date: 2023-9-10
+      content: 撸猫
+      image:
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog/x204.jpg
+    - date: 2023-9-10
+      content: 撸猫
+      image:
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog/x205.jpg
+    - date: 2023-9-10
+      content: 撸猫
+      image:
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog/x206.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog/x207.jpg
+
+
+
+
+
+
+
+
+
+
+- class_name: 收藏的壁纸
+  path_name: /love
+  type: 2
+  description: 部分很好看的壁纸🌇。
+  cover: https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog/x155.jpg
+  top_background: https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog/x156.jpg
+  rowHeight: 220
+  limit: 10
+  lazyload: true
+  btnLazyload: false
+  url: false
+  album_list:
+    - date: 2023-08-10
+      content: 壁纸
+      address: 壁纸
+      from: 壁纸
+      image:
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog/x185.jpg
+    - date: 2023-08-10
+      content: 壁纸
+      address: 壁纸
+      from: 壁纸
+      image:
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog/x186.jpg
+    - date: 2023-08-10
+      content: 壁纸
+      address: 壁纸
+      from: 壁纸
+      image:
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog/x187.jpg
+    - date: 2023-08-10
+      content: 壁纸
+      address: 壁纸
+      from: 壁纸
+      image:
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog/x188.jpg
+
+
+
+
+- class_name: DIY
+  path_name: /wallpaper
+  type: 2
+  description: 偶尔一天的突发奇想。
+  cover: https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog/x183.jpg
+  top_background: https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog/x124.jpg
+  rowHeight: 220
+  limit: 10
+  lazyload: true
+  btnLazyload: false
+  url: false
+  album_list:
+    
+    
+    - date: 2023/05/26 01:00:00
+      content: 智控植物生长箱
+      address: 智控植物生长箱
+      from: 智控植物生长箱
+      image:
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog/x2.jpg
+    - date: 2021-11-30
+      content: Arduino
+      address: Arduino
+      from: Arduino
+      image:
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/img/m169.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/img/m168.jpg
+    - date: 2021-11-25
+      content: 乐高跑车
+      address: 乐高跑车
+      from: 乐高
+      image:
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/img/m73.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/img/m72.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/img/m71.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/img/m70.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/img/m69.jpg
+    - date: 2021-08-25
+      content: 电子时钟
+      address: 电子时钟
+      from: 闹钟
+      image:
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/img/m67.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/img/m66.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/img/m65.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/img/m64.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/img/m63.jpg
+        - https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/img/m62.jpg
