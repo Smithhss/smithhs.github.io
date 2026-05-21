@@ -1,4 +1,13 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>SpringMVC笔记 | Smith</title><meta name="keywords" content="SpringMVC"><meta name="author" content="Smith"><meta name="copyright" content="Smith"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="SpringMVC笔记"><meta name="application-name" content="SpringMVC笔记"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="SpringMVC笔记"><meta property="og:url" content="https://smithhs.cn/2024/06/10/2024-06-10-SpringMVC%E7%AC%94%E8%AE%B0/index.html"><meta property="og:site_name" content="Smith"><meta property="og:description" content="1.初识SpringMvc1.1.Mvc1.1.1.概述 M(Model)：负责数据的处理操作 V(View)：提供程序和用户之间交互的接口 C(Controller)：控制请求的处理和跳转  1.1.2.Mvc框架可以做什么 将url映射成Java类或方法 封装请求数据 处理请求—调用相关处理方法"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/springmvc.webp"><meta property="article:author" content="Smith"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/springmvc.webp"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://smithhs.cn/2024/06/10/2024-06-10-SpringMVC%E7%AC%94%E8%AE%B0/"><link rel="preconnect" href="//npm.elemecdn.com"/><link rel="preconnect" href="//npm.onmicrosoft.cn"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/node-snackbar/0.1.16/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.14/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>SpringMVC笔记 | Smith</title><meta name="keywords" content="SpringMVC"><meta name="author" content="Smith"><meta name="copyright" content="Smith"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="SpringMVC笔记"><meta name="application-name" content="SpringMVC笔记"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="SpringMVC笔记"><meta property="og:url" content="https://smithhs.cn/2024/06/10/2024-06-10-SpringMVC%E7%AC%94%E8%AE%B0/index.html"><meta property="og:site_name" content="Smith"><meta property="og:description" content="1.初识SpringMvc1.1.Mvc1.1.1.概述 M(Model)：负责数据的处理操作 V(View)：提供程序和用户之间交互的接口 C(Controller)：控制请求的处理和跳转  1.1.2.Mvc框架可以做什么 将url映射成Java类或方法 封装请求数据 处理请求—调用相关处理方法"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/springmvc.webp"><meta property="article:author" content="Smith"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/springmvc.webp"><meta name="description" content="1.初识SpringMvc1.1.Mvc1.1.1.概述 M(Model)：负责数据的处理操作 V(View)：提供程序和用户之间交互的接口 C(Controller)：控制请求的处理和跳转  1.1.2.Mvc框架可以做什么 将url映射成Java类或方法 封装请求数据 处理请求—调用相关处理方法"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://smithhs.cn/2024/06/10/2024-06-10-SpringMVC%E7%AC%94%E8%AE%B0/"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/node-snackbar/0.1.16/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@6.1.6/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: {"enable":true,"img":"https://upload-bbs.miyoushe.com/upload/2024/07/27/125766904/ba62475f396df9de3316a08ed9e65d86_5680958632268053399..png"},
+  postHeadAiDescription: {"enable":true,"gptName":"AnZhiYu","mode":"local","switchBtn":false,"btnLink":"https://afdian.net/item/886a79d4db6711eda42a52540025c377","randomNum":3,"basicWordCount":1000,"key":"xxxx","Referer":"https://xx.xx/"},
+  diytitle: {"enable":true,"leaveTitle":"再看看嘛🌈！","backTitle":"欢迎回来✌️！"},
+  LA51: undefined,
+  greetingBox: {"enable":true,"default":"晚上好👋","list":[{"greeting":"晚安😴","startTime":0,"endTime":5},{"greeting":"早上好鸭👋, 祝你一天好心情！","startTime":6,"endTime":9},{"greeting":"上午好👋, 状态很好，鼓励一下～","startTime":10,"endTime":10},{"greeting":"11点多啦, 在坚持一下就吃饭啦～","startTime":11,"endTime":11},{"greeting":"午安👋, 宝贝","startTime":12,"endTime":14},{"greeting":"🌈充实的一天辛苦啦！","startTime":14,"endTime":18},{"greeting":"19点喽, 奖励一顿丰盛的大餐吧🍔。","startTime":19,"endTime":19},{"greeting":"晚上好👋, 在属于自己的时间好好放松😌~","startTime":20,"endTime":24}]},
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  music_page_default: "nav_music",
   root: '/',
   preloader: {"source":3},
   friends_vue_info: undefined,
@@ -9,7 +18,7 @@
   localSearch: undefined,
   translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
   noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
-  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":240},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":240},
   copy: {
     success: '复制成功',
     error: '复制错误',
@@ -28,21 +37,25 @@
     day: '天前',
     month: '个月前'
   },
-  copyright: undefined,
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: Smith","link":"链接: ","source":"来源: Smith","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
   lightbox: 'fancybox',
   Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#3b70fc","bgDark":"#1f1f1f","position":"top-center"},
   source: {
     justifiedGallery: {
-      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
-      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.2.0/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.2.0/dist/fjGallery.css'
     }
   },
   isPhotoFigcaption: false,
   islazyload: true,
   isAnchor: false,
-  shortcutKey: false
+  shortcutKey: undefined,
+  autoDarkmode: true
 }</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: 'Smith',
   title: 'SpringMVC笔记',
+  postAI: '',
+  pageFillDescription: '1.初识SpringMvc, 1.1.Mvc, 1.1.1.概述, 1.1.2.Mvc框架可以做什么, 1.1.3.常见的Mvc框架, 1.2.Spring Mvc, 1.2.1.概述, 1.2.2.为什么要学SpringMvc, 1.2.3.请求流程, 1.2.4.Spring Mvc的组件, 1.3.Hello Mvc, 1.3.1.项目搭建, 1.3.2.配置Spring Mvc, 1.3.3.配置前端控制器, 1.3.4.创建Controller, 1.3.5.测试, 1.4.说明, 2.Spring Mvc与注解, 2.1.项目搭建, 2.1.1.创建项目, 2.1.2.依赖, 2.1.3.配置SpringMvc, 2.1.5.实现Controller, 2.2.测试, 2.3.注解, 2.4.说明, 2.5.特点, SpringMVC, SpringMVC概述, SpringMVC特点, SpringMVC入门程序, Spring MVC FirstController!, SpringMVC工作原理, DispatcherServlet类, @Controller, @RequestMapping注解的使用, @RequestMapping注解的属性, 请求映射方式, 数据绑定, 默认类型数据绑定, 简单数据类型绑定, POJO绑定, 自定义类型转换器, 数组绑定, 集合绑定, 复杂POJO绑定一属性为对象类型的数据绑定, 复杂POJO绑定一属性为List类型的数据绑定, 复杂POJO绑定一属性为Map类型的数据绑定, JSON数据绑定, 返回值为void类型的页面跳转, 返回值为String类型的页面跳转一不携带数据, 返回值为String类型的页面跳转一携带数据, 返回值为ModelAndView类型的页面跳转, 普通字符串的回写, JSON数据的回写一对象数据转换成JSON数据后的回写, JSON数据的回写一集合数据转换成JSON数据后的回写, 简单异常处理器, 自定义异常处理器, 异常处理注解, 拦截器概述, 拦截器的配置, 拦截器的执行流程一单个拦截器, 拦截器的执行流程一多个拦截器, 案例：后台系统登录验证, 文件上传, 文件下载, 案例：文件上传和下载, 常用方式整合思路, 项目基础结构搭建, Spring和Mybatis整合, Spring和Spring MVC整合, 纯注解方式整合思路, 纯注解SSM框架整合, 系统概述, 数据库设计, 系统环境搭建, 用户登录, 实现登录验证, 注销登录, 新书推荐, 图书借阅, 当前借阅, 借阅记录, 访问权限控制, 扩展01 -云图书管理系统环境搭建, 登录的业务流程分析, 初识概述负责数据的处理操作提供程序和用户之间交互的接口控制请求的处理和跳转框架可以做什么将映射成类或方法封装请求数据处理请求调用相关处理方法封装响应数据对相应数据进行渲染如常见的框架请求响应式事件驱动概述是一个轻量级的请求响应式的框架严格遵守开闭原则是框架的一部分为什么要学比早期的框架具有更高的效率简单快捷可以更好的和进行无缝对接支持风格的支持国际化和本地化更强大的异常处理功能使用的人比较多早期后期的基础请求流程请求流程过程描述客户端浏览器的请求将会发送给前端控制器前端控制器通过请求映射器解析前端控制器通过请求处理适配器执行请求处理方法被调用并处理请求处理结果以对象进行返回前端控制器通过视图解析器处理响应结果最终视图解析器将返回一个给前端控制器前端控制器对进行渲染响应请求的组件前端控制器提供的作用接收请求响应结果在体系结构中他是一个中央处理器映射处理器提供的作用根据请求解析对应的执行链处理适配器提供的作用按照规则执行控制器程序员编写的作用处理用户的请求视图解析器提供的作用解析视图视图作用用户和代码之间交互的接口主要实现数据的收集与展示项目搭建创建项目略依赖配置配置配置配置视图解析器前缀配置需要视图解析器进行解析的前缀视图的目录后缀配置视图的后缀名配置前端控制器配置前端控制器其实就是一个通过指定配置文件的位置配置文件一般默认存放在目录下且文件命名要求为允许通过的重新指定配置文件的位置表示过滤所有以结尾的请求的写法其实是中的写法实际应用一般配置为创建创建一个类相当于之前的请求处理方法相当于的方法实例化对象返回对象测试实例化配置配置配置视图解析器前缀配置需要视图解析器进行解析的前缀视图的目录后缀配置视图的后缀名实例化对象访问说明的依赖相对较少在配置文件中需要配置映射器和适配器需要实现接口的方法与注解项目搭建创建项目略依赖配置配置前端控制器开启注解扫描配置前端控制器配置前端控制器实现注解方式实现请求处理方法方法被执行了创建对象通过对象可以传递进行访问的视图名称视图名称可以通过构造器进行传递也可以通过访问器进行传递请求处理方法方法被执行了测试注解表示被标注的类是一个控制器实例加载到容器中可以在方法和类上进行使用完成方法和之间的映射说明在中可以不配置任何的适配器和映射器因为在依赖中存在一个文件在该文件中配配置了所有的适配器和映射器而且会自动匹配所有合适的适配一般情况下需要配置来替代映射器和适配器特点简单方便灵活概述模型视图控制器三层架构在开发中系统经典的三层架构包括表现层业务层和持久层三层架构中每一层各司其职表现层层负责接收客户端请求并向客户端响应结果业务层层负责业务逻辑处理和项目需求息息相关持久层层负责和数据库交互对数据库表进行增删改查在表现层的作用作用丰层架构中的表现层用于接收客户端的请求并进行响应中包含了控制器和视图控制器接收到客户端的请求后对请求数据进行解析和封装接着将请求交给业务层处理业务层会对请求进行处理最后将处理结果返回给表现层表现层接收到业务层的处理结果后再由视图对处理结果进行渲染渲染完成后响应给客户端特点的特点是框架的后续产品可以方便地使用框架所提供的其他功能使用简单很容易设计出干净简洁的层支持各种请求资源的映射策略具有非常灵活的数据验证格式化和数据绑定机制能使用任何对象进行数据绑定不必实现特定框架的支持国际化可以根据用户区域显示多国语言支持多种视图技术扌它支持和等视图技术灵活性强易扩展入门程序接下来本节将通过一个简单的入门程序演示的使用该程序要求在浏览器发起请求由接收请求并响应具体实现步骤如下创建项目在中创建一个名称为的项目在下面的步骤中输入框中可以设置项目文件夹的路径将路径中项目名称后的路径修改为然后单击按钮完成项目文件夹路径的设置单击按钮系统会回到步骤所示的设置界面在步骤中单击右下角按钮需要注意的是如果默认创建的项目中没有自动生成文件夹可以在中进行设置引入依赖项目创建完成后为保障项目的正常运行需要导入项目所需的依赖到项目的文件中这里只展示了其中一个包需要注意的是要在中使用插件运行项目除了需要在文件中配置对应的插件外还需要在中进行项目运行的相关配置配置前端控制器通过前端控制器拦截客户端的请求并进行转发因此在使用时配置前端控制器是必不可少的一步的前端控制器也是一个可以在项目的文件中进行配置配置处理器映射信息和视图解析器在项目的文件夹下创建的配置文件用于配置处理器映射信息和视图解析器创建处理器在项目的目录下创建一个路径为的包在包中创建处理器类用于处理客户端的请求并指定响应时转跳的页面设置当前类为处理器类设定当前方法的访问映射地址设置当前方法返回值类型为用于指定请求完成后跳转的页面访问到设定具体跳转的页面创建视图页面在项目的文件夹下创建名称为的文件夹并在文件夹下创建名称为的文件用于对客户端请求进行处理后的视图展示工作原理三大组件处理器映射器处理器映射器可以理解为一个负责根据用户请求的找到处理器提供了不同的映射器来实现不同的映射方式类作用是的核心类也是的流程控制中心也称为的前端控制器它可以拦截客户端的请求拦截客户端请求之后会根据具体规则将请求交给其他组件处理所有请求都要经过进行转发处理这样就降低了组件之间的耦合性案例编写说明的本质是一个可以在文件中完成它的配置和映射参考第章入门程序在中创建一个名称为的项目需要注意的是如无特殊说明本章的所有案例都将在项目中开发和运行项目创建完成之后在项目文件中配置中对的配置分为两个方面一是配置的前端控制器二是配置映射的路径配置的前端控制器配置映射的路径文件夹下默认配置文件命名规则如果没有通过元素指定初始化时要加载的文件则应用程序会去文件夹下寻找并加载默认配置文件默认配置文件的名称规则如下所示其中指的是文件中元素的值是配置文件名的固定拼接元素取值元素取值分为三种情况如果元素的值为正整数或者表示在项目启动时就加载并初始化这个值越小的优先级越高就越先被加载如果元素的值为负数或者没有设置则会在被请求时加载和初始化如果元素的值为表明会在项目启动时加载并初始化注解作用在框架中传统的处理器类需要直接或间接地实现接口这种方式需要在配置文件中定义请求和的映射关系当后台需要处理的请求较多时使用传统的处理器类会比较繁琐且灵活性低对此框架提供了注解使用注解只需要将注解标注在普通类上然后通过的扫描机制找到标注了该注解的类该类就成为了的处理器类配置文件的类包扫描配置信息扫描配置文件范围的配置文件被加载时会自动扫描类包及其子包下的类如果被扫描的类中带有等注解则把这些类注册为并存放在中与传统的处理器类实现方式相比使用注解的方式显然更加简单和灵活因此在实际开发中通常使用注解来定义处理器类注解的使用注解作用注解用于建立请求和处理器之间的映射关系该注解可以标注在方法上和类上下面分别对注解的这两种使用方式进行介绍方式一标注在方法上当注解标注在方法上时该方法就成了一个可以处理客户端请求的处理器它会在接收到对应的请求时被执行在浏览器中对应的访问地址由项目访问路径处理方法的映射路径共同组成接下来通过一个案例演示注解标注在方法上的使用在项目的目录下创建类包并在类包下创建类在类中创建方法用来处理客户端请求启动项目在浏览器中访问控制台打印输出信息由运行结果可知方法被成功执行说明注解标注在方法上时成功建立了请求和处理请求方法之间的对应关系方式二标注在类上当注解标注在类上时的属性值相当于本处理器类的命名空间即访问该处理器类下的任意处理器都需要带上这个命名空间标注在类上时其属性值作为请求的第一级访问目录当处理器类和处理器都使用注解指定了对应的映射路径处理器在浏览器中的访问地址由项目访问路径处理器类的映射路径处理器的映射路径共同组成接下来通过一个案例演示注解标注在类上的使用启动项目在浏览器中访问控制台打印输出信息由运行结果可知方法被成功执行说明注解标注在类上时成功建立了请求和处理请求类之间的对应关系注解的属性属性的两种映射路径标注属性是注解的默认属性当属性是注解显式使用的唯一属性时可以省略的属性名例如下面两种映射路径标注的含义相同使用属性时可以指定映射单个的请求也可以将多个请求映射到一个方法上在属性中添加一个带有请求路径的列表就可以将这个请求列表中的路径都映射到对应的方法上设定当前方法的访问映射地址列表增删操作校验启动项目在浏览器中访问地址控制台打印输出信息在浏览器中访问地址控制台打印输出信息属性限定处理器映射属性可以对处理器映射的请求方式进行限定当请求的和处理器映射成功但请求方式和属性指定的属性值不匹配处理器也不能正常处理请求接下来通过一个案例演示属性中请求类型的声明只展示了处理请求方式为的请求方法处理请求方式为的请求方法处理请求方式为的请求方法处理请求方式为的请求方法启动项目后在客户端依次以方式方式方式和方式请求访问时程序会分别执行文件中的方法方法方法和方法控制台打印输出信息属性中有多个请求类型如果需要同时支持多个请求方式则需要将请求方式列表存放在英文大括号中以数组的形式给属性赋值并且多个请求方式之间用英文逗号分隔示例代码如下所示属性值的定义方式属性中定义的值可以将请求映射的定位范围缩小当客户端进行请求时如果请求参数的值等于属性定义的值可以正常执行所映射到的方法否则映射到的方法不执行请求映射方式请求映射方式的分类基于注解风格的通过主解指定请求映射的路径路径映射常用的方式有基于请求方式的路径映射基于风格的路径映射和基于风格的路径映射接下来分别对这三种请求映射方式进行详细讲解基于请求方式的路径映射上一节中学习到可以使用注解的属性来限定当前方法匹配哪种类型的请求方式除了可以使用注解来限定客户端的请求方式之外从版本开始还可以使用组合注解完成客户端请求方式的限定组合注解简化了常用的请求方式的映射并且更好的表达了被注解方法的语义组合注解匹配方式的请求匹配方式的请求匹配方式的请求匹配方式的请求匹配方式的请求用法示例接下来以为例讲解组合注解的用法是的缩写使用组合注解替代注解可以省略属性从而简化代码用法示例代码如下所示基于风格的路径映射支持风格的路径映射所谓风格其实就是一种通配符风格可以在处理器映射路径中使用通配符对访问的路径进行关联风格的通配符有以下种分别是匹配任何单字符匹配或者任意数量的字符匹配或者多级目录映射路径使用多个通配符情况当映射路径中同时使用多个通配符时会有通配符冲突的情况当多个通配符冲突时路径会遵守最长匹配原则去匹配通配符如果一个请求路径同时满足两个或多个风格的映射路径匹配规则那么请求路径最终会匹配满足规则字符最多的路径例如同时满足和匹配规则但最终会匹配路径基于风格的路径映射是按照风格访问网络资源简单说就是把请求参数变成请求路径的一种风格而是一种网络资源的访问风格规范对了网络资源的访问方式所访问的网络资源可以是一段文本一首歌曲一种服务总之是一个具体的存在每个网络资源都有一个指向它要获取这个资源访问它的就可以因此即为每一个资源的独一无二的标识符传统风格与风格访问格式的不同传统风格访问的格式如下所示而采用风格后其访问的格式如下所示需要注意的是风格中的不使用动词形式的路径例如表示查询用户是一个动词而表示用户为名词风格的基本请求操作风格在请求中通过和个动词对应四种基本请求操作具体如下所示用于获取资源用于新建资源用于更新资源用于删除资源数据绑定数据绑定的概念在程序运行时接收到客户端的请求后会根据客户端请求的参数和请求头等数据信息将参数以特定的方式转换并绑定到处理器的形参中中将请求消息数据与处理器的形参建立连接的过程就是的数据绑定数据绑定中的信息处理过程数据绑定中的信息处理过程的步骤描述如下将对象传递给将处理方法的入参对象传递给调用组件进行数据类型转换数据格式化等工作并将对象中的消息填充到参数对象中调用组件对已经绑定了请求消息数据的参数对象进行数据合法性校验校验完成后会生成数据绑定结果对象会将对象中的内容赋给处理方法的相应参数默认类型数据绑定常见的默认类型当使用默认支持的数据类型作为处理器的形参类型时的参数处理适配器会默认识别这些类型并进行赋值常见的默认类型如下所示通过对象获取请求信息通过处理响应信息通过对象得到中存放的对象是一个接口是一个类的实现类对象和对象都可以设置数据数据会填充到域下面通过案例演示默认类型的数据绑定该案例要求实现一个类型的数据绑定案例具体实现步骤如下所示在中创建一个名称为的项目并参照第章入门程序的项目搭建在项目的中引入的相关依赖并在的配置文件中完成相关配置需要注意的是如无特殊说明本章节的所有案例都将在项目中开发和运行项目的初始目录结构和文件组成如图所示项目的目录卜创建路径名称为的类包在类包中创建处理器类在类中定义方法用于获取客户端请求中参数的值启动项目在浏览器中携带参数访问地址访问后控制台打印信息如图所示简单数据类型绑定简单数据类型绑定的概念简单数据类型的绑定就是指中基本类型如等的数据绑定在中进行简单类型的数据绑定只需客户端请求参数的名称和处理器的形参名称一致即可请求参数会自动映射并匹配到处理器的形参完成数据绑定下面通过案例演示简单数据类型的数据绑定该案例要求实现类型和类型的数据绑定案例具体实现步骤如下所示修改文件在类中新增方法用来接收客户端请求中的参数启动项目在浏览器中访问地址访问后控制台打印信息如图所示参数别名的设置需要注意的是有时候客户端请求中参数名称和处理器的形参名称不一致这就会导致处理器无法正确绑定并接收到客户端请求中的参数为此提供了注解来定义参数的别名完成请求参数名称和处理器的形参名称不一致时的数据绑定注解的使用假设浏览器中的请求地址为可以在方法中使用注解标注参数上述代码中注解的属性给方法中的形参定义了别名此时客户端请求中名称为的参数就会绑定到方法中的形参上注解的属性设定了请求的参数不是必须的如果访问时没有携带参数会将属性设定的值赋给形参注解的两个常用属性当请求的映射方式是风格时上述对简单类型数据绑定的方式就不适用了为此提供了注解通过注解可以将中占位符参数绑定到处理器的形参中注解有以下两个常用属性用于指定中占位符名称是否必须提供占位符默认值为注解的使用在类中新增一个处理方法在该方法中使用注解进行数据绑定具体代码如下所示上述代码中通过注解的属性将占位符参数和处理方法的参数进行绑定注解属性可省略的情况启动项目在浏览器中访问地址访问后控制台打印信息如图所示从运行结果的打印信息可以看出控制台打印出了的值为这表明访问地址后执行了方法注解成功将请求中的变量映射到了方法的形参上如果请求路径中占位符的参数名称和方法形参名称一致那么注解的属性可以省略绑定数据绑定的使用场景在使用简单数据类型绑定时可以很容易的根据具体需求来定义方法中的形参类型和个数然而在实际应用中客户端请求可能会传递多个不同类型的参数数据如果还使用简单数据类型进行绑定那么就需要手动编写多个不同类型的参数这种操作显然比较繁琐为解决这个问题可以使用类型进行数据绑定数据绑定的概念类型的数据绑定就是将所有关联的请求参数封装在一个中然后在方法中直接使用该作为形参来完成数据绑定下面通过用户注册案例演示的数据绑定该案例要求表单提交的数据绑定在处理器类型的形参中案例具体实现步骤如下所示在项目的目录下创建一个包在该包下创建一个类用于封装用户信息用户名用户密码省略方法在类中定义方法用于接收用户注册信息接收表单用户信息在目录下创建文件在中编写用户注册表单启动项目在浏览器中访问页面访问地址为页面显示效果如图所示在所示页面的表单中分别填写注册的用户名为密码为然后单击注册按钮即可完成注册数据的提交当单击注册按钮后控制台打印信息如图所示从图中可以看出程序成功打印出了用户名和密码这表明方法获取到了客户端请求中的参数和参数的值并将和的值分别赋给了方法中形参的属性和属性实现了数据绑定解决请求参数中的中文乱码问题为了防止客户端传入的中文数据出现乱码可以使用提供的编码过滤器来统一编码要使用编码过滤器只需要在中添加如下代码自定义类型转换器自定义类型转换器使用场景默认提供了一些常用的类型转换器这些类型转换器可以将客户端提交的参数自动转换为处理器形参类型的数据然而默认类型转换器并不能将提交的参数转换为所有的类型此时就需要开发者自定义类型转换器来将参数转换为程序所需要的类型接口的使用框架提供了接口作为类型转换器开发者可以通过实现接口来自定义类型转换器接口的代码如下所示在上述代码中泛型参数中的表示源类型表示目标类型而方法将源类型转换为目标类型返回方法内的具体转换规则可由开发者自行定义下面通过案例演示自定义类型转换器转换特殊数据类型并完成数据绑定该案例要求实现类型的数据绑定案例具体实现步骤如下所示在项目的目录下创建包在该包下创建类并在类中定义方法实现类型转到类型的转换定义日期格式无效的日期格式请使用这种格式为了让知道并使用转换器类还需要在配置文件中配置类型转换器配置类型转换器工厂或配置格式化工厂要将自定义类型转换器注册到程序中除了可以将自定义转换器配置在类型转换器工厂中也可以将自定义转换器配置在格式化工厂中通过格式化工厂对数据格式化在类中定义方法用于绑定客户端请求中的日期数据方法代码如下所示使用自定义类型数据绑定日期数据数组绑定数组绑定的使用场景在实际开发中可能会遇到客户端请求需要传递多个同名参数到服务器端的情况这种情况采用前面讲解的简单数据绑定的方式显然是不合适的此时可以使用数组来接收客户端的请求参数完成数据绑定接下来通过一个批量提交商品的案例来演示数组的数据绑定具体实现步骤如下所示在项目的包下创建一个商品类用于封装商品信息类的具体代码如下所示商品商品名称省略方法在项目的目录下创建一个提交商品页面在中创建一个展示商品列表的表单表单提交时向服务器端发送商品列表的所有的具体代码如下所示提交商品框架实战在包中创建一个商品处理器类在类中定义方法用于接收表单提交的商品类的具体代码如下所示获取商品列表获取到了为的商品集合绑定集合绑定的使用集合中存储简单类型数据时数据的绑定规则和数组的绑定规则相似需要请求参数名称与处理器的形参名称保持一致不同的是使用集合绑定时处理器的形参名称需要使用注解标注接下来使用集合数据绑定来批量提交商品案例具体实现步骤如下所示修改类的方法让方法使用类型来接受客户端的请求参数修改后方法的具体代码如下所示获取商品列表使用绑定数据获取到了为的商品复杂绑定一属性为对象类型的数据绑定复杂数组绑定的使用场景使用简单类型已经可以完成多数的数据绑定但有时客户端请求中传递的参数比较复杂例如在用户查询订单时页面传递的参数可能包括订单编号用户名称等信息这就包含了订单和用户两个对象的信息如果将订单和用户的所有查询条件都封装在一个简单中显然会比较混乱这时可以考虑使用复杂类型的数据绑定复杂的种属性的类型所谓的复杂就是属性的类型不止包含简单数据类型扌还包含对象类型类型和类型等其他引用类型接下来分别对复杂中属性为对象类型的数据绑定属性为类型的数据绑定和属性为类型的数据绑定进行讲解属性为对象类型的数据绑定下面通过一个获取用户订单信息的案例演示复杂中对象类型的数据绑定案例具体实现步骤如下在包中创建一个订单类用于封装订单信息类的具体代码如下所示订单省略方法修改类在类中新增类型的属性并定义相应的和方法修改后类的具体代码如下所示用户名用户密码订单省略方法在类中定义方法用于获取客户端请求中的信息方法的具体代码如下所示在项目的目录下创建一个订单信息文件在文件中创建一个表单表单中包含用户名和订单编号表单提交时将用户名和订单编号信息发送到处理器的具体代码如下所示复杂数组绑定的格式在复杂数据绑定时如果数据需要绑定到属性对象的属性中客户端请求的参数名本例中指表单内各元素的属性值的格式必须为属性对象名称属性其中属性对象名称要和的属性对象名称一致属性要和属性对象所属类的属性一致复杂绑定一属性为类型的数据绑定属性为类型的数据绑定一般订单业务中用户和订单基本都是一对多的映射关系即用户的订单属性使用集合类型接下来通过一个获取用户订单信息的例子演示复杂中属性为类型的数据绑定案例具体实现步骤如下修改类将类中订单属性修改为类型由于用户一般拥有多个收货地址在类中新增类型的用户名用户密码用户订单订单地址省略方法在包中创建一个订单处理器类在类中定义方法用于展示用户的订单信息类的具体代码如下所示获取用户中的订单信息订单订单订单配送地址在项目的目录下创建一个订单信息文件在中创建一个表单用于提交用户的订单信息表单提交时表单数据分别封装到的订单属性和地址属性中的具体代码如下所示订单信息订单号订单名称配送地址在显示效果图所示的页面中单击左下角订单信息按钮表单中的订单信息发送到服务器端的方法进行处理控制台打印信息如图所示复杂数组绑定的编写要求在复杂数据绑定时如果数据绑定到类型的属性客户端请求的参数名称本例中指表单内各元素的属性值编写必须符合以下要求如果的泛型为简单类型则客户端参数名称必须和类中属性所属类中的属性名称保持一致如果的泛型参数为对象类型则客户端参数名称必须与类的层次结构名称保持一致并使用数组格式描述对象在中的位置即客户端参数名称必须和最终绑定在中的某个对象的某个属性的名称保持一致复杂绑定一属性为类型的数据绑定属性为类型的数据绑定接下来通过一个获取订单信息的案例演示复杂中属性为类型的数据绑定具体实现如下修改类在类中新增类型的属性用于封装订单中的商品信息其中的键用来存放商品的类别的值用来存放商品类别对应的商品订单商品信息修改类在类中新增用于获取客户端提交的订单信息并将获取到的订单信息打印在控制台方法的具体代码如下所示获取订单获取商品信息订单订单商品信息类商品商品名称在项目的目录下创建一个订单信息页面中创建一个表单用于提交订单信息表单提交时表单数据分别封装到的属性和商品信息属性中订单商品商品名称数据绑定消息转换器接口客户端不同的请求中数据的可能会不同如果想将中的数据转换成指定对象或者将对象转换成指定格式的数据就需要使用对应的消息转换器来实现中提供了一个接口作为消息转换器因为数据的类型有多种所以中提供了多个接口的实现类其中是接口的实现类之一在处理请求时可以将请求的报文绑定到处理器的形参对象在响应请求时将处理器的返回值转换成报文与类型转换器的区别需要注意的是消息转换器和之前所学习的类型转换器是有区别的消息转换器用于将请求消息中的报文数据转换成指定对象或者将对象转换成指定格式的报文进行响应类型转换器用于对象之间的类型转换接下来通过一个异步提交商品信息案例演示中的数据绑定案例具体实现步骤如下在项目的文件中导入的依赖使用对数据进行转换和绑定需要导入转换核心包转换的数据绑定包和转换注解包的相关依赖在项目中导入文件由于本次演示的是异步数据提交需要使用所以需要将文件导入到项目中以便发送请求在项目的文件夹下创建名称为的文件夹在文件夹中导入文件在项目的目录下创建一个商品信息页面在中创建一个表单用于填写商品信息表单提交时表单发送异步请求将表单的商品信息发送到处理器的部分代码如下所示修改类在类电新增方法和方法分别用于获取客户端提交的单个商品信息和多个商品信息由于客户端发送的是格式的数据此时在处理器中无法直接使用方法形参接收数据完成数据的自动绑定对此可以使用提供的注解只展示了个体方法获取单个商品信息获取到了为名称为的商品在项目的文件中配置的会拦截所有导致项目中的静态资源如等也被拦截如果想放行静态资源可以在的配置文件中进行静态资源配置配置文件的部分配置代码如下所示的两个重要属性属性说明用于定位需要访问的本地静态资源文件路径具体到某个文件夹匹配静态资源全路径其中表示文件夹及其子文件夹下的某个具体文件在的显示效果图所示的页面中单击右侧提交单个商品按钮表单中的单个商品信息以格式异步发送到服务器端方法中提交单个商品时控制台打印信息如图所示从图中所示的打印信息可以得出客户端异步提交的数据按照形参属性的格式进行关联映射并赋值给对应的属性完成了数据的绑定多学一招转换器配置和静态资源访问配置转换器配置和静态资源访问配置除了之前讲解的配置方案之外还可以通过其他方式完成下面讲解两种配置方式使用元素配置转换器和静态资源访问的配置方式使用元素配置转换器在配置转换器时除了常用的元素还可以使用元素进行显示的配置元素配置转换器方式具体如下所示返回值为类型的页面跳转返回值为类型的页面跳转到默认页面当方法的返回值为类型方法执行后会跳转到默认的页面默认页面的路径由方法映射路径和视图解析器中的前缀后缀拼接成拼接格式为前缀方法映射路径后缀如果的配置文件中没有配置视图解析器则会报错误由上面两个图的内容可以得出访问地址后执行了方法并且在方式执行后成功跳转到文件夹下的页面页面虽然跳转了但是浏览器地址栏没有变化原因是对请求默认按转发的方式进行响应返回值为类型的页面跳转一不携带数据返回值为类型的页面跳转的转发方式当方法的返回值为普通的字符串时在方法执行后会默认以转发的方式响应给客户端除了这种默认的转发方式还可以返回指定前缀的字符串来设定处理器执行后对请求进行转发还是重定向设定转发和重定向的字符串格式如下所示需要转发到的资源路径需要重定向到的资源路径返回值为类型的页面跳转一携带数据返回值为类型的页面跳转对象组成部分使用方法的返回值可以设定跳转的逻辑视图名称使用等对象实现页面跳转时传输数据除此之外还提供了兼顾视图和数据的对象对象包含视图相关内容和模型数据两部分其中视图相关的内容可以设置逻辑视图的名称也可以设置具体的实例模型数据则会在视图渲染过程中被合并到最终的视图输出接下来通过一个案例演示返回值为类型的页面跳转案例具体实现步骤如下修改文件新增方法在方法中使用封装数据和视图完成页面跳转时传递数据启动项目在浏览器中访问地址访问后浏览器页面进行跳转跳转的页面如图所示普通字符串的回写接下来通过输出数据的案例演示普通字符串的回写案例具体实现步骤如下在项目的包下创建一个数据回写类在类中定义方法用于测试在中普通字符串的回写启动项目在浏览器中访问地址数据的回写一对象数据转换成数据后的回写项目中已经导入的依赖可以先调用的转换的相关方法将对象或集合转换成数据然后通过将数据写入到输出流中完成回写具体实现步骤如下修改文件在类中新增方法用于将对象转换成数据并写入输出流中完成回写注解的使用范围如果每次回写对象或者集合等数据都需要手动转换成数据操作就比较繁琐为此提供了注解注解的作用是将处理器返回的对象通过适当的转换器转换为指定的格式之后写入到对象的区注解通常用来返回数据注解可以标注在方法和类上当标注在类上时表示该类中的所有方法均应用注解如果需要当前类中的所有方法均应用注解也可以使用注解注解相当于两个注解的结合数据的回写一集合数据转换成数据后的回写接下来通过一个案例演示使用注解回写格式的对象数据和集合数据案例具体实现步骤如下修改文件在类中新增方法用于返回类型的信息新增方法用于返回类型的列表信息只展示方法在项目的目录下创建一个商品添加页面在中创建一个表格用于显示用户信息和添加商品信息的部分代码如下所示简单异常处理器接口如果希望对中所有异常进行统一处理可以使用提供的异常处理器接口内部提供了的实现类它实现了简单的异常处理通过该实现类可以将不同类型的异常映射到不同的页面当发生异常的时候实现类根据发生的异常类型跳转到指定的页面处理异常信息实现类也可以为所有的异常指定一个默认的异常处理页面当应用程序抛出的异常没有对应的映射页面则使用默认页面处理异常信息下面通过一个案例演示对异常的统一处理案例具体实现步骤如下所示目录下创建一个名称为的包在包中创建类类的具体代码如下所示抛出空指针异常抛出异常省略抛出算术异常省略程序执行文件中的任意一个方法时都会抛出异常在异常发生时如果要跳转到指定的处理页面则需要在的配置文件中使用指定异常和异常处理页面的映射关系配置文件的部分配置如下所示',
   isPost: true,
   isHome: false,
   isHighlightShrink: false,
@@ -62,71 +75,76 @@
     display: inline !important
   }
 </style></noscript><script>(win=>{
-    win.saveToLocal = {
-      set: function setWithExpiry(key, value, ttl) {
-        if (ttl === 0) return
-        const now = new Date()
-        const expiryDay = ttl * 86400000
-        const item = {
-          value: value,
-          expiry: now.getTime() + expiryDay,
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
         }
-        localStorage.setItem(key, JSON.stringify(item))
-      },
-
-      get: function getWithExpiry(key) {
-        const itemStr = localStorage.getItem(key)
-
-        if (!itemStr) {
-          return undefined
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
         }
-        const item = JSON.parse(itemStr)
-        const now = new Date()
 
-        if (now.getTime() > item.expiry) {
-          localStorage.removeItem(key)
-          return undefined
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
         }
-        return item.value
-      }
-    }
-  
-    win.getScript = url => new Promise((resolve, reject) => {
-      const script = document.createElement('script')
-      script.src = url
-      script.async = true
-      script.onerror = reject
-      script.onload = script.onreadystatechange = function() {
-        const loadState = this.readyState
-        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-        script.onload = script.onreadystatechange = null
-        resolve()
-      }
-      document.head.appendChild(script)
-    })
-  
-    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
-      const link = document.createElement('link')
-      link.rel = 'stylesheet'
-      link.href = url
-      if (id) link.id = id
-      link.onerror = reject
-      link.onload = link.onreadystatechange = function() {
-        const loadState = this.readyState
-        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-        link.onload = link.onreadystatechange = null
-        resolve()
-      }
-      document.head.appendChild(link)
-    })
-  
-      win.activateDarkMode = function () {
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
         document.documentElement.setAttribute('data-theme', 'dark')
         if (document.querySelector('meta[name="theme-color"]') !== null) {
           document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
         }
       }
-      win.activateLightMode = function () {
+      win.activateLightMode = () => {
         document.documentElement.setAttribute('data-theme', 'light')
         if (document.querySelector('meta[name="theme-color"]') !== null) {
           document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
@@ -148,7 +166,7 @@
               const isNight = hour <= 6 || hour >= 18
               isNight ? activateDarkMode() : activateLightMode()
             }
-            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
               if (saveToLocal.get('theme') === undefined) {
                 e.matches ? activateDarkMode() : activateLightMode()
               }
@@ -165,34 +183,17 @@
         }
       }
     
-    const detectApple = () => {
-      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
-        document.documentElement.classList.add('apple')
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
       }
-    }
-    detectApple()
-    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d20f536c64d06e5fcf4bfe2ec5dc25d.jpg"/><div class="loading-image-dot"></div><div id="loading-percentage">0%</div></div></div><script>if (GLOBAL_CONFIG.preloader.source == "2" || GLOBAL_CONFIG.preloader.source == "3") {
-  const loadingPercentage = document.getElementById("loading-percentage");
-  let loadingPercentageTimer = setInterval(function() {
-    var progressBar = document.querySelector(".pace-progress");
-    if (!progressBar) return
-    var currentValue = progressBar.getAttribute("data-progress-text");
-    if (currentValue !== loadingPercentage.textContent) {
-      loadingPercentage.textContent = currentValue;
-      if (currentValue === "100%") {
-        clearInterval(loadingPercentageTimer);
-      }
-    }
-  }, 100);
-}
-
-const preloader = {
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d20f536c64d06e5fcf4bfe2ec5dc25d.jpg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
   endLoading: () => {
-    document.body.style.overflow = 'auto';
     document.getElementById('loading-box').classList.add("loaded");
   },
   initLoading: () => {
-    document.body.style.overflow = '';
     document.getElementById('loading-box').classList.remove("loaded")
   }
 }
@@ -202,8 +203,8 @@ setTimeout(function(){preloader.endLoading();},10000)
 if (true) {
   document.addEventListener('pjax:send', () => { preloader.initLoading() })
   document.addEventListener('pjax:complete', () => { preloader.endLoading() })
-}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div id="web_box"><div id="web_container"><div id="menu-mask"></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="anzhiyufont anzhiyu-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://smithhs.cn/" title="博客" target="_blank"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.png" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" href="http://robot.onliu.cn/" title="Robot" target="_blank"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/cupfox.png" alt="Robot"/><span class="back-menu-item-text">Robot</span></a><a class="back-menu-item" href="http://res.onliu.cn" title="Sale" target="_blank"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/tubiao.jpg" alt="Sale"/><span class="back-menu-item-text">Sale</span></a><a class="back-menu-item" href="http://se.onliu.cn/" title="资源共享" target="_blank"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog/x126.png" alt="资源共享"/><span class="back-menu-item-text">资源共享</span></a><a class="back-menu-item" href="https://github.com/Smithhss" title="Github" target="_blank"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/GitHub.png" alt="Github"/><span class="back-menu-item-text">Github</span></a></div></div></div></div><a id="site-name" href="/" accesskey="h"><div class="title">Smith</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page faa-parent animated-hover" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child" style="left:-79px;"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child" style="left:-31px;"><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li></ul></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child" style="left:-79px;"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于我</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button only-home" id="travellings_button" title="随机前往一个开往项目网站"><a class="site-page" onclick="anzhiyu.totraveling()" title="随机前往一个开往项目网站" href="javascript:void(0);" rel="external nofollow" data-pjax-state="external"><i class="anzhiyufont anzhiyu-icon-train"></i></a></div><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg" target="_blank"><img class="post-qr-code-img" alt="wechat" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg" target="_blank"><img class="post-qr-code-img" alt="alipay" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> <span>最新评论</span></span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Android-Studio/" style="font-size: 1.05rem;">Android Studio<sup>1</sup></a><a href="/tags/App/" style="font-size: 1.05rem;">App<sup>2</sup></a><a href="/tags/Butterfly/" style="font-size: 1.05rem;">Butterfly<sup>1</sup></a><a href="/tags/C/" style="font-size: 1.05rem;">C++<sup>1</sup></a><a href="/tags/CSS/" style="font-size: 1.05rem;">CSS<sup>1</sup></a><a href="/tags/Cisco-Packet-Tracer/" style="font-size: 1.05rem;">Cisco Packet Tracer<sup>1</sup></a><a href="/tags/Easypan/" style="font-size: 1.05rem;">Easypan<sup>2</sup></a><a href="/tags/FurtherMathematics/" style="font-size: 1.05rem;">FurtherMathematics<sup>1</sup></a><a href="/tags/GPT/" style="font-size: 1.05rem;">GPT<sup>1</sup></a><a href="/tags/Git2/" style="font-size: 1.05rem;">Git2<sup>1</sup></a><a href="/tags/HTML/" style="font-size: 1.05rem;">HTML<sup>1</sup></a><a href="/tags/Hexo/" style="font-size: 1.05rem;">Hexo<sup>1</sup></a><a href="/tags/Java/" style="font-size: 1.05rem;">Java<sup>6</sup></a><a href="/tags/JavaScript/" style="font-size: 1.05rem;">JavaScript<sup>1</sup></a><a href="/tags/JavaWeb/" style="font-size: 1.05rem;">JavaWeb<sup>2</sup></a><a href="/tags/Jrebel/" style="font-size: 1.05rem;">Jrebel<sup>1</sup></a><a href="/tags/LeetCode/" style="font-size: 1.05rem;">LeetCode<sup>1</sup></a><a href="/tags/Linux/" style="font-size: 1.05rem;">Linux<sup>3</sup></a><a href="/tags/Markdown/" style="font-size: 1.05rem;">Markdown<sup>2</sup></a><a href="/tags/Maven/" style="font-size: 1.05rem;">Maven<sup>2</sup></a><a href="/tags/Navicat/" style="font-size: 1.05rem;">Navicat<sup>1</sup></a><a href="/tags/NoSql/" style="font-size: 1.05rem;">NoSql<sup>1</sup></a><a href="/tags/Nodejs/" style="font-size: 1.05rem;">Nodejs<sup>2</sup></a><a href="/tags/Python/" style="font-size: 1.05rem;">Python<sup>4</sup></a><a href="/tags/Spring/" style="font-size: 1.05rem;">Spring<sup>2</sup></a><a href="/tags/VMware/" style="font-size: 1.05rem;">VMware<sup>2</sup></a><a href="/tags/Vue/" style="font-size: 1.05rem;">Vue<sup>1</sup></a><a href="/tags/YouHou/" style="font-size: 1.05rem;">YouHou<sup>1</sup></a><a href="/tags/books/" style="font-size: 1.05rem;">books<sup>1</sup></a><a href="/tags/butterfly/" style="font-size: 1.05rem;">butterfly<sup>1</sup></a><a href="/tags/clash/" style="font-size: 1.05rem;">clash<sup>1</sup></a><a href="/tags/project/" style="font-size: 1.05rem;">project<sup>4</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 1.05rem;">前端<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6/" style="font-size: 1.05rem;">开发框架<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" style="font-size: 1.05rem;">开发环境<sup>1</sup></a><a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 1.05rem;">操作系统<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" style="font-size: 1.05rem;">数据结构与算法<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" style="font-size: 1.05rem;">计算机组成原理<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 1.05rem;">计算机网络<sup>1</sup></a><a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="font-size: 1.05rem;">软件工程<sup>1</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
-    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/11/"><span class="card-archive-list-date">十一月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">3</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/10/"><span class="card-archive-list-date">十月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/09/"><span class="card-archive-list-date">九月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">6</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/07/"><span class="card-archive-list-date">七月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/06/"><span class="card-archive-list-date">六月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">7</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/05/"><span class="card-archive-list-date">五月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">17</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/04/"><span class="card-archive-list-date">四月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/06/"><span class="card-archive-list-date">六月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" onclick="anzhiyu.switchDarkMode()" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item on" id="consoleCommentBarrage" onclick="anzhiyu.switchCommentBarrage()" title="热评开关"><a class="commentBarrage"><i class="anzhiyufont anzhiyu-icon-message"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="anzhiyu.musicToggle()" title="音乐开关"><a class="music-switch"><i class="anzhiyufont anzhiyu-icon-music"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/Programming/">Programming</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/SpringMVC/" tabindex="-1"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>SpringMVC</span></a></span></div></div><h1 class="post-title">SpringMVC笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="post-meta-icon anzhiyufont anzhiyu-icon-calendar-days"></i><span class="post-meta-label">发表于</span><time datetime="2024-06-10T12:58:00.000Z" title="发表于 2024-06-10 20:58:00">2024-06-10</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">14.5k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>51分钟</span></span><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title="SpringMVC笔记"><i class="anzhiyufont anzhiyu-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为石家庄"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>石家庄</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/springmvc.webp"></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="1-初识SpringMvc"><a href="#1-初识SpringMvc" class="headerlink" title="1.初识SpringMvc"></a>1.初识SpringMvc</h1><h2 id="1-1-Mvc"><a href="#1-1-Mvc" class="headerlink" title="1.1.Mvc"></a>1.1.Mvc</h2><h3 id="1-1-1-概述"><a href="#1-1-1-概述" class="headerlink" title="1.1.1.概述"></a>1.1.1.概述</h3><ul>
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="anzhiyufont anzhiyu-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://smithhs.cn/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.png" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="http://robot.onliu.cn/" title="Robot"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/cupfox.png" alt="Robot"/><span class="back-menu-item-text">Robot</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="http://res.onliu.cn" title="Sale"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/tubiao.jpg" alt="Sale"/><span class="back-menu-item-text">Sale</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="http://se.onliu.cn/" title="资源共享"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog/x126.png" alt="资源共享"/><span class="back-menu-item-text">资源共享</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://github.com/Smithhss" title="Github"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/GitHub.png" alt="Github"/><span class="back-menu-item-text">Github</span></a></div></div></div></div><a id="site-name" href="/" accesskey="h"><div class="title">Smith</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/dailyPhoto/"><i class="anzhiyufont anzhiyu-icon-camera faa-tada" style="font-size: 0.9em;"></i><span> 每日照片</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wallpaper/"><i class="anzhiyufont anzhiyu-icon-image faa-tada" style="font-size: 0.9em;"></i><span> 壁纸</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wordScenery/"><i class="anzhiyufont anzhiyu-icon-font faa-tada" style="font-size: 0.9em;"></i><span> 文字风景</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于我</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/love/"><i class="anzhiyufont anzhiyu-icon-heart faa-tada" style="font-size: 0.9em;"></i><span> 爱情</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button only-home" id="travellings_button" title="随机前往一个开往项目网站"><a class="site-page" onclick="anzhiyu.totraveling()" title="随机前往一个开往项目网站" href="javascript:void(0);" rel="external nofollow" data-pjax-state="external"><i class="anzhiyufont anzhiyu-icon-train"></i></a></div><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg" target="_blank"><img class="post-qr-code-img" alt="wechat" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg" target="_blank"><img class="post-qr-code-img" alt="alipay" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Android-Studio/" style="font-size: 1.05rem;">Android Studio<sup>1</sup></a><a href="/tags/App/" style="font-size: 1.05rem;">App<sup>2</sup></a><a href="/tags/Butterfly/" style="font-size: 1.05rem;">Butterfly<sup>1</sup></a><a href="/tags/C/" style="font-size: 1.05rem;">C++<sup>1</sup></a><a href="/tags/CSS/" style="font-size: 1.05rem;">CSS<sup>1</sup></a><a href="/tags/Cisco-Packet-Tracer/" style="font-size: 1.05rem;">Cisco Packet Tracer<sup>1</sup></a><a href="/tags/Easypan/" style="font-size: 1.05rem;">Easypan<sup>2</sup></a><a href="/tags/FurtherMathematics/" style="font-size: 1.05rem;">FurtherMathematics<sup>1</sup></a><a href="/tags/GPT/" style="font-size: 1.05rem;">GPT<sup>1</sup></a><a href="/tags/Git2/" style="font-size: 1.05rem;">Git2<sup>1</sup></a><a href="/tags/HTML/" style="font-size: 1.05rem;">HTML<sup>1</sup></a><a href="/tags/Hexo/" style="font-size: 1.05rem;">Hexo<sup>1</sup></a><a href="/tags/Java/" style="font-size: 1.05rem;">Java<sup>6</sup></a><a href="/tags/JavaScript/" style="font-size: 1.05rem;">JavaScript<sup>1</sup></a><a href="/tags/JavaWeb/" style="font-size: 1.05rem;">JavaWeb<sup>2</sup></a><a href="/tags/Jrebel/" style="font-size: 1.05rem;">Jrebel<sup>1</sup></a><a href="/tags/LeetCode/" style="font-size: 1.05rem;">LeetCode<sup>1</sup></a><a href="/tags/Linux/" style="font-size: 1.05rem;">Linux<sup>3</sup></a><a href="/tags/Markdown/" style="font-size: 1.05rem;">Markdown<sup>2</sup></a><a href="/tags/Maven/" style="font-size: 1.05rem;">Maven<sup>2</sup></a><a href="/tags/Mysql/" style="font-size: 1.05rem;">Mysql<sup>1</sup></a><a href="/tags/NoSql/" style="font-size: 1.05rem;">NoSql<sup>1</sup></a><a href="/tags/Nodejs/" style="font-size: 1.05rem;">Nodejs<sup>2</sup></a><a href="/tags/Python/" style="font-size: 1.05rem;">Python<sup>4</sup></a><a href="/tags/Spring/" style="font-size: 1.05rem;">Spring<sup>2</sup></a><a href="/tags/VMware/" style="font-size: 1.05rem;">VMware<sup>2</sup></a><a href="/tags/Vue/" style="font-size: 1.05rem;">Vue<sup>1</sup></a><a href="/tags/YouHou/" style="font-size: 1.05rem;">YouHou<sup>1</sup></a><a href="/tags/books/" style="font-size: 1.05rem;">books<sup>1</sup></a><a href="/tags/butterfly/" style="font-size: 1.05rem;">butterfly<sup>1</sup></a><a href="/tags/clash/" style="font-size: 1.05rem;">clash<sup>1</sup></a><a href="/tags/project/" style="font-size: 1.05rem;">project<sup>4</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 1.05rem;">前端<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6/" style="font-size: 1.05rem;">开发框架<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" style="font-size: 1.05rem;">开发环境<sup>1</sup></a><a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 1.05rem;">操作系统<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" style="font-size: 1.05rem;">数据结构与算法<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" style="font-size: 1.05rem;">计算机组成原理<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 1.05rem;">计算机网络<sup>1</sup></a><a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="font-size: 1.05rem;">软件工程<sup>1</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/05/"><span class="card-archive-list-date">五月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/11/"><span class="card-archive-list-date">十一月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">3</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/10/"><span class="card-archive-list-date">十月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/09/"><span class="card-archive-list-date">九月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">5</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/07/"><span class="card-archive-list-date">七月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/06/"><span class="card-archive-list-date">六月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">7</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/05/"><span class="card-archive-list-date">五月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">17</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/04/"><span class="card-archive-list-date">四月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="anzhiyu.musicToggle()" title="音乐开关"><a class="music-switch"><i class="anzhiyufont anzhiyu-icon-music"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/Programming/" itemprop="url">Programming</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/SpringMVC/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>SpringMVC</span></a></span></div></div><h1 class="post-title" itemprop="name headline">SpringMVC笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="post-meta-icon anzhiyufont anzhiyu-icon-calendar-days"></i><span class="post-meta-label">发表于</span><time itemprop="dateCreated datePublished" datetime="2024-06-10T12:58:00.000Z" title="发表于 2024-06-10 20:58:00">2024-06-10</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">14.5k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>51分钟</span></span><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title="SpringMVC笔记"><i class="anzhiyufont anzhiyu-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为石家庄"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>石家庄</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/springmvc.webp"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="https://smithhs.cn/2024/06/10/2024-06-10-SpringMVC%E7%AC%94%E8%AE%B0/"><header><a class="post-meta-categories" href="/categories/Programming/" itemprop="url">Programming</a><a href="/tags/SpringMVC/" tabindex="-1" itemprop="url">SpringMVC</a><h1 id="CrawlerTitle" itemprop="name headline">SpringMVC笔记</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">Smith</span><time itemprop="dateCreated datePublished" datetime="2024-06-10T12:58:00.000Z" title="undefined 2024-06-10 20:58:00">2024-06-10</time></header><h1 id="1-初识SpringMvc"><a href="#1-初识SpringMvc" class="headerlink" title="1.初识SpringMvc"></a>1.初识SpringMvc</h1><h2 id="1-1-Mvc"><a href="#1-1-Mvc" class="headerlink" title="1.1.Mvc"></a>1.1.Mvc</h2><h3 id="1-1-1-概述"><a href="#1-1-1-概述" class="headerlink" title="1.1.1.概述"></a>1.1.1.概述</h3><ul>
 <li>M(Model)：负责数据的处理操作</li>
 <li>V(View)：提供程序和用户之间交互的接口</li>
 <li>C(Controller)：控制请求的处理和跳转</li>
@@ -280,11 +281,13 @@ if (true) {
 <p>需要注意的是，如果默认创建的Maven项目中没有自动生成webapp文件夹，可以在IDEA中进行设置。</p>
 <p>引入Maven依赖:项目创建完成后，为保障项目的正常运行，需要导入项目所需</p>
 <ul>
-<li>STEP 02<br>的依赖到项目的pom.xml文件中。<br>&lt;!-这里只展示了其中一个JAR包–&gt;<!--Spring核心类-->
+<li>STEP 02<br>的依赖到项目的pom.xml文件中。<br>&lt;!-这里只展示了其中一个JAR包–&gt;</li>
+</ul>
+<!--Spring核心类-->
 <dependency>
 <groupld>org.springframework</groupld><artifactld>spring-context</artifactld><version>5.2.8.RELEASE</version></dependency>
-需要注意的是，要在IDEA中使用插件运行Maven项目，除了需要在pom.xml文件中配置对应的插件外，还需要在IDEA中进行项目运行的相关配置。</li>
-</ul>
+需要注意的是，要在IDEA中使用插件运行Maven项目，除了需要在pom.xml文件中配置对应的插件外，还需要在IDEA中进行项目运行的相关配置。
+
 <p>配置前端控制器: Spring MVC通过前端控制器拦截客户端的请求并进行转发<br>因</p>
 <ul>
 <li>STEP 03<br>此在使用Spring MVC时，配置前端控制器是必不可少的一步。Spring MVC的前端控制器也是一个Servlet，可以在项目的web.xml文件中进行配置。</li>
@@ -294,23 +297,25 @@ if (true) {
 <p><param-value>classpath:spring-mvc.xml</param-value></init-param><br><load-on-startup>1</load-on-startup></servlet><servlet-mapping><br><servlet-name>DispatcherServlet</servlet-name><url-pattern>&#x2F;</url-pattern><br></servlet-mapping></p>
 <p>配置处理器映射信息和视图解析器:在项目的resources文件夹下创建Spring MVC的配置文件spring-mvc.xml，用于配置处理器映射信息和视图解析器。</p>
 <ul>
-<li>STEP 04<!--配置Spring MVC要扫描的包-->
-&lt;context:component-scan basepackage&#x3D;”com.itheima.controller” &#x2F;&gt;<!--配置视图解析器-->
-<bean class=
-"org.springframework.web.servlet.view.InternalResourceViewResolver"><property name="prefix" value="/WEB-INF/pages/" />
-<property name= "suffix" value=".jsp" />
-</bean></li>
+<li>STEP 04</li>
 </ul>
+<!--配置Spring MVC要扫描的包-->
+<p>&lt;context:component-scan basepackage&#x3D;”com.itheima.controller” &#x2F;&gt;</p>
+<!--配置视图解析器-->
+<p><bean class=
+"org.springframework.web.servlet.view.InternalResourceViewResolver"><br><property name="prefix" value="/WEB-INF/pages/" /><br><property name= "suffix" value=".jsp" /><br></bean></p>
 <p>创建处理器:在项目的src&#x2F;main&#x2F;java目录下创建一个路径为com.itheima.controller的包。在包中创建处理器FirstController类，用于处理客户端的请求并指定响应时转跳的页面。</p>
 <ul>
 <li>STEP 05<br>&#x2F;&#x2F;设置当前类为处理器类<br>@Controller<br>public class FirstController {&#x2F;设定当前方法的访问映射地址<br>@RequestMapping(“ &#x2F;firstController”)<br>&#x2F;设置当前方法返回值类型为String，用于指定请求完成后跳转的页面public String sayHello() {<br>System.out.println(“访问到FirstController!”);&#x2F;&#x2F;设定具体跳转的页面<br>return “success”;<br>}</li>
 </ul>
 <p>创建视图（View）页面:在项目的Web-INF文件夹下创建名称为page的文件夹并在page文件夹下创建名称为sucdess的jsp文件，用于对客户端请求进行处理后的视图展示。</p>
 <ul>
-<li>STEP 06<html><body>
-<h2>Spring MVC FirstController!</h2></body>
-</html></li>
+<li>STEP 06</li>
 </ul>
+<html><body>
+<h2>Spring MVC FirstController!</h2></body>
+</html>
+
 <h2 id="SpringMVC工作原理"><a href="#SpringMVC工作原理" class="headerlink" title="SpringMVC工作原理"></a>SpringMVC工作原理</h2><blockquote>
 <p>Spring MVC三大组件—处理器映射器<br>处理器映射器可以理解为一个Map&lt;URL,Hanlder&gt;，HandlerMapping负责根据用户请求的URL找到Handler (处理器)，Spring MVC提供了不同的映射器来实现不同的映射方式。</p>
 </blockquote>
@@ -486,13 +491,15 @@ if (true) {
 <p>public class DateConverter implements Converter&lt;String, Date&gt; {<br>private String datePattern &#x3D; “yyyy-MM-dd”;&#x2F;&#x2F;定义日期格式Override<br>public Date convert(String source){<br>SimpleDateFormat sdf &#x3D; new SimpleDateFormat(datePattern);try {<br>return sdf.parse(source);<br>} catch (Exception e) {<br>throw new lllegalArgumentException(<br>“无效的日期格式，请使用这种格式:”+datePattern); }<br>}</p>
 <p>为了让Spring MVC知道并使用DateConverter转换器类，还需要在配置文件spring-mvc.xml中配置类型转换器。</p>
 <ul>
-<li>STEP 02<!--配置创建spring容器要扫描的包-->
-&lt;context:component-scan basepackage&#x3D;”com.itheima.controller” &#x2F;&gt;<!--配置视图解析器--><bean class=
-"org.springframework.web.servlet.view.InternalResourceViewResolver"><property name="prefix" value="/WEB-INF/pages/" />
-<property name="suffix"value=".jsp"/>
-</bean><!--配置类型转换器工厂--><bean id="converterService" class="org.springframework.context.support.ConversionServiceFactoryBean">
-<!--给工厂注入一个新的类型转换器，配置自定义类型转换器--></li>
+<li>STEP 02</li>
 </ul>
+<!--配置创建spring容器要扫描的包-->
+<p>&lt;context:component-scan basepackage&#x3D;”com.itheima.controller” &#x2F;&gt;<!--配置视图解析器--><bean class=
+"org.springframework.web.servlet.view.InternalResourceViewResolver"><br><property name="prefix" value="/WEB-INF/pages/" /><br>&lt;property name&#x3D;”suffix”value&#x3D;”.jsp”&#x2F;&gt;<br></bean><!--配置类型转换器工厂--><bean id="converterService" class="org.springframework.context.support.ConversionServiceFactoryBean"></p>
+<!--给工厂注入一个新的类型转换器，配置自定义类型转换器-->
+
+
+
 <blockquote>
 <p>配置类型转换器工厂或配置格式化工厂<br>要将自定义类型转换器注册到程序中，除了可以将自定义转换器配置在类型转换器工厂ConversionServiceFactoryBean中，也可以将自定义转换器配置在格式化工厂org.springframework.format.support.FormattingConversionServiceFactoryBean中，通过格式化工厂对数据格式化。</p>
 </blockquote>
@@ -509,11 +516,13 @@ if (true) {
 </ul>
 <p>在项目的src\main\webapp目录下，创建一个提交商品页面products.jsp，在products.jsp中创建一个展示商品列表的表单，表单提交时向服务器端发送商品列表的所有id。products.jsp的具体代码如下所示。</p>
 <ul>
-<li>STEP 02<br>&lt;%@page language&#x3D;””java” contentType&#x3D;”text&#x2F;html; charset&#x3D;UTF-8””<br>pageEncoding&#x3D;”UTF-8”%&gt;<html> <head> <title>提交商品</title></head><body>
+<li>STEP 02<br>&lt;%@page language&#x3D;””java” contentType&#x3D;”text&#x2F;html; charset&#x3D;UTF-8””<br>pageEncoding&#x3D;”UTF-8”%&gt;</li>
+</ul>
+<html> <head> <title>提交商品</title></head><body>
 <form action="${pageContext.request.contextPath }/getProducts"method="post">
 <input name="prolds" value="3" type="checkbox"></td><td>SSM框架实战</td></tr></table>
-<input type="submit" value="提交商品"/></form></body></html></li>
-</ul>
+<input type="submit" value="提交商品"/></form></body></html>
+
 <p>在com.itheima.controller包中创建一个商品处理器类ProductController，在ProductController类中定义getProducts()方法，用于接收表单提交的商品id。ProductController类的具体代码如下所示。</p>
 <ul>
 <li>STEP 03<br>@Controller<br>public class ProductController<br>&#x2F;获取商品列表<br>@RequestMapping(“ &#x2F;getProducts”)<br>public void getProducts(String[]prolds){<br>for (String prold : prolds){<br>System.out.println(“获取到了ld为”+prold+”的商品”);}<br>}</li>
@@ -558,13 +567,14 @@ if (true) {
 </ul>
 <p>在项目的src\main\webapp目录下，创建一个订单信息文件orders.jsp，在orders.jsp中创建一个表单用于提交用户的订单信息。表单提交时，表单数据分别封装到User的订单属性orders和地址属性address中。orders.jsp的具体代码如下所示。</p>
 <ul>
-<li><p>STEP 03<br>&lt;%@page language&#x3D;”java” contentType&#x3D;”text&#x2F;html; charset&#x3D;UTF-8”<br>pageEncoding&#x3D;”UTF-8” %&gt;<html><head><title>订单信息</title></head><body>&lt;form action&#x3D;”${pageContext.request.contextPath }&#x2F;showOrders”method&#x3D;”post”&gt;<table width="220px" borde="1"><!--下面只展示一条数据--></p>
+<li>STEP 03<br>&lt;%@page language&#x3D;”java” contentType&#x3D;”text&#x2F;html; charset&#x3D;UTF-8”<br>pageEncoding&#x3D;”UTF-8” %&gt;<html><head><title>订单信息</title></head><body>&lt;form action&#x3D;”${pageContext.request.contextPath }&#x2F;showOrders”method&#x3D;”post”&gt;<table width="220px" borde="1"><!--下面只展示一条数据--></li>
+</ul>
 <tr><td>订单号</td><td>订单名称</td><td>配送地址</td></tr>
 <tr><td><input name="orders[0].orderld" value="1" type="text"></td>
 <td><input name="orders[0].orderName" value="Java基础教程"type="text"></td><td><input name="address" value="北京海淀" type="text"></td></tr></table><input type="submit" value="订单信息"/></form> </body> </html>
-</li>
-<li><p>STEP 05<br>在orders.jsp显示效果图所示的页面中，单击左下角“订单信息”按钮，orders.jsp表单中的订单信息发送到服务器端的showOrders()方法进行处理，控制台打印信息如图所示。</p>
-</li>
+
+<ul>
+<li>STEP 05<br>在orders.jsp显示效果图所示的页面中，单击左下角“订单信息”按钮，orders.jsp表单中的订单信息发送到服务器端的showOrders()方法进行处理，控制台打印信息如图所示。</li>
 </ul>
 <blockquote>
 <p>复杂POJO数组绑定的编写要求<br>在复杂POJO数据绑定时，如果数据绑定到List类型的属性，客户端请求的参数名称（本例中指form表单内各元素name的属性值）编写必须符合以下要求。<br>①如果List的泛型为简单类型，则客户端参数名称必须和POJO类中List属性所属类中的属性名称保持一致。<br>②如果List的泛型参数为对象类型，则客户端参数名称必须与POJO类的层次结构名称保持一致，并使用数组格式描述对象在List中的位置，即客户端参数名称必须和最终绑定在List中的某个对象的某个属性的名称保持一致。</p>
@@ -596,36 +606,43 @@ if (true) {
 </blockquote>
 <p>接下来通过一个异步提交商品信息案例，演示Spring MVC中的JSON数据绑定，案例具体实现步骤如下。在项目的pom.xml文件中导入Jackson的依赖。使用MappingJackson2HttpMessageConverter对JSON数据进行转换和绑定，需要导入Jackson JSON转换核心包、JSON转换的数据绑定包和JSON转换注解包的相关依赖。</p>
 <ul>
-<li><p>STEP 01</p>
+<li>STEP 01</li>
+</ul>
 <!--Jackson转换核心包依赖-->
 <dependency>
 <groupld>com.fasterxml.jackson.core</groupld><artifactld>jackson-core</artifactld>
 <version>2.9.2</version>
 </dependency>
 <!--Jackson转换的数据绑定包依赖，省略--><!--Jackson JSON转换注解包，省略-->
-</li>
-<li><p>STEP 02<br>在项目中导入jQuery文件。<br>由于本次演示的是异步数据提交，需要使用jQuery，所以需要将jQuery文件导入到项目中，以便发送ajax请求。在项目的&#x2F;webapp文件夹下创建名称为js的文件夹，在js文件夹中导入jQuery文件。</p>
-</li>
+
+<ul>
+<li>STEP 02<br>在项目中导入jQuery文件。<br>由于本次演示的是异步数据提交，需要使用jQuery，所以需要将jQuery文件导入到项目中，以便发送ajax请求。在项目的&#x2F;webapp文件夹下创建名称为js的文件夹，在js文件夹中导入jQuery文件。</li>
 </ul>
 <p>在项目的src\main\webapp目录下，创建一个商品信息页面product.jsp，在product.jsp中创建一个表单用于填写商品信息，表单提交时，表单发送异步请求将表单的商品信息发送到处理器。product.jsp的部分代码如下所示。</p>
 <ul>
-<li>STEP 03<script type="text/javascript">
-function sumbmitProduct() {
-}</li>
+<li>STEP 03</li>
 </ul>
-<p></script></p>
+<script type="text/javascript">
+function sumbmitProduct() {
+}
+
+</script>
+
 <p>修改ProductController.java类，在ProductController类电新增getProduct()方法和getProductList()方法，分别用于获取客户端提交的单个商品信息和多个商品信息。由于客户端发送的是JSON格式的数据，此时，在处理器中无法直接使用方法形参接收数据，完成数据的自动绑定。对此，可以使用Spring MVC提供的@RequestBody注解。</p>
 <ul>
 <li>STEP 04<br>&#x2F;**<br>只展示了个体Product()方法，获取单个商品信息*&#x2F;<br>RequestMapping(“&#x2F;getProduct”)<br>public void getProduct(@RequestBody Product product) {String prold &#x3D; product.getProld();<br>String proName &#x3D; product.getProName();<br>System.out.println(“获取到了ld为”+prold+”名称为”+ proName+”的商品”);</li>
 </ul>
 <p>在项目的web.xml文件中配置的DispatcherServlet会拦截所有URL，导致项目中的静态资源如css、jsp、js等）也被DispatcherServlet拦截。如果想放行静态资源,可以在Spring MVC的配置文件中进行静态资源配置。Spring MVC配置文件的部分配置代码如下所示。</p>
 <ul>
-<li>STEP 05<!-- 配置要扫描的包-->
-&lt;context:component-scan base-package&#x3D;”com.itheima.controller” &#x2F;&gt;<!--配置视图解析器--><bean class=
-"org.springframework.web.servlet.view.InternalResourceViewResolver"><br>&lt;property name&#x3D;”prefix”value&#x3D;”&#x2F;WEB-INF&#x2F;pages&#x2F;“ &#x2F;&gt;<br><property name="suffix" value=".jsp" /></bean><!--配置注解驱动--> 
-<a href="mvc:annotation-driven/">mvc:annotation-driven/</a><!--配置静态资源的访问映射，此配置中的文件，将不被前端控制器拦截-->
-&lt;mvc:resources mapping&#x3D;”&#x2F;js&#x2F;**” location&#x3D;”&#x2F;js&#x2F;“&#x2F;&gt;</li>
+<li>STEP 05</li>
 </ul>
+<!-- 配置要扫描的包-->
+<p>&lt;context:component-scan base-package&#x3D;”com.itheima.controller” &#x2F;&gt;<!--配置视图解析器--><bean class=
+"org.springframework.web.servlet.view.InternalResourceViewResolver"><br>&lt;property name&#x3D;”prefix”value&#x3D;”&#x2F;WEB-INF&#x2F;pages&#x2F;“ &#x2F;&gt;<br><property name="suffix" value=".jsp" /></bean></p>
+<!--配置注解驱动--> 
+<p><a href="mvc:annotation-driven/">mvc:annotation-driven/</a></p>
+<!--配置静态资源的访问映射，此配置中的文件，将不被前端控制器拦截-->
+<p>&lt;mvc:resources mapping&#x3D;”&#x2F;js&#x2F;**” location&#x3D;”&#x2F;js&#x2F;“&#x2F;&gt;</p>
 <p>&lt;mvcresources ..&#x2F;&gt;的两个重要属性<br>属性                    说明<br>location                用于定位需要访问的本地静态资源文件路径，具体到某个文件夹<br>mapping                 匹配静态资源全路径，其中“&#x2F;**”表示文件夹及其子文件夹下的某个具体文件</p>
 <p>在product.jsp的显示效果图所示的页面中，单击右侧“提交单个商品”按钮，product.jsp表单中的单个商品信息以JSON格式异步发送到服务器端getProduct()方法中。提交单个商品时控制台打印信息如图所示。</p>
 <ul>
@@ -693,19 +710,21 @@ function sumbmitProduct() {
 </ul>
 <p>程序执行文件ExceptionController.java中的任意一个方法时，都会抛出异常。在异常发生时，如果要跳转到指定的处理页面，则需要在Spring MVC的配置文件spring-mvc.xml中使用SimpleMappingExceptionResolver指定异常和异常处理页面的映射关系。Spring MVC配置文件的部分配置如下所示。</p>
 <ul>
-<li>STEP 03<!--配置静态资源的访问映射，此配置中的文件，将不被前端控制器拦截--><mvc:resources mapping=" /js/**" location="/js//>
-<!--注入 SimpleMappingExceptionResolver--> <bean class=
-“org.springframework.web.servlet.handler.SimpleMappingExceptionResolver”&gt;<!--定义特殊处理的异常，类名或完全路径名作为key，对应的异常页面名作为值--><property name="exceptionMappings">
-<props> <prop key="java.lang.NullPointerException">
-nullPointerExp.jsp</prop><prop key="IOException">IOExp.jsp</prop></props></property> </bean></li>
+<li>STEP 03</li>
 </ul>
+<!--配置静态资源的访问映射，此配置中的文件，将不被前端控制器拦截--><mvc:resources mapping=" /js/**" location="/js//>
+<!--注入 SimpleMappingExceptionResolver--> <bean class=
+<p>“org.springframework.web.servlet.handler.SimpleMappingExceptionResolver”&gt;<!--定义特殊处理的异常，类名或完全路径名作为key，对应的异常页面名作为值--><br><property name="exceptionMappings"><br><props> <prop key="java.lang.NullPointerException"><br>nullPointerExp.jsp</prop><prop key="IOException">IOExp.jsp</prop></props></property> </bean></p>
 <p>在文件spring-mvc.xml中，已经指定了异常类别对应的异常处理页面，接下来创建这些异常处理页面。在此不对异常处理页面做太多处理，只在页面中展示对应的异常信息。</p>
 <ul>
-<li>STEP 04<!--这里只展示nullPointerExp.jsp页面-->
-&lt;%@page contentType&#x3D;”text&#x2F;html;charset&#x3D;UTF-8” language&#x3D;”java”%&gt;<html><head><title>空指针异常处理页面</title></head><body>
-空指针异常处理页面-----${exp}</body>
-</html></li>
+<li>STEP 04</li>
 </ul>
+<!--这里只展示nullPointerExp.jsp页面-->
+<p>&lt;%@page contentType&#x3D;”text&#x2F;html;charset&#x3D;UTF-8” language&#x3D;”java”%&gt;<html></p>
+<head><title>空指针异常处理页面</title></head><body>
+空指针异常处理页面-----${exp}</body>
+</html>
+
 <p>启动chapter13项目，在浏览器中访问地址</p>
 <ul>
 <li>STEP 05<br><a target="_blank" rel="noopener" href="http://localhost:8080/chapter13/showNullPointer%EF%BC%8C%E7%A8%8B%E5%BA%8F%E5%B0%86%E6%89%A7%E8%A1%8CshowNullPointer()%E6%96%B9%E6%B3%95%E3%80%82%E6%96%B9%E6%B3%95%E6%89%A7%E8%A1%8C%E5%90%8E%E9%A1%B5%E9%9D%A2%E6%98%BE%E7%A4%BA%E6%95%88%E6%9E%9C%E5%A6%82%E5%9B%BE%E6%89%80%E7%A4%BA%E3%80%82">http://localhost:8080/chapter13/showNullPointer，程序将执行showNullPointer()方法。方法执行后页面显示效果如图所示。</a></li>
@@ -724,9 +743,11 @@ nullPointerExp.jsp</prop><prop key="IOException">IOExp.jsp</prop></props></prope
 </ul>
 <p>在src\main\webapp目录下，创建一个名称为error.jsp的文件，用作异常处理页面。本案例不对异常处理页面进行过多处理，只将异常信息打印在页面上。</p>
 <ul>
-<li>STEP 04<br>&lt;%@page contentType&#x3D;”text&#x2F;html;charset&#x3D;UTF-8” language&#x3D;”java”%&gt;<html><head><title>异常处理页面</title></head><body>
-${msg}</body></html></li>
+<li>STEP 04<br>&lt;%@page contentType&#x3D;”text&#x2F;html;charset&#x3D;UTF-8” language&#x3D;”java”%&gt;<html></li>
 </ul>
+<head><title>异常处理页面</title></head><body>
+${msg}</body></html>
+
 <h2 id="异常处理注解"><a href="#异常处理注解" class="headerlink" title="异常处理注解"></a>异常处理注解</h2><blockquote>
 <p>@ControllerAdvice注解的作用<br>从Spring 3.2开始，Spring提供了一个新注解@ControllerAdvice,ControllerAdvice有以下两个作用。<br>。注解作用在类上时可以增强Controller，对Controller中被@RequestMapping注解标注的方法加一些逻辑处理。<br>@ControllerAdvice注解结合方法型注解@ExceptionHandler，可以捕获Controller中抛出的指定类型的异常，从而实现不同类型的异常统一处理。</p>
 </blockquote>
@@ -760,13 +781,15 @@ ${msg}</body></html></li>
 </ul>
 <p>Spring MVC的配置文件spring-mvc.xml中添加MyInterceptor拦截器的配置，具</p>
 <ul>
-<li>STEP 03<br>体配置如下所示。<!--配置拦截器--><mvc:interceptors>
+<li>STEP 03<br>体配置如下所示。</li>
+</ul>
+<!--配置拦截器--><mvc:interceptors>
 <!--使用bean直接定义在<mvcinterceptors>下面的拦截器将拦截所有请求-->
 <bean class="com.itheima.interceptor.MyInterceptor" />
 </mvcinterceptors>
 福~r0 6 出To||×中巴
-在spring-mvc.xml中使用<mvc:interceptors>元素的子元素<bean>来配置拦截器，配置的拦截器会拦截所有映射到Handler的请求。</li>
-</ul>
+在spring-mvc.xml中使用<mvc:interceptors>元素的子元素<bean>来配置拦截器，配置的拦截器会拦截所有映射到Handler的请求。
+
 <h2 id="拦截器的执行流程一多个拦截器"><a href="#拦截器的执行流程一多个拦截器" class="headerlink" title="拦截器的执行流程一多个拦截器"></a>拦截器的执行流程一多个拦截器</h2><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/p39.png"></p>
 <p>下面在单个拦截器案例的基础上新增一个拦截器，来演示多个拦截器的执行，具体<br>STEP 01<br>步骤如下。在com.itheima.interceptor包中，新增拦截器MyInterceptor2,MyInterceptor2和MyInterceptor一样，也是Handlerlnterceptor接口的实现类,在MyInterceptor2中也要重写Handlerlnterceptor接口的3个方法。<br>public class MyInterceptor2 implements HandlerInterceptor {<br>@Override<br>public boolean preHandle(HttpServletRequest request,<br>HttpServletResponse response, Object handler){<br>System.out.println(“Mylnterceptor2…preHandle”);<br>1&#x2F;对拦截的请求进行放行处理<br>return true;<br>}<br>ll postHandle()和afterCompletion()方法省略</p>
 <p>在Spring MVC配置文件springmvc-config.xml中的<a href="mvc:interceptors">mvc:interceptors</a>元素内,新增拦截器MyInterceptor2，<a href="mvc:interceptors">mvc:interceptors</a>元素内的配置代码具体如下所示。</p>
@@ -784,7 +807,16 @@ ${msg}</body></html></li>
 <ul>
 <li>STEP 02<br>@Controller<br>public class UserController {<br>&#x2F;跳转到系统首页，跳转到登录页面，跳转到订单信息页面，用户登录省略@RequestMapping(“&#x2F;logout”)<br>public String logout(HttpSession session){&#x2F;用户退出session.invalidate();&#x2F;&#x2F;清除Session<br>return “redirect:tologin”;&#x2F;&#x2F;退出登录后重定向到登录页面</li>
 </ul>
-<h2 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h2><h2 id="文件下载"><a href="#文件下载" class="headerlink" title="文件下载"></a>文件下载</h2><h2 id="案例：文件上传和下载"><a href="#案例：文件上传和下载" class="headerlink" title="案例：文件上传和下载"></a>案例：文件上传和下载</h2><h2 id="常用方式整合思路"><a href="#常用方式整合思路" class="headerlink" title="常用方式整合思路"></a>常用方式整合思路</h2><h2 id="项目基础结构搭建"><a href="#项目基础结构搭建" class="headerlink" title="项目基础结构搭建"></a>项目基础结构搭建</h2><h2 id="Spring和Mybatis整合"><a href="#Spring和Mybatis整合" class="headerlink" title="Spring和Mybatis整合"></a>Spring和Mybatis整合</h2><h2 id="Spring和Spring-MVC整合"><a href="#Spring和Spring-MVC整合" class="headerlink" title="Spring和Spring MVC整合"></a>Spring和Spring MVC整合</h2><h2 id="纯注解方式整合思路"><a href="#纯注解方式整合思路" class="headerlink" title="纯注解方式整合思路"></a>纯注解方式整合思路</h2><h2 id="纯注解SSM框架整合"><a href="#纯注解SSM框架整合" class="headerlink" title="纯注解SSM框架整合"></a>纯注解SSM框架整合</h2><h2 id="系统概述"><a href="#系统概述" class="headerlink" title="系统概述"></a>系统概述</h2><h2 id="数据库设计"><a href="#数据库设计" class="headerlink" title="数据库设计"></a>数据库设计</h2><h2 id="系统环境搭建"><a href="#系统环境搭建" class="headerlink" title="系统环境搭建"></a>系统环境搭建</h2><h2 id="用户登录"><a href="#用户登录" class="headerlink" title="用户登录"></a>用户登录</h2><h2 id="实现登录验证"><a href="#实现登录验证" class="headerlink" title="实现登录验证"></a>实现登录验证</h2><h2 id="注销登录"><a href="#注销登录" class="headerlink" title="注销登录"></a>注销登录</h2><h2 id="新书推荐"><a href="#新书推荐" class="headerlink" title="新书推荐"></a>新书推荐</h2><h2 id="图书借阅"><a href="#图书借阅" class="headerlink" title="图书借阅"></a>图书借阅</h2><h2 id="当前借阅"><a href="#当前借阅" class="headerlink" title="当前借阅"></a>当前借阅</h2><h2 id="借阅记录"><a href="#借阅记录" class="headerlink" title="借阅记录"></a>借阅记录</h2><h2 id="访问权限控制"><a href="#访问权限控制" class="headerlink" title="访问权限控制"></a>访问权限控制</h2><h2 id="扩展01-云图书管理系统环境搭建"><a href="#扩展01-云图书管理系统环境搭建" class="headerlink" title="扩展01 -云图书管理系统环境搭建"></a>扩展01 -云图书管理系统环境搭建</h2><h2 id="登录的业务流程分析"><a href="#登录的业务流程分析" class="headerlink" title="登录的业务流程分析"></a>登录的业务流程分析</h2><h2 id=""><a href="#" class="headerlink" title=""></a></h2></article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d20f536c64d06e5fcf4bfe2ec5dc25d.jpg" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d20f536c64d06e5fcf4bfe2ec5dc25d.jpg" title="头像" alt="头像"></a><div class="post-copyright__author_name">Smith</div><div class="post-copyright__author_desc">人生太短，要干的事太多，我要争分夺秒</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://smithhs.cn/2024/06/10/2024-06-10-SpringMVC%E7%AC%94%E8%AE%B0/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://smithhs.cn/2024/06/10/2024-06-10-SpringMVC%E7%AC%94%E8%AE%B0/')">SpringMVC笔记</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="anzhiyu.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="anzhiyufont anzhiyu-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="anzhiyu.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://smithhs.cn/2024/06/10/2024-06-10-SpringMVC%E7%AC%94%E8%AE%B0/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=SpringMVC笔记&amp;url=https://smithhs.cn/2024/06/10/2024-06-10-SpringMVC%E7%AC%94%E8%AE%B0/&amp;pic=https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/springmvc.webp" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="rm.copyPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://smithhs.cn" target="_blank">Smith</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/SpringMVC/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>SpringMVC<span class="tagsPageCount">1</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/dataanalysis.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/05/27/2024-05-27-Spring%E7%AC%94%E8%AE%B0/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/javaspring.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Spring笔记</div></div></a></div><div class="next-post pull-right"><a href="/2024/06/16/2024-06-16-%E5%9F%BA%E4%BA%8ESpringBoot%E9%9F%B3%E4%B9%90%E7%B3%BB%E7%BB%9F%E9%A1%B9%E7%9B%AE/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/musicxiangmu.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">基于SpringBoot音乐系统项目</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E5%88%9D%E8%AF%86SpringMvc"><span class="toc-number">1.</span> <span class="toc-text">1.初识SpringMvc</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-Mvc"><span class="toc-number">1.1.</span> <span class="toc-text">1.1.Mvc</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-1-%E6%A6%82%E8%BF%B0"><span class="toc-number">1.1.1.</span> <span class="toc-text">1.1.1.概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-2-Mvc%E6%A1%86%E6%9E%B6%E5%8F%AF%E4%BB%A5%E5%81%9A%E4%BB%80%E4%B9%88"><span class="toc-number">1.1.2.</span> <span class="toc-text">1.1.2.Mvc框架可以做什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-3-%E5%B8%B8%E8%A7%81%E7%9A%84Mvc%E6%A1%86%E6%9E%B6"><span class="toc-number">1.1.3.</span> <span class="toc-text">1.1.3.常见的Mvc框架</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-Spring-Mvc"><span class="toc-number">1.2.</span> <span class="toc-text">1.2.Spring Mvc</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-1-%E6%A6%82%E8%BF%B0"><span class="toc-number">1.2.1.</span> <span class="toc-text">1.2.1.概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-2-%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%AD%A6SpringMvc"><span class="toc-number">1.2.2.</span> <span class="toc-text">1.2.2.为什么要学SpringMvc</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-3-%E8%AF%B7%E6%B1%82%E6%B5%81%E7%A8%8B"><span class="toc-number">1.2.3.</span> <span class="toc-text">1.2.3.请求流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-4-Spring-Mvc%E7%9A%84%E7%BB%84%E4%BB%B6"><span class="toc-number">1.2.4.</span> <span class="toc-text">1.2.4.Spring Mvc的组件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-Hello-Mvc"><span class="toc-number">1.3.</span> <span class="toc-text">1.3.Hello Mvc</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-1-%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA"><span class="toc-number">1.3.1.</span> <span class="toc-text">1.3.1.项目搭建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-2-%E9%85%8D%E7%BD%AESpring-Mvc"><span class="toc-number">1.3.2.</span> <span class="toc-text">1.3.2.配置Spring Mvc</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-3-%E9%85%8D%E7%BD%AE%E5%89%8D%E7%AB%AF%E6%8E%A7%E5%88%B6%E5%99%A8"><span class="toc-number">1.3.3.</span> <span class="toc-text">1.3.3.配置前端控制器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-4-%E5%88%9B%E5%BB%BAController"><span class="toc-number">1.3.4.</span> <span class="toc-text">1.3.4.创建Controller</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-5-%E6%B5%8B%E8%AF%95"><span class="toc-number">1.3.5.</span> <span class="toc-text">1.3.5.测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-%E8%AF%B4%E6%98%8E"><span class="toc-number">1.4.</span> <span class="toc-text">1.4.说明</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Spring-Mvc%E4%B8%8E%E6%B3%A8%E8%A7%A3"><span class="toc-number">2.</span> <span class="toc-text">2.Spring Mvc与注解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA"><span class="toc-number">2.1.</span> <span class="toc-text">2.1.项目搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-1-%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="toc-number">2.1.1.</span> <span class="toc-text">2.1.1.创建项目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-2-%E4%BE%9D%E8%B5%96"><span class="toc-number">2.1.2.</span> <span class="toc-text">2.1.2.依赖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-3-%E9%85%8D%E7%BD%AESpringMvc"><span class="toc-number">2.1.3.</span> <span class="toc-text">2.1.3.配置SpringMvc</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-5-%E5%AE%9E%E7%8E%B0Controller"><span class="toc-number">2.1.4.</span> <span class="toc-text">2.1.5.实现Controller</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-%E6%B5%8B%E8%AF%95"><span class="toc-number">2.2.</span> <span class="toc-text">2.2.测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-%E6%B3%A8%E8%A7%A3"><span class="toc-number">2.3.</span> <span class="toc-text">2.3.注解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-%E8%AF%B4%E6%98%8E"><span class="toc-number">2.4.</span> <span class="toc-text">2.4.说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-5-%E7%89%B9%E7%82%B9"><span class="toc-number">2.5.</span> <span class="toc-text">2.5.特点</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SpringMVC"><span class="toc-number">3.</span> <span class="toc-text">SpringMVC</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#SpringMVC%E6%A6%82%E8%BF%B0"><span class="toc-number">3.1.</span> <span class="toc-text">SpringMVC概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SpringMVC%E7%89%B9%E7%82%B9"><span class="toc-number">3.2.</span> <span class="toc-text">SpringMVC特点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SpringMVC%E5%85%A5%E9%97%A8%E7%A8%8B%E5%BA%8F"><span class="toc-number">3.3.</span> <span class="toc-text">SpringMVC入门程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.4.</span> <span class="toc-text">Spring MVC FirstController!</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SpringMVC%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">3.5.</span> <span class="toc-text">SpringMVC工作原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DispatcherServlet%E7%B1%BB"><span class="toc-number">3.6.</span> <span class="toc-text">DispatcherServlet类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Controller"><span class="toc-number">3.7.</span> <span class="toc-text">@Controller</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RequestMapping%E6%B3%A8%E8%A7%A3%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">3.8.</span> <span class="toc-text">@RequestMapping注解的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RequestMapping%E6%B3%A8%E8%A7%A3%E7%9A%84%E5%B1%9E%E6%80%A7"><span class="toc-number">3.9.</span> <span class="toc-text">@RequestMapping注解的属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E6%98%A0%E5%B0%84%E6%96%B9%E5%BC%8F"><span class="toc-number">3.10.</span> <span class="toc-text">请求映射方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A"><span class="toc-number">3.11.</span> <span class="toc-text">数据绑定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%BB%98%E8%AE%A4%E7%B1%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A"><span class="toc-number">3.12.</span> <span class="toc-text">默认类型数据绑定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%BB%91%E5%AE%9A"><span class="toc-number">3.13.</span> <span class="toc-text">简单数据类型绑定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#POJO%E7%BB%91%E5%AE%9A"><span class="toc-number">3.14.</span> <span class="toc-text">POJO绑定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E5%99%A8"><span class="toc-number">3.15.</span> <span class="toc-text">自定义类型转换器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E7%BB%84%E7%BB%91%E5%AE%9A"><span class="toc-number">3.16.</span> <span class="toc-text">数组绑定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9B%86%E5%90%88%E7%BB%91%E5%AE%9A"><span class="toc-number">3.17.</span> <span class="toc-text">集合绑定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%8D%E6%9D%82POJO%E7%BB%91%E5%AE%9A%E4%B8%80%E5%B1%9E%E6%80%A7%E4%B8%BA%E5%AF%B9%E8%B1%A1%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A"><span class="toc-number">3.18.</span> <span class="toc-text">复杂POJO绑定一属性为对象类型的数据绑定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%8D%E6%9D%82POJO%E7%BB%91%E5%AE%9A%E4%B8%80%E5%B1%9E%E6%80%A7%E4%B8%BAList%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A"><span class="toc-number">3.19.</span> <span class="toc-text">复杂POJO绑定一属性为List类型的数据绑定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%8D%E6%9D%82POJO%E7%BB%91%E5%AE%9A%E4%B8%80%E5%B1%9E%E6%80%A7%E4%B8%BAMap%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A"><span class="toc-number">3.20.</span> <span class="toc-text">复杂POJO绑定一属性为Map类型的数据绑定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JSON%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A"><span class="toc-number">3.21.</span> <span class="toc-text">JSON数据绑定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E5%80%BC%E4%B8%BAvoid%E7%B1%BB%E5%9E%8B%E7%9A%84%E9%A1%B5%E9%9D%A2%E8%B7%B3%E8%BD%AC"><span class="toc-number">3.22.</span> <span class="toc-text">返回值为void类型的页面跳转</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E5%80%BC%E4%B8%BAString%E7%B1%BB%E5%9E%8B%E7%9A%84%E9%A1%B5%E9%9D%A2%E8%B7%B3%E8%BD%AC%E4%B8%80%E4%B8%8D%E6%90%BA%E5%B8%A6%E6%95%B0%E6%8D%AE"><span class="toc-number">3.23.</span> <span class="toc-text">返回值为String类型的页面跳转一不携带数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E5%80%BC%E4%B8%BAString%E7%B1%BB%E5%9E%8B%E7%9A%84%E9%A1%B5%E9%9D%A2%E8%B7%B3%E8%BD%AC%E4%B8%80%E6%90%BA%E5%B8%A6%E6%95%B0%E6%8D%AE"><span class="toc-number">3.24.</span> <span class="toc-text">返回值为String类型的页面跳转一携带数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E5%80%BC%E4%B8%BAModelAndView%E7%B1%BB%E5%9E%8B%E7%9A%84%E9%A1%B5%E9%9D%A2%E8%B7%B3%E8%BD%AC"><span class="toc-number">3.25.</span> <span class="toc-text">返回值为ModelAndView类型的页面跳转</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%99%AE%E9%80%9A%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%9B%9E%E5%86%99"><span class="toc-number">3.26.</span> <span class="toc-text">普通字符串的回写</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JSON%E6%95%B0%E6%8D%AE%E7%9A%84%E5%9B%9E%E5%86%99%E4%B8%80%E5%AF%B9%E8%B1%A1%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2%E6%88%90JSON%E6%95%B0%E6%8D%AE%E5%90%8E%E7%9A%84%E5%9B%9E%E5%86%99"><span class="toc-number">3.27.</span> <span class="toc-text">JSON数据的回写一对象数据转换成JSON数据后的回写</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JSON%E6%95%B0%E6%8D%AE%E7%9A%84%E5%9B%9E%E5%86%99%E4%B8%80%E9%9B%86%E5%90%88%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2%E6%88%90JSON%E6%95%B0%E6%8D%AE%E5%90%8E%E7%9A%84%E5%9B%9E%E5%86%99"><span class="toc-number">3.28.</span> <span class="toc-text">JSON数据的回写一集合数据转换成JSON数据后的回写</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%99%A8"><span class="toc-number">3.29.</span> <span class="toc-text">简单异常处理器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%99%A8"><span class="toc-number">3.30.</span> <span class="toc-text">自定义异常处理器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E6%B3%A8%E8%A7%A3"><span class="toc-number">3.31.</span> <span class="toc-text">异常处理注解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8B%A6%E6%88%AA%E5%99%A8%E6%A6%82%E8%BF%B0"><span class="toc-number">3.32.</span> <span class="toc-text">拦截器概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8B%A6%E6%88%AA%E5%99%A8%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="toc-number">3.33.</span> <span class="toc-text">拦截器的配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8B%A6%E6%88%AA%E5%99%A8%E7%9A%84%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B%E4%B8%80%E5%8D%95%E4%B8%AA%E6%8B%A6%E6%88%AA%E5%99%A8"><span class="toc-number">3.34.</span> <span class="toc-text">拦截器的执行流程一单个拦截器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8B%A6%E6%88%AA%E5%99%A8%E7%9A%84%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B%E4%B8%80%E5%A4%9A%E4%B8%AA%E6%8B%A6%E6%88%AA%E5%99%A8"><span class="toc-number">3.35.</span> <span class="toc-text">拦截器的执行流程一多个拦截器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B%EF%BC%9A%E5%90%8E%E5%8F%B0%E7%B3%BB%E7%BB%9F%E7%99%BB%E5%BD%95%E9%AA%8C%E8%AF%81"><span class="toc-number">3.36.</span> <span class="toc-text">案例：后台系统登录验证</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0"><span class="toc-number">3.37.</span> <span class="toc-text">文件上传</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD"><span class="toc-number">3.38.</span> <span class="toc-text">文件下载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B%EF%BC%9A%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E5%92%8C%E4%B8%8B%E8%BD%BD"><span class="toc-number">3.39.</span> <span class="toc-text">案例：文件上传和下载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E6%96%B9%E5%BC%8F%E6%95%B4%E5%90%88%E6%80%9D%E8%B7%AF"><span class="toc-number">3.40.</span> <span class="toc-text">常用方式整合思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E5%9F%BA%E7%A1%80%E7%BB%93%E6%9E%84%E6%90%AD%E5%BB%BA"><span class="toc-number">3.41.</span> <span class="toc-text">项目基础结构搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring%E5%92%8CMybatis%E6%95%B4%E5%90%88"><span class="toc-number">3.42.</span> <span class="toc-text">Spring和Mybatis整合</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring%E5%92%8CSpring-MVC%E6%95%B4%E5%90%88"><span class="toc-number">3.43.</span> <span class="toc-text">Spring和Spring MVC整合</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%AF%E6%B3%A8%E8%A7%A3%E6%96%B9%E5%BC%8F%E6%95%B4%E5%90%88%E6%80%9D%E8%B7%AF"><span class="toc-number">3.44.</span> <span class="toc-text">纯注解方式整合思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%AF%E6%B3%A8%E8%A7%A3SSM%E6%A1%86%E6%9E%B6%E6%95%B4%E5%90%88"><span class="toc-number">3.45.</span> <span class="toc-text">纯注解SSM框架整合</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0"><span class="toc-number">3.46.</span> <span class="toc-text">系统概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1"><span class="toc-number">3.47.</span> <span class="toc-text">数据库设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="toc-number">3.48.</span> <span class="toc-text">系统环境搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95"><span class="toc-number">3.49.</span> <span class="toc-text">用户登录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E7%99%BB%E5%BD%95%E9%AA%8C%E8%AF%81"><span class="toc-number">3.50.</span> <span class="toc-text">实现登录验证</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E9%94%80%E7%99%BB%E5%BD%95"><span class="toc-number">3.51.</span> <span class="toc-text">注销登录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B0%E4%B9%A6%E6%8E%A8%E8%8D%90"><span class="toc-number">3.52.</span> <span class="toc-text">新书推荐</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E4%B9%A6%E5%80%9F%E9%98%85"><span class="toc-number">3.53.</span> <span class="toc-text">图书借阅</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BD%93%E5%89%8D%E5%80%9F%E9%98%85"><span class="toc-number">3.54.</span> <span class="toc-text">当前借阅</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%80%9F%E9%98%85%E8%AE%B0%E5%BD%95"><span class="toc-number">3.55.</span> <span class="toc-text">借阅记录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6"><span class="toc-number">3.56.</span> <span class="toc-text">访问权限控制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%A9%E5%B1%9501-%E4%BA%91%E5%9B%BE%E4%B9%A6%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="toc-number">3.57.</span> <span class="toc-text">扩展01 -云图书管理系统环境搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%99%BB%E5%BD%95%E7%9A%84%E4%B8%9A%E5%8A%A1%E6%B5%81%E7%A8%8B%E5%88%86%E6%9E%90"><span class="toc-number">3.58.</span> <span class="toc-text">登录的业务流程分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.59.</span> <span class="toc-text"></span></a></li></ol></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2022 - 2025 By <a class="footer-bar-link" href="/" title="Smith" target="_blank">Smith</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/Smithhss/smithhs.github.io.git" title="Hexo">Hexo</a></div></div></div></footer></div></div></div><div id="sidebar"><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d20f536c64d06e5fcf4bfe2ec5dc25d.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">79</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">55</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">6</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page faa-parent animated-hover" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child" style="left:-79px;"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child" style="left:-31px;"><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li></ul></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child" style="left:-79px;"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于我</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="nav-music"><a id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()" accesskey="m">播放音乐</a><div id="console-music-bg"></div><meting-js id="8805965276" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random"></meting-js></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://music.163.com/#/my/m/music/playlist?id=464586318&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn1.tianli0.top/npm/js-heo@1.0.6/translate/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.14/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/node-snackbar/0.1.16/snackbar.min.js"></script><script>var meting_api = "https://meting.qjqq.cn/?server=:server&type=:type&id=:id&auth=:auth&r=:r";
+<h2 id="文件上传"><a href="#文件上传" class="headerlink" title="文件上传"></a>文件上传</h2><h2 id="文件下载"><a href="#文件下载" class="headerlink" title="文件下载"></a>文件下载</h2><h2 id="案例：文件上传和下载"><a href="#案例：文件上传和下载" class="headerlink" title="案例：文件上传和下载"></a>案例：文件上传和下载</h2><h2 id="常用方式整合思路"><a href="#常用方式整合思路" class="headerlink" title="常用方式整合思路"></a>常用方式整合思路</h2><h2 id="项目基础结构搭建"><a href="#项目基础结构搭建" class="headerlink" title="项目基础结构搭建"></a>项目基础结构搭建</h2><h2 id="Spring和Mybatis整合"><a href="#Spring和Mybatis整合" class="headerlink" title="Spring和Mybatis整合"></a>Spring和Mybatis整合</h2><h2 id="Spring和Spring-MVC整合"><a href="#Spring和Spring-MVC整合" class="headerlink" title="Spring和Spring MVC整合"></a>Spring和Spring MVC整合</h2><h2 id="纯注解方式整合思路"><a href="#纯注解方式整合思路" class="headerlink" title="纯注解方式整合思路"></a>纯注解方式整合思路</h2><h2 id="纯注解SSM框架整合"><a href="#纯注解SSM框架整合" class="headerlink" title="纯注解SSM框架整合"></a>纯注解SSM框架整合</h2><h2 id="系统概述"><a href="#系统概述" class="headerlink" title="系统概述"></a>系统概述</h2><h2 id="数据库设计"><a href="#数据库设计" class="headerlink" title="数据库设计"></a>数据库设计</h2><h2 id="系统环境搭建"><a href="#系统环境搭建" class="headerlink" title="系统环境搭建"></a>系统环境搭建</h2><h2 id="用户登录"><a href="#用户登录" class="headerlink" title="用户登录"></a>用户登录</h2><h2 id="实现登录验证"><a href="#实现登录验证" class="headerlink" title="实现登录验证"></a>实现登录验证</h2><h2 id="注销登录"><a href="#注销登录" class="headerlink" title="注销登录"></a>注销登录</h2><h2 id="新书推荐"><a href="#新书推荐" class="headerlink" title="新书推荐"></a>新书推荐</h2><h2 id="图书借阅"><a href="#图书借阅" class="headerlink" title="图书借阅"></a>图书借阅</h2><h2 id="当前借阅"><a href="#当前借阅" class="headerlink" title="当前借阅"></a>当前借阅</h2><h2 id="借阅记录"><a href="#借阅记录" class="headerlink" title="借阅记录"></a>借阅记录</h2><h2 id="访问权限控制"><a href="#访问权限控制" class="headerlink" title="访问权限控制"></a>访问权限控制</h2><h2 id="扩展01-云图书管理系统环境搭建"><a href="#扩展01-云图书管理系统环境搭建" class="headerlink" title="扩展01 -云图书管理系统环境搭建"></a>扩展01 -云图书管理系统环境搭建</h2><h2 id="登录的业务流程分析"><a href="#登录的业务流程分析" class="headerlink" title="登录的业务流程分析"></a>登录的业务流程分析</h2><h2 id=""><a href="#" class="headerlink" title=""></a></h2></article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d20f536c64d06e5fcf4bfe2ec5dc25d.jpg" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d20f536c64d06e5fcf4bfe2ec5dc25d.jpg" title="头像" alt="头像"></a><div class="post-copyright__author_name">Smith</div><div class="post-copyright__author_desc">人生太短，要干的事太多，我要争分夺秒</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://smithhs.cn/2024/06/10/2024-06-10-SpringMVC%E7%AC%94%E8%AE%B0/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://smithhs.cn/2024/06/10/2024-06-10-SpringMVC%E7%AC%94%E8%AE%B0/')">SpringMVC笔记</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="anzhiyu.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="anzhiyufont anzhiyu-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="anzhiyu.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://smithhs.cn/2024/06/10/2024-06-10-SpringMVC%E7%AC%94%E8%AE%B0/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=SpringMVC笔记&amp;url=https://smithhs.cn/2024/06/10/2024-06-10-SpringMVC%E7%AC%94%E8%AE%B0/&amp;pic=https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/springmvc.webp" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://smithhs.cn" target="_blank">Smith</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/SpringMVC/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>SpringMVC<span class="tagsPageCount">1</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d20f536c64d06e5fcf4bfe2ec5dc25d.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/05/27/2024-05-27-Spring%E7%AC%94%E8%AE%B0/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/javaspring.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Spring笔记</div></div></a></div><div class="next-post pull-right"><a href="/2024/06/16/2024-06-16-%E5%9F%BA%E4%BA%8ESpringBoot%E9%9F%B3%E4%B9%90%E7%B3%BB%E7%BB%9F%E9%A1%B9%E7%9B%AE/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/musicxiangmu.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">基于SpringBoot音乐系统项目</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E5%88%9D%E8%AF%86SpringMvc"><span class="toc-number">1.</span> <span class="toc-text">1.初识SpringMvc</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1-Mvc"><span class="toc-number">1.1.</span> <span class="toc-text">1.1.Mvc</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-1-%E6%A6%82%E8%BF%B0"><span class="toc-number">1.1.1.</span> <span class="toc-text">1.1.1.概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-2-Mvc%E6%A1%86%E6%9E%B6%E5%8F%AF%E4%BB%A5%E5%81%9A%E4%BB%80%E4%B9%88"><span class="toc-number">1.1.2.</span> <span class="toc-text">1.1.2.Mvc框架可以做什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-3-%E5%B8%B8%E8%A7%81%E7%9A%84Mvc%E6%A1%86%E6%9E%B6"><span class="toc-number">1.1.3.</span> <span class="toc-text">1.1.3.常见的Mvc框架</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-Spring-Mvc"><span class="toc-number">1.2.</span> <span class="toc-text">1.2.Spring Mvc</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-1-%E6%A6%82%E8%BF%B0"><span class="toc-number">1.2.1.</span> <span class="toc-text">1.2.1.概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-2-%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E5%AD%A6SpringMvc"><span class="toc-number">1.2.2.</span> <span class="toc-text">1.2.2.为什么要学SpringMvc</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-3-%E8%AF%B7%E6%B1%82%E6%B5%81%E7%A8%8B"><span class="toc-number">1.2.3.</span> <span class="toc-text">1.2.3.请求流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-4-Spring-Mvc%E7%9A%84%E7%BB%84%E4%BB%B6"><span class="toc-number">1.2.4.</span> <span class="toc-text">1.2.4.Spring Mvc的组件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-Hello-Mvc"><span class="toc-number">1.3.</span> <span class="toc-text">1.3.Hello Mvc</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-1-%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA"><span class="toc-number">1.3.1.</span> <span class="toc-text">1.3.1.项目搭建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-2-%E9%85%8D%E7%BD%AESpring-Mvc"><span class="toc-number">1.3.2.</span> <span class="toc-text">1.3.2.配置Spring Mvc</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-3-%E9%85%8D%E7%BD%AE%E5%89%8D%E7%AB%AF%E6%8E%A7%E5%88%B6%E5%99%A8"><span class="toc-number">1.3.3.</span> <span class="toc-text">1.3.3.配置前端控制器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-4-%E5%88%9B%E5%BB%BAController"><span class="toc-number">1.3.4.</span> <span class="toc-text">1.3.4.创建Controller</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-5-%E6%B5%8B%E8%AF%95"><span class="toc-number">1.3.5.</span> <span class="toc-text">1.3.5.测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-%E8%AF%B4%E6%98%8E"><span class="toc-number">1.4.</span> <span class="toc-text">1.4.说明</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-Spring-Mvc%E4%B8%8E%E6%B3%A8%E8%A7%A3"><span class="toc-number">2.</span> <span class="toc-text">2.Spring Mvc与注解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1-%E9%A1%B9%E7%9B%AE%E6%90%AD%E5%BB%BA"><span class="toc-number">2.1.</span> <span class="toc-text">2.1.项目搭建</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-1-%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="toc-number">2.1.1.</span> <span class="toc-text">2.1.1.创建项目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-2-%E4%BE%9D%E8%B5%96"><span class="toc-number">2.1.2.</span> <span class="toc-text">2.1.2.依赖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-3-%E9%85%8D%E7%BD%AESpringMvc"><span class="toc-number">2.1.3.</span> <span class="toc-text">2.1.3.配置SpringMvc</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-5-%E5%AE%9E%E7%8E%B0Controller"><span class="toc-number">2.1.4.</span> <span class="toc-text">2.1.5.实现Controller</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-%E6%B5%8B%E8%AF%95"><span class="toc-number">2.2.</span> <span class="toc-text">2.2.测试</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-3-%E6%B3%A8%E8%A7%A3"><span class="toc-number">2.3.</span> <span class="toc-text">2.3.注解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-4-%E8%AF%B4%E6%98%8E"><span class="toc-number">2.4.</span> <span class="toc-text">2.4.说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-5-%E7%89%B9%E7%82%B9"><span class="toc-number">2.5.</span> <span class="toc-text">2.5.特点</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#SpringMVC"><span class="toc-number">3.</span> <span class="toc-text">SpringMVC</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#SpringMVC%E6%A6%82%E8%BF%B0"><span class="toc-number">3.1.</span> <span class="toc-text">SpringMVC概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SpringMVC%E7%89%B9%E7%82%B9"><span class="toc-number">3.2.</span> <span class="toc-text">SpringMVC特点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SpringMVC%E5%85%A5%E9%97%A8%E7%A8%8B%E5%BA%8F"><span class="toc-number">3.3.</span> <span class="toc-text">SpringMVC入门程序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.4.</span> <span class="toc-text">Spring MVC FirstController!</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SpringMVC%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-number">3.5.</span> <span class="toc-text">SpringMVC工作原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DispatcherServlet%E7%B1%BB"><span class="toc-number">3.6.</span> <span class="toc-text">DispatcherServlet类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Controller"><span class="toc-number">3.7.</span> <span class="toc-text">@Controller</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RequestMapping%E6%B3%A8%E8%A7%A3%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">3.8.</span> <span class="toc-text">@RequestMapping注解的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RequestMapping%E6%B3%A8%E8%A7%A3%E7%9A%84%E5%B1%9E%E6%80%A7"><span class="toc-number">3.9.</span> <span class="toc-text">@RequestMapping注解的属性</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E6%98%A0%E5%B0%84%E6%96%B9%E5%BC%8F"><span class="toc-number">3.10.</span> <span class="toc-text">请求映射方式</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A"><span class="toc-number">3.11.</span> <span class="toc-text">数据绑定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%BB%98%E8%AE%A4%E7%B1%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A"><span class="toc-number">3.12.</span> <span class="toc-text">默认类型数据绑定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E7%BB%91%E5%AE%9A"><span class="toc-number">3.13.</span> <span class="toc-text">简单数据类型绑定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#POJO%E7%BB%91%E5%AE%9A"><span class="toc-number">3.14.</span> <span class="toc-text">POJO绑定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2%E5%99%A8"><span class="toc-number">3.15.</span> <span class="toc-text">自定义类型转换器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E7%BB%84%E7%BB%91%E5%AE%9A"><span class="toc-number">3.16.</span> <span class="toc-text">数组绑定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9B%86%E5%90%88%E7%BB%91%E5%AE%9A"><span class="toc-number">3.17.</span> <span class="toc-text">集合绑定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%8D%E6%9D%82POJO%E7%BB%91%E5%AE%9A%E4%B8%80%E5%B1%9E%E6%80%A7%E4%B8%BA%E5%AF%B9%E8%B1%A1%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A"><span class="toc-number">3.18.</span> <span class="toc-text">复杂POJO绑定一属性为对象类型的数据绑定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%8D%E6%9D%82POJO%E7%BB%91%E5%AE%9A%E4%B8%80%E5%B1%9E%E6%80%A7%E4%B8%BAList%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A"><span class="toc-number">3.19.</span> <span class="toc-text">复杂POJO绑定一属性为List类型的数据绑定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%8D%E6%9D%82POJO%E7%BB%91%E5%AE%9A%E4%B8%80%E5%B1%9E%E6%80%A7%E4%B8%BAMap%E7%B1%BB%E5%9E%8B%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A"><span class="toc-number">3.20.</span> <span class="toc-text">复杂POJO绑定一属性为Map类型的数据绑定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JSON%E6%95%B0%E6%8D%AE%E7%BB%91%E5%AE%9A"><span class="toc-number">3.21.</span> <span class="toc-text">JSON数据绑定</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E5%80%BC%E4%B8%BAvoid%E7%B1%BB%E5%9E%8B%E7%9A%84%E9%A1%B5%E9%9D%A2%E8%B7%B3%E8%BD%AC"><span class="toc-number">3.22.</span> <span class="toc-text">返回值为void类型的页面跳转</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E5%80%BC%E4%B8%BAString%E7%B1%BB%E5%9E%8B%E7%9A%84%E9%A1%B5%E9%9D%A2%E8%B7%B3%E8%BD%AC%E4%B8%80%E4%B8%8D%E6%90%BA%E5%B8%A6%E6%95%B0%E6%8D%AE"><span class="toc-number">3.23.</span> <span class="toc-text">返回值为String类型的页面跳转一不携带数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E5%80%BC%E4%B8%BAString%E7%B1%BB%E5%9E%8B%E7%9A%84%E9%A1%B5%E9%9D%A2%E8%B7%B3%E8%BD%AC%E4%B8%80%E6%90%BA%E5%B8%A6%E6%95%B0%E6%8D%AE"><span class="toc-number">3.24.</span> <span class="toc-text">返回值为String类型的页面跳转一携带数据</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%94%E5%9B%9E%E5%80%BC%E4%B8%BAModelAndView%E7%B1%BB%E5%9E%8B%E7%9A%84%E9%A1%B5%E9%9D%A2%E8%B7%B3%E8%BD%AC"><span class="toc-number">3.25.</span> <span class="toc-text">返回值为ModelAndView类型的页面跳转</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%99%AE%E9%80%9A%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%9B%9E%E5%86%99"><span class="toc-number">3.26.</span> <span class="toc-text">普通字符串的回写</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JSON%E6%95%B0%E6%8D%AE%E7%9A%84%E5%9B%9E%E5%86%99%E4%B8%80%E5%AF%B9%E8%B1%A1%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2%E6%88%90JSON%E6%95%B0%E6%8D%AE%E5%90%8E%E7%9A%84%E5%9B%9E%E5%86%99"><span class="toc-number">3.27.</span> <span class="toc-text">JSON数据的回写一对象数据转换成JSON数据后的回写</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JSON%E6%95%B0%E6%8D%AE%E7%9A%84%E5%9B%9E%E5%86%99%E4%B8%80%E9%9B%86%E5%90%88%E6%95%B0%E6%8D%AE%E8%BD%AC%E6%8D%A2%E6%88%90JSON%E6%95%B0%E6%8D%AE%E5%90%8E%E7%9A%84%E5%9B%9E%E5%86%99"><span class="toc-number">3.28.</span> <span class="toc-text">JSON数据的回写一集合数据转换成JSON数据后的回写</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E5%8D%95%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%99%A8"><span class="toc-number">3.29.</span> <span class="toc-text">简单异常处理器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%AE%9A%E4%B9%89%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E5%99%A8"><span class="toc-number">3.30.</span> <span class="toc-text">自定义异常处理器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86%E6%B3%A8%E8%A7%A3"><span class="toc-number">3.31.</span> <span class="toc-text">异常处理注解</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8B%A6%E6%88%AA%E5%99%A8%E6%A6%82%E8%BF%B0"><span class="toc-number">3.32.</span> <span class="toc-text">拦截器概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8B%A6%E6%88%AA%E5%99%A8%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="toc-number">3.33.</span> <span class="toc-text">拦截器的配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8B%A6%E6%88%AA%E5%99%A8%E7%9A%84%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B%E4%B8%80%E5%8D%95%E4%B8%AA%E6%8B%A6%E6%88%AA%E5%99%A8"><span class="toc-number">3.34.</span> <span class="toc-text">拦截器的执行流程一单个拦截器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8B%A6%E6%88%AA%E5%99%A8%E7%9A%84%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B%E4%B8%80%E5%A4%9A%E4%B8%AA%E6%8B%A6%E6%88%AA%E5%99%A8"><span class="toc-number">3.35.</span> <span class="toc-text">拦截器的执行流程一多个拦截器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B%EF%BC%9A%E5%90%8E%E5%8F%B0%E7%B3%BB%E7%BB%9F%E7%99%BB%E5%BD%95%E9%AA%8C%E8%AF%81"><span class="toc-number">3.36.</span> <span class="toc-text">案例：后台系统登录验证</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0"><span class="toc-number">3.37.</span> <span class="toc-text">文件上传</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD"><span class="toc-number">3.38.</span> <span class="toc-text">文件下载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B%EF%BC%9A%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E5%92%8C%E4%B8%8B%E8%BD%BD"><span class="toc-number">3.39.</span> <span class="toc-text">案例：文件上传和下载</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E6%96%B9%E5%BC%8F%E6%95%B4%E5%90%88%E6%80%9D%E8%B7%AF"><span class="toc-number">3.40.</span> <span class="toc-text">常用方式整合思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E5%9F%BA%E7%A1%80%E7%BB%93%E6%9E%84%E6%90%AD%E5%BB%BA"><span class="toc-number">3.41.</span> <span class="toc-text">项目基础结构搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring%E5%92%8CMybatis%E6%95%B4%E5%90%88"><span class="toc-number">3.42.</span> <span class="toc-text">Spring和Mybatis整合</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Spring%E5%92%8CSpring-MVC%E6%95%B4%E5%90%88"><span class="toc-number">3.43.</span> <span class="toc-text">Spring和Spring MVC整合</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%AF%E6%B3%A8%E8%A7%A3%E6%96%B9%E5%BC%8F%E6%95%B4%E5%90%88%E6%80%9D%E8%B7%AF"><span class="toc-number">3.44.</span> <span class="toc-text">纯注解方式整合思路</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%AF%E6%B3%A8%E8%A7%A3SSM%E6%A1%86%E6%9E%B6%E6%95%B4%E5%90%88"><span class="toc-number">3.45.</span> <span class="toc-text">纯注解SSM框架整合</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0"><span class="toc-number">3.46.</span> <span class="toc-text">系统概述</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BE%E8%AE%A1"><span class="toc-number">3.47.</span> <span class="toc-text">数据库设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="toc-number">3.48.</span> <span class="toc-text">系统环境搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%94%A8%E6%88%B7%E7%99%BB%E5%BD%95"><span class="toc-number">3.49.</span> <span class="toc-text">用户登录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E7%99%BB%E5%BD%95%E9%AA%8C%E8%AF%81"><span class="toc-number">3.50.</span> <span class="toc-text">实现登录验证</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%A8%E9%94%80%E7%99%BB%E5%BD%95"><span class="toc-number">3.51.</span> <span class="toc-text">注销登录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B0%E4%B9%A6%E6%8E%A8%E8%8D%90"><span class="toc-number">3.52.</span> <span class="toc-text">新书推荐</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%BE%E4%B9%A6%E5%80%9F%E9%98%85"><span class="toc-number">3.53.</span> <span class="toc-text">图书借阅</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BD%93%E5%89%8D%E5%80%9F%E9%98%85"><span class="toc-number">3.54.</span> <span class="toc-text">当前借阅</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%80%9F%E9%98%85%E8%AE%B0%E5%BD%95"><span class="toc-number">3.55.</span> <span class="toc-text">借阅记录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BF%E9%97%AE%E6%9D%83%E9%99%90%E6%8E%A7%E5%88%B6"><span class="toc-number">3.56.</span> <span class="toc-text">访问权限控制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%89%A9%E5%B1%9501-%E4%BA%91%E5%9B%BE%E4%B9%A6%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="toc-number">3.57.</span> <span class="toc-text">扩展01 -云图书管理系统环境搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%99%BB%E5%BD%95%E7%9A%84%E4%B8%9A%E5%8A%A1%E6%B5%81%E7%A8%8B%E5%88%86%E6%9E%90"><span class="toc-number">3.58.</span> <span class="toc-text">登录的业务流程分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link"><span class="toc-number">3.59.</span> <span class="toc-text"></span></a></li></ol></li></ol></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2022 - 2026 By <a class="footer-bar-link" href="/" title="Smith" target="_blank">Smith</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/Smithhss/smithhs.github.io.git" title="Hexo">Hexo</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">80</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">55</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">6</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://smithhs.cn/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.png" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="http://robot.onliu.cn/" title="Robot"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/cupfox.png" alt="Robot"/><span class="back-menu-item-text">Robot</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="http://res.onliu.cn" title="Sale"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/tubiao.jpg" alt="Sale"/><span class="back-menu-item-text">Sale</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="http://se.onliu.cn/" title="资源共享"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog/x126.png" alt="资源共享"/><span class="back-menu-item-text">资源共享</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://github.com/Smithhss" title="Github"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/GitHub.png" alt="Github"/><span class="back-menu-item-text">Github</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/dailyPhoto/"><i class="anzhiyufont anzhiyu-icon-camera faa-tada" style="font-size: 0.9em;"></i><span> 每日照片</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wallpaper/"><i class="anzhiyufont anzhiyu-icon-image faa-tada" style="font-size: 0.9em;"></i><span> 壁纸</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wordScenery/"><i class="anzhiyufont anzhiyu-icon-font faa-tada" style="font-size: 0.9em;"></i><span> 文字风景</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于我</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/love/"><i class="anzhiyufont anzhiyu-icon-heart faa-tada" style="font-size: 0.9em;"></i><span> 爱情</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Android-Studio/" style="font-size: 0.88rem;">Android Studio<sup>1</sup></a><a href="/tags/App/" style="font-size: 0.88rem;">App<sup>2</sup></a><a href="/tags/Butterfly/" style="font-size: 0.88rem;">Butterfly<sup>1</sup></a><a href="/tags/C/" style="font-size: 0.88rem;">C++<sup>1</sup></a><a href="/tags/CSS/" style="font-size: 0.88rem;">CSS<sup>1</sup></a><a href="/tags/Cisco-Packet-Tracer/" style="font-size: 0.88rem;">Cisco Packet Tracer<sup>1</sup></a><a href="/tags/Easypan/" style="font-size: 0.88rem;">Easypan<sup>2</sup></a><a href="/tags/FurtherMathematics/" style="font-size: 0.88rem;">FurtherMathematics<sup>1</sup></a><a href="/tags/GPT/" style="font-size: 0.88rem;">GPT<sup>1</sup></a><a href="/tags/Git2/" style="font-size: 0.88rem;">Git2<sup>1</sup></a><a href="/tags/HTML/" style="font-size: 0.88rem;">HTML<sup>1</sup></a><a href="/tags/Hexo/" style="font-size: 0.88rem;">Hexo<sup>1</sup></a><a href="/tags/Java/" style="font-size: 0.88rem;">Java<sup>6</sup></a><a href="/tags/JavaScript/" style="font-size: 0.88rem;">JavaScript<sup>1</sup></a><a href="/tags/JavaWeb/" style="font-size: 0.88rem;">JavaWeb<sup>2</sup></a><a href="/tags/Jrebel/" style="font-size: 0.88rem;">Jrebel<sup>1</sup></a><a href="/tags/LeetCode/" style="font-size: 0.88rem;">LeetCode<sup>1</sup></a><a href="/tags/Linux/" style="font-size: 0.88rem;">Linux<sup>3</sup></a><a href="/tags/Markdown/" style="font-size: 0.88rem;">Markdown<sup>2</sup></a><a href="/tags/Maven/" style="font-size: 0.88rem;">Maven<sup>2</sup></a><a href="/tags/Mysql/" style="font-size: 0.88rem;">Mysql<sup>1</sup></a><a href="/tags/NoSql/" style="font-size: 0.88rem;">NoSql<sup>1</sup></a><a href="/tags/Nodejs/" style="font-size: 0.88rem;">Nodejs<sup>2</sup></a><a href="/tags/Python/" style="font-size: 0.88rem;">Python<sup>4</sup></a><a href="/tags/Spring/" style="font-size: 0.88rem;">Spring<sup>2</sup></a><a href="/tags/VMware/" style="font-size: 0.88rem;">VMware<sup>2</sup></a><a href="/tags/Vue/" style="font-size: 0.88rem;">Vue<sup>1</sup></a><a href="/tags/YouHou/" style="font-size: 0.88rem;">YouHou<sup>1</sup></a><a href="/tags/books/" style="font-size: 0.88rem;">books<sup>1</sup></a><a href="/tags/butterfly/" style="font-size: 0.88rem;">butterfly<sup>1</sup></a><a href="/tags/clash/" style="font-size: 0.88rem;">clash<sup>1</sup></a><a href="/tags/project/" style="font-size: 0.88rem;">project<sup>4</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 0.88rem;">前端<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6/" style="font-size: 0.88rem;">开发框架<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" style="font-size: 0.88rem;">开发环境<sup>1</sup></a><a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 0.88rem;">操作系统<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" style="font-size: 0.88rem;">数据结构与算法<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" style="font-size: 0.88rem;">计算机组成原理<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 0.88rem;">计算机网络<sup>1</sup></a><a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="font-size: 0.88rem;">软件工程<sup>1</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="nav-music"><a id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()" accesskey="m">播放音乐</a><div id="console-music-bg"></div><meting-js id="8805965276" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random" volume="0.7"></meting-js></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://music.163.com/#/my/m/music/playlist?id=464586318&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn1.tianli0.top/npm/js-heo@1.0.6/translate/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@6.1.6/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/node-snackbar/0.1.16/snackbar.min.js"></script><script>var meting_api = "https://meting.qjqq.cn/?server=:server&type=:type&id=:id&auth=:auth&r=:r";
 </script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
 var HoldLog = console.log;
 console.log = function () {};
@@ -813,7 +845,7 @@ queueMicrotask(() => {
     "已上线",
     dnum,
     "天",
-    "©2022 By 安知鱼 V1.5.3",
+    "©2022 By 安知鱼 V1.7.1",
   ];
   const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
 
@@ -821,12 +853,12 @@ queueMicrotask(() => {
     Log.bind(
       console,
       `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
-      "color:#3b70fc",
+      "color:#425AEF",
       "",
-      "color:#3b70fc",
-      "color:#3b70fc",
+      "color:#425AEF",
+      "color:#425AEF",
       "",
-      "color:#3b70fc",
+      "color:#425AEF",
       ""
     )
   );
@@ -857,534 +889,8 @@ queueMicrotask(() => {
   setTimeout(
     console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
   );
-});</script><script async src="/anzhiyu/random.js"></script><div class="js-pjax"><input type="hidden" name="page-type" id="page-type" value="post"></div><script>var visitorMail = "visitor@anheyu.com";</script><script>//动态标题
-let leaveTitle = '再看看嘛🌈！';
-let backTitle = '欢迎回来✌️！';
-let OriginTitile = document.title
-let titleTime
-document.addEventListener('visibilitychange', function () {
-  if (document.hidden) {
-    //离开当前页面时标签显示内容
-    document.title = leaveTitle
-    clearTimeout(titleTime)
-  } else {
-    //返回当前页面时标签显示内容
-    document.title = backTitle + OriginTitile
-    //两秒后变回正常标题
-    titleTime = setTimeout(function () {
-      document.title = OriginTitile
-    }, 2000)
-  }
-})</script><script async data-pjax src="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/waterfall.js/1.1.0/waterfall.min.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><script>// 初始化函数
-let rm = {};
-
-//禁止图片与超链接拖拽
-let aElements = document.getElementsByTagName("a");
-for (let i = 0; i < aElements.length; i++) {
-  aElements[i].setAttribute("draggable", "false");
-  let imgElements = aElements[i].getElementsByTagName("img");
-  for (let j = 0; j < imgElements.length; j++) {
-    imgElements[j].setAttribute("draggable", "false");
-  }
-}
-
-// 显示菜单
-rm.showRightMenu = function (isTrue, x = 0, y = 0) {
-  console.info(x, y)
-  let rightMenu = document.getElementById("rightMenu");
-  rightMenu.style.top = x + "px";
-  rightMenu.style.left = y + "px";
-  if (isTrue) {
-    rightMenu.style.display = "block";
-    stopMaskScroll();
-  } else {
-    rightMenu.style.display = "none";
-  }
-};
-
-// 隐藏菜单
-rm.hideRightMenu = function () {
-  rm.showRightMenu(false);
-  let rightMenuMask = document.querySelector("#rightmenu-mask");
-  rightMenuMask.style.display = "none";
-};
-
-// 尺寸
-let rmWidth = document.getElementById("rightMenu").offsetWidth;
-let rmHeight = document.getElementById("rightMenu").offsetHeight;
-
-// 重新定义尺寸
-rm.reloadrmSize = function () {
-  rightMenu.style.visibility = "hidden";
-  rightMenu.style.display = "block";
-  // 获取宽度和高度
-  rmWidth = document.getElementById("rightMenu").offsetWidth;
-  rmHeight = document.getElementById("rightMenu").offsetHeight;
-  rightMenu.style.visibility = "visible";
-};
-
-// 获取点击的href
-let domhref = "";
-let domImgSrc = "";
-let globalEvent = null;
-
-var oncontextmenuFunction = function (event) {
-  if (document.body.clientWidth > 768) {
-    let pageX = event.clientX + 10; //加10是为了防止显示时鼠标遮在菜单上
-    let pageY = event.clientY;
-
-    //其他额外菜单
-    const $rightMenuOther = document.querySelector(".rightMenuOther");
-    const $rightMenuPlugin = document.querySelector(".rightMenuPlugin");
-    const $rightMenuCopyText = document.querySelector("#menu-copytext");
-    const $rightMenuPasteText = document.querySelector("#menu-pastetext");
-    const $rightMenuCommentText = document.querySelector("#menu-commenttext");
-    const $rightMenuNewWindow = document.querySelector("#menu-newwindow");
-    const $rightMenuNewWindowImg = document.querySelector("#menu-newwindowimg");
-    const $rightMenuCopyLink = document.querySelector("#menu-copylink");
-    const $rightMenuCopyImg = document.querySelector("#menu-copyimg");
-    const $rightMenuDownloadImg = document.querySelector("#menu-downloadimg");
-    const $rightMenuSearch = document.querySelector("#menu-search");
-    const $rightMenuSearchBaidu = document.querySelector("#menu-searchBaidu");
-    const $rightMenuMusicToggle = document.querySelector("#menu-music-toggle");
-    const $rightMenuMusicBack = document.querySelector("#menu-music-back");
-    const $rightMenuMusicForward = document.querySelector("#menu-music-forward");
-    const $rightMenuMusicPlaylist = document.querySelector("#menu-music-playlist");
-    const $rightMenuMusicCopyMusicName = document.querySelector("#menu-music-copyMusicName");
-
-    let href = event.target.href;
-    let imgsrc = event.target.currentSrc;
-
-    // 判断模式 扩展模式为有事件
-    let pluginMode = false;
-    $rightMenuOther.style.display = "block";
-    globalEvent = event;
-
-    // 检查是否需要复制 是否有选中文本
-    if (selectTextNow && window.getSelection()) {
-      pluginMode = true;
-      $rightMenuCopyText.style.display = "block";
-      $rightMenuCommentText.style.display = "block";
-      $rightMenuSearch.style.display = "block";
-      $rightMenuSearchBaidu.style.display = "block";
-    } else {
-      $rightMenuCopyText.style.display = "none";
-      $rightMenuCommentText.style.display = "none";
-      $rightMenuSearchBaidu.style.display = "none";
-      $rightMenuSearch.style.display = "none";
-    }
-
-    //检查是否右键点击了链接a标签
-    if (href) {
-      pluginMode = true;
-      $rightMenuNewWindow.style.display = "block";
-      $rightMenuCopyLink.style.display = "block";
-      domhref = href;
-    } else {
-      $rightMenuNewWindow.style.display = "none";
-      $rightMenuCopyLink.style.display = "none";
-    }
-
-    //检查是否需要复制图片
-    if (imgsrc) {
-      pluginMode = true;
-      $rightMenuCopyImg.style.display = "block";
-      $rightMenuDownloadImg.style.display = "block";
-      $rightMenuNewWindowImg.style.display = "block";
-      document.getElementById("rightMenu").style.width="12rem"
-      domImgSrc = imgsrc;
-    } else {
-      $rightMenuCopyImg.style.display = "none";
-      $rightMenuDownloadImg.style.display = "none";
-      $rightMenuNewWindowImg.style.display = "none";
-    }
-
-    // 判断是否为输入框
-    if (event.target.tagName.toLowerCase() === "input" || event.target.tagName.toLowerCase() === "textarea") {
-      pluginMode = true;
-      $rightMenuPasteText.style.display = "block";
-    } else {
-      $rightMenuPasteText.style.display = "none";
-    }
-    const navMusicEl = document.querySelector("#nav-music");
-    //判断是否是音乐
-    if (navMusicEl && navMusicEl.contains(event.target)) {
-      pluginMode = true;
-      $rightMenuMusicToggle.style.display = "block";
-      $rightMenuMusicBack.style.display = "block";
-      $rightMenuMusicForward.style.display = "block";
-      $rightMenuMusicPlaylist.style.display = "block";
-      $rightMenuMusicCopyMusicName.style.display = "block";
-    } else {
-      $rightMenuMusicToggle.style.display = "none";
-      $rightMenuMusicBack.style.display = "none";
-      $rightMenuMusicForward.style.display = "none";
-      $rightMenuMusicPlaylist.style.display = "none";
-      $rightMenuMusicCopyMusicName.style.display = "none";
-    }
-
-    // 如果不是扩展模式则隐藏扩展模块
-    if (pluginMode) {
-      $rightMenuOther.style.display = "none";
-      $rightMenuPlugin.style.display = "block";
-    } else {
-      $rightMenuPlugin.style.display = "none";
-    }
-
-    rm.reloadrmSize();
-
-    // 鼠标默认显示在鼠标右下方，当鼠标靠右或靠下时，将菜单显示在鼠标左方\上方
-    if (pageX + rmWidth > window.innerWidth) {
-      pageX -= rmWidth + 10;
-    }
-    if (pageY + rmHeight > window.innerHeight) {
-      pageY -= pageY + rmHeight - window.innerHeight;
-    }
-
-    rm.showRightMenu(true, pageY, pageX);
-    document.getElementById("rightmenu-mask").style.display = "flex";
-    return false;
-  }
-};
-
-// 监听右键初始化
-window.oncontextmenu = oncontextmenuFunction
-
-// 下载图片状态
-rm.downloadimging = false;
-
-// 复制图片到剪贴板
-rm.writeClipImg = function (imgsrc) {
-  console.log("按下复制");
-  rm.hideRightMenu();
-  anzhiyu.snackbarShow("正在下载中，请稍后", false, 10000);
-  if (rm.downloadimging == false) {
-    rm.downloadimging = true;
-    setTimeout(function () {
-      copyImage(imgsrc);
-      anzhiyu.snackbarShow("复制成功！图片已添加盲水印，请遵守版权协议");
-      rm.downloadimging = false;
-    }, "10000");
-  }
-};
-
-function imageToBlob(imageURL) {
-  const img = new Image();
-  const c = document.createElement("canvas");
-  const ctx = c.getContext("2d");
-  img.crossOrigin = "";
-  img.src = imageURL;
-  return new Promise(resolve => {
-    img.onload = function () {
-      c.width = this.naturalWidth;
-      c.height = this.naturalHeight;
-      ctx.drawImage(this, 0, 0);
-      c.toBlob(
-        blob => {
-          // here the image is a blob
-          resolve(blob);
-        },
-        "image/png",
-        0.75
-      );
-    };
-  });
-}
-
-async function copyImage(imageURL) {
-  const blob = await imageToBlob(imageURL);
-  const item = new ClipboardItem({ "image/png": blob });
-  navigator.clipboard.write([item]);
-}
-
-rm.copyUrl = function (id) {
-  const input = document.createElement("input"); // Create a new <input> element
-  input.id = "copyVal"; // Set the id of the new element to "copyVal"
-  document.body.appendChild(input); // Append the new element to the end of the <body> element
-  
-  const text = id;
-  input.value = text;
-  input.select();
-  input.setSelectionRange(0, input.value.length);
-  document.execCommand("copy");
-  
-  input.remove(); // Remove the <input> element from the DOM
-};
-
-function stopMaskScroll() {
-  if (document.getElementById("rightmenu-mask")) {
-    let xscroll = document.getElementById("rightmenu-mask");
-    xscroll.addEventListener(
-      "mousewheel",
-      function (e) {
-        //阻止浏览器默认方法
-        rm.hideRightMenu();
-        // e.preventDefault();
-      },
-      { passive: true }
-    );
-  }
-  if (document.getElementById("rightMenu")) {
-    let xscroll = document.getElementById("rightMenu");
-    xscroll.addEventListener(
-      "mousewheel",
-      function (e) {
-        //阻止浏览器默认方法
-        rm.hideRightMenu();
-        // e.preventDefault();
-      },
-      { passive: true }
-    );
-  }
-}
-
-rm.rightmenuCopyText = function (txt) {
-  if (navigator.clipboard) {
-    navigator.clipboard.writeText(txt);
-  }
-  rm.hideRightMenu();
-};
-
-rm.copyPageUrl = function (url) {
-  if (!url) {
-    url = window.location.href;
-  }
-  rm.copyUrl(url);
-  anzhiyu.snackbarShow("复制链接地址成功", false, 2000);
-  rm.hideRightMenu();
-};
-
-rm.sharePage = function () {
-  var content = window.location.href;
-  rm.copyUrl(url);
-  anzhiyu.snackbarShow("复制链接地址成功", false, 2000);
-  rm.hideRightMenu();
-};
-
-// 复制当前选中文本
-var selectTextNow = "";
-document.onmouseup = document.ondblclick = selceText;
-
-function selceText() {
-  var txt;
-  if (document.selection) {
-    txt = document.selection.createRange().text;
-  } else {
-    txt = window.getSelection().toString();
-  }
-  selectTextNow = txt !== "" ? txt : "";
-}
-
-// 读取剪切板
-rm.readClipboard = function () {
-  if (navigator.clipboard) {
-    navigator.clipboard.readText().then(clipText => rm.insertAtCaret(globalEvent.target, clipText));
-  }
-};
-
-// 粘贴文本到焦点
-rm.insertAtCaret = function (elemt, value) {
-  const startPos = elemt.selectionStart,
-    endPos = elemt.selectionEnd;
-  if (document.selection) {
-    elemt.focus();
-    var sel = document.selection.createRange();
-    sel.text = value;
-    elemt.focus();
-  } else {
-    if (startPos || startPos == "0") {
-      var scrollTop = elemt.scrollTop;
-      elemt.value = elemt.value.substring(0, startPos) + value + elemt.value.substring(endPos, elemt.value.length);
-      elemt.focus();
-      elemt.selectionStart = startPos + value.length;
-      elemt.selectionEnd = startPos + value.length;
-      elemt.scrollTop = scrollTop;
-    } else {
-      elemt.value += value;
-      elemt.focus();
-    }
-  }
-};
-
-//粘贴文本
-rm.pasteText = function () {
-  const result = rm.readClipboard() || "";
-  rm.hideRightMenu();
-};
-
-//引用到评论
-rm.rightMenuCommentText = function (txt) {
-  rm.hideRightMenu();
-  const postCommentDom = document.getElementById("post-comment");
-  var domTop = postCommentDom.offsetTop;
-  window.scrollTo(0, domTop - 80);
-  if (txt == "undefined" || txt == "null") txt = "好棒！";
-  function setText() {
-    setTimeout(() => {
-      var input = document.getElementsByClassName("el-textarea__inner")[0];
-      if (!input) setText();
-      let evt = document.createEvent("HTMLEvents");
-      evt.initEvent("input", true, true);
-      let inputValue = replaceAll(txt, "\n", "\n> ");
-      input.value = "> " + inputValue + "\n\n";
-      input.dispatchEvent(evt);
-      input.focus();
-      input.setSelectionRange(-1, -1);
-      if (document.getElementById("comment-tips")) {
-        document.getElementById("comment-tips").classList.add("show");
-      }
-    }, 100);
-  }
-  setText();
-};
-
-//替换所有内容
-function replaceAll(string, search, replace) {
-  return string.split(search).join(replace);
-}
-
-// 百度搜索
-rm.searchBaidu = function () {
-  anzhiyu.snackbarShow("即将跳转到百度搜索", false, 2000);
-  setTimeout(function () {
-    window.open("https://www.baidu.com/s?wd=" + selectTextNow);
-  }, "2000");
-  rm.hideRightMenu();
-};
-
-//分享链接
-rm.copyLink = function () {
-  rm.rightmenuCopyText(domhref);
-  anzhiyu.snackbarShow("已复制链接地址");
-};
-
-function addRightMenuClickEvent() {
-  // 添加点击事件
-  document.getElementById("menu-backward").addEventListener("click", function () {
-  window.history.back();
-    rm.hideRightMenu();
-  });
-
-  document.getElementById("menu-forward").addEventListener("click", function () {
-    window.history.forward();
-    rm.hideRightMenu();
-  });
-
-  document.getElementById("menu-refresh").addEventListener("click", function () {
-    window.location.reload();
-  });
-
-  document.getElementById("menu-top").addEventListener("click", function () {
-    anzhiyu.scrollToDest(0, 500);
-    rm.hideRightMenu();
-  });
-
-  const menuLinks = document.querySelectorAll(".menu-link");
-  menuLinks.forEach(function (link) {
-    link.addEventListener("click", rm.hideRightMenu);
-  });
-
-  document.getElementById("menu-darkmode").addEventListener("click", anzhiyu.switchDarkMode);
-
-  document.getElementById("menu-home") && document.getElementById("menu-home").addEventListener("click", function () {
-    window.location.href = window.location.origin;
-  });
-
-  document.getElementById("menu-randomPost").addEventListener("click", function () {
-    toRandomPost();
-  });
-
-  document.getElementById("menu-commentBarrage").addEventListener("click", anzhiyu.switchCommentBarrage);
-
-  document.getElementById("rightmenu-mask").addEventListener("click", rm.hideRightMenu);
-
-  document.getElementById("rightmenu-mask").addEventListener("contextmenu", function (event) {
-    rm.hideRightMenu();
-    event.preventDefault(); // Prevent the default context menu from appearing
-  });
-
-  document.getElementById("menu-copy").addEventListener("click", rm.copyPageUrl);
-
-  document.getElementById("menu-pastetext").addEventListener("click", rm.pasteText);
-
-  document.getElementById("menu-copytext").addEventListener("click", function () {
-    rm.rightmenuCopyText(selectTextNow);
-    anzhiyu.snackbarShow("复制成功，复制和转载请标注本文地址");
-  });
-
-  document.getElementById("menu-commenttext").addEventListener("click", function () {
-    rm.rightMenuCommentText(selectTextNow);
-  });
-
-  document.getElementById("menu-newwindow").addEventListener("click", function () {
-    window.open(domhref, "_blank");
-    rm.hideRightMenu();
-  });
-
-  document.getElementById("menu-copylink").addEventListener("click", rm.copyLink);
-
-  document.getElementById("menu-downloadimg").addEventListener("click", function () {
-    anzhiyu.downloadImage(domImgSrc, "anzhiyu");
-  });
-
-  document.getElementById("menu-newwindowimg").addEventListener("click", function () {
-    window.open(domImgSrc, "_blank");
-    rm.hideRightMenu();
-  });
-
-  document.getElementById("menu-copyimg").addEventListener("click", function () {
-    rm.writeClipImg(domImgSrc);
-  });
-
-  document.getElementById("menu-searchBaidu").addEventListener("click", rm.searchBaidu);
-
-  //音乐
-  document.getElementById("menu-music-toggle").addEventListener("click", anzhiyu.musicToggle);
-
-  document.getElementById("menu-music-back").addEventListener("click", anzhiyu.musicSkipBack);
-
-  document.getElementById("menu-music-forward").addEventListener("click", anzhiyu.musicSkipForward);
-
-  document.getElementById("menu-music-copyMusicName").addEventListener("click", function () {
-    rm.rightmenuCopyText(anzhiyu.musicGetName());
-    anzhiyu.snackbarShow("复制歌曲名称成功", false, 3000);
-  });
-
-}
-
-addRightMenuClickEvent();</script><script data-pjax>var themeColorMeta = document.querySelector('meta[name="theme-color"]');
-var pageHeaderEl = document.getElementById("page-header");
-var navMusicEl = document.getElementById("nav-music");
-var consoleEl = document.getElementById("console");
-// 已随机的歌曲
-var selectRandomSong = [];
-// 音乐默认声音大小
-var musicVolume = 0.8;
-// 是否切换了周杰伦音乐列表
-var changeMusicListFlag = false;
-// 当前默认播放列表
-var defaultPlayMusicList = [];
-
-document.getElementById("page-name").innerText = document.title.split(" | Smith")[0];
-anzhiyu.initIndexEssay();
-anzhiyu.changeTimeInEssay();
-anzhiyu.removeBodyPaceClass();
-anzhiyu.qrcodeCreate();
-anzhiyu.changeTimeInAlbumDetail();
-anzhiyu.reflashEssayWaterFall();
-anzhiyu.sayhi();
-anzhiyu.stopImgRightDrag();
-anzhiyu.addNavBackgroundInit();
-anzhiyu.setValueToBodyType();
-anzhiyu.catalogActive();
-anzhiyu.tagsPageActive();
-anzhiyu.categoriesBarActive();
-anzhiyu.topCategoriesBarScroll();
-anzhiyu.switchRightClickMenuHotReview();
-anzhiyu.getCustomPlayList();
-anzhiyu.addEventListenerConsoleMusicList(false);
-setTimeout(() => {if (typeof addFriendLinksInFooter === "function") {addFriendLinksInFooter();}}, 200)</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><link rel="stylesheet" href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/aplayer/1.10.1/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/aplayer/1.10.1/APlayer.min.js"></script><script src="https://npm.elemecdn.com/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://lib.baomitu.com/pjax/0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
-
+});</script><script async src="/anzhiyu/random.js"></script><div class="js-pjax"><input type="hidden" name="page-type" id="page-type" value="post"></div><script>var visitorMail = "visitor@anheyu.com";
+</script><script async data-pjax src="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/waterfall.js/1.1.0/waterfall.min.js"></script><script src="https://cdn.cbd.int/qrcodejs@1.0.0/qrcode.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><link rel="stylesheet" href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/aplayer/1.10.1/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/aplayer/1.10.1/APlayer.min.js"></script><script src="https://npm.elemecdn.com/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://lib.baomitu.com/pjax/0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
 var pjax = new Pjax({
   elements: 'a:not([target="_blank"])',
   selectors: pjaxSelectors,
@@ -1395,10 +901,10 @@ var pjax = new Pjax({
 
 document.addEventListener('pjax:send', function () {
   // removeEventListener scroll 
-  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
-  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
 
-  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  document.getElementById('rightside').classList.remove('rightside-show')
   
   if (window.aplayers) {
     for (let i = 0; i < window.aplayers.length; i++) {
@@ -1428,7 +934,6 @@ document.addEventListener('pjax:complete', function () {
 
   GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
 
-  typeof chatBtnFn === 'function' && chatBtnFn()
   typeof panguInit === 'function' && panguInit()
 
   // google analytics
@@ -1443,8 +948,8 @@ document.addEventListener('pjax:complete', function () {
   typeof Prism === 'object' && Prism.highlightAll()
 })
 
-document.addEventListener('pjax:error', (e) => {
+document.addEventListener('pjax:error', e => {
   if (e.request.status === 404) {
     pjax.loadUrl('/404.html')
   }
-})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div></body></html>
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>

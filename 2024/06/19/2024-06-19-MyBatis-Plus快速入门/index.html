@@ -1,4 +1,13 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>MyBatis-Plus快速入门 | Smith</title><meta name="keywords" content="MyBatis-Plus"><meta name="author" content="Smith"><meta name="copyright" content="Smith"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="MyBatis-Plus快速入门"><meta name="application-name" content="MyBatis-Plus快速入门"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="MyBatis-Plus快速入门"><meta property="og:url" content="https://smithhs.cn/2024/06/19/2024-06-19-MyBatis-Plus%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/index.html"><meta property="og:site_name" content="Smith"><meta property="og:description" content="文章目录  一、MyBatis VS JPA 二、MyBatis-Plus简介 三、MyBatis-Plus快速入门  1、lombok简介及安装 2、入门小案例   四、基本使用  1、通用传统模式简介及通用mapper新增方法 2、常用注解 3、排除非表字段的三种方式   五、MyBatis-P"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/cover-mybatis-plus.png"><meta property="article:author" content="Smith"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/cover-mybatis-plus.png"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://smithhs.cn/2024/06/19/2024-06-19-MyBatis-Plus%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/"><link rel="preconnect" href="//npm.elemecdn.com"/><link rel="preconnect" href="//npm.onmicrosoft.cn"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/node-snackbar/0.1.16/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.14/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>MyBatis-Plus快速入门 | Smith</title><meta name="keywords" content="MyBatis-Plus"><meta name="author" content="Smith"><meta name="copyright" content="Smith"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="MyBatis-Plus快速入门"><meta name="application-name" content="MyBatis-Plus快速入门"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="MyBatis-Plus快速入门"><meta property="og:url" content="https://smithhs.cn/2024/06/19/2024-06-19-MyBatis-Plus%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/index.html"><meta property="og:site_name" content="Smith"><meta property="og:description" content="文章目录  一、MyBatis VS JPA 二、MyBatis-Plus简介 三、MyBatis-Plus快速入门  1、lombok简介及安装 2、入门小案例   四、基本使用  1、通用传统模式简介及通用mapper新增方法 2、常用注解 3、排除非表字段的三种方式   五、MyBatis-P"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/cover-mybatis-plus.png"><meta property="article:author" content="Smith"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/cover-mybatis-plus.png"><meta name="description" content="文章目录  一、MyBatis VS JPA 二、MyBatis-Plus简介 三、MyBatis-Plus快速入门  1、lombok简介及安装 2、入门小案例   四、基本使用  1、通用传统模式简介及通用mapper新增方法 2、常用注解 3、排除非表字段的三种方式   五、MyBatis-P"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://smithhs.cn/2024/06/19/2024-06-19-MyBatis-Plus%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/node-snackbar/0.1.16/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@6.1.6/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: {"enable":true,"img":"https://upload-bbs.miyoushe.com/upload/2024/07/27/125766904/ba62475f396df9de3316a08ed9e65d86_5680958632268053399..png"},
+  postHeadAiDescription: {"enable":true,"gptName":"AnZhiYu","mode":"local","switchBtn":false,"btnLink":"https://afdian.net/item/886a79d4db6711eda42a52540025c377","randomNum":3,"basicWordCount":1000,"key":"xxxx","Referer":"https://xx.xx/"},
+  diytitle: {"enable":true,"leaveTitle":"再看看嘛🌈！","backTitle":"欢迎回来✌️！"},
+  LA51: undefined,
+  greetingBox: {"enable":true,"default":"晚上好👋","list":[{"greeting":"晚安😴","startTime":0,"endTime":5},{"greeting":"早上好鸭👋, 祝你一天好心情！","startTime":6,"endTime":9},{"greeting":"上午好👋, 状态很好，鼓励一下～","startTime":10,"endTime":10},{"greeting":"11点多啦, 在坚持一下就吃饭啦～","startTime":11,"endTime":11},{"greeting":"午安👋, 宝贝","startTime":12,"endTime":14},{"greeting":"🌈充实的一天辛苦啦！","startTime":14,"endTime":18},{"greeting":"19点喽, 奖励一顿丰盛的大餐吧🍔。","startTime":19,"endTime":19},{"greeting":"晚上好👋, 在属于自己的时间好好放松😌~","startTime":20,"endTime":24}]},
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  music_page_default: "nav_music",
   root: '/',
   preloader: {"source":3},
   friends_vue_info: undefined,
@@ -9,7 +18,7 @@
   localSearch: undefined,
   translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
   noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
-  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":240},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":240},
   copy: {
     success: '复制成功',
     error: '复制错误',
@@ -28,21 +37,25 @@
     day: '天前',
     month: '个月前'
   },
-  copyright: undefined,
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: Smith","link":"链接: ","source":"来源: Smith","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
   lightbox: 'fancybox',
   Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#3b70fc","bgDark":"#1f1f1f","position":"top-center"},
   source: {
     justifiedGallery: {
-      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
-      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.2.0/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.2.0/dist/fjGallery.css'
     }
   },
   isPhotoFigcaption: false,
   islazyload: true,
   isAnchor: false,
-  shortcutKey: false
+  shortcutKey: undefined,
+  autoDarkmode: true
 }</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: 'Smith',
   title: 'MyBatis-Plus快速入门',
+  postAI: '',
+  pageFillDescription: '文章目录, 一、 VS JPA, 二、MyBatis-Plus简介, 三、MyBatis-Plus快速入门, 1、简介及安装, 2、入门小案例, 四、基本使用, 1、通用传统模式简介及通用mapper新增方法, 2、常用注解, 3、排除非表字段的三种方式, 五、MyBatis-Plus查询方法, 1、普通查询, 2、条件构造器查询, 3、select不列出全部字段, 4、condition作用, 5、实体作为条件构造器构造方法的参数, 6、AllEq用法, 7、其他使用条件构造器的方法, 8、lambda条件构造器, 六、自定义SQL及分页查询, 1、使用条件构造器的自定义sql, 2、分页查询, 七、更新与删除, 1、mybatis-plus更新, 2、mybatis-plus删除方法, 八、AR模式、主键策略和基本配置, 1、ActiveRecord模式, 2、主键策略, 3、基本配置, 九、通用的Service, 1、基本方法, 2、批量操作操作, 3、链式调用方法文章目录一二简介三快速入门简介及安装入门小案例四基本使用通用传统模式简介及通用新增方法常用注解排除非表字段的三种方式五查询方法普通查询条件构造器查询不列出全部字段作用实体作为条件构造器构造方法的参数用法其他使用条件构造器的方法条件构造器六自定义及分页查询使用条件构造器的自定义分页查询七更新与删除更新删除方法八模式主键策略和基本配置模式主键策略基本配置九通用的基本方法批量操作操作链式调用方法一持久层可以理解为一种规范就是其具体一个实现目前比较常用的是它是提供的一套简化开发的框架按照约定好的方法命名规则编写层接口就可以在不编写实现情况下执行数据库操作还提供了除以外的功能例如分页排序复杂查询等等可以理解为对的再次封装底层仍旧是优势语句可以自由控制更灵活性能较高与代码分离易于阅读和维护提供标签支持编写动态语句优势移植性比较好方言提供了很多方法开发效率高不用编写语句对象化程度更高面向对象开发思想劣势简单操作需要编写语句单表仍需要编写接口方法和的中有大量需维护自身功能有限二简介简介增强工具只做增强不作改变简化开发提高效率在启动的时候它在的和注解注入之后紧接着反射分析实体然后注入到底层容器中就是注入之类的注入之前会进行判断是否已经注入同样的方法如果已经注入就不在注入它的注入时机在容器启动时所以使用本身是无性能损耗的官网地址教学版核心程序员作品极速开发框架项目负责人作品项目地址码云项目地址特点无侵入在的基础上进行扩展只做增强不做改变引入不会对您现有的构架产生任何影响而且支持所有原生的特性依赖少仅仅依赖以及损耗小启动即会自动注入基本性能基本无损耗直接面向对象操作通用操作内置通用通用仅仅通过少量配置即可实现单表大部分操作更有强大的条件构造器满足各类使用需求多种主键策略支持多达种主键策略内含分布式唯一生成器可自由配置完美解决主键问题支持支持形式调用实体类只需继承类即可实现基本操作支持代码生成采用代码或者插件可快速生成层代码支持模板引擎更有超多自定义配置等您来使用比官方的更加强大支持自定义全局通用操作支持全局通用方法注入内置分页插件基于物理分页开发者无需关心具体操作配置好插件之后写分页等同于写基本查询内置性能分析插件可输出语句以及其执行时间建议开发测试时启用该功能能有效解决慢查询内置全局拦截插件提供全表操作智能分析阻断预防误操作三快速入门简介及安装作用提高开发效率通过注解形式使生成有参数无参数等方法无需手动实现倘若不使用可以使用的注解有注解介绍下面只是介绍了几个常用的注解更多的请参见可以作用在类上和属性上放在类上会对所有的非静态属性生成方法放在属性上会对该属性生成方法并可以指定方法的访问级别默认情况下会使用所有非瞬态和非静态字段来生成和方法也可以指定具体使用哪些属性生成方法默认情况下会输出类名所有属性属性会按照顺序输出以逗号分割无参构造器部分参数构造器全参构造器当我们需要重载多个构造器的时候就无能为力了所有属性的所有属性的和的组合通常情况下我们使用这个注解就足够了安装插件然后在的引入依赖入门小案例步骤建库建表引入依赖配置编码测试建一个名的数据库在建一个表创建数据库使用查看全文主键姓名年龄邮箱直属上级创建时间数据初始化猪头小懒猪小白小黑小可耐然后建一个工程依赖启动器创一个进行配置编写实体类主键姓名年龄邮箱直属上级创建时间备注不与数据库字段对应不参与序列化编写接口在启动类中添加注解进行扫描最后就是编写测试类查看效果运行是成功的我们可以发现相对于使用来说不用编写文件编写那些繁琐的语句简单快速的的就到这里若还有兴趣就继续看下去吧四基本使用通用传统模式简介及通用新增方法相信对比较熟系的小伙伴应该对传统编程模式都比较熟系接口中写抽象方法或注解写中调用接口中调用为了方便大家观察在多增加应该日志的输出进行测试小灰影响记录数运行结果倘若大家观察得仔细可以发现主键并没有设定自增那为什么没有出现报错呢原来的默认主键策略是基于雪花算法的自增主键在的源码中有雪花算法的实现代码额可能有小伙伴不知道什么是雪花算法大家可以看看这位博主写的文章雪花算法的原理和实现常用注解主键采用雪花算法生成值的前提是实体类的主键属性名称必须为数据表字段带有的可以自动映射到驼峰式命名的属性上注解数据库名不同在类上增加主键的驼峰一般无法识别在主键属性上增加属性与字段名不相同在属性上增加数据库表名使用场景实体类名称和数据表名不一致时通过它指定表名此时就可以使用的单表操作主键名使用场景实体类属性名称和数据表主键不是时通过它声明该属性为主键就可以采用雪花算法生成主键值操作字段名使用场景实体类属性名称和数据表字段名不一致时通过它指定数据表字段名称就可以和实体类属性对应排除非表字段的三种方式使用场景实体类中的某个属性不对应表中的任何字段只是用于保存临时数据或者临时组装的数据使用方式修饰实体类属性修饰的属性不会被序列化缺陷有些需求需要序列化该字段修饰属性前提手动实现方法对静态属性不会提供方法缺陷每个对象的属性值一致这个注解用来表示数据表中不存在该字段默认是五查询方法普通查询普通查询使用方式为实现接口对象调用该方法使用场景为通过主键查询只要该主键类型实现了接口即可使用场景为通过主键的集合去批量查询前提主键的类型实现了接口使用场景为传入一个集合为表字段为表字段值注意的为数据表的字段名不是实体类属性名条件构造器查询以条件构造器为参数的查询方法抽象类提供了很多条件构造器使用场景对于一些有特殊条件的查询比如模糊查询条件查询等使用方法为查询条件构造器它是的一个子类生成条件构造器方式一方式二注意条件构造器的条件构造器方法都为数据表字段为实际值例如等模糊条件构造器小于条件构造器范围条件构造器非空条件构造器模糊右通配符条件构造器或条件构造器大于等于条件构造器升序条件构造器降序条件构造器函数日期格式将日期按照格式进行插入或者返回例如动态条件构造器范围条件构造器注意如果替换为实际值可能会造成注入括号条件构造器注意怕有些小伙伴不了解这个是什么这种类型的表达式这个是引入的表达式的语法箭头左边是变量名箭头右边是自己编写的代码逻辑如果感兴趣你可以了解一下的表达式当然打印方式也是表达式括号条件构造器非开头的条件构造器条件构造器条件构造器注意有注入风险确保参数没有风险再使用不列出全部字段不列出全部字段如果返回的字段数量很多此时采用如下的也可以放置在后面第一个参数为实体类对象第二个参数相当于排除返回的字段作用如果使用的是需要添加依赖条件构造器中构造的方法的类型参数作用如下方法调用重载的方法重载方法中第一个参数作用该条件是否加入最后生成的中使用方法如果为就加入如果就不加入使用场景类似于动态的拼接传统使用方式实体作为条件构造器构造方法的参数创建条件构造器时传入实体对象一个参数的构造方法如果传入一个部不为的对象默认会进行进行等值比较也就是后拼接条件注意通过参数生成的等值和的条件构造方法生成的没有任何关系举例验证注意使用时要慎重因为他们都会在中进行拼接使用场景如果允许使用实体类去接受参数那么就可以不用调用条件构造器而是直接使用构造方法传入参数即可特殊操作可以通过在实体类上添加注解指定该属性使用那种操作默认使用等值类定义了一些常量包括等值不等于左边右边如果提供的常量无法满足需求就可以自己在注解中编写常量表达式例如小于用法使用方法传入一个集合对象就会按照等值进行操作为字段名称为字段值如果字段的值为那么就会拼接为这种形式如果传入的想要忽略掉也就是不进行拼接那么就传入第二个参数为的第二种方法参数为过滤函数它是一个函数式接口上图就是判断是不等于如果不等于就返回就会过滤掉所以没有拼接也可以判断值注意需要考虑类型的问题其他使用条件构造器的方法其他以条件构造器的方法集合的泛型不再是实体而是集合其中表示字段名表示字段值使用场景当实体类属性非常多时不易查看如果返回的是一个实体类那么即使我们设定了返回字段那么它的值为但是属性仍然存在如果返回的是类型当指定了返回字段时那么没返回的就不会存在使用场景当返回的不是一条一条记录时也就是返回的字段不在实体类属性中比如一些统计像平均值最大值最小值这样的集合的泛型不再是实体而是只返回第一个字段的值其他的会被舍弃使用场景只返回一列时可以使用它查询符合条件的总记录数的注意使用它时就不能指定返回的列了因为它会在后面拼接查询符合条件的数据只会返回一条数据注意查询的结果必须是一条或者查不到多于条就会报错条件构造器条件构造器类似条件构造器防误写条件构造器使用场景不需要我们手动在构造条件时去书写字段名称条件构造器使用方法条件构造器的创建有种方式通过查询构造器创建通过直接创建条件构造器通过构造器工具类创建此时需要泛型新增的创建条件构造器通过并且需要一个接口作为参数通过源码可以它是对普通查询构造器的再次封装源码中仍然是通过接口去调用六自定义及分页查询使用条件构造器的自定义使用场景当使用条件构造器去构造的方法不能满足需求时前提版本大于使用方法注意可以使条件构造器构造的被执行配置文件路径项目不过由于系列编辑器文件是不能放在文件夹中的默认不会编译源码文件夹中的文件所以可以通过在中加入即可在中进行编写语句分页查询分页查询分页查询的实现的分页不是物理分页可以理解为逻辑或者内存分页拓展内存分页弊端数据量大时占用过多内存第一次查询速度慢插件实现物理分页配置插件提供了两个分页方法这两个方法主要区别如下图返回的数据是实体类型还是类型分页使用分页形式使用分页时不查询总记录数第三个参数为表示查询总记录数否则就不查询当分页查询查询的是多表时使用分页倘若需要多表联查可以在文件里编写多表联查的一样可以实现其功能如在里编写需要的多表查询语句即可七更新与删除更新根据更新使用场景根据实体类主键属性进行更新其他属性有值就更新使用方法如下以条件构造器作为参数进行更新使用场景更新条件为其他时使用方法如下条件构造器传入实体时的使用和类似它会将实体属性作为更新的条件条件构造器中方法使用如果更新少量字段可使用如下方式方式更新通过构造器链进行直接更新删除方法根据删除方法前提实体类主键属性上有注解普通删除方法以条件构造器为参数删除方法八模式主键策略和基本配置模式简介活动记录领域模型模式直接通过实体操作数据库的一个实体类对应数据库的一张表而一个实例对应表中一行记录中模式的实现两个前提实体类需要继承接口实现直接用实体即可操作数据库如果实体的主键不是那么就会先查询如果有记录就更新没有就插入是直接进行插入注意如下图方法删除不存在的也返回至于其他方法的使用介绍可以查看源码主键策略的主键策略定义在了的枚举类中下面是源码局部策略在主键字段配置全局策略在配置中添加注意局部策略优于全局策略基本配置可在查看官网地址九通用的详情可查看的源码下面是部分方法的使用基本方法因为数据数大于所以默认返回第一条批量操作操作不指定指定链式调用方法查询更新删除关于的详细快速入门的学习就到这里',
   isPost: true,
   isHome: false,
   isHighlightShrink: false,
@@ -62,71 +75,76 @@
     display: inline !important
   }
 </style></noscript><script>(win=>{
-    win.saveToLocal = {
-      set: function setWithExpiry(key, value, ttl) {
-        if (ttl === 0) return
-        const now = new Date()
-        const expiryDay = ttl * 86400000
-        const item = {
-          value: value,
-          expiry: now.getTime() + expiryDay,
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
         }
-        localStorage.setItem(key, JSON.stringify(item))
-      },
-
-      get: function getWithExpiry(key) {
-        const itemStr = localStorage.getItem(key)
-
-        if (!itemStr) {
-          return undefined
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
         }
-        const item = JSON.parse(itemStr)
-        const now = new Date()
 
-        if (now.getTime() > item.expiry) {
-          localStorage.removeItem(key)
-          return undefined
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
         }
-        return item.value
-      }
-    }
-  
-    win.getScript = url => new Promise((resolve, reject) => {
-      const script = document.createElement('script')
-      script.src = url
-      script.async = true
-      script.onerror = reject
-      script.onload = script.onreadystatechange = function() {
-        const loadState = this.readyState
-        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-        script.onload = script.onreadystatechange = null
-        resolve()
-      }
-      document.head.appendChild(script)
-    })
-  
-    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
-      const link = document.createElement('link')
-      link.rel = 'stylesheet'
-      link.href = url
-      if (id) link.id = id
-      link.onerror = reject
-      link.onload = link.onreadystatechange = function() {
-        const loadState = this.readyState
-        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-        link.onload = link.onreadystatechange = null
-        resolve()
-      }
-      document.head.appendChild(link)
-    })
-  
-      win.activateDarkMode = function () {
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
         document.documentElement.setAttribute('data-theme', 'dark')
         if (document.querySelector('meta[name="theme-color"]') !== null) {
           document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
         }
       }
-      win.activateLightMode = function () {
+      win.activateLightMode = () => {
         document.documentElement.setAttribute('data-theme', 'light')
         if (document.querySelector('meta[name="theme-color"]') !== null) {
           document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
@@ -148,7 +166,7 @@
               const isNight = hour <= 6 || hour >= 18
               isNight ? activateDarkMode() : activateLightMode()
             }
-            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
               if (saveToLocal.get('theme') === undefined) {
                 e.matches ? activateDarkMode() : activateLightMode()
               }
@@ -165,34 +183,17 @@
         }
       }
     
-    const detectApple = () => {
-      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
-        document.documentElement.classList.add('apple')
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
       }
-    }
-    detectApple()
-    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d20f536c64d06e5fcf4bfe2ec5dc25d.jpg"/><div class="loading-image-dot"></div><div id="loading-percentage">0%</div></div></div><script>if (GLOBAL_CONFIG.preloader.source == "2" || GLOBAL_CONFIG.preloader.source == "3") {
-  const loadingPercentage = document.getElementById("loading-percentage");
-  let loadingPercentageTimer = setInterval(function() {
-    var progressBar = document.querySelector(".pace-progress");
-    if (!progressBar) return
-    var currentValue = progressBar.getAttribute("data-progress-text");
-    if (currentValue !== loadingPercentage.textContent) {
-      loadingPercentage.textContent = currentValue;
-      if (currentValue === "100%") {
-        clearInterval(loadingPercentageTimer);
-      }
-    }
-  }, 100);
-}
-
-const preloader = {
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d20f536c64d06e5fcf4bfe2ec5dc25d.jpg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
   endLoading: () => {
-    document.body.style.overflow = 'auto';
     document.getElementById('loading-box').classList.add("loaded");
   },
   initLoading: () => {
-    document.body.style.overflow = '';
     document.getElementById('loading-box').classList.remove("loaded")
   }
 }
@@ -202,8 +203,8 @@ setTimeout(function(){preloader.endLoading();},10000)
 if (true) {
   document.addEventListener('pjax:send', () => { preloader.initLoading() })
   document.addEventListener('pjax:complete', () => { preloader.endLoading() })
-}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div id="web_box"><div id="web_container"><div id="menu-mask"></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="anzhiyufont anzhiyu-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://smithhs.cn/" title="博客" target="_blank"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.png" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" href="http://robot.onliu.cn/" title="Robot" target="_blank"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/cupfox.png" alt="Robot"/><span class="back-menu-item-text">Robot</span></a><a class="back-menu-item" href="http://res.onliu.cn" title="Sale" target="_blank"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/tubiao.jpg" alt="Sale"/><span class="back-menu-item-text">Sale</span></a><a class="back-menu-item" href="http://se.onliu.cn/" title="资源共享" target="_blank"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog/x126.png" alt="资源共享"/><span class="back-menu-item-text">资源共享</span></a><a class="back-menu-item" href="https://github.com/Smithhss" title="Github" target="_blank"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/GitHub.png" alt="Github"/><span class="back-menu-item-text">Github</span></a></div></div></div></div><a id="site-name" href="/" accesskey="h"><div class="title">Smith</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page faa-parent animated-hover" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child" style="left:-79px;"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child" style="left:-31px;"><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li></ul></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child" style="left:-79px;"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于我</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button only-home" id="travellings_button" title="随机前往一个开往项目网站"><a class="site-page" onclick="anzhiyu.totraveling()" title="随机前往一个开往项目网站" href="javascript:void(0);" rel="external nofollow" data-pjax-state="external"><i class="anzhiyufont anzhiyu-icon-train"></i></a></div><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg" target="_blank"><img class="post-qr-code-img" alt="wechat" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg" target="_blank"><img class="post-qr-code-img" alt="alipay" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> <span>最新评论</span></span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Android-Studio/" style="font-size: 1.05rem;">Android Studio<sup>1</sup></a><a href="/tags/App/" style="font-size: 1.05rem;">App<sup>2</sup></a><a href="/tags/Butterfly/" style="font-size: 1.05rem;">Butterfly<sup>1</sup></a><a href="/tags/C/" style="font-size: 1.05rem;">C++<sup>1</sup></a><a href="/tags/CSS/" style="font-size: 1.05rem;">CSS<sup>1</sup></a><a href="/tags/Cisco-Packet-Tracer/" style="font-size: 1.05rem;">Cisco Packet Tracer<sup>1</sup></a><a href="/tags/Easypan/" style="font-size: 1.05rem;">Easypan<sup>2</sup></a><a href="/tags/FurtherMathematics/" style="font-size: 1.05rem;">FurtherMathematics<sup>1</sup></a><a href="/tags/GPT/" style="font-size: 1.05rem;">GPT<sup>1</sup></a><a href="/tags/Git2/" style="font-size: 1.05rem;">Git2<sup>1</sup></a><a href="/tags/HTML/" style="font-size: 1.05rem;">HTML<sup>1</sup></a><a href="/tags/Hexo/" style="font-size: 1.05rem;">Hexo<sup>1</sup></a><a href="/tags/Java/" style="font-size: 1.05rem;">Java<sup>6</sup></a><a href="/tags/JavaScript/" style="font-size: 1.05rem;">JavaScript<sup>1</sup></a><a href="/tags/JavaWeb/" style="font-size: 1.05rem;">JavaWeb<sup>2</sup></a><a href="/tags/Jrebel/" style="font-size: 1.05rem;">Jrebel<sup>1</sup></a><a href="/tags/LeetCode/" style="font-size: 1.05rem;">LeetCode<sup>1</sup></a><a href="/tags/Linux/" style="font-size: 1.05rem;">Linux<sup>3</sup></a><a href="/tags/Markdown/" style="font-size: 1.05rem;">Markdown<sup>2</sup></a><a href="/tags/Maven/" style="font-size: 1.05rem;">Maven<sup>2</sup></a><a href="/tags/Navicat/" style="font-size: 1.05rem;">Navicat<sup>1</sup></a><a href="/tags/NoSql/" style="font-size: 1.05rem;">NoSql<sup>1</sup></a><a href="/tags/Nodejs/" style="font-size: 1.05rem;">Nodejs<sup>2</sup></a><a href="/tags/Python/" style="font-size: 1.05rem;">Python<sup>4</sup></a><a href="/tags/Spring/" style="font-size: 1.05rem;">Spring<sup>2</sup></a><a href="/tags/VMware/" style="font-size: 1.05rem;">VMware<sup>2</sup></a><a href="/tags/Vue/" style="font-size: 1.05rem;">Vue<sup>1</sup></a><a href="/tags/YouHou/" style="font-size: 1.05rem;">YouHou<sup>1</sup></a><a href="/tags/books/" style="font-size: 1.05rem;">books<sup>1</sup></a><a href="/tags/butterfly/" style="font-size: 1.05rem;">butterfly<sup>1</sup></a><a href="/tags/clash/" style="font-size: 1.05rem;">clash<sup>1</sup></a><a href="/tags/project/" style="font-size: 1.05rem;">project<sup>4</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 1.05rem;">前端<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6/" style="font-size: 1.05rem;">开发框架<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" style="font-size: 1.05rem;">开发环境<sup>1</sup></a><a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 1.05rem;">操作系统<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" style="font-size: 1.05rem;">数据结构与算法<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" style="font-size: 1.05rem;">计算机组成原理<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 1.05rem;">计算机网络<sup>1</sup></a><a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="font-size: 1.05rem;">软件工程<sup>1</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
-    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/11/"><span class="card-archive-list-date">十一月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">3</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/10/"><span class="card-archive-list-date">十月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/09/"><span class="card-archive-list-date">九月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">6</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/07/"><span class="card-archive-list-date">七月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/06/"><span class="card-archive-list-date">六月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">7</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/05/"><span class="card-archive-list-date">五月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">17</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/04/"><span class="card-archive-list-date">四月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/06/"><span class="card-archive-list-date">六月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" onclick="anzhiyu.switchDarkMode()" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item on" id="consoleCommentBarrage" onclick="anzhiyu.switchCommentBarrage()" title="热评开关"><a class="commentBarrage"><i class="anzhiyufont anzhiyu-icon-message"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="anzhiyu.musicToggle()" title="音乐开关"><a class="music-switch"><i class="anzhiyufont anzhiyu-icon-music"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/Programming/">Programming</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/MyBatis-Plus/" tabindex="-1"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>MyBatis-Plus</span></a></span></div></div><h1 class="post-title">MyBatis-Plus快速入门</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="post-meta-icon anzhiyufont anzhiyu-icon-calendar-days"></i><span class="post-meta-label">发表于</span><time datetime="2024-06-19T13:48:00.000Z" title="发表于 2024-06-19 21:48:00">2024-06-19</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">5.9k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>21分钟</span></span><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title="MyBatis-Plus快速入门"><i class="anzhiyufont anzhiyu-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为石家庄"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>石家庄</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/cover-mybatis-plus.png"></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h4 id="文章目录"><a href="#文章目录" class="headerlink" title="文章目录"></a>文章目录</h4><ul>
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="anzhiyufont anzhiyu-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://smithhs.cn/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.png" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="http://robot.onliu.cn/" title="Robot"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/cupfox.png" alt="Robot"/><span class="back-menu-item-text">Robot</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="http://res.onliu.cn" title="Sale"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/tubiao.jpg" alt="Sale"/><span class="back-menu-item-text">Sale</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="http://se.onliu.cn/" title="资源共享"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog/x126.png" alt="资源共享"/><span class="back-menu-item-text">资源共享</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://github.com/Smithhss" title="Github"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/GitHub.png" alt="Github"/><span class="back-menu-item-text">Github</span></a></div></div></div></div><a id="site-name" href="/" accesskey="h"><div class="title">Smith</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/dailyPhoto/"><i class="anzhiyufont anzhiyu-icon-camera faa-tada" style="font-size: 0.9em;"></i><span> 每日照片</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wallpaper/"><i class="anzhiyufont anzhiyu-icon-image faa-tada" style="font-size: 0.9em;"></i><span> 壁纸</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wordScenery/"><i class="anzhiyufont anzhiyu-icon-font faa-tada" style="font-size: 0.9em;"></i><span> 文字风景</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于我</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/love/"><i class="anzhiyufont anzhiyu-icon-heart faa-tada" style="font-size: 0.9em;"></i><span> 爱情</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button only-home" id="travellings_button" title="随机前往一个开往项目网站"><a class="site-page" onclick="anzhiyu.totraveling()" title="随机前往一个开往项目网站" href="javascript:void(0);" rel="external nofollow" data-pjax-state="external"><i class="anzhiyufont anzhiyu-icon-train"></i></a></div><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg" target="_blank"><img class="post-qr-code-img" alt="wechat" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg" target="_blank"><img class="post-qr-code-img" alt="alipay" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Android-Studio/" style="font-size: 1.05rem;">Android Studio<sup>1</sup></a><a href="/tags/App/" style="font-size: 1.05rem;">App<sup>2</sup></a><a href="/tags/Butterfly/" style="font-size: 1.05rem;">Butterfly<sup>1</sup></a><a href="/tags/C/" style="font-size: 1.05rem;">C++<sup>1</sup></a><a href="/tags/CSS/" style="font-size: 1.05rem;">CSS<sup>1</sup></a><a href="/tags/Cisco-Packet-Tracer/" style="font-size: 1.05rem;">Cisco Packet Tracer<sup>1</sup></a><a href="/tags/Easypan/" style="font-size: 1.05rem;">Easypan<sup>2</sup></a><a href="/tags/FurtherMathematics/" style="font-size: 1.05rem;">FurtherMathematics<sup>1</sup></a><a href="/tags/GPT/" style="font-size: 1.05rem;">GPT<sup>1</sup></a><a href="/tags/Git2/" style="font-size: 1.05rem;">Git2<sup>1</sup></a><a href="/tags/HTML/" style="font-size: 1.05rem;">HTML<sup>1</sup></a><a href="/tags/Hexo/" style="font-size: 1.05rem;">Hexo<sup>1</sup></a><a href="/tags/Java/" style="font-size: 1.05rem;">Java<sup>6</sup></a><a href="/tags/JavaScript/" style="font-size: 1.05rem;">JavaScript<sup>1</sup></a><a href="/tags/JavaWeb/" style="font-size: 1.05rem;">JavaWeb<sup>2</sup></a><a href="/tags/Jrebel/" style="font-size: 1.05rem;">Jrebel<sup>1</sup></a><a href="/tags/LeetCode/" style="font-size: 1.05rem;">LeetCode<sup>1</sup></a><a href="/tags/Linux/" style="font-size: 1.05rem;">Linux<sup>3</sup></a><a href="/tags/Markdown/" style="font-size: 1.05rem;">Markdown<sup>2</sup></a><a href="/tags/Maven/" style="font-size: 1.05rem;">Maven<sup>2</sup></a><a href="/tags/Mysql/" style="font-size: 1.05rem;">Mysql<sup>1</sup></a><a href="/tags/NoSql/" style="font-size: 1.05rem;">NoSql<sup>1</sup></a><a href="/tags/Nodejs/" style="font-size: 1.05rem;">Nodejs<sup>2</sup></a><a href="/tags/Python/" style="font-size: 1.05rem;">Python<sup>4</sup></a><a href="/tags/Spring/" style="font-size: 1.05rem;">Spring<sup>2</sup></a><a href="/tags/VMware/" style="font-size: 1.05rem;">VMware<sup>2</sup></a><a href="/tags/Vue/" style="font-size: 1.05rem;">Vue<sup>1</sup></a><a href="/tags/YouHou/" style="font-size: 1.05rem;">YouHou<sup>1</sup></a><a href="/tags/books/" style="font-size: 1.05rem;">books<sup>1</sup></a><a href="/tags/butterfly/" style="font-size: 1.05rem;">butterfly<sup>1</sup></a><a href="/tags/clash/" style="font-size: 1.05rem;">clash<sup>1</sup></a><a href="/tags/project/" style="font-size: 1.05rem;">project<sup>4</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 1.05rem;">前端<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6/" style="font-size: 1.05rem;">开发框架<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" style="font-size: 1.05rem;">开发环境<sup>1</sup></a><a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 1.05rem;">操作系统<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" style="font-size: 1.05rem;">数据结构与算法<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" style="font-size: 1.05rem;">计算机组成原理<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 1.05rem;">计算机网络<sup>1</sup></a><a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="font-size: 1.05rem;">软件工程<sup>1</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/05/"><span class="card-archive-list-date">五月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/11/"><span class="card-archive-list-date">十一月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">3</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/10/"><span class="card-archive-list-date">十月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/09/"><span class="card-archive-list-date">九月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">5</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/07/"><span class="card-archive-list-date">七月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/06/"><span class="card-archive-list-date">六月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">7</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/05/"><span class="card-archive-list-date">五月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">17</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/04/"><span class="card-archive-list-date">四月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="anzhiyu.musicToggle()" title="音乐开关"><a class="music-switch"><i class="anzhiyufont anzhiyu-icon-music"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/Programming/" itemprop="url">Programming</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/MyBatis-Plus/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>MyBatis-Plus</span></a></span></div></div><h1 class="post-title" itemprop="name headline">MyBatis-Plus快速入门</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="post-meta-icon anzhiyufont anzhiyu-icon-calendar-days"></i><span class="post-meta-label">发表于</span><time itemprop="dateCreated datePublished" datetime="2024-06-19T13:48:00.000Z" title="发表于 2024-06-19 21:48:00">2024-06-19</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">5.9k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>21分钟</span></span><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title="MyBatis-Plus快速入门"><i class="anzhiyufont anzhiyu-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为石家庄"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>石家庄</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/cover-mybatis-plus.png"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="https://smithhs.cn/2024/06/19/2024-06-19-MyBatis-Plus%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/"><header><a class="post-meta-categories" href="/categories/Programming/" itemprop="url">Programming</a><a href="/tags/MyBatis-Plus/" tabindex="-1" itemprop="url">MyBatis-Plus</a><h1 id="CrawlerTitle" itemprop="name headline">MyBatis-Plus快速入门</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">Smith</span><time itemprop="dateCreated datePublished" datetime="2024-06-19T13:48:00.000Z" title="undefined 2024-06-19 21:48:00">2024-06-19</time></header><h4 id="文章目录"><a href="#文章目录" class="headerlink" title="文章目录"></a>文章目录</h4><ul>
 <li><ul>
 <li><a href="#MyBatis_VS_JPA_2">一、MyBatis VS JPA</a></li>
 <li><a href="#MyBatisPlus_21">二、MyBatis-Plus简介</a></li>
@@ -349,7 +350,7 @@ if (true) {
 <p><strong>编写dao接口：<br>UserMapper.java：</strong></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public interface UserMapper extends BaseMapper&lt;User&gt; &#123;</span><br><span class="line">&#125;</span><br><span class="line">12</span><br></pre></td></tr></table></figure>
 
-<p><strong>在启动类中添加注解：</strong><strong>@MapperScan(“com.mp.first_mp.dao”)<strong>，</strong>进行扫描</strong></p>
+<p><strong>在启动类中添加注解：****@MapperScan(“com.mp.first_mp.dao”)</strong>，<strong>进行扫描</strong></p>
 <p>最后就是编写测试类：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">@RunWith(SpringRunner.class)</span><br><span class="line">@SpringBootTest</span><br><span class="line">public class SimpleTest &#123;</span><br><span class="line"></span><br><span class="line">    @Autowired</span><br><span class="line">    private UserMapper userMapper;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    public void select() &#123;</span><br><span class="line">        List&lt;User&gt; list = userMapper.selectList(null);</span><br><span class="line">        Assert.assertEquals(5, list.size());</span><br><span class="line">        list.forEach(System.out::println);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">1234567891011121314</span><br></pre></td></tr></table></figure>
 
@@ -413,23 +414,23 @@ if (true) {
 
 <h4 id="2、条件构造器查询"><a href="#2、条件构造器查询" class="headerlink" title="2、条件构造器查询"></a>2、条件构造器查询</h4><p>BaseMapper以条件构造器（Wrapper）为参数的查询方法</p>
 <p>AbstractWrapper抽象类：提供了很多条件构造器。</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d773b528e68d53aef4a09e1e56be6dfapng.jpg" alt="http://img2.sycdn.imooc.com/5f8db8a700015a9507830434.jpghttp://img1.sycdn.imooc.com/5f8db8c00001cddf08570416.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/9dcd367d30d43f1cebaff66a35bc6018png.jpg"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d773b528e68d53aef4a09e1e56be6dfapng.jpg" alt="http:&#x2F;&#x2F;img2.sycdn.imooc.com&#x2F;5f8db8a700015a9507830434.jpghttp:&#x2F;&#x2F;img1.sycdn.imooc.com&#x2F;5f8db8c00001cddf08570416.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/9dcd367d30d43f1cebaff66a35bc6018png.jpg"></p>
 <p>List selectList(@Param(Constans.WRAPPER) Wrapper queryWrapper)：<br>使用场景：对于一些有特殊条件的查询，比如模糊查询、条件查询等。<br>使用方法：QueryWrapper为查询条件构造器，它是AbstractWrapper的一个子类。<br>生成条件构造器<br>方式一：QueryWrapper queryWrapper&#x3D;new QueryWrapper();<br>方式二：QueryWrapper query&#x3D;Wrappers.query();</p>
 <p><strong>注意：</strong> 条件构造器AbstractWrapper的条件构造器方法key都为数据表字段，value为实际值。例如：like（Column，value）、gt（Column，value）等。</p>
 <p>模糊条件构造器：like，小于条件构造器：lt。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/f6897078d3432055ba0bc102aa244263png.jpg"></p>
 <p>范围条件构造器：between，非空条件构造器：isNotNull。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/3503d602c973eb0be59696a2a130d5dfpng.jpg"><br>模糊右通配符条件构造器：likeRight，或条件构造器：or。<br>大于等于条件构造器：ge，升序条件构造器：orderAsc。<br>降序条件构造器：orderDesc。</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/4fdadd0dab33039c9786e40940374055png.jpg" alt="http://img1.sycdn.imooc.com/5f8dc3100001837607420320.jpg"><br><strong>Mysql函数</strong><br>date_format(日期，‘格式’)：将日期按照格式进行插入或者返回。<br><strong>例如：</strong> date_format(now(),’%Y-%m-%d’)。</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/5287a78ef6b438c6ee99a4c3a37c73c5png.jpg" alt="http://img4.sycdn.imooc.com/5f8ef2a20001f50504130219.jpg"></p>
-<p>动态条件构造器：apply，范围条件构造器：insql。<br><strong>注意：</strong> 如果{0}替换为实际值，可能会造成sql注入。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/14e5a45447609e1d4f564173bcb33c4bpng.jpg" alt="http://img2.sycdn.imooc.com/5f8eff88000122cf12320275.jpg"><br>and括号条件构造器：and（）</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/144b0604b7d56314352a70389a596497png.jpg" alt="http://img1.sycdn.imooc.com/5f90504f00011ec413440280.jpg"><br>注意： <strong>怕有些小伙伴不了解这个是什么：wq -&gt; wq.xxx这种类型的表达式，这个是java8引入的lambda表达式的语法，箭头左边是变量名，箭头右边是自己编写的代码逻辑，如果感兴趣你可以了解一下java的lambda表达式，当然打印方式也是lambda表达式</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/4fdadd0dab33039c9786e40940374055png.jpg" alt="http:&#x2F;&#x2F;img1.sycdn.imooc.com&#x2F;5f8dc3100001837607420320.jpg"><br><strong>Mysql函数</strong><br>date_format(日期，‘格式’)：将日期按照格式进行插入或者返回。<br><strong>例如：</strong> date_format(now(),’%Y-%m-%d’)。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/5287a78ef6b438c6ee99a4c3a37c73c5png.jpg" alt="http:&#x2F;&#x2F;img4.sycdn.imooc.com&#x2F;5f8ef2a20001f50504130219.jpg"></p>
+<p>动态条件构造器：apply，范围条件构造器：insql。<br><strong>注意：</strong> 如果{0}替换为实际值，可能会造成sql注入。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/14e5a45447609e1d4f564173bcb33c4bpng.jpg" alt="http:&#x2F;&#x2F;img2.sycdn.imooc.com&#x2F;5f8eff88000122cf12320275.jpg"><br>and括号条件构造器：and（）</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/144b0604b7d56314352a70389a596497png.jpg" alt="http:&#x2F;&#x2F;img1.sycdn.imooc.com&#x2F;5f90504f00011ec413440280.jpg"><br>注意： <strong>怕有些小伙伴不了解这个是什么：wq -&gt; wq.xxx这种类型的表达式，这个是java8引入的lambda表达式的语法，箭头左边是变量名，箭头右边是自己编写的代码逻辑，如果感兴趣你可以了解一下java的lambda表达式，当然打印方式也是lambda表达式</strong></p>
 <p>or括号条件构造器：or()</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/6b77d57ebffcad428923bf970aaf2ab0png.jpg" alt="http://img1.sycdn.imooc.com/5f9051760001f86908160381.jpg"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/6b77d57ebffcad428923bf970aaf2ab0png.jpg" alt="http:&#x2F;&#x2F;img1.sycdn.imooc.com&#x2F;5f9051760001f86908160381.jpg"></p>
 <p>非and开头的条件构造器：nested（）</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/abb51550c9f453b508d3b5121aee9e47png.jpg" alt="http://img2.sycdn.imooc.com/5f9052d3000138e107640356.jpg"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/abb51550c9f453b508d3b5121aee9e47png.jpg" alt="http:&#x2F;&#x2F;img2.sycdn.imooc.com&#x2F;5f9052d3000138e107640356.jpg"></p>
 <p>In条件构造器：In（column,Collection)</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/6376dd88e29f5f91ebd3bc791787bfe9png.jpg" alt="http://img1.sycdn.imooc.com/5f90548e0001a0e807960357.jpg"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/6376dd88e29f5f91ebd3bc791787bfe9png.jpg" alt="http:&#x2F;&#x2F;img1.sycdn.imooc.com&#x2F;5f90548e0001a0e807960357.jpg"></p>
 <p>last条件构造器：last(sql）。注意：有sql注入风险。确保参数没有风险再使用。</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/bda48492fc8e53016ba726a9dca36575png.jpg" alt="http://img1.sycdn.imooc.com/5f9055330001271e08440374.jpg"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/bda48492fc8e53016ba726a9dca36575png.jpg" alt="http:&#x2F;&#x2F;img1.sycdn.imooc.com&#x2F;5f9055330001271e08440374.jpg"></p>
 <h4 id="3、select不列出全部字段"><a href="#3、select不列出全部字段" class="headerlink" title="3、select不列出全部字段"></a>3、select不列出全部字段</h4><p>select不列出全部字段</p>
 <blockquote>
 <p>select（String …columns)</p>
@@ -445,43 +446,43 @@ if (true) {
 
 <p>条件构造器（abstractWrapper）中 condition（构造的方法的boolean类型参数） 作用。</p>
 <p>如下：like方法调用重载的方法，重载方法中第一个参数。</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/4a6fb3d0d300f09d3738e913ce3b46abpng.jpg" alt="http://img1.sycdn.imooc.com/5f941dbd0001f72a05250160.jpg"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/4a6fb3d0d300f09d3738e913ce3b46abpng.jpg" alt="http:&#x2F;&#x2F;img1.sycdn.imooc.com&#x2F;5f941dbd0001f72a05250160.jpg"></p>
 <p>作用：该条件是否加入最后生成的sql中。<br>使用方法：如果为true就加入，如果false就不加入。<br>使用场景：类似于动态的sql拼接。</p>
 <p>传统使用：</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/bcfe46305b48becde8dc6c0c4fd52aadpng.jpg" alt="http://img4.sycdn.imooc.com/5f9420460001fc9108520519.jpg"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/bcfe46305b48becde8dc6c0c4fd52aadpng.jpg" alt="http:&#x2F;&#x2F;img4.sycdn.imooc.com&#x2F;5f9420460001fc9108520519.jpg"></p>
 <p>mp方式：</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/98f25369e3c1a9b64419decd88229f64png.jpg" alt="http://img4.sycdn.imooc.com/5f9420e300011afe09010293.jpg"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/98f25369e3c1a9b64419decd88229f64png.jpg" alt="http:&#x2F;&#x2F;img4.sycdn.imooc.com&#x2F;5f9420e300011afe09010293.jpg"></p>
 <h4 id="5、实体作为条件构造器构造方法的参数"><a href="#5、实体作为条件构造器构造方法的参数" class="headerlink" title="5、实体作为条件构造器构造方法的参数"></a>5、实体作为条件构造器构造方法的参数</h4><p>创建条件构造器时传入实体对象</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">private SharedString sqlSelect = new SharedString();</span><br><span class="line"></span><br><span class="line">public QueryWrapper() &#123;</span><br><span class="line">    this(null);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public QueryWrapper(T entity) &#123;</span><br><span class="line">    super.setEntity(entity);</span><br><span class="line">    super.initNeed();</span><br><span class="line">&#125;</span><br><span class="line">12345678910</span><br></pre></td></tr></table></figure>
 
 <p>QueryWrapper一个参数的构造方法，如果传入一个部不为null的对象，默认会进行进行等值比较，也就是where后拼接条件。</p>
 <p>注意：通过entity参数生成的等值和QueryWrapper的条件构造方法生成的没有任何关系。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/231a60401891e106607e9d06b5984b79png.jpg"></p>
-<p>举例验证：<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/40baea88f9416b9d95a192748c5d7d1epng.jpg" alt="http://img3.sycdn.imooc.com/5f94262a000121c409290352.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/9d121d14a2c353547eaa2123fb35848dpng.jpg" alt="http://img2.sycdn.imooc.com/5f94262100010ab111120201.jpg"><br>注意：使用时要慎重，因为他们都会在sql中进行拼接。</p>
+<p>举例验证：<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/40baea88f9416b9d95a192748c5d7d1epng.jpg" alt="http:&#x2F;&#x2F;img3.sycdn.imooc.com&#x2F;5f94262a000121c409290352.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/9d121d14a2c353547eaa2123fb35848dpng.jpg" alt="http:&#x2F;&#x2F;img2.sycdn.imooc.com&#x2F;5f94262100010ab111120201.jpg"><br>注意：使用时要慎重，因为他们都会在sql中进行拼接。</p>
 <p>使用场景：如果允许使用实体类去接受参数，那么就可以不用调用条件构造器，而是直接使用构造方法传入参数即可。</p>
 <p>特殊操作：可以通过在实体类上添加注解，指定该属性使用那种操作，默认使用等值。</p>
-<p>SqlCondition类：定义了一些常量，包括等值、不等于、like、左边like、右边like。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/3510fdcdfe99235784367f63b609d18cpng.jpg" alt="http://img4.sycdn.imooc.com/5f94279b00015dc407230558.jpg"><br>如果提供的常量无法满足需求，就可以自己在注解中编写常量表达式，例如小于。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d74c4d9bf424a44bd6ec99d2308f937epng.jpg" alt="http://img4.sycdn.imooc.com/5f942a420001d19007800551.jpg"></p>
+<p>SqlCondition类：定义了一些常量，包括等值、不等于、like、左边like、右边like。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/3510fdcdfe99235784367f63b609d18cpng.jpg" alt="http:&#x2F;&#x2F;img4.sycdn.imooc.com&#x2F;5f94279b00015dc407230558.jpg"><br>如果提供的常量无法满足需求，就可以自己在注解中编写常量表达式，例如小于。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d74c4d9bf424a44bd6ec99d2308f937epng.jpg" alt="http:&#x2F;&#x2F;img4.sycdn.imooc.com&#x2F;5f942a420001d19007800551.jpg"></p>
 <h4 id="6、AllEq用法"><a href="#6、AllEq用法" class="headerlink" title="6、AllEq用法"></a>6、AllEq用法</h4><p>Alleq（Map&lt;R,V&gt; params）</p>
-<p>使用方法：传入一个map集合对象，就会按照等值进行操作。key为字段名称，value为字段值。如果字段的值为null，那么sql就会拼接为is null这种形式。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/16799d5be916639d79942f8d81f3da03png.jpg" alt="http://img4.sycdn.imooc.com/5f942bb700016fac05630085.jpg"><br>如果传入的null，想要忽略掉，也就是不进行拼接，那么就传入第二个参数为false。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/aebdea327bbd4c4f06d7433f614e1beepng.jpg" alt="http://img2.sycdn.imooc.com/5f942ce30001b2e109700525.jpg"></p>
+<p>使用方法：传入一个map集合对象，就会按照等值进行操作。key为字段名称，value为字段值。如果字段的值为null，那么sql就会拼接为is null这种形式。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/16799d5be916639d79942f8d81f3da03png.jpg" alt="http:&#x2F;&#x2F;img4.sycdn.imooc.com&#x2F;5f942bb700016fac05630085.jpg"><br>如果传入的null，想要忽略掉，也就是不进行拼接，那么就传入第二个参数为false。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/aebdea327bbd4c4f06d7433f614e1beepng.jpg" alt="http:&#x2F;&#x2F;img2.sycdn.imooc.com&#x2F;5f942ce30001b2e109700525.jpg"></p>
 <p>allEq的第二种方法，参数1为过滤函数，它是一个函数式接口。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/9d2d0ce7850bd6d3061905b4f2e2093apng.jpg"></p>
 <p>上图就是判断name是不等于name，如果不等于就返回true，就会过滤掉，所以没有拼接name。也可以判断值。注意需要考虑类型的问题<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/b3bf3f8019dd91bdaa038a5cc101d705png.jpg"></p>
 <h4 id="7、其他使用条件构造器的方法"><a href="#7、其他使用条件构造器的方法" class="headerlink" title="7、其他使用条件构造器的方法"></a>7、其他使用条件构造器的方法</h4><p>其他以条件构造器的方法</p>
-<p>1、selectMap：List集合的泛型不再是实体，而是map集合。其中key表示字段名，value表示字段值。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2886752005733474dcdace0cb0ed70dcpng.jpg" alt="http://img1.sycdn.imooc.com/5f9572000001a16c10270198.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/4cd776582ab8aefe5ac9b4c17e29cefdpng.jpg" alt="http://img3.sycdn.imooc.com/5f9573d50001705711540205.jpg"></p>
-<p>使用场景1：当实体类属性非常多时，不易查看。如果返回的是一个实体类，那么即使我们设定了返回字段，那么它的值为null，但是属性仍然存在。如果返回的是Map类型，当指定了返回字段时，那么没返回的就不会存在。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/89e4480dae36429b6995a659af33296bpng.jpg" alt="http://img3.sycdn.imooc.com/5f9576290001d58e10510123.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/f008b6c63ffb170404e76bed9bd4bf90png.jpg" alt="http://img4.sycdn.imooc.com/5f9576c20001f8b314280045.jpg"></p>
-<p>使用场景2：当返回的不是一条一条记录时，也就是返回的字段不在实体类属性中，比如一些统计，像平均值，最大值，最小值这样的。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/a78ab583f23484e2edd7754b0572a943png.jpg" alt="http://img3.sycdn.imooc.com/5f957b8100017a1411010282.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/5fce760d163e8f744d82f0c14010d016png.jpg" alt="http://img2.sycdn.imooc.com/5f957b8d0001f6b406370069.jpg"></p>
-<p>2、selectObject：List集合的泛型不再是实体，而是Object，只返回第一个字段的值。其他的会被舍弃。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/e6e8307906f5d1043e4d2d1f72499801png.jpg" alt="http://img1.sycdn.imooc.com/5f957d31000199d208730228.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/34fcdd361ede198aabfa4d2831eae260png.jpg" alt="http://img3.sycdn.imooc.com/5f957e25000131e010490264.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/3b1e5453b6622fa2dbd734455f357b58png.jpg" alt="http://img4.sycdn.imooc.com/5f957e1b0001a2b413400360.jpg"><br>使用场景：只返回一列时可以使用它。</p>
+<p>1、selectMap：List集合的泛型不再是实体，而是map集合。其中key表示字段名，value表示字段值。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2886752005733474dcdace0cb0ed70dcpng.jpg" alt="http:&#x2F;&#x2F;img1.sycdn.imooc.com&#x2F;5f9572000001a16c10270198.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/4cd776582ab8aefe5ac9b4c17e29cefdpng.jpg" alt="http:&#x2F;&#x2F;img3.sycdn.imooc.com&#x2F;5f9573d50001705711540205.jpg"></p>
+<p>使用场景1：当实体类属性非常多时，不易查看。如果返回的是一个实体类，那么即使我们设定了返回字段，那么它的值为null，但是属性仍然存在。如果返回的是Map类型，当指定了返回字段时，那么没返回的就不会存在。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/89e4480dae36429b6995a659af33296bpng.jpg" alt="http:&#x2F;&#x2F;img3.sycdn.imooc.com&#x2F;5f9576290001d58e10510123.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/f008b6c63ffb170404e76bed9bd4bf90png.jpg" alt="http:&#x2F;&#x2F;img4.sycdn.imooc.com&#x2F;5f9576c20001f8b314280045.jpg"></p>
+<p>使用场景2：当返回的不是一条一条记录时，也就是返回的字段不在实体类属性中，比如一些统计，像平均值，最大值，最小值这样的。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/a78ab583f23484e2edd7754b0572a943png.jpg" alt="http:&#x2F;&#x2F;img3.sycdn.imooc.com&#x2F;5f957b8100017a1411010282.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/5fce760d163e8f744d82f0c14010d016png.jpg" alt="http:&#x2F;&#x2F;img2.sycdn.imooc.com&#x2F;5f957b8d0001f6b406370069.jpg"></p>
+<p>2、selectObject：List集合的泛型不再是实体，而是Object，只返回第一个字段的值。其他的会被舍弃。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/e6e8307906f5d1043e4d2d1f72499801png.jpg" alt="http:&#x2F;&#x2F;img1.sycdn.imooc.com&#x2F;5f957d31000199d208730228.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/34fcdd361ede198aabfa4d2831eae260png.jpg" alt="http:&#x2F;&#x2F;img3.sycdn.imooc.com&#x2F;5f957e25000131e010490264.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/3b1e5453b6622fa2dbd734455f357b58png.jpg" alt="http:&#x2F;&#x2F;img4.sycdn.imooc.com&#x2F;5f957e1b0001a2b413400360.jpg"><br>使用场景：只返回一列时可以使用它。</p>
 <p>3、selectCount：查询符合条件的总记录数的。</p>
-<p>注意：使用它时，就不能指定返回的列了，因为它会在后面拼接COUNT(1)。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/747069887d134cee2469f66e23b483d0png.jpg" alt="http://img3.sycdn.imooc.com/5f958c2100015fd108430254.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d55840a2c6393f0834384e01890bebb8png.jpg" alt="http://img2.sycdn.imooc.com/5f958da70001f85907960205.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/86d480673420848320faaf0c4ca346b4png.jpg" alt="http://img4.sycdn.imooc.com/5f958db30001b98607000185.jpg"></p>
+<p>注意：使用它时，就不能指定返回的列了，因为它会在后面拼接COUNT(1)。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/747069887d134cee2469f66e23b483d0png.jpg" alt="http:&#x2F;&#x2F;img3.sycdn.imooc.com&#x2F;5f958c2100015fd108430254.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d55840a2c6393f0834384e01890bebb8png.jpg" alt="http:&#x2F;&#x2F;img2.sycdn.imooc.com&#x2F;5f958da70001f85907960205.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/86d480673420848320faaf0c4ca346b4png.jpg" alt="http:&#x2F;&#x2F;img4.sycdn.imooc.com&#x2F;5f958db30001b98607000185.jpg"></p>
 <p>4、selectOne：查询符合条件的数据，只会返回一条数据。</p>
-<p>注意： 查询的结果必须是一条或者查不到（<strong>多于1条就会报错</strong>）。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/61a1143a85d2c1b64dbc4f9e83eddf3epng.jpg" alt="http://img1.sycdn.imooc.com/5f958eae0001b76709360214.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/12d6597c5f025675dfb38a3fa607f314png.jpg" alt="http://img4.sycdn.imooc.com/5f958fda0001a26708530321.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/8302792684a35c438f4a42206b5086depng.jpg" alt="http://img4.sycdn.imooc.com/5f958fe50001df8913700300.jpg"></p>
+<p>注意： 查询的结果必须是一条或者查不到（<strong>多于1条就会报错</strong>）。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/61a1143a85d2c1b64dbc4f9e83eddf3epng.jpg" alt="http:&#x2F;&#x2F;img1.sycdn.imooc.com&#x2F;5f958eae0001b76709360214.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/12d6597c5f025675dfb38a3fa607f314png.jpg" alt="http:&#x2F;&#x2F;img4.sycdn.imooc.com&#x2F;5f958fda0001a26708530321.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/8302792684a35c438f4a42206b5086depng.jpg" alt="http:&#x2F;&#x2F;img4.sycdn.imooc.com&#x2F;5f958fe50001df8913700300.jpg"></p>
 <h4 id="8、lambda条件构造器"><a href="#8、lambda条件构造器" class="headerlink" title="8、lambda条件构造器"></a>8、lambda条件构造器</h4><p>lambda条件构造器（类似mp条件构造器，防误写）</p>
 <p>lambda条件构造器使用场景：</p>
-<p>不需要我们手动在构造条件时去书写字段名称。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2777932e48a988f3d2ab09d42d07ebf9png.jpg" alt="http://img3.sycdn.imooc.com/5fc23604000191c909560053.jpg"><br>lambda条件构造器使用方法：<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/35599edccc92b183803abc6b7a4680ccpng.jpg" alt="http://img1.sycdn.imooc.com/5fc236e80001837013630842.jpg"><br>lambda条件构造器的创建有3种方式</p>
+<p>不需要我们手动在构造条件时去书写字段名称。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2777932e48a988f3d2ab09d42d07ebf9png.jpg" alt="http:&#x2F;&#x2F;img3.sycdn.imooc.com&#x2F;5fc23604000191c909560053.jpg"><br>lambda条件构造器使用方法：<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/35599edccc92b183803abc6b7a4680ccpng.jpg" alt="http:&#x2F;&#x2F;img1.sycdn.imooc.com&#x2F;5fc236e80001837013630842.jpg"><br>lambda条件构造器的创建有3种方式</p>
 <p>1、通过查询构造器QueryWrapper创建</p>
 <p>2、通过new直接创建lambda条件构造器</p>
-<p>3、通过构造器工具类Wrappers创建（此时需要泛型）<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/b75f8c309a4ed7a9e853c221d6411458png.jpg" alt="http://img4.sycdn.imooc.com/5fc2323e000189b110150217.jpg"><br>4、3.0.7新增的创建lambda条件构造器，通过LambdaQueryChainWrapper，并且需要一个Mapper接口作为参数（通过源码可以，它是对普通查询构造器的再次封装，源码中仍然是通过Mapper接口去调用）。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2de28077430d88a7bbf47d0a98344567png.jpg" alt="http://img1.sycdn.imooc.com/5fc23ace0001394f15670359.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/86eed52dd7d978d9bfff2cf4ace18b09png.jpg" alt="http://img4.sycdn.imooc.com/5fc23ae10001ed3614840336.jpg"></p>
+<p>3、通过构造器工具类Wrappers创建（此时需要泛型）<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/b75f8c309a4ed7a9e853c221d6411458png.jpg" alt="http:&#x2F;&#x2F;img4.sycdn.imooc.com&#x2F;5fc2323e000189b110150217.jpg"><br>4、3.0.7新增的创建lambda条件构造器，通过LambdaQueryChainWrapper，并且需要一个Mapper接口作为参数（通过源码可以，它是对普通查询构造器的再次封装，源码中仍然是通过Mapper接口去调用）。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2de28077430d88a7bbf47d0a98344567png.jpg" alt="http:&#x2F;&#x2F;img1.sycdn.imooc.com&#x2F;5fc23ace0001394f15670359.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/86eed52dd7d978d9bfff2cf4ace18b09png.jpg" alt="http:&#x2F;&#x2F;img4.sycdn.imooc.com&#x2F;5fc23ae10001ed3614840336.jpg"></p>
 <h3 id="六、自定义SQL及分页查询"><a href="#六、自定义SQL及分页查询" class="headerlink" title="六、自定义SQL及分页查询"></a>六、自定义SQL及分页查询</h3><h4 id="1、使用条件构造器的自定义sql"><a href="#1、使用条件构造器的自定义sql" class="headerlink" title="1、使用条件构造器的自定义sql"></a>1、使用条件构造器的自定义sql</h4><p>使用场景：当使用条件构造器去构造sql的方法不能满足需求时（前提：mybatisplus版本大于3.0.7）。</p>
 <p>使用方法：</p>
-<p>注意:${ew.customSqlsegment}可以使条件构造器构造的sql被执行。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/eb7704e9541cbde4aba679b82d2870cbpng.jpg" alt="http://img1.sycdn.imooc.com/5fc302cb00019d7a09610327.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d481c0e4a86806b0a2f16dc7010cc054png.jpg" alt="http://img1.sycdn.imooc.com/5fc303c3000141f112020398.jpg"><br>mybatis-plus配置xml文件路径（springboot项目）：<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/ade80e2ffa264e55c869c1a64edb756apng.jpg"></p>
+<p>注意:${ew.customSqlsegment}可以使条件构造器构造的sql被执行。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/eb7704e9541cbde4aba679b82d2870cbpng.jpg" alt="http:&#x2F;&#x2F;img1.sycdn.imooc.com&#x2F;5fc302cb00019d7a09610327.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d481c0e4a86806b0a2f16dc7010cc054png.jpg" alt="http:&#x2F;&#x2F;img1.sycdn.imooc.com&#x2F;5fc303c3000141f112020398.jpg"><br>mybatis-plus配置xml文件路径（springboot项目）：<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/ade80e2ffa264e55c869c1a64edb756apng.jpg"></p>
 <p>不过由于IDEA系列编辑器，XML文件是不能放在 java 文件夹中的，IDEA默认不会编译源码文件夹中的 XML文件，所以可以通过在pom.xml中加入：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;build&gt;</span><br><span class="line">	&lt;resources&gt;</span><br><span class="line">       &lt;resource&gt;</span><br><span class="line">       &lt;directory&gt;src/main/java&lt;/directory&gt;</span><br><span class="line">          &lt;includes&gt;</span><br><span class="line">              &lt;include&gt;**/*.xml&lt;/include&gt;</span><br><span class="line">          &lt;/includes&gt;</span><br><span class="line">       &lt;/resource&gt;</span><br><span class="line">    &lt;/resources&gt;</span><br><span class="line">&lt;/build&gt;</span><br><span class="line">12345678910</span><br></pre></td></tr></table></figure>
 
@@ -491,21 +492,21 @@ if (true) {
 <p>拓展：内存分页弊端，数据量大时占用过多内存，第一次查询速度慢。</p>
 <p>2、mybatis-plus插件实现物理分页</p>
 <p>a、配置mybatis-plus插件</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2429b494922c8ac2cdc8b2a69bce4ab9png.jpg" alt="http://img1.sycdn.imooc.com/5fc315ef00013b9807540354.jpg"><br>BaseMapper提供了两个分页方法：<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/dfa2b9b7fcea219ded416c25b844e015png.jpg" alt="http://img1.sycdn.imooc.com/5fc309db0001932011160457.jpg"><br>这两个方法主要区别如下图，返回的数据是实体类型，还是map类型。<br><strong>IPage.java:</strong><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/04c0a615e3544645c119a58392b9aa0bpng.jpg"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2429b494922c8ac2cdc8b2a69bce4ab9png.jpg" alt="http:&#x2F;&#x2F;img1.sycdn.imooc.com&#x2F;5fc315ef00013b9807540354.jpg"><br>BaseMapper提供了两个分页方法：<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/dfa2b9b7fcea219ded416c25b844e015png.jpg" alt="http:&#x2F;&#x2F;img1.sycdn.imooc.com&#x2F;5fc309db0001932011160457.jpg"><br>这两个方法主要区别如下图，返回的数据是实体类型，还是map类型。<br><strong>IPage.java:</strong><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/04c0a615e3544645c119a58392b9aa0bpng.jpg"></p>
 <p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/8152ec4a31cc3552561d85aae8a31c54png.jpg"></p>
 <p>b、分页使用<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/55a1f6e245be5d58c84e812d1bb3c001png.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/0736222815b2dcb39cc92039d0592fc4png.jpg"><br>分页map形式</p>
-<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/f0a0d353734fa8f417f88215821a69eepng.jpg" alt="http://img4.sycdn.imooc.com/5fc312200001f80c13310319.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/968caf4627085c7cecec29e620e5913apng.jpg" alt="http://img2.sycdn.imooc.com/5fc312300001da3c14050474.jpg"></p>
-<p>使用分页时，不查询总记录数：第三个参数为true表示查询总记录数，否则就不查询。<br><strong>Page.class:</strong><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/b8c1326d3e2ae831e024b2a367365a25png.jpg" alt="http://img4.sycdn.imooc.com/5fc312990001183507360114.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/ffd887c7f81a57b0734c2cce4478f18dpng.jpg" alt="http://img4.sycdn.imooc.com/5fc312e2000187b513530335.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/5d6d9ee412ec863cca01631bb5f60db4png.jpg" alt="http://img1.sycdn.imooc.com/5fc312ff0001e0d413860403.jpg"></p>
-<p>当分页查询查询的是多表时使用分页：<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/0537658ce41823abd81e42c8980e7978png.jpg" alt="http://img1.sycdn.imooc.com/5fc31572000183c912680363.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/a966f23660293d1009a0e80c332fb912png.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/fb482805d1b128634b8e5511a89cd489png.jpg"><br>倘若需要多表联查，可以在xml文件里编写多表联查的SQL，一样可以实现其功能ヾ(◍°∇°◍)ﾉﾞ<br>如：<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/e8415938596af8f4bea345c71f3e3e64png.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/821922c3b0988d5763040682565b4d04png.jpg"><br>在xml里编写需要的多表查询语句即可。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/f0a0d353734fa8f417f88215821a69eepng.jpg" alt="http:&#x2F;&#x2F;img4.sycdn.imooc.com&#x2F;5fc312200001f80c13310319.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/968caf4627085c7cecec29e620e5913apng.jpg" alt="http:&#x2F;&#x2F;img2.sycdn.imooc.com&#x2F;5fc312300001da3c14050474.jpg"></p>
+<p>使用分页时，不查询总记录数：第三个参数为true表示查询总记录数，否则就不查询。<br><strong>Page.class:</strong><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/b8c1326d3e2ae831e024b2a367365a25png.jpg" alt="http:&#x2F;&#x2F;img4.sycdn.imooc.com&#x2F;5fc312990001183507360114.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/ffd887c7f81a57b0734c2cce4478f18dpng.jpg" alt="http:&#x2F;&#x2F;img4.sycdn.imooc.com&#x2F;5fc312e2000187b513530335.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/5d6d9ee412ec863cca01631bb5f60db4png.jpg" alt="http:&#x2F;&#x2F;img1.sycdn.imooc.com&#x2F;5fc312ff0001e0d413860403.jpg"></p>
+<p>当分页查询查询的是多表时使用分页：<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/0537658ce41823abd81e42c8980e7978png.jpg" alt="http:&#x2F;&#x2F;img1.sycdn.imooc.com&#x2F;5fc31572000183c912680363.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/a966f23660293d1009a0e80c332fb912png.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/fb482805d1b128634b8e5511a89cd489png.jpg"><br>倘若需要多表联查，可以在xml文件里编写多表联查的SQL，一样可以实现其功能ヾ(◍°∇°◍)ﾉﾞ<br>如：<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/e8415938596af8f4bea345c71f3e3e64png.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/821922c3b0988d5763040682565b4d04png.jpg"><br>在xml里编写需要的多表查询语句即可。</p>
 <h3 id="七、更新与删除"><a href="#七、更新与删除" class="headerlink" title="七、更新与删除"></a>七、更新与删除</h3><h4 id="1、mybatis-plus更新"><a href="#1、mybatis-plus更新" class="headerlink" title="1、mybatis-plus更新"></a>1、mybatis-plus更新</h4><p>1、根据id更新</p>
 <p>使用场景：根据实体类主键属性进行更新，其他属性有值就更新。</p>
-<p>使用方法：如下<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/861295362194151019a455e0bcc945e0png.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/96e8133ed5599665e5db8a737fd05f58png.jpg" alt="http://img1.sycdn.imooc.com/5fc3825e0001e99a06450311.jpg"><br>2、以条件构造器作为参数进行更新</p>
+<p>使用方法：如下<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/861295362194151019a455e0bcc945e0png.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/96e8133ed5599665e5db8a737fd05f58png.jpg" alt="http:&#x2F;&#x2F;img1.sycdn.imooc.com&#x2F;5fc3825e0001e99a06450311.jpg"><br>2、以条件构造器作为参数进行更新</p>
 <p>使用场景：更新条件为其他时。</p>
-<p>使用方法：如下<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/0479daecef4a8040308bd331d0acb7bdpng.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/23df49526e9c1ea1a9731c734aa71798png.jpg" alt="http://img2.sycdn.imooc.com/5fc3827e00015b2c09570334.jpg"><br>条件构造器传入实体时的使用（和QueryWrapper类似），它会将实体属性作为更新的条件。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/270321bcb43936a4da4b57b7fba07ebdpng.jpg" alt="http://img3.sycdn.imooc.com/5fc3829f0001b3e609050392.jpg"><br>3、条件构造器中set方法使用</p>
-<p>如果更新少量字段可使用如下方式：<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/38040b09375cb704c003371010013a8epng.jpg" alt="http://img1.sycdn.imooc.com/5fc382e80001310913940247.jpg"></p>
-<p>lambda方式更新：<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/e4d8b4a92dca23a7054e3ef21dbf46bepng.jpg" alt="http://img1.sycdn.imooc.com/5fc383140001864612030260.jpg"><br>通过构造器链进行直接更新：<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/551eb1ce94adcb640f82bbfdb378ac6apng.jpg" alt="http://img1.sycdn.imooc.com/5fc3833500017b1716720290.jpg"></p>
-<h4 id="2、mybatis-plus删除方法"><a href="#2、mybatis-plus删除方法" class="headerlink" title="2、mybatis-plus删除方法"></a>2、mybatis-plus删除方法</h4><p>1、根据id删除方法——deleteById(前提：实体类主键属性上有@TableId注解)<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/60465d1bcd01add33cd22c355707107bpng.jpg" alt="http://img4.sycdn.imooc.com/5fc64ceb0001da1c05620157.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/6e2ab9d18e79b771da68fdf0d5661784png.jpg"></p>
-<p>2、普通删除方法<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/024b9c662c75bd395a392cb441b0e03bpng.jpg" alt="http://img1.sycdn.imooc.com/5fc64d920001ac6d05760260.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d7519310cff6a99b9e604f35c4d62ad7png.jpg" alt="http://img2.sycdn.imooc.com/5fc64d9a00013db708460172.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/ba701afc0d5932c3ebb4b679d33d5011png.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/4a80144d68ce2fd93922d414c27e485cpng.jpg"></p>
+<p>使用方法：如下<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/0479daecef4a8040308bd331d0acb7bdpng.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/23df49526e9c1ea1a9731c734aa71798png.jpg" alt="http:&#x2F;&#x2F;img2.sycdn.imooc.com&#x2F;5fc3827e00015b2c09570334.jpg"><br>条件构造器传入实体时的使用（和QueryWrapper类似），它会将实体属性作为更新的条件。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/270321bcb43936a4da4b57b7fba07ebdpng.jpg" alt="http:&#x2F;&#x2F;img3.sycdn.imooc.com&#x2F;5fc3829f0001b3e609050392.jpg"><br>3、条件构造器中set方法使用</p>
+<p>如果更新少量字段可使用如下方式：<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/38040b09375cb704c003371010013a8epng.jpg" alt="http:&#x2F;&#x2F;img1.sycdn.imooc.com&#x2F;5fc382e80001310913940247.jpg"></p>
+<p>lambda方式更新：<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/e4d8b4a92dca23a7054e3ef21dbf46bepng.jpg" alt="http:&#x2F;&#x2F;img1.sycdn.imooc.com&#x2F;5fc383140001864612030260.jpg"><br>通过构造器链进行直接更新：<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/551eb1ce94adcb640f82bbfdb378ac6apng.jpg" alt="http:&#x2F;&#x2F;img1.sycdn.imooc.com&#x2F;5fc3833500017b1716720290.jpg"></p>
+<h4 id="2、mybatis-plus删除方法"><a href="#2、mybatis-plus删除方法" class="headerlink" title="2、mybatis-plus删除方法"></a>2、mybatis-plus删除方法</h4><p>1、根据id删除方法——deleteById(前提：实体类主键属性上有@TableId注解)<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/60465d1bcd01add33cd22c355707107bpng.jpg" alt="http:&#x2F;&#x2F;img4.sycdn.imooc.com&#x2F;5fc64ceb0001da1c05620157.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/6e2ab9d18e79b771da68fdf0d5661784png.jpg"></p>
+<p>2、普通删除方法<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/024b9c662c75bd395a392cb441b0e03bpng.jpg" alt="http:&#x2F;&#x2F;img1.sycdn.imooc.com&#x2F;5fc64d920001ac6d05760260.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d7519310cff6a99b9e604f35c4d62ad7png.jpg" alt="http:&#x2F;&#x2F;img2.sycdn.imooc.com&#x2F;5fc64d9a00013db708460172.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/ba701afc0d5932c3ebb4b679d33d5011png.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/4a80144d68ce2fd93922d414c27e485cpng.jpg"></p>
 <p>3、以条件构造器为参数删除方法<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/c610737e34ab082a8645d75d8808fc0epng.jpg"></p>
 <h3 id="八、AR模式、主键策略和基本配置"><a href="#八、AR模式、主键策略和基本配置" class="headerlink" title="八、AR模式、主键策略和基本配置"></a>八、AR模式、主键策略和基本配置</h3><h4 id="1、ActiveRecord模式"><a href="#1、ActiveRecord模式" class="headerlink" title="1、ActiveRecord模式"></a>1、ActiveRecord模式</h4><p><strong>简介：活动记录，领域模型模式，直接通过实体操作数据库（java的一个实体类对应数据库的一张表，而一个实例对应表中一行记录）</strong></p>
 <p>MP中AR模式的实现（两个前提：实体类需要继承Model；mapper接口实现BaseMapper）<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/42792accb03ed81f466ddcd3edb8b2ecpng.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/08447eae25c23cac5ae7e10cd638b4f4png.jpg"><br>直接用实体即可操作数据库：<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/e2c1fa2c99d8677871462f9c794f87e9png.jpg"><br>insertOrUpdate():<br><strong>如果实体的主键不是null，那么就会先查询，如果有记录就更新，没有就插入。是null直接进行插入。</strong><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/aa456643279066a79e67d4a5151e3b25png.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1df47da089ff8b3e5863458921c86ca8png.jpg"></p>
@@ -516,7 +517,16 @@ if (true) {
 <h4 id="1、基本方法"><a href="#1、基本方法" class="headerlink" title="1、基本方法"></a>1、基本方法</h4><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/69e7317c2cbb96d1525699ce3a3afe4cpng.jpg"><br>因为数据数大于1，所以默认返回第一条<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/227e41023a4750d709f8bd8db10db316png.jpg"></p>
 <h4 id="2、批量操作操作"><a href="#2、批量操作操作" class="headerlink" title="2、批量操作操作"></a>2、批量操作操作</h4><p><strong>不指定</strong><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/72f77508071ad33e547ead467165ecb3png.jpg"><br><strong>指定</strong><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/0c062934dd0afc83780554ee0d6b61acpng.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d3b36679636bdfef666919de76607d44png.jpg"></p>
 <h4 id="3、链式调用方法"><a href="#3、链式调用方法" class="headerlink" title="3、链式调用方法"></a>3、链式调用方法</h4><p><strong>查询：</strong><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/167dfafec5fe8d4a4d1e7ab6a60c9b52png.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/bafaceb7488d0bc0021f4de17af3870fpng.jpg"><br><strong>更新：</strong><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/db2f1a9fc5db736e357ea39bb2babb5cpng.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/0e4461e41c35b5462a6513b901b61416png.jpg"><br><strong>删除：</strong><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/819f96e1dafe90f6445b94a3279af654png.jpg"><br><strong>关于MyBatis-Plus的详细快速入门的学习就到这里，Thanks♪(･ω･)ﾉ</strong></p>
-</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d20f536c64d06e5fcf4bfe2ec5dc25d.jpg" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d20f536c64d06e5fcf4bfe2ec5dc25d.jpg" title="头像" alt="头像"></a><div class="post-copyright__author_name">Smith</div><div class="post-copyright__author_desc">人生太短，要干的事太多，我要争分夺秒</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://smithhs.cn/2024/06/19/2024-06-19-MyBatis-Plus%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://smithhs.cn/2024/06/19/2024-06-19-MyBatis-Plus%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/')">MyBatis-Plus快速入门</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="anzhiyu.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="anzhiyufont anzhiyu-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="anzhiyu.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://smithhs.cn/2024/06/19/2024-06-19-MyBatis-Plus%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=MyBatis-Plus快速入门&amp;url=https://smithhs.cn/2024/06/19/2024-06-19-MyBatis-Plus%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/&amp;pic=https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/cover-mybatis-plus.png" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="rm.copyPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://smithhs.cn" target="_blank">Smith</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/MyBatis-Plus/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>MyBatis-Plus<span class="tagsPageCount">1</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/dataanalysis.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/06/19/2024-06-19-SSM/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/ssm.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">SSM</div></div></a></div><div class="next-post pull-right"><a href="/2024/06/20/2024-06-20-Maven/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/Maven.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Maven</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95"><span class="toc-number">1.</span> <span class="toc-text">文章目录</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81MyBatis-VS-JPA"><span class="toc-number"></span> <span class="toc-text">一、MyBatis VS JPA</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81MyBatis-Plus%E7%AE%80%E4%BB%8B"><span class="toc-number"></span> <span class="toc-text">二、MyBatis-Plus简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81MyBatis-Plus%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8"><span class="toc-number"></span> <span class="toc-text">三、MyBatis-Plus快速入门</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81lombok%E7%AE%80%E4%BB%8B%E5%8F%8A%E5%AE%89%E8%A3%85"><span class="toc-number">1.</span> <span class="toc-text">1、lombok简介及安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E5%85%A5%E9%97%A8%E5%B0%8F%E6%A1%88%E4%BE%8B"><span class="toc-number">2.</span> <span class="toc-text">2、入门小案例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-number"></span> <span class="toc-text">四、基本使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E9%80%9A%E7%94%A8%E4%BC%A0%E7%BB%9F%E6%A8%A1%E5%BC%8F%E7%AE%80%E4%BB%8B%E5%8F%8A%E9%80%9A%E7%94%A8mapper%E6%96%B0%E5%A2%9E%E6%96%B9%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text">1、通用传统模式简介及通用mapper新增方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3"><span class="toc-number">2.</span> <span class="toc-text">2、常用注解</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81%E6%8E%92%E9%99%A4%E9%9D%9E%E8%A1%A8%E5%AD%97%E6%AE%B5%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F"><span class="toc-number">3.</span> <span class="toc-text">3、排除非表字段的三种方式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%94%E3%80%81MyBatis-Plus%E6%9F%A5%E8%AF%A2%E6%96%B9%E6%B3%95"><span class="toc-number"></span> <span class="toc-text">五、MyBatis-Plus查询方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E6%99%AE%E9%80%9A%E6%9F%A5%E8%AF%A2"><span class="toc-number">1.</span> <span class="toc-text">1、普通查询</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E6%9D%A1%E4%BB%B6%E6%9E%84%E9%80%A0%E5%99%A8%E6%9F%A5%E8%AF%A2"><span class="toc-number">2.</span> <span class="toc-text">2、条件构造器查询</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81select%E4%B8%8D%E5%88%97%E5%87%BA%E5%85%A8%E9%83%A8%E5%AD%97%E6%AE%B5"><span class="toc-number">3.</span> <span class="toc-text">3、select不列出全部字段</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81condition%E4%BD%9C%E7%94%A8"><span class="toc-number">4.</span> <span class="toc-text">4、condition作用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5%E3%80%81%E5%AE%9E%E4%BD%93%E4%BD%9C%E4%B8%BA%E6%9D%A1%E4%BB%B6%E6%9E%84%E9%80%A0%E5%99%A8%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95%E7%9A%84%E5%8F%82%E6%95%B0"><span class="toc-number">5.</span> <span class="toc-text">5、实体作为条件构造器构造方法的参数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6%E3%80%81AllEq%E7%94%A8%E6%B3%95"><span class="toc-number">6.</span> <span class="toc-text">6、AllEq用法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7%E3%80%81%E5%85%B6%E4%BB%96%E4%BD%BF%E7%94%A8%E6%9D%A1%E4%BB%B6%E6%9E%84%E9%80%A0%E5%99%A8%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-number">7.</span> <span class="toc-text">7、其他使用条件构造器的方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8%E3%80%81lambda%E6%9D%A1%E4%BB%B6%E6%9E%84%E9%80%A0%E5%99%A8"><span class="toc-number">8.</span> <span class="toc-text">8、lambda条件构造器</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E8%87%AA%E5%AE%9A%E4%B9%89SQL%E5%8F%8A%E5%88%86%E9%A1%B5%E6%9F%A5%E8%AF%A2"><span class="toc-number"></span> <span class="toc-text">六、自定义SQL及分页查询</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E4%BD%BF%E7%94%A8%E6%9D%A1%E4%BB%B6%E6%9E%84%E9%80%A0%E5%99%A8%E7%9A%84%E8%87%AA%E5%AE%9A%E4%B9%89sql"><span class="toc-number">1.</span> <span class="toc-text">1、使用条件构造器的自定义sql</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E5%88%86%E9%A1%B5%E6%9F%A5%E8%AF%A2"><span class="toc-number">2.</span> <span class="toc-text">2、分页查询</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E6%9B%B4%E6%96%B0%E4%B8%8E%E5%88%A0%E9%99%A4"><span class="toc-number"></span> <span class="toc-text">七、更新与删除</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81mybatis-plus%E6%9B%B4%E6%96%B0"><span class="toc-number">1.</span> <span class="toc-text">1、mybatis-plus更新</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81mybatis-plus%E5%88%A0%E9%99%A4%E6%96%B9%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">2、mybatis-plus删除方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AB%E3%80%81AR%E6%A8%A1%E5%BC%8F%E3%80%81%E4%B8%BB%E9%94%AE%E7%AD%96%E7%95%A5%E5%92%8C%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE"><span class="toc-number"></span> <span class="toc-text">八、AR模式、主键策略和基本配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81ActiveRecord%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.</span> <span class="toc-text">1、ActiveRecord模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E4%B8%BB%E9%94%AE%E7%AD%96%E7%95%A5"><span class="toc-number">2.</span> <span class="toc-text">2、主键策略</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE"><span class="toc-number">3.</span> <span class="toc-text">3、基本配置</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B9%9D%E3%80%81%E9%80%9A%E7%94%A8%E7%9A%84Service"><span class="toc-number"></span> <span class="toc-text">九、通用的Service</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E5%9F%BA%E6%9C%AC%E6%96%B9%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text">1、基本方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E6%89%B9%E9%87%8F%E6%93%8D%E4%BD%9C%E6%93%8D%E4%BD%9C"><span class="toc-number">2.</span> <span class="toc-text">2、批量操作操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81%E9%93%BE%E5%BC%8F%E8%B0%83%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text">3、链式调用方法</span></a></li></ol></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2022 - 2025 By <a class="footer-bar-link" href="/" title="Smith" target="_blank">Smith</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/Smithhss/smithhs.github.io.git" title="Hexo">Hexo</a></div></div></div></footer></div></div></div><div id="sidebar"><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d20f536c64d06e5fcf4bfe2ec5dc25d.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">79</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">55</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">6</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page faa-parent animated-hover" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child" style="left:-79px;"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child" style="left:-31px;"><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li></ul></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child" style="left:-79px;"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于我</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="nav-music"><a id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()" accesskey="m">播放音乐</a><div id="console-music-bg"></div><meting-js id="8805965276" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random"></meting-js></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://music.163.com/#/my/m/music/playlist?id=464586318&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn1.tianli0.top/npm/js-heo@1.0.6/translate/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.14/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/node-snackbar/0.1.16/snackbar.min.js"></script><script>var meting_api = "https://meting.qjqq.cn/?server=:server&type=:type&id=:id&auth=:auth&r=:r";
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d20f536c64d06e5fcf4bfe2ec5dc25d.jpg" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d20f536c64d06e5fcf4bfe2ec5dc25d.jpg" title="头像" alt="头像"></a><div class="post-copyright__author_name">Smith</div><div class="post-copyright__author_desc">人生太短，要干的事太多，我要争分夺秒</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://smithhs.cn/2024/06/19/2024-06-19-MyBatis-Plus%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://smithhs.cn/2024/06/19/2024-06-19-MyBatis-Plus%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/')">MyBatis-Plus快速入门</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="anzhiyu.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="anzhiyufont anzhiyu-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="anzhiyu.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://smithhs.cn/2024/06/19/2024-06-19-MyBatis-Plus%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=MyBatis-Plus快速入门&amp;url=https://smithhs.cn/2024/06/19/2024-06-19-MyBatis-Plus%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8/&amp;pic=https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/cover-mybatis-plus.png" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://smithhs.cn" target="_blank">Smith</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/MyBatis-Plus/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>MyBatis-Plus<span class="tagsPageCount">1</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d20f536c64d06e5fcf4bfe2ec5dc25d.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/06/19/2024-06-19-SSM/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/ssm.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">SSM</div></div></a></div><div class="next-post pull-right"><a href="/2024/06/20/2024-06-20-Maven/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/Maven.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Maven</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95"><span class="toc-number">1.</span> <span class="toc-text">文章目录</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81MyBatis-VS-JPA"><span class="toc-number"></span> <span class="toc-text">一、MyBatis VS JPA</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81MyBatis-Plus%E7%AE%80%E4%BB%8B"><span class="toc-number"></span> <span class="toc-text">二、MyBatis-Plus简介</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81MyBatis-Plus%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8"><span class="toc-number"></span> <span class="toc-text">三、MyBatis-Plus快速入门</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81lombok%E7%AE%80%E4%BB%8B%E5%8F%8A%E5%AE%89%E8%A3%85"><span class="toc-number">1.</span> <span class="toc-text">1、lombok简介及安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E5%85%A5%E9%97%A8%E5%B0%8F%E6%A1%88%E4%BE%8B"><span class="toc-number">2.</span> <span class="toc-text">2、入门小案例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="toc-number"></span> <span class="toc-text">四、基本使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E9%80%9A%E7%94%A8%E4%BC%A0%E7%BB%9F%E6%A8%A1%E5%BC%8F%E7%AE%80%E4%BB%8B%E5%8F%8A%E9%80%9A%E7%94%A8mapper%E6%96%B0%E5%A2%9E%E6%96%B9%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text">1、通用传统模式简介及通用mapper新增方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3"><span class="toc-number">2.</span> <span class="toc-text">2、常用注解</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81%E6%8E%92%E9%99%A4%E9%9D%9E%E8%A1%A8%E5%AD%97%E6%AE%B5%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F"><span class="toc-number">3.</span> <span class="toc-text">3、排除非表字段的三种方式</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%94%E3%80%81MyBatis-Plus%E6%9F%A5%E8%AF%A2%E6%96%B9%E6%B3%95"><span class="toc-number"></span> <span class="toc-text">五、MyBatis-Plus查询方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E6%99%AE%E9%80%9A%E6%9F%A5%E8%AF%A2"><span class="toc-number">1.</span> <span class="toc-text">1、普通查询</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E6%9D%A1%E4%BB%B6%E6%9E%84%E9%80%A0%E5%99%A8%E6%9F%A5%E8%AF%A2"><span class="toc-number">2.</span> <span class="toc-text">2、条件构造器查询</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81select%E4%B8%8D%E5%88%97%E5%87%BA%E5%85%A8%E9%83%A8%E5%AD%97%E6%AE%B5"><span class="toc-number">3.</span> <span class="toc-text">3、select不列出全部字段</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81condition%E4%BD%9C%E7%94%A8"><span class="toc-number">4.</span> <span class="toc-text">4、condition作用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5%E3%80%81%E5%AE%9E%E4%BD%93%E4%BD%9C%E4%B8%BA%E6%9D%A1%E4%BB%B6%E6%9E%84%E9%80%A0%E5%99%A8%E6%9E%84%E9%80%A0%E6%96%B9%E6%B3%95%E7%9A%84%E5%8F%82%E6%95%B0"><span class="toc-number">5.</span> <span class="toc-text">5、实体作为条件构造器构造方法的参数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6%E3%80%81AllEq%E7%94%A8%E6%B3%95"><span class="toc-number">6.</span> <span class="toc-text">6、AllEq用法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7%E3%80%81%E5%85%B6%E4%BB%96%E4%BD%BF%E7%94%A8%E6%9D%A1%E4%BB%B6%E6%9E%84%E9%80%A0%E5%99%A8%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-number">7.</span> <span class="toc-text">7、其他使用条件构造器的方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8%E3%80%81lambda%E6%9D%A1%E4%BB%B6%E6%9E%84%E9%80%A0%E5%99%A8"><span class="toc-number">8.</span> <span class="toc-text">8、lambda条件构造器</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E8%87%AA%E5%AE%9A%E4%B9%89SQL%E5%8F%8A%E5%88%86%E9%A1%B5%E6%9F%A5%E8%AF%A2"><span class="toc-number"></span> <span class="toc-text">六、自定义SQL及分页查询</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E4%BD%BF%E7%94%A8%E6%9D%A1%E4%BB%B6%E6%9E%84%E9%80%A0%E5%99%A8%E7%9A%84%E8%87%AA%E5%AE%9A%E4%B9%89sql"><span class="toc-number">1.</span> <span class="toc-text">1、使用条件构造器的自定义sql</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E5%88%86%E9%A1%B5%E6%9F%A5%E8%AF%A2"><span class="toc-number">2.</span> <span class="toc-text">2、分页查询</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E6%9B%B4%E6%96%B0%E4%B8%8E%E5%88%A0%E9%99%A4"><span class="toc-number"></span> <span class="toc-text">七、更新与删除</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81mybatis-plus%E6%9B%B4%E6%96%B0"><span class="toc-number">1.</span> <span class="toc-text">1、mybatis-plus更新</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81mybatis-plus%E5%88%A0%E9%99%A4%E6%96%B9%E6%B3%95"><span class="toc-number">2.</span> <span class="toc-text">2、mybatis-plus删除方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AB%E3%80%81AR%E6%A8%A1%E5%BC%8F%E3%80%81%E4%B8%BB%E9%94%AE%E7%AD%96%E7%95%A5%E5%92%8C%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE"><span class="toc-number"></span> <span class="toc-text">八、AR模式、主键策略和基本配置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81ActiveRecord%E6%A8%A1%E5%BC%8F"><span class="toc-number">1.</span> <span class="toc-text">1、ActiveRecord模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E4%B8%BB%E9%94%AE%E7%AD%96%E7%95%A5"><span class="toc-number">2.</span> <span class="toc-text">2、主键策略</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81%E5%9F%BA%E6%9C%AC%E9%85%8D%E7%BD%AE"><span class="toc-number">3.</span> <span class="toc-text">3、基本配置</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B9%9D%E3%80%81%E9%80%9A%E7%94%A8%E7%9A%84Service"><span class="toc-number"></span> <span class="toc-text">九、通用的Service</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E5%9F%BA%E6%9C%AC%E6%96%B9%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text">1、基本方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81%E6%89%B9%E9%87%8F%E6%93%8D%E4%BD%9C%E6%93%8D%E4%BD%9C"><span class="toc-number">2.</span> <span class="toc-text">2、批量操作操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81%E9%93%BE%E5%BC%8F%E8%B0%83%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-number">3.</span> <span class="toc-text">3、链式调用方法</span></a></li></ol></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2022 - 2026 By <a class="footer-bar-link" href="/" title="Smith" target="_blank">Smith</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/Smithhss/smithhs.github.io.git" title="Hexo">Hexo</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">80</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">55</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">6</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://smithhs.cn/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.png" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="http://robot.onliu.cn/" title="Robot"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/cupfox.png" alt="Robot"/><span class="back-menu-item-text">Robot</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="http://res.onliu.cn" title="Sale"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/tubiao.jpg" alt="Sale"/><span class="back-menu-item-text">Sale</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="http://se.onliu.cn/" title="资源共享"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog/x126.png" alt="资源共享"/><span class="back-menu-item-text">资源共享</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://github.com/Smithhss" title="Github"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/GitHub.png" alt="Github"/><span class="back-menu-item-text">Github</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/dailyPhoto/"><i class="anzhiyufont anzhiyu-icon-camera faa-tada" style="font-size: 0.9em;"></i><span> 每日照片</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wallpaper/"><i class="anzhiyufont anzhiyu-icon-image faa-tada" style="font-size: 0.9em;"></i><span> 壁纸</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wordScenery/"><i class="anzhiyufont anzhiyu-icon-font faa-tada" style="font-size: 0.9em;"></i><span> 文字风景</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于我</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/love/"><i class="anzhiyufont anzhiyu-icon-heart faa-tada" style="font-size: 0.9em;"></i><span> 爱情</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Android-Studio/" style="font-size: 0.88rem;">Android Studio<sup>1</sup></a><a href="/tags/App/" style="font-size: 0.88rem;">App<sup>2</sup></a><a href="/tags/Butterfly/" style="font-size: 0.88rem;">Butterfly<sup>1</sup></a><a href="/tags/C/" style="font-size: 0.88rem;">C++<sup>1</sup></a><a href="/tags/CSS/" style="font-size: 0.88rem;">CSS<sup>1</sup></a><a href="/tags/Cisco-Packet-Tracer/" style="font-size: 0.88rem;">Cisco Packet Tracer<sup>1</sup></a><a href="/tags/Easypan/" style="font-size: 0.88rem;">Easypan<sup>2</sup></a><a href="/tags/FurtherMathematics/" style="font-size: 0.88rem;">FurtherMathematics<sup>1</sup></a><a href="/tags/GPT/" style="font-size: 0.88rem;">GPT<sup>1</sup></a><a href="/tags/Git2/" style="font-size: 0.88rem;">Git2<sup>1</sup></a><a href="/tags/HTML/" style="font-size: 0.88rem;">HTML<sup>1</sup></a><a href="/tags/Hexo/" style="font-size: 0.88rem;">Hexo<sup>1</sup></a><a href="/tags/Java/" style="font-size: 0.88rem;">Java<sup>6</sup></a><a href="/tags/JavaScript/" style="font-size: 0.88rem;">JavaScript<sup>1</sup></a><a href="/tags/JavaWeb/" style="font-size: 0.88rem;">JavaWeb<sup>2</sup></a><a href="/tags/Jrebel/" style="font-size: 0.88rem;">Jrebel<sup>1</sup></a><a href="/tags/LeetCode/" style="font-size: 0.88rem;">LeetCode<sup>1</sup></a><a href="/tags/Linux/" style="font-size: 0.88rem;">Linux<sup>3</sup></a><a href="/tags/Markdown/" style="font-size: 0.88rem;">Markdown<sup>2</sup></a><a href="/tags/Maven/" style="font-size: 0.88rem;">Maven<sup>2</sup></a><a href="/tags/Mysql/" style="font-size: 0.88rem;">Mysql<sup>1</sup></a><a href="/tags/NoSql/" style="font-size: 0.88rem;">NoSql<sup>1</sup></a><a href="/tags/Nodejs/" style="font-size: 0.88rem;">Nodejs<sup>2</sup></a><a href="/tags/Python/" style="font-size: 0.88rem;">Python<sup>4</sup></a><a href="/tags/Spring/" style="font-size: 0.88rem;">Spring<sup>2</sup></a><a href="/tags/VMware/" style="font-size: 0.88rem;">VMware<sup>2</sup></a><a href="/tags/Vue/" style="font-size: 0.88rem;">Vue<sup>1</sup></a><a href="/tags/YouHou/" style="font-size: 0.88rem;">YouHou<sup>1</sup></a><a href="/tags/books/" style="font-size: 0.88rem;">books<sup>1</sup></a><a href="/tags/butterfly/" style="font-size: 0.88rem;">butterfly<sup>1</sup></a><a href="/tags/clash/" style="font-size: 0.88rem;">clash<sup>1</sup></a><a href="/tags/project/" style="font-size: 0.88rem;">project<sup>4</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 0.88rem;">前端<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6/" style="font-size: 0.88rem;">开发框架<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" style="font-size: 0.88rem;">开发环境<sup>1</sup></a><a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 0.88rem;">操作系统<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" style="font-size: 0.88rem;">数据结构与算法<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" style="font-size: 0.88rem;">计算机组成原理<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 0.88rem;">计算机网络<sup>1</sup></a><a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="font-size: 0.88rem;">软件工程<sup>1</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="nav-music"><a id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()" accesskey="m">播放音乐</a><div id="console-music-bg"></div><meting-js id="8805965276" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random" volume="0.7"></meting-js></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://music.163.com/#/my/m/music/playlist?id=464586318&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn1.tianli0.top/npm/js-heo@1.0.6/translate/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@6.1.6/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/node-snackbar/0.1.16/snackbar.min.js"></script><script>var meting_api = "https://meting.qjqq.cn/?server=:server&type=:type&id=:id&auth=:auth&r=:r";
 </script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
 var HoldLog = console.log;
 console.log = function () {};
@@ -545,7 +555,7 @@ queueMicrotask(() => {
     "已上线",
     dnum,
     "天",
-    "©2022 By 安知鱼 V1.5.3",
+    "©2022 By 安知鱼 V1.7.1",
   ];
   const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
 
@@ -553,12 +563,12 @@ queueMicrotask(() => {
     Log.bind(
       console,
       `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
-      "color:#3b70fc",
+      "color:#425AEF",
       "",
-      "color:#3b70fc",
-      "color:#3b70fc",
+      "color:#425AEF",
+      "color:#425AEF",
       "",
-      "color:#3b70fc",
+      "color:#425AEF",
       ""
     )
   );
@@ -589,534 +599,8 @@ queueMicrotask(() => {
   setTimeout(
     console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
   );
-});</script><script async src="/anzhiyu/random.js"></script><div class="js-pjax"><input type="hidden" name="page-type" id="page-type" value="post"></div><script>var visitorMail = "visitor@anheyu.com";</script><script>//动态标题
-let leaveTitle = '再看看嘛🌈！';
-let backTitle = '欢迎回来✌️！';
-let OriginTitile = document.title
-let titleTime
-document.addEventListener('visibilitychange', function () {
-  if (document.hidden) {
-    //离开当前页面时标签显示内容
-    document.title = leaveTitle
-    clearTimeout(titleTime)
-  } else {
-    //返回当前页面时标签显示内容
-    document.title = backTitle + OriginTitile
-    //两秒后变回正常标题
-    titleTime = setTimeout(function () {
-      document.title = OriginTitile
-    }, 2000)
-  }
-})</script><script async data-pjax src="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/waterfall.js/1.1.0/waterfall.min.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><script>// 初始化函数
-let rm = {};
-
-//禁止图片与超链接拖拽
-let aElements = document.getElementsByTagName("a");
-for (let i = 0; i < aElements.length; i++) {
-  aElements[i].setAttribute("draggable", "false");
-  let imgElements = aElements[i].getElementsByTagName("img");
-  for (let j = 0; j < imgElements.length; j++) {
-    imgElements[j].setAttribute("draggable", "false");
-  }
-}
-
-// 显示菜单
-rm.showRightMenu = function (isTrue, x = 0, y = 0) {
-  console.info(x, y)
-  let rightMenu = document.getElementById("rightMenu");
-  rightMenu.style.top = x + "px";
-  rightMenu.style.left = y + "px";
-  if (isTrue) {
-    rightMenu.style.display = "block";
-    stopMaskScroll();
-  } else {
-    rightMenu.style.display = "none";
-  }
-};
-
-// 隐藏菜单
-rm.hideRightMenu = function () {
-  rm.showRightMenu(false);
-  let rightMenuMask = document.querySelector("#rightmenu-mask");
-  rightMenuMask.style.display = "none";
-};
-
-// 尺寸
-let rmWidth = document.getElementById("rightMenu").offsetWidth;
-let rmHeight = document.getElementById("rightMenu").offsetHeight;
-
-// 重新定义尺寸
-rm.reloadrmSize = function () {
-  rightMenu.style.visibility = "hidden";
-  rightMenu.style.display = "block";
-  // 获取宽度和高度
-  rmWidth = document.getElementById("rightMenu").offsetWidth;
-  rmHeight = document.getElementById("rightMenu").offsetHeight;
-  rightMenu.style.visibility = "visible";
-};
-
-// 获取点击的href
-let domhref = "";
-let domImgSrc = "";
-let globalEvent = null;
-
-var oncontextmenuFunction = function (event) {
-  if (document.body.clientWidth > 768) {
-    let pageX = event.clientX + 10; //加10是为了防止显示时鼠标遮在菜单上
-    let pageY = event.clientY;
-
-    //其他额外菜单
-    const $rightMenuOther = document.querySelector(".rightMenuOther");
-    const $rightMenuPlugin = document.querySelector(".rightMenuPlugin");
-    const $rightMenuCopyText = document.querySelector("#menu-copytext");
-    const $rightMenuPasteText = document.querySelector("#menu-pastetext");
-    const $rightMenuCommentText = document.querySelector("#menu-commenttext");
-    const $rightMenuNewWindow = document.querySelector("#menu-newwindow");
-    const $rightMenuNewWindowImg = document.querySelector("#menu-newwindowimg");
-    const $rightMenuCopyLink = document.querySelector("#menu-copylink");
-    const $rightMenuCopyImg = document.querySelector("#menu-copyimg");
-    const $rightMenuDownloadImg = document.querySelector("#menu-downloadimg");
-    const $rightMenuSearch = document.querySelector("#menu-search");
-    const $rightMenuSearchBaidu = document.querySelector("#menu-searchBaidu");
-    const $rightMenuMusicToggle = document.querySelector("#menu-music-toggle");
-    const $rightMenuMusicBack = document.querySelector("#menu-music-back");
-    const $rightMenuMusicForward = document.querySelector("#menu-music-forward");
-    const $rightMenuMusicPlaylist = document.querySelector("#menu-music-playlist");
-    const $rightMenuMusicCopyMusicName = document.querySelector("#menu-music-copyMusicName");
-
-    let href = event.target.href;
-    let imgsrc = event.target.currentSrc;
-
-    // 判断模式 扩展模式为有事件
-    let pluginMode = false;
-    $rightMenuOther.style.display = "block";
-    globalEvent = event;
-
-    // 检查是否需要复制 是否有选中文本
-    if (selectTextNow && window.getSelection()) {
-      pluginMode = true;
-      $rightMenuCopyText.style.display = "block";
-      $rightMenuCommentText.style.display = "block";
-      $rightMenuSearch.style.display = "block";
-      $rightMenuSearchBaidu.style.display = "block";
-    } else {
-      $rightMenuCopyText.style.display = "none";
-      $rightMenuCommentText.style.display = "none";
-      $rightMenuSearchBaidu.style.display = "none";
-      $rightMenuSearch.style.display = "none";
-    }
-
-    //检查是否右键点击了链接a标签
-    if (href) {
-      pluginMode = true;
-      $rightMenuNewWindow.style.display = "block";
-      $rightMenuCopyLink.style.display = "block";
-      domhref = href;
-    } else {
-      $rightMenuNewWindow.style.display = "none";
-      $rightMenuCopyLink.style.display = "none";
-    }
-
-    //检查是否需要复制图片
-    if (imgsrc) {
-      pluginMode = true;
-      $rightMenuCopyImg.style.display = "block";
-      $rightMenuDownloadImg.style.display = "block";
-      $rightMenuNewWindowImg.style.display = "block";
-      document.getElementById("rightMenu").style.width="12rem"
-      domImgSrc = imgsrc;
-    } else {
-      $rightMenuCopyImg.style.display = "none";
-      $rightMenuDownloadImg.style.display = "none";
-      $rightMenuNewWindowImg.style.display = "none";
-    }
-
-    // 判断是否为输入框
-    if (event.target.tagName.toLowerCase() === "input" || event.target.tagName.toLowerCase() === "textarea") {
-      pluginMode = true;
-      $rightMenuPasteText.style.display = "block";
-    } else {
-      $rightMenuPasteText.style.display = "none";
-    }
-    const navMusicEl = document.querySelector("#nav-music");
-    //判断是否是音乐
-    if (navMusicEl && navMusicEl.contains(event.target)) {
-      pluginMode = true;
-      $rightMenuMusicToggle.style.display = "block";
-      $rightMenuMusicBack.style.display = "block";
-      $rightMenuMusicForward.style.display = "block";
-      $rightMenuMusicPlaylist.style.display = "block";
-      $rightMenuMusicCopyMusicName.style.display = "block";
-    } else {
-      $rightMenuMusicToggle.style.display = "none";
-      $rightMenuMusicBack.style.display = "none";
-      $rightMenuMusicForward.style.display = "none";
-      $rightMenuMusicPlaylist.style.display = "none";
-      $rightMenuMusicCopyMusicName.style.display = "none";
-    }
-
-    // 如果不是扩展模式则隐藏扩展模块
-    if (pluginMode) {
-      $rightMenuOther.style.display = "none";
-      $rightMenuPlugin.style.display = "block";
-    } else {
-      $rightMenuPlugin.style.display = "none";
-    }
-
-    rm.reloadrmSize();
-
-    // 鼠标默认显示在鼠标右下方，当鼠标靠右或靠下时，将菜单显示在鼠标左方\上方
-    if (pageX + rmWidth > window.innerWidth) {
-      pageX -= rmWidth + 10;
-    }
-    if (pageY + rmHeight > window.innerHeight) {
-      pageY -= pageY + rmHeight - window.innerHeight;
-    }
-
-    rm.showRightMenu(true, pageY, pageX);
-    document.getElementById("rightmenu-mask").style.display = "flex";
-    return false;
-  }
-};
-
-// 监听右键初始化
-window.oncontextmenu = oncontextmenuFunction
-
-// 下载图片状态
-rm.downloadimging = false;
-
-// 复制图片到剪贴板
-rm.writeClipImg = function (imgsrc) {
-  console.log("按下复制");
-  rm.hideRightMenu();
-  anzhiyu.snackbarShow("正在下载中，请稍后", false, 10000);
-  if (rm.downloadimging == false) {
-    rm.downloadimging = true;
-    setTimeout(function () {
-      copyImage(imgsrc);
-      anzhiyu.snackbarShow("复制成功！图片已添加盲水印，请遵守版权协议");
-      rm.downloadimging = false;
-    }, "10000");
-  }
-};
-
-function imageToBlob(imageURL) {
-  const img = new Image();
-  const c = document.createElement("canvas");
-  const ctx = c.getContext("2d");
-  img.crossOrigin = "";
-  img.src = imageURL;
-  return new Promise(resolve => {
-    img.onload = function () {
-      c.width = this.naturalWidth;
-      c.height = this.naturalHeight;
-      ctx.drawImage(this, 0, 0);
-      c.toBlob(
-        blob => {
-          // here the image is a blob
-          resolve(blob);
-        },
-        "image/png",
-        0.75
-      );
-    };
-  });
-}
-
-async function copyImage(imageURL) {
-  const blob = await imageToBlob(imageURL);
-  const item = new ClipboardItem({ "image/png": blob });
-  navigator.clipboard.write([item]);
-}
-
-rm.copyUrl = function (id) {
-  const input = document.createElement("input"); // Create a new <input> element
-  input.id = "copyVal"; // Set the id of the new element to "copyVal"
-  document.body.appendChild(input); // Append the new element to the end of the <body> element
-  
-  const text = id;
-  input.value = text;
-  input.select();
-  input.setSelectionRange(0, input.value.length);
-  document.execCommand("copy");
-  
-  input.remove(); // Remove the <input> element from the DOM
-};
-
-function stopMaskScroll() {
-  if (document.getElementById("rightmenu-mask")) {
-    let xscroll = document.getElementById("rightmenu-mask");
-    xscroll.addEventListener(
-      "mousewheel",
-      function (e) {
-        //阻止浏览器默认方法
-        rm.hideRightMenu();
-        // e.preventDefault();
-      },
-      { passive: true }
-    );
-  }
-  if (document.getElementById("rightMenu")) {
-    let xscroll = document.getElementById("rightMenu");
-    xscroll.addEventListener(
-      "mousewheel",
-      function (e) {
-        //阻止浏览器默认方法
-        rm.hideRightMenu();
-        // e.preventDefault();
-      },
-      { passive: true }
-    );
-  }
-}
-
-rm.rightmenuCopyText = function (txt) {
-  if (navigator.clipboard) {
-    navigator.clipboard.writeText(txt);
-  }
-  rm.hideRightMenu();
-};
-
-rm.copyPageUrl = function (url) {
-  if (!url) {
-    url = window.location.href;
-  }
-  rm.copyUrl(url);
-  anzhiyu.snackbarShow("复制链接地址成功", false, 2000);
-  rm.hideRightMenu();
-};
-
-rm.sharePage = function () {
-  var content = window.location.href;
-  rm.copyUrl(url);
-  anzhiyu.snackbarShow("复制链接地址成功", false, 2000);
-  rm.hideRightMenu();
-};
-
-// 复制当前选中文本
-var selectTextNow = "";
-document.onmouseup = document.ondblclick = selceText;
-
-function selceText() {
-  var txt;
-  if (document.selection) {
-    txt = document.selection.createRange().text;
-  } else {
-    txt = window.getSelection().toString();
-  }
-  selectTextNow = txt !== "" ? txt : "";
-}
-
-// 读取剪切板
-rm.readClipboard = function () {
-  if (navigator.clipboard) {
-    navigator.clipboard.readText().then(clipText => rm.insertAtCaret(globalEvent.target, clipText));
-  }
-};
-
-// 粘贴文本到焦点
-rm.insertAtCaret = function (elemt, value) {
-  const startPos = elemt.selectionStart,
-    endPos = elemt.selectionEnd;
-  if (document.selection) {
-    elemt.focus();
-    var sel = document.selection.createRange();
-    sel.text = value;
-    elemt.focus();
-  } else {
-    if (startPos || startPos == "0") {
-      var scrollTop = elemt.scrollTop;
-      elemt.value = elemt.value.substring(0, startPos) + value + elemt.value.substring(endPos, elemt.value.length);
-      elemt.focus();
-      elemt.selectionStart = startPos + value.length;
-      elemt.selectionEnd = startPos + value.length;
-      elemt.scrollTop = scrollTop;
-    } else {
-      elemt.value += value;
-      elemt.focus();
-    }
-  }
-};
-
-//粘贴文本
-rm.pasteText = function () {
-  const result = rm.readClipboard() || "";
-  rm.hideRightMenu();
-};
-
-//引用到评论
-rm.rightMenuCommentText = function (txt) {
-  rm.hideRightMenu();
-  const postCommentDom = document.getElementById("post-comment");
-  var domTop = postCommentDom.offsetTop;
-  window.scrollTo(0, domTop - 80);
-  if (txt == "undefined" || txt == "null") txt = "好棒！";
-  function setText() {
-    setTimeout(() => {
-      var input = document.getElementsByClassName("el-textarea__inner")[0];
-      if (!input) setText();
-      let evt = document.createEvent("HTMLEvents");
-      evt.initEvent("input", true, true);
-      let inputValue = replaceAll(txt, "\n", "\n> ");
-      input.value = "> " + inputValue + "\n\n";
-      input.dispatchEvent(evt);
-      input.focus();
-      input.setSelectionRange(-1, -1);
-      if (document.getElementById("comment-tips")) {
-        document.getElementById("comment-tips").classList.add("show");
-      }
-    }, 100);
-  }
-  setText();
-};
-
-//替换所有内容
-function replaceAll(string, search, replace) {
-  return string.split(search).join(replace);
-}
-
-// 百度搜索
-rm.searchBaidu = function () {
-  anzhiyu.snackbarShow("即将跳转到百度搜索", false, 2000);
-  setTimeout(function () {
-    window.open("https://www.baidu.com/s?wd=" + selectTextNow);
-  }, "2000");
-  rm.hideRightMenu();
-};
-
-//分享链接
-rm.copyLink = function () {
-  rm.rightmenuCopyText(domhref);
-  anzhiyu.snackbarShow("已复制链接地址");
-};
-
-function addRightMenuClickEvent() {
-  // 添加点击事件
-  document.getElementById("menu-backward").addEventListener("click", function () {
-  window.history.back();
-    rm.hideRightMenu();
-  });
-
-  document.getElementById("menu-forward").addEventListener("click", function () {
-    window.history.forward();
-    rm.hideRightMenu();
-  });
-
-  document.getElementById("menu-refresh").addEventListener("click", function () {
-    window.location.reload();
-  });
-
-  document.getElementById("menu-top").addEventListener("click", function () {
-    anzhiyu.scrollToDest(0, 500);
-    rm.hideRightMenu();
-  });
-
-  const menuLinks = document.querySelectorAll(".menu-link");
-  menuLinks.forEach(function (link) {
-    link.addEventListener("click", rm.hideRightMenu);
-  });
-
-  document.getElementById("menu-darkmode").addEventListener("click", anzhiyu.switchDarkMode);
-
-  document.getElementById("menu-home") && document.getElementById("menu-home").addEventListener("click", function () {
-    window.location.href = window.location.origin;
-  });
-
-  document.getElementById("menu-randomPost").addEventListener("click", function () {
-    toRandomPost();
-  });
-
-  document.getElementById("menu-commentBarrage").addEventListener("click", anzhiyu.switchCommentBarrage);
-
-  document.getElementById("rightmenu-mask").addEventListener("click", rm.hideRightMenu);
-
-  document.getElementById("rightmenu-mask").addEventListener("contextmenu", function (event) {
-    rm.hideRightMenu();
-    event.preventDefault(); // Prevent the default context menu from appearing
-  });
-
-  document.getElementById("menu-copy").addEventListener("click", rm.copyPageUrl);
-
-  document.getElementById("menu-pastetext").addEventListener("click", rm.pasteText);
-
-  document.getElementById("menu-copytext").addEventListener("click", function () {
-    rm.rightmenuCopyText(selectTextNow);
-    anzhiyu.snackbarShow("复制成功，复制和转载请标注本文地址");
-  });
-
-  document.getElementById("menu-commenttext").addEventListener("click", function () {
-    rm.rightMenuCommentText(selectTextNow);
-  });
-
-  document.getElementById("menu-newwindow").addEventListener("click", function () {
-    window.open(domhref, "_blank");
-    rm.hideRightMenu();
-  });
-
-  document.getElementById("menu-copylink").addEventListener("click", rm.copyLink);
-
-  document.getElementById("menu-downloadimg").addEventListener("click", function () {
-    anzhiyu.downloadImage(domImgSrc, "anzhiyu");
-  });
-
-  document.getElementById("menu-newwindowimg").addEventListener("click", function () {
-    window.open(domImgSrc, "_blank");
-    rm.hideRightMenu();
-  });
-
-  document.getElementById("menu-copyimg").addEventListener("click", function () {
-    rm.writeClipImg(domImgSrc);
-  });
-
-  document.getElementById("menu-searchBaidu").addEventListener("click", rm.searchBaidu);
-
-  //音乐
-  document.getElementById("menu-music-toggle").addEventListener("click", anzhiyu.musicToggle);
-
-  document.getElementById("menu-music-back").addEventListener("click", anzhiyu.musicSkipBack);
-
-  document.getElementById("menu-music-forward").addEventListener("click", anzhiyu.musicSkipForward);
-
-  document.getElementById("menu-music-copyMusicName").addEventListener("click", function () {
-    rm.rightmenuCopyText(anzhiyu.musicGetName());
-    anzhiyu.snackbarShow("复制歌曲名称成功", false, 3000);
-  });
-
-}
-
-addRightMenuClickEvent();</script><script data-pjax>var themeColorMeta = document.querySelector('meta[name="theme-color"]');
-var pageHeaderEl = document.getElementById("page-header");
-var navMusicEl = document.getElementById("nav-music");
-var consoleEl = document.getElementById("console");
-// 已随机的歌曲
-var selectRandomSong = [];
-// 音乐默认声音大小
-var musicVolume = 0.8;
-// 是否切换了周杰伦音乐列表
-var changeMusicListFlag = false;
-// 当前默认播放列表
-var defaultPlayMusicList = [];
-
-document.getElementById("page-name").innerText = document.title.split(" | Smith")[0];
-anzhiyu.initIndexEssay();
-anzhiyu.changeTimeInEssay();
-anzhiyu.removeBodyPaceClass();
-anzhiyu.qrcodeCreate();
-anzhiyu.changeTimeInAlbumDetail();
-anzhiyu.reflashEssayWaterFall();
-anzhiyu.sayhi();
-anzhiyu.stopImgRightDrag();
-anzhiyu.addNavBackgroundInit();
-anzhiyu.setValueToBodyType();
-anzhiyu.catalogActive();
-anzhiyu.tagsPageActive();
-anzhiyu.categoriesBarActive();
-anzhiyu.topCategoriesBarScroll();
-anzhiyu.switchRightClickMenuHotReview();
-anzhiyu.getCustomPlayList();
-anzhiyu.addEventListenerConsoleMusicList(false);
-setTimeout(() => {if (typeof addFriendLinksInFooter === "function") {addFriendLinksInFooter();}}, 200)</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><link rel="stylesheet" href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/aplayer/1.10.1/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/aplayer/1.10.1/APlayer.min.js"></script><script src="https://npm.elemecdn.com/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://lib.baomitu.com/pjax/0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
-
+});</script><script async src="/anzhiyu/random.js"></script><div class="js-pjax"><input type="hidden" name="page-type" id="page-type" value="post"></div><script>var visitorMail = "visitor@anheyu.com";
+</script><script async data-pjax src="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/waterfall.js/1.1.0/waterfall.min.js"></script><script src="https://cdn.cbd.int/qrcodejs@1.0.0/qrcode.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><link rel="stylesheet" href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/aplayer/1.10.1/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/aplayer/1.10.1/APlayer.min.js"></script><script src="https://npm.elemecdn.com/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://lib.baomitu.com/pjax/0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
 var pjax = new Pjax({
   elements: 'a:not([target="_blank"])',
   selectors: pjaxSelectors,
@@ -1127,10 +611,10 @@ var pjax = new Pjax({
 
 document.addEventListener('pjax:send', function () {
   // removeEventListener scroll 
-  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
-  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
 
-  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  document.getElementById('rightside').classList.remove('rightside-show')
   
   if (window.aplayers) {
     for (let i = 0; i < window.aplayers.length; i++) {
@@ -1160,7 +644,6 @@ document.addEventListener('pjax:complete', function () {
 
   GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
 
-  typeof chatBtnFn === 'function' && chatBtnFn()
   typeof panguInit === 'function' && panguInit()
 
   // google analytics
@@ -1175,8 +658,8 @@ document.addEventListener('pjax:complete', function () {
   typeof Prism === 'object' && Prism.highlightAll()
 })
 
-document.addEventListener('pjax:error', (e) => {
+document.addEventListener('pjax:error', e => {
   if (e.request.status === 404) {
     pjax.loadUrl('/404.html')
   }
-})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div></body></html>
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>

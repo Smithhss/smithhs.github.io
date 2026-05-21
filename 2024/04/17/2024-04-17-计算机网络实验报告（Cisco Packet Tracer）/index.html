@@ -1,4 +1,13 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>计算机网络实验报告（Cisco Packet Tracer） | Smith</title><meta name="keywords" content="Cisco Packet Tracer"><meta name="author" content="Smith"><meta name="copyright" content="Smith"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="计算机网络实验报告（Cisco Packet Tracer）"><meta name="application-name" content="计算机网络实验报告（Cisco Packet Tracer）"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="计算机网络实验报告（Cisco Packet Tracer）"><meta property="og:url" content="https://smithhs.cn/2024/04/17/2024-04-17-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A%EF%BC%88Cisco%20Packet%20Tracer%EF%BC%89/index.html"><meta property="og:site_name" content="Smith"><meta property="og:description" content="文章目录 Cisco Packet Tracer简介    1、直接连接两台 PC 构建 LAN 2、用交换机构建 LAN 3.交换机接口地址列表 4.生成树协议（Spanning Tree Protocol） 5.路由器配置初步 6.静态路由 7.动态路由 RIP 8.虚拟局域网 VLAN 10、"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/CiscoPacketTracer.jpg"><meta property="article:author" content="Smith"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/CiscoPacketTracer.jpg"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://smithhs.cn/2024/04/17/2024-04-17-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A%EF%BC%88Cisco%20Packet%20Tracer%EF%BC%89/"><link rel="preconnect" href="//npm.elemecdn.com"/><link rel="preconnect" href="//npm.onmicrosoft.cn"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/node-snackbar/0.1.16/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.14/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>计算机网络实验报告（Cisco Packet Tracer） | Smith</title><meta name="keywords" content="Cisco Packet Tracer"><meta name="author" content="Smith"><meta name="copyright" content="Smith"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="计算机网络实验报告（Cisco Packet Tracer）"><meta name="application-name" content="计算机网络实验报告（Cisco Packet Tracer）"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="计算机网络实验报告（Cisco Packet Tracer）"><meta property="og:url" content="https://smithhs.cn/2024/04/17/2024-04-17-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A%EF%BC%88Cisco%20Packet%20Tracer%EF%BC%89/index.html"><meta property="og:site_name" content="Smith"><meta property="og:description" content="文章目录 Cisco Packet Tracer简介    1、直接连接两台 PC 构建 LAN 2、用交换机构建 LAN 3.交换机接口地址列表 4.生成树协议（Spanning Tree Protocol） 5.路由器配置初步 6.静态路由 7.动态路由 RIP 8.虚拟局域网 VLAN 10、"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/CiscoPacketTracer.jpg"><meta property="article:author" content="Smith"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/CiscoPacketTracer.jpg"><meta name="description" content="文章目录 Cisco Packet Tracer简介    1、直接连接两台 PC 构建 LAN 2、用交换机构建 LAN 3.交换机接口地址列表 4.生成树协议（Spanning Tree Protocol） 5.路由器配置初步 6.静态路由 7.动态路由 RIP 8.虚拟局域网 VLAN 10、"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://smithhs.cn/2024/04/17/2024-04-17-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A%EF%BC%88Cisco%20Packet%20Tracer%EF%BC%89/"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/node-snackbar/0.1.16/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@6.1.6/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: {"enable":true,"img":"https://upload-bbs.miyoushe.com/upload/2024/07/27/125766904/ba62475f396df9de3316a08ed9e65d86_5680958632268053399..png"},
+  postHeadAiDescription: {"enable":true,"gptName":"AnZhiYu","mode":"local","switchBtn":false,"btnLink":"https://afdian.net/item/886a79d4db6711eda42a52540025c377","randomNum":3,"basicWordCount":1000,"key":"xxxx","Referer":"https://xx.xx/"},
+  diytitle: {"enable":true,"leaveTitle":"再看看嘛🌈！","backTitle":"欢迎回来✌️！"},
+  LA51: undefined,
+  greetingBox: {"enable":true,"default":"晚上好👋","list":[{"greeting":"晚安😴","startTime":0,"endTime":5},{"greeting":"早上好鸭👋, 祝你一天好心情！","startTime":6,"endTime":9},{"greeting":"上午好👋, 状态很好，鼓励一下～","startTime":10,"endTime":10},{"greeting":"11点多啦, 在坚持一下就吃饭啦～","startTime":11,"endTime":11},{"greeting":"午安👋, 宝贝","startTime":12,"endTime":14},{"greeting":"🌈充实的一天辛苦啦！","startTime":14,"endTime":18},{"greeting":"19点喽, 奖励一顿丰盛的大餐吧🍔。","startTime":19,"endTime":19},{"greeting":"晚上好👋, 在属于自己的时间好好放松😌~","startTime":20,"endTime":24}]},
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  music_page_default: "nav_music",
   root: '/',
   preloader: {"source":3},
   friends_vue_info: undefined,
@@ -9,7 +18,7 @@
   localSearch: undefined,
   translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
   noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
-  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":240},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":240},
   copy: {
     success: '复制成功',
     error: '复制错误',
@@ -28,21 +37,25 @@
     day: '天前',
     month: '个月前'
   },
-  copyright: undefined,
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: Smith","link":"链接: ","source":"来源: Smith","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
   lightbox: 'fancybox',
   Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#3b70fc","bgDark":"#1f1f1f","position":"top-center"},
   source: {
     justifiedGallery: {
-      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
-      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.2.0/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.2.0/dist/fjGallery.css'
     }
   },
   isPhotoFigcaption: false,
   islazyload: true,
   isAnchor: false,
-  shortcutKey: false
+  shortcutKey: undefined,
+  autoDarkmode: true
 }</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: 'Smith',
   title: '计算机网络实验报告（Cisco Packet Tracer）',
+  postAI: '',
+  pageFillDescription: '文章目录, Cisco Packet 简介, 1、直接连接两台 PC 构建 LAN, 2、用交换机构建 LAN, 3.交换机接口地址列表, 4.生成树协议（Spanning Tree Protocol）, 5.路由器配置初步, 6.静态路由, 7.动态路由 RIP, 8.虚拟局域网 VLAN, 10、虚拟局域网管理 VTP, 11、VLAN 间的通信, 12、DHCP、DNS及Web服务器简单配置, 总结文章目录简介直接连接两台构建用交换机构建交换机接口地址列表生成树协议路由器配置初步静态路由动态路由虚拟局域网虚拟局域网管理间的通信及服务器简单配置总结简介简介是公司发布的一个辅助学习工具为学习思科网络课程的初学者去设计配置排除网络故障提供了网络模拟环境用户可以在软件的图形用户界面上直接使用拖曳方法建立网络拓扑并可提供数据包在网络中行进的详细处理过程观察网络实时运行情况可以学习的配置锻炼故障排查能力名词解释动态主机控制协议子网掩码默认路由默认网关路由器交换机集线器无线设备仿真广域网直接连接两台构建将两台直接连接构成一个网络注意直接连接需使用交叉线进行两台的基本网络配置只需要配置地址即可然后相互通即成功配置打开中用交换机构建构建如下拓扑结构的局域网各的基本网络配置如下表子网掩码问题能否通答能通但不能通能否通为什么答能通但不能通将台的掩码都改为它们相互能通吗为什么答相互之间能通如果掩码为和不是同一局域网他们之间不能互通而掩码改为他们之间属于同一局域网下可以互通使用二层交换机连接的网络需要配置网关吗为什么答需要在二层交换机中配置网关尤为重要因为其与相连的自治系统可以向核心系统通告可达信息试一试集线器是工作在物理层的多接口设备它与交换机的区别是什么答集线器是工作在物理层而交换机则是工作在物理层和数据链路层两种工作的区域不同交换机接口地址列表二层交换机是一种即插即用的多接口设备它对于收到的帧有种处理方式广播转发和丢弃请弄清楚何时进行何种操作那么要转发成功则交换机中必须要有接口地址列表即表该表是交换机通过学习自动得到的仍然构建上图的拓扑结构并配置各计算机的在同一个一个子网使用工具栏中的放大镜点击某交换机如左边的选择可以看到最初交换机的表是空的也即它不知道该怎样转发帧那么它将如何处理用访问后再查看该交换机的表现在有相应的记录请思考如何得来随着网络通信的增加各交换机都将生成自己完整的表此时交换机的交换速度就是最快的生成树协议交换机在目的地址未知或接收到广播帧时是要进行广播的如果交换机之间存在回路环路那么就会产生广播循环风暴从而严重影响网络性能而交换机中运行的协议能避免交换机之间发生广播循环风暴只使用交换机构建如下拓扑这是初始时的状态我们可以看到交换机之间有回路这会造成广播帧循环传送即形成广播风暴严重影响网络性能随后交换机将自动通过生成树协议对多余的线路进行自动阻塞以形成一棵以为根具体哪个是根交换机有相关的策略的具有唯一路径树即生成树经过一段时间随着协议成功构建了生成树后的两个接口当前物理上是连接的但逻辑上是不通的处于状态桔色如下图所示在网络运行期间假设某个时候与之间的物理连接出现问题将与的连线剪掉则该生成树将自动发生变化上方先前的那个接口现在活动了绿色但下方那个接口仍处于状态桔色如下图所示注意交换机的协议即生成树协议始终自动保证交换机之间不会出现回路从而形成广播风暴秘籍使用的即模拟方式可非常清楚看到这个过程路由器配置初步我们模拟重庆交通大学和重庆大学两个学校的连接构建如下拓扑原因在于默认的路由器端口不够用我们需要在设备互连前要添加所需的路由器模块添加模块时注意要关闭电源我们为添加模块可以连接接着在配置里启用端口即可因为两路由器之间不能通过双绞线连接我们添加广域网接口说明一交通大学与重庆大学显然是两个不同的子网在不同子网间通信需通过路由器路由器的每个接口下至少是一个子网图中我们简单的规划了个子网左边路由器是交通大学的其下使用交换机连接交通大学的网络分配网络号该路由器接口也是交通大学网络的网关分配为右边路由器是重庆大学的其下使用交换机连接重庆大学的网络分配网络号该路由器接口也是重庆大学网络的网关分配为两个路由器之间使用广域网接口相连也是一个子网分配网络号说明二现实中交通大学和重庆大学的连接是远程的该连接要么通过路由器的光纤接口要么通过广域网接口即所谓的口如拓扑图所示进行一般不会通过双绞线连接为什么下面我们以通过路由器的广域网口连接为例来进行相关配置请注意我们选用的路由器默认没有广域网模块名称为等需要关闭路由器后添加然后再开机启动说明三在模拟的广域网连接中需注意和端连线时线路上有提示带一个时钟标志的是端有关和的概念请查阅相关资料在端需配置时钟频率说明四路由器有多种命令行配置模式每种模式对应不同的提示符及相应的权限请留意在正确的模式下输入配置相关的命令用户模式特权模式全局配置模式接口配置模式子接口配置模式说明五在现实中对新的路由器显然不能远程进行配置我们必须在现场通过笔记本的串口与路由器的接口连接并进行初次的配置注意设置比特率为后才能通过网络远程进行配置这也是上图左上画出笔记本连接的用意说明六在路由器的界面中可看到路由器刚启动成功后因为无任何配置将会提示是否进行对话配置因其步骤繁多请选择比如大学路由器的初步配置可以如下注意在我们的实验中可不进行如下的配置但在现实中为了安全以下的登录及特权密码等配置是必须的否则每个人都可操作你的路由器或交换机从普通模式进入特权模式进入全局配置模式可支持共个终端同时登录远程登录密码特权模式密码退出拓扑图中路由器各接口配置数据如下交通大学以太网口交通大学广域网口重庆大学以太网口重庆大学广域网口拓扑图中各配置数据如下交通大学交通大学重庆大学重庆大学交通大学路由器基本配置如下以太网口从普通模式进入特权模式进入全局配置模式进入配置以太网口模式配置该接口的激活接口直接退到特权模式广域网口从普通模式进入特权模式进入全局配置模式进入配置广域网口模式配置该接口的其为端配置时钟频率激活接口直接退到特权模式重庆大学路由器基本配置如下以太网口从普通模式进入特权模式进入全局配置模式进入配置以太网口模式配置该接口的激活接口直接退到特权模式广域网口从普通模式进入特权模式进入全局配置模式进入配置广域网口模式配置该接口的激活接口直接退到特权模式至此路由器基本的配置完成问题现在交通大学内的各及网关相互能通重庆大学也类似但不能从交大的通重大的反之亦然也即不能跨子网为什么原因是在路由表中都没能够到达对方的路由路径所以就无法通静态路由静态路由是非自适应性路由协议是由网络管理人员手动配置的不能够根据网络拓扑的变化而改变因此静态路由简单高效适用于结构非常简单的网络在当前这个简单的拓扑结构中我们可以使用静态路由即直接告诉路由器到某网络该怎么走即可在前述路由器基本配置成功的情况下使用以下命令进行静态路由协议的配置交通大学路由器静态路由配置从普通模式进入特权模式进入全局配置模式告诉交通大学路由器到这个网络的下一跳是退到特权模式查看路由表重庆大学路由器静态路由配置从普通模式进入特权模式进入全局配置模式告诉重庆大学路由器到这个网络的下一跳是退到特权模式查看路由表查看路由表你可看到标记为的一条路由表示至此这些能全部相互通动态路由动态路由协议采用自适应路由算法能够根据网络拓扑的变化而重新计算机最佳路由的全称是是距离矢量路由的代表目前虽然淘汰但可作为我们学习的对象使用协议只需要告诉路由器直接相连有哪些网络即可然后根据算法自动构建出路由表因为我们模拟的网络非常简单因此不能同时使用静态和动态路由否则看不出效果所以我们需要把刚才配置的静态路由先清除掉清除静态路由配置直接关闭路由器电源相当于没有保存任何配置然后各接口再按照前面基本配置所述重新配置等参数推荐此方法可以再熟悉一下接口的配置命令使用命令清除静态路由在全局配置模式下交通大学路由器使用重庆大学路由器使用相当于使用命令把刚才配置的静态路由命令给取消交通大学路由器路由配置从普通模式进入特权模式进入全局配置模式启用路由协议注意是命令网络与我直连网络与我直连直接退到特权模式查看路由表重庆大学路由器路由配置从普通模式进入特权模式进入全局配置模式启用路由协议注意是命令网络与我直连网络与我直连直接退到特权模式查看路由表查看路由表你可看到标记为的一条路由表示至此这些也能全部相互通虚拟局域网在实际网络中如我校的网络你可看到路由器一般位于网络的边界而内部几乎全部使用交换机连接前面我们分析过交换机连接的是同一个子网显然在这样一个大型规模的子网中进行广播甚至产生广播风暴将严重影响网络性能甚至瘫痪另外我们也已经知道其实学校是划分了多个子网的那么这些交换机连接的就绝不是一个子网这样矛盾的事情该如何解释呢我们实际上使用了支持的交换机而前述的交换机只是普通的层交换机或者我们把它当作层交换机在使用即虚拟局域网通过划分我们可以把一个物理网络划分为多个逻辑网段即多个子网划分后可以杜绝网络广播风暴增强网络的安全性便于进行统一管理等构建拓扑交换机是支持的交换机共有个和个以太网口默认所有的接口都在中故此时连接上来的计算机都处于同一可以进行通信下面我们就该交换机的个接口分为个部分划分到个不同的中号分别设为且设置别名以利于区分和管理交换机配置创建为的缺省的交换机所有接口都属于不能使用设置的别名该为一个子网设置其作为该子网网关创建为的设置别名创建为的设置别名成组配置接口设置为存取模式划归到中查看的划分情况至此在该交换机上我们就划分了个不包括缺省的各下的网络配置及连接的交换机接口如下表机器名连接的接口所属子网掩码网关此时可以使用命令进行测试你会发现只有在同一中的才能通信且广播也局限于该用不通用通了思考分析一下当前为何不同中的不能通信网关在此起什么作用我们的网关又在何处如何发起广播测试答有划分网络的作用同一个中的端口可以不通过路由器直接通信而不同之间则需要路由器进行路由网关是用来进行协议转换的不同的网段之间需要通信一定需要网关如果要发起广播测试那么就要引入三层设备虚拟局域网管理前一个实验我们在交换机上进行了的规划和划分但在实际应用中我们绝不允许在这些支持的交换机上进行随意的划分如此将造成管理混乱的划分必须得到统一的规划和管理这就需要协议即中继协议通过帧或私有帧可查阅相关资料了解保持配置统一性也被称为虚拟局域网干道协议它是思科私有协议统一管理增加删除调整自动地将信息向网络中其它的交换机广播此外减小了那些可能导致安全问题的配置只要在做相应设置会自动学习上的信息为演示重新构建如下拓扑结构注意作为干线两个交换机和核心的交换机应该使用口相连这虽然不是必须但现实中这样连接性能最好交换机是网络中的核心交换机我们将其作为域及将在其上创建和管理两个交换机是是局域网中的汇聚层接入层交换机将作为可决定加入的域和目前该网络都属于也即这些是可以相互通信的前面说过无论对于性能管理还是安全等而言现实中我们必须进行划分现在我们的要求是新建两个然后让和属于和属于我们将在核心交换机上进行如下工作设置为模式域为新建网络号网关新建网络号网关配置更改交换机名称可选设置域名称为设置其为服务器模式新建设置的别名可选再建设置的别名可选配置接口它将是该子网左边的网关配置接口它将是该子网右边的网关我们将在左边交换机上进行如下工作加入名为的域配置与核心交换机连接的千兆接口为模式将接口划分到中将接口划分到中左边配置更改交换机名称可选加入名为的域设置模式为客户配置与核心交换机连接的千兆接口设置该接口为中继模式允许为所有的中继配置接口设置该接口为正常访问模式将接口划分到配置接口设置该接口为正常访问模式将接口划分到我们将在右边交换机上进行同样的工作加入名为域配置与核心交换机连接的千兆接口为模式将接口划分到中将接口划分到中右边配置更改交换机名称可选加入名为的域设置模式为客户配置与核心交换机连接的千兆接口设置该接口为中继模式允许为所有的中继配置接口设置该接口为正常访问模式将接口划分到配置接口设置该接口为正常访问模式将接口划分到至此各交换机配置完毕秘籍此时在个交换机的特权模式下都可使用命令查看状态使用命令查看状态各连接的交换机和接口以及网络配置如下至此配置完成同可以通而不同不行即使在同一交换机下如从到且能够方便的统一规划和管理试一试使用的结果如何使用的结果如何想想为什么不能通因为不属于同一可以通因为和属于同一下间的通信只是给我们划分和管理提供了方便由上面的测试得知目前我们仍然不能在间通信因为默认的间是不允许进行通信此时我们需要所谓的独臂路由器在间为其进行转发我们使用的核心交换机是个层交换机可工作在网络层也称路由交换机即具有路由功能能进行这种转发操作交换机配置配置连接左边交换机的接口封装协议设置为中继模式在所有间转发配置连接右边交换机的接口封装协议设置为中继模式在所有间转发启用路由转发功能至此各中的可以正常通信试一试现在再使用的结果如何使用的结果如何答都可以通独臂路由的缺陷当使用的模拟方式进行上面的测试时你会非常清楚的看到包全部都由交换机在转发非常容易形成瓶颈现实中我们一般不使用这种方式而是真正使用其三层转发功能即一次路由多次交换请查阅相关资料及服务器简单配置动态主机配置域名解析以及服务在日常应用中作用巨大我们构建如下简单的拓扑来进行练习该拓扑中服务器及客户机都连在同一交换机上为简单起见服务器同时作为以及服务器各客户机无需配置将自动获取网络配置点击拓扑图中的图标设置其静态地址为然后选择进行如下相关配置试一试先查看各看看是否获得网络配置因为我们在服务器中把谷歌和百度的都设为了即所以如果打开的浏览器输入或者我们都应该看到默认的这个服务器的主页总结这次实验使我接触了一个全新的软件从入门到可以简单的运用使我获益良多也让我掌握了许多计算机网络的协议搞明白了计算机网络的基本原理我的计算机网络实验就告一段落了希望能够继续努力学习对计算机网络有更加深刻的理解',
   isPost: true,
   isHome: false,
   isHighlightShrink: false,
@@ -62,71 +75,76 @@
     display: inline !important
   }
 </style></noscript><script>(win=>{
-    win.saveToLocal = {
-      set: function setWithExpiry(key, value, ttl) {
-        if (ttl === 0) return
-        const now = new Date()
-        const expiryDay = ttl * 86400000
-        const item = {
-          value: value,
-          expiry: now.getTime() + expiryDay,
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
         }
-        localStorage.setItem(key, JSON.stringify(item))
-      },
-
-      get: function getWithExpiry(key) {
-        const itemStr = localStorage.getItem(key)
-
-        if (!itemStr) {
-          return undefined
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
         }
-        const item = JSON.parse(itemStr)
-        const now = new Date()
 
-        if (now.getTime() > item.expiry) {
-          localStorage.removeItem(key)
-          return undefined
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
         }
-        return item.value
-      }
-    }
-  
-    win.getScript = url => new Promise((resolve, reject) => {
-      const script = document.createElement('script')
-      script.src = url
-      script.async = true
-      script.onerror = reject
-      script.onload = script.onreadystatechange = function() {
-        const loadState = this.readyState
-        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-        script.onload = script.onreadystatechange = null
-        resolve()
-      }
-      document.head.appendChild(script)
-    })
-  
-    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
-      const link = document.createElement('link')
-      link.rel = 'stylesheet'
-      link.href = url
-      if (id) link.id = id
-      link.onerror = reject
-      link.onload = link.onreadystatechange = function() {
-        const loadState = this.readyState
-        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
-        link.onload = link.onreadystatechange = null
-        resolve()
-      }
-      document.head.appendChild(link)
-    })
-  
-      win.activateDarkMode = function () {
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
         document.documentElement.setAttribute('data-theme', 'dark')
         if (document.querySelector('meta[name="theme-color"]') !== null) {
           document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
         }
       }
-      win.activateLightMode = function () {
+      win.activateLightMode = () => {
         document.documentElement.setAttribute('data-theme', 'light')
         if (document.querySelector('meta[name="theme-color"]') !== null) {
           document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
@@ -148,7 +166,7 @@
               const isNight = hour <= 6 || hour >= 18
               isNight ? activateDarkMode() : activateLightMode()
             }
-            window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
               if (saveToLocal.get('theme') === undefined) {
                 e.matches ? activateDarkMode() : activateLightMode()
               }
@@ -165,34 +183,17 @@
         }
       }
     
-    const detectApple = () => {
-      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
-        document.documentElement.classList.add('apple')
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
       }
-    }
-    detectApple()
-    })(window)</script><meta name="generator" content="Hexo 6.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d20f536c64d06e5fcf4bfe2ec5dc25d.jpg"/><div class="loading-image-dot"></div><div id="loading-percentage">0%</div></div></div><script>if (GLOBAL_CONFIG.preloader.source == "2" || GLOBAL_CONFIG.preloader.source == "3") {
-  const loadingPercentage = document.getElementById("loading-percentage");
-  let loadingPercentageTimer = setInterval(function() {
-    var progressBar = document.querySelector(".pace-progress");
-    if (!progressBar) return
-    var currentValue = progressBar.getAttribute("data-progress-text");
-    if (currentValue !== loadingPercentage.textContent) {
-      loadingPercentage.textContent = currentValue;
-      if (currentValue === "100%") {
-        clearInterval(loadingPercentageTimer);
-      }
-    }
-  }, 100);
-}
-
-const preloader = {
+      detectApple()
+    })(window)</script><meta name="generator" content="Hexo 7.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d20f536c64d06e5fcf4bfe2ec5dc25d.jpg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
   endLoading: () => {
-    document.body.style.overflow = 'auto';
     document.getElementById('loading-box').classList.add("loaded");
   },
   initLoading: () => {
-    document.body.style.overflow = '';
     document.getElementById('loading-box').classList.remove("loaded")
   }
 }
@@ -202,8 +203,8 @@ setTimeout(function(){preloader.endLoading();},10000)
 if (true) {
   document.addEventListener('pjax:send', () => { preloader.initLoading() })
   document.addEventListener('pjax:complete', () => { preloader.endLoading() })
-}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div id="web_box"><div id="web_container"><div id="menu-mask"></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="anzhiyufont anzhiyu-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://smithhs.cn/" title="博客" target="_blank"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.png" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" href="http://robot.onliu.cn/" title="Robot" target="_blank"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/cupfox.png" alt="Robot"/><span class="back-menu-item-text">Robot</span></a><a class="back-menu-item" href="http://res.onliu.cn" title="Sale" target="_blank"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/tubiao.jpg" alt="Sale"/><span class="back-menu-item-text">Sale</span></a><a class="back-menu-item" href="http://se.onliu.cn/" title="资源共享" target="_blank"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog/x126.png" alt="资源共享"/><span class="back-menu-item-text">资源共享</span></a><a class="back-menu-item" href="https://github.com/Smithhss" title="Github" target="_blank"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/GitHub.png" alt="Github"/><span class="back-menu-item-text">Github</span></a></div></div></div></div><a id="site-name" href="/" accesskey="h"><div class="title">Smith</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page faa-parent animated-hover" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child" style="left:-79px;"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child" style="left:-31px;"><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li></ul></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child" style="left:-79px;"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于我</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button only-home" id="travellings_button" title="随机前往一个开往项目网站"><a class="site-page" onclick="anzhiyu.totraveling()" title="随机前往一个开往项目网站" href="javascript:void(0);" rel="external nofollow" data-pjax-state="external"><i class="anzhiyufont anzhiyu-icon-train"></i></a></div><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg" target="_blank"><img class="post-qr-code-img" alt="wechat" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg" target="_blank"><img class="post-qr-code-img" alt="alipay" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> <span>最新评论</span></span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Android-Studio/" style="font-size: 1.05rem;">Android Studio<sup>1</sup></a><a href="/tags/App/" style="font-size: 1.05rem;">App<sup>2</sup></a><a href="/tags/Butterfly/" style="font-size: 1.05rem;">Butterfly<sup>1</sup></a><a href="/tags/C/" style="font-size: 1.05rem;">C++<sup>1</sup></a><a href="/tags/CSS/" style="font-size: 1.05rem;">CSS<sup>1</sup></a><a href="/tags/Cisco-Packet-Tracer/" style="font-size: 1.05rem;">Cisco Packet Tracer<sup>1</sup></a><a href="/tags/Easypan/" style="font-size: 1.05rem;">Easypan<sup>2</sup></a><a href="/tags/FurtherMathematics/" style="font-size: 1.05rem;">FurtherMathematics<sup>1</sup></a><a href="/tags/GPT/" style="font-size: 1.05rem;">GPT<sup>1</sup></a><a href="/tags/Git2/" style="font-size: 1.05rem;">Git2<sup>1</sup></a><a href="/tags/HTML/" style="font-size: 1.05rem;">HTML<sup>1</sup></a><a href="/tags/Hexo/" style="font-size: 1.05rem;">Hexo<sup>1</sup></a><a href="/tags/Java/" style="font-size: 1.05rem;">Java<sup>6</sup></a><a href="/tags/JavaScript/" style="font-size: 1.05rem;">JavaScript<sup>1</sup></a><a href="/tags/JavaWeb/" style="font-size: 1.05rem;">JavaWeb<sup>2</sup></a><a href="/tags/Jrebel/" style="font-size: 1.05rem;">Jrebel<sup>1</sup></a><a href="/tags/LeetCode/" style="font-size: 1.05rem;">LeetCode<sup>1</sup></a><a href="/tags/Linux/" style="font-size: 1.05rem;">Linux<sup>3</sup></a><a href="/tags/Markdown/" style="font-size: 1.05rem;">Markdown<sup>2</sup></a><a href="/tags/Maven/" style="font-size: 1.05rem;">Maven<sup>2</sup></a><a href="/tags/Navicat/" style="font-size: 1.05rem;">Navicat<sup>1</sup></a><a href="/tags/NoSql/" style="font-size: 1.05rem;">NoSql<sup>1</sup></a><a href="/tags/Nodejs/" style="font-size: 1.05rem;">Nodejs<sup>2</sup></a><a href="/tags/Python/" style="font-size: 1.05rem;">Python<sup>4</sup></a><a href="/tags/Spring/" style="font-size: 1.05rem;">Spring<sup>2</sup></a><a href="/tags/VMware/" style="font-size: 1.05rem;">VMware<sup>2</sup></a><a href="/tags/Vue/" style="font-size: 1.05rem;">Vue<sup>1</sup></a><a href="/tags/YouHou/" style="font-size: 1.05rem;">YouHou<sup>1</sup></a><a href="/tags/books/" style="font-size: 1.05rem;">books<sup>1</sup></a><a href="/tags/butterfly/" style="font-size: 1.05rem;">butterfly<sup>1</sup></a><a href="/tags/clash/" style="font-size: 1.05rem;">clash<sup>1</sup></a><a href="/tags/project/" style="font-size: 1.05rem;">project<sup>4</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 1.05rem;">前端<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6/" style="font-size: 1.05rem;">开发框架<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" style="font-size: 1.05rem;">开发环境<sup>1</sup></a><a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 1.05rem;">操作系统<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" style="font-size: 1.05rem;">数据结构与算法<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" style="font-size: 1.05rem;">计算机组成原理<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 1.05rem;">计算机网络<sup>1</sup></a><a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="font-size: 1.05rem;">软件工程<sup>1</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
-    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/11/"><span class="card-archive-list-date">十一月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">3</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/10/"><span class="card-archive-list-date">十月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/09/"><span class="card-archive-list-date">九月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">6</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/07/"><span class="card-archive-list-date">七月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/06/"><span class="card-archive-list-date">六月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">7</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/05/"><span class="card-archive-list-date">五月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">17</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/04/"><span class="card-archive-list-date">四月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/06/"><span class="card-archive-list-date">六月 2023</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" onclick="anzhiyu.switchDarkMode()" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item on" id="consoleCommentBarrage" onclick="anzhiyu.switchCommentBarrage()" title="热评开关"><a class="commentBarrage"><i class="anzhiyufont anzhiyu-icon-message"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="anzhiyu.musicToggle()" title="音乐开关"><a class="music-switch"><i class="anzhiyufont anzhiyu-icon-music"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/Programming/">Programming</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/Cisco-Packet-Tracer/" tabindex="-1"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Cisco Packet Tracer</span></a></span></div></div><h1 class="post-title">计算机网络实验报告（Cisco Packet Tracer）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="post-meta-icon anzhiyufont anzhiyu-icon-calendar-days"></i><span class="post-meta-label">发表于</span><time datetime="2024-04-16T22:54:40.000Z" title="发表于 2024-04-17 06:54:40">2024-04-17</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">7.3k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>26分钟</span></span><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title="计算机网络实验报告（Cisco Packet Tracer）"><i class="anzhiyufont anzhiyu-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为石家庄"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>石家庄</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/CiscoPacketTracer.jpg"></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h4 id="文章目录"><a href="#文章目录" class="headerlink" title="文章目录"></a>文章目录</h4><ul>
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="anzhiyufont anzhiyu-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://smithhs.cn/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.png" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="http://robot.onliu.cn/" title="Robot"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/cupfox.png" alt="Robot"/><span class="back-menu-item-text">Robot</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="http://res.onliu.cn" title="Sale"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/tubiao.jpg" alt="Sale"/><span class="back-menu-item-text">Sale</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="http://se.onliu.cn/" title="资源共享"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog/x126.png" alt="资源共享"/><span class="back-menu-item-text">资源共享</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://github.com/Smithhss" title="Github"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/GitHub.png" alt="Github"/><span class="back-menu-item-text">Github</span></a></div></div></div></div><a id="site-name" href="/" accesskey="h"><div class="title">Smith</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/dailyPhoto/"><i class="anzhiyufont anzhiyu-icon-camera faa-tada" style="font-size: 0.9em;"></i><span> 每日照片</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wallpaper/"><i class="anzhiyufont anzhiyu-icon-image faa-tada" style="font-size: 0.9em;"></i><span> 壁纸</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wordScenery/"><i class="anzhiyufont anzhiyu-icon-font faa-tada" style="font-size: 0.9em;"></i><span> 文字风景</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于我</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/love/"><i class="anzhiyufont anzhiyu-icon-heart faa-tada" style="font-size: 0.9em;"></i><span> 爱情</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button only-home" id="travellings_button" title="随机前往一个开往项目网站"><a class="site-page" onclick="anzhiyu.totraveling()" title="随机前往一个开往项目网站" href="javascript:void(0);" rel="external nofollow" data-pjax-state="external"><i class="anzhiyufont anzhiyu-icon-train"></i></a></div><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg" target="_blank"><img class="post-qr-code-img" alt="wechat" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg" target="_blank"><img class="post-qr-code-img" alt="alipay" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Android-Studio/" style="font-size: 1.05rem;">Android Studio<sup>1</sup></a><a href="/tags/App/" style="font-size: 1.05rem;">App<sup>2</sup></a><a href="/tags/Butterfly/" style="font-size: 1.05rem;">Butterfly<sup>1</sup></a><a href="/tags/C/" style="font-size: 1.05rem;">C++<sup>1</sup></a><a href="/tags/CSS/" style="font-size: 1.05rem;">CSS<sup>1</sup></a><a href="/tags/Cisco-Packet-Tracer/" style="font-size: 1.05rem;">Cisco Packet Tracer<sup>1</sup></a><a href="/tags/Easypan/" style="font-size: 1.05rem;">Easypan<sup>2</sup></a><a href="/tags/FurtherMathematics/" style="font-size: 1.05rem;">FurtherMathematics<sup>1</sup></a><a href="/tags/GPT/" style="font-size: 1.05rem;">GPT<sup>1</sup></a><a href="/tags/Git2/" style="font-size: 1.05rem;">Git2<sup>1</sup></a><a href="/tags/HTML/" style="font-size: 1.05rem;">HTML<sup>1</sup></a><a href="/tags/Hexo/" style="font-size: 1.05rem;">Hexo<sup>1</sup></a><a href="/tags/Java/" style="font-size: 1.05rem;">Java<sup>6</sup></a><a href="/tags/JavaScript/" style="font-size: 1.05rem;">JavaScript<sup>1</sup></a><a href="/tags/JavaWeb/" style="font-size: 1.05rem;">JavaWeb<sup>2</sup></a><a href="/tags/Jrebel/" style="font-size: 1.05rem;">Jrebel<sup>1</sup></a><a href="/tags/LeetCode/" style="font-size: 1.05rem;">LeetCode<sup>1</sup></a><a href="/tags/Linux/" style="font-size: 1.05rem;">Linux<sup>3</sup></a><a href="/tags/Markdown/" style="font-size: 1.05rem;">Markdown<sup>2</sup></a><a href="/tags/Maven/" style="font-size: 1.05rem;">Maven<sup>2</sup></a><a href="/tags/Mysql/" style="font-size: 1.05rem;">Mysql<sup>1</sup></a><a href="/tags/NoSql/" style="font-size: 1.05rem;">NoSql<sup>1</sup></a><a href="/tags/Nodejs/" style="font-size: 1.05rem;">Nodejs<sup>2</sup></a><a href="/tags/Python/" style="font-size: 1.05rem;">Python<sup>4</sup></a><a href="/tags/Spring/" style="font-size: 1.05rem;">Spring<sup>2</sup></a><a href="/tags/VMware/" style="font-size: 1.05rem;">VMware<sup>2</sup></a><a href="/tags/Vue/" style="font-size: 1.05rem;">Vue<sup>1</sup></a><a href="/tags/YouHou/" style="font-size: 1.05rem;">YouHou<sup>1</sup></a><a href="/tags/books/" style="font-size: 1.05rem;">books<sup>1</sup></a><a href="/tags/butterfly/" style="font-size: 1.05rem;">butterfly<sup>1</sup></a><a href="/tags/clash/" style="font-size: 1.05rem;">clash<sup>1</sup></a><a href="/tags/project/" style="font-size: 1.05rem;">project<sup>4</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 1.05rem;">前端<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6/" style="font-size: 1.05rem;">开发框架<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" style="font-size: 1.05rem;">开发环境<sup>1</sup></a><a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 1.05rem;">操作系统<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" style="font-size: 1.05rem;">数据结构与算法<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" style="font-size: 1.05rem;">计算机组成原理<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 1.05rem;">计算机网络<sup>1</sup></a><a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="font-size: 1.05rem;">软件工程<sup>1</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="anzhiyufont anzhiyu-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/05/"><span class="card-archive-list-date">五月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/11/"><span class="card-archive-list-date">十一月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">3</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/10/"><span class="card-archive-list-date">十月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/09/"><span class="card-archive-list-date">九月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">5</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/07/"><span class="card-archive-list-date">七月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/06/"><span class="card-archive-list-date">六月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">7</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/05/"><span class="card-archive-list-date">五月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">17</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/04/"><span class="card-archive-list-date">四月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">2</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="anzhiyu.musicToggle()" title="音乐开关"><a class="music-switch"><i class="anzhiyufont anzhiyu-icon-music"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/Programming/" itemprop="url">Programming</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/Cisco-Packet-Tracer/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>Cisco Packet Tracer</span></a></span></div></div><h1 class="post-title" itemprop="name headline">计算机网络实验报告（Cisco Packet Tracer）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="post-meta-icon anzhiyufont anzhiyu-icon-calendar-days"></i><span class="post-meta-label">发表于</span><time itemprop="dateCreated datePublished" datetime="2024-04-16T22:54:40.000Z" title="发表于 2024-04-17 06:54:40">2024-04-17</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">7.3k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>26分钟</span></span><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title="计算机网络实验报告（Cisco Packet Tracer）"><i class="anzhiyufont anzhiyu-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为石家庄"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>石家庄</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/CiscoPacketTracer.jpg"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="https://smithhs.cn/2024/04/17/2024-04-17-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A%EF%BC%88Cisco%20Packet%20Tracer%EF%BC%89/"><header><a class="post-meta-categories" href="/categories/Programming/" itemprop="url">Programming</a><a href="/tags/Cisco-Packet-Tracer/" tabindex="-1" itemprop="url">Cisco Packet Tracer</a><h1 id="CrawlerTitle" itemprop="name headline">计算机网络实验报告（Cisco Packet Tracer）</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">Smith</span><time itemprop="dateCreated datePublished" datetime="2024-04-16T22:54:40.000Z" title="undefined 2024-04-17 06:54:40">2024-04-17</time></header><h4 id="文章目录"><a href="#文章目录" class="headerlink" title="文章目录"></a>文章目录</h4><ul>
 <li><a href="#Cisco_Packet_Tracer_8">Cisco Packet Tracer简介</a></li>
 <li><ul>
 <li><ul>
@@ -511,7 +512,16 @@ if (true) {
 </blockquote>
 <hr>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这次实验使我接触了一个全新的软件，从入门到可以简单的运用，使我获益良多，也让我掌握了许多计算机网络的协议，搞明白了计算机网络的基本原理。我的计算机网络实验就告一段落了，希望能够继续努力学习，对计算机网络有更加深刻的理解。</p>
-</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d20f536c64d06e5fcf4bfe2ec5dc25d.jpg" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d20f536c64d06e5fcf4bfe2ec5dc25d.jpg" title="头像" alt="头像"></a><div class="post-copyright__author_name">Smith</div><div class="post-copyright__author_desc">人生太短，要干的事太多，我要争分夺秒</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://smithhs.cn/2024/04/17/2024-04-17-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A%EF%BC%88Cisco%20Packet%20Tracer%EF%BC%89/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://smithhs.cn/2024/04/17/2024-04-17-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A%EF%BC%88Cisco%20Packet%20Tracer%EF%BC%89/')">计算机网络实验报告（Cisco Packet Tracer）</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="anzhiyu.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="anzhiyufont anzhiyu-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="anzhiyu.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://smithhs.cn/2024/04/17/2024-04-17-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A%EF%BC%88Cisco%20Packet%20Tracer%EF%BC%89/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=计算机网络实验报告（Cisco Packet Tracer）&amp;url=https://smithhs.cn/2024/04/17/2024-04-17-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A%EF%BC%88Cisco%20Packet%20Tracer%EF%BC%89/&amp;pic=https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/CiscoPacketTracer.jpg" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="rm.copyPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://smithhs.cn" target="_blank">Smith</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/Cisco-Packet-Tracer/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>Cisco Packet Tracer<span class="tagsPageCount">1</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/dataanalysis.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/04/12/2024-04-12-2024%E6%9C%80%E6%96%B0GPT+GPTs+MJ+Claude3%E7%A8%8B%E5%BA%8F%E6%90%AD%E5%BB%BA/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/v2-540fc0af6b556b67535db82197d91050_1440w.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">最新GPT+GPTs+MJ+Claude3程序搭建</div></div></a></div><div class="next-post pull-right"><a href="/2024/05/07/2024-05-07-LeetCode%E5%88%B7%E9%A2%98/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/hello_leetcode.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">LeetCode刷题教程</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95"><span class="toc-number">1.</span> <span class="toc-text">文章目录</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Cisco-Packet-Tracer%E7%AE%80%E4%BB%8B"><span class="toc-number"></span> <span class="toc-text">Cisco Packet Tracer简介</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1%E3%80%81%E7%9B%B4%E6%8E%A5%E8%BF%9E%E6%8E%A5%E4%B8%A4%E5%8F%B0-PC-%E6%9E%84%E5%BB%BA-LAN"><span class="toc-number">0.1.</span> <span class="toc-text">1、直接连接两台 PC 构建 LAN</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%E3%80%81%E7%94%A8%E4%BA%A4%E6%8D%A2%E6%9C%BA%E6%9E%84%E5%BB%BA-LAN"><span class="toc-number">0.2.</span> <span class="toc-text">2、用交换机构建 LAN</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E4%BA%A4%E6%8D%A2%E6%9C%BA%E6%8E%A5%E5%8F%A3%E5%9C%B0%E5%9D%80%E5%88%97%E8%A1%A8"><span class="toc-number">0.3.</span> <span class="toc-text">3.交换机接口地址列表</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-%E7%94%9F%E6%88%90%E6%A0%91%E5%8D%8F%E8%AE%AE%EF%BC%88Spanning-Tree-Protocol%EF%BC%89"><span class="toc-number">0.4.</span> <span class="toc-text">4.生成树协议（Spanning Tree Protocol）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-%E8%B7%AF%E7%94%B1%E5%99%A8%E9%85%8D%E7%BD%AE%E5%88%9D%E6%AD%A5"><span class="toc-number">0.5.</span> <span class="toc-text">5.路由器配置初步</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6-%E9%9D%99%E6%80%81%E8%B7%AF%E7%94%B1"><span class="toc-number">0.6.</span> <span class="toc-text">6.静态路由</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7-%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1-RIP"><span class="toc-number">0.7.</span> <span class="toc-text">7.动态路由 RIP</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#8-%E8%99%9A%E6%8B%9F%E5%B1%80%E5%9F%9F%E7%BD%91-VLAN"><span class="toc-number">0.8.</span> <span class="toc-text">8.虚拟局域网 VLAN</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#10%E3%80%81%E8%99%9A%E6%8B%9F%E5%B1%80%E5%9F%9F%E7%BD%91%E7%AE%A1%E7%90%86-VTP"><span class="toc-number">0.9.</span> <span class="toc-text">10、虚拟局域网管理 VTP</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#11%E3%80%81VLAN-%E9%97%B4%E7%9A%84%E9%80%9A%E4%BF%A1"><span class="toc-number">0.10.</span> <span class="toc-text">11、VLAN 间的通信</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#12%E3%80%81DHCP%E3%80%81DNS%E5%8F%8AWeb%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AE%80%E5%8D%95%E9%85%8D%E7%BD%AE"><span class="toc-number">0.11.</span> <span class="toc-text">12、DHCP、DNS及Web服务器简单配置</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number"></span> <span class="toc-text">总结</span></a></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2022 - 2025 By <a class="footer-bar-link" href="/" title="Smith" target="_blank">Smith</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/Smithhss/smithhs.github.io.git" title="Hexo">Hexo</a></div></div></div></footer></div></div></div><div id="sidebar"><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d20f536c64d06e5fcf4bfe2ec5dc25d.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">79</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">55</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">6</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page faa-parent animated-hover" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child" style="left:-79px;"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child" style="left:-31px;"><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li></ul></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child" style="left:-79px;"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于我</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="nav-music"><a id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()" accesskey="m">播放音乐</a><div id="console-music-bg"></div><meting-js id="8805965276" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random"></meting-js></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://music.163.com/#/my/m/music/playlist?id=464586318&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn1.tianli0.top/npm/js-heo@1.0.6/translate/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.14/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/node-snackbar/0.1.16/snackbar.min.js"></script><script>var meting_api = "https://meting.qjqq.cn/?server=:server&type=:type&id=:id&auth=:auth&r=:r";
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d20f536c64d06e5fcf4bfe2ec5dc25d.jpg" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d20f536c64d06e5fcf4bfe2ec5dc25d.jpg" title="头像" alt="头像"></a><div class="post-copyright__author_name">Smith</div><div class="post-copyright__author_desc">人生太短，要干的事太多，我要争分夺秒</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://smithhs.cn/2024/04/17/2024-04-17-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A%EF%BC%88Cisco%20Packet%20Tracer%EF%BC%89/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://smithhs.cn/2024/04/17/2024-04-17-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A%EF%BC%88Cisco%20Packet%20Tracer%EF%BC%89/')">计算机网络实验报告（Cisco Packet Tracer）</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="anzhiyu.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="anzhiyufont anzhiyu-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="anzhiyu.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://smithhs.cn/2024/04/17/2024-04-17-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A%EF%BC%88Cisco%20Packet%20Tracer%EF%BC%89/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=计算机网络实验报告（Cisco Packet Tracer）&amp;url=https://smithhs.cn/2024/04/17/2024-04-17-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A%EF%BC%88Cisco%20Packet%20Tracer%EF%BC%89/&amp;pic=https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/CiscoPacketTracer.jpg" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://smithhs.cn" target="_blank">Smith</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/Cisco-Packet-Tracer/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>Cisco Packet Tracer<span class="tagsPageCount">1</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d20f536c64d06e5fcf4bfe2ec5dc25d.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/04/12/2024-04-12-2024%E6%9C%80%E6%96%B0GPT+GPTs+MJ+Claude3%E7%A8%8B%E5%BA%8F%E6%90%AD%E5%BB%BA/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/v2-540fc0af6b556b67535db82197d91050_1440w.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">最新GPT+GPTs+MJ+Claude3程序搭建</div></div></a></div><div class="next-post pull-right"><a href="/2024/05/07/2024-05-07-LeetCode%E5%88%B7%E9%A2%98/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/hello_leetcode.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">LeetCode刷题教程</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95"><span class="toc-number">1.</span> <span class="toc-text">文章目录</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Cisco-Packet-Tracer%E7%AE%80%E4%BB%8B"><span class="toc-number"></span> <span class="toc-text">Cisco Packet Tracer简介</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1%E3%80%81%E7%9B%B4%E6%8E%A5%E8%BF%9E%E6%8E%A5%E4%B8%A4%E5%8F%B0-PC-%E6%9E%84%E5%BB%BA-LAN"><span class="toc-number">0.1.</span> <span class="toc-text">1、直接连接两台 PC 构建 LAN</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%E3%80%81%E7%94%A8%E4%BA%A4%E6%8D%A2%E6%9C%BA%E6%9E%84%E5%BB%BA-LAN"><span class="toc-number">0.2.</span> <span class="toc-text">2、用交换机构建 LAN</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E4%BA%A4%E6%8D%A2%E6%9C%BA%E6%8E%A5%E5%8F%A3%E5%9C%B0%E5%9D%80%E5%88%97%E8%A1%A8"><span class="toc-number">0.3.</span> <span class="toc-text">3.交换机接口地址列表</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-%E7%94%9F%E6%88%90%E6%A0%91%E5%8D%8F%E8%AE%AE%EF%BC%88Spanning-Tree-Protocol%EF%BC%89"><span class="toc-number">0.4.</span> <span class="toc-text">4.生成树协议（Spanning Tree Protocol）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-%E8%B7%AF%E7%94%B1%E5%99%A8%E9%85%8D%E7%BD%AE%E5%88%9D%E6%AD%A5"><span class="toc-number">0.5.</span> <span class="toc-text">5.路由器配置初步</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6-%E9%9D%99%E6%80%81%E8%B7%AF%E7%94%B1"><span class="toc-number">0.6.</span> <span class="toc-text">6.静态路由</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7-%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1-RIP"><span class="toc-number">0.7.</span> <span class="toc-text">7.动态路由 RIP</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#8-%E8%99%9A%E6%8B%9F%E5%B1%80%E5%9F%9F%E7%BD%91-VLAN"><span class="toc-number">0.8.</span> <span class="toc-text">8.虚拟局域网 VLAN</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#10%E3%80%81%E8%99%9A%E6%8B%9F%E5%B1%80%E5%9F%9F%E7%BD%91%E7%AE%A1%E7%90%86-VTP"><span class="toc-number">0.9.</span> <span class="toc-text">10、虚拟局域网管理 VTP</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#11%E3%80%81VLAN-%E9%97%B4%E7%9A%84%E9%80%9A%E4%BF%A1"><span class="toc-number">0.10.</span> <span class="toc-text">11、VLAN 间的通信</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#12%E3%80%81DHCP%E3%80%81DNS%E5%8F%8AWeb%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AE%80%E5%8D%95%E9%85%8D%E7%BD%AE"><span class="toc-number">0.11.</span> <span class="toc-text">12、DHCP、DNS及Web服务器简单配置</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number"></span> <span class="toc-text">总结</span></a></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2022 - 2026 By <a class="footer-bar-link" href="/" title="Smith" target="_blank">Smith</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/Smithhss/smithhs.github.io.git" title="Hexo">Hexo</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">80</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">55</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">6</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://smithhs.cn/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.png" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="http://robot.onliu.cn/" title="Robot"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/cupfox.png" alt="Robot"/><span class="back-menu-item-text">Robot</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="http://res.onliu.cn" title="Sale"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/tubiao.jpg" alt="Sale"/><span class="back-menu-item-text">Sale</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="http://se.onliu.cn/" title="资源共享"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog/x126.png" alt="资源共享"/><span class="back-menu-item-text">资源共享</span></a><a class="back-menu-item" target="_blank" rel="noopener" href="https://github.com/Smithhss" title="Github"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/GitHub.png" alt="Github"/><span class="back-menu-item-text">Github</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="anzhiyufont anzhiyu-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="anzhiyufont anzhiyu-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="anzhiyufont anzhiyu-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="anzhiyufont anzhiyu-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="anzhiyufont anzhiyu-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/dailyPhoto/"><i class="anzhiyufont anzhiyu-icon-camera faa-tada" style="font-size: 0.9em;"></i><span> 每日照片</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wallpaper/"><i class="anzhiyufont anzhiyu-icon-image faa-tada" style="font-size: 0.9em;"></i><span> 壁纸</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wordScenery/"><i class="anzhiyufont anzhiyu-icon-font faa-tada" style="font-size: 0.9em;"></i><span> 文字风景</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="anzhiyufont anzhiyu-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于我</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="anzhiyufont anzhiyu-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/love/"><i class="anzhiyufont anzhiyu-icon-heart faa-tada" style="font-size: 0.9em;"></i><span> 爱情</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="anzhiyufont anzhiyu-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Android-Studio/" style="font-size: 0.88rem;">Android Studio<sup>1</sup></a><a href="/tags/App/" style="font-size: 0.88rem;">App<sup>2</sup></a><a href="/tags/Butterfly/" style="font-size: 0.88rem;">Butterfly<sup>1</sup></a><a href="/tags/C/" style="font-size: 0.88rem;">C++<sup>1</sup></a><a href="/tags/CSS/" style="font-size: 0.88rem;">CSS<sup>1</sup></a><a href="/tags/Cisco-Packet-Tracer/" style="font-size: 0.88rem;">Cisco Packet Tracer<sup>1</sup></a><a href="/tags/Easypan/" style="font-size: 0.88rem;">Easypan<sup>2</sup></a><a href="/tags/FurtherMathematics/" style="font-size: 0.88rem;">FurtherMathematics<sup>1</sup></a><a href="/tags/GPT/" style="font-size: 0.88rem;">GPT<sup>1</sup></a><a href="/tags/Git2/" style="font-size: 0.88rem;">Git2<sup>1</sup></a><a href="/tags/HTML/" style="font-size: 0.88rem;">HTML<sup>1</sup></a><a href="/tags/Hexo/" style="font-size: 0.88rem;">Hexo<sup>1</sup></a><a href="/tags/Java/" style="font-size: 0.88rem;">Java<sup>6</sup></a><a href="/tags/JavaScript/" style="font-size: 0.88rem;">JavaScript<sup>1</sup></a><a href="/tags/JavaWeb/" style="font-size: 0.88rem;">JavaWeb<sup>2</sup></a><a href="/tags/Jrebel/" style="font-size: 0.88rem;">Jrebel<sup>1</sup></a><a href="/tags/LeetCode/" style="font-size: 0.88rem;">LeetCode<sup>1</sup></a><a href="/tags/Linux/" style="font-size: 0.88rem;">Linux<sup>3</sup></a><a href="/tags/Markdown/" style="font-size: 0.88rem;">Markdown<sup>2</sup></a><a href="/tags/Maven/" style="font-size: 0.88rem;">Maven<sup>2</sup></a><a href="/tags/Mysql/" style="font-size: 0.88rem;">Mysql<sup>1</sup></a><a href="/tags/NoSql/" style="font-size: 0.88rem;">NoSql<sup>1</sup></a><a href="/tags/Nodejs/" style="font-size: 0.88rem;">Nodejs<sup>2</sup></a><a href="/tags/Python/" style="font-size: 0.88rem;">Python<sup>4</sup></a><a href="/tags/Spring/" style="font-size: 0.88rem;">Spring<sup>2</sup></a><a href="/tags/VMware/" style="font-size: 0.88rem;">VMware<sup>2</sup></a><a href="/tags/Vue/" style="font-size: 0.88rem;">Vue<sup>1</sup></a><a href="/tags/YouHou/" style="font-size: 0.88rem;">YouHou<sup>1</sup></a><a href="/tags/books/" style="font-size: 0.88rem;">books<sup>1</sup></a><a href="/tags/butterfly/" style="font-size: 0.88rem;">butterfly<sup>1</sup></a><a href="/tags/clash/" style="font-size: 0.88rem;">clash<sup>1</sup></a><a href="/tags/project/" style="font-size: 0.88rem;">project<sup>4</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 0.88rem;">前端<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6/" style="font-size: 0.88rem;">开发框架<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" style="font-size: 0.88rem;">开发环境<sup>1</sup></a><a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 0.88rem;">操作系统<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" style="font-size: 0.88rem;">数据结构与算法<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" style="font-size: 0.88rem;">计算机组成原理<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 0.88rem;">计算机网络<sup>1</sup></a><a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="font-size: 0.88rem;">软件工程<sup>1</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="nav-music"><a id="nav-music-hoverTips" onclick="anzhiyu.musicToggle()" accesskey="m">播放音乐</a><div id="console-music-bg"></div><meting-js id="8805965276" server="netease" type="playlist" mutex="true" preload="none" theme="var(--anzhiyu-main)" data-lrctype="0" order="random" volume="0.7"></meting-js></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://music.163.com/#/my/m/music/playlist?id=464586318&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn1.tianli0.top/npm/js-heo@1.0.6/translate/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@6.1.6/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/vanilla-lazyload/17.3.1/lazyload.iife.min.js"></script><script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/node-snackbar/0.1.16/snackbar.min.js"></script><script>var meting_api = "https://meting.qjqq.cn/?server=:server&type=:type&id=:id&auth=:auth&r=:r";
 </script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
 var HoldLog = console.log;
 console.log = function () {};
@@ -540,7 +550,7 @@ queueMicrotask(() => {
     "已上线",
     dnum,
     "天",
-    "©2022 By 安知鱼 V1.5.3",
+    "©2022 By 安知鱼 V1.7.1",
   ];
   const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
 
@@ -548,12 +558,12 @@ queueMicrotask(() => {
     Log.bind(
       console,
       `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
-      "color:#3b70fc",
+      "color:#425AEF",
       "",
-      "color:#3b70fc",
-      "color:#3b70fc",
+      "color:#425AEF",
+      "color:#425AEF",
       "",
-      "color:#3b70fc",
+      "color:#425AEF",
       ""
     )
   );
@@ -584,534 +594,8 @@ queueMicrotask(() => {
   setTimeout(
     console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
   );
-});</script><script async src="/anzhiyu/random.js"></script><div class="js-pjax"><input type="hidden" name="page-type" id="page-type" value="post"></div><script>var visitorMail = "visitor@anheyu.com";</script><script>//动态标题
-let leaveTitle = '再看看嘛🌈！';
-let backTitle = '欢迎回来✌️！';
-let OriginTitile = document.title
-let titleTime
-document.addEventListener('visibilitychange', function () {
-  if (document.hidden) {
-    //离开当前页面时标签显示内容
-    document.title = leaveTitle
-    clearTimeout(titleTime)
-  } else {
-    //返回当前页面时标签显示内容
-    document.title = backTitle + OriginTitile
-    //两秒后变回正常标题
-    titleTime = setTimeout(function () {
-      document.title = OriginTitile
-    }, 2000)
-  }
-})</script><script async data-pjax src="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/waterfall.js/1.1.0/waterfall.min.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><script>// 初始化函数
-let rm = {};
-
-//禁止图片与超链接拖拽
-let aElements = document.getElementsByTagName("a");
-for (let i = 0; i < aElements.length; i++) {
-  aElements[i].setAttribute("draggable", "false");
-  let imgElements = aElements[i].getElementsByTagName("img");
-  for (let j = 0; j < imgElements.length; j++) {
-    imgElements[j].setAttribute("draggable", "false");
-  }
-}
-
-// 显示菜单
-rm.showRightMenu = function (isTrue, x = 0, y = 0) {
-  console.info(x, y)
-  let rightMenu = document.getElementById("rightMenu");
-  rightMenu.style.top = x + "px";
-  rightMenu.style.left = y + "px";
-  if (isTrue) {
-    rightMenu.style.display = "block";
-    stopMaskScroll();
-  } else {
-    rightMenu.style.display = "none";
-  }
-};
-
-// 隐藏菜单
-rm.hideRightMenu = function () {
-  rm.showRightMenu(false);
-  let rightMenuMask = document.querySelector("#rightmenu-mask");
-  rightMenuMask.style.display = "none";
-};
-
-// 尺寸
-let rmWidth = document.getElementById("rightMenu").offsetWidth;
-let rmHeight = document.getElementById("rightMenu").offsetHeight;
-
-// 重新定义尺寸
-rm.reloadrmSize = function () {
-  rightMenu.style.visibility = "hidden";
-  rightMenu.style.display = "block";
-  // 获取宽度和高度
-  rmWidth = document.getElementById("rightMenu").offsetWidth;
-  rmHeight = document.getElementById("rightMenu").offsetHeight;
-  rightMenu.style.visibility = "visible";
-};
-
-// 获取点击的href
-let domhref = "";
-let domImgSrc = "";
-let globalEvent = null;
-
-var oncontextmenuFunction = function (event) {
-  if (document.body.clientWidth > 768) {
-    let pageX = event.clientX + 10; //加10是为了防止显示时鼠标遮在菜单上
-    let pageY = event.clientY;
-
-    //其他额外菜单
-    const $rightMenuOther = document.querySelector(".rightMenuOther");
-    const $rightMenuPlugin = document.querySelector(".rightMenuPlugin");
-    const $rightMenuCopyText = document.querySelector("#menu-copytext");
-    const $rightMenuPasteText = document.querySelector("#menu-pastetext");
-    const $rightMenuCommentText = document.querySelector("#menu-commenttext");
-    const $rightMenuNewWindow = document.querySelector("#menu-newwindow");
-    const $rightMenuNewWindowImg = document.querySelector("#menu-newwindowimg");
-    const $rightMenuCopyLink = document.querySelector("#menu-copylink");
-    const $rightMenuCopyImg = document.querySelector("#menu-copyimg");
-    const $rightMenuDownloadImg = document.querySelector("#menu-downloadimg");
-    const $rightMenuSearch = document.querySelector("#menu-search");
-    const $rightMenuSearchBaidu = document.querySelector("#menu-searchBaidu");
-    const $rightMenuMusicToggle = document.querySelector("#menu-music-toggle");
-    const $rightMenuMusicBack = document.querySelector("#menu-music-back");
-    const $rightMenuMusicForward = document.querySelector("#menu-music-forward");
-    const $rightMenuMusicPlaylist = document.querySelector("#menu-music-playlist");
-    const $rightMenuMusicCopyMusicName = document.querySelector("#menu-music-copyMusicName");
-
-    let href = event.target.href;
-    let imgsrc = event.target.currentSrc;
-
-    // 判断模式 扩展模式为有事件
-    let pluginMode = false;
-    $rightMenuOther.style.display = "block";
-    globalEvent = event;
-
-    // 检查是否需要复制 是否有选中文本
-    if (selectTextNow && window.getSelection()) {
-      pluginMode = true;
-      $rightMenuCopyText.style.display = "block";
-      $rightMenuCommentText.style.display = "block";
-      $rightMenuSearch.style.display = "block";
-      $rightMenuSearchBaidu.style.display = "block";
-    } else {
-      $rightMenuCopyText.style.display = "none";
-      $rightMenuCommentText.style.display = "none";
-      $rightMenuSearchBaidu.style.display = "none";
-      $rightMenuSearch.style.display = "none";
-    }
-
-    //检查是否右键点击了链接a标签
-    if (href) {
-      pluginMode = true;
-      $rightMenuNewWindow.style.display = "block";
-      $rightMenuCopyLink.style.display = "block";
-      domhref = href;
-    } else {
-      $rightMenuNewWindow.style.display = "none";
-      $rightMenuCopyLink.style.display = "none";
-    }
-
-    //检查是否需要复制图片
-    if (imgsrc) {
-      pluginMode = true;
-      $rightMenuCopyImg.style.display = "block";
-      $rightMenuDownloadImg.style.display = "block";
-      $rightMenuNewWindowImg.style.display = "block";
-      document.getElementById("rightMenu").style.width="12rem"
-      domImgSrc = imgsrc;
-    } else {
-      $rightMenuCopyImg.style.display = "none";
-      $rightMenuDownloadImg.style.display = "none";
-      $rightMenuNewWindowImg.style.display = "none";
-    }
-
-    // 判断是否为输入框
-    if (event.target.tagName.toLowerCase() === "input" || event.target.tagName.toLowerCase() === "textarea") {
-      pluginMode = true;
-      $rightMenuPasteText.style.display = "block";
-    } else {
-      $rightMenuPasteText.style.display = "none";
-    }
-    const navMusicEl = document.querySelector("#nav-music");
-    //判断是否是音乐
-    if (navMusicEl && navMusicEl.contains(event.target)) {
-      pluginMode = true;
-      $rightMenuMusicToggle.style.display = "block";
-      $rightMenuMusicBack.style.display = "block";
-      $rightMenuMusicForward.style.display = "block";
-      $rightMenuMusicPlaylist.style.display = "block";
-      $rightMenuMusicCopyMusicName.style.display = "block";
-    } else {
-      $rightMenuMusicToggle.style.display = "none";
-      $rightMenuMusicBack.style.display = "none";
-      $rightMenuMusicForward.style.display = "none";
-      $rightMenuMusicPlaylist.style.display = "none";
-      $rightMenuMusicCopyMusicName.style.display = "none";
-    }
-
-    // 如果不是扩展模式则隐藏扩展模块
-    if (pluginMode) {
-      $rightMenuOther.style.display = "none";
-      $rightMenuPlugin.style.display = "block";
-    } else {
-      $rightMenuPlugin.style.display = "none";
-    }
-
-    rm.reloadrmSize();
-
-    // 鼠标默认显示在鼠标右下方，当鼠标靠右或靠下时，将菜单显示在鼠标左方\上方
-    if (pageX + rmWidth > window.innerWidth) {
-      pageX -= rmWidth + 10;
-    }
-    if (pageY + rmHeight > window.innerHeight) {
-      pageY -= pageY + rmHeight - window.innerHeight;
-    }
-
-    rm.showRightMenu(true, pageY, pageX);
-    document.getElementById("rightmenu-mask").style.display = "flex";
-    return false;
-  }
-};
-
-// 监听右键初始化
-window.oncontextmenu = oncontextmenuFunction
-
-// 下载图片状态
-rm.downloadimging = false;
-
-// 复制图片到剪贴板
-rm.writeClipImg = function (imgsrc) {
-  console.log("按下复制");
-  rm.hideRightMenu();
-  anzhiyu.snackbarShow("正在下载中，请稍后", false, 10000);
-  if (rm.downloadimging == false) {
-    rm.downloadimging = true;
-    setTimeout(function () {
-      copyImage(imgsrc);
-      anzhiyu.snackbarShow("复制成功！图片已添加盲水印，请遵守版权协议");
-      rm.downloadimging = false;
-    }, "10000");
-  }
-};
-
-function imageToBlob(imageURL) {
-  const img = new Image();
-  const c = document.createElement("canvas");
-  const ctx = c.getContext("2d");
-  img.crossOrigin = "";
-  img.src = imageURL;
-  return new Promise(resolve => {
-    img.onload = function () {
-      c.width = this.naturalWidth;
-      c.height = this.naturalHeight;
-      ctx.drawImage(this, 0, 0);
-      c.toBlob(
-        blob => {
-          // here the image is a blob
-          resolve(blob);
-        },
-        "image/png",
-        0.75
-      );
-    };
-  });
-}
-
-async function copyImage(imageURL) {
-  const blob = await imageToBlob(imageURL);
-  const item = new ClipboardItem({ "image/png": blob });
-  navigator.clipboard.write([item]);
-}
-
-rm.copyUrl = function (id) {
-  const input = document.createElement("input"); // Create a new <input> element
-  input.id = "copyVal"; // Set the id of the new element to "copyVal"
-  document.body.appendChild(input); // Append the new element to the end of the <body> element
-  
-  const text = id;
-  input.value = text;
-  input.select();
-  input.setSelectionRange(0, input.value.length);
-  document.execCommand("copy");
-  
-  input.remove(); // Remove the <input> element from the DOM
-};
-
-function stopMaskScroll() {
-  if (document.getElementById("rightmenu-mask")) {
-    let xscroll = document.getElementById("rightmenu-mask");
-    xscroll.addEventListener(
-      "mousewheel",
-      function (e) {
-        //阻止浏览器默认方法
-        rm.hideRightMenu();
-        // e.preventDefault();
-      },
-      { passive: true }
-    );
-  }
-  if (document.getElementById("rightMenu")) {
-    let xscroll = document.getElementById("rightMenu");
-    xscroll.addEventListener(
-      "mousewheel",
-      function (e) {
-        //阻止浏览器默认方法
-        rm.hideRightMenu();
-        // e.preventDefault();
-      },
-      { passive: true }
-    );
-  }
-}
-
-rm.rightmenuCopyText = function (txt) {
-  if (navigator.clipboard) {
-    navigator.clipboard.writeText(txt);
-  }
-  rm.hideRightMenu();
-};
-
-rm.copyPageUrl = function (url) {
-  if (!url) {
-    url = window.location.href;
-  }
-  rm.copyUrl(url);
-  anzhiyu.snackbarShow("复制链接地址成功", false, 2000);
-  rm.hideRightMenu();
-};
-
-rm.sharePage = function () {
-  var content = window.location.href;
-  rm.copyUrl(url);
-  anzhiyu.snackbarShow("复制链接地址成功", false, 2000);
-  rm.hideRightMenu();
-};
-
-// 复制当前选中文本
-var selectTextNow = "";
-document.onmouseup = document.ondblclick = selceText;
-
-function selceText() {
-  var txt;
-  if (document.selection) {
-    txt = document.selection.createRange().text;
-  } else {
-    txt = window.getSelection().toString();
-  }
-  selectTextNow = txt !== "" ? txt : "";
-}
-
-// 读取剪切板
-rm.readClipboard = function () {
-  if (navigator.clipboard) {
-    navigator.clipboard.readText().then(clipText => rm.insertAtCaret(globalEvent.target, clipText));
-  }
-};
-
-// 粘贴文本到焦点
-rm.insertAtCaret = function (elemt, value) {
-  const startPos = elemt.selectionStart,
-    endPos = elemt.selectionEnd;
-  if (document.selection) {
-    elemt.focus();
-    var sel = document.selection.createRange();
-    sel.text = value;
-    elemt.focus();
-  } else {
-    if (startPos || startPos == "0") {
-      var scrollTop = elemt.scrollTop;
-      elemt.value = elemt.value.substring(0, startPos) + value + elemt.value.substring(endPos, elemt.value.length);
-      elemt.focus();
-      elemt.selectionStart = startPos + value.length;
-      elemt.selectionEnd = startPos + value.length;
-      elemt.scrollTop = scrollTop;
-    } else {
-      elemt.value += value;
-      elemt.focus();
-    }
-  }
-};
-
-//粘贴文本
-rm.pasteText = function () {
-  const result = rm.readClipboard() || "";
-  rm.hideRightMenu();
-};
-
-//引用到评论
-rm.rightMenuCommentText = function (txt) {
-  rm.hideRightMenu();
-  const postCommentDom = document.getElementById("post-comment");
-  var domTop = postCommentDom.offsetTop;
-  window.scrollTo(0, domTop - 80);
-  if (txt == "undefined" || txt == "null") txt = "好棒！";
-  function setText() {
-    setTimeout(() => {
-      var input = document.getElementsByClassName("el-textarea__inner")[0];
-      if (!input) setText();
-      let evt = document.createEvent("HTMLEvents");
-      evt.initEvent("input", true, true);
-      let inputValue = replaceAll(txt, "\n", "\n> ");
-      input.value = "> " + inputValue + "\n\n";
-      input.dispatchEvent(evt);
-      input.focus();
-      input.setSelectionRange(-1, -1);
-      if (document.getElementById("comment-tips")) {
-        document.getElementById("comment-tips").classList.add("show");
-      }
-    }, 100);
-  }
-  setText();
-};
-
-//替换所有内容
-function replaceAll(string, search, replace) {
-  return string.split(search).join(replace);
-}
-
-// 百度搜索
-rm.searchBaidu = function () {
-  anzhiyu.snackbarShow("即将跳转到百度搜索", false, 2000);
-  setTimeout(function () {
-    window.open("https://www.baidu.com/s?wd=" + selectTextNow);
-  }, "2000");
-  rm.hideRightMenu();
-};
-
-//分享链接
-rm.copyLink = function () {
-  rm.rightmenuCopyText(domhref);
-  anzhiyu.snackbarShow("已复制链接地址");
-};
-
-function addRightMenuClickEvent() {
-  // 添加点击事件
-  document.getElementById("menu-backward").addEventListener("click", function () {
-  window.history.back();
-    rm.hideRightMenu();
-  });
-
-  document.getElementById("menu-forward").addEventListener("click", function () {
-    window.history.forward();
-    rm.hideRightMenu();
-  });
-
-  document.getElementById("menu-refresh").addEventListener("click", function () {
-    window.location.reload();
-  });
-
-  document.getElementById("menu-top").addEventListener("click", function () {
-    anzhiyu.scrollToDest(0, 500);
-    rm.hideRightMenu();
-  });
-
-  const menuLinks = document.querySelectorAll(".menu-link");
-  menuLinks.forEach(function (link) {
-    link.addEventListener("click", rm.hideRightMenu);
-  });
-
-  document.getElementById("menu-darkmode").addEventListener("click", anzhiyu.switchDarkMode);
-
-  document.getElementById("menu-home") && document.getElementById("menu-home").addEventListener("click", function () {
-    window.location.href = window.location.origin;
-  });
-
-  document.getElementById("menu-randomPost").addEventListener("click", function () {
-    toRandomPost();
-  });
-
-  document.getElementById("menu-commentBarrage").addEventListener("click", anzhiyu.switchCommentBarrage);
-
-  document.getElementById("rightmenu-mask").addEventListener("click", rm.hideRightMenu);
-
-  document.getElementById("rightmenu-mask").addEventListener("contextmenu", function (event) {
-    rm.hideRightMenu();
-    event.preventDefault(); // Prevent the default context menu from appearing
-  });
-
-  document.getElementById("menu-copy").addEventListener("click", rm.copyPageUrl);
-
-  document.getElementById("menu-pastetext").addEventListener("click", rm.pasteText);
-
-  document.getElementById("menu-copytext").addEventListener("click", function () {
-    rm.rightmenuCopyText(selectTextNow);
-    anzhiyu.snackbarShow("复制成功，复制和转载请标注本文地址");
-  });
-
-  document.getElementById("menu-commenttext").addEventListener("click", function () {
-    rm.rightMenuCommentText(selectTextNow);
-  });
-
-  document.getElementById("menu-newwindow").addEventListener("click", function () {
-    window.open(domhref, "_blank");
-    rm.hideRightMenu();
-  });
-
-  document.getElementById("menu-copylink").addEventListener("click", rm.copyLink);
-
-  document.getElementById("menu-downloadimg").addEventListener("click", function () {
-    anzhiyu.downloadImage(domImgSrc, "anzhiyu");
-  });
-
-  document.getElementById("menu-newwindowimg").addEventListener("click", function () {
-    window.open(domImgSrc, "_blank");
-    rm.hideRightMenu();
-  });
-
-  document.getElementById("menu-copyimg").addEventListener("click", function () {
-    rm.writeClipImg(domImgSrc);
-  });
-
-  document.getElementById("menu-searchBaidu").addEventListener("click", rm.searchBaidu);
-
-  //音乐
-  document.getElementById("menu-music-toggle").addEventListener("click", anzhiyu.musicToggle);
-
-  document.getElementById("menu-music-back").addEventListener("click", anzhiyu.musicSkipBack);
-
-  document.getElementById("menu-music-forward").addEventListener("click", anzhiyu.musicSkipForward);
-
-  document.getElementById("menu-music-copyMusicName").addEventListener("click", function () {
-    rm.rightmenuCopyText(anzhiyu.musicGetName());
-    anzhiyu.snackbarShow("复制歌曲名称成功", false, 3000);
-  });
-
-}
-
-addRightMenuClickEvent();</script><script data-pjax>var themeColorMeta = document.querySelector('meta[name="theme-color"]');
-var pageHeaderEl = document.getElementById("page-header");
-var navMusicEl = document.getElementById("nav-music");
-var consoleEl = document.getElementById("console");
-// 已随机的歌曲
-var selectRandomSong = [];
-// 音乐默认声音大小
-var musicVolume = 0.8;
-// 是否切换了周杰伦音乐列表
-var changeMusicListFlag = false;
-// 当前默认播放列表
-var defaultPlayMusicList = [];
-
-document.getElementById("page-name").innerText = document.title.split(" | Smith")[0];
-anzhiyu.initIndexEssay();
-anzhiyu.changeTimeInEssay();
-anzhiyu.removeBodyPaceClass();
-anzhiyu.qrcodeCreate();
-anzhiyu.changeTimeInAlbumDetail();
-anzhiyu.reflashEssayWaterFall();
-anzhiyu.sayhi();
-anzhiyu.stopImgRightDrag();
-anzhiyu.addNavBackgroundInit();
-anzhiyu.setValueToBodyType();
-anzhiyu.catalogActive();
-anzhiyu.tagsPageActive();
-anzhiyu.categoriesBarActive();
-anzhiyu.topCategoriesBarScroll();
-anzhiyu.switchRightClickMenuHotReview();
-anzhiyu.getCustomPlayList();
-anzhiyu.addEventListenerConsoleMusicList(false);
-setTimeout(() => {if (typeof addFriendLinksInFooter === "function") {addFriendLinksInFooter();}}, 200)</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><link rel="stylesheet" href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/aplayer/1.10.1/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/aplayer/1.10.1/APlayer.min.js"></script><script src="https://npm.elemecdn.com/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://lib.baomitu.com/pjax/0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
-
+});</script><script async src="/anzhiyu/random.js"></script><div class="js-pjax"><input type="hidden" name="page-type" id="page-type" value="post"></div><script>var visitorMail = "visitor@anheyu.com";
+</script><script async data-pjax src="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/waterfall.js/1.1.0/waterfall.min.js"></script><script src="https://cdn.cbd.int/qrcodejs@1.0.0/qrcode.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><link rel="stylesheet" href="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/aplayer/1.10.1/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/aplayer/1.10.1/APlayer.min.js"></script><script src="https://npm.elemecdn.com/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://lib.baomitu.com/pjax/0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
 var pjax = new Pjax({
   elements: 'a:not([target="_blank"])',
   selectors: pjaxSelectors,
@@ -1122,10 +606,10 @@ var pjax = new Pjax({
 
 document.addEventListener('pjax:send', function () {
   // removeEventListener scroll 
-  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
-  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
 
-  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  document.getElementById('rightside').classList.remove('rightside-show')
   
   if (window.aplayers) {
     for (let i = 0; i < window.aplayers.length; i++) {
@@ -1155,7 +639,6 @@ document.addEventListener('pjax:complete', function () {
 
   GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
 
-  typeof chatBtnFn === 'function' && chatBtnFn()
   typeof panguInit === 'function' && panguInit()
 
   // google analytics
@@ -1170,8 +653,8 @@ document.addEventListener('pjax:complete', function () {
   typeof Prism === 'object' && Prism.highlightAll()
 })
 
-document.addEventListener('pjax:error', (e) => {
+document.addEventListener('pjax:error', e => {
   if (e.request.status === 404) {
     pjax.loadUrl('/404.html')
   }
-})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div></body></html>
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div></body></html>
