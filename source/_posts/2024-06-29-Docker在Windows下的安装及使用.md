@@ -2,7 +2,7 @@
 title: Docker在Windows下的安装及使用
 date: 2024-06-23 15:56:00
 tags: Docker
-categories: Programming
+categories: 编程开发
 cover: 'https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/docker.png'
 ---
 

@@ -2,7 +2,7 @@
 title: Vue3项目实战Easypan仿百度网盘前端
 date: 2024-05-18 15:21:00
 tags: Easypan
-categories: Programming
+categories: 编程开发
 cover: 'https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/0148c85ce647a6a801208f8b2ce8b7.jpg@1280w_1l_2o_100sh.jpg'
 ---
 

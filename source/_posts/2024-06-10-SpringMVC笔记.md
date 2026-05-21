@@ -2,7 +2,7 @@
 title: SpringMVC笔记
 date: 2024-06-10 20:58:00
 tags: SpringMVC
-categories: Programming
+categories: 编程开发
 cover: 'https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/springmvc.webp'
 ---
 

@@ -2,7 +2,7 @@
 title: 手把手教你用Android Studio写一个APP
 date: 2024-05-20 17:56:00
 tags: Android Studio
-categories: Programming
+categories: 编程开发
 cover: 'https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/Android%20Studio.png'
 ---
 

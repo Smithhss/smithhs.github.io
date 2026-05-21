@@ -2,7 +2,7 @@
 title: Hexo搭建Butterfly主题并快速美化
 date: 2022-01-28 05:28:00
 tags: Butterfly
-categories: Blog
+categories: 随笔
 cover: 'https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/Butterfly.jpg'
 ---
 

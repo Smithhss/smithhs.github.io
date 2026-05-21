@@ -2,7 +2,7 @@
 title: mongodb 图形界面工具 -- Studio 3T
 date: 2024-09-05 08:37:54
 tags: Studio3T
-categories: Programming
+categories: 编程开发
 cover: 'https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/Studio%203T.webp'
 ---
 

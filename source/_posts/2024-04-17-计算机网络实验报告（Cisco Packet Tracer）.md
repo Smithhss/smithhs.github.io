@@ -2,7 +2,7 @@
 title: 计算机网络实验报告（Cisco Packet Tracer）
 date: 2024-04-17 06:54:40
 tags: Cisco Packet Tracer
-categories: Programming
+categories: 编程开发
 cover: 'https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/CiscoPacketTracer.jpg'
 ---
 

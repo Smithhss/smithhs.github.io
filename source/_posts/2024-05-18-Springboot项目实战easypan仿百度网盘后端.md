@@ -2,7 +2,7 @@
 title: Springboot项目实战Easypan仿百度网盘后端
 date: 2024-05-18 15:08:00
 tags: Easypan
-categories: Programming
+categories: 编程开发
 cover: 'https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/R-C.jpg'
 ---
 

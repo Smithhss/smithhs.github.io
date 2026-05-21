@@ -2,7 +2,7 @@
 title: MyBatis-Plus快速入门
 date: 2024-06-19 21:48:00
 tags: MyBatis-Plus
-categories: Programming
+categories: 编程开发
 cover: 'https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/cover-mybatis-plus.png'
 ---
 

@@ -2,7 +2,7 @@
 title: 基于SpringBoot音乐系统项目
 date: 2024-06-16 20:56:00
 tags: project
-categories: Programming
+categories: 编程开发
 cover: 'https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/musicxiangmu.jpg'
 ---
 

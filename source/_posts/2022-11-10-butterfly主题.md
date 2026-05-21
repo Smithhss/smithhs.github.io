@@ -2,7 +2,7 @@
 title: Butterfly主题配置
 date: 2022-11-10 22:25:00
 tags: butterfly
-categories: Blog
+categories: 随笔
 cover: 'https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/butterfly.webp'
 ---
 

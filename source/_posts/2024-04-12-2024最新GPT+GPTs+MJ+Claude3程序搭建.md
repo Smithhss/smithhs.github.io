@@ -2,7 +2,7 @@
 title: 最新GPT+GPTs+MJ+Claude3程序搭建
 date: 2024-04-12 20:04:00
 tags: GPT
-categories: Programming
+categories: 编程开发
 cover: 'https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/v2-540fc0af6b556b67535db82197d91050_1440w.jpg'
 ---
 

@@ -2,7 +2,7 @@
 title: JavaScript
 date: 2021-08-03 10:21:24
 tags: JavaScript
-categories: Front
+categories: 编程开发
 cover: 'https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/JavaScript.png'
 ---
 
