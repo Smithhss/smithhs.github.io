@@ -76,19 +76,19 @@ social:
 # 作者卡片 状态
 author_status:
   enable: true
-  status: ✍️
-  alias: writing_hand
-  fallback_src: https://github.githubassets.com/images/icons/emoji/unicode/270d.png
-  text: on Studying
+  status: 💻
+  alias: laptop
+  fallback_src: https://github.githubassets.com/images/icons/emoji/unicode/1f4bb.png
+  text: on Building
   skills:
-    - 🤖️ 数码科技爱好者
-    - 🔍 分享与热心帮助
-    - 🏠 智能家居小能手
-    - 🔨 设计开发一条龙
-    - 🤝 专修交互与设计
-    - 🏃 脚踏实地行动派
-    - 🧱 团队小组发动机
-    - 💢 壮汉人狠话不多
+    - 💻 后端开发 Java / Spring Cloud
+    - 🌐 前端探索 React / TypeScript
+    - 🤖 AI 工具深度用户
+    - 🏠 智能家居折腾达人
+    - 🔨 从设计到部署一条龙
+    - 📝 偶尔写写博客记录生活
+    - 🎵 听歌写代码双线并行
+    - 🚀 脚踏实地行动派
 
 # search (搜索)
 # see https://butterfly.js.org/posts/ceeb73f/#搜索系统
@@ -812,7 +812,7 @@ aside:
     category: true
   card_author:
     enable: true
-    description: <div style="line-height:1.38;margin:0.6rem 0;text-align:justify;color:rgba(255, 255, 255, 0.8);">我将分享关于<b style="color:#fff">Code、Robot</b>的文章、教程和经验总结。</div><div style="line-height:1.38;margin:0.6rem 0;text-align:justify;color:rgba(255, 255, 255, 0.8);">相信你可以在这里找到对你有用的<b style="color:#fff">知识</b>和<b style="color:#fff">教程</b>。</div> # 默认为站点描述
+    description: <div style="line-height:1.38;margin:0.6rem 0;text-align:justify;color:rgba(255, 255, 255, 0.8);">分享关于 <b style="color:#fff">Java、Spring Cloud、前端</b> 的技术文章与经验总结。</div><div style="line-height:1.38;margin:0.6rem 0;text-align:justify;color:rgba(255, 255, 255, 0.8);">也记录一些<b style="color:#fff">生活与思考</b>，欢迎常来坐坐。</div> # 默认为站点描述
     name_link: /
   
   card_announcement:
