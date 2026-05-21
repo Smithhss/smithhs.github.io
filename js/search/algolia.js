@@ -11,7 +11,7 @@ window.addEventListener("load", () => {
   };
 
   const openSearch = () => {
-    anzhiyu.animateIn($searchMask, "to_show 0.5s");
+    smith.animateIn($searchMask, "to_show 0.5s");
     $searchDialog.style.display = "block";
     setTimeout(() => {
       document.querySelector("#algolia-search .ais-SearchBox-input").focus();
@@ -30,7 +30,7 @@ window.addEventListener("load", () => {
   };
 
   // shortcut: shift+S
-  if (anzhiyu_keyboard) {
+  if (smith_keyboard) {
     window.addEventListener("keydown", function (event) {
       if (event.keyCode == 83 && event.shiftKey) {
         console.info(selectTextNow);
@@ -52,8 +52,8 @@ window.addEventListener("load", () => {
   }
 
   const closeSearch = () => {
-    anzhiyu.animateOut($searchDialog, "search_close .5s");
-    anzhiyu.animateOut($searchMask, "to_hide 0.5s");
+    smith.animateOut($searchDialog, "search_close .5s");
+    smith.animateOut($searchMask, "to_hide 0.5s");
     window.removeEventListener("resize", fixSafariHeight);
   };
 
@@ -65,7 +65,7 @@ window.addEventListener("load", () => {
   };
 
   const searchClickFn = () => {
-    anzhiyu.addEventListenerPjax(document.querySelector("#search-button > .search"), "click", openSearch);
+    smith.addEventListenerPjax(document.querySelector("#search-button > .search"), "click", openSearch);
   };
 
   const searchFnOnce = () => {
@@ -93,7 +93,7 @@ window.addEventListener("load", () => {
     searchClient: algoliasearch(algolia.appId, algolia.apiKey),
     searchFunction(helper) {
       if (helper.state.query) {
-        let innerLoading = '<i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i>';
+        let innerLoading = '<i class="smithfont smith-icon-spinner smith-spin"></i>';
         document.getElementById("algolia-hits").innerHTML = innerLoading;
         helper.search();
       }
@@ -122,7 +122,7 @@ window.addEventListener("load", () => {
         // 验证链接安全性，防止 javascript: 协议注入
         const link = /^(https?:\/\/|\/)/i.test(rawLink) ? escapeHtml(rawLink) : escapeHtml("/" + rawLink);
         const result = data._highlightResult;
-        const loadingLogo = document.querySelector("#algolia-hits .anzhiyu-spin");
+        const loadingLogo = document.querySelector("#algolia-hits .smith-spin");
         if (loadingLogo) {
           loadingLogo.style.display = "none";
         }
@@ -138,7 +138,7 @@ window.addEventListener("load", () => {
           </a>`;
       },
       empty: function (data) {
-        const loadingLogo = document.querySelector("#algolia-hits .anzhiyu-spin");
+        const loadingLogo = document.querySelector("#algolia-hits .smith-spin");
         console.info(loadingLogo);
         if (loadingLogo) {
           loadingLogo.style.display = "none";
@@ -179,10 +179,10 @@ window.addEventListener("load", () => {
     container: "#algolia-pagination",
     totalPages: algolia.hits.per_page ?? 5,
     templates: {
-      first: '<i class="anzhiyufont anzhiyu-icon-angle-double-left"></i>',
-      last: '<i class="anzhiyufont anzhiyu-icon-angle-double-right"></i>',
-      previous: '<i class="anzhiyufont anzhiyu-icon-angle-left"></i>',
-      next: '<i class="anzhiyufont anzhiyu-icon-angle-right"></i>',
+      first: '<i class="smithfont smith-icon-angle-double-left"></i>',
+      last: '<i class="smithfont smith-icon-angle-double-right"></i>',
+      previous: '<i class="smithfont smith-icon-angle-left"></i>',
+      next: '<i class="smithfont smith-icon-angle-right"></i>',
     },
     scrollTo: false,
     showFirstLast: false,
@@ -203,7 +203,7 @@ window.addEventListener("load", () => {
   searchFnOnce();
 
   window.addEventListener("pjax:complete", () => {
-    !anzhiyu.isHidden($searchMask) && closeSearch();
+    !smith.isHidden($searchMask) && closeSearch();
     searchClickFn();
   });
 
