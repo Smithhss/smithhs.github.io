@@ -1,32 +1,24 @@
 {
-  "name": "hexo-theme-anzhiyu",
-  "version": "1.7.1",
-  "description": "A Simple and Card UI Design theme for Hexo",
+  "name": "hexo-theme-smith",
+  "version": "1.0.0",
+  "description": "A Card UI Design theme for Hexo, built by Smith",
   "main": "package.json",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [
-    "hexo",
-    "theme",
-    "anzhiyu",
-    "Card UI Design",
-    "AnZhiYu",
-    "hexo-theme-anzhiyu"
-  ],
+  "keywords": ["hexo", "theme", "smith", "hexo-theme-smith", "Card UI Design"],
   "repository": {
     "type": "git",
-    "url": "https://github.com/anzhiyu-c/hexo-theme-anzhiyu.git"
+    "url": "https://github.com/Smithhss/hexo-theme-smith.git"
   },
   "bugs": {
-    "url": "https://github.com/anzhiyu-c/hexo-theme-anzhiyu/issues",
-    "email": "me@anheyu.com"
+    "url": "https://github.com/Smithhss/hexo-theme-smith/issues"
   },
   "dependencies": {
     "hexo-renderer-stylus": "^3.0.0",
     "hexo-renderer-pug": "^3.0.0"
   },
-  "homepage": "https://hexo.anheyu.com/",
-  "author": "anzhiyu <me@anheyu.com>",
+  "homepage": "https://github.com/Smithhss/hexo-theme-smith",
+  "author": "Smith <saressmith@outlook.com>",
   "license": "GPL-3.0"
 }
