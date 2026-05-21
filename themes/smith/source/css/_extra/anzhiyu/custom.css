@@ -1,3 +1,17 @@
+/* ===== Smith Theme Font ===== */
+:root {
+  --smith-font-body: 'LXGW WenKai Screen', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --anzhiyu-background: #fafaf8;
+}
+
+body {
+  font-family: var(--smith-font-body) !important;
+}
+
+[data-theme="light"] body {
+  background-color: #fafaf8;
+}
+
 h1#site-title {
   font-size: 3em !important;
 }
