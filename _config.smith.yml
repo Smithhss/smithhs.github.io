@@ -1054,25 +1054,25 @@ css_prefix: true
 home_top:
   enable: true # 开关
   timemode: date #date/updated
-  title: No one
-  subTitle: Can deny you。
+  title: Smith
+  subTitle: Build things. Write things. Own things.
   siteText: smithhs.cn
   category:
     - name: Code
-      path: /categories/前端开发/
+      path: /categories/编程开发/
       shadow: var(--anzhiyu-shadow-blue)
       class: blue
       icon: anzhiyu-icon-dove
-    - name: 热点
-      path: /categories/热点事件/
-      shadow: var(--anzhiyu-shadow-red)
-      class: red
-      icon: anzhiyu-icon-fire
     - name: 生活
       path: /categories/生活日常/
       shadow: var(--anzhiyu-shadow-green)
       class: green
       icon: anzhiyu-icon-book
+    - name: 随笔
+      path: /categories/随笔/
+      shadow: var(--anzhiyu-shadow-yellow)
+      class: yellow
+      icon: anzhiyu-icon-lightbulb
   default_descr: 再怎么看我也不知道怎么描述它的啦！
   swiper:
     enable: false
@@ -1349,7 +1349,7 @@ rightClickMenu:
   enable: false
 
 peoplecanvas:
-  enable: true
+  enable: false
   img: https://upload-bbs.miyoushe.com/upload/2024/07/27/125766904/ba62475f396df9de3316a08ed9e65d86_5680958632268053399..png
 
 dynamicEffect:
