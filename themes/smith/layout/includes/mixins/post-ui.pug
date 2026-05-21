@@ -81,21 +81,21 @@ mixin postUI(posts)
                 +countBlockInIndex
                   a(href=url_for(link) + '#post-comment')
                     span.valine-comment-count(data-xid=url_for(link))
-                      i.smithfont.smith-icon-spinner.anzhiyu-spin
+                      i.smithfont.smith-icon-spinner.smith-spin
               when 'Waline'
                 +countBlockInIndex
                   a(href=url_for(link) + '#post-comment')
                     span.waline-comment-count(id=url_for(link))
-                      i.smithfont.smith-icon-spinner.anzhiyu-spin
+                      i.smithfont.smith-icon-spinner.smith-spin
               when 'Twikoo'
                 +countBlockInIndex
                   a.twikoo-count(href=url_for(link) + '#post-comment' tabindex="-1")
-                    i.smithfont.smith-icon-spinner.anzhiyu-spin
+                    i.smithfont.smith-icon-spinner.smith-spin
               when 'Artalk'
                 +countBlockInIndex
                   a(href=url_for(link) + '#post-comment')
                     span.artalk-count(data-page-key=url_for(link))
-                      i.smithfont.smith-icon-spinner.anzhiyu-spin
+                      i.smithfont.smith-icon-spinner.smith-spin
 
         //- Display the article introduction on homepage
         case theme.index_post_content.method

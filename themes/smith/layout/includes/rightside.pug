@@ -30,7 +30,7 @@ mixin rightsideItem(array)
           a#to_comment(href="#post-comment" title=_p("rightside.scroll_to_comment"))
             i.smithfont.smith-icon-comments
         if theme.comment_barrage_config && theme.comment_barrage_config.enable
-          a#switch-commentBarrage(href="javascript:anzhiyu.switchCommentBarrage();" title="开关弹幕")
+          a#switch-commentBarrage(href="javascript:smith.switchCommentBarrage();" title="开关弹幕")
             i.smithfont.smith-icon-danmu
 
 #rightside

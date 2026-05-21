@@ -1,12 +1,12 @@
 blank_issues_enabled: false
 contact_links:
-  - name: Questions about AnZhiYu
-    url: https://github.com/anzhiyu-c/hexo-theme-anzhiyu/discussions
+  - name: Questions about Smith
+    url: https://github.com/smith-c/hexo-theme-smith/discussions
     about: 一些使用问题请到 Discussion 询问。 Please ask questions in Discussion.
 
-  - name: AnZhiYu Q&A
+  - name: Smith Q&A
     url: https://hexo.anheyu.com/comments/
-    about: AnZhiYu Q&A
+    about: Smith Q&A
 
   - name: QQ群
     url: https://jq.qq.com/?_wv=1027&k=v7NK7ELr

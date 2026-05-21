@@ -130,7 +130,7 @@ div#category {
 }
 
 #article-container
-  a:not([data-fancybox="gallery"]):not(.headerlink):not(.cf-friends-link):not(.tag-Link):not(.btn-anzhiyu):not(
+  a:not([data-fancybox="gallery"]):not(.headerlink):not(.cf-friends-link):not(.tag-Link):not(.btn-smith):not(
     .no-text-decoration
   ) {
   font-weight: 500;
@@ -141,7 +141,7 @@ div#category {
   font-family: inherit;
 }
 #article-container
-  a:not([data-fancybox="gallery"]):not(.headerlink):not(.cf-friends-link):not(.btn-anzhiyu):not(
+  a:not([data-fancybox="gallery"]):not(.headerlink):not(.cf-friends-link):not(.btn-smith):not(
     .no-text-decoration
   ):hover {
   color: var(--smith-white);

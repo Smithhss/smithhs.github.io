@@ -29,19 +29,19 @@
       .console-btn-item
         a.darkmode_switchbutton(title=_p('console.toggle_mode'), href='javascript:void(0);')
           i.smithfont.smith-icon-moon
-    .console-btn-item#consoleHideAside(onclick='anzhiyu.hideAsideBtn()', title=_p('console.toggle_aside'))
+    .console-btn-item#consoleHideAside(onclick='smith.hideAsideBtn()', title=_p('console.toggle_aside'))
       a.asideSwitch
         i.smithfont.smith-icon-arrows-left-right
     if theme.comment_barrage_config.enable
-      .console-btn-item.on#consoleCommentBarrage(onclick='anzhiyu.switchCommentBarrage()', title=_p('console.toggle_barrage'))
+      .console-btn-item.on#consoleCommentBarrage(onclick='smith.switchCommentBarrage()', title=_p('console.toggle_barrage'))
         a.commentBarrage
           i.smithfont.smith-icon-message
     if theme.nav_music.enable
-      .console-btn-item#consoleMusic(onclick='anzhiyu.musicToggle()', title=_p('console.toggle_music'))
+      .console-btn-item#consoleMusic(onclick='smith.musicToggle()', title=_p('console.toggle_music'))
         a.music-switch
           i.smithfont.smith-icon-music
     if theme.shortcutKey.enable
-      .console-btn-item#consoleKeyboard(onclick='anzhiyu.keyboardToggle()', title=_p('console.toggle_keyboard'))
+      .console-btn-item#consoleKeyboard(onclick='smith.keyboardToggle()', title=_p('console.toggle_keyboard'))
         a.keyboard-switch
           i.smithfont.smith-icon-keyboard
-  .console-mask(onclick='anzhiyu.hideConsole()', href='javascript:void(0);')
+  .console-mask(onclick='smith.hideConsole()', href='javascript:void(0);')

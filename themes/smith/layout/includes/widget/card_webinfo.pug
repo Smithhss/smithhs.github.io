@@ -16,7 +16,7 @@ if theme.aside.card_webinfo.enable
             i.smithfont.smith-icon-stopwatch
             .item-name= _p('aside.card_webinfo.runtime.name') + " :"
           .item-count#runtimeshow(data-publishDate=date_xml(theme.runtimeshow.publish_date))
-            i.smithfont.smith-icon-spinner.anzhiyu-spin
+            i.smithfont.smith-icon-spinner.smith-spin
       if theme.wordcount.enable && theme.wordcount.total_wordcount
         .webinfo-item
           .webinfo-item-title
@@ -29,19 +29,19 @@ if theme.aside.card_webinfo.enable
             i.smithfont.smith-icon-universal-access
             .item-name= _p('aside.card_webinfo.site_uv_name') + " :"
           .item-count#busuanzi_value_site_uv
-            i.smithfont.smith-icon-spinner.anzhiyu-spin
+            i.smithfont.smith-icon-spinner.smith-spin
       if theme.busuanzi.site_pv
         .webinfo-item
           .webinfo-item-title
             i.smithfont.smith-icon-square-poll-vertical
             .item-name= _p('aside.card_webinfo.site_pv_name') + " :"
           .item-count#busuanzi_value_site_pv
-            i.smithfont.smith-icon-spinner.anzhiyu-spin
+            i.smithfont.smith-icon-spinner.smith-spin
       if theme.aside.card_webinfo.last_push_date
         .webinfo-item
           .webinfo-item-title
             i.smithfont.smith-icon-hourglass-start
             .item-name= _p('aside.card_webinfo.last_push_date.name') + " :"
           .item-count#last-push-date(data-lastPushDate=date_xml(Date.now()))
-            i.smithfont.smith-icon-spinner.anzhiyu-spin
+            i.smithfont.smith-icon-spinner.smith-spin
 

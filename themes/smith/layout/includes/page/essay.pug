@@ -41,7 +41,7 @@ if site.data.essay
                           .bber-content-noimg
                       if item.aplayer
                         .bber-music
-                          meting-js(id=item.aplayer.id, server=item.aplayer.server, type="song", mutex="true",preload="none", theme="var(--anzhiyu-main)", data-lrctype="0", order="list")
+                          meting-js(id=item.aplayer.id, server=item.aplayer.server, type="song", mutex="true",preload="none", theme="var(--smith-main)", data-lrctype="0", order="list")
                   hr
                   .bber-bottom
                     .bber-info
@@ -63,5 +63,5 @@ if site.data.essay
                           span=item.address
                     .bber-reply(onclick="rm.rightMenuCommentText(" + `'${item.content}'` + ")")
                       i.smithfont.smith-icon-message
-      #bber-tips(style='color: var(--anzhiyu-secondtext);')
+      #bber-tips(style='color: var(--smith-secondtext);')
         ="- 只展示最近" + i.limit + "条短文 -"

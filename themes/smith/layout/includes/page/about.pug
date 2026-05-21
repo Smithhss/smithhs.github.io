@@ -63,7 +63,7 @@ if site.data.about
             .author-content-item-tips=skillsTips.tips
             span.author-content-item-title=skillsTips.title
             .skills-style-group
-              include ../anzhiyu/tags-group-all.pug
+              include ../smith/tags-group-all.pug
               if site.data.creativity
                 .skills-list
                   each i in site.data.creativity
@@ -236,7 +236,7 @@ if site.data.about
                     .reward-list-item-name=item.name
                     .reward-list-bottom-group
                       if item.amount >= 50
-                        .reward-list-item-money(style='background:var(--anzhiyu-yellow)')=`¥${item.amount}`
+                        .reward-list-item-money(style='background:var(--smith-yellow)')=`¥${item.amount}`
                       else 
                         .reward-list-item-money=`¥${item.amount + (item.suffix ? item.suffix : "")}`
                       .datatime.reward-list-item-time(datatime=item.datatime)=new Date(item.datatime).toISOString().slice(0, -14)
@@ -245,7 +245,7 @@ if site.data.about
                 time.datatime.reward-list-updateDate-time(datatime=sortedByDate[0].datatime)=new Date(sortedByDate[0].datatime).toISOString().slice(0, -14)
             .about-reward
               #con
-              #TA-con(onclick="anzhiyu.rewardShowConsole()")
+              #TA-con(onclick="smith.rewardShowConsole()")
                 #text-con
                   #linght
                   #TA=_p('about.charge_for_ta')

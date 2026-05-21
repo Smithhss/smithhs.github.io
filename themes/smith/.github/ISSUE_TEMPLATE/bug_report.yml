@@ -9,9 +9,9 @@ body:
         重要：请依照该模板来提交 
         Please follow the template to create a new issue
   - type: input
-    id: anzhiyu-ver
+    id: smith-ver
     attributes:
-      label: 使用的 AnZhiYu 版本？ | What version of AnZhiYu are you use?
+      label: 使用的 Smith 版本？ | What version of Smith are you use?
       description: 检视主题的 package.json | Check the theme's package.json
     validations:
       required: true

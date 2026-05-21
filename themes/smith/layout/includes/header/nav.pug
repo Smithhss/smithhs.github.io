@@ -18,18 +18,18 @@ nav#nav
         .title #[=config.title]
         i.smithfont.smith-icon-house-chimney
       if (theme.nav.clock)
-        !=partial('includes/anzhiyu/clock', {}, {cache: true})
+        !=partial('includes/smith/clock', {}, {cache: true})
 
     div.mask-name-container
       #name-container
-        a#page-name(href="javascript:anzhiyu.scrollToDest(0, 500)") PAGE_NAME
+        a#page-name(href="javascript:smith.scrollToDest(0, 500)") PAGE_NAME
 
     #menus
       !=partial('includes/header/menu_item', {}, {cache: true})
     #nav-right
       if theme.nav.travelling
         .nav-button.only-home#travellings_button(title=_p('nav.travelling'))
-          a.site-page(onclick='anzhiyu.totraveling()', title=_p('nav.travelling'), href='javascript:void(0);', rel='external nofollow', data-pjax-state='external')
+          a.site-page(onclick='smith.totraveling()', title=_p('nav.travelling'), href='javascript:void(0);', rel='external nofollow', data-pjax-state='external')
             i.smithfont.smith-icon-train
       .nav-button#randomPost_button
         a.site-page(onclick='toRandomPost()', title=_p('nav.random_post'), href='javascript:void(0);')
@@ -42,17 +42,17 @@ nav#nav
 
       if theme.centerConsole.enable
         input#center-console(type="checkbox")
-        label.widget(for="center-console" title=_p('console.title') onclick="anzhiyu.switchConsole();")
+        label.widget(for="center-console" title=_p('console.title') onclick="smith.switchConsole();")
           i.left
           i.widget.center
           i.widget.right
 
-      !=partial('includes/anzhiyu/console', {}, {cache:true})
+      !=partial('includes/smith/console', {}, {cache:true})
 
       div.nav-button#nav-totop
         a.totopbtn(href='javascript:void(0);')
           i.smithfont.smith-icon-arrow-up
-          span#percent(onclick="anzhiyu.scrollToDest(0,500)") 0
+          span#percent(onclick="smith.scrollToDest(0,500)") 0
 
       #toggle-menu
         a.site-page(href='javascript:void(0);' title=_p('nav.toggle_menu'))

@@ -11,7 +11,7 @@
               i.smithfont.smith-icon-paper-plane1
               span.banner-button-text=_p('flink.random_visit')
           if theme.linkPageTop.addFriendPlaceholder && theme.comments.use == 'Twikoo' && theme.twikoo.envId
-            a.banner-button.no-text-decoration(onclick="anzhiyu.addFriendLink()")
+            a.banner-button.no-text-decoration(onclick="smith.addFriendLink()")
               i.smithfont.smith-icon-arrow-circle-right
               span.banner-button-text=_p('flink.apply_link')
       #skills-tags-group-all
@@ -54,8 +54,8 @@
           h2!= i.class_name + "(" + i.link_list.length + ")"
         if i.class_desc
           .flink-desc!=i.class_desc
-        if i.flink_style === 'anzhiyu'
-          div(class=i.lost_contact ? 'anzhiyu-flink-list cf-friends-lost-contact' : 'anzhiyu-flink-list')
+        if i.flink_style === 'smith'
+          div(class=i.lost_contact ? 'smith-flink-list cf-friends-lost-contact' : 'smith-flink-list')
             if i.link_list
               each item in i.link_list
                 - let color = item.color || ""
