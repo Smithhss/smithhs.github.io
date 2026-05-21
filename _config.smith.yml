@@ -36,15 +36,6 @@ nav:
           icon: /img/favicon.png
     - title: 项目
       item:
-        - name: Robot
-          link: http://robot.onliu.cn/
-          icon: /img/cupfox.png
-        - name: Sale
-          link: http://res.onliu.cn
-          icon: https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog-tuce/tubiao.jpg
-        - name: 资源共享
-          link: http://se.onliu.cn/
-          icon: https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog/x126.png
         - name: Github
           link: https://github.com/Smithhss
           icon: https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/GitHub.png
@@ -333,7 +324,7 @@ noticeOutdate:
 # https://github.com/overtrue/share.js
 sharejs:
   enable: true
-  sites: facebook,twitter,wechat,weibo,qq
+  sites: wechat,weibo,qq
 
 # AddToAny
 # https://www.addtoany.com/
@@ -617,12 +608,12 @@ google_adsense:
 # --------------------------------------
 
 site_verification:
-  - name: google-site-verification
-    content: xxx
-  - name: baidu-site-verification
-    content: code-xxx
-  - name: msvalidate.01
-    content: xxx
+  # - name: google-site-verification
+  #   content:
+  # - name: baidu-site-verification
+  #   content:
+  # - name: msvalidate.01
+  #   content:
 
 # Beautify/Effect (美化/效果)
 # --------------------------------------
@@ -1182,7 +1173,7 @@ greetingBox:
 
 # 文章顶部ai摘要
 post_head_ai_description:
-  enable: true
+  enable: false
   gptName: AnZhiYu
   mode: local # 默认模式 可选值: tianli/local
   switchBtn: false # 可以配置是否显示切换按钮 以切换tianli/local
