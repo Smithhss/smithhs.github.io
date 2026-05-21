@@ -16,7 +16,7 @@ body[data-type="room"] #page .page-title {
   right: 2rem;
 }
 #room_page .banner-button-group .banner-button:hover {
-  background: var(--anzhiyu-card-bg);
+  background: var(--smith-card-bg);
   color: var(--font-color);
 }
 #room_page .banner-button-group .banner-button i,
@@ -28,8 +28,8 @@ body[data-type="room"] #page .page-title {
   width: 140px;
   border-radius: 20px;
   justify-content: center;
-  color: var(--anzhiyu-white);
-  background: var(--anzhiyu-theme);
+  color: var(--smith-white);
+  background: var(--smith-theme);
   display: flex;
   align-items: center;
   z-index: 1;
@@ -41,9 +41,9 @@ body[data-type="room"] #page .page-title {
 #room_page .description {
   margin: 20px auto 20px;
   border-radius: 24px;
-  background: var(--anzhiyu-card-bg);
+  background: var(--smith-card-bg);
   border: var(--style-border-always);
-  box-shadow: var(--anzhiyu-shadow-border);
+  box-shadow: var(--smith-shadow-border);
   position: relative;
   padding: 1rem 2rem;
   overflow: hidden;

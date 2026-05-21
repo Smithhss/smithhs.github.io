@@ -153,9 +153,9 @@ maxHeight580()
   display: inline-block
   transform-origin: 50% 50%;
   animation-name: anzhiyu-spin;
-  animation-duration: var(--anzhiyu-animation-duration,2s);
-  animation-iteration-count: var(--anzhiyu-animation-iteration-count,infinite);
-  animation-timing-function: var(--anzhiyu-animation-timing,linear);
+  animation-duration: var(--smith-animation-duration,2s);
+  animation-iteration-count: var(--smith-animation-iteration-count,infinite);
+  animation-timing-function: var(--smith-animation-timing,linear);
 
 
 .anzhiyu-pulse-icon
@@ -360,47 +360,47 @@ if hexo-config('avatar.effect') == true
 
 @keyframes header
   entry 0% {
-    --anzhiyu-header-translateY: 160px
-    --anzhiyu-header-info-scale: 0.7
-    --anzhiyu-header-cover-scale: 1
+    --smith-header-translateY: 160px
+    --smith-header-info-scale: 0.7
+    --smith-header-cover-scale: 1
   }
 
   entry 100% {
-    --anzhiyu-header-translateY: 0px
-    --anzhiyu-header-info-scale: 1
-      --anzhiyu-header-cover-scale: 2
+    --smith-header-translateY: 0px
+    --smith-header-info-scale: 1
+      --smith-header-cover-scale: 2
   }
   exit 100% {
-    --anzhiyu-header-translateY: 160px
-    --anzhiyu-header-info-scale: 0.7
-      --anzhiyu-header-cover-scale: 1
+    --smith-header-translateY: 160px
+    --smith-header-info-scale: 0.7
+      --smith-header-cover-scale: 1
   }
 
   exit 0% {
-    --anzhiyu-header-translateY: 0px
-    --anzhiyu-header-info-scale: 1
-      --anzhiyu-header-cover-scale: 2
+    --smith-header-translateY: 0px
+    --smith-header-info-scale: 1
+      --smith-header-cover-scale: 2
   }
 
 @keyframes post-info-slide-in
   0%
-    transform: scale(var(--anzhiyu-header-info-scale)) translateY(20px);
+    transform: scale(var(--smith-header-info-scale)) translateY(20px);
     opacity: 0;
   100%
-    transform: scale(var(--anzhiyu-header-info-scale)) translateY(0);
+    transform: scale(var(--smith-header-info-scale)) translateY(0);
     opacity: 1;
 
-@property --anzhiyu-header-translateY
+@property --smith-header-translateY
   syntax: "<length-percentage>";
   inherits: true;
   initial-value: 0px;
 
-@property --anzhiyu-header-info-scale
+@property --smith-header-info-scale
   syntax: "<number>";
   inherits: true;
   initial-value: 1;
 
-@property  --anzhiyu-header-cover-scale
+@property  --smith-header-cover-scale
   syntax: "<number>";
   inherits: true;
   initial-value: 2;

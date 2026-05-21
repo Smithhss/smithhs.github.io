@@ -619,15 +619,15 @@ theme_color:
   paginator: "#425AEF"
   #   button_hover: "#FF7242"
   text_selection: "#2128bd"
-  link_color: "var(--anzhiyu-fontcolor)"
-  meta_color: "var(--anzhiyu-fontcolor)"
+  link_color: "var(--smith-fontcolor)"
+  meta_color: "var(--smith-fontcolor)"
   hr_color: "#4259ef23"
   code_foreground: "#fff"
-  code_background: "var(--anzhiyu-code-stress)"
+  code_background: "var(--smith-code-stress)"
   toc_color: "#425AEF"
   #   blockquote_padding_color: "#425AEF"
   #   blockquote_background_color: "#425AEF"
-  scrollbar_color: "var(--anzhiyu-scrollbar)"
+  scrollbar_color: "var(--smith-scrollbar)"
   meta_theme_color_light: "#f7f9fe"
   meta_theme_color_dark: "#18171d"
 
@@ -1032,7 +1032,7 @@ pwa:
   enable: false
   startup_image_enable: true
   manifest: /manifest.json
-  theme_color: var(--anzhiyu-main)
+  theme_color: var(--smith-main)
   mask_icon: /img/siteicon/apple-icon-180.png
   apple_touch_icon: /img/siteicon/apple-icon-180.png
   bookmark_icon: /img/siteicon/apple-icon-180.png
@@ -1056,17 +1056,17 @@ home_top:
   category:
     - name: 前端
       path: /categories/前端开发/
-      shadow: var(--anzhiyu-shadow-blue)
+      shadow: var(--smith-shadow-blue)
       class: blue
       icon: anzhiyu-icon-dove
     - name: 大学
       path: /categories/大学生涯/
-      shadow: var(--anzhiyu-shadow-red)
+      shadow: var(--smith-shadow-red)
       class: red
       icon: anzhiyu-icon-fire
     - name: 生活
       path: /categories/生活日常/
-      shadow: var(--anzhiyu-shadow-green)
+      shadow: var(--smith-shadow-green)
       class: green
       icon: anzhiyu-icon-book
   default_descr: 再怎么看我也不知道怎么描述它的啦！

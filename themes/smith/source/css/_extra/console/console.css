@@ -68,7 +68,7 @@
   border-radius: 12px;
   overflow: hidden;
   border: var(--style-border);
-  box-shadow: var(--anzhiyu-shadow-border);
+  box-shadow: var(--smith-shadow-border);
   padding: 40px;
 }
 
@@ -77,7 +77,7 @@
 }
 
 #console .console-mask {
-  background: var(--anzhiyu-maskbgdeep);
+  background: var(--smith-maskbgdeep);
   backdrop-filter: saturate(100%) blur(0px);
   -webkit-backdrop-filter: blur(0px);
   width: 100vw;
@@ -105,7 +105,7 @@
 }
 
 #card-newest-comments .aside-list-item {
-  background: var(--anzhiyu-card-bg);
+  background: var(--smith-card-bg);
   border-radius: 12px;
   border: var(--style-border);
   padding: 12px 16px;
@@ -157,8 +157,8 @@
 }
 
 #card-newest-comments .aside-list-item:hover {
-  background: var(--anzhiyu-main);
-  color: var(--anzhiyu-white);
+  background: var(--smith-main);
+  color: var(--smith-white);
 }
 
 #console .aside-list-item .content .comment {
@@ -174,13 +174,13 @@
 #console .aside-list-item:hover .thumbnail,
 #console .aside-list-item:hover .content .comment,
 #console .aside-list-item:hover .content time {
-  color: var(--anzhiyu-white);
+  color: var(--smith-white);
 }
 
 #console .aside-list-item .content time {
   font-size: 12px;
   margin-top: auto;
-  color: var(--anzhiyu-fontcolor);
+  color: var(--smith-fontcolor);
 }
 
 #console .aside-list {
@@ -218,12 +218,12 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--anzhiyu-fontcolor);
+  color: var(--smith-fontcolor);
 }
 
 #console .button-group .console-btn-item.on a {
-  background: var(--anzhiyu-orange);
-  color: var(--anzhiyu-white);
+  background: var(--smith-orange);
+  color: var(--smith-white);
   transition: 0.3s;
 }
 
@@ -236,19 +236,19 @@
 }
 
 .console-card.tags .card-tag-cloud a {
-  color: var(--anzhiyu-fontcolor) !important;
+  color: var(--smith-fontcolor) !important;
   margin: 6px 4px;
   padding: 2px 8px;
   border-radius: 8px;
-  background: var(--anzhiyu-secondbg);
+  background: var(--smith-secondbg);
   border: var(--style-border);
   font-size: 14px !important;
   font-weight: bold;
 }
 
 .console-card.tags .card-tag-cloud a:hover {
-  background: var(--anzhiyu-main);
-  color: var(--anzhiyu-white) !important;
+  background: var(--smith-main);
+  color: var(--smith-white) !important;
 }
 
 .console-card.tags .card-tag-cloud a sup {
@@ -291,8 +291,8 @@
 }
 
 #console .console-card.history .card-archive-list .card-archive-list-link:hover {
-  background: var(--anzhiyu-main);
-  color: var(--anzhiyu-white);
+  background: var(--smith-main);
+  color: var(--smith-white);
 }
 
 #console #card-newest-comments {
@@ -319,8 +319,8 @@
 }
 
 [data-theme="dark"] #console .button-group .console-btn-item a.darkmode_switchbutton {
-  background: var(--anzhiyu-orange);
-  color: var(--anzhiyu-white);
+  background: var(--smith-orange);
+  color: var(--smith-white);
 }
 
 /* 控制台音乐css */
@@ -368,7 +368,7 @@ body:has(#console.show) #nav-music .aplayer.aplayer-withlrc .aplayer-lrc {
 }
 body:has(#console.show) #nav-music .aplayer .aplayer-lrc p.aplayer-lrc-current,
 body:has(#console.show) #nav-music .aplayer .aplayer-lrc p {
-  color: var(--anzhiyu-fontcolor);
+  color: var(--smith-fontcolor);
 }
 body:has(#console.show) #nav-music #nav-music-hoverTips {
   opacity: 0;
@@ -447,7 +447,7 @@ body:has(#console.show) #nav-music .aplayer .aplayer-info .aplayer-music .aplaye
   display: inline;
 }
 body:has(#console.show) #nav-music .aplayer .aplayer-info .aplayer-music .aplayer-title {
-  color: var(--anzhiyu-fontcolor);
+  color: var(--smith-fontcolor);
   cursor: auto;
   line-height: 2;
   display: inline-block;
@@ -495,7 +495,7 @@ body:has(#console.show)
   .aplayer-bar-wrap
   .aplayer-bar
   .aplayer-played {
-  background: var(--anzhiyu-main) !important;
+  background: var(--smith-main) !important;
   opacity: 0.8;
   animation: none;
   border-radius: 10px;
@@ -661,7 +661,7 @@ body:has(#console.show) #nav-music .aplayer .aplayer-lrc .aplayer-lrc-contents {
     transform: scale(1.2);
   }
   [data-theme="dark"] body:has(#console.show) #console-music-bg {
-    background: var(--anzhiyu-white);
+    background: var(--smith-white);
   }
   body:has(#console.show) #console-music-bg::after {
     box-shadow: inset 0 0px 10px 116px #000000;
@@ -673,7 +673,7 @@ body:has(#console.show) #nav-music .aplayer .aplayer-lrc .aplayer-lrc-contents {
     left: 0;
   }
   [data-theme="dark"] body:has(#console.show) #console-music-bg::after {
-    box-shadow: inset 0 0px 10px 116px var(--anzhiyu-white);
+    box-shadow: inset 0 0px 10px 116px var(--smith-white);
   }
   body:has(#console.show) #nav-music .aplayer.aplayer-withlrc .aplayer-pic {
     height: 100px;
@@ -692,7 +692,7 @@ body:has(#console.show) #nav-music .aplayer .aplayer-lrc .aplayer-lrc-contents {
   }
   body:has(#console.show) #nav-music .aplayer .aplayer-info .aplayer-music .aplayer-title,
   body:has(#console.show) #nav-music .aplayer .aplayer-info .aplayer-music .aplayer-author {
-    color: var(--anzhiyu-white);
+    color: var(--smith-white);
   }
   body:has(#console.show) #nav-music .aplayer.aplayer-withlrc .aplayer-info {
     width: 100%;
@@ -719,7 +719,7 @@ body:has(#console.show) #nav-music .aplayer .aplayer-lrc .aplayer-lrc-contents {
   }
 
   body:has(#console.show) #nav-music .aplayer .aplayer-lrc p.aplayer-lrc-current {
-    color: var(--anzhiyu-white);
+    color: var(--smith-white);
     font-size: 20px;
     line-height: 25px !important;
     float: left;
@@ -729,7 +729,7 @@ body:has(#console.show) #nav-music .aplayer .aplayer-lrc .aplayer-lrc-contents {
     /* margin: 0; */
   }
   body:has(#console.show) #nav-music .aplayer .aplayer-lrc p {
-    color: var(--anzhiyu-white);
+    color: var(--smith-white);
     font-size: 16px;
     margin: 0;
     margin-top: 20px;
@@ -739,7 +739,7 @@ body:has(#console.show) #nav-music .aplayer .aplayer-lrc .aplayer-lrc-contents {
     margin: -40px 0px 0;
   }
   body:has(#console.show) #nav-music .aplayer .aplayer-info .aplayer-controller .aplayer-time {
-    color: var(--anzhiyu-white);
+    color: var(--smith-white);
     left: 50%;
     transform: translateX(-50%);
     top: 15px;
@@ -881,7 +881,7 @@ body:has(#console.show) #nav-music .aplayer .aplayer-lrc .aplayer-lrc-contents {
     align-items: center;
   }
   body:has(#console.show) .aplayer .aplayer-info .aplayer-controller .aplayer-time .aplayer-icon path {
-    fill: var(--anzhiyu-white);
+    fill: var(--smith-white);
   }
   body:has(#console.show) .aplayer .aplayer-info .aplayer-controller .aplayer-volume-wrap .aplayer-volume-bar-wrap {
     overflow: visible;
@@ -949,11 +949,11 @@ body:has(#console.show) #nav-music .aplayer .aplayer-lrc .aplayer-lrc-contents {
 
 @media screen and (min-width: 768px) {
   #console .button-group .console-btn-item a:hover {
-    background: var(--anzhiyu-main) !important;
+    background: var(--smith-main) !important;
   }
   #console .button-group .console-btn-item:hover a {
-    background: var(--anzhiyu-main);
-    color: var(--anzhiyu-white);
+    background: var(--smith-main);
+    color: var(--smith-white);
   }
 }
 @media screen and (max-width: 768px) {

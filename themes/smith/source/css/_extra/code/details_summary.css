@@ -1,7 +1,7 @@
 details.folding-tag[open] {
   border-radius: 15px !important;
-  border-color: var(--anzhiyu-main) !important;
-  border: 1px solid var(--anzhiyu-main) !important;
+  border-color: var(--smith-main) !important;
+  border: 1px solid var(--smith-main) !important;
 }
 
 li details.folding-tag {
@@ -18,9 +18,9 @@ details.folding-tag {
 }
 
 details.folding-tag[open] > summary {
-  color: var(--anzhiyu-white) !important;
-  background: var(--anzhiyu-main) !important;
-  border: 1px solid var(--anzhiyu-main) !important;
+  color: var(--smith-white) !important;
+  background: var(--smith-main) !important;
+  border: 1px solid var(--smith-main) !important;
   border-top: none !important;
   border-left: none !important;
   border-right: none !important;
@@ -29,14 +29,14 @@ details.folding-tag[open] > summary {
 }
 details.folding-tag > summary {
   border: var(--style-border) !important;
-  background: var(--anzhiyu-card-bg);
+  background: var(--smith-card-bg);
   border-radius: 14px !important;
-  box-shadow: var(--anzhiyu-shadow-border);
+  box-shadow: var(--smith-shadow-border);
   color: var(--font-color) !important;
   user-select: none;
 }
 details.folding-tag > summary::marker {
-  color: var(--anzhiyu-main);
+  color: var(--smith-main);
   font-size: 16px;
 }
 details.folding-tag > summary::before {
@@ -47,17 +47,17 @@ details.folding-tag[open] > div.content {
   border-radius: 0 0 16px 16px;
 }
 details.folding-tag summary:hover::marker {
-  color: var(--anzhiyu-white);
+  color: var(--smith-white);
 }
 details.folding-tag[open] > summary::marker {
-  color: var(--anzhiyu-white);
+  color: var(--smith-white);
 }
 details.folding-tag summary:hover {
   cursor: pointer;
-  background: var(--anzhiyu-main) !important;
-  color: var(--anzhiyu-white) !important;
+  background: var(--smith-main) !important;
+  color: var(--smith-white) !important;
   transition: 0.3s;
-  box-shadow: var(--anzhiyu-shadow-main);
+  box-shadow: var(--smith-shadow-main);
 }
 details .content > *:nth-child(1) {
   margin-top: 0 !important;

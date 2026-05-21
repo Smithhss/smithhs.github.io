@@ -1,15 +1,15 @@
 /* 分类目录条、标签目录条 */
 #catalog-bar {
-  border-radius: var(--anzhiyu-border-radius);
+  border-radius: var(--smith-border-radius);
   display: flex;
-  border: var(--anzhiyu-border-radius);
+  border: var(--smith-border-radius);
   margin-bottom: 1rem;
   justify-content: flex-start;
   align-items: center;
 }
 
 #catalog-bar:hover {
-  border-color: var(--anzhiyu-theme);
+  border-color: var(--smith-theme);
 }
 
 #catalog-bar i {
@@ -45,17 +45,17 @@
 }
 
 .catalog-list-item.selected a {
-  background: var(--anzhiyu-lighttext);
-  color: var(--anzhiyu-white);
+  background: var(--smith-lighttext);
+  color: var(--smith-white);
 }
 
 a.catalog-more {
   min-width: fit-content;
   font-weight: bold;
-  color: var(--anzhiyu-fontcolor);
+  color: var(--smith-fontcolor);
   margin-left: 16px;
 }
 
 a.catalog-more:hover {
-  color: var(--anzhiyu-theme);
+  color: var(--smith-theme);
 }

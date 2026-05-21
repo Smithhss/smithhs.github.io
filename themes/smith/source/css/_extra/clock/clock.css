@@ -11,7 +11,7 @@
 }
 
 #he-plugin-simple .sticker-important {
-  color: var(--anzhiyu-white) !important;
+  color: var(--smith-white) !important;
 }
 
 .s-sticker div[data-v-41ba7e2c]:not(:first-child):not(:last-child) {
@@ -37,7 +37,7 @@ body:has(.post-bg.nav-fixed) #he-plugin-simple .s-sticker div {
   color: var(--font-color) !important;
 }
 body:has(.post-bg) #he-plugin-simple .s-sticker div {
-  color: var(--anzhiyu-white) !important;
+  color: var(--smith-white) !important;
 }
 [data-theme="dark"] body:has(.post-bg) #he-plugin-simple .s-sticker div {
   color: var(--font-color) !important;
@@ -47,7 +47,7 @@ body:has(.post-bg) #he-plugin-simple .s-sticker div {
   height: 285px !important;
   padding: 10px !important;
   border-radius: 10px !important;
-  background-color: var(--anzhiyu-card-bg) !important;
+  background-color: var(--smith-card-bg) !important;
   box-shadow: rgba(0, 0, 0, 0.1) 0 0 20px;
   margin-top: 20px !important;
   transform: 0.3s;
@@ -69,8 +69,8 @@ body:has(.post-bg) #he-plugin-simple .s-sticker div {
 .wv-lt-location a {
   padding: 0 5px;
   border-radius: 3px;
-  color: var(--anzhiyu-blue) !important;
-  background-color: var(--anzhiyu-blue-tint);
+  color: var(--smith-blue) !important;
+  background-color: var(--smith-blue-tint);
   text-decoration: none !important;
 }
 .wv-lt-col-5 {
@@ -88,7 +88,7 @@ body:has(.post-bg) #he-plugin-simple .s-sticker div {
 .wv-n-h-now-tmp span,
 .wv-n-h-now-txt span,
 .wv-n-h-now-txt-t {
-  color: var(--anzhiyu-fontcolor) !important;
+  color: var(--smith-fontcolor) !important;
 }
 .wv-f-table div .vw-f-cell:nth-child(1) a {
   color: #9b9b9b !important;
@@ -113,15 +113,15 @@ body:has(.post-bg) #he-plugin-simple .s-sticker div {
   padding-left: 10px !important;
 }
 .wv-top-button {
-  background-color: var(--anzhiyu-blue) !important;
+  background-color: var(--smith-blue) !important;
   color: #fff !important;
 }
 
 .wv-top-button:hover {
-  background-color: var(--anzhiyu-blue-hover) !important;
+  background-color: var(--smith-blue-hover) !important;
 }
 .wv-top-button:active {
-  background-color: var(--anzhiyu-blue-hover) !important;
+  background-color: var(--smith-blue-hover) !important;
 }
 
 @media screen and (max-width: 1400px) {
