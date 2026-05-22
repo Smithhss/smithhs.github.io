@@ -2,12 +2,12 @@
   const config = GLOBAL_CONFIG.live2d;
   if (!config || !config.enable) return;
 
-  const loadLive2D = async () => {
+  const loadLive2D = () => {
     const pixiScript = document.createElement("script");
-    pixiScript.src = "https://cdn.jsdelivr.net/npm/pixi.js@7.3.2/dist/pixi.min.js";
+    pixiScript.src = "https://cdn.jsdelivr.net/npm/pixi.js@6.5.10/dist/browser/pixi.min.js";
     document.head.appendChild(pixiScript);
 
-    pixiScript.onload = async () => {
+    pixiScript.onload = () => {
       const live2dScript = document.createElement("script");
       live2dScript.src = "https://cdn.jsdelivr.net/npm/pixi-live2d-display@0.4.0/dist/cubism2.min.js";
       document.head.appendChild(live2dScript);
@@ -15,6 +15,12 @@
       live2dScript.onload = () => {
         initLive2D();
       };
+      live2dScript.onerror = () => {
+        console.warn("[Live2D] Failed to load pixi-live2d-display");
+      };
+    };
+    pixiScript.onerror = () => {
+      console.warn("[Live2D] Failed to load pixi.js");
     };
   };
 
@@ -27,6 +33,7 @@
       width: config.width || 300,
       height: config.height || 300,
       transparent: true,
+      backgroundAlpha: 0,
     });
 
     const modelPath = config.model || "shizuku";
@@ -43,6 +50,8 @@
           model.motion("tap_body");
         }
       });
+    }).catch(err => {
+      console.warn("[Live2D] Failed to load model:", err);
     });
   };
 
