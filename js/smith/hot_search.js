@@ -3,23 +3,23 @@
   if (!config || !config.enable) return;
 
   const APIs = {
-    bilibili: "https://api.vvhan.com/api/hotlist/bili",
-    weibo: "https://api.vvhan.com/api/hotlist/wbHot",
-    zhihu: "https://api.vvhan.com/api/hotlist/zhihu",
-    github: "https://api.vvhan.com/api/hotlist/github",
+    bilibili: "https://api.codelife.cc/api/top/list?lang=cn&id=bilibili",
+    weibo: "https://api.codelife.cc/api/top/list?lang=cn&id=KdYF6e9r",
+    zhihu: "https://api.codelife.cc/api/top/list?lang=cn&id=zhihu",
   };
 
   const tabNames = {
     bilibili: "B站",
     weibo: "微博",
     zhihu: "知乎",
-    github: "GitHub",
   };
 
   let currentTab = config.defaultTab || "bilibili";
 
   const renderTabs = () => {
-    const enabledTabs = config.tabs || ["bilibili", "weibo", "zhihu"];
+    const enabledTabs = (config.tabs || ["bilibili", "weibo", "zhihu"]).filter(
+      (tab) => APIs[tab]
+    );
     return enabledTabs
       .map(
         (tab) =>
@@ -29,16 +29,22 @@
   };
 
   const renderList = (data) => {
-    if (!data || !data.data) return "<div class='hot-search-empty'>暂无数据</div>";
+    if (!data || !data.data || !data.data.length) {
+      return "<div class='hot-search-empty'>暂无数据，请稍后再试</div>";
+    }
     return data.data
       .slice(0, config.limit || 15)
       .map(
-        (item, index) =>
-          `<a class="hot-search-item" href="${item.url || "#"}" target="_blank" rel="noopener">
+        (item, index) => {
+          const url = item.url || item.link || "#";
+          const title = item.title || item.desc || item.name || "";
+          const hot = item.hot || item.index || "";
+          return `<a class="hot-search-item" href="${url}" target="_blank" rel="noopener">
             <span class="hot-search-rank ${index < 3 ? "top3" : ""}">${index + 1}</span>
-            <span class="hot-search-title">${item.title || item.desc || ""}</span>
-            ${item.hot ? `<span class="hot-search-count">${item.hot}</span>` : ""}
-          </a>`
+            <span class="hot-search-title">${title}</span>
+            ${hot ? `<span class="hot-search-count">${hot}</span>` : ""}
+          </a>`;
+        }
       )
       .join("");
   };
@@ -51,13 +57,29 @@
 
     try {
       const url = APIs[tab];
-      if (!url) return;
+      if (!url) {
+        container.innerHTML = "<div class='hot-search-empty'>该平台暂不可用</div>";
+        return;
+      }
 
-      const response = await fetch(url);
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 8000);
+
+      const response = await fetch(url, {
+        signal: controller.signal,
+        mode: "cors",
+      });
+      clearTimeout(timeoutId);
+
+      if (!response.ok) {
+        container.innerHTML = "<div class='hot-search-empty'>暂无数据，请稍后再试</div>";
+        return;
+      }
+
       const data = await response.json();
       container.innerHTML = renderList(data);
     } catch (error) {
-      container.innerHTML = "<div class='hot-search-empty'>加载失败</div>";
+      container.innerHTML = "<div class='hot-search-empty'>网络异常，请稍后再试</div>";
     }
   };
 
