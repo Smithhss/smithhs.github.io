@@ -629,6 +629,12 @@ document.addEventListener("DOMContentLoaded", function () {
         requestAnimationFrame(() => {
           smith.initThemeColor();
           $header.classList.add("nav-fixed");
+          // Nav glass effect
+          if (currentTop > 0) {
+            $header.classList.add("scrolled");
+          } else {
+            $header.classList.remove("scrolled");
+          }
         });
         if (window.getComputedStyle($rightside).getPropertyValue("opacity") === "0") {
           $rightside.style.cssText = "opacity: 0.8; transform: translateX(-58px)";
@@ -638,6 +644,7 @@ document.addEventListener("DOMContentLoaded", function () {
           requestAnimationFrame(() => {
             $header.classList.remove("nav-fixed");
             $header.classList.remove("nav-visible");
+            $header.classList.remove("scrolled");
             // 修改顶栏颜色
             smith.initThemeColor();
           });
@@ -1817,6 +1824,56 @@ document.addEventListener("DOMContentLoaded", function () {
 
     mouseleaveHomeCard();
     coverColor();
+
+    // Banner carousel
+    const bannerItems = document.querySelectorAll('.banner-item');
+    const bannerListItems = document.querySelectorAll('.banner-list-item');
+    if (bannerItems.length > 0) {
+      let currentBannerIndex = 0;
+      let bannerInterval;
+      const BANNER_INTERVAL = 5000;
+
+      function switchBanner(index) {
+        bannerItems.forEach(item => item.classList.remove('active'));
+        bannerListItems.forEach(item => item.classList.remove('active'));
+        bannerItems[index].classList.add('active');
+        bannerListItems[index].classList.add('active');
+        currentBannerIndex = index;
+      }
+
+      function nextBanner() {
+        const nextIndex = (currentBannerIndex + 1) % bannerItems.length;
+        switchBanner(nextIndex);
+      }
+
+      function startBannerAutoplay() {
+        bannerInterval = setInterval(nextBanner, BANNER_INTERVAL);
+      }
+
+      function stopBannerAutoplay() {
+        clearInterval(bannerInterval);
+      }
+
+      // Click on list items
+      bannerListItems.forEach(item => {
+        item.addEventListener('click', () => {
+          const index = parseInt(item.getAttribute('data-index'));
+          stopBannerAutoplay();
+          switchBanner(index);
+          startBannerAutoplay();
+        });
+      });
+
+      // Pause on hover
+      const bannerContainer = document.querySelector('.home-banner');
+      if (bannerContainer) {
+        bannerContainer.addEventListener('mouseenter', stopBannerAutoplay);
+        bannerContainer.addEventListener('mouseleave', startBannerAutoplay);
+      }
+
+      startBannerAutoplay();
+    }
+
     listenToPageInputPress();
     openMobileMenu();
 
