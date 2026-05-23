@@ -389,3 +389,16 @@ html.hide-aside .layout > div:first-child {
 .card-widget.card-info .card-content .card-info-social-icons .social-icon:hover {
   background: rgba(255, 255, 255, 0.3);
 }
+
+/* === Footer Gradient === */
+#footer {
+  background: linear-gradient(rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255) 25%);
+}
+
+#footer .footer-bar {
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 20px 0;
+  text-align: center;
+  font-size: 13px;
+  color: rgba(60, 60, 67, 0.8);
+}
