@@ -2,6 +2,26 @@ extends includes/layout.pug
 
 block content
   include ./includes/mixins/post-ui.pug
+
+  //- Home Banner
+  if theme.home_banner && theme.home_banner.enable
+    .home-banner
+      .banner-left
+        - const bannerPosts = theme.home_banner.auto ? site.posts.sort('date', -1).limit(theme.home_banner.count || 5).toArray() : (theme.home_banner.items || [])
+        each post, index in bannerPosts
+          .banner-item(class=index === 0 ? 'active' : '' data-index=index)
+            if post.cover
+              img.banner-cover(src=url_for(post.cover) alt=post.title)
+            .banner-mask(style=`background: linear-gradient(to top, ${theme.home_banner.colors[index % 5]}, transparent)`)
+            .banner-title
+              a(href=url_for(post.path))= post.title
+              if post.categories && post.categories.data && post.categories.data.length > 0
+                .banner-tags= post.categories.data[0].name
+      .banner-right
+        each post, index in bannerPosts
+          .banner-list-item(class=index === 0 ? 'active' : '' data-index=index style=`background: ${index === 0 ? theme.home_banner.colors[index % 5] : theme.home_banner.colors[index % 5] + 'BD'}`)
+            span= post.title
+
   #recent-posts.recent-posts
     include includes/categoryGroup.pug
     +postUI
