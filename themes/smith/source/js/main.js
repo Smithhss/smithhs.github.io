@@ -629,6 +629,12 @@ document.addEventListener("DOMContentLoaded", function () {
         requestAnimationFrame(() => {
           smith.initThemeColor();
           $header.classList.add("nav-fixed");
+          // Nav glass effect
+          if (currentTop > 0) {
+            $header.classList.add("scrolled");
+          } else {
+            $header.classList.remove("scrolled");
+          }
         });
         if (window.getComputedStyle($rightside).getPropertyValue("opacity") === "0") {
           $rightside.style.cssText = "opacity: 0.8; transform: translateX(-58px)";
@@ -638,6 +644,7 @@ document.addEventListener("DOMContentLoaded", function () {
           requestAnimationFrame(() => {
             $header.classList.remove("nav-fixed");
             $header.classList.remove("nav-visible");
+            $header.classList.remove("scrolled");
             // 修改顶栏颜色
             smith.initThemeColor();
           });
