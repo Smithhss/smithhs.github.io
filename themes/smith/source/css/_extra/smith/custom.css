@@ -523,3 +523,29 @@ html.hide-aside .layout > div:first-child {
     font-size: 18px;
   }
 }
+
+/* === Dark Mode Compatibility === */
+[data-theme="dark"] #page-header.scrolled {
+  background: rgba(30, 30, 30, 0.85) !important;
+}
+
+[data-theme="dark"] .home-banner {
+  background: #1e1e1e;
+}
+
+[data-theme="dark"] .banner-right {
+  background: linear-gradient(135deg, rgb(30, 30, 30), rgb(60, 60, 60));
+}
+
+[data-theme="dark"] #footer {
+  background: linear-gradient(rgba(30, 30, 30, 0) 0%, rgb(30, 30, 30) 25%);
+}
+
+[data-theme="dark"] #footer .footer-bar {
+  border-top-color: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.6);
+}
+
+[data-theme="dark"] #category-bar {
+  background: rgba(30, 30, 30, 0.85) !important;
+}
