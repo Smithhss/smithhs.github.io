@@ -1828,12 +1828,18 @@ document.addEventListener("DOMContentLoaded", function () {
     // Banner carousel
     const bannerItems = document.querySelectorAll('.banner-item');
     const bannerListItems = document.querySelectorAll('.banner-list-item');
-    if (bannerItems.length > 0) {
+    if (bannerItems.length > 0 && bannerListItems.length > 0) {
       let currentBannerIndex = 0;
-      let bannerInterval;
-      const BANNER_INTERVAL = 5000;
+      // Clear any existing banner interval from previous PJAX navigation
+      if (window._smithBannerInterval) {
+        clearInterval(window._smithBannerInterval);
+        window._smithBannerInterval = null;
+      }
+      // Read interval from config, default to 5000ms
+      const BANNER_INTERVAL = (typeof GLOBAL_CONFIG !== 'undefined' && GLOBAL_CONFIG.home_banner && GLOBAL_CONFIG.home_banner.interval) || 5000;
 
       function switchBanner(index) {
+        if (index < 0 || index >= bannerItems.length || index >= bannerListItems.length) return;
         bannerItems.forEach(item => item.classList.remove('active'));
         bannerListItems.forEach(item => item.classList.remove('active'));
         bannerItems[index].classList.add('active');
@@ -1847,20 +1853,29 @@ document.addEventListener("DOMContentLoaded", function () {
       }
 
       function startBannerAutoplay() {
-        bannerInterval = setInterval(nextBanner, BANNER_INTERVAL);
+        // Always clear existing interval before starting new one
+        if (window._smithBannerInterval) {
+          clearInterval(window._smithBannerInterval);
+        }
+        window._smithBannerInterval = setInterval(nextBanner, BANNER_INTERVAL);
       }
 
       function stopBannerAutoplay() {
-        clearInterval(bannerInterval);
+        if (window._smithBannerInterval) {
+          clearInterval(window._smithBannerInterval);
+          window._smithBannerInterval = null;
+        }
       }
 
       // Click on list items
       bannerListItems.forEach(item => {
         item.addEventListener('click', () => {
           const index = parseInt(item.getAttribute('data-index'));
-          stopBannerAutoplay();
-          switchBanner(index);
-          startBannerAutoplay();
+          if (!isNaN(index)) {
+            stopBannerAutoplay();
+            switchBanner(index);
+            startBannerAutoplay();
+          }
         });
       });
 

@@ -166,6 +166,15 @@
     music_page_default = JSON.stringify(theme.music_page_default)
   }
 
+  let home_banner = 'undefined'
+  if (theme.home_banner && theme.home_banner.enable) {
+    home_banner = JSON.stringify({
+      enable: theme.home_banner.enable,
+      interval: theme.home_banner.interval || 5000,
+      count: theme.home_banner.count || 5
+    })
+  }
+
 script.
   const GLOBAL_CONFIG = {
     linkPageTop: !{linkPageTop},
@@ -177,6 +186,7 @@ script.
     twikooEnvId: '!{theme.twikoo.envId}',
     commentBarrageConfig:!{commentBarrageConfig},
     music_page_default: !{music_page_default},
+    home_banner: !{home_banner},
     root: '!{config.root}',
     preloader: !{preloader},
     friends_vue_info: !{friends_vue_info},
