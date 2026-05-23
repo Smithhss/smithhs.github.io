@@ -2,6 +2,24 @@
 :root {
   --smith-font-body: 'LXGW WenKai Screen', 'PingFang SC', 'Microsoft YaHei', sans-serif;
   --smith-background: #fafaf8;
+
+  /* === Smith Blog Design Tokens === */
+  --smith-nav-glass-bg: rgba(255, 255, 255, 0.85);
+  --smith-nav-glass-shadow: rgba(0, 0, 0, 0.05) 0 1px 12px;
+  --smith-nav-blur: blur(20px);
+
+  --smith-card-shadow: rgba(44, 45, 48, 0.047) 0 8px 16px -4px;
+  --smith-card-shadow-hover: rgba(44, 45, 48, 0.1) 0 8px 24px -4px;
+  --smith-sidebar-shadow: rgba(0, 0, 0, 0.05) 0 0 12px 4px;
+
+  --smith-author-gradient-green: linear-gradient(135deg, rgb(162, 214, 98), rgb(86, 171, 47));
+  --smith-author-gradient-pink: linear-gradient(135deg, #FF7F7F, #E06060);
+
+  --smith-banner-color-1: rgb(116, 84, 252);
+  --smith-banner-color-2: rgb(4, 148, 252);
+  --smith-banner-color-3: rgb(82, 194, 202);
+  --smith-banner-color-4: rgb(52, 44, 44);
+  --smith-banner-color-5: rgb(28, 36, 84);
 }
 
 body {
@@ -235,4 +253,16 @@ html.hide-aside .layout > div:first-child {
 }
 #recent-posts > .recent-post-item .post_cover {
   height: 280px;
+}
+
+/* === Nav Glass Effect === */
+#page-header {
+  transition: background 0.3s, box-shadow 0.3s;
+}
+
+#page-header.scrolled {
+  background: var(--smith-nav-glass-bg) !important;
+  backdrop-filter: var(--smith-nav-blur);
+  -webkit-backdrop-filter: var(--smith-nav-blur);
+  box-shadow: var(--smith-nav-glass-shadow);
 }
