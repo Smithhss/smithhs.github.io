@@ -266,3 +266,27 @@ html.hide-aside .layout > div:first-child {
   -webkit-backdrop-filter: var(--smith-nav-blur);
   box-shadow: var(--smith-nav-glass-shadow);
 }
+
+/* === Article Card Cover Zoom === */
+#recent-posts .recent-post-item .post_cover img {
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.25, 1);
+}
+
+#recent-posts .recent-post-item:hover .post_cover img {
+  transform: scale(1.05);
+}
+
+/* === Article Card Shadow System === */
+#recent-posts .recent-post-item {
+  box-shadow: var(--smith-card-shadow) !important;
+  transition: box-shadow 0.3s, border 0.3s !important;
+}
+
+#recent-posts .recent-post-item:hover {
+  box-shadow: var(--smith-card-shadow-hover) !important;
+}
+
+/* === Sidebar Card Shadow === */
+.card-widget {
+  box-shadow: var(--smith-sidebar-shadow) !important;
+}
