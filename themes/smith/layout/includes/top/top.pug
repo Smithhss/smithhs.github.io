@@ -89,7 +89,7 @@ if home_top_config.enable
               .todayCard-title=top_group_banner_title
             img.todayCard-cover(src=url_for(top_group_banner_image) onerror=`this.onerror=null;this.src='${url_for(theme.error_img.post_page)}'` alt='封面')
             .banner-button-group
-              .banner-button(onclick='event.stopPropagation();event.preventDefault();smith.hideTodayCard();')
+              .banner-button
                 i.smithfont.smith-icon-arrow-circle-right
                 span.banner-button-text 更多推荐
         

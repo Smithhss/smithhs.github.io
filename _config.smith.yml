@@ -1068,13 +1068,13 @@ home_top:
   subTitle: Build things. Write things. Own things.
   siteText: smithhs.cn
   category:
-    - name: Code
+    - name: 编程开发
       path: /categories/编程开发/
       shadow: var(--smith-shadow-blue)
       class: blue
       icon: smith-icon-dove
-    - name: 生活
-      path: /categories/随笔/
+    - name: 技术分享
+      path: /categories/技术分享/
       shadow: var(--smith-shadow-green)
       class: green
       icon: smith-icon-book
@@ -1092,7 +1092,7 @@ home_top:
     tips: 最新开源
     title: Comment-wall
     image: https://alandodo-1315761622.cos.ap-beijing.myqcloud.com/blog/x130.jpg
-    link: https://github.com/Smithhss/Comment-wall
+    link: /categories/
 # 朋友圈配置
 friends_vue:
   enable: false
