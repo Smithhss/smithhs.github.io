@@ -290,3 +290,22 @@ html.hide-aside .layout > div:first-child {
 .card-widget {
   box-shadow: var(--smith-sidebar-shadow) !important;
 }
+
+/* === Category Bar Glass Effect === */
+#category-bar {
+  background: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 12px;
+}
+
+#category-bar .category-bar-item {
+  border-radius: 100px;
+  transition: all 0.3s;
+}
+
+#category-bar .category-bar-item.select {
+  background: var(--smith-main);
+  color: white;
+  font-weight: 700;
+}
