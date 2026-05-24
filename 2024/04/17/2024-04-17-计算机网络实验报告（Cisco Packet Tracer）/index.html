@@ -1,0 +1,695 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>计算机网络实验报告（Cisco Packet Tracer） | Smith</title><meta name="keywords" content="Cisco Packet Tracer"><meta name="author" content="Smith"><meta name="copyright" content="Smith"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#fafaf8"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="计算机网络实验报告（Cisco Packet Tracer）"><meta name="application-name" content="计算机网络实验报告（Cisco Packet Tracer）"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#fafaf8"><meta property="og:type" content="article"><meta property="og:title" content="计算机网络实验报告（Cisco Packet Tracer）"><meta property="og:url" content="https://smithhs.cn/2024/04/17/2024-04-17-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A%EF%BC%88Cisco%20Packet%20Tracer%EF%BC%89/index.html"><meta property="og:site_name" content="Smith"><meta property="og:description" content="文章目录 Cisco Packet Tracer简介    1、直接连接两台 PC 构建 LAN 2、用交换机构建 LAN 3.交换机接口地址列表 4.生成树协议（Spanning Tree Protocol） 5.路由器配置初步 6.静态路由 7.动态路由 RIP 8.虚拟局域网 VLAN 10、"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/CiscoPacketTracer.jpg"><meta property="article:author" content="Smith"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/CiscoPacketTracer.jpg"><meta name="description" content="文章目录 Cisco Packet Tracer简介    1、直接连接两台 PC 构建 LAN 2、用交换机构建 LAN 3.交换机接口地址列表 4.生成树协议（Spanning Tree Protocol） 5.路由器配置初步 6.静态路由 7.动态路由 RIP 8.虚拟局域网 VLAN 10、"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://smithhs.cn/2024/04/17/2024-04-17-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A%EF%BC%88Cisco%20Packet%20Tracer%EF%BC%89/"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="manifest" href="/manifest.json"/><meta name="msapplication-TileColor" content="var(--smith-main)"/><link rel="mask-icon" href="/img/siteicon/apple-icon-180.png" color="#5bbad5"/><link rel="apple-touch-icon" sizes="180x180" href="/img/siteicon/apple-icon-180.png"/><link rel="apple-touch-icon-precomposed" sizes="180x180" href="/img/siteicon/apple-icon-180.png"/><link rel="icon" type="image/png" sizes="32x32" href="/img/siteicon/32.png"/><link rel="icon" type="image/png" sizes="16x16" href="/img/siteicon/16.png"/><link rel="bookmark" href="/img/siteicon/apple-icon-180.png"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2048-2732.jpg" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2732-2048.jpg" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1668-2388.jpg" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2388-1668.jpg" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1536-2048.jpg" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2048-1536.jpg" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1668-2224.jpg" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2224-1668.jpg" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1620-2160.jpg" media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2160-1620.jpg" media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1290-2796.jpg" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2796-1290.jpg" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1179-2556.jpg" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2556-1179.jpg" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1284-2778.jpg" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2778-1284.jpg" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1170-2532.jpg" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2532-1170.jpg" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1125-2436.jpg" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2436-1125.jpg" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1242-2688.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2688-1242.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-828-1792.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1792-828.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1242-2208.jpg" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2208-1242.jpg" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-750-1334.jpg" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1334-750.jpg" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-640-1136.jpg" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1136-640.jpg" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@6.1.6/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/smith-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: undefined,
+  postHeadAiDescription: {"enable":true,"gptName":"Smith","mode":"api","switchBtn":false,"btnLink":"https://aicos.ink","randomNum":3,"basicWordCount":1000,"key":"sk-fpYVeik6Ps1EpZsVEbZpipNzy0Hal0Y0G9RpjexTGcpCLflG","Referer":"https://aicos.ink"},
+  diytitle: {"enable":true,"leaveTitle":"再看看嘛🌈！","backTitle":"欢迎回来✌️！"},
+  LA51: undefined,
+  greetingBox: {"enable":true,"default":"晚上好👋","list":[{"greeting":"晚安😴","startTime":0,"endTime":5},{"greeting":"早上好鸭👋, 祝你一天好心情！","startTime":6,"endTime":9},{"greeting":"上午好👋, 状态很好，鼓励一下～","startTime":10,"endTime":10},{"greeting":"11点多啦, 在坚持一下就吃饭啦～","startTime":11,"endTime":11},{"greeting":"午安👋, 宝贝","startTime":12,"endTime":14},{"greeting":"🌈充实的一天辛苦啦！","startTime":14,"endTime":18},{"greeting":"19点喽, 奖励一顿丰盛的大餐吧🍔。","startTime":19,"endTime":19},{"greeting":"晚上好👋, 在属于自己的时间好好放松😌~","startTime":20,"endTime":24}]},
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  music_page_default: "nav_music",
+  home_banner: {"enable":true,"interval":5000,"count":5},
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: true,
+  mainTone: undefined,
+  authorStatus: {"skills":["💻 后端开发 Java / Spring Cloud","🌐 前端探索 React / TypeScript","🤖 AI 工具深度用户","🏠 智能家居折腾达人","🔨 从设计到部署一条龙","📝 偶尔写写博客记录生活","🎵 听歌写代码双线并行","🚀 脚踏实地行动派"]},
+  algolia: undefined,
+  localSearch: {"path":"/search.json","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":240},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: Smith","link":"链接: ","source":"来源: Smith","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#4f7cff","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.2.0/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.2.0/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: 'Smith',
+  title: '计算机网络实验报告（Cisco Packet Tracer）',
+  postAI: '',
+  pageFillDescription: '文章目录, Cisco Packet 简介, 1、直接连接两台 PC 构建 LAN, 2、用交换机构建 LAN, 3.交换机接口地址列表, 4.生成树协议（Spanning Tree Protocol）, 5.路由器配置初步, 6.静态路由, 7.动态路由 RIP, 8.虚拟局域网 VLAN, 10、虚拟局域网管理 VTP, 11、VLAN 间的通信, 12、DHCP、DNS及Web服务器简单配置, 总结文章目录简介直接连接两台构建用交换机构建交换机接口地址列表生成树协议路由器配置初步静态路由动态路由虚拟局域网虚拟局域网管理间的通信及服务器简单配置总结简介简介是公司发布的一个辅助学习工具为学习思科网络课程的初学者去设计配置排除网络故障提供了网络模拟环境用户可以在软件的图形用户界面上直接使用拖曳方法建立网络拓扑并可提供数据包在网络中行进的详细处理过程观察网络实时运行情况可以学习的配置锻炼故障排查能力名词解释动态主机控制协议子网掩码默认路由默认网关路由器交换机集线器无线设备仿真广域网直接连接两台构建将两台直接连接构成一个网络注意直接连接需使用交叉线进行两台的基本网络配置只需要配置地址即可然后相互通即成功配置打开中用交换机构建构建如下拓扑结构的局域网各的基本网络配置如下表子网掩码问题能否通答能通但不能通能否通为什么答能通但不能通将台的掩码都改为它们相互能通吗为什么答相互之间能通如果掩码为和不是同一局域网他们之间不能互通而掩码改为他们之间属于同一局域网下可以互通使用二层交换机连接的网络需要配置网关吗为什么答需要在二层交换机中配置网关尤为重要因为其与相连的自治系统可以向核心系统通告可达信息试一试集线器是工作在物理层的多接口设备它与交换机的区别是什么答集线器是工作在物理层而交换机则是工作在物理层和数据链路层两种工作的区域不同交换机接口地址列表二层交换机是一种即插即用的多接口设备它对于收到的帧有种处理方式广播转发和丢弃请弄清楚何时进行何种操作那么要转发成功则交换机中必须要有接口地址列表即表该表是交换机通过学习自动得到的仍然构建上图的拓扑结构并配置各计算机的在同一个一个子网使用工具栏中的放大镜点击某交换机如左边的选择可以看到最初交换机的表是空的也即它不知道该怎样转发帧那么它将如何处理用访问后再查看该交换机的表现在有相应的记录请思考如何得来随着网络通信的增加各交换机都将生成自己完整的表此时交换机的交换速度就是最快的生成树协议交换机在目的地址未知或接收到广播帧时是要进行广播的如果交换机之间存在回路环路那么就会产生广播循环风暴从而严重影响网络性能而交换机中运行的协议能避免交换机之间发生广播循环风暴只使用交换机构建如下拓扑这是初始时的状态我们可以看到交换机之间有回路这会造成广播帧循环传送即形成广播风暴严重影响网络性能随后交换机将自动通过生成树协议对多余的线路进行自动阻塞以形成一棵以为根具体哪个是根交换机有相关的策略的具有唯一路径树即生成树经过一段时间随着协议成功构建了生成树后的两个接口当前物理上是连接的但逻辑上是不通的处于状态桔色如下图所示在网络运行期间假设某个时候与之间的物理连接出现问题将与的连线剪掉则该生成树将自动发生变化上方先前的那个接口现在活动了绿色但下方那个接口仍处于状态桔色如下图所示注意交换机的协议即生成树协议始终自动保证交换机之间不会出现回路从而形成广播风暴秘籍使用的即模拟方式可非常清楚看到这个过程路由器配置初步我们模拟重庆交通大学和重庆大学两个学校的连接构建如下拓扑原因在于默认的路由器端口不够用我们需要在设备互连前要添加所需的路由器模块添加模块时注意要关闭电源我们为添加模块可以连接接着在配置里启用端口即可因为两路由器之间不能通过双绞线连接我们添加广域网接口说明一交通大学与重庆大学显然是两个不同的子网在不同子网间通信需通过路由器路由器的每个接口下至少是一个子网图中我们简单的规划了个子网左边路由器是交通大学的其下使用交换机连接交通大学的网络分配网络号该路由器接口也是交通大学网络的网关分配为右边路由器是重庆大学的其下使用交换机连接重庆大学的网络分配网络号该路由器接口也是重庆大学网络的网关分配为两个路由器之间使用广域网接口相连也是一个子网分配网络号说明二现实中交通大学和重庆大学的连接是远程的该连接要么通过路由器的光纤接口要么通过广域网接口即所谓的口如拓扑图所示进行一般不会通过双绞线连接为什么下面我们以通过路由器的广域网口连接为例来进行相关配置请注意我们选用的路由器默认没有广域网模块名称为等需要关闭路由器后添加然后再开机启动说明三在模拟的广域网连接中需注意和端连线时线路上有提示带一个时钟标志的是端有关和的概念请查阅相关资料在端需配置时钟频率说明四路由器有多种命令行配置模式每种模式对应不同的提示符及相应的权限请留意在正确的模式下输入配置相关的命令用户模式特权模式全局配置模式接口配置模式子接口配置模式说明五在现实中对新的路由器显然不能远程进行配置我们必须在现场通过笔记本的串口与路由器的接口连接并进行初次的配置注意设置比特率为后才能通过网络远程进行配置这也是上图左上画出笔记本连接的用意说明六在路由器的界面中可看到路由器刚启动成功后因为无任何配置将会提示是否进行对话配置因其步骤繁多请选择比如大学路由器的初步配置可以如下注意在我们的实验中可不进行如下的配置但在现实中为了安全以下的登录及特权密码等配置是必须的否则每个人都可操作你的路由器或交换机从普通模式进入特权模式进入全局配置模式可支持共个终端同时登录远程登录密码特权模式密码退出拓扑图中路由器各接口配置数据如下交通大学以太网口交通大学广域网口重庆大学以太网口重庆大学广域网口拓扑图中各配置数据如下交通大学交通大学重庆大学重庆大学交通大学路由器基本配置如下以太网口从普通模式进入特权模式进入全局配置模式进入配置以太网口模式配置该接口的激活接口直接退到特权模式广域网口从普通模式进入特权模式进入全局配置模式进入配置广域网口模式配置该接口的其为端配置时钟频率激活接口直接退到特权模式重庆大学路由器基本配置如下以太网口从普通模式进入特权模式进入全局配置模式进入配置以太网口模式配置该接口的激活接口直接退到特权模式广域网口从普通模式进入特权模式进入全局配置模式进入配置广域网口模式配置该接口的激活接口直接退到特权模式至此路由器基本的配置完成问题现在交通大学内的各及网关相互能通重庆大学也类似但不能从交大的通重大的反之亦然也即不能跨子网为什么原因是在路由表中都没能够到达对方的路由路径所以就无法通静态路由静态路由是非自适应性路由协议是由网络管理人员手动配置的不能够根据网络拓扑的变化而改变因此静态路由简单高效适用于结构非常简单的网络在当前这个简单的拓扑结构中我们可以使用静态路由即直接告诉路由器到某网络该怎么走即可在前述路由器基本配置成功的情况下使用以下命令进行静态路由协议的配置交通大学路由器静态路由配置从普通模式进入特权模式进入全局配置模式告诉交通大学路由器到这个网络的下一跳是退到特权模式查看路由表重庆大学路由器静态路由配置从普通模式进入特权模式进入全局配置模式告诉重庆大学路由器到这个网络的下一跳是退到特权模式查看路由表查看路由表你可看到标记为的一条路由表示至此这些能全部相互通动态路由动态路由协议采用自适应路由算法能够根据网络拓扑的变化而重新计算机最佳路由的全称是是距离矢量路由的代表目前虽然淘汰但可作为我们学习的对象使用协议只需要告诉路由器直接相连有哪些网络即可然后根据算法自动构建出路由表因为我们模拟的网络非常简单因此不能同时使用静态和动态路由否则看不出效果所以我们需要把刚才配置的静态路由先清除掉清除静态路由配置直接关闭路由器电源相当于没有保存任何配置然后各接口再按照前面基本配置所述重新配置等参数推荐此方法可以再熟悉一下接口的配置命令使用命令清除静态路由在全局配置模式下交通大学路由器使用重庆大学路由器使用相当于使用命令把刚才配置的静态路由命令给取消交通大学路由器路由配置从普通模式进入特权模式进入全局配置模式启用路由协议注意是命令网络与我直连网络与我直连直接退到特权模式查看路由表重庆大学路由器路由配置从普通模式进入特权模式进入全局配置模式启用路由协议注意是命令网络与我直连网络与我直连直接退到特权模式查看路由表查看路由表你可看到标记为的一条路由表示至此这些也能全部相互通虚拟局域网在实际网络中如我校的网络你可看到路由器一般位于网络的边界而内部几乎全部使用交换机连接前面我们分析过交换机连接的是同一个子网显然在这样一个大型规模的子网中进行广播甚至产生广播风暴将严重影响网络性能甚至瘫痪另外我们也已经知道其实学校是划分了多个子网的那么这些交换机连接的就绝不是一个子网这样矛盾的事情该如何解释呢我们实际上使用了支持的交换机而前述的交换机只是普通的层交换机或者我们把它当作层交换机在使用即虚拟局域网通过划分我们可以把一个物理网络划分为多个逻辑网段即多个子网划分后可以杜绝网络广播风暴增强网络的安全性便于进行统一管理等构建拓扑交换机是支持的交换机共有个和个以太网口默认所有的接口都在中故此时连接上来的计算机都处于同一可以进行通信下面我们就该交换机的个接口分为个部分划分到个不同的中号分别设为且设置别名以利于区分和管理交换机配置创建为的缺省的交换机所有接口都属于不能使用设置的别名该为一个子网设置其作为该子网网关创建为的设置别名创建为的设置别名成组配置接口设置为存取模式划归到中查看的划分情况至此在该交换机上我们就划分了个不包括缺省的各下的网络配置及连接的交换机接口如下表机器名连接的接口所属子网掩码网关此时可以使用命令进行测试你会发现只有在同一中的才能通信且广播也局限于该用不通用通了思考分析一下当前为何不同中的不能通信网关在此起什么作用我们的网关又在何处如何发起广播测试答有划分网络的作用同一个中的端口可以不通过路由器直接通信而不同之间则需要路由器进行路由网关是用来进行协议转换的不同的网段之间需要通信一定需要网关如果要发起广播测试那么就要引入三层设备虚拟局域网管理前一个实验我们在交换机上进行了的规划和划分但在实际应用中我们绝不允许在这些支持的交换机上进行随意的划分如此将造成管理混乱的划分必须得到统一的规划和管理这就需要协议即中继协议通过帧或私有帧可查阅相关资料了解保持配置统一性也被称为虚拟局域网干道协议它是思科私有协议统一管理增加删除调整自动地将信息向网络中其它的交换机广播此外减小了那些可能导致安全问题的配置只要在做相应设置会自动学习上的信息为演示重新构建如下拓扑结构注意作为干线两个交换机和核心的交换机应该使用口相连这虽然不是必须但现实中这样连接性能最好交换机是网络中的核心交换机我们将其作为域及将在其上创建和管理两个交换机是是局域网中的汇聚层接入层交换机将作为可决定加入的域和目前该网络都属于也即这些是可以相互通信的前面说过无论对于性能管理还是安全等而言现实中我们必须进行划分现在我们的要求是新建两个然后让和属于和属于我们将在核心交换机上进行如下工作设置为模式域为新建网络号网关新建网络号网关配置更改交换机名称可选设置域名称为设置其为服务器模式新建设置的别名可选再建设置的别名可选配置接口它将是该子网左边的网关配置接口它将是该子网右边的网关我们将在左边交换机上进行如下工作加入名为的域配置与核心交换机连接的千兆接口为模式将接口划分到中将接口划分到中左边配置更改交换机名称可选加入名为的域设置模式为客户配置与核心交换机连接的千兆接口设置该接口为中继模式允许为所有的中继配置接口设置该接口为正常访问模式将接口划分到配置接口设置该接口为正常访问模式将接口划分到我们将在右边交换机上进行同样的工作加入名为域配置与核心交换机连接的千兆接口为模式将接口划分到中将接口划分到中右边配置更改交换机名称可选加入名为的域设置模式为客户配置与核心交换机连接的千兆接口设置该接口为中继模式允许为所有的中继配置接口设置该接口为正常访问模式将接口划分到配置接口设置该接口为正常访问模式将接口划分到至此各交换机配置完毕秘籍此时在个交换机的特权模式下都可使用命令查看状态使用命令查看状态各连接的交换机和接口以及网络配置如下至此配置完成同可以通而不同不行即使在同一交换机下如从到且能够方便的统一规划和管理试一试使用的结果如何使用的结果如何想想为什么不能通因为不属于同一可以通因为和属于同一下间的通信只是给我们划分和管理提供了方便由上面的测试得知目前我们仍然不能在间通信因为默认的间是不允许进行通信此时我们需要所谓的独臂路由器在间为其进行转发我们使用的核心交换机是个层交换机可工作在网络层也称路由交换机即具有路由功能能进行这种转发操作交换机配置配置连接左边交换机的接口封装协议设置为中继模式在所有间转发配置连接右边交换机的接口封装协议设置为中继模式在所有间转发启用路由转发功能至此各中的可以正常通信试一试现在再使用的结果如何使用的结果如何答都可以通独臂路由的缺陷当使用的模拟方式进行上面的测试时你会非常清楚的看到包全部都由交换机在转发非常容易形成瓶颈现实中我们一般不使用这种方式而是真正使用其三层转发功能即一次路由多次交换请查阅相关资料及服务器简单配置动态主机配置域名解析以及服务在日常应用中作用巨大我们构建如下简单的拓扑来进行练习该拓扑中服务器及客户机都连在同一交换机上为简单起见服务器同时作为以及服务器各客户机无需配置将自动获取网络配置点击拓扑图中的图标设置其静态地址为然后选择进行如下相关配置试一试先查看各看看是否获得网络配置因为我们在服务器中把谷歌和百度的都设为了即所以如果打开的浏览器输入或者我们都应该看到默认的这个服务器的主页总结这次实验使我接触了一个全新的软件从入门到可以简单的运用使我获益良多也让我掌握了许多计算机网络的协议搞明白了计算机网络的基本原理我的计算机网络实验就告一段落了希望能够继续努力学习对计算机网络有更加深刻的理解',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2026-05-21 22:00:58',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fafaf8')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="https://npm.elemecdn.com/lxgw-wenkai-screen-webfont@1.1.0/style.css" media="print" onload="this.media='all'"><meta name="generator" content="Hexo 7.3.0"></head><body data-type="smith"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d20f536c64d06e5fcf4bfe2ec5dc25d.jpg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/smith-theme-static@1.0.0/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="smithfont smith-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://smithhs.cn/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.png" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://github.com/Smithhss" title="Github"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/GitHub.png" alt="Github"/><span class="back-menu-item-text">Github</span></a></div></div></div></div><a id="site-name" href="/" accesskey="h"><div class="title">Smith</div><i class="smithfont smith-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:smith.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="smithfont smith-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="smithfont smith-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="smithfont smith-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="smithfont smith-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="smithfont smith-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="smithfont smith-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/dailyPhoto/"><i class="smithfont smith-icon-camera faa-tada" style="font-size: 0.9em;"></i><span> 每日照片</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wallpaper/"><i class="smithfont smith-icon-image faa-tada" style="font-size: 0.9em;"></i><span> 壁纸</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wordScenery/"><i class="smithfont smith-icon-font faa-tada" style="font-size: 0.9em;"></i><span> 文字风景</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="smithfont smith-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于我</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="smithfont smith-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/love/"><i class="smithfont smith-icon-heart faa-tada" style="font-size: 0.9em;"></i><span> 爱情</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="smithfont smith-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button only-home" id="travellings_button" title="随机前往一个开往项目网站"><a class="site-page" onclick="smith.totraveling()" title="随机前往一个开往项目网站" href="javascript:void(0);" rel="external nofollow" data-pjax-state="external"><i class="smithfont smith-icon-train"></i></a></div><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="smithfont smith-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="smithfont smith-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="smith.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg" target="_blank"><img class="post-qr-code-img" alt="wechat" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg" target="_blank"><img class="post-qr-code-img" alt="alipay" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Android-Studio/" style="font-size: 1.05rem;">Android Studio<sup>1</sup></a><a href="/tags/App/" style="font-size: 1.05rem;">App<sup>2</sup></a><a href="/tags/Butterfly/" style="font-size: 1.05rem;">Butterfly<sup>1</sup></a><a href="/tags/C/" style="font-size: 1.05rem;">C++<sup>1</sup></a><a href="/tags/CSS/" style="font-size: 1.05rem;">CSS<sup>1</sup></a><a href="/tags/Cisco-Packet-Tracer/" style="font-size: 1.05rem;">Cisco Packet Tracer<sup>1</sup></a><a href="/tags/Easypan/" style="font-size: 1.05rem;">Easypan<sup>2</sup></a><a href="/tags/FurtherMathematics/" style="font-size: 1.05rem;">FurtherMathematics<sup>1</sup></a><a href="/tags/GPT/" style="font-size: 1.05rem;">GPT<sup>1</sup></a><a href="/tags/Git2/" style="font-size: 1.05rem;">Git2<sup>1</sup></a><a href="/tags/HTML/" style="font-size: 1.05rem;">HTML<sup>1</sup></a><a href="/tags/Hexo/" style="font-size: 1.05rem;">Hexo<sup>1</sup></a><a href="/tags/Java/" style="font-size: 1.05rem;">Java<sup>6</sup></a><a href="/tags/JavaScript/" style="font-size: 1.05rem;">JavaScript<sup>1</sup></a><a href="/tags/JavaWeb/" style="font-size: 1.05rem;">JavaWeb<sup>2</sup></a><a href="/tags/Jrebel/" style="font-size: 1.05rem;">Jrebel<sup>1</sup></a><a href="/tags/LeetCode/" style="font-size: 1.05rem;">LeetCode<sup>1</sup></a><a href="/tags/Linux/" style="font-size: 1.05rem;">Linux<sup>3</sup></a><a href="/tags/Markdown/" style="font-size: 1.05rem;">Markdown<sup>2</sup></a><a href="/tags/Maven/" style="font-size: 1.05rem;">Maven<sup>2</sup></a><a href="/tags/Navicat/" style="font-size: 1.05rem;">Navicat<sup>1</sup></a><a href="/tags/NoSql/" style="font-size: 1.05rem;">NoSql<sup>1</sup></a><a href="/tags/Nodejs/" style="font-size: 1.05rem;">Nodejs<sup>2</sup></a><a href="/tags/Python/" style="font-size: 1.05rem;">Python<sup>4</sup></a><a href="/tags/Spring/" style="font-size: 1.05rem;">Spring<sup>2</sup></a><a href="/tags/VMware/" style="font-size: 1.05rem;">VMware<sup>2</sup></a><a href="/tags/Vue/" style="font-size: 1.05rem;">Vue<sup>1</sup></a><a href="/tags/YouHou/" style="font-size: 1.05rem;">YouHou<sup>1</sup></a><a href="/tags/books/" style="font-size: 1.05rem;">books<sup>1</sup></a><a href="/tags/butterfly/" style="font-size: 1.05rem;">butterfly<sup>1</sup></a><a href="/tags/clash/" style="font-size: 1.05rem;">clash<sup>1</sup></a><a href="/tags/project/" style="font-size: 1.05rem;">project<sup>4</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 1.05rem;">前端<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6/" style="font-size: 1.05rem;">开发框架<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" style="font-size: 1.05rem;">开发环境<sup>1</sup></a><a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 1.05rem;">操作系统<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" style="font-size: 1.05rem;">数据结构与算法<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" style="font-size: 1.05rem;">计算机组成原理<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 1.05rem;">计算机网络<sup>1</sup></a><a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="font-size: 1.05rem;">软件工程<sup>1</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="smithfont smith-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="smithfont smith-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="smithfont smith-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/05/"><span class="card-archive-list-date">五月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/02/"><span class="card-archive-list-date">二月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/11/"><span class="card-archive-list-date">十一月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">3</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/10/"><span class="card-archive-list-date">十月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/09/"><span class="card-archive-list-date">九月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">5</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/07/"><span class="card-archive-list-date">七月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/06/"><span class="card-archive-list-date">六月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">7</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/05/"><span class="card-archive-list-date">五月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">17</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="smithfont smith-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="smith.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="smithfont smith-icon-arrows-left-right"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="smith.musicToggle()" title="音乐开关"><a class="music-switch"><i class="smithfont smith-icon-music"></i></a></div></div><div class="console-mask" onclick="smith.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="smithfont smith-icon-arrow-up"></i><span id="percent" onclick="smith.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="smithfont smith-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="smithfont smith-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/" itemprop="url">编程开发</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/Cisco-Packet-Tracer/" tabindex="-1" itemprop="url"> <span> <i class="smithfont smith-icon-hashtag"></i>Cisco Packet Tracer</span></a></span></div></div><h1 class="post-title" itemprop="name headline">计算机网络实验报告（Cisco Packet Tracer）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="post-meta-icon smithfont smith-icon-calendar-days"></i><span class="post-meta-label">发表于</span><time itemprop="dateCreated datePublished" datetime="2024-04-16T22:54:40.000Z" title="发表于 2024-04-17 06:54:40">2024-04-17</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="smithfont smith-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">7.3k</span><span class="post-meta-separator"></span><i class="smithfont smith-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>26分钟</span></span><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title="计算机网络实验报告（Cisco Packet Tracer）"><i class="smithfont smith-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="smithfont smith-icon-spinner smith-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为石家庄"><i class="smithfont smith-icon-location-dot"></i>石家庄</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/CiscoPacketTracer.jpg"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><div class="post-ai-description"><div class="ai-title"><i class="smithfont smith-icon-bilibili"></i><div class="ai-title-text">AI-摘要</div><i class="smithfont smith-icon-arrow-rotate-right"></i><i class="smithfont smith-icon-circle-dot" title="朗读摘要"></i><div id="ai-tag">Smith GPT</div></div><div class="ai-explanation">AI初始化中...</div><div class="ai-btn-box"><div class="ai-btn-item">介绍自己 🙈</div><div class="ai-btn-item">生成本文简介 👋</div><div class="ai-btn-item">推荐相关文章 📖</div><div class="ai-btn-item">前往主页 🏠</div><div class="ai-btn-item" id="go-api-link">了解更多</div></div><script data-pjax src="/js/smith/ai_abstract.js"></script></div><article class="post-content" id="article-container" itemscope itemtype="https://smithhs.cn/2024/04/17/2024-04-17-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A%EF%BC%88Cisco%20Packet%20Tracer%EF%BC%89/"><header><a class="post-meta-categories" href="/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/" itemprop="url">编程开发</a><a href="/tags/Cisco-Packet-Tracer/" tabindex="-1" itemprop="url">Cisco Packet Tracer</a><h1 id="CrawlerTitle" itemprop="name headline">计算机网络实验报告（Cisco Packet Tracer）</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">Smith</span><time itemprop="dateCreated datePublished" datetime="2024-04-16T22:54:40.000Z" title="undefined 2024-04-17 06:54:40">2024-04-17</time></header><h4 id="文章目录"><a href="#文章目录" class="headerlink" title="文章目录"></a>文章目录</h4><ul>
+<li><a href="#Cisco_Packet_Tracer_8">Cisco Packet Tracer简介</a></li>
+<li><ul>
+<li><ul>
+<li><ul>
+<li><a href="#1_PC__LAN_24">1、直接连接两台 PC 构建 LAN</a></li>
+<li><a href="#2_LAN_36">2、用交换机构建 LAN</a></li>
+<li><a href="#3_80">3.交换机接口地址列表</a></li>
+<li><a href="#4Spanning_Tree_Protocol_88">4.生成树协议（Spanning Tree Protocol）</a></li>
+<li><a href="#5_105">5.路由器配置初步</a></li>
+<li><a href="#6_248">6.静态路由</a></li>
+<li><a href="#7_RIP_280">7.动态路由 RIP</a></li>
+<li><a href="#8_VLAN_319">8.虚拟局域网 VLAN</a></li>
+<li><a href="#10_VTP_472">10、虚拟局域网管理 VTP</a></li>
+<li><a href="#11VLAN__587">11、VLAN 间的通信</a></li>
+<li><a href="#12DHCPDNSWeb_622">12、DHCP、DNS及Web服务器简单配置</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#_643">总结</a></li>
+</ul>
+<hr>
+<h2 id="Cisco-Packet-Tracer简介"><a href="#Cisco-Packet-Tracer简介" class="headerlink" title="Cisco Packet Tracer简介"></a>Cisco Packet <a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=Tracer&spm=1001.2101.3001.7020">Tracer</a>简介</h2><p><strong>简介</strong>：Cisco Packet Tracer是Cisco公司发布的一个辅助学习工具，为学习思科网络课程的初学者去设计、配置、排除网络故障提供了网络模拟环境。用户可以在软件的图形用户界面上直接使用拖曳方法建立网络拓扑，并可提供数据包在网络中行进的详细处理过程，观察网络实时运行情况。可以学习IOS的配置、锻炼故障排查能力。</p>
+<blockquote>
+<p>名词解释：<br>DHCP 动态主机控制协议<br>subnet Mask 子网掩码<br>default Gateway (默认路由)默认网关<br>router路由器<br>switches 交换机<br>hubs 集线器<br>wireless Devices 无线设备<br>WAN emulation 仿真广域网</p>
+</blockquote>
+<hr>
+<h5 id="1、直接连接两台-PC-构建-LAN"><a href="#1、直接连接两台-PC-构建-LAN" class="headerlink" title="1、直接连接两台 PC 构建 LAN"></a>1、直接连接两台 PC 构建 LAN</h5><p>（1）将两台 PC 直接连接构成一个网络。注意：直接连接需使用交叉线。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/31f455a05534bbad4b2349e1050852c6png.jpg"><br>（2）进行两台 PC 的基本网络配置，只需要配置 IP 地址即可，然后相互 ping 通即成功。<br>配置：<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/402bf4f1780a02cac3e945508059d0dcpng.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/50f00931355390f4e01011b81a9d8a4fpng.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/0375bec482e7e0374acbbe24137b32a4png.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/aa449d2b2249142ac35bbb22abe3f6e3png.jpg"><br>打开【PC中 &gt;&gt; Desktop &gt;&gt; Commond prompt】<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/0880d08795ba88f4884ca5e716187b93png.jpg" alt="1"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/26fcf22690bb60f8f5169310b432bca5png.jpg"></p>
+<h5 id="2、用交换机构建-LAN"><a href="#2、用交换机构建-LAN" class="headerlink" title="2、用交换机构建 LAN"></a>2、用交换机构建 LAN</h5><p>构建如下拓扑结构的局域网：<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/6b9c055cd68ac34a7be33992daad8951png.jpg"></p>
+<p>各PC的基本网络配置如下表：</p>
+<table>
+<thead>
+<tr>
+<th>pc</th>
+<th>IP</th>
+<th>子网掩码</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>PC0</td>
+<td>192.168.1.1</td>
+<td>255.255.255.0</td>
+</tr>
+<tr>
+<td>PC1</td>
+<td>192.168.1.2</td>
+<td>255.255.255.0</td>
+</tr>
+<tr>
+<td>PC2</td>
+<td>192.168.2.1</td>
+<td>255.255.255.0</td>
+</tr>
+<tr>
+<td>PC3</td>
+<td>192.168.2.2</td>
+<td>255.255.255.0</td>
+</tr>
+</tbody></table>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d92c8c16677550957acaf393dc0c3e78png.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/497412937c3759f3c9f2519b5ea0f092png.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/334baffa68f6ca12ef2dd86ec769ff43png.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/9381e6b9ba277c54646c95221d774e98png.jpg"><br><strong>问题：</strong><br>（1）PC0能否 ping 通 PC1、PC2、PC3 ？</p>
+<blockquote>
+<p>答：PC0能ping通PC1，但不能ping通PC2、PC3。</p>
+</blockquote>
+<p>（2）PC3能否 ping 通 PC0、PC1、PC2？为什么？</p>
+<blockquote>
+<p>答：PC3能ping通PC2，但不能ping通PC0、PC1。</p>
+</blockquote>
+<p>（3）将 4 台 PC 的掩码都改为 255.255.0.0 ，它们相互能 ping 通吗？为什么？</p>
+<blockquote>
+<p>答：相互之间能ping通。<br>如果掩码为255.255.255.0，PC0、PC1和PC2、PC3不是同一局域网，他们之间不能互通。<br>而掩码改为255.255.0.0，他们之间属于同一局域网下，可以互通。</p>
+</blockquote>
+<p>（4）使用二层交换机连接的网络需要配置网关吗？为什么？</p>
+<blockquote>
+<p>答：需要。在二层交换机中，配置网关尤为重要，因为其与相连的自bai治系统可以向核心系统通告可达信息。</p>
+</blockquote>
+<p>试一试：</p>
+<p>（1）集线器 Hub 是工作在物理层的多接口设备，它与交换机的区别是什么？</p>
+<blockquote>
+<p>答：集线器Hub是工作在物理层，而交换机则是工作在物理层和数据链路层。两种工作的区域不同。</p>
+</blockquote>
+<h5 id="3-交换机接口地址列表"><a href="#3-交换机接口地址列表" class="headerlink" title="3.交换机接口地址列表"></a>3.交换机接口地址列表</h5><p>二层交换机是一种即插即用的多接口设备，它对于收到的帧有 3 种处理方式：广播、转发和丢弃（请弄清楚何时进行何种操作）。那么，要转发成功，则交换机中必须要有接口地址列表即 MAC 表，该表是交换机通过学习自动得到的！</p>
+<p>仍然构建上图的拓扑结构，并配置各计算机的 IP 在同一个一个子网，使用工具栏中的放大镜点击某交换机如左边的 Switch3，选择 MAC Table，可以看到最初交换机的 MAC 表是空的，也即它不知道该怎样转发帧（那么它将如何处理？），用 PC0 访问（ping）PC1 后，再查看该交换机的 MAC 表，现在有相应的记录，请思考如何得来。随着网络通信的增加，各交换机都将生成自己完整的 MAC 表，此时交换机的交换速度就是最快的！<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/9fcedbe9802a590cfd7ab80fd5f6dfcfpng.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/534cc524b8e63287bc4cc9ad0190ef4apng.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/70313d803bdacbf9474677c06694bf79png.jpg"></p>
+<h5 id="4-生成树协议（Spanning-Tree-Protocol）"><a href="#4-生成树协议（Spanning-Tree-Protocol）" class="headerlink" title="4.生成树协议（Spanning Tree Protocol）"></a>4.生成树协议（Spanning Tree Protocol）</h5><p>交换机在目的地址未知或接收到广播帧时是要进行广播的。如果交换机之间存在回路&#x2F;环路，那么就会产生广播循环风暴，从而严重影响网络性能。<br>而交换机中运行的 STP 协议能避免交换机之间发生广播循环风暴。<br>只使用交换机，构建如下拓扑：<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/7db1f125e0b4fe2a2bebc492b73154b0png.jpg"><br>这是初始时的状态。我们可以看到交换机之间有回路，这会造成广播帧循环传送即形成广播风暴，严重影响网络性能。<br>随后，交换机将自动通过生成树协议（STP）对多余的线路进行自动阻塞（Blocking），以形成一棵以 Switch4 为根（具体哪个是根交换机有相关的策略）的具有唯一路径树即生成树！<br>经过一段时间，随着 STP 协议成功构建了生成树后，Switch5 的两个接口当前物理上是连接的，但逻辑上是不通的，处于Blocking状态（桔色）如下图所示：<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/15cc9d198b11d6e59a87cc95bfb6c7aepng.jpg"><br>在网络运行期间，假设某个时候 Switch3与 Switch4 之间的物理连接出现问题（将 Switch3 与 Switch4 的连线剪掉），则该生成树将自动发生变化。Switch5 上方先前 Blocking 的那个接口现在活动了（绿色），但下方那个接口仍处于 Blocking 状态（桔色）。如下图所示：<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/930df32279e17b81ecfcde69f332938cpng.jpg"><br><strong>注意</strong>：<br>交换机的 STP 协议即生成树协议始终自动保证交换机之间不会出现回路，从而形成广播风暴。<br><strong>秘籍：</strong><br>使用 CPT 的 Simulation 即模拟方式可非常清楚看到这个过程！</p>
+<h5 id="5-路由器配置初步"><a href="#5-路由器配置初步" class="headerlink" title="5.路由器配置初步"></a>5.路由器配置初步</h5><p>我们模拟重庆交通大学和重庆大学两个学校的连接，构建如下拓扑：<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/be41ee34aec43b28b05b156c73fa6730png.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/b9aa3663c578674ba67e65ca12b18b6cpng.jpg"></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/0e5a640fdf4aa2f998a4579fb3661353png.jpg"></p>
+<blockquote>
+<p>原因在于默认的2621XM路由器端口不够用，我们需要在设备互连前要添加所需的路由器模块（添加模块时注意要关闭电源）。我们为 Router 0添加NM－4E模块<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/3214750ab9cdf4e3e4299b05007f3425png.jpg"><br>可以连接，接着在配置里启用端口即可<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/9421ee94b0c91fe1f33358108e8f8e3dpng.jpg"><br>因为两路由器之间不能通过双绞线连接，我们添加广域网接口</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/35eb07b2cef9783a3daf07252842be31png.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/bbeac54201f7435dbca6d02627aa7a08png.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/061bfe2dfefeaf3c1e86d1d5d7a909d9png.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/a366a163ba1f2b9f99b72adcbbc6b0b6png.jpg"></p>
+<p><strong>说明一</strong><br>交通大学与重庆大学显然是两个不同的子网。在不同子网间通信需通过路由器。</p>
+<p>路由器的每个接口下至少是一个子网，图中我们简单的规划了 3 个子网：</p>
+<p>左边路由器是交通大学的，其下使用交换机连接交通大学的网络，分配网络号 192.168.1.0&#x2F;24，该路由器接口也是交通大学网络的网关，分配 IP 为 192.168.1.1<br>右边路由器是重庆大学的，其下使用交换机连接重庆大学的网络，分配网络号 192.168.3.0&#x2F;24，该路由器接口也是重庆大学网络的网关，分配 IP 为 192.168.3.1<br>两个路由器之间使用广域网接口相连，也是一个子网，分配网络号 192.168.2.0&#x2F;24<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/8737faf44586587c5dc69435ce16e85fpng.jpg"></p>
+<p><strong>说明二</strong><br>现实中，交通大学和重庆大学的连接是远程的。该连接要么通过路由器的光纤接口，要么通过广域网接口即所谓的 serial 口（如拓扑图所示）进行，一般不会通过双绞线连接（为什么？）。<br>下面我们以通过路由器的广域网口连接为例来进行相关配置。请注意：我们选用的路由器默认没有广域网模块（名称为 WIC-1T 等），需要关闭路由器后添加，然后再开机启动。<br><strong>说明三</strong><br>在模拟的广域网连接中需注意 DCE 和 DTE 端（连线时线路上有提示，带一个时钟标志的是 DCE 端。有关 DCE 和 DTE 的概念请查阅相关资料。），在 DCE 端需配置时钟频率 64000<br><strong>说明四</strong><br>路由器有多种命令行配置模式，每种模式对应不同的提示符及相应的权限。<br>请留意在正确的模式下输入配置相关的命令。</p>
+<blockquote>
+<p>User mode：用户模式<br>Privileged mode：特权模式<br>Global configuration mode：全局配置模式<br>Interface mode：接口配置模式<br>Subinterface mode：子接口配置模式</p>
+</blockquote>
+<p><strong>说明五</strong><br>在现实中，对新的路由器，显然不能远程进行配置，我们必须在现场通过笔记本的串口与路由器的 console 接口连接并进行初次的配置（注意设置比特率为9600）后，才能通过网络远程进行配置。这也是上图左上画出笔记本连接的用意。<br><strong>说明六</strong><br>在路由器的 CLI 界面中，可看到路由器刚启动成功后，因为无任何配置，将会提示是否进行对话配置（Would you like to enter the initial configuration dialog?），因其步骤繁多，请选择 NO<br>比如A大学路由器的初步配置可以如下：</p>
+<p><strong>注意</strong><br>在我们的实验中可不进行如下的配置，但在现实中为了安全，以下的登录及特权密码等配置是必须的，否则每个人都可操作你的路由器或交换机！</p>
+<blockquote>
+<p>Router&gt;en &#x2F;&#x2F; 从普通模式进入特权模式<br>Router#conf t &#x2F;&#x2F; 进入全局配置模式<br>Router(config)#interface FastEthernet0&#x2F;0<br>Router(config-if)#ip address 192.168.1.1 255.255.255.0<br>Router(config-if)#no shutdown<br>Router(config-if)#exit<br>Router(config)#line vty 0 4 &#x2F;&#x2F;可支持0-4共5个终端同时登录<br>Router(config-line)#password xianlu &#x2F;&#x2F; 远程登录密码<br>Router(config-line)#login<br>Router(config-line)#exit<br>Router(config)#enable password xianlu &#x2F;&#x2F; 特权模式密码 Router(config)#^Z &#x2F;&#x2F;退出</p>
+</blockquote>
+<p>拓扑图中路由器各接口配置数据如下：</p>
+<p>交通大学 Router0 以太网口 192.168.1.1 255.255.255.0<br>交通大学 Router0 广域网口 192.168.2.1 255.255.255.0<br>重庆大学 Router1 以太网口 192.168.3.1 255.255.255.0<br>重庆大学 Router1 广域网口 192.168.2.2 255.255.255.0</p>
+<p>拓扑图中各 PC 配置数据如下：</p>
+<p>交通大学 PC6 192.168.1.2 255.255.255.0 192.168.1.1<br>交通大学 PC7 192.168.1.3 255.255.255.0 192.168.1.1<br>重庆大学 PC8 192.168.3.2 255.255.255.0 192.168.3.1<br>重庆大学 PC9 192.168.3.3 255.255.255.0 192.168.3.1</p>
+<p>交通大学路由器基本配置如下：<br>以太网口：</p>
+<blockquote>
+<p>Router&gt;enable &#x2F;&#x2F; 从普通模式进入特权模式<br>Router#configure terminal &#x2F;&#x2F; 进入全局配置模式<br>Router(config)#interface f0&#x2F;0 &#x2F;&#x2F; 进入配置以太网口模式<br>Router(config-if)#ip<br>address 192.168.1.1 255.255.255.0 &#x2F;&#x2F; 配置该接口的 IP<br>Router(config-if)#no<br>shutdown &#x2F;&#x2F; 激活接口<br>Router(config-if)#^z &#x2F;&#x2F; 直接退到特权模式<br>Router#<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/3fcf9cea4e0e50eb49e25d6ad06f65bapng.jpg"></p>
+</blockquote>
+<p>广域网口：</p>
+<blockquote>
+<p>Router&gt;en &#x2F;&#x2F; 从普通模式进入特权模式<br>Router#conf t &#x2F;&#x2F; 进入全局配置模式<br>Router(config)#int s0&#x2F;0 &#x2F;&#x2F; 进入配置广域网口模式<br>Router(config-if)#ip address192.168.2.1 255.255.255.0 &#x2F;&#x2F;配置该接口的 IP<br>Router(config-if)#clock rate 64000 &#x2F;&#x2F; 其为 DCE 端，配置时钟频率 Router(config-if)#no shutdown &#x2F;&#x2F; 激活接口<br>Router(config-if)#^z &#x2F;&#x2F; 直接退到特权模式<br>Router#<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2ba0223af4a93ac7fc35ec8ce871b341png.jpg"></p>
+</blockquote>
+<p>重庆大学路由器基本配置如下：</p>
+<p>以太网口：</p>
+<blockquote>
+<p>Router&gt;en &#x2F;&#x2F; 从普通模式进入特权模式<br>Router#conf t &#x2F;&#x2F; 进入全局配置模式<br>Router(config)#int f0&#x2F;0 &#x2F;&#x2F; 进入配置以太网口模式<br>Router(config-if)#ip address<br>192.168.3.1 255.255.255.0 &#x2F;&#x2F; 配置该接口的 IP<br>Router(config-if)#no shutdown &#x2F;&#x2F; 激活接口<br>Router(config-if)#^z &#x2F;&#x2F; 直接退到特权模式 Router#<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/5044f055ca75f55375d85218191e4541png.jpg"></p>
+</blockquote>
+<p>广域网口：</p>
+<blockquote>
+<p>Router&gt;en &#x2F;&#x2F; 从普通模式进入特权模式<br>Router#conf t &#x2F;&#x2F; 进入全局配置模式<br>Router(config)#int s0&#x2F;0 &#x2F;&#x2F; 进入配置广域网口模式<br>Router(config-if)#ip address192.168.2.2 255.255.255.0 &#x2F;&#x2F;配置该接口的 IP<br>Router(config-if)#no shutdown &#x2F;&#x2F; 激活接口<br>Router(config-if)#^z &#x2F;&#x2F; 直接退到特权模式<br>Router#<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/9c7410a166faca88ee055ce3e4f5a445png.jpg"></p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/aa7ece23cb4c3f694ca9ae44470562f6png.jpg"></p>
+<p>至此，路由器基本的配置完成。<br><strong>问题</strong><br>现在交通大学内的各 PC 及网关相互能 ping 通，重庆大学也类似。但不能从交大的 PC ping 通重大的 PC，反之亦然，也即不能跨子网。为什么？</p>
+<blockquote>
+<p>原因是在路由表中都没能够到达对方的路由路径，所以就无法ping通。</p>
+</blockquote>
+<h5 id="6-静态路由"><a href="#6-静态路由" class="headerlink" title="6.静态路由"></a>6.静态路由</h5><p><strong>静态路由</strong>是非自适应性路由协议，是由网络管理人员手动配置的，不能够根据网络拓扑的变化而改变。 因此，静态路由简单高效，适用于结构非常简单的网络。</p>
+<p>在当前这个简单的拓扑结构中我们可以使用静态路由，即直接告诉路由器到某网络该怎么走即可。</p>
+<p>在前述路由器基本配置成功的情况下使用以下命令进行静态路由协议的配置：</p>
+<p>交通大学路由器静态路由配置：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Router&gt;en   <span class="comment">// 从普通模式进入特权模式</span></span><br><span class="line">Router<span class="meta">#conf t   <span class="comment">// 进入全局配置模式</span></span></span><br><span class="line">Router(config)<span class="meta">#ip route 192.168.3.0 255.255.255.0 192.168.2.2   <span class="comment">// 告诉交通大学路由器到 192.168.3.0 这个网络的下一跳是 192.168.2.2</span></span></span><br><span class="line">Router(config)<span class="meta">#exit   <span class="comment">//退到特权模式</span></span></span><br><span class="line">Router<span class="meta">#show ip route    <span class="comment">//查看路由表</span></span></span><br><span class="line"><span class="number">12345</span></span><br></pre></td></tr></table></figure>
+
+<p>重庆大学路由器静态路由配置：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Router&gt;en   <span class="comment">// 从普通模式进入特权模式</span></span><br><span class="line">Router<span class="meta">#conf t   <span class="comment">// 进入全局配置模式</span></span></span><br><span class="line">Router(config)<span class="meta">#ip route 192.168.1.0 255.255.255.0 192.168.2.1   <span class="comment">// 告诉重庆大学路由器到 192.168.1.0 这个网络的下一跳是 192.168.2.1</span></span></span><br><span class="line">Router(config)<span class="meta">#exit   <span class="comment">//退到特权模式</span></span></span><br><span class="line">Router<span class="meta">#show ip route    <span class="comment">//查看路由表</span></span></span><br><span class="line"><span class="number">12345</span></span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/a18e6c8869dd090403cd3d321f336fb5png.jpg"></p>
+<p>查看路由表你可看到标记为 S 的一条路由，S 表示 Static 。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/4004e9599c6d4f74a1c9d98c6f31c4bbpng.jpg"></p>
+<p>至此，这些 PC 能全部相互 ping 通！</p>
+<h5 id="7-动态路由-RIP"><a href="#7-动态路由-RIP" class="headerlink" title="7.动态路由 RIP"></a>7.动态路由 RIP</h5><p><strong>动态路由协议</strong>采用自适应路由算法，能够根据网络拓扑的变化而重新计算机最佳路由。</p>
+<p>RIP 的全称是 Routing Information Protocol，是距离矢量路由的代表（目前虽然淘汰，但可作为我们学习的对象）。使用 RIP 协议只需要告诉路由器直接相连有哪些网络即可，然后 RIP 根据算法自动构建出路由表。</p>
+<p>因为我们模拟的网络非常简单，因此不能同时使用静态和动态路由，否则看不出效果，所以我们需要把刚才配置的静态路由先清除掉。</p>
+<p>清除静态路由配置：<br>直接关闭路由器电源。相当于没有保存任何配置，然后各接口再按照前面基本配置所述重新配置 IP 等参数（推荐此方法，可以再熟悉一下接口的配置命令）；<br>使用 no 命令清除静态路由。在全局配置模式下，交通大学路由器使用：no ip route 192.168.3.0 255.255.255.0 192.168.2.2，重庆大学路由器使用：no ip route 192.168.1.0 255.255.255.0 192.168.2.1 。相当于使用 no 命令把刚才配置的静态路由命令给取消。<br>交通大学路由器 RIP 路由配置：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Router&gt;en   <span class="comment">// 从普通模式进入特权模式</span></span><br><span class="line">Router<span class="meta">#conf t   <span class="comment">// 进入全局配置模式</span></span></span><br><span class="line">Router(config)<span class="meta">#router rip   <span class="comment">// 启用 RIP 路由协议，注意是 router 命令</span></span></span><br><span class="line">Router(config-router)<span class="meta">#network 192.168.1.0   <span class="comment">// 网络 192.168.1.0 与我直连</span></span></span><br><span class="line">Router(config-router)<span class="meta">#network 192.168.2.0   <span class="comment">// 网络 192.168.2.0 与我直连</span></span></span><br><span class="line">Router(config-router)#^z   <span class="comment">//直接退到特权模式</span></span><br><span class="line">Router<span class="meta">#show ip route    <span class="comment">//查看路由表</span></span></span><br><span class="line"><span class="number">1234567</span></span><br></pre></td></tr></table></figure>
+
+<p>重庆大学路由器 RIP 路由配置：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">Router&gt;en   <span class="comment">// 从普通模式进入特权模式</span></span><br><span class="line">Router<span class="meta">#conf t   <span class="comment">// 进入全局配置模式</span></span></span><br><span class="line">Router(config)<span class="meta">#router rip   <span class="comment">// 启用RIP路由协议，注意是 router 命令</span></span></span><br><span class="line">Router(config-router)<span class="meta">#network 192.168.3.0   <span class="comment">// 网络 192.168.3.0 与我直连</span></span></span><br><span class="line">Router(config-router)<span class="meta">#network 192.168.2.0   <span class="comment">// 网络 192.168.2.0 与我直连</span></span></span><br><span class="line">Router(config-router)#^z   <span class="comment">//直接退到特权模式</span></span><br><span class="line">Router<span class="meta">#show ip route    <span class="comment">//查看路由表</span></span></span><br><span class="line"><span class="number">1234567</span></span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/9a31ff0a0ca5802653ccae6588049a83png.jpg"></p>
+<p>查看路由表你可看到标记为 R 的一条路由，R 表示 RIP 。</p>
+<p>至此，这些 PC 也能全部相互 ping 通！</p>
+<h5 id="8-虚拟局域网-VLAN"><a href="#8-虚拟局域网-VLAN" class="headerlink" title="8.虚拟局域网 VLAN"></a>8.虚拟局域网 VLAN</h5><p>在实际网络中（如我校的网络），你可看到路由器一般位于网络的边界，而内部几乎全部使用交换机连接。</p>
+<p>前面我们分析过，交换机连接的是同一个子网！ 显然，在这样一个大型规模的子网中进行广播甚至产生广播风暴将严重影响网络性能甚至瘫痪。</p>
+<p>另外我们也已经知道，其实学校是划分了 N 多个子网的，那么这些交换机连接的就绝不是一个子网！这样矛盾的事情该如何解释呢？我们实际上使用了支持 VLAN 的交换机！而前述的交换机只是普通的 2 层交换机（或者我们把它当作 2 层交换机在使用。</p>
+<p>VLAN（Virtual Local Area Network）即虚拟局域网。通过划分 VLAN，我们可以把一个物理网络划分为多个逻辑网段即多个子网。</p>
+<p>划分 VLAN 后可以杜绝网络广播风暴，增强网络的安全性，便于进行统一管理等。</p>
+<p>构建拓扑：<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/e21e87adb7be3a3c2c687b4f2644b980png.jpg"></p>
+<p>Cisco 2960 交换机是支持 VLAN 的交换机，共有 24 个 100M 和 2 个 1000M 以太网口。默认所有的接口都在 VLAN 1 中，故此时连接上来的计算机都处于同一 VLAN，可以进行通信。</p>
+<p>下面我们就该交换机的 24 个 100M 接口分为 3 个部分，划分到 3 个不同的 VLAN 中，id 号分别设为 10、20、30，且设置别名（computer、communication、electronic）以利于区分和管理。</p>
+<p>交换机 VLAN 配置：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">Switch&gt;en</span><br><span class="line">Switch<span class="meta">#conf t</span></span><br><span class="line">Switch(config)<span class="meta">#vlan 10    <span class="comment">// 创建 id 为 10 的 VLAN（缺省的，交换机所有接口都属于VLAN 1，不能使用）</span></span></span><br><span class="line">Switch(config-vlan)<span class="meta">#name computer    <span class="comment">// 设置 VLAN 的别名</span></span></span><br><span class="line">Switch(config-vlan)<span class="meta">#exit</span></span><br><span class="line">Switch(config)<span class="meta">#int vlan 10    <span class="comment">// 该 VLAN 为一个子网，设置其 IP，作为该子网网关</span></span></span><br><span class="line">Switch(config-<span class="keyword">if</span>)<span class="meta">#ip address 192.168.0.1 255.255.255.0</span></span><br><span class="line">Switch(config-<span class="keyword">if</span>)<span class="meta">#exit</span></span><br><span class="line">Switch(config)<span class="meta">#vlan 20    <span class="comment">// 创建 id 为 20 的 VLAN</span></span></span><br><span class="line">Switch(config-vlan)<span class="meta">#name communication    <span class="comment">//设置别名</span></span></span><br><span class="line">Switch(config-vlan)<span class="meta">#exit</span></span><br><span class="line">Switch(config)<span class="meta">#int vlan 20</span></span><br><span class="line">Switch(config-<span class="keyword">if</span>)<span class="meta">#ip addr 192.168.1.1 255.255.255.0</span></span><br><span class="line">Switch(config-<span class="keyword">if</span>)<span class="meta">#exit</span></span><br><span class="line">Switch(config)<span class="meta">#vlan 30    <span class="comment">// 创建 id 为 20 的 VLAN</span></span></span><br><span class="line">Switch(config-vlan)<span class="meta">#name electronic    <span class="comment">// 设置别名</span></span></span><br><span class="line">Switch(config-vlan)<span class="meta">#exit</span></span><br><span class="line">Switch(config)<span class="meta">#int vlan 30</span></span><br><span class="line">Switch(config-<span class="keyword">if</span>)<span class="meta">#ip add 192.168.2.1 255.255.255.0</span></span><br><span class="line">Switch(config-<span class="keyword">if</span>)<span class="meta">#exit</span></span><br><span class="line">Switch(config)<span class="meta">#int range f0/1-8    <span class="comment">// 成组配置接口（1-8）</span></span></span><br><span class="line">Switch(config-<span class="keyword">if</span>-range)<span class="meta">#switchport mode access    <span class="comment">// 设置为存取模式</span></span></span><br><span class="line">Switch(config-<span class="keyword">if</span>-range)<span class="meta">#switchport access vlan 10    <span class="comment">// 划归到 VLAN 10 中</span></span></span><br><span class="line">Switch(config-<span class="keyword">if</span>-range)<span class="meta">#exit</span></span><br><span class="line">Switch(config)<span class="meta">#int range f0/9-16</span></span><br><span class="line">Switch(config-<span class="keyword">if</span>-range)<span class="meta">#switchport mode access</span></span><br><span class="line">Switch(config-<span class="keyword">if</span>-range)<span class="meta">#switchport access vlan 20</span></span><br><span class="line">Switch(config-<span class="keyword">if</span>-range)<span class="meta">#exit</span></span><br><span class="line">Switch(config)<span class="meta">#int range f0/17-24</span></span><br><span class="line">Switch(config-<span class="keyword">if</span>-range)<span class="meta">#switchport mode access</span></span><br><span class="line">Switch(config-<span class="keyword">if</span>-range)<span class="meta">#switchport access vlan 30</span></span><br><span class="line">Switch(config-<span class="keyword">if</span>-range)#^Z</span><br><span class="line">Switch<span class="meta">#show vlan <span class="comment">// 查看 VLAN 的划分情况</span></span></span><br><span class="line"><span class="number">123456789101112131415161718192021222324252627282930313233</span></span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/325611b8c0c7dac0a49d21a58a159b1bpng.jpg"></p>
+<p>至此，在该交换机上我们就划分了 3 个 VLAN（不包括缺省的 VLAN 1）。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/0d79314a54046e194f3b6683e1e37485png.jpg"></p>
+<p>各 VLAN 下 PC 的网络配置及连接的交换机接口如下表：</p>
+<table>
+<thead>
+<tr>
+<th>机器名</th>
+<th>连接的接口</th>
+<th>所属VLAN</th>
+<th>IP</th>
+<th>子网掩码</th>
+<th>网关</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>PC0</td>
+<td>F0&#x2F;1</td>
+<td>VLAN 10</td>
+<td>192.168.0.2</td>
+<td>255.255.255.0</td>
+<td>192.168.0.1</td>
+</tr>
+<tr>
+<td>PC1</td>
+<td>F0&#x2F;2</td>
+<td>VLAN 10</td>
+<td>192.168.0.3</td>
+<td>255.255.255.0</td>
+<td>192.168.0.1</td>
+</tr>
+<tr>
+<td>PC2</td>
+<td>F0&#x2F;17</td>
+<td>VLAN 30</td>
+<td>192.168.2.2</td>
+<td>255.255.255.0</td>
+<td>192.168.2.1</td>
+</tr>
+<tr>
+<td>PC3</td>
+<td>F0&#x2F;9</td>
+<td>VLAN 20</td>
+<td>192.168.1.2</td>
+<td>255.255.255.0</td>
+<td>192.168.1.1</td>
+</tr>
+<tr>
+<td>PC4</td>
+<td>F0&#x2F;10</td>
+<td>VLAN 20</td>
+<td>192.168.1.3</td>
+<td>255.255.255.0</td>
+<td>192.168.1.1</td>
+</tr>
+<tr>
+<td>PC5</td>
+<td>F0&#x2F;18</td>
+<td>VLAN 30</td>
+<td>192.168.2.3</td>
+<td>255.255.255.0</td>
+<td>192.168.2.1</td>
+</tr>
+<tr>
+<td>PC6</td>
+<td>F0&#x2F;19</td>
+<td>VLAN 30</td>
+<td>192.168.2.4</td>
+<td>255.255.255.0</td>
+<td>192.168.2.1</td>
+</tr>
+</tbody></table>
+<p>此时可以使用 ping 命令进行测试，你会发现只有在同一 VLAN 中的 PC 才能通信，且广播也局限于该 VLAN。</p>
+<p>用P0pingP6，不通<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/59a5751c3d0231f2898d45e71fd14ef8png.jpg"><br>用P0pingP1，通了<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/43d7b96d374d04c8b32081556a5a8eb4png.jpg"></p>
+<p>✎ 思考</p>
+<p>分析一下当前为何不同 VLAN 中的 PC 不能通信？网关在此起什么作用？我们的网关又在何处？如何发起广播测试？</p>
+<blockquote>
+<p>答：vlan有划分网络的作用，同一个vlan中的端口可以不通过路由器直接通信，而不同vlan之间则需要路由器进行路由，网关是用来进行协议转换的。不同的网段之间需要通信一定需要网关。如果要发起广播测试，那么就要引入三层设备。</p>
+</blockquote>
+<h5 id="10、虚拟局域网管理-VTP"><a href="#10、虚拟局域网管理-VTP" class="headerlink" title="10、虚拟局域网管理 VTP"></a>10、虚拟局域网管理 VTP</h5><p>前一个实验我们在交换机上进行了 VLAN 的规划和划分。但在实际应用中，我们绝不允许在这些支持VLAN的交换机上进行随意的 VLAN 划分，如此将造成管理混乱！VLAN的划分必须得到统一的规划和管理，这就需要 VTP 协议。</p>
+<p>VTP（VLAN Trunk Protocol）即 VLAN 中继协议。VTP 通过 ISL 帧或 Cisco 私有 DTP 帧（可查阅相关资料了解）保持 VLAN 配置统一性，也被称为虚拟局域网干道协议，它是思科私有协议。 VTP 统一管理、增加、删除、调整VLAN，自动地将信息向网络中其它的交换机广播。</p>
+<p>此外，VTP 减小了那些可能导致安全问题的配置，只要在 VTP Server 做相应设置，VTP Client 会自动学习 VTP Server 上的 VLAN 信息。</p>
+<p>为演示 VTP，重新构建如下拓扑结构：<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/c2be83789b5eb4df9fd2fb4e0b3a435dpng.jpg"></p>
+<blockquote>
+<p><strong>注意</strong>： 作为干线，两个 2960 交换机和核心的 3560 交换机应该使用 Gbit 口相连。这虽然不是必须，但现实中这样连接性能最好。<br>3560 交换机是网络中的核心交换机，我们将其作为 VTP Server，VTP 域及 VLAN 将在其上创建和管理。 两个 2960<br>交换机是是局域网中的汇聚层&#x2F;接入层交换机，将作为 VTP Client，可决定加入的 VTP 域和 VLAN。</p>
+</blockquote>
+<p>目前该网络都属于 VLAN 1，也即这些 PC 是可以相互通信的。前面说过，无论对于性能、管理还是安全等而言，现实中我们必须进行 VLAN 划分。</p>
+<p>现在我们的要求是：新建两个 VLAN，然后让 PC0 和 PC1 属于 VLAN 2，PC1 和 PC3 属于 VLAN 3。</p>
+<p>我们将在核心交换机 3560上进行如下工作：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">设置为 server 模式，VTP 域为 cqjtu</span><br><span class="line">新建 VLAN <span class="number">2</span>，网络号 <span class="number">192.168</span><span class="number">.1</span><span class="number">.0</span>/<span class="number">24</span>，网关 <span class="number">192.168</span><span class="number">.1</span><span class="number">.1</span></span><br><span class="line">新建 VLAN <span class="number">3</span>，网络号 <span class="number">192.168</span><span class="number">.2</span><span class="number">.0</span>/<span class="number">24</span>，网关 <span class="number">192.168</span><span class="number">.2</span><span class="number">.1</span></span><br><span class="line"><span class="number">123</span></span><br></pre></td></tr></table></figure>
+
+<p>3560 VTP Server 配置：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Switch&gt;en</span><br><span class="line">Switch<span class="meta">#conf t</span></span><br><span class="line">Switch(config)<span class="meta">#hostname 3560    <span class="comment">// 更改交换机名称（可选）</span></span></span><br><span class="line"><span class="number">3560</span>(config)<span class="meta">#vtp domain cqjtu   <span class="comment">// 设置 VTP 域名称为 cqjtu</span></span></span><br><span class="line"><span class="number">3560</span>(config)<span class="meta">#vtp mode server    <span class="comment">// 设置其为 VTP 服务器模式</span></span></span><br><span class="line"><span class="number">3560</span>(config)<span class="meta">#vlan 2             <span class="comment">// 新建VLAN 2</span></span></span><br><span class="line"><span class="number">3560</span>(config-vlan)<span class="meta">#name computer <span class="comment">// 设置 VLAN 2 的别名（可选）</span></span></span><br><span class="line"><span class="number">3560</span>(config-vlan)<span class="meta">#exit</span></span><br><span class="line"><span class="number">3560</span>(config)<span class="meta">#vlan 3             <span class="comment">// 再建 VLAN 3</span></span></span><br><span class="line"><span class="number">3560</span>(config-vlan)<span class="meta">#name communication    <span class="comment">//设置 VLAN 2 的别名（可选）</span></span></span><br><span class="line"><span class="number">3560</span>(config-vlan)<span class="meta">#exit</span></span><br><span class="line"><span class="number">3560</span>(config)<span class="meta">#int vlan 2    <span class="comment">// 配置接口 VLAN 2，它将是该子网（左边）的网关</span></span></span><br><span class="line"><span class="number">3560</span>(config-<span class="keyword">if</span>)<span class="meta">#ip address 192.168.1.1 255.255.255.0</span></span><br><span class="line"><span class="number">3560</span>(config-<span class="keyword">if</span>)<span class="meta">#exit</span></span><br><span class="line"><span class="number">3560</span>(config)<span class="meta">#int vlan 3    <span class="comment">// 配置接口 VLAN 3，它将是该子网（右边）的网关</span></span></span><br><span class="line"><span class="number">3560</span>(config-<span class="keyword">if</span>)<span class="meta">#ip address 192.168.2.1 255.255.255.0</span></span><br><span class="line"><span class="number">12345678910111213141516</span></span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/fd825df7ff52a3dd9d550b5fd5f76c33png.jpg"></p>
+<p>我们将在左边交换机 2960A 上进行如下工作：</p>
+<blockquote>
+<p>加入名为 cqjtu 的 VTP 域 配置与核心交换机 3560 连接的千兆接口 g0&#x2F;1 为 trunk 模式 将接口 f0&#x2F;1 划分到<br>VLAN 2 中 将接口 f0&#x2F;2 划分到 VLAN 3 中</p>
+</blockquote>
+<p>2960A（左边） VTP Client 配置：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Switch&gt;en</span><br><span class="line">Switch<span class="meta">#conf t</span></span><br><span class="line">Switch(config)<span class="meta">#hostname 2960A    <span class="comment">// 更改交换机名称（可选）</span></span></span><br><span class="line"><span class="number">2960</span>A(config)<span class="meta">#vtp domain cqjtu   <span class="comment">// 加入名为 cqjtu 的 VTP 域</span></span></span><br><span class="line"><span class="number">2960</span>A(config)<span class="meta">#vtp mode client    <span class="comment">// 设置模式为 VTP 客户</span></span></span><br><span class="line"><span class="number">2960</span>A(config)<span class="meta">#int g0/1    <span class="comment">// 配置与核心交换机 3560 连接的 g0/1 千兆接口</span></span></span><br><span class="line"><span class="number">2960</span>A(config-<span class="keyword">if</span>)<span class="meta">#switchport mode trunk    <span class="comment">// 设置该接口为中继（trunk）模式</span></span></span><br><span class="line"><span class="number">2960</span>A(config-<span class="keyword">if</span>)<span class="meta">#switchport trunk allowed vlan all  <span class="comment">// 允许为所有的 VLAN 中继</span></span></span><br><span class="line"><span class="number">2960</span>A(config-<span class="keyword">if</span>)<span class="meta">#exit</span></span><br><span class="line"><span class="number">2960</span>A(config)<span class="meta">#int f0/1    <span class="comment">// 配置接口 1</span></span></span><br><span class="line"><span class="number">2960</span>A(config-<span class="keyword">if</span>)<span class="meta">#switchport mode access    <span class="comment">// 设置该接口为正常访问模式</span></span></span><br><span class="line"><span class="number">2960</span>A(config-<span class="keyword">if</span>)<span class="meta">#switchport access vlan 2  <span class="comment">// 将接口划分到 VLAN 2</span></span></span><br><span class="line"><span class="number">2960</span>A(config-<span class="keyword">if</span>)<span class="meta">#exit</span></span><br><span class="line"><span class="number">2960</span>A(config)<span class="meta">#int f0/2    <span class="comment">// 配置接口 2</span></span></span><br><span class="line"><span class="number">2960</span>A(config-<span class="keyword">if</span>)<span class="meta">#switchport mode access    <span class="comment">// 设置该接口为正常访问模式</span></span></span><br><span class="line"><span class="number">2960</span>A(config-<span class="keyword">if</span>)<span class="meta">#switchport access vlan 3  <span class="comment">// 将接口划分到 VLAN 3</span></span></span><br><span class="line"><span class="number">12345678910111213141516</span></span><br></pre></td></tr></table></figure>
+
+<p>我们将在右边交换机 2960B 上进行同样的工作：</p>
+<blockquote>
+<p>加入名为 cqjtu VTP 域 配置与核心交换机 3560 连接的千兆接口 g0&#x2F;1 为 trunk 模式 将接口 f0&#x2F;1 划分到<br>VLAN 2 中 将接口 f0&#x2F;2 划分到 VLAN 3 中</p>
+</blockquote>
+<p>2960B（右边） VTP Client 配置：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">Switch&gt;en</span><br><span class="line">Switch<span class="meta">#conf t</span></span><br><span class="line">Switch(config)<span class="meta">#hostname 2960B    <span class="comment">// 更改交换机名称（可选）</span></span></span><br><span class="line"><span class="number">2960B</span>(config)<span class="meta">#vtp domain cqjtu   <span class="comment">// 加入名为 cqjtu 的 VTP 域</span></span></span><br><span class="line"><span class="number">2960B</span>(config)<span class="meta">#vtp mode client    <span class="comment">// 设置模式为 VTP 客户</span></span></span><br><span class="line"><span class="number">2960B</span>(config)<span class="meta">#int g0/1    <span class="comment">// 配置与核心交换机 3560 连接的 g0/1 千兆接口</span></span></span><br><span class="line"><span class="number">2960B</span>(config-<span class="keyword">if</span>)<span class="meta">#switchport mode trunk    <span class="comment">// 设置该接口为中继（trunk）模式</span></span></span><br><span class="line"><span class="number">2960B</span>(config-<span class="keyword">if</span>)<span class="meta">#switchport trunk allowed vlan all  <span class="comment">// 允许为所有的 VLAN 中继</span></span></span><br><span class="line"><span class="number">2960B</span>(config-<span class="keyword">if</span>)<span class="meta">#exit</span></span><br><span class="line"><span class="number">2960B</span>(config)<span class="meta">#int f0/1    <span class="comment">// 配置接口 1</span></span></span><br><span class="line"><span class="number">2960B</span>(config-<span class="keyword">if</span>)<span class="meta">#switchport mode access    <span class="comment">// 设置该接口为正常访问模式</span></span></span><br><span class="line"><span class="number">2960B</span>(config-<span class="keyword">if</span>)<span class="meta">#switchport access vlan 2  <span class="comment">// 将接口划分到 VLAN 2</span></span></span><br><span class="line"><span class="number">2960B</span>(config-<span class="keyword">if</span>)<span class="meta">#exit</span></span><br><span class="line"><span class="number">2960B</span>(config)<span class="meta">#int f0/2    <span class="comment">// 配置接口 2</span></span></span><br><span class="line"><span class="number">2960B</span>(config-<span class="keyword">if</span>)<span class="meta">#switchport mode access    <span class="comment">// 设置该接口为正常访问模式</span></span></span><br><span class="line"><span class="number">2960B</span>(config-<span class="keyword">if</span>)<span class="meta">#switchport access vlan 3  <span class="comment">// 将接口划分到 VLAN 3</span></span></span><br><span class="line"><span class="number">12345678910111213141516</span></span><br></pre></td></tr></table></figure>
+
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/5abc570febdced048ef6feab28809926png.jpg"></p>
+<p>至此，各交换机配置完毕。</p>
+<blockquote>
+<p>秘籍<br>此时在 3 个交换机的特权模式下，都可使用show vtp status命令查看 VTP 状态，使用show vlan命令查看 VLAN 状态</p>
+</blockquote>
+<p>各 PC 连接的交换机和接口以及网络配置如下：<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d4ac452039bc9b49c4207a16d8355467png.jpg"></p>
+<p>至此，VTP 配置完成。同 VLAN 可以 ping 通，而不同 VLAN 不行（即使在同一交换机下，如从 PC0 到 PC1），且能够方便的统一规划和管理。</p>
+<blockquote>
+<p>试一试<br>使用 PC0（192.168.1.2） ping PC1（192.168.2.2） 的结果如何？使用 PC0 ping PC2 的结果如何？想想为什么？<br><em>PC0 pingPC1不能通,因为不属于同一vlan，<br>PC0pingPC2可以通，因为PC0和PC2属于同一vlan下</em></p>
+</blockquote>
+<h5 id="11、VLAN-间的通信"><a href="#11、VLAN-间的通信" class="headerlink" title="11、VLAN 间的通信"></a>11、VLAN 间的通信</h5><p>VTP 只是给我们划分和管理 VLAN 提供了方便，由上面的测试得知，目前我们仍然不能在 VLAN 间通信。</p>
+<p>因为默认的，VLAN 间是不允许进行通信，此时我们需要所谓的独臂路由器在 VLAN 间为其进行转发！</p>
+<p>我们使用的核心交换机 3560 是个 3 层交换机，可工作在网络层，也称路由交换机，即具有路由功能，能进行这种转发操作。</p>
+<p>3560 交换机配置：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">3560</span>&gt;en</span><br><span class="line"><span class="number">3560</span><span class="meta">#conf t</span></span><br><span class="line"><span class="number">3560</span>(config)<span class="meta">#int g0/1    <span class="comment">// 配置连接左边 2960A 交换机的接口</span></span></span><br><span class="line"><span class="number">3560</span>(config-<span class="keyword">if</span>)<span class="meta">#switchport trunk encapsulation dot1q    <span class="comment">// 封装 VLAN 协议</span></span></span><br><span class="line"><span class="number">3560</span>(config-<span class="keyword">if</span>)<span class="meta">#switchport mode trunk     <span class="comment">// 设置为中继模式</span></span></span><br><span class="line"><span class="number">3560</span>(config-<span class="keyword">if</span>)<span class="meta">#switchport trunk allowed vlan all     <span class="comment">// 在所有 VLAN 间转发</span></span></span><br><span class="line"><span class="number">3560</span>(config-<span class="keyword">if</span>)<span class="meta">#exit</span></span><br><span class="line"><span class="number">3560</span>(config)<span class="meta">#int g0/2    <span class="comment">// 配置连接右边 2960B 交换机的接口</span></span></span><br><span class="line"><span class="number">3560</span>(config-<span class="keyword">if</span>)<span class="meta">#switchport trunk encapsulation dot1q    <span class="comment">//封装 VLAN 协议</span></span></span><br><span class="line"><span class="number">3560</span>(config-<span class="keyword">if</span>)<span class="meta">#switchport mode trunk     <span class="comment">// 设置为中继模式</span></span></span><br><span class="line"><span class="number">3560</span>(config-<span class="keyword">if</span>)<span class="meta">#switchport trunk allowed vlan all     <span class="comment">// 在所有 VLAN 间转发</span></span></span><br><span class="line"><span class="number">3560</span>(config-<span class="keyword">if</span>)<span class="meta">#exit</span></span><br><span class="line"><span class="number">3560</span>(config)<span class="meta">#ip routing    <span class="comment">// 启用路由转发功能</span></span></span><br><span class="line"><span class="number">12345678910111213</span></span><br></pre></td></tr></table></figure>
+
+<p>至此，各 VLAN 中的 PC 可以正常通信。</p>
+<blockquote>
+<p>试一试 现在再使用 PC0（192.168.1.2） ping PC1（192.168.2.2） 的结果如何？使用 PC0 ping PC2 的结果如何？<br>答：都可以ping通。</p>
+</blockquote>
+<p>独臂路由的缺陷</p>
+<blockquote>
+<p>当使用 CPT 的模拟方式进行上面的测试时（ PC0 ping PC1），你会非常清楚的看到 ICMP 包全部都由3560交换机在转发，非常容易形成瓶颈。现实中，我们一般不使用这种方式，而是真正使用其三层转发功能，即”一次路由多次交换”，请查阅相关资料。</p>
+</blockquote>
+<h5 id="12、DHCP、DNS及Web服务器简单配置"><a href="#12、DHCP、DNS及Web服务器简单配置" class="headerlink" title="12、DHCP、DNS及Web服务器简单配置"></a>12、DHCP、DNS及Web服务器简单配置</h5><p>1、动态主机配置 DHCP、域名解析 DNS 以及 Web 服务在日常应用中作用巨大，我们构建如下简单的拓扑来进行练习。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/545c4c9aaa1e4d45e9e79a2e0b378e7epng.jpg"><br>该拓扑中，服务器及客户机都连在同一交换机上。为简单起见，服务器 Server-PT 同时作为 DHCP、DNS 以及 Web 服务器，各客户机无需配置，将自动获取网络配置。</p>
+<p>点击 CPT 拓扑图中的 Server 图标，设置其静态 IP 地址为 19.89.6.4&#x2F;24，然后选择 Service 进行如下相关配置：<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/7c89e9cb993fd8433e21b99da1afac47png.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/bf899b29d40aa0d9244700dcff620815png.jpg"></p>
+<blockquote>
+<p>试一试</p>
+<p>先查看各 PC，看看是否获得网络配置<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/c8e77ee1b8dc8e6540c83d14fba6ca39png.jpg"></p>
+</blockquote>
+<blockquote>
+<p>因为我们在 DNS 服务器中把谷歌和百度的 IP 都设为了 19.89.6.4，即Server-PT，所以，如果打开 PC0 的浏览器，输入 <a target="_blank" rel="noopener" href="http://www.google.com/">www.google.com</a> 或者 <a target="_blank" rel="noopener" href="http://www.baidu.com,我们都应该看到默认的/">www.baidu.com，我们都应该看到默认的</a> Server-PT 这个 Web 服务器的主页<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/7021b5d610347587a9ca300c83c5f181png.jpg"><br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d711e5e6797d87367512c679618d800apng.jpg"></p>
+</blockquote>
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这次实验使我接触了一个全新的软件，从入门到可以简单的运用，使我获益良多，也让我掌握了许多计算机网络的协议，搞明白了计算机网络的基本原理。我的计算机网络实验就告一段落了，希望能够继续努力学习，对计算机网络有更加深刻的理解。</p>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="smithfont smith-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d20f536c64d06e5fcf4bfe2ec5dc25d.jpg" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d20f536c64d06e5fcf4bfe2ec5dc25d.jpg" title="头像" alt="头像"></a><div class="post-copyright__author_name">Smith</div><div class="post-copyright__author_desc">人生太短，要干的事太多，我要争分夺秒</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://smithhs.cn/2024/04/17/2024-04-17-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A%EF%BC%88Cisco%20Packet%20Tracer%EF%BC%89/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://smithhs.cn/2024/04/17/2024-04-17-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A%EF%BC%88Cisco%20Packet%20Tracer%EF%BC%89/')">计算机网络实验报告（Cisco Packet Tracer）</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="smith.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="smithfont smith-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="smith.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="smithfont smith-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://smithhs.cn/2024/04/17/2024-04-17-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A%EF%BC%88Cisco%20Packet%20Tracer%EF%BC%89/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=计算机网络实验报告（Cisco Packet Tracer）&amp;url=https://smithhs.cn/2024/04/17/2024-04-17-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9E%E9%AA%8C%E6%8A%A5%E5%91%8A%EF%BC%88Cisco%20Packet%20Tracer%EF%BC%89/&amp;pic=https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/CiscoPacketTracer.jpg" rel="external nofollow noreferrer noopener"><i class="smithfont smith-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="smithfont smith-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://smithhs.cn" target="_blank">Smith</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/Cisco-Packet-Tracer/"><span class="tags-punctuation"> <i class="smithfont smith-icon-tag"></i></span>Cisco Packet Tracer<span class="tagsPageCount">1</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d20f536c64d06e5fcf4bfe2ec5dc25d.jpg" data-sites="wechat,weibo,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/04/12/2024-04-12-2024%E6%9C%80%E6%96%B0GPT+GPTs+MJ+Claude3%E7%A8%8B%E5%BA%8F%E6%90%AD%E5%BB%BA/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/v2-540fc0af6b556b67535db82197d91050_1440w.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">最新GPT+GPTs+MJ+Claude3程序搭建</div></div></a></div><div class="next-post pull-right"><a href="/2024/05/07/2024-05-07-LeetCode%E5%88%B7%E9%A2%98/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/hello_leetcode.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">LeetCode刷题教程</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="smithfont smith-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95"><span class="toc-number">1.</span> <span class="toc-text">文章目录</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Cisco-Packet-Tracer%E7%AE%80%E4%BB%8B"><span class="toc-number"></span> <span class="toc-text">Cisco Packet Tracer简介</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1%E3%80%81%E7%9B%B4%E6%8E%A5%E8%BF%9E%E6%8E%A5%E4%B8%A4%E5%8F%B0-PC-%E6%9E%84%E5%BB%BA-LAN"><span class="toc-number">0.1.</span> <span class="toc-text">1、直接连接两台 PC 构建 LAN</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2%E3%80%81%E7%94%A8%E4%BA%A4%E6%8D%A2%E6%9C%BA%E6%9E%84%E5%BB%BA-LAN"><span class="toc-number">0.2.</span> <span class="toc-text">2、用交换机构建 LAN</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-%E4%BA%A4%E6%8D%A2%E6%9C%BA%E6%8E%A5%E5%8F%A3%E5%9C%B0%E5%9D%80%E5%88%97%E8%A1%A8"><span class="toc-number">0.3.</span> <span class="toc-text">3.交换机接口地址列表</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-%E7%94%9F%E6%88%90%E6%A0%91%E5%8D%8F%E8%AE%AE%EF%BC%88Spanning-Tree-Protocol%EF%BC%89"><span class="toc-number">0.4.</span> <span class="toc-text">4.生成树协议（Spanning Tree Protocol）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-%E8%B7%AF%E7%94%B1%E5%99%A8%E9%85%8D%E7%BD%AE%E5%88%9D%E6%AD%A5"><span class="toc-number">0.5.</span> <span class="toc-text">5.路由器配置初步</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#6-%E9%9D%99%E6%80%81%E8%B7%AF%E7%94%B1"><span class="toc-number">0.6.</span> <span class="toc-text">6.静态路由</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#7-%E5%8A%A8%E6%80%81%E8%B7%AF%E7%94%B1-RIP"><span class="toc-number">0.7.</span> <span class="toc-text">7.动态路由 RIP</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#8-%E8%99%9A%E6%8B%9F%E5%B1%80%E5%9F%9F%E7%BD%91-VLAN"><span class="toc-number">0.8.</span> <span class="toc-text">8.虚拟局域网 VLAN</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#10%E3%80%81%E8%99%9A%E6%8B%9F%E5%B1%80%E5%9F%9F%E7%BD%91%E7%AE%A1%E7%90%86-VTP"><span class="toc-number">0.9.</span> <span class="toc-text">10、虚拟局域网管理 VTP</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#11%E3%80%81VLAN-%E9%97%B4%E7%9A%84%E9%80%9A%E4%BF%A1"><span class="toc-number">0.10.</span> <span class="toc-text">11、VLAN 间的通信</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#12%E3%80%81DHCP%E3%80%81DNS%E5%8F%8AWeb%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AE%80%E5%8D%95%E9%85%8D%E7%BD%AE"><span class="toc-number">0.11.</span> <span class="toc-text">12、DHCP、DNS及Web服务器简单配置</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number"></span> <span class="toc-text">总结</span></a></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2022 - 2026 By <a class="footer-bar-link" href="/" title="Smith" target="_blank">Smith</a></div></div><div id="footer-type-tips"></div><div class="js-pjax"><script>function subtitleType () {
+  fetch('https://v1.hitokoto.cn')
+    .then(response => response.json())
+    .then(data => {
+      if (true) {
+        const from = '出自 ' + data.from
+        const sub = []
+        sub.unshift(data.hitokoto, from)
+        window.typed = new Typed('#footer-type-tips', {
+          strings: sub,
+          startDelay: 300,
+          typeSpeed: 150,
+          loop: true,
+          backSpeed: 50,
+        })
+      } else {
+        document.getElementById('footer-type-tips').innerHTML = data.hitokoto
+      }
+    })
+}
+
+if (true) {
+  if (typeof Typed === 'function') {
+    subtitleType()
+  } else {
+    getScript('https://cdn.jsdelivr.net/npm/typed.js@2.0.12/dist/typed.min.js').then(subtitleType)
+  }
+} else {
+  subtitleType()
+}
+</script></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/Smithhss/smithhs.github.io.git" title="Hexo">Hexo</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">80</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">56</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">3</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="smithfont smith-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://smithhs.cn/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.png" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://github.com/Smithhss" title="Github"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/GitHub.png" alt="Github"/><span class="back-menu-item-text">Github</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="smithfont smith-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="smithfont smith-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="smithfont smith-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="smithfont smith-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="smithfont smith-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="smithfont smith-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/dailyPhoto/"><i class="smithfont smith-icon-camera faa-tada" style="font-size: 0.9em;"></i><span> 每日照片</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wallpaper/"><i class="smithfont smith-icon-image faa-tada" style="font-size: 0.9em;"></i><span> 壁纸</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wordScenery/"><i class="smithfont smith-icon-font faa-tada" style="font-size: 0.9em;"></i><span> 文字风景</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="smithfont smith-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于我</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="smithfont smith-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/love/"><i class="smithfont smith-icon-heart faa-tada" style="font-size: 0.9em;"></i><span> 爱情</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="smithfont smith-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Android-Studio/" style="font-size: 0.88rem;">Android Studio<sup>1</sup></a><a href="/tags/App/" style="font-size: 0.88rem;">App<sup>2</sup></a><a href="/tags/Butterfly/" style="font-size: 0.88rem;">Butterfly<sup>1</sup></a><a href="/tags/C/" style="font-size: 0.88rem;">C++<sup>1</sup></a><a href="/tags/CSS/" style="font-size: 0.88rem;">CSS<sup>1</sup></a><a href="/tags/Cisco-Packet-Tracer/" style="font-size: 0.88rem;">Cisco Packet Tracer<sup>1</sup></a><a href="/tags/Easypan/" style="font-size: 0.88rem;">Easypan<sup>2</sup></a><a href="/tags/FurtherMathematics/" style="font-size: 0.88rem;">FurtherMathematics<sup>1</sup></a><a href="/tags/GPT/" style="font-size: 0.88rem;">GPT<sup>1</sup></a><a href="/tags/Git2/" style="font-size: 0.88rem;">Git2<sup>1</sup></a><a href="/tags/HTML/" style="font-size: 0.88rem;">HTML<sup>1</sup></a><a href="/tags/Hexo/" style="font-size: 0.88rem;">Hexo<sup>1</sup></a><a href="/tags/Java/" style="font-size: 0.88rem;">Java<sup>6</sup></a><a href="/tags/JavaScript/" style="font-size: 0.88rem;">JavaScript<sup>1</sup></a><a href="/tags/JavaWeb/" style="font-size: 0.88rem;">JavaWeb<sup>2</sup></a><a href="/tags/Jrebel/" style="font-size: 0.88rem;">Jrebel<sup>1</sup></a><a href="/tags/LeetCode/" style="font-size: 0.88rem;">LeetCode<sup>1</sup></a><a href="/tags/Linux/" style="font-size: 0.88rem;">Linux<sup>3</sup></a><a href="/tags/Markdown/" style="font-size: 0.88rem;">Markdown<sup>2</sup></a><a href="/tags/Maven/" style="font-size: 0.88rem;">Maven<sup>2</sup></a><a href="/tags/Navicat/" style="font-size: 0.88rem;">Navicat<sup>1</sup></a><a href="/tags/NoSql/" style="font-size: 0.88rem;">NoSql<sup>1</sup></a><a href="/tags/Nodejs/" style="font-size: 0.88rem;">Nodejs<sup>2</sup></a><a href="/tags/Python/" style="font-size: 0.88rem;">Python<sup>4</sup></a><a href="/tags/Spring/" style="font-size: 0.88rem;">Spring<sup>2</sup></a><a href="/tags/VMware/" style="font-size: 0.88rem;">VMware<sup>2</sup></a><a href="/tags/Vue/" style="font-size: 0.88rem;">Vue<sup>1</sup></a><a href="/tags/YouHou/" style="font-size: 0.88rem;">YouHou<sup>1</sup></a><a href="/tags/books/" style="font-size: 0.88rem;">books<sup>1</sup></a><a href="/tags/butterfly/" style="font-size: 0.88rem;">butterfly<sup>1</sup></a><a href="/tags/clash/" style="font-size: 0.88rem;">clash<sup>1</sup></a><a href="/tags/project/" style="font-size: 0.88rem;">project<sup>4</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 0.88rem;">前端<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6/" style="font-size: 0.88rem;">开发框架<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" style="font-size: 0.88rem;">开发环境<sup>1</sup></a><a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 0.88rem;">操作系统<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" style="font-size: 0.88rem;">数据结构与算法<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" style="font-size: 0.88rem;">计算机组成原理<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 0.88rem;">计算机网络<sup>1</sup></a><a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="font-size: 0.88rem;">软件工程<sup>1</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="smithfont smith-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="smithfont smith-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="smithfont smith-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="smithfont smith-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="smithfont smith-icon-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="smithfont smith-icon-arrow-up"></i></button></div></div><div id="nav-music"><a id="nav-music-hoverTips" onclick="smith.musicToggle()" accesskey="m">播放音乐</a><div id="console-music-bg"></div><meting-js id="8805965276" server="netease" type="playlist" mutex="true" preload="none" theme="var(--smith-main)" data-lrctype="0" order="random" volume="0.7"></meting-js></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="smithfont smith-icon-xmark"></i></button></nav><div class="is-center" id="loading-database"><i class="smithfont smith-icon-spinner smith-pulse-icon"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="smithfont smith-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="smithfont smith-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="smithfont smith-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="smithfont smith-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="smithfont smith-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="smithfont smith-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="smithfont smith-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="smithfont smith-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="smithfont smith-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="smithfont smith-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="smithfont smith-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="smithfont smith-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="smithfont smith-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="smithfont smith-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="smithfont smith-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="smithfont smith-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="smithfont smith-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://music.163.com/#/my/m/music/playlist?id=464586318&quot;, &quot;_blank&quot;);" style="display: none;"><i class="smithfont smith-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="smithfont smith-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="smithfont smith-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="smithfont smith-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="smithfont smith-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="smithfont smith-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="smithfont smith-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="smithfont smith-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="smithfont smith-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn1.tianli0.top/npm/js-heo@1.0.6/translate/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@6.1.6/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.3.1/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.js"></script><script>var meting_api = "https://api.injahow.cn/meting/?server=:server&type=:type&id=:id&auth=:auth&r=:r";
+</script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/smith-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("07/01/2022 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用史先森!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2022 By 史先森 V1.0.0",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/smith-blog@1.0.0/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 史先森 %c 你正在访问 Smith 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/smith/random.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><input type="hidden" name="page-type" id="page-type" value="post"></div><script async data-pjax src="https://npm.elemecdn.com/smith-theme-static@1.0.0/bubble/bubble.js"></script><script>var visitorMail = "visitor@smithhs.cn";
+</script><script async data-pjax src="https://cdn.jsdelivr.net/npm/waterfall.js@1.1.0/dist/waterfall.min.js"></script><script src="https://cdn.cbd.int/qrcodejs@1.0.0/qrcode.min.js"></script><script src="/js/smith/right_click_menu.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/smith-theme-static@1.0.0/icon/ali_iconfont_css.css"><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/dist/canvas-nest.min.js"></script><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script><script src="https://lib.baomitu.com/pjax/0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  smith.removeGlobalFnEvent('pjax')
+  smith.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script charset="UTF-8" src="https://cdn.cbd.int/smith-theme-static@1.0.0/accesskey/accesskey.js"></script><div id="live2d-container"><canvas id="live2d-canvas"></canvas><button class="live2d-toggle" title="切换看板娘">🎭</button></div><script data-pjax src="/js/smith/live2d.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="smithfont smith-icon-arrow-circle-right"></i></div></div></div></body></html>

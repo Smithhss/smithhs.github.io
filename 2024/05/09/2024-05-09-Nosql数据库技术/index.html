@@ -1,0 +1,584 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>NoSql数据库技术 | Smith</title><meta name="keywords" content="NoSql"><meta name="author" content="Smith"><meta name="copyright" content="Smith"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#fafaf8"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="NoSql数据库技术"><meta name="application-name" content="NoSql数据库技术"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#fafaf8"><meta property="og:type" content="article"><meta property="og:title" content="NoSql数据库技术"><meta property="og:url" content="https://smithhs.cn/2024/05/09/2024-05-09-Nosql%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/index.html"><meta property="og:site_name" content="Smith"><meta property="og:description" content="NoSQL数据库有哪些？关系型数据库产品很多，如 MySQL、Oracle、Microsoft SQL Sever 等，但它们的基本模型都是关系型数据模型。 NoSQL 并没有统一的模型，而且是非关系型的。   常见的 NoSQL 数据库包括键值数据库、列族数据库、文档数据库和图形数据库，其具体分类"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/NoSql.png"><meta property="article:author" content="Smith"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/NoSql.png"><meta name="description" content="NoSQL数据库有哪些？关系型数据库产品很多，如 MySQL、Oracle、Microsoft SQL Sever 等，但它们的基本模型都是关系型数据模型。 NoSQL 并没有统一的模型，而且是非关系型的。   常见的 NoSQL 数据库包括键值数据库、列族数据库、文档数据库和图形数据库，其具体分类"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://smithhs.cn/2024/05/09/2024-05-09-Nosql%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="manifest" href="/manifest.json"/><meta name="msapplication-TileColor" content="var(--smith-main)"/><link rel="mask-icon" href="/img/siteicon/apple-icon-180.png" color="#5bbad5"/><link rel="apple-touch-icon" sizes="180x180" href="/img/siteicon/apple-icon-180.png"/><link rel="apple-touch-icon-precomposed" sizes="180x180" href="/img/siteicon/apple-icon-180.png"/><link rel="icon" type="image/png" sizes="32x32" href="/img/siteicon/32.png"/><link rel="icon" type="image/png" sizes="16x16" href="/img/siteicon/16.png"/><link rel="bookmark" href="/img/siteicon/apple-icon-180.png"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2048-2732.jpg" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2732-2048.jpg" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1668-2388.jpg" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2388-1668.jpg" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1536-2048.jpg" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2048-1536.jpg" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1668-2224.jpg" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2224-1668.jpg" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1620-2160.jpg" media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2160-1620.jpg" media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1290-2796.jpg" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2796-1290.jpg" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1179-2556.jpg" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2556-1179.jpg" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1284-2778.jpg" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2778-1284.jpg" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1170-2532.jpg" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2532-1170.jpg" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1125-2436.jpg" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2436-1125.jpg" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1242-2688.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2688-1242.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-828-1792.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1792-828.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1242-2208.jpg" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2208-1242.jpg" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-750-1334.jpg" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1334-750.jpg" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-640-1136.jpg" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1136-640.jpg" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@6.1.6/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/smith-theme-static@1.0.0/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: undefined,
+  postHeadAiDescription: {"enable":true,"gptName":"Smith","mode":"api","switchBtn":false,"btnLink":"https://aicos.ink","randomNum":3,"basicWordCount":1000,"key":"sk-fpYVeik6Ps1EpZsVEbZpipNzy0Hal0Y0G9RpjexTGcpCLflG","Referer":"https://aicos.ink"},
+  diytitle: {"enable":true,"leaveTitle":"再看看嘛🌈！","backTitle":"欢迎回来✌️！"},
+  LA51: undefined,
+  greetingBox: {"enable":true,"default":"晚上好👋","list":[{"greeting":"晚安😴","startTime":0,"endTime":5},{"greeting":"早上好鸭👋, 祝你一天好心情！","startTime":6,"endTime":9},{"greeting":"上午好👋, 状态很好，鼓励一下～","startTime":10,"endTime":10},{"greeting":"11点多啦, 在坚持一下就吃饭啦～","startTime":11,"endTime":11},{"greeting":"午安👋, 宝贝","startTime":12,"endTime":14},{"greeting":"🌈充实的一天辛苦啦！","startTime":14,"endTime":18},{"greeting":"19点喽, 奖励一顿丰盛的大餐吧🍔。","startTime":19,"endTime":19},{"greeting":"晚上好👋, 在属于自己的时间好好放松😌~","startTime":20,"endTime":24}]},
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  music_page_default: "nav_music",
+  home_banner: {"enable":true,"interval":5000,"count":5},
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: true,
+  mainTone: undefined,
+  authorStatus: {"skills":["💻 后端开发 Java / Spring Cloud","🌐 前端探索 React / TypeScript","🤖 AI 工具深度用户","🏠 智能家居折腾达人","🔨 从设计到部署一条龙","📝 偶尔写写博客记录生活","🎵 听歌写代码双线并行","🚀 脚踏实地行动派"]},
+  algolia: undefined,
+  localSearch: {"path":"/search.json","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":240},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: Smith","link":"链接: ","source":"来源: Smith","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#4f7cff","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.2.0/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.2.0/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: 'Smith',
+  title: 'NoSql数据库技术',
+  postAI: '',
+  pageFillDescription: 'NoSQL数据库有哪些？, 基础, 一、初识HBase, HBase特点, 易扩展, 海量存储, 列式存储, 高可靠性, 稀疏性, 模块组成, HMaster, RegionServer, ZooKeeper, 二、HBase 数据模型, 1.Column Family, 2.RowKey, 3.Region, 4.TimeStamp, 三、列式存储会被广泛用在OLAP中, 行式存储的原理与特点, 列式存储的原理与特点, 四、HBase 的架构组成, 1.HBase Client, 2.HMaster, 3.Region Server, 4.ZooKeeper, 5.HDFS, 五、HBase 的写入流程, Region Server 寻址, 写 Hlog, 写 MemStore 并返回结果, MemStore 刷盘, 为什么要把 WAL 加载到 MemStore中再刷写成 HFile 呢？, 六、HBase 的读流程, Region Server 寻址, Region 寻址, 数据读取, 七、HBase 的数据删除数据库有哪些关系型数据库产品很多如等但它们的基本模型都是关系型数据模型并没有统一的模型而且是非关系型的常见的数据库包括键值数据库列族数据库文档数据库和图形数据库其具体分类和特点如表所示数据库分类和特点分类相关产品应用场景数据模型优点缺点键值数据库内容缓存如会话配置文件参数等频繁读写拥有简单数据模型的应用键值对通过散列表来实现扩展性好灵活性好大量操作时性能高数据无结构化通常只被当做字符串或者二进制数据只能通过键来查询值列族数据库分布式数据存储与管理以列族式存储将同一列数据存在一起可扩展性强查找速度快复杂性低功能局限不支持事务的强一致性文档数据库应用存储面向文档或类似半结构化的数据是结构的文档数据结构灵活可以根据构建索引缺乏统一查询语法图形数据库社交网络推荐系统专注构建关系图谱图结构支持复杂的图形算法复杂性高只能支持一定的数据规模数据库并没有一个统一的架构两种不同的数据库之间的差异程度远远超过两种关系型数据库之间的不同可以说数据库各有所长一个优秀的数据库必然特别适用于某些场合或者某些应用在这些场合中会远远胜过关系型数据库和其他的数据库常见的数据库分为以下几种键值数据库这一类数据库主要会使用到一个散列表这个表中有一个特定的键和一个指针指向特定的数据键值模型对于系统来说其优势在于简单易部署键值数据库可以按照键对数据进行定位还可以通过对键进行排序和分区以实现更快速的数据定位列族数据库列族数据库通常用来应对分布式存储的海量数据键仍然存在但是它们的特点是指向了多个列如图所示此列族数据库表中由两行组成每一行都有关键字每一行由多个列族组成即和而每个列族由多个列组成文档数据库文档数据库的灵感来自办公软件它与键值数据库类似该类型的数据模型是版本化的文档文档以特定的格式存储如文档数据库可以看作键值数据库的升级版允许之间嵌套键值如图所示文档数据库比键值数据库的查询效率更高因为文档数据库不仅可以根据键创建索引同时还可以根据文档内容创建索引图形数据库图形数据库来源于图论中的拓扑学以节点边及节点之间的关系来存储复杂网络中的数据如图所示这种拓扑结构类似图但在图形模式中关系和节点本身就是数据而在图中关系描述的是一种结构基础一初识是一个面向列式存储的分布式数据库其设计思想来源于的论文底层存储基于实现集群的管理基于实现良好的分布式架构设计为海量数据的快速存储随机访问提供了可能基于数据副本机制和分区机制可以轻松实现在线扩容缩容和数据容灾是大数据领域中数据结构存储最常用的数据库方案特点易扩展的扩展性主要体现在两个方面一个是基于运算能力的扩展通过增加节点的数量提升上层的处理能力另一个是基于存储能力的扩展通过增加节点数量对存储层的进行扩容提升的数据存储能力海量存储作为一个开源的分布式数据库其主要作用是面向级别数据的实时入库和快速随机访问这主要源于上述易扩展的特点使得通过扩展来存储海量的数据列式存储是根据列族来存储数据的列族下面可以有非常多的列列式存储的最大好处就是其数据在表中是按照某列存储的这样在查询只需要少数几个字段时能大大减少读取的数据量高可靠性机制保证了数据写入时不会因集群异常而导致写入数据丢失机制保证了在集群出现严重的问题时数据不会发生丢失或损坏而且底层使用本身也有备份稀疏性在的列族中可以指定任意多的列为空的列不占用存储空间表可以设计得非常稀疏模块组成可以将数据存储在本地文件系统也可以存储在文件系统在生产环境中一般运行在上以作为基础的存储设施通过提供的来访问数据库以完成数据的写入和读取集群主由和组成负责管理实现其负载均衡管理和分配如在时分配新的在退出时迁移其内的到其他上管理和的元数据实际存储在上权限控制存放和管理本地读写管理中的数据从中获取元数据找到所在的进行读写数据存放整个集群的元数据以及集群的状态信息实现主从节点的二数据模型是一个面向列式存储的分布式数据库的数据模型与十分相似在表中一条数据拥有一个全局唯一的键和任意数量的列一列或多列组成一个列族同一个列族中列的数据在物理上都存储在同一个中这样基于列存储的数据结构有利于数据缓存和查询中的表是疏松地存储的因此用户可以动态地为数据定义各种不同的列中的数据按主键排序同时会将表按主键划分为多个存储在不同上以完成数据的分布式存储和读取根据列成来存储数据一个列族对应物理存储上的一个列族包含多列列族在创建表的时候被指定即列族基于列划分数据的物理存储一个列族可以包含包意多列一般同一类的列会放在一个列族中每个列族都有一组存储属性是否应该缓存在内存中数据如何被压缩或行键如何编码等在创建表的时候就必须指定列族的列族不是越多越好官方荐一个表的列族数量最好小于或者等于过多的列族不利于数据的管理和索引的概念与关系型数据库中的主键相似使用来唯一标识某行的数据访问数据的方式有三种基于的单行查询基于的范围查询全表扫描查询将表中的数据基于的不同范围划分到不同上每个都负责一定范围的数据存储和访问每个表一开始只有一个随着数据不断插入表不断增大当增大到一个阀值的时候就会等分成两个新的当中的行不断增多就会有越来越多的另外是中分布式存储和负载均衡的最小单元不同的可以分布在不同的上但一个是不会拆分到多个上的这样即使有一个包括上百亿条数据的表由于数据被划分到不同的上每个都可以独立地进行写入和查询写查询时候可以于多分布式并发操作因此访问速度也不会有太大的降低是实现多版本的关键在中使用不同来标识相同对应的不同版本的数据相同的数据按照倒序排列默认查询的是最新的版本当然用户也可以指定的值来读取指定版本的数据三列式存储会被广泛用在中行式存储的原理与特点对于场景大多都是对一整行记录进行增删改查操作的那么行式存储采用以行的行式在磁盘上存储数据就是一个不错的选择当查询基于需求字段查询和返回结果时由于这些字段都埋藏在各行数据中就必须读取每一条完整的行记录大量磁盘转动寻址的操作使得读取效率大大降低举个例子下图为员工信息表数据在磁盘上是以行的形式存储在磁盘上同一行的数据紧挨着存放在一起对于表要查询部门为的所有员工的名字由于的值是离散地存储在磁盘中在查询过程中需要磁盘转动多次才能完成数据的定位和返回结果列式存储的原理与特点对于场景一个典型的查询需要遍历整个表进行分组排序聚合等操作这样一来行式存储中把一整行记录存放在一起的优势就不复存在了而且分析型常常不会用到所有的列而仅仅对其中某些需要的的列做运算那一行中无关的列也不得不参与扫描然而在列式存储中由于同一列的数据被紧挨着存放在了一起如下图所示那么基于需求字段查询和返回结果时就不许对每一行数据进行扫描按照列找到需要的数据磁盘的转动次数少性能也会提高还是上面例子中的查询由于在列式存储中的值是按照顺序存储在磁盘上的因此磁盘只需要顺序查询和返回结果即可列式存储不仅具有按需查询来提高效率的优势由于同一列的数据属于同一种类型如数值类型字符串类型等相似度很高还可以选择使用合适的编码压缩可减少数据的存储空间进而减少提高读取性能总的来说行式存储和列式存储没有说谁比谁更优越只能说谁更适合哪种应用场景四的架构组成作为数据库的代表属于三驾马车之一的对应实现的出现很好地弥补了大数据快速查询能力的空缺在前面咱们也有介绍过的数据模型感兴趣的小伙伴可以翻看下的核心架构由五部分组成以及它的架构组成如下图所示下面我们对架构组成的每一部分详细介绍一下为用户提供了访问的接口可以通过元数据表来定位到目标数据的另外还维护了对应的来加速的访问比如缓存元数据的信息是集群的主节点负责整个集群的管理工作主要工作职责如下分配负责启动的时候分配到具体的负载均衡一方面负责将用户的数据均衡地分布在各个上防止数据倾斜过载另一方面负责将用户的请求均衡地分布在各个上防止请求过热维护数据发现失效的并将失效的分配到正常的上并且在失效的时候协调对应的进行任务的拆分直接对接用户的读写请求是真正的干活的节点主要工作职责如下管理为其分配的负责与底层的交互存储数据到负责变大以后的拆分以及的合并工作与的协同当某个宕机之后会通知进行失效备援下线的所负责的暂时停止对外提供服务会将该所负责的转移到其他上并且会对所下线的上存在中还未持久化到磁盘中的数据由重播进行恢复数据存储的基本结构如下图所示一个是包含多个的这里仅展示一个每一个都有起始和结束代表了存储的的范围保存着表中某段连续的数据一开始每个表都只有一个随着数据量不断增加当大小达到一个阀值时就会被水平切分成两个新的当很多时会将保存到其他上一个由多个组成每个都对应一个包含和作为的内存数据存储数据的写操作会先写到中当中的数据增长到一个阈值默认后会启动进程将中的数据写人持久化存储每次写入后都形成一个单独的当客户端检索数据时先在中查找如果中不存在则会在中继续查找内存中的数据写到文件后就是底层是以的格式保存以的大小来判断是否需要切分当一个中所有的大小和数量都增长到超过一个阈值时会把当前分割为两个并分配到其他上实现负载均衡和是同一个文件只不过站在的角度称这个文件为站在的角度就称这个文件为负责记录着数据的操作日志当出现故障时可以进行日志重放故障恢复例如磁盘掉电导致中的数据没有持久化存储到这时就可以通过日志重放来恢复数据通过来完成选举监控维护元数据集群配置等工作主要工作职责如下选举保证集中仅有个在运行如果异常则会通过选举机制产生新的来提供服务监控通过来监控的状态当有异常的时候通过回调的形式通知有关上下线的信息维护元数据和集群配置通过储信息并对外提供访问接口为提供底层数据存储服务同时为提供高可用的支持将存储在上当服务器发生异常宕机时可以重放来恢复数据五的写入流程寻址访问获取写入所在的位置即获取表位于哪个访问对应的获取表并查询出目标数据位于哪个中的哪个中并将该的信息以及表的位置信息缓存在客户端的方便下次访问写向发送写请求会通过顺序写入磁盘的方式将存储在上写并返回结果向发送写请求只有当写和写的请求都成功完成之后并将反馈给这时对于整个写入流程完成刷盘会根据配置的刷盘策略定时将数据刷新到中完成数据持久化存储为什么要把加载到中再刷写成呢预写日志是的在处理数据插入和删除过程中用来记录操作内容的一种日志每次等一条记录时首先将其数据写入到对应的文件中去而是保存在上的持久化文件数据到达时先写入然后被加载到中这样就算宕机了操作没来得及执行持久化也可以再重启的时候从加载操作并执行那么我们从写入流程中可以看出数据进入之前就已经被持久化到了而就是在上的是在内存中的增加并不能提高写入性能为什么还要从加载到中再刷写成呢数据需要顺序写入但是不支持对数据进行修改的的持久化为了保证数据的安全性是无序的在内存中维持数据按照顺序排列从而顺序写入磁盘所以的意义在于维持数据按照的字典序排列而不是做一个缓存提高写入效率六的读流程寻址请求获取元数据表所在的的地址寻址请求获取需要访问的元数据查询出目标数据位于哪个中的哪个中并将该的信息以及表的位置信息缓存在客户端的方便下次访问数据读取请求数据所在的获取所需要的数据首先在中查找若命中则返回如果在中找不到则通过判断数据是否存在如果存在则在中扫描并将结果返回客户端七的数据删除的数据删除操作并不会立即将数据从磁盘上删除因为的数据通常被保存在中而只允许新增或者追加数据文件所以删除操作主要对要被删除的数据进行标记当执行删除操作时新插入一条相同的数据但是这便意味着数据被删除了直到发生操作数据才会真正地被从磁盘上删除这种基于标记删除的方式是按顺序写磁盘的的因此很容易实现海量数据的快速删除有效避免了在海量数据中查找数据执行删除及重建索引等复杂的流程',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2026-05-21 22:00:58',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fafaf8')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="https://npm.elemecdn.com/lxgw-wenkai-screen-webfont@1.1.0/style.css" media="print" onload="this.media='all'"><meta name="generator" content="Hexo 7.3.0"></head><body data-type="smith"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d20f536c64d06e5fcf4bfe2ec5dc25d.jpg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/smith-theme-static@1.0.0/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="smithfont smith-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://smithhs.cn/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.png" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://github.com/Smithhss" title="Github"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/GitHub.png" alt="Github"/><span class="back-menu-item-text">Github</span></a></div></div></div></div><a id="site-name" href="/" accesskey="h"><div class="title">Smith</div><i class="smithfont smith-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:smith.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="smithfont smith-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="smithfont smith-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="smithfont smith-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="smithfont smith-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="smithfont smith-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="smithfont smith-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/dailyPhoto/"><i class="smithfont smith-icon-camera faa-tada" style="font-size: 0.9em;"></i><span> 每日照片</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wallpaper/"><i class="smithfont smith-icon-image faa-tada" style="font-size: 0.9em;"></i><span> 壁纸</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wordScenery/"><i class="smithfont smith-icon-font faa-tada" style="font-size: 0.9em;"></i><span> 文字风景</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="smithfont smith-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于我</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="smithfont smith-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/love/"><i class="smithfont smith-icon-heart faa-tada" style="font-size: 0.9em;"></i><span> 爱情</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="smithfont smith-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button only-home" id="travellings_button" title="随机前往一个开往项目网站"><a class="site-page" onclick="smith.totraveling()" title="随机前往一个开往项目网站" href="javascript:void(0);" rel="external nofollow" data-pjax-state="external"><i class="smithfont smith-icon-train"></i></a></div><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="smithfont smith-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="smithfont smith-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="smith.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg" target="_blank"><img class="post-qr-code-img" alt="wechat" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg" target="_blank"><img class="post-qr-code-img" alt="alipay" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Android-Studio/" style="font-size: 1.05rem;">Android Studio<sup>1</sup></a><a href="/tags/App/" style="font-size: 1.05rem;">App<sup>2</sup></a><a href="/tags/Butterfly/" style="font-size: 1.05rem;">Butterfly<sup>1</sup></a><a href="/tags/C/" style="font-size: 1.05rem;">C++<sup>1</sup></a><a href="/tags/CSS/" style="font-size: 1.05rem;">CSS<sup>1</sup></a><a href="/tags/Cisco-Packet-Tracer/" style="font-size: 1.05rem;">Cisco Packet Tracer<sup>1</sup></a><a href="/tags/Easypan/" style="font-size: 1.05rem;">Easypan<sup>2</sup></a><a href="/tags/FurtherMathematics/" style="font-size: 1.05rem;">FurtherMathematics<sup>1</sup></a><a href="/tags/GPT/" style="font-size: 1.05rem;">GPT<sup>1</sup></a><a href="/tags/Git2/" style="font-size: 1.05rem;">Git2<sup>1</sup></a><a href="/tags/HTML/" style="font-size: 1.05rem;">HTML<sup>1</sup></a><a href="/tags/Hexo/" style="font-size: 1.05rem;">Hexo<sup>1</sup></a><a href="/tags/Java/" style="font-size: 1.05rem;">Java<sup>6</sup></a><a href="/tags/JavaScript/" style="font-size: 1.05rem;">JavaScript<sup>1</sup></a><a href="/tags/JavaWeb/" style="font-size: 1.05rem;">JavaWeb<sup>2</sup></a><a href="/tags/Jrebel/" style="font-size: 1.05rem;">Jrebel<sup>1</sup></a><a href="/tags/LeetCode/" style="font-size: 1.05rem;">LeetCode<sup>1</sup></a><a href="/tags/Linux/" style="font-size: 1.05rem;">Linux<sup>3</sup></a><a href="/tags/Markdown/" style="font-size: 1.05rem;">Markdown<sup>2</sup></a><a href="/tags/Maven/" style="font-size: 1.05rem;">Maven<sup>2</sup></a><a href="/tags/Navicat/" style="font-size: 1.05rem;">Navicat<sup>1</sup></a><a href="/tags/NoSql/" style="font-size: 1.05rem;">NoSql<sup>1</sup></a><a href="/tags/Nodejs/" style="font-size: 1.05rem;">Nodejs<sup>2</sup></a><a href="/tags/Python/" style="font-size: 1.05rem;">Python<sup>4</sup></a><a href="/tags/Spring/" style="font-size: 1.05rem;">Spring<sup>2</sup></a><a href="/tags/VMware/" style="font-size: 1.05rem;">VMware<sup>2</sup></a><a href="/tags/Vue/" style="font-size: 1.05rem;">Vue<sup>1</sup></a><a href="/tags/YouHou/" style="font-size: 1.05rem;">YouHou<sup>1</sup></a><a href="/tags/books/" style="font-size: 1.05rem;">books<sup>1</sup></a><a href="/tags/butterfly/" style="font-size: 1.05rem;">butterfly<sup>1</sup></a><a href="/tags/clash/" style="font-size: 1.05rem;">clash<sup>1</sup></a><a href="/tags/project/" style="font-size: 1.05rem;">project<sup>4</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 1.05rem;">前端<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6/" style="font-size: 1.05rem;">开发框架<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" style="font-size: 1.05rem;">开发环境<sup>1</sup></a><a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 1.05rem;">操作系统<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" style="font-size: 1.05rem;">数据结构与算法<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" style="font-size: 1.05rem;">计算机组成原理<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 1.05rem;">计算机网络<sup>1</sup></a><a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="font-size: 1.05rem;">软件工程<sup>1</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="smithfont smith-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="smithfont smith-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="smithfont smith-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/05/"><span class="card-archive-list-date">五月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/02/"><span class="card-archive-list-date">二月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/11/"><span class="card-archive-list-date">十一月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">3</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/10/"><span class="card-archive-list-date">十月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/09/"><span class="card-archive-list-date">九月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">5</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/07/"><span class="card-archive-list-date">七月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/06/"><span class="card-archive-list-date">六月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">7</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/05/"><span class="card-archive-list-date">五月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">17</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="smithfont smith-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="smith.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="smithfont smith-icon-arrows-left-right"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="smith.musicToggle()" title="音乐开关"><a class="music-switch"><i class="smithfont smith-icon-music"></i></a></div></div><div class="console-mask" onclick="smith.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="smithfont smith-icon-arrow-up"></i><span id="percent" onclick="smith.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="smithfont smith-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="smithfont smith-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/" itemprop="url">编程开发</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/NoSql/" tabindex="-1" itemprop="url"> <span> <i class="smithfont smith-icon-hashtag"></i>NoSql</span></a></span></div></div><h1 class="post-title" itemprop="name headline">NoSql数据库技术</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="post-meta-icon smithfont smith-icon-calendar-days"></i><span class="post-meta-label">发表于</span><time itemprop="dateCreated datePublished" datetime="2024-05-08T16:15:00.000Z" title="发表于 2024-05-09 00:15:00">2024-05-09</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="smithfont smith-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">5.2k</span><span class="post-meta-separator"></span><i class="smithfont smith-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>16分钟</span></span><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title="NoSql数据库技术"><i class="smithfont smith-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="smithfont smith-icon-spinner smith-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为石家庄"><i class="smithfont smith-icon-location-dot"></i>石家庄</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/NoSql.png"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><div class="post-ai-description"><div class="ai-title"><i class="smithfont smith-icon-bilibili"></i><div class="ai-title-text">AI-摘要</div><i class="smithfont smith-icon-arrow-rotate-right"></i><i class="smithfont smith-icon-circle-dot" title="朗读摘要"></i><div id="ai-tag">Smith GPT</div></div><div class="ai-explanation">AI初始化中...</div><div class="ai-btn-box"><div class="ai-btn-item">介绍自己 🙈</div><div class="ai-btn-item">生成本文简介 👋</div><div class="ai-btn-item">推荐相关文章 📖</div><div class="ai-btn-item">前往主页 🏠</div><div class="ai-btn-item" id="go-api-link">了解更多</div></div><script data-pjax src="/js/smith/ai_abstract.js"></script></div><article class="post-content" id="article-container" itemscope itemtype="https://smithhs.cn/2024/05/09/2024-05-09-Nosql%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/"><header><a class="post-meta-categories" href="/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/" itemprop="url">编程开发</a><a href="/tags/NoSql/" tabindex="-1" itemprop="url">NoSql</a><h1 id="CrawlerTitle" itemprop="name headline">NoSql数据库技术</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">Smith</span><time itemprop="dateCreated datePublished" datetime="2024-05-08T16:15:00.000Z" title="undefined 2024-05-09 00:15:00">2024-05-09</time></header><h1 id="NoSQL数据库有哪些？"><a href="#NoSQL数据库有哪些？" class="headerlink" title="NoSQL数据库有哪些？"></a>NoSQL数据库有哪些？</h1><p><a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E5%85%B3%E7%B3%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E5%BA%93&spm=1001.2101.3001.7020">关系型数据库</a>产品很多，如 <a target="_blank" rel="noopener" href="http://www.voidme.com/mysql" title="MySQL">MySQL</a>、Oracle、Microsoft SQL Sever 等，但它们的基本模型都是关系型<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B&spm=1001.2101.3001.7020">数据模型</a>。 <a target="_blank" rel="noopener" href="http://www.voidme.com/nosql" title="NoSQL">NoSQL</a> 并没有统一的模型，而且是非关系型的。  </p>
+<p>常见的 <a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=NoSQL&spm=1001.2101.3001.7020">NoSQL</a> 数据库包括键值数据库、列族数据库、文档数据库和图形数据库，其具体分类和特点如表所示。  
+ </p>
+<table><caption>NoSQL 数据库分类和特点</caption><tbody><tr><th>分类</th><th>相关产品</th><th>应用场景</th><th>数据模型</th><th>优点</th><th>缺点</th></tr><tr><td>键值数据库</td><td><a target="_blank" href="http://www.voidme.com/redis" rel="nofollow noopener" title="Redis">Redis</a>、<a target="_blank" href="http://www.voidme.com/nosql/nl-memcached" rel="nofollow noopener" title="Memcached">Memcached</a>、Riak</td><td>内容缓存，如会话、配置文件、参数等；<br>频繁读写、拥有简单数据模型的应用</td><td>&lt;key,value&gt; 键值对，通过散列表来实现</td><td>扩展性好，灵活性好，大量操作时性能高</td><td>数据无结构化，通常只被当做字符串或者二进制数据，只能通过键来查询值</td></tr><tr><td>列族数据库</td><td>Bigtable、<a target="_blank" href="http://www.voidme.com/hbase" rel="nofollow noopener" title="HBase">HBase</a>、Cassandra</td><td>分布式数据存储与管理</td><td>以列族式存储，将同一列数据存在一起</td><td>可扩展性强，查找速度快，复杂性低</td><td>功能局限，不支持事务的强一致性</td></tr><tr><td>文档数据库</td><td><a target="_blank" href="http://www.voidme.com/mongodb" rel="nofollow noopener" title="MongoDB">MongoDB</a>、CouchDB</td><td>Web 应用，存储面向文档或类似半结构化的数据</td><td>&lt;key,value&gt;&nbsp;<br>value 是 JSON 结构的文档</td><td><a target="_blank" href="http://www.voidme.com/data-structure" rel="nofollow noopener" title="数据结构">数据结构</a>灵活，可以根据 value 构建索引</td><td>缺乏统一查询语法</td></tr><tr><td>图形数据库</td><td><a target="_blank" href="http://www.voidme.com/nosql/nl-neo4j" rel="nofollow noopener" title="Neo4j">Neo4j</a>、InfoGrid</td><td>社交网络、推荐系统，专注构建关系图谱</td><td>图结构</td><td>支持复杂的图形算法</td><td>复杂性高，只能支持一定的数据规模</td></tr></tbody></table>
+
+  
+<p>NoSQL 数据库并没有一个统一的架构，两种不同的 NoSQL 数据库之间的差异程度，远远超过两种关系型数据库之间的不同。  </p>
+<p>可以说，NoSQL 数据库各有所长，一个优秀的 NoSQL 数据库必然特别适用于某些场合或者某些应用，在这些场合中会远远胜过关系型数据库和其他的 NoSQL 数据库。  </p>
+<p>常见的 NoSQL 数据库分为以下几种。</p>
+<ol>
+<li>键值数据库</li>
+</ol>
+<p>这一类数据库主要会使用到一个散列表，这个表中有一个特定的键和一个指针指向特定的数据。  </p>
+<p>键值模型对于 IT 系统来说，其优势在于简单、易部署。键值数据库可以按照键对数据进行定位，还可以通过对键进行排序和分区，以实现更快速的数据定位。</p>
+<ol start="2">
+<li>列族数据库</li>
+</ol>
+<p>列族数据库通常用来应对分布式存储的海量数据。键仍然存在，但是它们的特点是指向了多个列，如图所示。  
+ </p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/ee5a70cf31b8f71acd4b3c3036bf9fa8gif.jpg"></p>
+<p>此列族数据库表中由两行组成，每一行都有关键字 Row Key，每一行由多个列族组成，即 Column-Family-1 和 Column-Family-2，而每个列族由多个列组成。</p>
+<ol start="3">
+<li>文档数据库</li>
+</ol>
+<p>文档数据库的灵感来自 Lotus Notes 办公软件，它与键值数据库类似。该类型的数据模型是版本化的文档，文档以特定的格式存储，如 JSON。  </p>
+<p>文档数据库可以看作键值数据库的升级版，允许之间嵌套键值，如图所示。  
+ </p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/dc752b8d3e4db2b7d3e48b629435c5c3gif.jpg"></p>
+<p>文档数据库比键值数据库的查询效率更高， 因为文档数据库不仅可以根据键创建索引，同时还可以根据文档内容创建索引。</p>
+<ol start="4">
+<li>图形数据库</li>
+</ol>
+<p>图形数据库来源于图论中的拓扑学，以节点、边及节点之间的关系来存储复杂网络中的数据，如图所示。  
+ </p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d03375eac31b5e651fa1106dfe94b07cgif.jpg"></p>
+<p>这种拓扑结构类似 E-R 图，但在图形模式中，关系和节点本身就是数据，而在 E-R 图中，关系描述的是一种结构。</p>
+<h3 id="HBase基础"><a href="#HBase基础" class="headerlink" title="HBase基础"></a><a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=HBase&spm=1001.2101.3001.7020">HBase</a>基础</h3><h4 id="一、初识HBase"><a href="#一、初识HBase" class="headerlink" title="一、初识HBase"></a>一、初识HBase</h4><p>HBase 是一个面向列式存储的<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E5%88%86%E5%B8%83%E5%BC%8F%E6%95%B0%E6%8D%AE%E5%BA%93&spm=1001.2101.3001.7020">分布式数据库</a>，其设计思想来源于 Google 的 BigTable 论文。HBase 底层存储基于 HDFS 实现，集群的管理基于 ZooKeeper 实现。HBase 良好的分布式架构设计为海量数据的快速存储、随机访问提供了可能，基于数据副本机制和分区机制可以轻松实现在线扩容、缩容和数据容灾，是大数据领域中 Key-Value 数据结构存储最常用的数据库方案。</p>
+<h5 id="HBase特点"><a href="#HBase特点" class="headerlink" title="HBase特点"></a>HBase特点</h5><h6 id="易扩展"><a href="#易扩展" class="headerlink" title="易扩展"></a>易扩展</h6><p>Hbase 的扩展性主要体现在两个方面，一个是基于运算能力（RegionServer） 的扩展，通过增加 RegionSever 节点的数量，提升 Hbase 上层的处理能力；另一个是基于存储能力的扩展（<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=HDFS&spm=1001.2101.3001.7020">HDFS</a>），通过增加 DataNode 节点数量对存储层的进行扩容，提升 HBase 的数据存储能力。</p>
+<h6 id="海量存储"><a href="#海量存储" class="headerlink" title="海量存储"></a>海量存储</h6><p>HBase 作为一个开源的分布式 Key-Value 数据库，其主要作用是面向 PB 级别数据的实时入库和快速随机访问。这主要源于上述易扩展的特点，使得 HBase 通过扩展来存储海量的数据。</p>
+<h6 id="列式存储"><a href="#列式存储" class="headerlink" title="列式存储"></a>列式存储</h6><p>Hbase 是根据列族来存储数据的。列族下面可以有非常多的列。列式存储的最大好处就是，其数据在表中是按照某列存储的，这样在查询只需要少数几个字段时，能大大减少读取的数据量。</p>
+<h6 id="高可靠性"><a href="#高可靠性" class="headerlink" title="高可靠性"></a>高可靠性</h6><p>WAL 机制保证了数据写入时不会因集群异常而导致写入数据丢失，Replication 机制保证了在集群出现严重的问题时，数据不会发生丢失或损坏。而且 Hbase 底层使用 HDFS，HDFS 本身也有备份。</p>
+<h6 id="稀疏性"><a href="#稀疏性" class="headerlink" title="稀疏性"></a>稀疏性</h6><p>在 HBase 的列族中，可以指定任意多的列，为空的列不占用存储空间，表可以设计得非常稀疏。</p>
+<h6 id="模块组成"><a href="#模块组成" class="headerlink" title="模块组成"></a>模块组成</h6><p>HBase 可以将数据存储在本地文件系统，也可以存储在 HDFS 文件系统。在生产环境中，HBase 一般运行在 HDFS 上，以 HDFS 作为基础的存储设施。HBase 通过 HBase Client 提供的 Java API 来访问 HBase 数据库，以完成数据的写入和读取。HBase 集群主由HMaster、Region Server 和 ZooKeeper 组成。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/b34754468c6e0f624928a7a0910f87cbpngpic_center.jpg" alt="hbase模块组成"></p>
+<h6 id="HMaster"><a href="#HMaster" class="headerlink" title="HMaster"></a>HMaster</h6><ul>
+<li>负责管理 RegionServer，实现其负载均衡；</li>
+<li>管理和分配 Region，如在 Region split时分配新的 Region，在 RegionServer 退出时迁移其内的 Region 到其他 RegionServer上；</li>
+<li>管理namespace和table的元数据（实际存储在HDFS上）；</li>
+<li>权限控制（ACL）。</li>
+</ul>
+<h6 id="RegionServer"><a href="#RegionServer" class="headerlink" title="RegionServer"></a>RegionServer</h6><ul>
+<li>存放和管理本地 Region；</li>
+<li>读写HDFS，管理Table中的数据；</li>
+<li>Client 从 HMaster 中获取元数据，找到 RowKey 所在的 RegionServer 进行读写数据。</li>
+</ul>
+<h6 id="ZooKeeper"><a href="#ZooKeeper" class="headerlink" title="ZooKeeper"></a>ZooKeeper</h6><ul>
+<li>存放整个 HBase集群的元数据以及集群的状态信息；</li>
+<li>实现HMaster主从节点的failover。</li>
+</ul>
+<h4 id="二、HBase-数据模型"><a href="#二、HBase-数据模型" class="headerlink" title="二、HBase 数据模型"></a>二、HBase 数据模型</h4><p>HBase 是一个面向列式存储的分布式数据库。HBase 的数据模型与 BigTable 十分相似。在 HBase 表中，一条数据拥有一个全局唯一的键(RowKey)和任意数量的列(Column)，一列或多列组成一个列族(Column Family)，同一个列族中列的数据在物理上都存储在同一个 HFile 中，这样基于列存储的数据结构有利于数据缓存和查询。 HBase 中的表是疏松地存储的，因此用户可以动态地为数据定义各种不同的列。HBase中的数据按主键排序，同时，HBase 会将表按主键划分为多个 Region 存储在不同 Region Server 上，以完成数据的分布式存储和读取。</p>
+<p>HBase 根据列成来存储数据，一个列族对应物理存储上的一个 HFile，列族包含多列列族在创建表的时候被指定。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/478f8122a3db8cf954b9e6d13103d815pngpic_center.jpg" alt="hbase rowkey"></p>
+<h5 id="1-Column-Family"><a href="#1-Column-Family" class="headerlink" title="1.Column Family"></a>1.Column Family</h5><p>Column Family 即列族，HBase 基于列划分数据的物理存储，一个列族可以包含包意多列。</p>
+<p>一般同一类的列会放在一个列族中，每个列族都有一组存储属性：</p>
+<ul>
+<li>是否应该缓存在内存中；</li>
+<li>数据如何被压缩或行键如何编码等。</li>
+</ul>
+<p>HBase 在创建表的时候就必须指定列族。</p>
+<p>HBase的列族不是越多越好，官方荐一个表的列族数量最好小于或者等于3，过多的列族不利于 HBase 数据的管理和索引。</p>
+<h5 id="2-RowKey"><a href="#2-RowKey" class="headerlink" title="2.RowKey"></a>2.RowKey</h5><p>RowKey的概念与关系型数据库中的主键相似，HBase 使用 RowKey 来唯一标识某行的数据。</p>
+<p>访问 HBase 数据的方式有三种:</p>
+<ul>
+<li>基于 RowKey的单行查询；</li>
+<li>基于RowKey的范围查询；</li>
+<li>全表扫描查询。</li>
+</ul>
+<h5 id="3-Region"><a href="#3-Region" class="headerlink" title="3.Region"></a>3.Region</h5><p>HBase 将表中的数据基于 RowKey 的不同范围划分到不同 Region 上，每个Region都负责一定范围的数据存储和访问。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/804521d1e5bbec121992823fde2304d6pngpic_center.jpg" alt="region"></p>
+<p>每个表一开始只有一个 Region，随着数据不断插入表，Region 不断增大，当增大到一个阀值的时候，Region 就会等分成两个新的 Region。当table中的行不断增多，就会有越来越多的 Region。</p>
+<p>另外，Region 是 Hbase 中分布式存储和负载均衡的最小单元，不同的 Region 可以分布在不同的 HRegion Server上。但一个Hregion是不会拆分到多个server上的。</p>
+<p>这样即使有一个包括上百亿条数据的表，由于数据被划分到不同的 Region上，每个 Region 都可以独立地进行写入和查询，HBase 写查询时候可以于多 Region 分布式并发操作，因此访问速度也不会有太大的降低。</p>
+<h5 id="4-TimeStamp"><a href="#4-TimeStamp" class="headerlink" title="4.TimeStamp"></a>4.TimeStamp</h5><p>TimeStamp 是实现 HBase 多版本的关键。在HBase 中，使用不同 TimeStamp 来标识相同RowKey对应的不同版本的数据。相同 RowKey的数据按照 TimeStamp 倒序排列。默认查询的是最新的版本，当然用户也可以指定 TimeStamp 的值来读取指定版本的数据。</p>
+<h4 id="三、列式存储会被广泛用在OLAP中"><a href="#三、列式存储会被广泛用在OLAP中" class="headerlink" title="三、列式存储会被广泛用在OLAP中"></a>三、列式存储会被广泛用在OLAP中</h4><h5 id="行式存储的原理与特点"><a href="#行式存储的原理与特点" class="headerlink" title="行式存储的原理与特点"></a>行式存储的原理与特点</h5><p>对于 OLAP 场景，大多都是对一整行记录进行增删改查操作的，那么行式存储采用以行的行式在磁盘上存储数据就是一个不错的选择。</p>
+<p>当查询基于需求字段查询和返回结果时，由于这些字段都埋藏在各行数据中，就必须读取每一条完整的行记录，大量磁盘转动寻址的操作使得读取效率大大降低。</p>
+<p>举个例子，下图为员工信息emp表。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/bd2e8fe291fdd3aeba4d6e7741c6ef51pngpic_center.jpg" alt="行结构数据表结构"></p>
+<p>数据在磁盘上是以行的形式存储在磁盘上，同一行的数据紧挨着存放在一起。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/98410133852d1b02f94edad0c69b5f2dpngpic_center.jpg" alt="数据在磁盘存储"></p>
+<p>对于 emp 表，要查询部门 dept 为 A 的所有员工的名字。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> name <span class="keyword">from</span> emp <span class="keyword">where</span> dept <span class="operator">=</span> A</span><br><span class="line"><span class="number">1</span></span><br></pre></td></tr></table></figure>
+
+<p>由于 dept 的值是离散地存储在磁盘中，在查询过程中，需要磁盘转动多次，才能完成数据的定位和返回结果。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/ef613cd248b53bf1e68f2fdff0654d4epngpic_center.jpg" alt="数据表离散存储"></p>
+<h5 id="列式存储的原理与特点"><a href="#列式存储的原理与特点" class="headerlink" title="列式存储的原理与特点"></a>列式存储的原理与特点</h5><p>对于 OLAP 场景，一个典型的查询需要遍历整个表，进行分组、排序、聚合等操作，这样一来行式存储中把一整行记录存放在一起的优势就不复存在了。而且，分析型 SQL 常常不会用到所有的列，而仅仅对其中某些需要的的列做运算，那一行中无关的列也不得不参与扫描。</p>
+<p>然而在列式存储中，由于同一列的数据被紧挨着存放在了一起，如下图所示。</p>
+<p>那么基于需求字段查询和返回结果时，就不许对每一行数据进行扫描，按照列找到需要的数据，磁盘的转动次数少，性能也会提高。</p>
+<p>还是上面例子中的查询，由于在列式存储中 dept 的值是按照顺序存储在磁盘上的，因此磁盘只需要顺序查询和返回结果即可。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/490d5aaedf7aefb5d8ca671cc48ad445pngpic_center.jpg" alt="列式存储在磁盘存储"></p>
+<p>列式存储不仅具有按需查询来提高效率的优势，由于同一列的数据属于同一种类型，如数值类型，字符串类型等，相似度很高，还可以选择使用合适的编码压缩可减少数据的存储空间，进而减少IO提高读取性能。</p>
+<p>总的来说，行式存储和列式存储没有说谁比谁更优越，只能说谁更适合哪种应用场景。</p>
+<h4 id="四、HBase-的架构组成"><a href="#四、HBase-的架构组成" class="headerlink" title="四、HBase 的架构组成"></a>四、HBase 的架构组成</h4><p>HBase 作为 NoSQL 数据库的代表，属于三驾马车之一 BigTable 的对应实现，HBase 的出现很好地弥补了大数据快速查询能力的空缺。在前面咱们也有介绍过 HBase 的数据模型，感兴趣的小伙伴可以翻看下。</p>
+<p>HBase 的核心架构由五部分组成，HBase Client、HMaster、Region Server、ZooKeeper 以及 HDFS。它的架构组成如下图所示。<br><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/29436fce99963bfd68de0ad36b1e5f80.png" alt="hbase架构"></p>
+<p>下面我们对 HBase 架构组成的每一部分详细介绍一下。</p>
+<h5 id="1-HBase-Client"><a href="#1-HBase-Client" class="headerlink" title="1.HBase Client"></a>1.HBase Client</h5><p>HBase Client 为用户提供了访问 HBase 的接口，可以通过元数据表来定位到目标数据的 RegionServer，另外 HBase Client 还维护了对应的 cache 来加速 Hbase 的访问，比如缓存元数据的信息。</p>
+<h5 id="2-HMaster"><a href="#2-HMaster" class="headerlink" title="2.HMaster"></a>2.HMaster</h5><p>HMaster 是 HBase 集群的主节点，负责整个集群的管理工作，主要工作职责如下：</p>
+<ul>
+<li><p>分配Region：负责启动的时候分配Region到具体的 RegionServer；</p>
+</li>
+<li><p>负载均衡：一方面负责将用户的数据均衡地分布在各个 Region Server 上，</p>
+<p>防止Region Server数据倾斜过载。另一方面负责将用户的请求均衡地分布在各个 Region Server 上，</p>
+<p>防止Region Server 请求过热；</p>
+</li>
+<li><p>维护数据：发现失效的 Region，并将失效的 Region 分配到正常的 RegionServer 上，</p>
+<p>并且在Region Sever 失效的时候，协调对应的HLog进行任务的拆分。</p>
+</li>
+</ul>
+<h5 id="3-Region-Server"><a href="#3-Region-Server" class="headerlink" title="3.Region Server"></a>3.Region Server</h5><p>Region Server 直接对接用户的读写请求，是真正的干活的节点，主要工作职责如下。</p>
+<ul>
+<li>管理 HMaster 为其分配的 Region；</li>
+<li>负责与底层的 HDFS 交互，存储数据到 HDFS；</li>
+<li>负责 Region 变大以后的拆分以及 StoreFile 的合并工作。</li>
+</ul>
+<p>与 HMaster 的协同：当某个 RegionServer 宕机之后，ZK 会通知 Master 进行失效备援。下线的 RegionServer 所负责的 Region 暂时停止对外提供服务，Master 会将该 RegionServer 所负责的 Region 转移到其他 RegionServer 上，并且会对所下线的 RegionServer 上存在 MemStore 中还未持久化到磁盘中的数据由 WAL 重播进行恢复。</p>
+<p>Region Serve数据存储的基本结构，如下图所示。一个 Region Server 是包含多个 Region 的，这里仅展示一个。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/20e4967189bd0ecc4741cb9c60130711pngpic_center.jpg" alt="regionserver"></p>
+<ul>
+<li><p>Region：每一个 Region 都有起始 RowKey 和结束 RowKey，代表了存储的Row的范围，保存着表中某段连续的数据。一开始每个表都只有一个 Region，随着数据量不断增加，当 Region 大小达到一个阀值时，Region 就会被 Regio Server 水平切分成两个新的 Region。当 Region 很多时，HMaster 会将 Region 保存到其他 Region Server 上。</p>
+</li>
+<li><p>Store：一个 Region 由多个 Store 组成，每个 Store 都对应一个 Column Family, Store 包含 MemStore 和 StoreFile。</p>
+<ul>
+<li><p>MemStore：作为HBase的内存数据存储，数据的写操作会先写到 MemStore 中，</p>
+<p>当MemStore 中的数据增长到一个阈值（默认64M）后，</p>
+<p>Region Server 会启动 flasheatch 进程将 MemStore 中的数据写人 StoreFile 持久化存储，</p>
+<p>每次写入后都形成一个单独的 StoreFile。</p>
+<p>当客户端检索数据时，先在 MemStore中查找，如果MemStore 中不存在，则会在 StoreFile 中继续查找。</p>
+</li>
+<li><p>StoreFile：MemStore 内存中的数据写到文件后就是StoreFile，StoreFile底层是以 HFile 的格式保存。</p>
+<p>HBase以Store的大小来判断是否需要切分Region。</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>当一个Region 中所有 StoreFile 的大小和数量都增长到超过一个阈值时，HMaster 会把当前Region分割为两个，并分配到其他 Region Server 上，实现负载均衡。</p>
+<ul>
+<li><p>HFile：HFile 和 StoreFile 是同一个文件，</p>
+<p>只不过站在 HDFS 的角度称这个文件为HFile，站在HBase的角度就称这个文件为StoreFile。</p>
+</li>
+<li><p>HLog：负责记录着数据的操作日志，当HBase出现故障时可以进行日志重放、故障恢复。</p>
+<p>例如，磁盘掉电导致 MemStore中的数据没有持久化存储到 StoreFile，这时就可以通过HLog日志重放来恢复数据。</p>
+</li>
+</ul>
+<h5 id="4-ZooKeeper"><a href="#4-ZooKeeper" class="headerlink" title="4.ZooKeeper"></a>4.ZooKeeper</h5><p>HBase 通过 ZooKeeper 来完成选举 HMaster、监控 Region Server、维护元数据集群配置等工作，主要工作职责如下：</p>
+<ul>
+<li><p>选举HMaster：zooKeeper保证集中仅有1个HMaster在运行，</p>
+<p>如果 HMaster 异常，则会通过选举机制产生新的 HMaster 来提供服务；</p>
+</li>
+<li><p>监控Region Server: 通过 ZooKeeper 来监控 Region Server 的状态，</p>
+<p>当Region Server 有异常的时候，通过回调的形式通知 HMaster 有关Region Server 上下线的信息；</p>
+</li>
+<li><p>维护元数据和集群配置：通过ooKeeper储B信息并对外提供访问接口。</p>
+</li>
+</ul>
+<h5 id="5-HDFS"><a href="#5-HDFS" class="headerlink" title="5.HDFS"></a>5.HDFS</h5><p>HDFS 为 HBase 提供底层数据存储服务，同时为 HBase提供高可用的支持，</p>
+<p>HBase 将 HLog 存储在 HDFS 上，当服务器发生异常宕机时，可以重放 HLog 来恢复数据。</p>
+<h4 id="五、HBase-的写入流程"><a href="#五、HBase-的写入流程" class="headerlink" title="五、HBase 的写入流程"></a>五、HBase 的写入流程</h4><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/f4cf9c5eb2b0ce2fcf786f463915218fpngpic_center.jpg" alt="HBase 的写入流程"></p>
+<h5 id="Region-Server-寻址"><a href="#Region-Server-寻址" class="headerlink" title="Region Server 寻址"></a>Region Server 寻址</h5><ol>
+<li>HBase Client 访问 ZooKeeper；</li>
+<li>获取写入 Region 所在的位置，即获取 hbase:meta 表位于哪个 Region Server；</li>
+<li>访问对应的 Region Server；</li>
+<li>获取 hbase:meta 表，并查询出目标数据位于哪个 Region Server 中的哪个 Region 中。并将该 table 的 Region 信息以及 meta 表的位置信息缓存在客户端的 meta cache，方便下次访问；</li>
+</ol>
+<h5 id="写-Hlog"><a href="#写-Hlog" class="headerlink" title="写 Hlog"></a>写 Hlog</h5><ol>
+<li>HBase Client 向 Region Server 发送写 Hlog 请求；</li>
+<li>Region Server 会通过顺序写入磁盘的方式，将 Hlog 存储在 HDFS 上；</li>
+</ol>
+<h5 id="写-MemStore-并返回结果"><a href="#写-MemStore-并返回结果" class="headerlink" title="写 MemStore 并返回结果"></a>写 MemStore 并返回结果</h5><ol>
+<li>HBase Client 向 Region Server 发送写 MemStore 请求；</li>
+<li>只有当写 Hlog 和写 MemStore 的请求都成功完成之后，并将反馈给 HBase Client，这时对于整个 HBase Client 写入流程完成。</li>
+</ol>
+<h5 id="MemStore-刷盘"><a href="#MemStore-刷盘" class="headerlink" title="MemStore 刷盘"></a>MemStore 刷盘</h5><p>HBase 会根据 MemStore 配置的刷盘策略定时将数据刷新到 StoreFile 中，完成数据持久化存储。</p>
+<h5 id="为什么要把-WAL-加载到-MemStore中，再刷写成-HFile-呢？"><a href="#为什么要把-WAL-加载到-MemStore中，再刷写成-HFile-呢？" class="headerlink" title="为什么要把 WAL 加载到 MemStore中，再刷写成 HFile 呢？"></a>为什么要把 WAL 加载到 MemStore中，再刷写成 HFile 呢？</h5><p>WAL (Write-Ahead-Log) 预写日志是 HBase 的 RegionServer 在处理数据插入和删除过程中用来记录操作内容的一种日志。每次Put、Delete等一条记录时，首先将其数据写入到 RegionServer 对应的 HLog 文件中去。</p>
+<p>而WAL是保存在HDFS上的持久化文件，数据到达 Region 时先写入 WAL，然后被加载到 MemStore 中。这样就算Region宕机了，操作没来得及执行持久化，也可以再重启的时候从 WAL 加载操作并执行。</p>
+<p>那么，我们从写入流程中可以看出，数据进入 HFile 之前就已经被持久化到 WAL了，而 WAL 就是在 HDFS 上的，MemStore 是在内存中的，增加 MemStore 并不能提高写入性能，为什么还要从 WAL 加载到 MemStore中，再刷写成 HFile 呢？</p>
+<ul>
+<li>数据需要顺序写入，但 HDFS 是不支持对数据进行修改的；</li>
+<li>WAL 的持久化为了保证数据的安全性，是无序的；</li>
+<li>Memstore在内存中维持数据按照row key顺序排列，从而顺序写入磁盘；</li>
+</ul>
+<p>所以 MemStore 的意义在于维持数据按照RowKey的字典序排列，而不是做一个缓存提高写入效率。</p>
+<h4 id="六、HBase-的读流程"><a href="#六、HBase-的读流程" class="headerlink" title="六、HBase 的读流程"></a>六、HBase 的读流程</h4><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/c5ad4b4f5b9e3c6933b4c332975cf3a6pngpic_center.jpg" alt="HBase 的读流程"></p>
+<h5 id="Region-Server-寻址-1"><a href="#Region-Server-寻址-1" class="headerlink" title="Region Server 寻址"></a>Region Server 寻址</h5><p>HBase Client 请求 ZooKeeper 获取元数据表所在的 Region Server的地址。</p>
+<h5 id="Region-寻址"><a href="#Region-寻址" class="headerlink" title="Region 寻址"></a>Region 寻址</h5><p>HBase Client 请求 RegionServer 获取需要访问的元数据，查询出目标数据位于哪个 Region Server 中的哪个 Region 中。并将该 table 的 region 信息以 及 meta 表的位置信息缓存在客户端的 meta cache，方便下次访问。</p>
+<h5 id="数据读取"><a href="#数据读取" class="headerlink" title="数据读取"></a>数据读取</h5><p>HBase Client 请求数据所在的 Region Server，获取所需要的数据。 Region 首先在 MemStore 中查找，若命中则返回；如果在MemStore 中找不到，则通过 BloomFilter 判断数据是否存在；如果存在，则在:StoreFile 中扫描并将结果返回客户端。</p>
+<h4 id="七、HBase-的数据删除"><a href="#七、HBase-的数据删除" class="headerlink" title="七、HBase 的数据删除"></a>七、HBase 的数据删除</h4><p>HBase 的数据删除操作并不会立即将数据从磁盘上删除，因为 HBase 的数据通常被保存在 HDFS 中，而 HDFS 只允许新增或者追加数据文件，所以删除操作主要对要被删除的数据进行标记。</p>
+<p>当执行删除操作时，HBase 新插入一条相同的 Key-Value 数据，但是<br>keyType&#x3D;Delete，这便意味着数据被删除了，直到发生 Major_compaction 操作，数据才会真正地被从磁盘上删除。</p>
+<p>HBase这种基于标记删除的方式是按顺序写磁盘的的，因此很容易实现海量数据的快速删除，有效避免了在海量数据中查找数据、执行删除及重建索引等复杂的流程。</p>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="smithfont smith-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d20f536c64d06e5fcf4bfe2ec5dc25d.jpg" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d20f536c64d06e5fcf4bfe2ec5dc25d.jpg" title="头像" alt="头像"></a><div class="post-copyright__author_name">Smith</div><div class="post-copyright__author_desc">人生太短，要干的事太多，我要争分夺秒</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://smithhs.cn/2024/05/09/2024-05-09-Nosql%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://smithhs.cn/2024/05/09/2024-05-09-Nosql%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/')">NoSql数据库技术</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="smith.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="smithfont smith-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="smith.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="smithfont smith-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://smithhs.cn/2024/05/09/2024-05-09-Nosql%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=NoSql数据库技术&amp;url=https://smithhs.cn/2024/05/09/2024-05-09-Nosql%E6%95%B0%E6%8D%AE%E5%BA%93%E6%8A%80%E6%9C%AF/&amp;pic=https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/NoSql.png" rel="external nofollow noreferrer noopener"><i class="smithfont smith-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="smithfont smith-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://smithhs.cn" target="_blank">Smith</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/NoSql/"><span class="tags-punctuation"> <i class="smithfont smith-icon-tag"></i></span>NoSql<span class="tagsPageCount">1</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d20f536c64d06e5fcf4bfe2ec5dc25d.jpg" data-sites="wechat,weibo,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/05/08/2024-05-08-Mysql%E5%AD%A6%E4%B9%A0/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/mysql-2048x1264.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Mysql学习</div></div></a></div><div class="next-post pull-right"><a href="/2024/05/10/2024-05-10-JavaWeb%E5%BC%80%E5%8F%91/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/image-20200802222153316.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">JavaWeb开发</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="smithfont smith-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#NoSQL%E6%95%B0%E6%8D%AE%E5%BA%93%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">NoSQL数据库有哪些？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#HBase%E5%9F%BA%E7%A1%80"><span class="toc-number">1.0.1.</span> <span class="toc-text">HBase基础</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%88%9D%E8%AF%86HBase"><span class="toc-number">1.0.1.1.</span> <span class="toc-text">一、初识HBase</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#HBase%E7%89%B9%E7%82%B9"><span class="toc-number">1.0.1.1.1.</span> <span class="toc-text">HBase特点</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E6%98%93%E6%89%A9%E5%B1%95"><span class="toc-number">1.0.1.1.1.1.</span> <span class="toc-text">易扩展</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E6%B5%B7%E9%87%8F%E5%AD%98%E5%82%A8"><span class="toc-number">1.0.1.1.1.2.</span> <span class="toc-text">海量存储</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%88%97%E5%BC%8F%E5%AD%98%E5%82%A8"><span class="toc-number">1.0.1.1.1.3.</span> <span class="toc-text">列式存储</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E9%AB%98%E5%8F%AF%E9%9D%A0%E6%80%A7"><span class="toc-number">1.0.1.1.1.4.</span> <span class="toc-text">高可靠性</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E7%A8%80%E7%96%8F%E6%80%A7"><span class="toc-number">1.0.1.1.1.5.</span> <span class="toc-text">稀疏性</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E6%A8%A1%E5%9D%97%E7%BB%84%E6%88%90"><span class="toc-number">1.0.1.1.1.6.</span> <span class="toc-text">模块组成</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#HMaster"><span class="toc-number">1.0.1.1.1.7.</span> <span class="toc-text">HMaster</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#RegionServer"><span class="toc-number">1.0.1.1.1.8.</span> <span class="toc-text">RegionServer</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#ZooKeeper"><span class="toc-number">1.0.1.1.1.9.</span> <span class="toc-text">ZooKeeper</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E3%80%81HBase-%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B"><span class="toc-number">1.0.1.2.</span> <span class="toc-text">二、HBase 数据模型</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-Column-Family"><span class="toc-number">1.0.1.2.1.</span> <span class="toc-text">1.Column Family</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-RowKey"><span class="toc-number">1.0.1.2.2.</span> <span class="toc-text">2.RowKey</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-Region"><span class="toc-number">1.0.1.2.3.</span> <span class="toc-text">3.Region</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-TimeStamp"><span class="toc-number">1.0.1.2.4.</span> <span class="toc-text">4.TimeStamp</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%88%97%E5%BC%8F%E5%AD%98%E5%82%A8%E4%BC%9A%E8%A2%AB%E5%B9%BF%E6%B3%9B%E7%94%A8%E5%9C%A8OLAP%E4%B8%AD"><span class="toc-number">1.0.1.3.</span> <span class="toc-text">三、列式存储会被广泛用在OLAP中</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%A1%8C%E5%BC%8F%E5%AD%98%E5%82%A8%E7%9A%84%E5%8E%9F%E7%90%86%E4%B8%8E%E7%89%B9%E7%82%B9"><span class="toc-number">1.0.1.3.1.</span> <span class="toc-text">行式存储的原理与特点</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%88%97%E5%BC%8F%E5%AD%98%E5%82%A8%E7%9A%84%E5%8E%9F%E7%90%86%E4%B8%8E%E7%89%B9%E7%82%B9"><span class="toc-number">1.0.1.3.2.</span> <span class="toc-text">列式存储的原理与特点</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9B%9B%E3%80%81HBase-%E7%9A%84%E6%9E%B6%E6%9E%84%E7%BB%84%E6%88%90"><span class="toc-number">1.0.1.4.</span> <span class="toc-text">四、HBase 的架构组成</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#1-HBase-Client"><span class="toc-number">1.0.1.4.1.</span> <span class="toc-text">1.HBase Client</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#2-HMaster"><span class="toc-number">1.0.1.4.2.</span> <span class="toc-text">2.HMaster</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-Region-Server"><span class="toc-number">1.0.1.4.3.</span> <span class="toc-text">3.Region Server</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#4-ZooKeeper"><span class="toc-number">1.0.1.4.4.</span> <span class="toc-text">4.ZooKeeper</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#5-HDFS"><span class="toc-number">1.0.1.4.5.</span> <span class="toc-text">5.HDFS</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%94%E3%80%81HBase-%E7%9A%84%E5%86%99%E5%85%A5%E6%B5%81%E7%A8%8B"><span class="toc-number">1.0.1.5.</span> <span class="toc-text">五、HBase 的写入流程</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Region-Server-%E5%AF%BB%E5%9D%80"><span class="toc-number">1.0.1.5.1.</span> <span class="toc-text">Region Server 寻址</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%86%99-Hlog"><span class="toc-number">1.0.1.5.2.</span> <span class="toc-text">写 Hlog</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%86%99-MemStore-%E5%B9%B6%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%9C"><span class="toc-number">1.0.1.5.3.</span> <span class="toc-text">写 MemStore 并返回结果</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#MemStore-%E5%88%B7%E7%9B%98"><span class="toc-number">1.0.1.5.4.</span> <span class="toc-text">MemStore 刷盘</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E6%8A%8A-WAL-%E5%8A%A0%E8%BD%BD%E5%88%B0-MemStore%E4%B8%AD%EF%BC%8C%E5%86%8D%E5%88%B7%E5%86%99%E6%88%90-HFile-%E5%91%A2%EF%BC%9F"><span class="toc-number">1.0.1.5.5.</span> <span class="toc-text">为什么要把 WAL 加载到 MemStore中，再刷写成 HFile 呢？</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%AD%E3%80%81HBase-%E7%9A%84%E8%AF%BB%E6%B5%81%E7%A8%8B"><span class="toc-number">1.0.1.6.</span> <span class="toc-text">六、HBase 的读流程</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Region-Server-%E5%AF%BB%E5%9D%80-1"><span class="toc-number">1.0.1.6.1.</span> <span class="toc-text">Region Server 寻址</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Region-%E5%AF%BB%E5%9D%80"><span class="toc-number">1.0.1.6.2.</span> <span class="toc-text">Region 寻址</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%AF%BB%E5%8F%96"><span class="toc-number">1.0.1.6.3.</span> <span class="toc-text">数据读取</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%83%E3%80%81HBase-%E7%9A%84%E6%95%B0%E6%8D%AE%E5%88%A0%E9%99%A4"><span class="toc-number">1.0.1.7.</span> <span class="toc-text">七、HBase 的数据删除</span></a></li></ol></li></ol></li></ol></li></ol></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2022 - 2026 By <a class="footer-bar-link" href="/" title="Smith" target="_blank">Smith</a></div></div><div id="footer-type-tips"></div><div class="js-pjax"><script>function subtitleType () {
+  fetch('https://v1.hitokoto.cn')
+    .then(response => response.json())
+    .then(data => {
+      if (true) {
+        const from = '出自 ' + data.from
+        const sub = []
+        sub.unshift(data.hitokoto, from)
+        window.typed = new Typed('#footer-type-tips', {
+          strings: sub,
+          startDelay: 300,
+          typeSpeed: 150,
+          loop: true,
+          backSpeed: 50,
+        })
+      } else {
+        document.getElementById('footer-type-tips').innerHTML = data.hitokoto
+      }
+    })
+}
+
+if (true) {
+  if (typeof Typed === 'function') {
+    subtitleType()
+  } else {
+    getScript('https://cdn.jsdelivr.net/npm/typed.js@2.0.12/dist/typed.min.js').then(subtitleType)
+  }
+} else {
+  subtitleType()
+}
+</script></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/Smithhss/smithhs.github.io.git" title="Hexo">Hexo</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">80</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">56</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">3</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="smithfont smith-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://smithhs.cn/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.png" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://github.com/Smithhss" title="Github"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/GitHub.png" alt="Github"/><span class="back-menu-item-text">Github</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="smithfont smith-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="smithfont smith-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="smithfont smith-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="smithfont smith-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="smithfont smith-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="smithfont smith-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/dailyPhoto/"><i class="smithfont smith-icon-camera faa-tada" style="font-size: 0.9em;"></i><span> 每日照片</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wallpaper/"><i class="smithfont smith-icon-image faa-tada" style="font-size: 0.9em;"></i><span> 壁纸</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wordScenery/"><i class="smithfont smith-icon-font faa-tada" style="font-size: 0.9em;"></i><span> 文字风景</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="smithfont smith-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于我</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="smithfont smith-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/love/"><i class="smithfont smith-icon-heart faa-tada" style="font-size: 0.9em;"></i><span> 爱情</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="smithfont smith-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Android-Studio/" style="font-size: 0.88rem;">Android Studio<sup>1</sup></a><a href="/tags/App/" style="font-size: 0.88rem;">App<sup>2</sup></a><a href="/tags/Butterfly/" style="font-size: 0.88rem;">Butterfly<sup>1</sup></a><a href="/tags/C/" style="font-size: 0.88rem;">C++<sup>1</sup></a><a href="/tags/CSS/" style="font-size: 0.88rem;">CSS<sup>1</sup></a><a href="/tags/Cisco-Packet-Tracer/" style="font-size: 0.88rem;">Cisco Packet Tracer<sup>1</sup></a><a href="/tags/Easypan/" style="font-size: 0.88rem;">Easypan<sup>2</sup></a><a href="/tags/FurtherMathematics/" style="font-size: 0.88rem;">FurtherMathematics<sup>1</sup></a><a href="/tags/GPT/" style="font-size: 0.88rem;">GPT<sup>1</sup></a><a href="/tags/Git2/" style="font-size: 0.88rem;">Git2<sup>1</sup></a><a href="/tags/HTML/" style="font-size: 0.88rem;">HTML<sup>1</sup></a><a href="/tags/Hexo/" style="font-size: 0.88rem;">Hexo<sup>1</sup></a><a href="/tags/Java/" style="font-size: 0.88rem;">Java<sup>6</sup></a><a href="/tags/JavaScript/" style="font-size: 0.88rem;">JavaScript<sup>1</sup></a><a href="/tags/JavaWeb/" style="font-size: 0.88rem;">JavaWeb<sup>2</sup></a><a href="/tags/Jrebel/" style="font-size: 0.88rem;">Jrebel<sup>1</sup></a><a href="/tags/LeetCode/" style="font-size: 0.88rem;">LeetCode<sup>1</sup></a><a href="/tags/Linux/" style="font-size: 0.88rem;">Linux<sup>3</sup></a><a href="/tags/Markdown/" style="font-size: 0.88rem;">Markdown<sup>2</sup></a><a href="/tags/Maven/" style="font-size: 0.88rem;">Maven<sup>2</sup></a><a href="/tags/Navicat/" style="font-size: 0.88rem;">Navicat<sup>1</sup></a><a href="/tags/NoSql/" style="font-size: 0.88rem;">NoSql<sup>1</sup></a><a href="/tags/Nodejs/" style="font-size: 0.88rem;">Nodejs<sup>2</sup></a><a href="/tags/Python/" style="font-size: 0.88rem;">Python<sup>4</sup></a><a href="/tags/Spring/" style="font-size: 0.88rem;">Spring<sup>2</sup></a><a href="/tags/VMware/" style="font-size: 0.88rem;">VMware<sup>2</sup></a><a href="/tags/Vue/" style="font-size: 0.88rem;">Vue<sup>1</sup></a><a href="/tags/YouHou/" style="font-size: 0.88rem;">YouHou<sup>1</sup></a><a href="/tags/books/" style="font-size: 0.88rem;">books<sup>1</sup></a><a href="/tags/butterfly/" style="font-size: 0.88rem;">butterfly<sup>1</sup></a><a href="/tags/clash/" style="font-size: 0.88rem;">clash<sup>1</sup></a><a href="/tags/project/" style="font-size: 0.88rem;">project<sup>4</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 0.88rem;">前端<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6/" style="font-size: 0.88rem;">开发框架<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" style="font-size: 0.88rem;">开发环境<sup>1</sup></a><a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" style="font-size: 0.88rem;">操作系统<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" style="font-size: 0.88rem;">数据结构与算法<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/" style="font-size: 0.88rem;">计算机组成原理<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" style="font-size: 0.88rem;">计算机网络<sup>1</sup></a><a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="font-size: 0.88rem;">软件工程<sup>1</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="smithfont smith-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="smithfont smith-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="smithfont smith-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="smithfont smith-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="smithfont smith-icon-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="smithfont smith-icon-arrow-up"></i></button></div></div><div id="nav-music"><a id="nav-music-hoverTips" onclick="smith.musicToggle()" accesskey="m">播放音乐</a><div id="console-music-bg"></div><meting-js id="8805965276" server="netease" type="playlist" mutex="true" preload="none" theme="var(--smith-main)" data-lrctype="0" order="random" volume="0.7"></meting-js></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="smithfont smith-icon-xmark"></i></button></nav><div class="is-center" id="loading-database"><i class="smithfont smith-icon-spinner smith-pulse-icon"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="smithfont smith-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="smithfont smith-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="smithfont smith-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="smithfont smith-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="smithfont smith-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="smithfont smith-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="smithfont smith-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="smithfont smith-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="smithfont smith-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="smithfont smith-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="smithfont smith-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="smithfont smith-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="smithfont smith-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="smithfont smith-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="smithfont smith-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="smithfont smith-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="smithfont smith-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://music.163.com/#/my/m/music/playlist?id=464586318&quot;, &quot;_blank&quot;);" style="display: none;"><i class="smithfont smith-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="smithfont smith-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="smithfont smith-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="smithfont smith-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="smithfont smith-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="smithfont smith-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="smithfont smith-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="smithfont smith-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="smithfont smith-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn1.tianli0.top/npm/js-heo@1.0.6/translate/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@6.1.6/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.3.1/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.js"></script><script>var meting_api = "https://api.injahow.cn/meting/?server=:server&type=:type&id=:id&auth=:auth&r=:r";
+</script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/smith-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("07/01/2022 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用史先森!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2022 By 史先森 V1.0.0",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/smith-blog@1.0.0/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 史先森 %c 你正在访问 Smith 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/smith/random.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><input type="hidden" name="page-type" id="page-type" value="post"></div><script async data-pjax src="https://npm.elemecdn.com/smith-theme-static@1.0.0/bubble/bubble.js"></script><script>var visitorMail = "visitor@smithhs.cn";
+</script><script async data-pjax src="https://cdn.jsdelivr.net/npm/waterfall.js@1.1.0/dist/waterfall.min.js"></script><script src="https://cdn.cbd.int/qrcodejs@1.0.0/qrcode.min.js"></script><script src="/js/smith/right_click_menu.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/smith-theme-static@1.0.0/icon/ali_iconfont_css.css"><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/dist/canvas-nest.min.js"></script><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script><script src="https://lib.baomitu.com/pjax/0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  smith.removeGlobalFnEvent('pjax')
+  smith.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script charset="UTF-8" src="https://cdn.cbd.int/smith-theme-static@1.0.0/accesskey/accesskey.js"></script><div id="live2d-container"><canvas id="live2d-canvas"></canvas><button class="live2d-toggle" title="切换看板娘">🎭</button></div><script data-pjax src="/js/smith/live2d.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="smithfont smith-icon-arrow-circle-right"></i></div></div></div></body></html>
