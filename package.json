@@ -12,7 +12,7 @@
     "version": "7.3.0"
   },
   "dependencies": {
-    "hexo": "^7.3.0",
+    "hexo": "^8.1.2",
     "hexo-asset-image": "^0.0.5",
     "hexo-deployer-git": "github:hexojs/hexo-deployer-git",
     "hexo-generator-archive": "^2.0.0",
