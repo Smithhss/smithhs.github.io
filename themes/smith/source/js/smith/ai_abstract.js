@@ -38,7 +38,7 @@
   const aiFunctions = [introduce, aiTitleRefreshIconClick, aiRecommend, aiGoHome];
 
   const aiBtnList = post_ai.querySelectorAll(".ai-btn-item");
-  const filteredHeadings = Array.from(aiBtnList).filter(heading => heading.id !== "go-tianli-blog");
+  const filteredHeadings = Array.from(aiBtnList).filter(heading => heading.id !== "go-api-link");
   filteredHeadings.forEach((item, index) => {
     item.addEventListener("click", () => {
       aiFunctions[index]();
@@ -47,72 +47,13 @@
 
   document.getElementById("ai-tag").addEventListener("click", onAiTagClick);
   aiTitleRefreshIcon.addEventListener("click", onAiTitleRefreshIconClick);
-  document.getElementById("go-tianli-blog").addEventListener("click", () => {
+  document.getElementById("go-api-link").addEventListener("click", () => {
     window.open(btnLink, "_blank");
   });
   aiReadAloudIcon.addEventListener("click", readAloud);
 
   async function readAloud() {
-    if (!summaryID) {
-      smith.snackbarShow("摘要还没加载完呢，请稍后。。。");
-      return;
-    }
-    aiReadAloudIcon = post_ai.querySelector(".smith-icon-circle-dot");
-    aiReadAloudIcon.style.opacity = "0.2";
-    if (audio && !isPaused) {
-      audio.pause();
-      isPaused = true;
-      aiReadAloudIcon.style.opacity = "1";
-      aiReadAloudIcon.style.animation = "";
-      aiReadAloudIcon.style.cssText = "animation: ''; opacity: 1;cursor: pointer;";
-      return;
-    }
-
-    if (audio && isPaused) {
-      audio.play();
-      isPaused = false;
-      aiReadAloudIcon.style.cssText = "animation: breathe .5s linear infinite; opacity: 0.2;cursor: pointer";
-      return;
-    }
-
-    const options = {
-      key: AIKey,
-      Referer: AIReferer,
-    };
-    const requestParams = new URLSearchParams({
-      key: options.key,
-      id: summaryID,
-    });
-
-    const requestOptions = {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Referer: options.Referer,
-      },
-    };
-
-    try {
-      const response = await fetch(`https://summary.tianli0.top/audio?${requestParams}`, requestOptions);
-      if (response.status === 403) {
-        console.error("403 refer与key不匹配。");
-      } else if (response.status === 500) {
-        console.error("500 系统内部错误");
-      } else {
-        const audioBlob = await response.blob();
-        const audioURL = URL.createObjectURL(audioBlob);
-        audio = new Audio(audioURL);
-        audio.play();
-        aiReadAloudIcon.style.cssText = "animation: breathe .5s linear infinite; opacity: 0.2;cursor: pointer";
-        audio.addEventListener("ended", () => {
-          audio = null;
-          aiReadAloudIcon.style.opacity = "1";
-          aiReadAloudIcon.style.animation = "";
-        });
-      }
-    } catch (error) {
-      console.error("请求发生错误❎");
-    }
+    smith.snackbarShow("自建 API 模式暂不支持语音朗读");
   }
   if (switchBtn) {
     document.getElementById("ai-Toggle").addEventListener("click", changeShowMode);
@@ -203,14 +144,14 @@
   }
 
   async function aiAbstract(num = basicWordCount) {
-    if (mode === "tianli") {
-      await aiAbstractTianli(num);
+    if (mode === "api") {
+      await aiAbstractAPI(num);
     } else {
       aiAbstractLocal();
     }
   }
 
-  async function aiAbstractTianli(num) {
+  async function aiAbstractAPI(num) {
     indexI = 0;
     indexJ = 1;
     clearTimeouts();
@@ -219,23 +160,30 @@
     observer.disconnect();
 
     num = Math.max(10, Math.min(2000, num));
-    const options = {
-      key: AIKey,
-      Referer: AIReferer,
-    };
     const truncateDescription = (title + pageFillDescription).trim().substring(0, num);
 
     const requestBody = {
-      key: options.key,
-      content: truncateDescription,
-      url: location.href,
+      model: "deepseek-v4-flash",
+      messages: [
+        {
+          role: "system",
+          content: "你是一个文章摘要生成助手。请用简洁的中文为以下文章生成摘要，100-200字左右。直接输出摘要内容，不要添加任何前缀或解释。"
+        },
+        {
+          role: "user",
+          content: truncateDescription
+        }
+      ],
+      stream: false,
+      max_tokens: 300,
+      temperature: 0.7
     };
 
     const requestOptions = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Referer: options.Referer,
+        "Authorization": "Bearer " + AIKey,
       },
       body: JSON.stringify(requestBody),
     };
@@ -249,22 +197,24 @@
         explanation.innerHTML = animationText;
         indexJ = (indexJ % 3) + 1;
       }, 500);
-      const response = await fetch(`https://summary.tianli0.top/`, requestOptions);
+      const response = await fetch(AIReferer + "/v1/chat/completions", requestOptions);
       let result;
-      if (response.status === 403) {
-        result = {
-          summary: "403 refer与key不匹配。",
-        };
-      } else if (response.status === 500) {
-        result = {
-          summary: "500 系统内部错误",
-        };
+      if (response.status === 401) {
+        result = { summary: "API Key 无效，请检查配置。" };
+      } else if (response.status === 403) {
+        result = { summary: "API 访问被拒绝，请检查 Referer 配置。" };
+      } else if (!response.ok) {
+        result = { summary: "API 请求失败: " + response.status };
       } else {
         result = await response.json();
       }
 
-      summary = result.summary.trim();
-      summaryID = result.id;
+      if (result.choices && result.choices[0]) {
+        summary = result.choices[0].message.content.trim();
+        summaryID = "self-hosted";
+      } else {
+        summary = result.summary || "摘要获取失败，请检查 API 配置。";
+      }
 
       setTimeout(() => {
         aiTitleRefreshIcon.style.opacity = "1";
@@ -272,12 +222,12 @@
       if (summary) {
         startAI(summary);
       } else {
-        startAI("摘要获取失败!!!请检查Tianli服务是否正常!!!");
+        startAI("摘要获取失败!!!请检查 API 服务是否正常!!!");
       }
       clearInterval(animationInterval);
     } catch (error) {
       console.error(error);
-      explanation.innerHTML = "发生异常" + error;
+      explanation.innerHTML = "发生异常: " + error.message;
     }
   }
 
@@ -359,8 +309,8 @@
   }
 
   function introduce() {
-    if (mode == "tianli") {
-      startAI("我是文章辅助AI: TianliGPT，点击下方的按钮，让我生成本文简介、推荐相关文章等。");
+    if (mode == "api") {
+      startAI("我是文章辅助AI: Smith GPT，点击下方的按钮，让我生成本文简介、推荐相关文章等。");
     } else {
       startAI(`我是文章辅助AI: ${gptName} GPT，点击下方的按钮，让我生成本文简介、推荐相关文章等。`);
     }
@@ -371,15 +321,15 @@
   }
 
   function onAiTagClick() {
-    if (mode === "tianli") {
+    if (mode === "api") {
       post_ai.querySelectorAll(".ai-btn-item").forEach(item => (item.style.display = "none"));
-      document.getElementById("go-tianli-blog").style.display = "block";
+      document.getElementById("go-api-link").style.display = "block";
       startAI(
-        "你好，我是Tianli开发的摘要生成助理TianliGPT，是一个基于GPT-4的生成式AI。我在这里只负责摘要的预生成和显示，你无法与我直接沟通，如果你也需要一个这样的AI摘要接口，可以在下方购买。"
+        "你好，我是本站摘要生成助理Smith GPT，是一个基于deepseek的生成式AI。我在这里只负责摘要的预生成和显示，你无法与我直接沟通。"
       );
     } else {
       post_ai.querySelectorAll(".ai-btn-item").forEach(item => (item.style.display = "block"));
-      document.getElementById("go-tianli-blog").style.display = "none";
+      document.getElementById("go-api-link").style.display = "none";
       startAI(
         `你好，我是本站摘要生成助理${gptName} GPT，是一个基于GPT-4的生成式AI。我在这里只负责摘要的预生成和显示，你无法与我直接沟通。`
       );
@@ -410,18 +360,18 @@
   }
 
   function changeShowMode() {
-    mode = mode === "tianli" ? "local" : "tianli";
-    if (mode === "tianli") {
-      document.getElementById("ai-tag").innerHTML = "TianliGPT";
+    mode = mode === "api" ? "local" : "api";
+    if (mode === "api") {
+      document.getElementById("ai-tag").innerHTML = "Smith GPT";
 
       aiReadAloudIcon.style.opacity = "1";
       aiReadAloudIcon.style.cursor = "pointer";
     } else {
       aiReadAloudIcon.style.opacity = "0";
       aiReadAloudIcon.style.cursor = "auto";
-      if ((document.getElementById("go-tianli-blog").style.display = "block")) {
+      if ((document.getElementById("go-api-link").style.display = "block")) {
         document.querySelectorAll(".ai-btn-item").forEach(item => (item.style.display = "block"));
-        document.getElementById("go-tianli-blog").style.display = "none";
+        document.getElementById("go-api-link").style.display = "none";
       }
       document.getElementById("ai-tag").innerHTML = gptName + " GPT";
     }
@@ -429,8 +379,8 @@
   }
 
   function showAiBtn() {
-    if (mode === "tianli") {
-      document.getElementById("ai-tag").innerHTML = "TianliGPT";
+    if (mode === "api") {
+      document.getElementById("ai-tag").innerHTML = "Smith GPT";
     } else {
       document.getElementById("ai-tag").innerHTML = gptName + " GPT";
     }

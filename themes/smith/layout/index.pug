@@ -7,20 +7,21 @@ block content
     //- Home Banner
     if theme.home_banner && theme.home_banner.enable
       .home-banner
+        - const bannerPosts = theme.home_banner.auto ? site.posts.sort('date', -1).filter(post => post.cover).limit(theme.home_banner.count || 5).toArray() : (theme.home_banner.items || [])
         .banner-left
-          - const bannerPosts = theme.home_banner.auto ? site.posts.sort('date', -1).filter(post => post.cover).limit(theme.home_banner.count || 5).toArray() : (theme.home_banner.items || [])
           each post, index in bannerPosts
-            .banner-item(class=index === 0 ? 'active' : '' data-index=index)
+            .banner-item(class=index === 0 ? 'active' : '' data-index=index data-path=url_for(post.path))
               img.banner-cover(src=url_for(post.cover) alt=post.title loading="eager" onerror=`this.onerror=null;this.src='${url_for(theme.error_img.post_page)}'`)
               .banner-mask(style=`background: linear-gradient(to top, ${theme.home_banner.colors[index % theme.home_banner.colors.length]}, transparent)`)
               .banner-title
-                a(href=url_for(post.path))= post.title
+                span= post.title
                 if post.categories && post.categories.data && post.categories.data.length > 0
                   .banner-tags= post.categories.data[0].name
-        .banner-right
+        .banner-nav
           each post, index in bannerPosts
-            .banner-list-item(class=index === 0 ? 'active' : '' data-index=index)
-              span= post.title
+            .banner-nav-item(class=index === 0 ? 'active' : '' data-index=index data-path=url_for(post.path))
+              span.banner-nav-index= index + 1
+              span.banner-nav-text= post.title
 
     include includes/categoryGroup.pug
     +postUI

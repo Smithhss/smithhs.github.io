@@ -1,5 +1,5 @@
 /**
- * AnZhiYu
+ * Smith
  * mermaid
  * https://github.com/mermaid-js/mermaid
  */

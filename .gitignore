@@ -8,3 +8,5 @@ public/
 _multiconfig.yml
 *.bak
 themes/anzhiyu/
+.npmrc
+CLAUDE.md

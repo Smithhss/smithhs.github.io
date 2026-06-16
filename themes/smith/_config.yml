@@ -31,13 +31,13 @@ nav:
     - title: 网页
       item:
         - name: 博客
-          link: https://hexo.anheyu.com/
+          link: https://smithhs.cn/
           icon: /img/favicon.ico
     - title: 项目
       item:
-        - name: 安知鱼图床
-          link: https://image.anheyu.com/
-          icon: https://image.anheyu.com/favicon.ico
+        - name: Github
+          link: https://github.com/Smithhss
+          icon: https://github.githubassets.com/favicons/favicon.svg
 
 # mourn （哀悼日，指定日期网站简单变灰，不包括滚动条）
 # 注意： 仅网站首页变灰，其他页面正常显示
@@ -68,7 +68,7 @@ copy:
 # formal:
 #   name: link || icon
 social:
-  # Github: https://github.com/anzhiyu-c || smith-icon-github
+  # Github: https://github.com/Smithhss || smith-icon-github
   # BiliBili: https://space.bilibili.com/372204786 || smith-icon-bilibili
 
 # 作者卡片 状态
@@ -195,7 +195,7 @@ post_meta:
 mainTone:
   enable: false # true or false 文章是否启用获取图片主色调
   mode: api # colorthief/cdn/api/both colorthief模式为前端获取图片主色调，cdn模式为图片url+imageAve参数获取主色调，api模式为请求API获取主色调，both模式会先请求cdn参数，无法获取的情况下将请求API获取，可以在文章内配置main_color: '#3e5658'，使用十六进制颜色，则不会请求colorthief/cdn/api/both获取主色调，而是直接使用配置的颜色
-  # 项目地址：https://github.com/anzhiyu-c/img2color-go
+  # 项目地址：https://github.com/Smithhss
   api: https://img2color-go.vercel.app/api?img= # mode为api时可填写
   cover_change: true # 整篇文章跟随cover修改主色调
 
@@ -246,10 +246,10 @@ post_copyright:
 reward:
   enable: true
   QR_code:
-    - img: https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-weichat.png
+    - img: https://npm.elemecdn.com/smith-blog@1.0.0/img/post/common/qrcode-weichat.png
       link:
       text: 微信
-    - img: https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/qrcode-alipay.png
+    - img: https://npm.elemecdn.com/smith-blog@1.0.0/img/post/common/qrcode-alipay.png
       link:
       text: 支付宝
 
@@ -432,9 +432,9 @@ footer:
   runtime:
     enable: false
     launch_time: 04/01/2021 00:00:00 # 网站上线时间
-    work_img: https://npm.elemecdn.com/anzhiyu-blog@2.0.4/img/badge/安知鱼-上班摸鱼中.svg
+    work_img: https://npm.elemecdn.com/smith-blog@1.0.0/img/badge/史先森-上班摸鱼中.svg
     work_description: 距离月入25k也就还差一个大佬带我~
-    offduty_img: https://npm.elemecdn.com/anzhiyu-blog@2.0.4/img/badge/安知鱼-下班啦.svg
+    offduty_img: https://npm.elemecdn.com/smith-blog@1.0.0/img/badge/史先森-下班啦.svg
     offduty_description: 下班了就该开开心心的玩耍，嘿嘿~
   # 徽标部分配置项 https://shields.io/
   # https://img.shields.io/badge/CDN-jsDelivr-orange?style=flat&logo=jsDelivr
@@ -442,19 +442,19 @@ footer:
     enable: false
     list:
       - link: https://hexo.io/ #徽标指向网站链接
-        shields: https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Frame-Hexo.svg #徽标API
+        shields: https://npm.elemecdn.com/smith-blog@1.0.0/img/badge/Frame-Hexo.svg #徽标API
         message: 博客框架为Hexo_v5.4.0 #徽标提示语
-      - link: https://hexo.anheyu.com/
-        shields: https://npm.elemecdn.com/smith-theme-static@1.0.0/img/Theme-AnZhiYu-2E67D3.svg
+      - link: https://smithhs.cn/
+        shields: https://npm.elemecdn.com/smith-theme-static@1.0.1/img/Theme-Smith.svg
         message: 本站使用Smith主题
       # - link: https://www.dogecloud.com/
-      #   shields: https://npm.elemecdn.com/anzhiyu-blog@2.2.0/img/badge/CDN-多吉云-3693F3.svg
+      #   shields: https://npm.elemecdn.com/smith-blog@1.0.0/img/badge/CDN-多吉云-3693F3.svg
       #   message: 本站使用多吉云为静态资源提供CDN加速
       # - link: https://github.com/
-      #   shields: https://npm.elemecdn.com/anzhiyu-blog@2.1.5/img/badge/Source-Github.svg
+      #   shields: https://npm.elemecdn.com/smith-blog@1.0.0/img/badge/Source-Github.svg
       #   message: 本站项目由Github托管
       # - link: http://creativecommons.org/licenses/by-nc-sa/4.0/
-      #   shields: https://npm.elemecdn.com/anzhiyu-blog@2.2.0/img/badge/Copyright-BY-NC-SA.svg
+      #   shields: https://npm.elemecdn.com/smith-blog@1.0.0/img/badge/Copyright-BY-NC-SA.svg
       #   message: 本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可
   socialBar:
     enable: false
@@ -474,7 +474,7 @@ footer:
       #   icon: smith-icon-rss
     right:
       # - title: Github
-      #   link: https://github.com/anzhiyu-c
+      #   link: https://github.com/Smithhss
       #   icon: smith-icon-github
       # - title: Bilibili
       #   link: https://space.bilibili.com/372204786
@@ -502,7 +502,7 @@ footer:
       #     - title: 文档
       #       link: /docs/
       #     - title: 源码
-      #       link: https://github.com/anzhiyu-c/hexo-theme-anzhiyu
+      #       link: https://github.com/Smithhss
       #     - title: 更新日志
       #       link: /update/
       # - title: 导航
@@ -528,10 +528,8 @@ footer:
       enable: false
       link: /copyright
     linkList:
-      - link: https://github.com/anzhiyu-c/hexo-theme-anzhiyu
+      - link: https://github.com/Smithhss
         text: 主题
-      # - link: https://image.anheyu.com
-      #   text: 图床
       # - link: https://beian.miit.gov.cn/
       #   text: 湘ICP备-xxxxxxx号
     subTitle:
@@ -791,7 +789,7 @@ preloader:
   source: 3
   # pace theme (see https://codebyzach.github.io/pace/)
   pace_css_url:
-  avatar: https://npm.elemecdn.com/anzhiyu-blog-static@1.0.4/img/avatar.jpg # 自定加载动画义头像
+  avatar: https://npm.elemecdn.com/smith-blog-static@1.0.0/img/avatar.jpg # 自定加载动画义头像
 
 # aside (侧边栏)
 # --------------------------------------
@@ -1052,7 +1050,7 @@ home_top:
   timemode: date #date/updated
   title: 生活明朗
   subTitle: 万物可爱。
-  siteText: anheyu.com
+  siteText: smithhs.cn
   category:
     - name: 前端
       path: /categories/前端开发/
@@ -1078,7 +1076,7 @@ home_top:
     tips: 新品主题
     title: hexo-theme-smith
     image: https://bu.dusays.com/2023/05/13/645fa3cf90d70.webp
-    link: https://docs.anheyu.com/
+    link: https://smithhs.cn/
 
 # 朋友圈配置
 friends_vue:
@@ -1196,13 +1194,13 @@ greetingBox:
 post_head_ai_description:
   enable: true
   gptName: Smith
-  mode: local # 默认模式 可选值: tianli/local
-  switchBtn: false # 可以配置是否显示切换按钮 以切换tianli/local
+  mode: api # 默认模式 可选值: api/local
+  switchBtn: false # 可以配置是否显示切换按钮 以切换api/local
   btnLink: https://afdian.net/item/886a79d4db6711eda42a52540025c377
   randomNum: 3 # 按钮最大的随机次数，也就是一篇文章最大随机出来几种
   basicWordCount: 1000 # 最低获取字符数, 最小1000, 最大1999
-  key: xxxx
-  Referer: https://xx.xx/
+  key: sk-fpYVeik6Ps1EpZsVEbZpipNzy0Hal0Y0G9RpjexTGcpCLflG
+  Referer: https://aicos.ink
 
 # 快捷键配置
 shortcutKey:
@@ -1261,12 +1259,12 @@ inject:
 # 非必要请不要修改
 CDN:
   # The CDN provider of internal scripts (主题内部 js 的 cdn 配置)
-  # option: local/elemecdn/jsdelivr/unpkg/cdnjs/onmicrosoft/cbd/anheyu/custom
+  # option: local/elemecdn/jsdelivr/unpkg/cdnjs/onmicrosoft/cbd/smith/custom
   # Dev version can only choose. ( dev版的主题只能设置为 local )
   internal_provider: local
 
   # The CDN provider of third party scripts (第三方 js 的 cdn 配置)
-  # option: elemecdn/jsdelivr/unpkg/cdnjs/onmicrosoft/cbd/anheyu/custom
+  # option: elemecdn/jsdelivr/unpkg/cdnjs/onmicrosoft/cbd/smith/custom
   third_party_provider: cbd
 
   # Add version number to CDN, true or false

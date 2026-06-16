@@ -1,0 +1,8 @@
+if theme.hotSearch && theme.hotSearch.enable
+  #hot-search-container
+    .hot-search-header
+      .hot-search-title 🔥 热搜
+      #hot-search-tabs
+    #hot-search-list
+      .hot-search-loading 加载中...
+  script(data-pjax src="/js/smith/hot_search.js")

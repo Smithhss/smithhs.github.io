@@ -120,6 +120,17 @@ div
     else if page.aplayer
       include ./third-party/aplayer.pug
 
+  //- AOS animation library
+  if theme.aos && theme.aos.enable
+    script(src='https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js')
+    script.
+      AOS.init({
+        duration: 800,
+        easing: 'ease-out-cubic',
+        once: true,
+        offset: 50
+      });
+
   if theme.pjax.enable
     != partial("includes/third-party/pjax", {}, { cache: true })
 
@@ -130,3 +141,7 @@ div
 
   if is_current("/") && theme.greetingBox.enable
     #greetingBox
+
+  //- 看板娘
+  if theme.live2d && theme.live2d.enable
+    include smith/live2d.pug

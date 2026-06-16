@@ -457,6 +457,11 @@ const smith = {
   // 初始化即刻
   initIndexEssay: function () {
     if (!document.getElementById("bbTimeList")) return;
+    if (typeof Swiper === "undefined") {
+      console.warn("[Smith] Swiper not loaded, retrying...");
+      setTimeout(() => smith.initIndexEssay(), 500);
+      return;
+    }
     setTimeout(() => {
       let essay_bar_swiper = new Swiper(".essay_bar_swiper_container", {
         passiveListeners: true,

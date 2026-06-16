@@ -68,6 +68,10 @@ if (theme.snackbar && theme.snackbar.enable)
 if theme.fancybox
   link(rel='stylesheet' href=url_for(theme.asset.fancybox_css) media="print" onload="this.media='all'")
 
+//- AOS animation library
+if theme.aos && theme.aos.enable
+  link(rel='stylesheet' href='https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css')
+
 if site.data.essay || theme.home_top.swiper.enable
   link(rel='stylesheet' href=url_for(theme.home_top.swiper.swiper_css) media="print" onload="this.media='all'")
 

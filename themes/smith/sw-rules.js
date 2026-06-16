@@ -9,7 +9,7 @@ module.exports.config = {
    * @type ?Object|boolean
    */
   serviceWorker: {
-    cacheName: "AnZhiYuThemeCache",
+    cacheName: "SmithThemeCache",
   },
   register: {
     onerror: undefined,
@@ -88,10 +88,7 @@ module.exports.cacheRules = {
     match: url =>
       [
         "cdn.cbd.int",
-        "lf26-cdn-tos.bytecdntp.com",
-        "lf6-cdn-tos.bytecdntp.com",
-        "lf3-cdn-tos.bytecdntp.com",
-        "lf9-cdn-tos.bytecdntp.com",
+        "cdn.jsdelivr.net",
         "cdn.staticfile.org",
         "npm.elemecdn.com",
       ].includes(url.host) && url.pathname.match(/\.(js|css|woff2|woff|ttf|cur)$/),

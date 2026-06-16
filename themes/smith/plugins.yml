@@ -155,15 +155,15 @@ flickr_justified_gallery_css:
 aplayer_css:
   name: smith-theme-static
   file: aplayer/APlayer.min.css
-  version: 1.0.0
+  version: 1.0.2
 aplayer_js:
   name: smith-theme-static
   file: js/APlayer.min.js
-  version: 1.0.0
+  version: 1.0.2
 meting_js:
-  name: hexo-anzhiyu-music
-  file: assets/js/Meting2.min.js
-  version: 1.0.1
+  name: meting
+  file: dist/Meting.min.js
+  version: 2.0.1
 prismjs_js:
   name: prismjs
   file: prism.js
@@ -195,39 +195,39 @@ pace_js:
 pace_default_css:
   name: smith-theme-static
   file: progress_bar/progress_bar.css
-  version: 1.0.0
+  version: 1.0.2
 coin_js:
   name: smith-theme-static
   file: coin/coin.js
-  version: 1.0.0
+  version: 1.0.2
 coin_css:
   name: smith-theme-static
   file: coin/coin.min.css
-  version: 1.0.0
+  version: 1.0.2
 countup_js:
   name: smith-theme-static
   file: countup/countup.js
-  version: 1.0.0
+  version: 1.0.2
 gsap_js:
   name: smith-theme-static
   file: gsap/gsap.min.js
-  version: 1.0.0
+  version: 1.0.2
 rightmenu:
   name: smith-theme-static
   file: rightmenu/rightmenu.js
-  version: 1.0.0
+  version: 1.0.2
 waterfall:
   name: smith-theme-static
   file: waterfall/waterfall.js
-  version: 1.0.0
+  version: 1.0.2
 ali_iconfont_css:
   name: smith-theme-static
   file: icon/ali_iconfont_css.css
-  version: 1.0.0
+  version: 1.0.2
 accesskey_js:
   name: smith-theme-static
   file: accesskey/accesskey.js
-  version: 1.0.0
+  version: 1.0.2
 colorthief:
   name: colorthief
   file: dist/color-thief.umd.min.js

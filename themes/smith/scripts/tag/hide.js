@@ -1,5 +1,5 @@
 /**
- * AnZhiYu
+ * Smith
  * @example
  * hideInline
  * {% hideInline content,display,bg,color %}

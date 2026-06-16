@@ -1,13 +1,5 @@
 blank_issues_enabled: false
 contact_links:
   - name: Questions about Smith
-    url: https://github.com/smith-c/hexo-theme-smith/discussions
+    url: https://github.com/Smithhss/smithhs.github.io/discussions
     about: 一些使用问题请到 Discussion 询问。 Please ask questions in Discussion.
-
-  - name: Smith Q&A
-    url: https://hexo.anheyu.com/comments/
-    about: Smith Q&A
-
-  - name: QQ群
-    url: https://jq.qq.com/?_wv=1027&k=v7NK7ELr
-    about: "群号 464636182"

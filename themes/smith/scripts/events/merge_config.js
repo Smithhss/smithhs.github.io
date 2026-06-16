@@ -131,9 +131,9 @@ hexo.extend.filter.register(
         runtime: {
           enable: false,
           launch_time: "04/01/2021 00:00:00",
-          work_img: "https://npm.elemecdn.com/smith-blog@2.0.4/img/badge/安知鱼-上班摸鱼中.svg",
+          work_img: "https://npm.elemecdn.com/smith-blog@2.0.4/img/badge/史先森-上班摸鱼中.svg",
           work_description: "距离月入25k也就还差一个大佬带我~",
-          offduty_img: "https://npm.elemecdn.com/smith-blog@2.0.4/img/badge/安知鱼-下班啦.svg",
+          offduty_img: "https://npm.elemecdn.com/smith-blog@2.0.4/img/badge/史先森-下班啦.svg",
           offduty_description: "下班了就该开开心心的玩耍，嘿嘿~",
         },
         bdageitem: {
@@ -145,9 +145,9 @@ hexo.extend.filter.register(
               message: "博客框架为Hexo_v5.4.0",
             },
             {
-              link: "https://hexo.anheyu.com/",
-              shields: "https://npm.elemecdn.com/smith-theme-static@1.0.9/img/Theme-AnZhiYu-2E67D3.svg",
-              message: "本站使用AnZhiYu主题",
+              link: "https://smithhs.cn/",
+              shields: "https://npm.elemecdn.com/smith-theme-static@1.0.1/img/Theme-Smith.svg",
+              message: "本站使用Smith主题",
             },
           ],
         },
@@ -594,7 +594,7 @@ hexo.extend.filter.register(
       },
       post_head_ai_description: {
         enable: true,
-        gptName: "AnZhiYu",
+        gptName: "Smith",
         mode: "local",
         switchBtn: false,
         btnLink: "https://afdian.net/item/886a79d4db6711eda42a52540025c377",

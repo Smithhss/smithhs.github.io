@@ -2,7 +2,7 @@
 - let gptName = theme.post_head_ai_description.gptName
 - let mode = theme.post_head_ai_description.mode
 - let switchBtn = theme.post_head_ai_description.switchBtn
-if (pageFillDescription && page.ai)
+if (pageFillDescription)
   .post-ai-description
     .ai-title
       i.smithfont.smith-icon-bilibili
@@ -12,8 +12,8 @@ if (pageFillDescription && page.ai)
       i.smithfont.smith-icon-arrow-rotate-right
       i.smithfont.smith-icon-circle-dot(title="朗读摘要")
       #ai-tag
-        if mode == "tianli"
-          = "Tianli GPT"
+        if mode == "api"
+          = "Smith GPT"
         else
           = gptName + " GPT"
     .ai-explanation AI初始化中...
@@ -22,5 +22,5 @@ if (pageFillDescription && page.ai)
       .ai-btn-item 生成本文简介 👋
       .ai-btn-item 推荐相关文章 📖
       .ai-btn-item 前往主页 🏠
-      .ai-btn-item#go-tianli-blog 前往爱发电购买
+      .ai-btn-item#go-api-link 了解更多
     script(data-pjax src=url_for(theme.asset.ai_abstract_js))

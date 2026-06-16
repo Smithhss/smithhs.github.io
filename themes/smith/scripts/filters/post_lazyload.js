@@ -1,5 +1,5 @@
 /**
- * AnZhiYu
+ * Smith
  * lazyload
  * replace src to data-lazy-src
  */

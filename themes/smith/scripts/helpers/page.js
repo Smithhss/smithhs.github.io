@@ -1,5 +1,5 @@
 /**
- * AnZhiYu
+ * Smith
  * @example
  *  page_description()
  *  cloudTags(source, minfontsize, maxfontsize, limit)
