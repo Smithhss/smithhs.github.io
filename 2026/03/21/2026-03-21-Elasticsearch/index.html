@@ -1,0 +1,580 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>Elasticsearch | Smith</title><meta name="keywords" content="技术分享"><meta name="author" content="Smith"><meta name="copyright" content="Smith"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#fafaf8"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="Elasticsearch"><meta name="application-name" content="Elasticsearch"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#fafaf8"><meta property="og:type" content="article"><meta property="og:title" content="Elasticsearch"><meta property="og:url" content="https://smithhs.cn/2026/03/21/2026-03-21-Elasticsearch/index.html"><meta property="og:site_name" content="Smith"><meta property="og:description" content="你好！很高兴为你解释 Elasticsearch（简称 ES）。 为了让你彻底理解，我会分三个部分来讲：  一句话定义（它是什么） 通俗类比（它是怎么工作的） 真实案例（它在生活中哪里用到了）  1. 一句话定义Elasticsearch 是一个分布式的、超快的“搜索引擎”兼“数据分析工具”。 它专"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=1200&amp;q=80"><meta property="article:author" content="Smith"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=1200&amp;q=80"><meta name="description" content="你好！很高兴为你解释 Elasticsearch（简称 ES）。 为了让你彻底理解，我会分三个部分来讲：  一句话定义（它是什么） 通俗类比（它是怎么工作的） 真实案例（它在生活中哪里用到了）  1. 一句话定义Elasticsearch 是一个分布式的、超快的“搜索引擎”兼“数据分析工具”。 它专"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://smithhs.cn/2026/03/21/2026-03-21-Elasticsearch/"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="manifest" href="/manifest.json"/><meta name="msapplication-TileColor" content="var(--smith-main)"/><link rel="mask-icon" href="/img/siteicon/apple-icon-180.png" color="#5bbad5"/><link rel="apple-touch-icon" sizes="180x180" href="/img/siteicon/apple-icon-180.png"/><link rel="apple-touch-icon-precomposed" sizes="180x180" href="/img/siteicon/apple-icon-180.png"/><link rel="icon" type="image/png" sizes="32x32" href="/img/siteicon/32.png"/><link rel="icon" type="image/png" sizes="16x16" href="/img/siteicon/16.png"/><link rel="bookmark" href="/img/siteicon/apple-icon-180.png"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2048-2732.jpg" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2732-2048.jpg" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1668-2388.jpg" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2388-1668.jpg" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1536-2048.jpg" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2048-1536.jpg" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1668-2224.jpg" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2224-1668.jpg" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1620-2160.jpg" media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2160-1620.jpg" media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1290-2796.jpg" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2796-1290.jpg" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1179-2556.jpg" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2556-1179.jpg" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1284-2778.jpg" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2778-1284.jpg" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1170-2532.jpg" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2532-1170.jpg" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1125-2436.jpg" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2436-1125.jpg" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1242-2688.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2688-1242.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-828-1792.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1792-828.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1242-2208.jpg" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2208-1242.jpg" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-750-1334.jpg" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1334-750.jpg" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-640-1136.jpg" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1136-640.jpg" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@6.1.6/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"><link rel="stylesheet" href="https://npm.elemecdn.com/smith-theme-static@1.0.2/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: undefined,
+  postHeadAiDescription: {"enable":true,"gptName":"Smith","mode":"api","switchBtn":false,"btnLink":"https://aicos.ink","randomNum":3,"basicWordCount":1000,"key":"sk-fpYVeik6Ps1EpZsVEbZpipNzy0Hal0Y0G9RpjexTGcpCLflG","Referer":"https://aicos.ink"},
+  diytitle: {"enable":true,"leaveTitle":"再看看嘛🌈！","backTitle":"欢迎回来✌️！"},
+  LA51: undefined,
+  greetingBox: {"enable":true,"default":"晚上好👋","list":[{"greeting":"晚安😴","startTime":0,"endTime":5},{"greeting":"早上好鸭👋, 祝你一天好心情！","startTime":6,"endTime":9},{"greeting":"上午好👋, 状态很好，鼓励一下～","startTime":10,"endTime":10},{"greeting":"11点多啦, 在坚持一下就吃饭啦～","startTime":11,"endTime":11},{"greeting":"午安👋, 宝贝","startTime":12,"endTime":14},{"greeting":"🌈充实的一天辛苦啦！","startTime":14,"endTime":18},{"greeting":"19点喽, 奖励一顿丰盛的大餐吧🍔。","startTime":19,"endTime":19},{"greeting":"晚上好👋, 在属于自己的时间好好放松😌~","startTime":20,"endTime":24}]},
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  music_page_default: "nav_music",
+  home_banner: {"enable":true,"interval":5000,"count":5},
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: true,
+  mainTone: undefined,
+  authorStatus: {"skills":["💻 后端开发 Java / Spring Cloud","🌐 前端探索 React / TypeScript","🤖 AI 工具深度用户","🏠 智能家居折腾达人","🔨 从设计到部署一条龙","📝 偶尔写写博客记录生活","🎵 听歌写代码双线并行","🚀 脚踏实地行动派"]},
+  algolia: undefined,
+  localSearch: {"path":"/search.json","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":240},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: Smith","link":"链接: ","source":"来源: Smith","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#4f7cff","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.2.0/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.2.0/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: 'Smith',
+  title: 'Elasticsearch',
+  postAI: '',
+  pageFillDescription: '1. 一句话定义, 2. 通俗易懂的原理解析, 类比一：为什么它搜得这么快？（核心：倒排索引）, 类比二：它怎么存海量数据？（核心：集群与分片）, 3. 真实生活中的案例, 案例 1：电商网站搜索（淘宝x2F京东）, 案例 2：网站日志分析（ELK 栈）, 案例 3：智能联想与自动补全, 4. 总结：Elasticsearch vs 传统数据库 (MySQL), 一句话总结, 方法一：Spring Data Elasticsearch（最常用开发效率高）, 1. 引入依赖 (Maven), 2. 配置连接 (application.yml), 3. 定义实体类 (Document), 4. 定义 Repository 接口, 5. 在 Service 中使用, 方法二：Official Java API Client（更灵活功能全）, 1. 引入依赖, 2. 初始化客户端, 3. 索引文档 (写入数据), 4. 复杂搜索 (查询数据), 总结：我该选哪种？, 避坑指南（新手必看）你好很高兴为你解释简称为了让你彻底理解我会分三个部分来讲一句话定义它是什么通俗类比它是怎么工作的真实案例它在生活中哪里用到了一句话定义是一个分布式的超快的搜索引擎兼数据分析工具它专门用来处理海量数据让你能在几毫秒内从几亿条数据中找到你想要的内容并且还能对这些数据进行统计和分析注意它虽然名字里有但它不仅仅是搜索还能做日志分析数据监控等通俗易懂的原理解析为了理解我们需要解决两个问题它为什么快和它怎么存数据类比一为什么它搜得这么快核心倒排索引想象你面前有万本书你想找到所有包含苹果这个词的书传统数据库如的做法像是一个勤勤恳恳的图书管理员他必须从第本书的第页开始读一直读到第万本书的最后一页如果发现苹果就记下来缺点数据量一大速度极慢的做法它像是书后面自带的索引页它预先建立了一个字典苹果出现在书书书香蕉出现在书书当你搜苹果时它直接查这个字典瞬间告诉你结果完全不需要去翻书专业术语这叫倒排索引类比二它怎么存海量数据核心集群与分片想象你要开一家超级巨大的超市货物多到一家店放不下集群就是你的连锁超市集团节点就是其中的每一家分店索引就是超市里的商品分类区比如家电区食品区在里相似的数据放在一起叫一个索引类似于数据库里的表文档就是具体的某一件商品比如一台具体的在里数据是以格式存储的非常灵活不需要像传统数据库那样先定死表格结构分片因为家电区太大了一家分店摆不下于是你把家电区切开冰箱放店电视放店手机放店这就是分片好处顾客买手机直接去店找不用跑遍所有店多台机器一起干活速度飞快真实生活中的案例为了让你更有体感我们看三个最常见的场景案例电商网站搜索淘宝京东场景你在淘宝搜索框输入红色连衣裙夏季如果没有系统要去数据库里遍历几亿个商品一个个比对标题和描述你可能需要转圈圈等秒钟甚至系统直接崩溃有了分词把你的搜索词拆成红色连衣裙夏季匹配利用倒排索引瞬间找到同时包含这三个词的商品排序根据销量价格好评率进行打分排序结果在秒内给你展示最相关的商品列表高亮搜索结果里红色连衣裙这些字会被标红显示这也是的功能案例网站日志分析栈场景你是某游戏公司的运维工程师凌晨点游戏服务器突然变卡玩家投诉问题服务器每秒产生几万条日志存在硬盘里有几个那么大你需要找到报错的那一行传统方法登录服务器用命令一行行搜或者把日志下载下来用打开根本打不开耗时几小时有了配合日志实时被收集并写入你在的可视化界面上输入或在几秒内从几亿条日志中筛选出所有报错记录你还能直接看到报错时间的曲线图定位到具体是哪台服务器在什么时间点出了问题案例智能联想与自动补全场景你在百度或谷歌搜索框刚输入埃隆还没输完下拉框就提示埃隆马斯克埃隆马斯克简历原理有一种特殊的结构叫它预先存好了所有热门搜索词的前缀当你输入前几个字它立刻匹配出最可能的完整词这需要极高的读取速度只有能胜任总结传统数据库很多人会问我有了为什么还要特性传统数据库搜索引擎核心强项存和事务比如银行转账不能出错搜和分析比如找商品要快且模糊匹配模糊搜索很慢会导致全表扫描极快倒排索引数据结构严格必须先建表定好字段类型灵活格式随时加字段海量数据数据量太大时查询性能下降明显天生分布式数据越多加机器即可性能依然稳典型用途订单系统用户账户库存管理站内搜索日志分析推荐系统一句话总结如果把比作会计的账本严谨存钱不能错那么就是图书馆的检索目录灵活找书要超快在现代互联网架构中通常是负责存数据负责搜数据两者配合使用在中使用主要有两种主流方式取决于你的项目架构推荐如果你使用的是项目这是最简单最快捷的方式类似操作的官方原生客户端如果你不使用或者需要更底层更灵活的控制使用官方提供的客户端重要提示版本对应关系的版本更新很快客户端的版本必须与服务端的版本尽量保持一致否则会出现连接错误或功能不兼容对应对应下面我以为例为你详细演示这两种方法方法一最常用开发效率高这种方式把当作数据库一样操作通过定义实体类和接口来完成增删改查引入依赖在中添加配置连接默认开启了安全认证账号密码和为了演示方便如果是本地测试可以在配置中关闭安全或者在中配置证书这里假设你已配置好连接信息你的密码如果是自签名证书可能需要配置验证生产环境建议开启定义实体类创建一个类映射到的索引对应中的索引名对应的使用分词器不分词用于精确匹配构造方法省略定义接口继承无需写实现类会自动生成方法命名查询类似在中使用新增修改方法如果存在则更新不存在则新增搜索删除优点代码极少开发快适合常规业务缺点复杂查询如聚合复杂评分支持不够灵活方法二更灵活功能全如果你需要写复杂的查询语句比如多条件组合聚合分析高亮显示官方客户端更合适推出了新的类型安全客户端引入依赖版本号需与服务端一致初始化客户端创建底层客户端创建传输层创建客户端索引文档写入数据索引请求执行复杂搜索查询数据这是原生客户端最强大的地方可以构建非常复杂的查询构建查询价格小于且标题包含执行搜索获取结果优点功能最全支持所有特性聚合高亮脚本等性能微调空间大缺点代码量大学习曲线稍陡峭总结我该选哪种场景推荐方案理由简单的增删改查像操作一样简单代码少维护方便复杂的搜索业务需要自定义评分聚合统计高亮显示时原生客户端更灵活非项目没有容器支持只能用原生客户端混合使用两者结合很多公司会在项目中简单查询用复杂查询注入或原生避坑指南新手必看分词器问题默认的分词器对中文支持不好会把中国拆成中国在中国使用通常需要在服务器安装分词器并在实体类中指定版本对齐再次强调的版本必须和你的服务器版本兼容如果连不上首先查版本兼容性矩阵连接超时如果数据量大写入或查询可能耗时记得在配置中适当增加和证书默认开启本地开发如果嫌麻烦可以在中关闭安全配置但生产环境千万不要关闭希望这份指南能帮你顺利在项目中用上如果有具体的代码报错欢迎继续提问',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2026-06-02 11:58:01',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fafaf8')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="https://npm.elemecdn.com/lxgw-wenkai-screen-webfont@1.1.0/style.css" media="print" onload="this.media='all'"><meta name="generator" content="Hexo 7.3.0"></head><body data-type="smith"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d20f536c64d06e5fcf4bfe2ec5dc25d.jpg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/smith-theme-static@1.0.2/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="smithfont smith-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://smithhs.cn/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.png" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://github.com/Smithhss" title="Github"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/GitHub.png" alt="Github"/><span class="back-menu-item-text">Github</span></a></div></div></div></div><a id="site-name" href="/" accesskey="h"><div class="title">Smith</div><i class="smithfont smith-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:smith.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="smithfont smith-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="smithfont smith-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="smithfont smith-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="smithfont smith-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="smithfont smith-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="smithfont smith-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/dailyPhoto/"><i class="smithfont smith-icon-camera faa-tada" style="font-size: 0.9em;"></i><span> 每日照片</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wallpaper/"><i class="smithfont smith-icon-image faa-tada" style="font-size: 0.9em;"></i><span> 壁纸</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wordScenery/"><i class="smithfont smith-icon-font faa-tada" style="font-size: 0.9em;"></i><span> 文字风景</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="smithfont smith-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于我</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="smithfont smith-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/love/"><i class="smithfont smith-icon-heart faa-tada" style="font-size: 0.9em;"></i><span> 爱情</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="smithfont smith-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button only-home" id="travellings_button" title="随机前往一个开往项目网站"><a class="site-page" onclick="smith.totraveling()" title="随机前往一个开往项目网站" href="javascript:void(0);" rel="external nofollow" data-pjax-state="external"><i class="smithfont smith-icon-train"></i></a></div><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="smithfont smith-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="smithfont smith-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="smith.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg" target="_blank"><img class="post-qr-code-img" alt="wechat" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg" target="_blank"><img class="post-qr-code-img" alt="alipay" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Android-Studio/" style="font-size: 1.05rem;">Android Studio<sup>1</sup></a><a href="/tags/App/" style="font-size: 1.05rem;">App<sup>1</sup></a><a href="/tags/Butterfly/" style="font-size: 1.05rem;">Butterfly<sup>1</sup></a><a href="/tags/C/" style="font-size: 1.05rem;">C++<sup>3</sup></a><a href="/tags/CSS/" style="font-size: 1.05rem;">CSS<sup>1</sup></a><a href="/tags/Cisco-Packet-Tracer/" style="font-size: 1.05rem;">Cisco Packet Tracer<sup>1</sup></a><a href="/tags/Docker/" style="font-size: 1.05rem;">Docker<sup>2</sup></a><a href="/tags/Easypan/" style="font-size: 1.05rem;">Easypan<sup>2</sup></a><a href="/tags/FurtherMathematics/" style="font-size: 1.05rem;">FurtherMathematics<sup>1</sup></a><a href="/tags/GPT/" style="font-size: 1.05rem;">GPT<sup>1</sup></a><a href="/tags/Git2/" style="font-size: 1.05rem;">Git2<sup>1</sup></a><a href="/tags/HTML/" style="font-size: 1.05rem;">HTML<sup>1</sup></a><a href="/tags/Hexo/" style="font-size: 1.05rem;">Hexo<sup>1</sup></a><a href="/tags/Java/" style="font-size: 1.05rem;">Java<sup>67</sup></a><a href="/tags/JavaScript/" style="font-size: 1.05rem;">JavaScript<sup>1</sup></a><a href="/tags/Jrebel/" style="font-size: 1.05rem;">Jrebel<sup>1</sup></a><a href="/tags/LeetCode/" style="font-size: 1.05rem;">LeetCode<sup>1</sup></a><a href="/tags/Linux/" style="font-size: 1.05rem;">Linux<sup>3</sup></a><a href="/tags/Markdown/" style="font-size: 1.05rem;">Markdown<sup>2</sup></a><a href="/tags/Maven/" style="font-size: 1.05rem;">Maven<sup>2</sup></a><a href="/tags/MyBatis/" style="font-size: 1.05rem;">MyBatis<sup>1</sup></a><a href="/tags/MyBatis-Plus/" style="font-size: 1.05rem;">MyBatis-Plus<sup>1</sup></a><a href="/tags/Mysql/" style="font-size: 1.05rem;">Mysql<sup>1</sup></a><a href="/tags/Navicat/" style="font-size: 1.05rem;">Navicat<sup>1</sup></a><a href="/tags/NoSql/" style="font-size: 1.05rem;">NoSql<sup>1</sup></a><a href="/tags/Nodejs/" style="font-size: 1.05rem;">Nodejs<sup>2</sup></a><a href="/tags/Python/" style="font-size: 1.05rem;">Python<sup>4</sup></a><a href="/tags/Spring/" style="font-size: 1.05rem;">Spring<sup>2</sup></a><a href="/tags/VMware/" style="font-size: 1.05rem;">VMware<sup>2</sup></a><a href="/tags/WeChat/" style="font-size: 1.05rem;">WeChat<sup>1</sup></a><a href="/tags/YouHou/" style="font-size: 1.05rem;">YouHou<sup>1</sup></a><a href="/tags/books/" style="font-size: 1.05rem;">books<sup>1</sup></a><a href="/tags/butterfly/" style="font-size: 1.05rem;">butterfly<sup>1</sup></a><a href="/tags/clash/" style="font-size: 1.05rem;">clash<sup>1</sup></a><a href="/tags/error/" style="font-size: 1.05rem;">error<sup>1</sup></a><a href="/tags/project/" style="font-size: 1.05rem;">project<sup>4</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 1.05rem;">前端<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6/" style="font-size: 1.05rem;">开发框架<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" style="font-size: 1.05rem;">开发环境<sup>1</sup></a><a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="font-size: 1.05rem;">软件工程<sup>1</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="smithfont smith-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="smithfont smith-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="smithfont smith-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/05/"><span class="card-archive-list-date">五月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">16</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/04/"><span class="card-archive-list-date">四月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">31</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/03/"><span class="card-archive-list-date">三月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">75</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/02/"><span class="card-archive-list-date">二月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">7</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/11/"><span class="card-archive-list-date">十一月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">3</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/10/"><span class="card-archive-list-date">十月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/09/"><span class="card-archive-list-date">九月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">5</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/07/"><span class="card-archive-list-date">七月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="smithfont smith-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="smith.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="smithfont smith-icon-arrows-left-right"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="smith.musicToggle()" title="音乐开关"><a class="music-switch"><i class="smithfont smith-icon-music"></i></a></div></div><div class="console-mask" onclick="smith.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="smithfont smith-icon-arrow-up"></i><span id="percent" onclick="smith.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="smithfont smith-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="smithfont smith-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/" itemprop="url">技术分享</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/" tabindex="-1" itemprop="url"> <span> <i class="smithfont smith-icon-hashtag"></i>技术分享</span></a></span></div></div><h1 class="post-title" itemprop="name headline">Elasticsearch</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="post-meta-icon smithfont smith-icon-calendar-days"></i><span class="post-meta-label">发表于</span><time itemprop="dateCreated datePublished" datetime="2026-03-21T01:53:38.000Z" title="发表于 2026-03-21 09:53:38">2026-03-21</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="smithfont smith-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">3k</span><span class="post-meta-separator"></span><i class="smithfont smith-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>10分钟</span></span><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title="Elasticsearch"><i class="smithfont smith-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="smithfont smith-icon-spinner smith-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为石家庄"><i class="smithfont smith-icon-location-dot"></i>石家庄</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=1200&amp;q=80"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><div class="post-ai-description"><div class="ai-title"><i class="smithfont smith-icon-bilibili"></i><div class="ai-title-text">AI-摘要</div><i class="smithfont smith-icon-arrow-rotate-right"></i><i class="smithfont smith-icon-circle-dot" title="朗读摘要"></i><div id="ai-tag">Smith GPT</div></div><div class="ai-explanation">AI初始化中...</div><div class="ai-btn-box"><div class="ai-btn-item">介绍自己 🙈</div><div class="ai-btn-item">生成本文简介 👋</div><div class="ai-btn-item">推荐相关文章 📖</div><div class="ai-btn-item">前往主页 🏠</div><div class="ai-btn-item" id="go-api-link">了解更多</div></div><script data-pjax src="/js/smith/ai_abstract.js"></script></div><article class="post-content" id="article-container" itemscope itemtype="https://smithhs.cn/2026/03/21/2026-03-21-Elasticsearch/"><header><a class="post-meta-categories" href="/categories/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/" itemprop="url">技术分享</a><a href="/tags/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/" tabindex="-1" itemprop="url">技术分享</a><h1 id="CrawlerTitle" itemprop="name headline">Elasticsearch</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">Smith</span><time itemprop="dateCreated datePublished" datetime="2026-03-21T01:53:38.000Z" title="undefined 2026-03-21 09:53:38">2026-03-21</time></header><p>你好！很高兴为你解释 <strong>Elasticsearch</strong>（简称 ES）。</p>
+<p>为了让你彻底理解，我会分三个部分来讲：</p>
+<ol>
+<li><strong>一句话定义</strong>（它是什么）</li>
+<li><strong>通俗类比</strong>（它是怎么工作的）</li>
+<li><strong>真实案例</strong>（它在生活中哪里用到了）</li>
+</ol>
+<h3 id="1-一句话定义"><a href="#1-一句话定义" class="headerlink" title="1. 一句话定义"></a>1. 一句话定义</h3><p><strong>Elasticsearch 是一个分布式的、超快的“搜索引擎”兼“数据分析工具”。</strong></p>
+<p>它专门用来处理海量数据，让你能在几毫秒内，从几亿条数据中找到你想要的内容，并且还能对这些数据进行统计和分析。</p>
+<blockquote>
+<p><strong>注意</strong>：它虽然名字里有”Search”，但它不仅仅是搜索，还能做日志分析、数据监控等。</p>
+</blockquote>
+<hr>
+<h3 id="2-通俗易懂的原理解析"><a href="#2-通俗易懂的原理解析" class="headerlink" title="2. 通俗易懂的原理解析"></a>2. 通俗易懂的原理解析</h3><p>为了理解 ES，我们需要解决两个问题：<strong>它为什么快？</strong> 和 <strong>它怎么存数据？</strong></p>
+<h4 id="类比一：为什么它搜得这么快？（核心：倒排索引）"><a href="#类比一：为什么它搜得这么快？（核心：倒排索引）" class="headerlink" title="类比一：为什么它搜得这么快？（核心：倒排索引）"></a>类比一：为什么它搜得这么快？（核心：倒排索引）</h4><p>想象你面前有 <strong>1 万本书</strong>，你想找到所有包含“苹果”这个词的书。</p>
+<ul>
+<li><p><strong>传统数据库（如 MySQL）的做法：</strong><br>像是一个勤勤恳恳的图书管理员。他必须从第 1 本书的第 1 页开始读，一直读到第 1 万本书的最后一页。如果发现“苹果”就记下来。</p>
+<ul>
+<li><em>缺点：</em> 数据量一大，速度极慢。</li>
+</ul>
+</li>
+<li><p><strong>Elasticsearch 的做法：</strong><br>它像是书后面自带的 <strong>“索引页”</strong>。<br>它预先建立了一个字典：</p>
+<ul>
+<li>“苹果” -&gt; 出现在：书 1, 书 50, 书 998…</li>
+<li>“香蕉” -&gt; 出现在：书 2, 书 33…<br>当你搜“苹果”时，它直接查这个字典，瞬间告诉你结果，完全不需要去翻书。</li>
+<li><em>专业术语：</em> 这叫 <strong>倒排索引 (Inverted Index)</strong>。</li>
+</ul>
+</li>
+</ul>
+<h4 id="类比二：它怎么存海量数据？（核心：集群与分片）"><a href="#类比二：它怎么存海量数据？（核心：集群与分片）" class="headerlink" title="类比二：它怎么存海量数据？（核心：集群与分片）"></a>类比二：它怎么存海量数据？（核心：集群与分片）</h4><p>想象你要开一家 <strong>超级巨大的超市</strong>，货物多到一家店放不下。</p>
+<ul>
+<li><strong>集群 (Cluster)</strong>：就是你的 <strong>连锁超市集团</strong>。</li>
+<li><strong>节点 (Node)</strong>：就是其中的 <strong>每一家分店</strong>。</li>
+<li><strong>索引 (Index)</strong>：就是超市里的 <strong>商品分类区</strong>（比如“家电区”、“食品区”）。在 ES 里，相似的数据放在一起叫一个索引（类似于数据库里的“表”）。</li>
+<li><strong>文档 (Document)</strong>：就是 <strong>具体的某一件商品</strong>（比如一台具体的 iPhone 15）。在 ES 里，数据是以 JSON 格式存储的，非常灵活，不需要像传统数据库那样先定死表格结构。</li>
+<li><strong>分片 (Shard)</strong>：因为“家电区”太大了，一家分店摆不下。于是你把“家电区”切开，<strong>冰箱放 A 店，电视放 B 店，手机放 C 店</strong>。这就是分片。<ul>
+<li><em>好处：</em> 顾客买手机，直接去 C 店找，不用跑遍所有店。多台机器一起干活，速度飞快。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="3-真实生活中的案例"><a href="#3-真实生活中的案例" class="headerlink" title="3. 真实生活中的案例"></a>3. 真实生活中的案例</h3><p>为了让你更有体感，我们看三个最常见的场景：</p>
+<h4 id="案例-1：电商网站搜索（淘宝-京东）"><a href="#案例-1：电商网站搜索（淘宝-京东）" class="headerlink" title="案例 1：电商网站搜索（淘宝&#x2F;京东）"></a>案例 1：电商网站搜索（淘宝&#x2F;京东）</h4><p><strong>场景</strong>：你在淘宝搜索框输入 <strong>“红色 连衣裙 夏季”</strong>。</p>
+<ul>
+<li><strong>如果没有 ES</strong>：<br>系统要去数据库里遍历几亿个商品，一个个比对标题和描述。你可能需要转圈圈等 10 秒钟，甚至系统直接崩溃。</li>
+<li><strong>有了 ES</strong>：<ol>
+<li><strong>分词</strong>：ES 把你的搜索词拆成“红色”、“连衣裙”、“夏季”。</li>
+<li><strong>匹配</strong>：利用倒排索引，瞬间找到同时包含这三个词的商品 ID。</li>
+<li><strong>排序</strong>：根据销量、价格、好评率进行打分排序。</li>
+<li><strong>结果</strong>：在 <strong>0.1 秒</strong> 内，给你展示最相关的商品列表。</li>
+<li><strong>高亮</strong>：搜索结果里，“红色”、“连衣裙”这些字会被标红显示（这也是 ES 的功能）。</li>
+</ol>
+</li>
+</ul>
+<h4 id="案例-2：网站日志分析（ELK-栈）"><a href="#案例-2：网站日志分析（ELK-栈）" class="headerlink" title="案例 2：网站日志分析（ELK 栈）"></a>案例 2：网站日志分析（ELK 栈）</h4><p><strong>场景</strong>：你是某游戏公司的运维工程师。凌晨 3 点，游戏服务器突然变卡，玩家投诉。</p>
+<ul>
+<li><strong>问题</strong>：服务器每秒产生几万条日志，存在硬盘里有几个 TB 那么大。你需要找到报错的那一行。</li>
+<li><strong>传统方法</strong>：登录服务器，用 <code>grep</code> 命令一行行搜，或者把日志下载下来用 Excel 打开（根本打不开）。耗时几小时。</li>
+<li><strong>有了 ES (配合 Logstash, Kibana)</strong>：<ol>
+<li>日志实时被收集并写入 ES。</li>
+<li>你在 Kibana（ES 的可视化界面）上输入 <code>status: 500</code> 或 <code>error: timeout</code>。</li>
+<li><strong>ES 在几秒内</strong> 从几亿条日志中筛选出所有报错记录。</li>
+<li>你还能直接看到报错时间的 <strong>曲线图</strong>，定位到具体是哪台服务器在什么时间点出了问题。</li>
+</ol>
+</li>
+</ul>
+<h4 id="案例-3：智能联想与自动补全"><a href="#案例-3：智能联想与自动补全" class="headerlink" title="案例 3：智能联想与自动补全"></a>案例 3：智能联想与自动补全</h4><p><strong>场景</strong>：你在百度或谷歌搜索框，刚输入“埃隆”，还没输完，下拉框就提示“埃隆马斯克”、“埃隆马斯克简历”。</p>
+<ul>
+<li><strong>原理</strong>：<br>ES 有一种特殊的结构叫 <strong>Completion Suggester</strong>。<br>它预先存好了所有热门搜索词的前缀。当你输入前几个字，它立刻匹配出最可能的完整词。这需要极高的读取速度，只有 ES 能胜任。</li>
+</ul>
+<hr>
+<h3 id="4-总结：Elasticsearch-vs-传统数据库-MySQL"><a href="#4-总结：Elasticsearch-vs-传统数据库-MySQL" class="headerlink" title="4. 总结：Elasticsearch vs 传统数据库 (MySQL)"></a>4. 总结：Elasticsearch vs 传统数据库 (MySQL)</h3><p>很多人会问：<em>“我有了 MySQL，为什么还要 ES？”</em></p>
+<table>
+<thead>
+<tr>
+<th align="left">特性</th>
+<th align="left">MySQL (传统数据库)</th>
+<th align="left">Elasticsearch (搜索引擎)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>核心强项</strong></td>
+<td align="left"><strong>存</strong> 和 <strong>事务</strong> (比如银行转账，不能出错)</td>
+<td align="left"><strong>搜</strong> 和 <strong>分析</strong> (比如找商品，要快且模糊匹配)</td>
+</tr>
+<tr>
+<td align="left"><strong>模糊搜索</strong></td>
+<td align="left">很慢 (<code>like &#39;%keyword%&#39;</code> 会导致全表扫描)</td>
+<td align="left">极快 (倒排索引)</td>
+</tr>
+<tr>
+<td align="left"><strong>数据结构</strong></td>
+<td align="left">严格 (必须先建表，定好字段类型)</td>
+<td align="left">灵活 (JSON 格式，随时加字段)</td>
+</tr>
+<tr>
+<td align="left"><strong>海量数据</strong></td>
+<td align="left">数据量太大时，查询性能下降明显</td>
+<td align="left">天生分布式，数据越多，加机器即可，性能依然稳</td>
+</tr>
+<tr>
+<td align="left"><strong>典型用途</strong></td>
+<td align="left">订单系统、用户账户、库存管理</td>
+<td align="left">站内搜索、日志分析、推荐系统</td>
+</tr>
+</tbody></table>
+<h3 id="一句话总结"><a href="#一句话总结" class="headerlink" title="一句话总结"></a>一句话总结</h3><p>如果把 <strong>MySQL</strong> 比作 <strong>会计的账本</strong>（严谨、存钱、不能错）；<br>那么 <strong>Elasticsearch</strong> 就是 <strong>图书馆的检索目录</strong>（灵活、找书、要超快）。</p>
+<p>在现代互联网架构中，通常是 <strong>MySQL 负责存数据，ES 负责搜数据</strong>，两者配合使用。</p>
+<p>在 Java 中使用 Elasticsearch（ES）主要有 <strong>两种主流方式</strong>，取决于你的项目架构：</p>
+<ol>
+<li><strong>Spring Data Elasticsearch</strong>（推荐）：如果你使用的是 <strong>Spring Boot</strong> 项目，这是最简单、最快捷的方式，类似操作 MySQL 的 JPA。</li>
+<li><strong>Official Java API Client</strong>（官方原生客户端）：如果你不使用 Spring，或者需要更底层、更灵活的控制，使用 ES 官方提供的 Java 客户端。</li>
+</ol>
+<blockquote>
+<p><strong>⚠️ 重要提示：版本对应关系</strong><br>Elasticsearch 的版本更新很快，<strong>Java 客户端的版本必须与 ES 服务端的版本尽量保持一致</strong>，否则会出现连接错误或功能不兼容。</p>
+<ul>
+<li>ES 7.x -&gt; 对应 Spring Data ES 4.x</li>
+<li>ES 8.x -&gt; 对应 Spring Data ES 5.x (Spring Boot 3.x)</li>
+</ul>
+</blockquote>
+<p>下面我以 <strong>ES 8.x + Spring Boot 3.x</strong> 为例，为你详细演示这两种方法。</p>
+<hr>
+<h3 id="方法一：Spring-Data-Elasticsearch（最常用，开发效率高）"><a href="#方法一：Spring-Data-Elasticsearch（最常用，开发效率高）" class="headerlink" title="方法一：Spring Data Elasticsearch（最常用，开发效率高）"></a>方法一：Spring Data Elasticsearch（最常用，开发效率高）</h3><p>这种方式把 ES 当作数据库一样操作，通过定义“实体类”和“接口”来完成增删改查。</p>
+<h4 id="1-引入依赖-Maven"><a href="#1-引入依赖-Maven" class="headerlink" title="1. 引入依赖 (Maven)"></a>1. 引入依赖 (Maven)</h4><p>在 <code>pom.xml</code> 中添加：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-elasticsearch<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-配置连接-application-yml"><a href="#2-配置连接-application-yml" class="headerlink" title="2. 配置连接 (application.yml)"></a>2. 配置连接 (application.yml)</h4><p>ES 8.x 默认开启了安全认证（账号密码）和 SSL。为了演示方便，如果是本地测试，可以在 ES 配置中关闭安全，或者在 Java 中配置证书。<br><em>这里假设你已配置好连接信息：</em></p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">elasticsearch:</span></span><br><span class="line">    <span class="attr">uris:</span> <span class="string">http://localhost:9200</span></span><br><span class="line">    <span class="attr">username:</span> <span class="string">elastic</span></span><br><span class="line">    <span class="attr">password:</span> <span class="string">你的密码</span></span><br><span class="line">    <span class="comment"># 如果是自签名证书，可能需要配置 ssl 验证，生产环境建议开启</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="3-定义实体类-Document"><a href="#3-定义实体类-Document" class="headerlink" title="3. 定义实体类 (Document)"></a>3. 定义实体类 (Document)</h4><p>创建一个 Java 类，映射到 ES 的索引（Index）。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.data.annotation.Id;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.elasticsearch.annotations.Document;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.elasticsearch.annotations.Field;</span><br><span class="line"><span class="keyword">import</span> org.springframework.data.elasticsearch.annotations.FieldType;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Document(indexName = &quot;products&quot;)</span> <span class="comment">// 对应 ES 中的索引名</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Product</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Id</span> <span class="comment">// 对应 ES 的 _id</span></span><br><span class="line">    <span class="keyword">private</span> String id;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Field(type = FieldType.Text, analyzer = &quot;ik_max_word&quot;)</span> <span class="comment">// 使用 IK 分词器</span></span><br><span class="line">    <span class="keyword">private</span> String title;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Field(type = FieldType.Double)</span></span><br><span class="line">    <span class="keyword">private</span> Double price;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Field(type = FieldType.Keyword)</span> <span class="comment">// 不分词，用于精确匹配</span></span><br><span class="line">    <span class="keyword">private</span> String category;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Getter, Setter, 构造方法 省略...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-定义-Repository-接口"><a href="#4-定义-Repository-接口" class="headerlink" title="4. 定义 Repository 接口"></a>4. 定义 Repository 接口</h4><p>继承 <code>ElasticsearchRepository</code>，无需写实现类，Spring 会自动生成。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.data.elasticsearch.repository.ElasticsearchRepository;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">ProductRepository</span> <span class="keyword">extends</span> <span class="title class_">ElasticsearchRepository</span>&lt;Product, String&gt; &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 方法命名查询：类似 MySQL</span></span><br><span class="line">    List&lt;Product&gt; <span class="title function_">findByTitleContaining</span><span class="params">(String keyword)</span>;</span><br><span class="line">    </span><br><span class="line">    List&lt;Product&gt; <span class="title function_">findByPriceLessThan</span><span class="params">(Double price)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="5-在-Service-中使用"><a href="#5-在-Service-中使用" class="headerlink" title="5. 在 Service 中使用"></a>5. 在 Service 中使用</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ProductService</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> ProductRepository repository;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 1. 新增/修改 (save 方法如果 id 存在则更新，不存在则新增)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">saveProduct</span><span class="params">(Product product)</span> &#123;</span><br><span class="line">        repository.save(product);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 2. 搜索</span></span><br><span class="line">    <span class="keyword">public</span> List&lt;Product&gt; <span class="title function_">search</span><span class="params">(String keyword)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> repository.findByTitleContaining(keyword);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 3. 删除</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">deleteProduct</span><span class="params">(String id)</span> &#123;</span><br><span class="line">        repository.deleteById(id);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>优点</strong>：代码极少，开发快，适合常规业务。<br><strong>缺点</strong>：复杂查询（如聚合、复杂评分）支持不够灵活。</p>
+<hr>
+<h3 id="方法二：Official-Java-API-Client（更灵活，功能全）"><a href="#方法二：Official-Java-API-Client（更灵活，功能全）" class="headerlink" title="方法二：Official Java API Client（更灵活，功能全）"></a>方法二：Official Java API Client（更灵活，功能全）</h3><p>如果你需要写复杂的查询语句（比如多条件组合、聚合分析、高亮显示），官方客户端更合适。ES 8.x 推出了新的类型安全客户端。</p>
+<h4 id="1-引入依赖"><a href="#1-引入依赖" class="headerlink" title="1. 引入依赖"></a>1. 引入依赖</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>co.elastic.clients<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>elasticsearch-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>8.11.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span> <span class="comment">&lt;!-- 版本号需与 ES 服务端一致 --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="2-初始化客户端"><a href="#2-初始化客户端" class="headerlink" title="2. 初始化客户端"></a>2. 初始化客户端</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> co.elastic.clients.elasticsearch.ElasticsearchClient;</span><br><span class="line"><span class="keyword">import</span> co.elastic.clients.transport.rest_client.RestClientTransport;</span><br><span class="line"><span class="keyword">import</span> org.apache.http.HttpHost;</span><br><span class="line"><span class="keyword">import</span> org.elasticsearch.client.RestClient;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建底层 REST 客户端</span></span><br><span class="line"><span class="type">RestClient</span> <span class="variable">restClient</span> <span class="operator">=</span> RestClient.builder(</span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">HttpHost</span>(<span class="string">&quot;localhost&quot;</span>, <span class="number">9200</span>, <span class="string">&quot;http&quot;</span>)).build();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建传输层</span></span><br><span class="line"><span class="type">Transport</span> <span class="variable">transport</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">RestClientTransport</span>(restClient, <span class="keyword">new</span> <span class="title class_">JacksonJsonpMapper</span>());</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建 API 客户端</span></span><br><span class="line"><span class="type">ElasticsearchClient</span> <span class="variable">esClient</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ElasticsearchClient</span>(transport);</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-索引文档-写入数据"><a href="#3-索引文档-写入数据" class="headerlink" title="3. 索引文档 (写入数据)"></a>3. 索引文档 (写入数据)</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Product</span> <span class="variable">product</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Product</span>();</span><br><span class="line">product.setId(<span class="string">&quot;1001&quot;</span>);</span><br><span class="line">product.setTitle(<span class="string">&quot;iPhone 15 Pro&quot;</span>);</span><br><span class="line">product.setPrice(<span class="number">8999.0</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 索引请求</span></span><br><span class="line">IndexRequest&lt;Product&gt; indexRequest = <span class="keyword">new</span> <span class="title class_">IndexRequest</span>.Builder&lt;Product&gt;()</span><br><span class="line">        .index(<span class="string">&quot;products&quot;</span>)</span><br><span class="line">        .id(product.getId())</span><br><span class="line">        .document(product)</span><br><span class="line">        .build();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 执行</span></span><br><span class="line">esClient.index(indexRequest);</span><br></pre></td></tr></table></figure>
+
+<h4 id="4-复杂搜索-查询数据"><a href="#4-复杂搜索-查询数据" class="headerlink" title="4. 复杂搜索 (查询数据)"></a>4. 复杂搜索 (查询数据)</h4><p>这是原生客户端最强大的地方，可以构建非常复杂的 DSL 查询。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> co.elastic.clients.elasticsearch.SearchRequest;</span><br><span class="line"><span class="keyword">import</span> co.elastic.clients.elasticsearch.SearchResponse;</span><br><span class="line"><span class="keyword">import</span> co.elastic.clients.elasticsearch._types.query_dsl.Query;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 构建查询：价格小于 9000 且 标题包含 &quot;iPhone&quot;</span></span><br><span class="line"><span class="type">SearchRequest</span> <span class="variable">searchRequest</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SearchRequest</span>.Builder()</span><br><span class="line">        .index(<span class="string">&quot;products&quot;</span>)</span><br><span class="line">        .query(q -&gt; q</span><br><span class="line">            .bool(b -&gt; b</span><br><span class="line">                .must(m -&gt; m.match(t -&gt; t.field(<span class="string">&quot;title&quot;</span>).query(<span class="string">&quot;iPhone&quot;</span>)))</span><br><span class="line">                .filter(f -&gt; f.range(r -&gt; r.field(<span class="string">&quot;price&quot;</span>).lt(JsonData.of(<span class="number">9000</span>))))</span><br><span class="line">            )</span><br><span class="line">        )</span><br><span class="line">        .build();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 执行搜索</span></span><br><span class="line">SearchResponse&lt;Product&gt; response = esClient.search(searchRequest, Product.class);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取结果</span></span><br><span class="line">List&lt;Product&gt; products = response.hits().hits().stream()</span><br><span class="line">        .map(hit -&gt; hit.source())</span><br><span class="line">        .collect(Collectors.toList());</span><br></pre></td></tr></table></figure>
+
+<p><strong>优点</strong>：功能最全，支持所有 ES 特性（聚合、高亮、脚本等），性能微调空间大。<br><strong>缺点</strong>：代码量大，学习曲线稍陡峭。</p>
+<hr>
+<h3 id="总结：我该选哪种？"><a href="#总结：我该选哪种？" class="headerlink" title="总结：我该选哪种？"></a>总结：我该选哪种？</h3><table>
+<thead>
+<tr>
+<th align="left">场景</th>
+<th align="left">推荐方案</th>
+<th align="left">理由</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>简单的增删改查</strong></td>
+<td align="left"><strong>Spring Data ES</strong></td>
+<td align="left">像操作 MySQL 一样简单，代码少，维护方便。</td>
+</tr>
+<tr>
+<td align="left"><strong>复杂的搜索业务</strong></td>
+<td align="left"><strong>Java API Client</strong></td>
+<td align="left">需要自定义评分、聚合统计、高亮显示时，原生客户端更灵活。</td>
+</tr>
+<tr>
+<td align="left"><strong>非 Spring 项目</strong></td>
+<td align="left"><strong>Java API Client</strong></td>
+<td align="left">没有 Spring 容器支持，只能用原生客户端。</td>
+</tr>
+<tr>
+<td align="left"><strong>混合使用</strong></td>
+<td align="left"><strong>两者结合</strong></td>
+<td align="left">很多公司会在 Spring Boot 项目中，简单查询用 Repository，复杂查询注入 <code>ElasticsearchOperations</code> 或原生 Client。</td>
+</tr>
+</tbody></table>
+<h3 id="避坑指南（新手必看）"><a href="#避坑指南（新手必看）" class="headerlink" title="避坑指南（新手必看）"></a>避坑指南（新手必看）</h3><ol>
+<li><strong>分词器问题</strong>：ES 默认的分词器对中文支持不好（会把“中国”拆成“中”、“国”）。在中国使用，通常需要在 ES 服务器安装 <strong>IK 分词器</strong>，并在 Java 实体类中指定 <code>analyzer = &quot;ik_max_word&quot;</code>。</li>
+<li><strong>版本对齐</strong>：再次强调，<code>spring-boot-starter-data-elasticsearch</code> 的版本必须和你的 ES 服务器版本兼容。如果连不上，首先查版本兼容性矩阵。</li>
+<li><strong>连接超时</strong>：如果数据量大，写入或查询可能耗时，记得在配置中适当增加 <code>socket-timeout</code> 和 <code>connect-timeout</code>。</li>
+<li><strong>SSL 证书</strong>：ES 8.x 默认开启 HTTPS。本地开发如果嫌麻烦，可以在 <code>elasticsearch.yml</code> 中关闭安全配置（<code>xpack.security.enabled: false</code>），但<strong>生产环境千万不要关闭</strong>。</li>
+</ol>
+<p>希望这份指南能帮你顺利在 Java 项目中用上 Elasticsearch！如果有具体的代码报错，欢迎继续提问。</p>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="smithfont smith-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d20f536c64d06e5fcf4bfe2ec5dc25d.jpg" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d20f536c64d06e5fcf4bfe2ec5dc25d.jpg" title="头像" alt="头像"></a><div class="post-copyright__author_name">Smith</div><div class="post-copyright__author_desc">人生太短，要干的事太多，我要争分夺秒</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://smithhs.cn/2026/03/21/2026-03-21-Elasticsearch/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://smithhs.cn/2026/03/21/2026-03-21-Elasticsearch/')">Elasticsearch</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="smith.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="smithfont smith-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="smith.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="smithfont smith-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://smithhs.cn/2026/03/21/2026-03-21-Elasticsearch/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=Elasticsearch&amp;url=https://smithhs.cn/2026/03/21/2026-03-21-Elasticsearch/&amp;pic=https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=1200&amp;q=80" rel="external nofollow noreferrer noopener"><i class="smithfont smith-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="smithfont smith-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://smithhs.cn" target="_blank">Smith</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/%E6%8A%80%E6%9C%AF%E5%88%86%E4%BA%AB/"><span class="tags-punctuation"> <i class="smithfont smith-icon-tag"></i></span>技术分享<span class="tagsPageCount">4</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1681455691814.png" data-sites="wechat,weibo,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2026/03/20/2026-03-20-%E5%B8%B8%E7%94%A8API/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200&amp;q=80" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">常用API</div></div></a></div><div class="next-post pull-right"><a href="/2026/03/21/2026-03-21-%E6%8E%A5%E5%8F%A3%E5%92%8C%E5%A4%9A%E6%80%81-%E9%9D%99%E6%80%81%E4%BF%AE%E9%A5%B0%E7%AC%A6-Objects-Arrays-%E5%8C%BF%E5%90%8D%E5%86%85%E9%83%A8%E7%B1%BB/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/20250204131900.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">接口和多态-静态修饰符-Objects-Arrays-匿名内部类</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="smithfont smith-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/2026/03/19/2026-03-19-Cursor%E4%BD%BF%E7%94%A8/" title="Cursor使用"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=1200&q=80" alt="cover"><div class="content is-center"><div class="date"><i class="smithfont smith-icon-calendar-days fa-fw"></i> 2026-03-19</div><div class="title">Cursor使用</div></div></a></div><div><a href="/2026/03/19/2026-03-19-%E6%94%AF%E4%BB%98%E5%AE%9D%E6%B2%99%E7%AE%B1/" title="支付宝沙箱"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=1200&q=80" alt="cover"><div class="content is-center"><div class="date"><i class="smithfont smith-icon-calendar-days fa-fw"></i> 2026-03-19</div><div class="title">支付宝沙箱</div></div></a></div><div><a href="/2026/03/19/2026-03-19-%E6%B2%99%E7%AE%B1/" title="沙箱"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=1200&q=80" alt="cover"><div class="content is-center"><div class="date"><i class="smithfont smith-icon-calendar-days fa-fw"></i> 2026-03-19</div><div class="title">沙箱</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="smithfont smith-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%B8%80%E5%8F%A5%E8%AF%9D%E5%AE%9A%E4%B9%89"><span class="toc-number">1.</span> <span class="toc-text">1. 一句话定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E9%80%9A%E4%BF%97%E6%98%93%E6%87%82%E7%9A%84%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90"><span class="toc-number">2.</span> <span class="toc-text">2. 通俗易懂的原理解析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B1%BB%E6%AF%94%E4%B8%80%EF%BC%9A%E4%B8%BA%E4%BB%80%E4%B9%88%E5%AE%83%E6%90%9C%E5%BE%97%E8%BF%99%E4%B9%88%E5%BF%AB%EF%BC%9F%EF%BC%88%E6%A0%B8%E5%BF%83%EF%BC%9A%E5%80%92%E6%8E%92%E7%B4%A2%E5%BC%95%EF%BC%89"><span class="toc-number">2.1.</span> <span class="toc-text">类比一：为什么它搜得这么快？（核心：倒排索引）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%B1%BB%E6%AF%94%E4%BA%8C%EF%BC%9A%E5%AE%83%E6%80%8E%E4%B9%88%E5%AD%98%E6%B5%B7%E9%87%8F%E6%95%B0%E6%8D%AE%EF%BC%9F%EF%BC%88%E6%A0%B8%E5%BF%83%EF%BC%9A%E9%9B%86%E7%BE%A4%E4%B8%8E%E5%88%86%E7%89%87%EF%BC%89"><span class="toc-number">2.2.</span> <span class="toc-text">类比二：它怎么存海量数据？（核心：集群与分片）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E7%9C%9F%E5%AE%9E%E7%94%9F%E6%B4%BB%E4%B8%AD%E7%9A%84%E6%A1%88%E4%BE%8B"><span class="toc-number">3.</span> <span class="toc-text">3. 真实生活中的案例</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B-1%EF%BC%9A%E7%94%B5%E5%95%86%E7%BD%91%E7%AB%99%E6%90%9C%E7%B4%A2%EF%BC%88%E6%B7%98%E5%AE%9D-%E4%BA%AC%E4%B8%9C%EF%BC%89"><span class="toc-number">3.1.</span> <span class="toc-text">案例 1：电商网站搜索（淘宝&#x2F;京东）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B-2%EF%BC%9A%E7%BD%91%E7%AB%99%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90%EF%BC%88ELK-%E6%A0%88%EF%BC%89"><span class="toc-number">3.2.</span> <span class="toc-text">案例 2：网站日志分析（ELK 栈）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B-3%EF%BC%9A%E6%99%BA%E8%83%BD%E8%81%94%E6%83%B3%E4%B8%8E%E8%87%AA%E5%8A%A8%E8%A1%A5%E5%85%A8"><span class="toc-number">3.3.</span> <span class="toc-text">案例 3：智能联想与自动补全</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E6%80%BB%E7%BB%93%EF%BC%9AElasticsearch-vs-%E4%BC%A0%E7%BB%9F%E6%95%B0%E6%8D%AE%E5%BA%93-MySQL"><span class="toc-number">4.</span> <span class="toc-text">4. 总结：Elasticsearch vs 传统数据库 (MySQL)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E5%8F%A5%E8%AF%9D%E6%80%BB%E7%BB%93"><span class="toc-number">5.</span> <span class="toc-text">一句话总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80%EF%BC%9ASpring-Data-Elasticsearch%EF%BC%88%E6%9C%80%E5%B8%B8%E7%94%A8%EF%BC%8C%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87%E9%AB%98%EF%BC%89"><span class="toc-number">6.</span> <span class="toc-text">方法一：Spring Data Elasticsearch（最常用，开发效率高）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%BC%95%E5%85%A5%E4%BE%9D%E8%B5%96-Maven"><span class="toc-number">6.1.</span> <span class="toc-text">1. 引入依赖 (Maven)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E9%85%8D%E7%BD%AE%E8%BF%9E%E6%8E%A5-application-yml"><span class="toc-number">6.2.</span> <span class="toc-text">2. 配置连接 (application.yml)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E5%AE%9A%E4%B9%89%E5%AE%9E%E4%BD%93%E7%B1%BB-Document"><span class="toc-number">6.3.</span> <span class="toc-text">3. 定义实体类 (Document)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E5%AE%9A%E4%B9%89-Repository-%E6%8E%A5%E5%8F%A3"><span class="toc-number">6.4.</span> <span class="toc-text">4. 定义 Repository 接口</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E5%9C%A8-Service-%E4%B8%AD%E4%BD%BF%E7%94%A8"><span class="toc-number">6.5.</span> <span class="toc-text">5. 在 Service 中使用</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C%EF%BC%9AOfficial-Java-API-Client%EF%BC%88%E6%9B%B4%E7%81%B5%E6%B4%BB%EF%BC%8C%E5%8A%9F%E8%83%BD%E5%85%A8%EF%BC%89"><span class="toc-number">7.</span> <span class="toc-text">方法二：Official Java API Client（更灵活，功能全）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%BC%95%E5%85%A5%E4%BE%9D%E8%B5%96"><span class="toc-number">7.1.</span> <span class="toc-text">1. 引入依赖</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%88%9D%E5%A7%8B%E5%8C%96%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="toc-number">7.2.</span> <span class="toc-text">2. 初始化客户端</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E7%B4%A2%E5%BC%95%E6%96%87%E6%A1%A3-%E5%86%99%E5%85%A5%E6%95%B0%E6%8D%AE"><span class="toc-number">7.3.</span> <span class="toc-text">3. 索引文档 (写入数据)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E5%A4%8D%E6%9D%82%E6%90%9C%E7%B4%A2-%E6%9F%A5%E8%AF%A2%E6%95%B0%E6%8D%AE"><span class="toc-number">7.4.</span> <span class="toc-text">4. 复杂搜索 (查询数据)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93%EF%BC%9A%E6%88%91%E8%AF%A5%E9%80%89%E5%93%AA%E7%A7%8D%EF%BC%9F"><span class="toc-number">8.</span> <span class="toc-text">总结：我该选哪种？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%81%BF%E5%9D%91%E6%8C%87%E5%8D%97%EF%BC%88%E6%96%B0%E6%89%8B%E5%BF%85%E7%9C%8B%EF%BC%89"><span class="toc-number">9.</span> <span class="toc-text">避坑指南（新手必看）</span></a></li></ol></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2022 - 2026 By <a class="footer-bar-link" href="/" title="Smith" target="_blank">Smith</a></div></div><div id="footer-type-tips"></div><div class="js-pjax"><script>function subtitleType () {
+  fetch('https://v1.hitokoto.cn')
+    .then(response => response.json())
+    .then(data => {
+      if (true) {
+        const from = '出自 ' + data.from
+        const sub = []
+        sub.unshift(data.hitokoto, from)
+        window.typed = new Typed('#footer-type-tips', {
+          strings: sub,
+          startDelay: 300,
+          typeSpeed: 150,
+          loop: true,
+          backSpeed: 50,
+        })
+      } else {
+        document.getElementById('footer-type-tips').innerHTML = data.hitokoto
+      }
+    })
+}
+
+if (true) {
+  if (typeof Typed === 'function') {
+    subtitleType()
+  } else {
+    getScript('https://cdn.jsdelivr.net/npm/typed.js@2.0.12/dist/typed.min.js').then(subtitleType)
+  }
+} else {
+  subtitleType()
+}
+</script></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/Smithhss/smithhs.github.io.git" title="Hexo">Hexo</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">199</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">69</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">3</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="smithfont smith-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://smithhs.cn/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.png" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://github.com/Smithhss" title="Github"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/GitHub.png" alt="Github"/><span class="back-menu-item-text">Github</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="smithfont smith-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="smithfont smith-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="smithfont smith-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="smithfont smith-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="smithfont smith-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="smithfont smith-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/dailyPhoto/"><i class="smithfont smith-icon-camera faa-tada" style="font-size: 0.9em;"></i><span> 每日照片</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wallpaper/"><i class="smithfont smith-icon-image faa-tada" style="font-size: 0.9em;"></i><span> 壁纸</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wordScenery/"><i class="smithfont smith-icon-font faa-tada" style="font-size: 0.9em;"></i><span> 文字风景</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="smithfont smith-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于我</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="smithfont smith-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/love/"><i class="smithfont smith-icon-heart faa-tada" style="font-size: 0.9em;"></i><span> 爱情</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="smithfont smith-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Android-Studio/" style="font-size: 0.88rem;">Android Studio<sup>1</sup></a><a href="/tags/App/" style="font-size: 0.88rem;">App<sup>1</sup></a><a href="/tags/Butterfly/" style="font-size: 0.88rem;">Butterfly<sup>1</sup></a><a href="/tags/C/" style="font-size: 0.88rem;">C++<sup>3</sup></a><a href="/tags/CSS/" style="font-size: 0.88rem;">CSS<sup>1</sup></a><a href="/tags/Cisco-Packet-Tracer/" style="font-size: 0.88rem;">Cisco Packet Tracer<sup>1</sup></a><a href="/tags/Docker/" style="font-size: 0.88rem;">Docker<sup>2</sup></a><a href="/tags/Easypan/" style="font-size: 0.88rem;">Easypan<sup>2</sup></a><a href="/tags/FurtherMathematics/" style="font-size: 0.88rem;">FurtherMathematics<sup>1</sup></a><a href="/tags/GPT/" style="font-size: 0.88rem;">GPT<sup>1</sup></a><a href="/tags/Git2/" style="font-size: 0.88rem;">Git2<sup>1</sup></a><a href="/tags/HTML/" style="font-size: 0.88rem;">HTML<sup>1</sup></a><a href="/tags/Hexo/" style="font-size: 0.88rem;">Hexo<sup>1</sup></a><a href="/tags/Java/" style="font-size: 0.88rem;">Java<sup>67</sup></a><a href="/tags/JavaScript/" style="font-size: 0.88rem;">JavaScript<sup>1</sup></a><a href="/tags/Jrebel/" style="font-size: 0.88rem;">Jrebel<sup>1</sup></a><a href="/tags/LeetCode/" style="font-size: 0.88rem;">LeetCode<sup>1</sup></a><a href="/tags/Linux/" style="font-size: 0.88rem;">Linux<sup>3</sup></a><a href="/tags/Markdown/" style="font-size: 0.88rem;">Markdown<sup>2</sup></a><a href="/tags/Maven/" style="font-size: 0.88rem;">Maven<sup>2</sup></a><a href="/tags/MyBatis/" style="font-size: 0.88rem;">MyBatis<sup>1</sup></a><a href="/tags/MyBatis-Plus/" style="font-size: 0.88rem;">MyBatis-Plus<sup>1</sup></a><a href="/tags/Mysql/" style="font-size: 0.88rem;">Mysql<sup>1</sup></a><a href="/tags/Navicat/" style="font-size: 0.88rem;">Navicat<sup>1</sup></a><a href="/tags/NoSql/" style="font-size: 0.88rem;">NoSql<sup>1</sup></a><a href="/tags/Nodejs/" style="font-size: 0.88rem;">Nodejs<sup>2</sup></a><a href="/tags/Python/" style="font-size: 0.88rem;">Python<sup>4</sup></a><a href="/tags/Spring/" style="font-size: 0.88rem;">Spring<sup>2</sup></a><a href="/tags/VMware/" style="font-size: 0.88rem;">VMware<sup>2</sup></a><a href="/tags/WeChat/" style="font-size: 0.88rem;">WeChat<sup>1</sup></a><a href="/tags/YouHou/" style="font-size: 0.88rem;">YouHou<sup>1</sup></a><a href="/tags/books/" style="font-size: 0.88rem;">books<sup>1</sup></a><a href="/tags/butterfly/" style="font-size: 0.88rem;">butterfly<sup>1</sup></a><a href="/tags/clash/" style="font-size: 0.88rem;">clash<sup>1</sup></a><a href="/tags/error/" style="font-size: 0.88rem;">error<sup>1</sup></a><a href="/tags/project/" style="font-size: 0.88rem;">project<sup>4</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 0.88rem;">前端<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6/" style="font-size: 0.88rem;">开发框架<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" style="font-size: 0.88rem;">开发环境<sup>1</sup></a><a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="font-size: 0.88rem;">软件工程<sup>1</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="smithfont smith-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="smithfont smith-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="smithfont smith-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="smithfont smith-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="smithfont smith-icon-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="smithfont smith-icon-arrow-up"></i></button></div></div><div id="nav-music"><a id="nav-music-hoverTips" onclick="smith.musicToggle()" accesskey="m">播放音乐</a><div id="console-music-bg"></div><meting-js id="8805965276" server="netease" type="playlist" mutex="true" preload="none" theme="var(--smith-main)" data-lrctype="0" order="random" volume="0.7"></meting-js></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="smithfont smith-icon-xmark"></i></button></nav><div class="is-center" id="loading-database"><i class="smithfont smith-icon-spinner smith-pulse-icon"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="smithfont smith-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="smithfont smith-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="smithfont smith-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="smithfont smith-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="smithfont smith-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="smithfont smith-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="smithfont smith-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="smithfont smith-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="smithfont smith-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="smithfont smith-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="smithfont smith-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="smithfont smith-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="smithfont smith-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="smithfont smith-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="smithfont smith-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="smithfont smith-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="smithfont smith-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://music.163.com/#/my/m/music/playlist?id=464586318&quot;, &quot;_blank&quot;);" style="display: none;"><i class="smithfont smith-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="smithfont smith-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="smithfont smith-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="smithfont smith-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="smithfont smith-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="smithfont smith-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="smithfont smith-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="smithfont smith-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="smithfont smith-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn1.tianli0.top/npm/js-heo@1.0.6/translate/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@6.1.6/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.3.1/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.js"></script><script>var meting_api = "https://api.injahow.cn/meting/?server=:server&type=:type&id=:id&auth=:auth&r=:r";
+</script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/smith-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("07/01/2022 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用史先森!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+      ███████╗███╗   ███╗██╗████████╗██╗  ██╗
+      ██╔════╝████╗ ████║██║╚══██╔══╝██║  ██║
+      ███████╗██╔████╔██║██║   ██║   ███████║
+      ╚════██║██║╚██╔╝██║██║   ██║   ██╔══██║
+      ███████║██║ ╚═╝ ██║██║   ██║   ██║  ██║
+      ╚══════╝╚═╝     ╚═╝╚═╝   ╚═╝   ╚═╝  ╚═╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2022 By 史先森 V1.0.0",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/smith-blog@1.0.0/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 史先森 %c 你正在访问 Smith 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/smith/random.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><input type="hidden" name="page-type" id="page-type" value="post"></div><script async data-pjax src="https://npm.elemecdn.com/smith-theme-static@1.0.0/bubble/bubble.js"></script><script>var visitorMail = "visitor@smithhs.cn";
+</script><script async data-pjax src="https://cdn.jsdelivr.net/npm/waterfall.js@1.1.0/dist/waterfall.min.js"></script><script src="https://cdn.cbd.int/qrcodejs@1.0.0/qrcode.min.js"></script><script src="/js/smith/right_click_menu.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/smith-theme-static@1.0.2/icon/ali_iconfont_css.css"><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/dist/canvas-nest.min.js"></script><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script><script>AOS.init({
+  duration: 800,
+  easing: 'ease-out-cubic',
+  once: true,
+  offset: 50
+});
+</script><script src="https://lib.baomitu.com/pjax/0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  smith.removeGlobalFnEvent('pjax')
+  smith.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script charset="UTF-8" src="https://cdn.cbd.int/smith-theme-static@1.0.2/accesskey/accesskey.js"></script><div id="live2d-container"><canvas id="live2d-canvas"></canvas><button class="live2d-toggle" title="切换看板娘">🎭</button></div><script data-pjax src="/js/smith/live2d.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="smithfont smith-icon-arrow-circle-right"></i></div></div></div></body></html>

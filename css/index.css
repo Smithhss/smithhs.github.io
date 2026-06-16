@@ -24606,86 +24606,6 @@ html.hide-aside .layout > div:first-child {
   font-weight: 700;
 }
 
-/* === Author Card Upgrade === */
-.card-widget.card-info .card-content {
-  padding: 0 !important;
-}
-
-.card-widget.card-info .card-content .author-info__top-group {
-  background: var(--smith-author-gradient-green);
-  padding: 20px 24px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.card-widget.card-info .card-content .author-info__sayhi {
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 12px;
-  padding: 2px 10px;
-  font-size: 12px;
-  color: white;
-  margin-bottom: 12px;
-}
-
-.card-widget.card-info .card-content .avatar-img-group {
-  border-radius: 500px;
-  overflow: hidden;
-  position: relative;
-}
-
-.card-widget.card-info .card-content .avatar-img-group img {
-  border-radius: 500px;
-}
-
-.card-widget.card-info .card-content .author-info__description_group {
-  color: white;
-  text-align: center;
-  padding: 0 24px 16px;
-  font-size: 14px;
-}
-
-.card-widget.card-info .card-content .author-info__bottom-group {
-  background: var(--smith-author-gradient-pink);
-  padding: 24px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.card-widget.card-info .card-content .author-info__name {
-  font-size: 20px;
-  font-weight: 700;
-  color: white;
-}
-
-.card-widget.card-info .card-content .author-info__desc {
-  font-size: 12px;
-  color: white;
-  margin-top: 4px;
-}
-
-.card-widget.card-info .card-content .card-info-social-icons {
-  display: flex;
-  gap: 8px;
-}
-
-.card-widget.card-info .card-content .card-info-social-icons .social-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.15);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background 0.3s;
-  color: white;
-}
-
-.card-widget.card-info .card-content .card-info-social-icons .social-icon:hover {
-  background: rgba(255, 255, 255, 0.3);
-}
-
 /* === Footer Gradient === */
 #footer {
   background: linear-gradient(rgba(255, 255, 255, 0) 0%, rgb(255, 255, 255) 25%);
@@ -24707,12 +24627,27 @@ html.hide-aside .layout > div:first-child {
   background: white;
   margin-bottom: 10px;
   height: 340px;
+  position: relative;
 }
 
 .banner-left {
   flex: 1;
   position: relative;
   overflow: hidden;
+  cursor: pointer;
+}
+
+/* 左图右缘渐变淡出，与右栏白玻璃平滑衔接 */
+.banner-left::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 90px;
+  background: linear-gradient(to right, transparent, var(--smith-nav-glass-bg));
+  pointer-events: none;
+  z-index: 2;
 }
 
 .banner-item {
@@ -24748,6 +24683,7 @@ html.hide-aside .layout > div:first-child {
   position: absolute;
   inset: 0;
   pointer-events: none;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.55), transparent 55%) !important;
 }
 
 .banner-title {
@@ -24758,59 +24694,95 @@ html.hide-aside .layout > div:first-child {
   z-index: 2;
 }
 
-.banner-title a {
-  font-size: 24px;
+.banner-title span {
+  display: block;
+  font-size: 28px;
   font-weight: 700;
-  color: white;
-  line-height: 1.6;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  color: #fff;
+  line-height: 1.5;
+  font-family: var(--smith-font-body);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
 }
 
 .banner-tags {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 3px 12px;
   font-size: 12px;
-  color: rgba(255, 255, 255, 0.7);
-  margin-top: 4px;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border-radius: 100px;
 }
 
-.banner-right {
-  width: 300px;
-  background: linear-gradient(135deg, rgb(255, 127, 127), rgb(224, 96, 96));
+.banner-nav {
+  position: relative;
+  flex: 0 0 280px;
+  width: 280px;
+  background: var(--smith-nav-glass-bg);
+  backdrop-filter: var(--smith-nav-blur);
+  -webkit-backdrop-filter: var(--smith-nav-blur);
+  border-left: 1px solid rgba(0, 0, 0, 0.06);
   display: flex;
   flex-direction: column;
-  flex-shrink: 0;
+  z-index: 2;
 }
 
-.banner-list-item {
-  height: 68px;
+.banner-nav-item {
+  height: 60px;
   display: flex;
   align-items: center;
-  padding: 0 24px;
+  gap: 12px;
+  padding: 0 20px;
   cursor: pointer;
-  transition: all 0.3s;
+  transition: background 0.3s, border-left-color 0.3s, padding-left 0.3s;
   border-left: 3px solid transparent;
 }
 
-.banner-list-item:hover {
-  background: rgba(255, 255, 255, 0.15);
+.banner-nav-item:hover {
+  background: rgba(0, 0, 0, 0.04);
 }
 
-.banner-list-item span {
+.banner-nav-index {
+  flex: 0 0 auto;
+  width: 22px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--smith-secondtext, #888);
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 6px;
+  pointer-events: none;
+}
+
+/* 序号统一样式，仅当前项强调 */
+.banner-nav-item.active .banner-nav-index {
+  color: #fff;
+  background: var(--smith-main);
+}
+
+.banner-nav-text {
+  flex: 1;
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.8);
-  font-weight: 400;
+  color: var(--smith-fontcolor);
+  font-weight: 500;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   pointer-events: none;
 }
 
-.banner-list-item.active {
-  background: rgba(255, 255, 255, 0.25);
-  border-left-color: white;
+.banner-nav-item.active {
+  background: rgba(79, 124, 255, 0.1);
+  border-left-color: var(--smith-main);
 }
 
-.banner-list-item.active span {
-  color: white;
+.banner-nav-item.active .banner-nav-text {
+  color: var(--smith-main);
   font-weight: 700;
 }
 
@@ -24825,7 +24797,7 @@ html.hide-aside .layout > div:first-child {
     height: 200px;
   }
 
-  .banner-right {
+  .banner-nav {
     width: 100%;
     display: none;
   }
@@ -24836,8 +24808,16 @@ html.hide-aside .layout > div:first-child {
     max-width: 80%;
   }
 
-  .banner-title a {
+  .banner-title span {
     font-size: 18px;
+  }
+}
+
+/* Banner: 大屏双列布局下占整行，避免被当成 flex 卡片项挤压 */
+@media screen and (min-width: 1201px) {
+  #recent-posts > .home-banner {
+    flex: 0 0 100%;
+    width: 100%;
   }
 }
 
@@ -24850,8 +24830,30 @@ html.hide-aside .layout > div:first-child {
   background: #1e1e1e;
 }
 
-[data-theme="dark"] .banner-right {
-  background: linear-gradient(135deg, rgb(180, 60, 60), rgb(150, 50, 50));
+[data-theme="dark"] .banner-nav {
+  background: rgba(30, 30, 30, 0.72);
+  border-left-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="dark"] .banner-nav-text {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+[data-theme="dark"] .banner-nav-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+[data-theme="dark"] .banner-nav-index {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.6);
+}
+
+[data-theme="dark"] .banner-nav-item.active {
+  background: rgba(79, 124, 255, 0.18);
+}
+
+[data-theme="dark"] .banner-left::after {
+  background: linear-gradient(to right, transparent, rgba(30, 30, 30, 0.72));
 }
 
 [data-theme="dark"] #footer {
@@ -24865,6 +24867,68 @@ html.hide-aside .layout > div:first-child {
 
 [data-theme="dark"] #category-bar {
   background: rgba(30, 30, 30, 0.85) !important;
+}
+
+/* ============================================================
+   UI Polish（需求3 全量视觉美化）
+   ============================================================ */
+
+/* 1. Banner 右侧列表：hover 内移高亮 + 选中指示条加粗 */
+.banner-nav-item {
+  transition: background 0.3s, border-left-color 0.3s, padding-left 0.3s;
+}
+.banner-nav-item:hover {
+  padding-left: 28px;
+}
+.banner-nav-item.active {
+  border-left-width: 4px;
+}
+
+/* 2. 首页文章卡片：hover 抬升（叠加已有阴影/封面缓放） */
+#recent-posts .recent-post-item {
+  transition: box-shadow 0.3s, border 0.3s, transform 0.3s !important;
+}
+#recent-posts .recent-post-item:hover {
+  transform: translateY(-4px);
+}
+
+/* 3. 侧栏作者卡：头像呼吸光环 + 社交图标 hover 动效 */
+@keyframes smith-avatar-breath {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(79, 124, 255, 0.35); }
+  50% { box-shadow: 0 0 0 8px rgba(79, 124, 255, 0); }
+}
+.card-widget.card-info .avatar-img {
+  border-radius: 50%;
+  transition: transform 0.4s ease;
+  animation: smith-avatar-breath 4s ease-in-out infinite;
+}
+.card-widget.card-info .avatar-img:hover {
+  transform: rotate(8deg) scale(1.05);
+  animation-play-state: paused;
+}
+.card-info-social-icons a {
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+.card-info-social-icons a:hover {
+  transform: translateY(-3px) scale(1.15);
+  color: var(--smith-main);
+}
+
+/* 4. 配色统一：强调态统一用主色 */
+.banner-title a:hover {
+  color: var(--smith-main);
+}
+
+/* 5. 字体排版：首页标题层级微调 */
+#recent-posts .recent-post-item .article-title {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.5;
+}
+
+/* 6. 暗色模式对比度校正 */
+[data-theme="dark"] .banner-nav-item span {
+  color: rgba(255, 255, 255, 0.88);
 }
 
 #article-container .tag-Link {

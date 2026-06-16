@@ -1,0 +1,1010 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>SpringBoot&amp;Mybatis综合案例 | Smith</title><meta name="keywords" content="Java,JavaWeb,后端"><meta name="author" content="Smith"><meta name="copyright" content="Smith"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#fafaf8"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="SpringBoot&amp;Mybatis综合案例"><meta name="application-name" content="SpringBoot&amp;Mybatis综合案例"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#fafaf8"><meta property="og:type" content="article"><meta property="og:title" content="SpringBoot&amp;Mybatis综合案例"><meta property="og:url" content="https://smithhs.cn/2026/04/25/2026-04-25-SpringBoot&amp;Mybatis%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/index.html"><meta property="og:site_name" content="Smith"><meta property="og:description" content="SpringBootWeb案例前面我们已经讲解了Web前端开发的基础知识，也讲解了Web后端开发的基础(HTTP协议、请求响应)，并且也讲解了数据库MySQL，以及通过Mybatis框架如何来完成数据库的基本操作。 那接下来，我们就通过一个案例，来将前端开发、后端开发、数据库整合起来。  而这个案例"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200&amp;q=80"><meta property="article:author" content="Smith"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200&amp;q=80"><meta name="description" content="SpringBootWeb案例前面我们已经讲解了Web前端开发的基础知识，也讲解了Web后端开发的基础(HTTP协议、请求响应)，并且也讲解了数据库MySQL，以及通过Mybatis框架如何来完成数据库的基本操作。 那接下来，我们就通过一个案例，来将前端开发、后端开发、数据库整合起来。  而这个案例"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://smithhs.cn/2026/04/25/2026-04-25-SpringBoot&amp;Mybatis%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="manifest" href="/manifest.json"/><meta name="msapplication-TileColor" content="var(--smith-main)"/><link rel="mask-icon" href="/img/siteicon/apple-icon-180.png" color="#5bbad5"/><link rel="apple-touch-icon" sizes="180x180" href="/img/siteicon/apple-icon-180.png"/><link rel="apple-touch-icon-precomposed" sizes="180x180" href="/img/siteicon/apple-icon-180.png"/><link rel="icon" type="image/png" sizes="32x32" href="/img/siteicon/32.png"/><link rel="icon" type="image/png" sizes="16x16" href="/img/siteicon/16.png"/><link rel="bookmark" href="/img/siteicon/apple-icon-180.png"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2048-2732.jpg" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2732-2048.jpg" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1668-2388.jpg" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2388-1668.jpg" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1536-2048.jpg" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2048-1536.jpg" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1668-2224.jpg" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2224-1668.jpg" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1620-2160.jpg" media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2160-1620.jpg" media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1290-2796.jpg" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2796-1290.jpg" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1179-2556.jpg" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2556-1179.jpg" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1284-2778.jpg" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2778-1284.jpg" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1170-2532.jpg" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2532-1170.jpg" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1125-2436.jpg" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2436-1125.jpg" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1242-2688.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2688-1242.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-828-1792.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1792-828.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1242-2208.jpg" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2208-1242.jpg" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-750-1334.jpg" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1334-750.jpg" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-640-1136.jpg" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1136-640.jpg" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@6.1.6/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"><link rel="stylesheet" href="https://npm.elemecdn.com/smith-theme-static@1.0.2/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: undefined,
+  postHeadAiDescription: {"enable":true,"gptName":"Smith","mode":"api","switchBtn":false,"btnLink":"https://aicos.ink","randomNum":3,"basicWordCount":1000,"key":"sk-fpYVeik6Ps1EpZsVEbZpipNzy0Hal0Y0G9RpjexTGcpCLflG","Referer":"https://aicos.ink"},
+  diytitle: {"enable":true,"leaveTitle":"再看看嘛🌈！","backTitle":"欢迎回来✌️！"},
+  LA51: undefined,
+  greetingBox: {"enable":true,"default":"晚上好👋","list":[{"greeting":"晚安😴","startTime":0,"endTime":5},{"greeting":"早上好鸭👋, 祝你一天好心情！","startTime":6,"endTime":9},{"greeting":"上午好👋, 状态很好，鼓励一下～","startTime":10,"endTime":10},{"greeting":"11点多啦, 在坚持一下就吃饭啦～","startTime":11,"endTime":11},{"greeting":"午安👋, 宝贝","startTime":12,"endTime":14},{"greeting":"🌈充实的一天辛苦啦！","startTime":14,"endTime":18},{"greeting":"19点喽, 奖励一顿丰盛的大餐吧🍔。","startTime":19,"endTime":19},{"greeting":"晚上好👋, 在属于自己的时间好好放松😌~","startTime":20,"endTime":24}]},
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  music_page_default: "nav_music",
+  home_banner: {"enable":true,"interval":5000,"count":5},
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: true,
+  mainTone: undefined,
+  authorStatus: {"skills":["💻 后端开发 Java / Spring Cloud","🌐 前端探索 React / TypeScript","🤖 AI 工具深度用户","🏠 智能家居折腾达人","🔨 从设计到部署一条龙","📝 偶尔写写博客记录生活","🎵 听歌写代码双线并行","🚀 脚踏实地行动派"]},
+  algolia: undefined,
+  localSearch: {"path":"/search.json","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":240},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: Smith","link":"链接: ","source":"来源: Smith","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#4f7cff","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.2.0/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.2.0/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: 'Smith',
+  title: 'SpringBoot&Mybatis综合案例',
+  postAI: '',
+  pageFillDescription: 'SpringBootWeb案例, 1. 准备工作, 1.1 需求, 1.2 环境搭建, 1.3 开发规范, 1.3.1 REST风格, 1.3.2 统一响应结果, 1.3.3 开发流程, 2. 部门管理, 2.1 查询部门, 2.1.1 需求, 2.1.2 开发, 2.1.3 测试, 2.2 删除部门, 2.2.1 需求, 2.2.2 开发, 2.2.3 测试, 2.3 新增部门, 2.3.1 需求, 2.3.2 开发, 2.3.3 测试, 2.4 请求路径, 3. 员工管理, 3.1 分页查询, 3.1.1 需求, 3.1.2 分析, 3.1.2.1 介绍, 3.1.2.2 参数传递, 3.1.2.3 PageBean定义, 3.1.3 开发, 3.1.4 测试, 3.1.5 思考, 3.2 分页插件, 3.2.1 介绍, 3.2.2 分页实现, 3.2.3 测试, 3.3 分页查询(条件), 3.3.1 需求, 3.3.2 开发, 3.3.3 测试, 3.4 删除员工, 3.4.1 需求, 3.4.2 开发, 3.4.3 测试, 3.4 新增员工, 3.4.1 需求, 3.4.2 开发, 3.4.3 测试, 3.5 修改员工, 3.5.1 需求, 3.5.2 查询回显, 3.5.3 保存修改案例前面我们已经讲解了前端开发的基础知识也讲解了后端开发的基础协议请求响应并且也讲解了数据库以及通过框架如何来完成数据库的基本操作那接下来我们就通过一个案例来将前端开发后端开发数据库整合起来而这个案例呢就是我们前面提到的智能学习辅助系统在这个案例中前端开发人员已经将前端工程开发完毕了我们需要做的就是参考接口文档完成后端功能的开发然后结合前端工程进行联调测试即可那今天我们的主要内容如下准备工作部门管理员工管理准备工作需求部门管理部门管理功能开发包括查询部门列表删除部门新增部门修改部门员工管理员工管理功能开发包括查询员工列表分页条件删除员工新增员工修改员工环境搭建创建一个工程选择引入对应的起步依赖驱动并在创建好的项目中准备好包结构准备数据库表及对应的实体类导入数据库中部门管理主键部门名称创建时间修改时间部门表学工部教研部咨询部就业部人事部员工管理带约束用户名密码姓名性别说明男女图像职位说明班主任讲师学工主管教研主管咨询师入职时间部门创建时间修改时间员工表金庸张无忌杨逍韦一笑常遇春小昭纪晓芙周芷若丁敏君赵敏鹿杖客鹤笔翁方东白张三丰俞莲舟宋远桥陈友谅实体类放在项目的包下在中引入数据库连接信息复制过来即可开启的日志输出开启数据库表字段到实体类属性的驼峰映射准备对应的接口的基础代码最终的结构如下开发规范风格当前案例我们基于当前最为主流的前后端分离模式进行开发在前后端分离的开发模式中前后端开发人员都需要根据提前定义好的接口文档来进行前后端功能的开发而在前后端进行交互的时候我们需要基于当前主流的风格的接口进行交互那么什么是风格呢表现形式状态转换它是一种软件架构风格原来我们定义风格如下原始的传统呢定义比较复杂而且将资源的访问行为对外暴露出来了如果是基于风格在风格的中我们通过四种请求方式来操作数据的增删改查查询新增修改删除我们看到如果是基于风格定义将会更加简洁更加规范更加优雅注意事项上述行为是风格是约定方式约定不是规范可以打破所以称为风格而不是规范描述模块的功能通常使用复数也就是加的格式来描述表示此类资源而非单个资源如添加和新增不需要统一响应结果前后端工程在进行交互时使用统一响应结果响应码代表成功代表失败响应码描述字符串返回的数据增删改成功响应查询成功响应失败响应开发流程我们在进行功能开发时都是根据如下流程进行查询页面原型明确需求阅读接口文档已提供思路分析接口开发就是开发后台的业务功能一个业务功能我们称为一个接口接口测试功能开发完毕后先通过进行接口测试测试通过后和前端进行联调测试前后端联调测试和前端开发人员开发好的前端工程一起测试部门管理查询部门需求通过页面原型以及需求描述我们可以看到部门查询是不需要考虑分页操作的开发然后我们就可以查看资料中提供的查询部门列表的接口文档请求路径请求方式接口描述该接口用于部门列表数据查询然后来开发对应的功能查询全部部门数据查询所有的部门数据测试功能开发完成后我们就可以启动项目然后打开发起请求访问删除部门需求点击部门列表后面操作栏的删除按钮就可以删除该部门信息此时前端只需要给服务端传递一个参数就可以了我们从接口文档中也可以看得出来开发然后我们就可以查看资料中提供的删除部门的接口文档请求路径请求方式接口描述该接口用于根据删除部门数据然后来开发对应的功能删除部门删除部门删除部门测试功能开发完成后我们就可以启动项目然后打开发起请求访问新增部门需求点击新增部门按钮弹出新增部门对话框输入部门名称点击保存将部门信息保存到数据库开发然后我们就可以查看资料中提供的新增部门的接口文档请求路径请求方式接口描述该接口用于添加部门数据然后来开发对应的功能新增部门新增部门是框架提供的一个工具方法作用是把源对象的属性值复制到目标对象的对应属性上新建空的实体对象把的值拷到实体补充没有的字段插入数据库数据来源对象这里是前端的参数目标对象这里是即将插入数据库的实体需要注意的细节属性名必须一致区分大小写否则不会拷贝类型要兼容比如到到等不匹配的属性会被跳过且不报错它是浅拷贝如果属性是引用类型如只拷贝引用两个对象会指向同一个集合修改一个会相互影响来源这里用的是的它比的性能稍好参数顺序也不同是测试功能开发完成后我们就可以启动项目然后打开发起请求访问然后在请求体中传递格式的参数请求路径前端我们开发的部门信息的列表查询删除新增功能接口我们会看到在方法上面加的注解中指定的请求路径中都包含了重复了我们可以考虑将其抽取到类上可以在类上加一个注解然后声明属性来指定请求路径像下面这样那如果类上添加了注解在方法上也添加了注解或者其衍生注解此时在进行请求访问时完整的请求路径应该是类上的的属性方法上的的属性员工管理分页查询需求我们之前做的查询所有功能中将数据库中所有的数据查询出来并展示到页面上试想如果数据库中的数据有很多假设有十几万条的时候将数据全部展示出来肯定不现实那如何解决这个问题呢几乎所有的网站都会使用分页解决这个问题每次只展示一页的数据比如一页展示条数据如果还想看其他的数据可以通过点击页码进行查询意思是每次打开网页只显示第一页其他的页面需要查询通过提供的页面原型及需求可以看出由于员工数据比较多在展示的时候需要进行分页展示分析介绍分页查询也是从数据库进行查询的所以我们要分页对应的语句应该怎么写分页查询使用关键字格式为开始索引每页显示的条数以后前端页面在发送请求携带参数时它并不明确开始索引是什么但是它知道查询第几页所以开始索引需要在后端进行计算计算的公式是开始索引当前页码每页显示条数比如查询第页的数据的语句是查询第页的数据的语句是查询第页的数据的语句是参数传递分页查询功能时候比较复杂的所以我们要先分析清楚以下两个问题前端在请求服务端时传递的参数当前页码每页展示记录数后端需要响应什么数据给前端上面的页面原型是分页查询页面展示的效果从上面我们可以看出需要响应以下两份数据当前页需要展示的数据我们在后端一般会存储到集合中总共记录数在上图页面中需要展示总的记录数所以这部分数据也需要总的页码的分页组件会自动计算我们不需要关心而这两部分需要封装到对象中并将该对象转换为格式的数据响应回给浏览器定义总记录数当前页数据列表开发后端需要响应总记录数和当前页的数据两部分数据给前端所以在接口中需要定义两个方法查询当前页的数据的方法查询总记录的方法整体流程如下条件分页查询页码每页展示记录数获取总记录数计算起始索引公式页码页大小封装条件分页查询可以通过该注解的属性来设置参数的默认值测试功能开发完成后我们就可以启动项目然后打开发起请求访问思考我们通过上述方式已经实现了分页查询的需求在数据库访问层接口中我们编写两个方法获取总记录数获取当前页的结果列表如果我们通过这种方式来实现也就意味着我们所有的业务模块只要涉及到分页都需要指定上述的操作步骤是固定的而且代码比较繁琐由于步骤是固定的所以在框架中已经有组织将其封装为了一个简单易用的插件从而来大大简化分页的操作分页插件介绍官网是的一款功能强大方便易用的分页插件支持任何形式的单标多表的分页查询如果使用了分页插件进行分页那我们是无需再这层来手动分页的这一层我们进行正常的列表查询即可我们需要在层中调用的方法之前设置分页参数在调用方法执行查询之后解析分页结果并将结果封装到对象中返回流程如下接下来呢我们就可以将上面手动实现的分页代码注释掉通过分页插件来实现分页操作分页实现引入依赖直接给分页插件设置分页信息直接调用层的多条件查询的方法不要带分页也不需要我们自己查询数量把返回的结果封装成一个再获取具体信息或直接强制转成类型获取信息封装成并返回直接调用层的多条件查询的方法不要带分页也不需要我们自己查询数量把返回的结果封装成一个再获取具体信息或直接强制转成类型获取信息了解测试功能开发完成后我们就可以启动项目然后打开发起请求访问分页查询条件需求通过员工管理的页面原型我们可以看到员工列表页面的查询不仅仅需要考虑分页还需要考虑查询条件分页查询我们已经实现了接下来我们需要考虑在分页查询的基础上再加上查询条件我们看到页面原型及需求中描述搜索栏的搜索条件有三个分别是姓名模糊匹配性别精确匹配入职日期范围匹配而且上述的三个条件都是可以传递也可以不传递的也就是动态的想到这儿大家马上就想起来了我们前面在中讲解的动态开发然后我们就可以查看资料中提供的条件分页查询员工的接口文档请求路径请求方式接口描述该接口用于员工列表数据的条件分页查询请求参数参数名称是否必须示例备注否张姓名否性别男女否范围匹配的开始时间入职日期否范围匹配的结束时间入职日期是分页查询的页码如果未指定默认为是分页查询的每页记录数如果未指定默认为然后来开发对应的功能需要在原来分页查询的代码基础上进行改造接口条件分页查询页码每页展示记录数性别范围开始时间范围结束时间设置分页参数执行分页查询获取分页结果封装条件分页查询测试功能开发完成后我们就可以启动项目然后打开发起请求访问删除员工需求当我们勾选列表前面的复选框然后点击批量删除按钮就可以将这一批次的员工信息删除掉了开发然后我们就可以查看资料中提供的删除员工的接口文档请求路径请求方式接口描述该接口用于批量删除员工的数据信息请求样例从接口文档中我们可以看出在路径参数中传递过来了多个在中我们可以将这组值封装到一个集合中然后在中通过动态来完成批量删除操作对应的流程为接口批量删除批量删除操作集合通过接口文档我们可以看出这一组是通过路径参数传递过来的接收路径参数需要在集合前面加上批量删除测试功能开发完成后我们就可以启动项目然后打开发起请求访问新增员工需求在新增用户时我们需要保存用户的基本信息并且还需要上传的员工的图片目前我们先完成第一步操作保存用户的基本信息我们可以看一下接口文档参照接口文档进行功能的开发开发新增员工最终呢我们就是需要往数据库表结构中插入数据具体的流程为保存员工信息保存员工信息新增测试代码编写完毕后启动服务器打开发送请求请求连接新增员工基本信息我们已经保存到数据库了那接下来我们要来完成的是员工图像的上传修改员工需求在进行修改员工信息的时候我们首先先要根据员工的查询员工的信息用于页面回显展示然后用户修改员工数据之后点击保存按钮就可以将修改的数据提交到服务端保存到数据库所以呢分为两部操作根据查询员工信息保存修改查询回显查询回显就是根据查询员工的信息用于页面回显展示接下来我们就需要参考接口文档进行开发根据查询员工信息根据查询员工根据查询测试代码编写完毕后启动服务器打开发送请求请求连接保存修改当用户修改完数据之后点击保存按钮就需要将数据提交到服务端然后服务端需要将数据保存到数据库中具体的执行流程为接下来我们就可以根据接口文档进行功能开发了接口修改员工信息更新员工更新修改时间为当前时间修改测试',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2026-06-02 11:58:01',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fafaf8')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="https://npm.elemecdn.com/lxgw-wenkai-screen-webfont@1.1.0/style.css" media="print" onload="this.media='all'"><meta name="generator" content="Hexo 7.3.0"></head><body data-type="smith"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d20f536c64d06e5fcf4bfe2ec5dc25d.jpg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/smith-theme-static@1.0.2/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="smithfont smith-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://smithhs.cn/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.png" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://github.com/Smithhss" title="Github"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/GitHub.png" alt="Github"/><span class="back-menu-item-text">Github</span></a></div></div></div></div><a id="site-name" href="/" accesskey="h"><div class="title">Smith</div><i class="smithfont smith-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:smith.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="smithfont smith-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="smithfont smith-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="smithfont smith-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="smithfont smith-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="smithfont smith-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="smithfont smith-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/dailyPhoto/"><i class="smithfont smith-icon-camera faa-tada" style="font-size: 0.9em;"></i><span> 每日照片</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wallpaper/"><i class="smithfont smith-icon-image faa-tada" style="font-size: 0.9em;"></i><span> 壁纸</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wordScenery/"><i class="smithfont smith-icon-font faa-tada" style="font-size: 0.9em;"></i><span> 文字风景</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="smithfont smith-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于我</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="smithfont smith-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/love/"><i class="smithfont smith-icon-heart faa-tada" style="font-size: 0.9em;"></i><span> 爱情</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="smithfont smith-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button only-home" id="travellings_button" title="随机前往一个开往项目网站"><a class="site-page" onclick="smith.totraveling()" title="随机前往一个开往项目网站" href="javascript:void(0);" rel="external nofollow" data-pjax-state="external"><i class="smithfont smith-icon-train"></i></a></div><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="smithfont smith-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="smithfont smith-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="smith.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg" target="_blank"><img class="post-qr-code-img" alt="wechat" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg" target="_blank"><img class="post-qr-code-img" alt="alipay" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Android-Studio/" style="font-size: 1.05rem;">Android Studio<sup>1</sup></a><a href="/tags/App/" style="font-size: 1.05rem;">App<sup>1</sup></a><a href="/tags/Butterfly/" style="font-size: 1.05rem;">Butterfly<sup>1</sup></a><a href="/tags/C/" style="font-size: 1.05rem;">C++<sup>3</sup></a><a href="/tags/CSS/" style="font-size: 1.05rem;">CSS<sup>1</sup></a><a href="/tags/Cisco-Packet-Tracer/" style="font-size: 1.05rem;">Cisco Packet Tracer<sup>1</sup></a><a href="/tags/Docker/" style="font-size: 1.05rem;">Docker<sup>2</sup></a><a href="/tags/Easypan/" style="font-size: 1.05rem;">Easypan<sup>2</sup></a><a href="/tags/FurtherMathematics/" style="font-size: 1.05rem;">FurtherMathematics<sup>1</sup></a><a href="/tags/GPT/" style="font-size: 1.05rem;">GPT<sup>1</sup></a><a href="/tags/Git2/" style="font-size: 1.05rem;">Git2<sup>1</sup></a><a href="/tags/HTML/" style="font-size: 1.05rem;">HTML<sup>1</sup></a><a href="/tags/Hexo/" style="font-size: 1.05rem;">Hexo<sup>1</sup></a><a href="/tags/Java/" style="font-size: 1.05rem;">Java<sup>67</sup></a><a href="/tags/JavaScript/" style="font-size: 1.05rem;">JavaScript<sup>1</sup></a><a href="/tags/Jrebel/" style="font-size: 1.05rem;">Jrebel<sup>1</sup></a><a href="/tags/LeetCode/" style="font-size: 1.05rem;">LeetCode<sup>1</sup></a><a href="/tags/Linux/" style="font-size: 1.05rem;">Linux<sup>3</sup></a><a href="/tags/Markdown/" style="font-size: 1.05rem;">Markdown<sup>2</sup></a><a href="/tags/Maven/" style="font-size: 1.05rem;">Maven<sup>2</sup></a><a href="/tags/MyBatis/" style="font-size: 1.05rem;">MyBatis<sup>1</sup></a><a href="/tags/MyBatis-Plus/" style="font-size: 1.05rem;">MyBatis-Plus<sup>1</sup></a><a href="/tags/Mysql/" style="font-size: 1.05rem;">Mysql<sup>1</sup></a><a href="/tags/Navicat/" style="font-size: 1.05rem;">Navicat<sup>1</sup></a><a href="/tags/NoSql/" style="font-size: 1.05rem;">NoSql<sup>1</sup></a><a href="/tags/Nodejs/" style="font-size: 1.05rem;">Nodejs<sup>2</sup></a><a href="/tags/Python/" style="font-size: 1.05rem;">Python<sup>4</sup></a><a href="/tags/Spring/" style="font-size: 1.05rem;">Spring<sup>2</sup></a><a href="/tags/VMware/" style="font-size: 1.05rem;">VMware<sup>2</sup></a><a href="/tags/WeChat/" style="font-size: 1.05rem;">WeChat<sup>1</sup></a><a href="/tags/YouHou/" style="font-size: 1.05rem;">YouHou<sup>1</sup></a><a href="/tags/books/" style="font-size: 1.05rem;">books<sup>1</sup></a><a href="/tags/butterfly/" style="font-size: 1.05rem;">butterfly<sup>1</sup></a><a href="/tags/clash/" style="font-size: 1.05rem;">clash<sup>1</sup></a><a href="/tags/error/" style="font-size: 1.05rem;">error<sup>1</sup></a><a href="/tags/project/" style="font-size: 1.05rem;">project<sup>4</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 1.05rem;">前端<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6/" style="font-size: 1.05rem;">开发框架<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" style="font-size: 1.05rem;">开发环境<sup>1</sup></a><a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="font-size: 1.05rem;">软件工程<sup>1</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="smithfont smith-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="smithfont smith-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="smithfont smith-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/05/"><span class="card-archive-list-date">五月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">16</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/04/"><span class="card-archive-list-date">四月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">31</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/03/"><span class="card-archive-list-date">三月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">75</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/02/"><span class="card-archive-list-date">二月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">7</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/11/"><span class="card-archive-list-date">十一月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">3</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/10/"><span class="card-archive-list-date">十月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/09/"><span class="card-archive-list-date">九月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">5</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/07/"><span class="card-archive-list-date">七月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="smithfont smith-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="smith.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="smithfont smith-icon-arrows-left-right"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="smith.musicToggle()" title="音乐开关"><a class="music-switch"><i class="smithfont smith-icon-music"></i></a></div></div><div class="console-mask" onclick="smith.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="smithfont smith-icon-arrow-up"></i><span id="percent" onclick="smith.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="smithfont smith-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="smithfont smith-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/" itemprop="url">编程开发</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/Java/" tabindex="-1" itemprop="url"> <span> <i class="smithfont smith-icon-hashtag"></i>Java</span></a><a class="article-meta__tags" href="/tags/JavaWeb/" tabindex="-1" itemprop="url"> <span> <i class="smithfont smith-icon-hashtag"></i>JavaWeb</span></a><a class="article-meta__tags" href="/tags/%E5%90%8E%E7%AB%AF/" tabindex="-1" itemprop="url"> <span> <i class="smithfont smith-icon-hashtag"></i>后端</span></a></span></div></div><h1 class="post-title" itemprop="name headline">SpringBoot&amp;Mybatis综合案例</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="post-meta-icon smithfont smith-icon-calendar-days"></i><span class="post-meta-label">发表于</span><time itemprop="dateCreated datePublished" datetime="2026-04-25T06:49:02.000Z" title="发表于 2026-04-25 14:49:02">2026-04-25</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="smithfont smith-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">7.2k</span><span class="post-meta-separator"></span><i class="smithfont smith-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>30分钟</span></span><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title="SpringBoot&amp;Mybatis综合案例"><i class="smithfont smith-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="smithfont smith-icon-spinner smith-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为石家庄"><i class="smithfont smith-icon-location-dot"></i>石家庄</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200&amp;q=80"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><div class="post-ai-description"><div class="ai-title"><i class="smithfont smith-icon-bilibili"></i><div class="ai-title-text">AI-摘要</div><i class="smithfont smith-icon-arrow-rotate-right"></i><i class="smithfont smith-icon-circle-dot" title="朗读摘要"></i><div id="ai-tag">Smith GPT</div></div><div class="ai-explanation">AI初始化中...</div><div class="ai-btn-box"><div class="ai-btn-item">介绍自己 🙈</div><div class="ai-btn-item">生成本文简介 👋</div><div class="ai-btn-item">推荐相关文章 📖</div><div class="ai-btn-item">前往主页 🏠</div><div class="ai-btn-item" id="go-api-link">了解更多</div></div><script data-pjax src="/js/smith/ai_abstract.js"></script></div><article class="post-content" id="article-container" itemscope itemtype="https://smithhs.cn/2026/04/25/2026-04-25-SpringBoot&amp;Mybatis%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/"><header><a class="post-meta-categories" href="/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/" itemprop="url">编程开发</a><a href="/tags/Java/" tabindex="-1" itemprop="url">Java</a><a href="/tags/JavaWeb/" tabindex="-1" itemprop="url">JavaWeb</a><a href="/tags/%E5%90%8E%E7%AB%AF/" tabindex="-1" itemprop="url">后端</a><h1 id="CrawlerTitle" itemprop="name headline">SpringBoot&amp;Mybatis综合案例</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">Smith</span><time itemprop="dateCreated datePublished" datetime="2026-04-25T06:49:02.000Z" title="undefined 2026-04-25 14:49:02">2026-04-25</time></header><h1 id="SpringBootWeb案例"><a href="#SpringBootWeb案例" class="headerlink" title="SpringBootWeb案例"></a>SpringBootWeb案例</h1><p>前面我们已经讲解了Web前端开发的基础知识，也讲解了Web后端开发的基础(HTTP协议、请求响应)，并且也讲解了数据库MySQL，以及通过Mybatis框架如何来完成数据库的基本操作。 那接下来，我们就通过一个案例，来将前端开发、后端开发、数据库整合起来。 </p>
+<p>而这个案例呢，就是我们前面提到的Tlias智能学习辅助系统。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/assets/image-20220904103734643.png" alt="image-20220904103734643"> </p>
+<p>在这个案例中，前端开发人员已经将前端工程开发完毕了。 我们需要做的，就是参考接口文档完成后端功能的开发，然后结合前端工程进行联调测试即可。</p>
+<p>那今天我们的主要内容如下：</p>
+<ul>
+<li>准备工作</li>
+<li>部门管理</li>
+<li>员工管理</li>
+</ul>
+<h2 id="1-准备工作"><a href="#1-准备工作" class="headerlink" title="1. 准备工作"></a>1. 准备工作</h2><h3 id="1-1-需求"><a href="#1-1-需求" class="headerlink" title="1.1 需求"></a>1.1 需求</h3><p><strong>1). 部门管理</strong></p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="assets/image-20220904104826854.png" alt="image-20220904104826854" style="zoom:67%;" /> 
+
+<p>部门管理功能开发，包括：</p>
+<ul>
+<li>查询部门列表</li>
+<li>删除部门</li>
+<li>新增部门</li>
+<li>修改部门</li>
+</ul>
+<p><strong>2). 员工管理</strong></p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="assets/image-20220904105021551.png" alt="image-20220904105021551" style="zoom:67%;" /> 
+
+<p>员工管理功能开发，包括：</p>
+<ul>
+<li>查询员工列表(分页、条件)</li>
+<li>删除员工</li>
+<li>新增员工</li>
+<li>修改员工</li>
+</ul>
+<h3 id="1-2-环境搭建"><a href="#1-2-环境搭建" class="headerlink" title="1.2 环境搭建"></a>1.2 环境搭建</h3><p><strong>1). 创建一个SpringBoot工程，选择引入对应的起步依赖（web、mybatis、mysql驱动、lombok）</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/assets/image-20220904105617722.png" alt="image-20220904105617722"> </p>
+<p>并在创建好的项目中，准备好包结构：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/assets/image-20220904111915042.png" alt="image-20220904111915042"> </p>
+<p><strong>2). 准备数据库表，及对应的实体类</strong></p>
+<ul>
+<li>SQL（导入MySQL数据库中）</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 部门管理</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> dept(</span><br><span class="line">    id <span class="type">int</span> unsigned <span class="keyword">primary</span> key auto_increment comment <span class="string">&#x27;主键ID&#x27;</span>,</span><br><span class="line">    name <span class="type">varchar</span>(<span class="number">10</span>) <span class="keyword">not</span> <span class="keyword">null</span> <span class="keyword">unique</span> comment <span class="string">&#x27;部门名称&#x27;</span>,</span><br><span class="line">    create_time datetime <span class="keyword">not</span> <span class="keyword">null</span> comment <span class="string">&#x27;创建时间&#x27;</span>,</span><br><span class="line">    update_time datetime <span class="keyword">not</span> <span class="keyword">null</span> comment <span class="string">&#x27;修改时间&#x27;</span></span><br><span class="line">) comment <span class="string">&#x27;部门表&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">insert</span> <span class="keyword">into</span> dept (id, name, create_time, update_time) <span class="keyword">values</span>(<span class="number">1</span>,<span class="string">&#x27;学工部&#x27;</span>,now(),now()),(<span class="number">2</span>,<span class="string">&#x27;教研部&#x27;</span>,now(),now()),(<span class="number">3</span>,<span class="string">&#x27;咨询部&#x27;</span>,now(),now()), (<span class="number">4</span>,<span class="string">&#x27;就业部&#x27;</span>,now(),now()),(<span class="number">5</span>,<span class="string">&#x27;人事部&#x27;</span>,now(),now());</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">-- 员工管理(带约束)</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> emp (</span><br><span class="line">  id <span class="type">int</span> unsigned <span class="keyword">primary</span> key auto_increment comment <span class="string">&#x27;ID&#x27;</span>,</span><br><span class="line">  username <span class="type">varchar</span>(<span class="number">20</span>) <span class="keyword">not</span> <span class="keyword">null</span> <span class="keyword">unique</span> comment <span class="string">&#x27;用户名&#x27;</span>,</span><br><span class="line">  password <span class="type">varchar</span>(<span class="number">32</span>) <span class="keyword">default</span> <span class="string">&#x27;123456&#x27;</span> comment <span class="string">&#x27;密码&#x27;</span>,</span><br><span class="line">  name <span class="type">varchar</span>(<span class="number">10</span>) <span class="keyword">not</span> <span class="keyword">null</span> comment <span class="string">&#x27;姓名&#x27;</span>,</span><br><span class="line">  gender tinyint unsigned <span class="keyword">not</span> <span class="keyword">null</span> comment <span class="string">&#x27;性别, 说明: 1 男, 2 女&#x27;</span>,</span><br><span class="line">  image <span class="type">varchar</span>(<span class="number">300</span>) comment <span class="string">&#x27;图像&#x27;</span>,</span><br><span class="line">  job tinyint unsigned comment <span class="string">&#x27;职位, 说明: 1 班主任,2 讲师, 3 学工主管, 4 教研主管, 5 咨询师&#x27;</span>,</span><br><span class="line">  entrydate <span class="type">date</span> comment <span class="string">&#x27;入职时间&#x27;</span>,</span><br><span class="line">  dept_id <span class="type">int</span> unsigned comment <span class="string">&#x27;部门ID&#x27;</span>,</span><br><span class="line">  create_time datetime <span class="keyword">not</span> <span class="keyword">null</span> comment <span class="string">&#x27;创建时间&#x27;</span>,</span><br><span class="line">  update_time datetime <span class="keyword">not</span> <span class="keyword">null</span> comment <span class="string">&#x27;修改时间&#x27;</span></span><br><span class="line">) comment <span class="string">&#x27;员工表&#x27;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> emp</span><br><span class="line">	(id, username, password, name, gender, image, job, entrydate,dept_id, create_time, update_time) <span class="keyword">VALUES</span></span><br><span class="line">	(<span class="number">1</span>,<span class="string">&#x27;jinyong&#x27;</span>,<span class="string">&#x27;123456&#x27;</span>,<span class="string">&#x27;金庸&#x27;</span>,<span class="number">1</span>,<span class="string">&#x27;1.jpg&#x27;</span>,<span class="number">4</span>,<span class="string">&#x27;2000-01-01&#x27;</span>,<span class="number">2</span>,now(),now()),</span><br><span class="line">	(<span class="number">2</span>,<span class="string">&#x27;zhangwuji&#x27;</span>,<span class="string">&#x27;123456&#x27;</span>,<span class="string">&#x27;张无忌&#x27;</span>,<span class="number">1</span>,<span class="string">&#x27;2.jpg&#x27;</span>,<span class="number">2</span>,<span class="string">&#x27;2015-01-01&#x27;</span>,<span class="number">2</span>,now(),now()),</span><br><span class="line">	(<span class="number">3</span>,<span class="string">&#x27;yangxiao&#x27;</span>,<span class="string">&#x27;123456&#x27;</span>,<span class="string">&#x27;杨逍&#x27;</span>,<span class="number">1</span>,<span class="string">&#x27;3.jpg&#x27;</span>,<span class="number">2</span>,<span class="string">&#x27;2008-05-01&#x27;</span>,<span class="number">2</span>,now(),now()),</span><br><span class="line">	(<span class="number">4</span>,<span class="string">&#x27;weiyixiao&#x27;</span>,<span class="string">&#x27;123456&#x27;</span>,<span class="string">&#x27;韦一笑&#x27;</span>,<span class="number">1</span>,<span class="string">&#x27;4.jpg&#x27;</span>,<span class="number">2</span>,<span class="string">&#x27;2007-01-01&#x27;</span>,<span class="number">2</span>,now(),now()),</span><br><span class="line">	(<span class="number">5</span>,<span class="string">&#x27;changyuchun&#x27;</span>,<span class="string">&#x27;123456&#x27;</span>,<span class="string">&#x27;常遇春&#x27;</span>,<span class="number">1</span>,<span class="string">&#x27;5.jpg&#x27;</span>,<span class="number">2</span>,<span class="string">&#x27;2012-12-05&#x27;</span>,<span class="number">2</span>,now(),now()),</span><br><span class="line">	(<span class="number">6</span>,<span class="string">&#x27;xiaozhao&#x27;</span>,<span class="string">&#x27;123456&#x27;</span>,<span class="string">&#x27;小昭&#x27;</span>,<span class="number">2</span>,<span class="string">&#x27;6.jpg&#x27;</span>,<span class="number">3</span>,<span class="string">&#x27;2013-09-05&#x27;</span>,<span class="number">1</span>,now(),now()),</span><br><span class="line">	(<span class="number">7</span>,<span class="string">&#x27;jixiaofu&#x27;</span>,<span class="string">&#x27;123456&#x27;</span>,<span class="string">&#x27;纪晓芙&#x27;</span>,<span class="number">2</span>,<span class="string">&#x27;7.jpg&#x27;</span>,<span class="number">1</span>,<span class="string">&#x27;2005-08-01&#x27;</span>,<span class="number">1</span>,now(),now()),</span><br><span class="line">	(<span class="number">8</span>,<span class="string">&#x27;zhouzhiruo&#x27;</span>,<span class="string">&#x27;123456&#x27;</span>,<span class="string">&#x27;周芷若&#x27;</span>,<span class="number">2</span>,<span class="string">&#x27;8.jpg&#x27;</span>,<span class="number">1</span>,<span class="string">&#x27;2014-11-09&#x27;</span>,<span class="number">1</span>,now(),now()),</span><br><span class="line">	(<span class="number">9</span>,<span class="string">&#x27;dingminjun&#x27;</span>,<span class="string">&#x27;123456&#x27;</span>,<span class="string">&#x27;丁敏君&#x27;</span>,<span class="number">2</span>,<span class="string">&#x27;9.jpg&#x27;</span>,<span class="number">1</span>,<span class="string">&#x27;2011-03-11&#x27;</span>,<span class="number">1</span>,now(),now()),</span><br><span class="line">	(<span class="number">10</span>,<span class="string">&#x27;zhaomin&#x27;</span>,<span class="string">&#x27;123456&#x27;</span>,<span class="string">&#x27;赵敏&#x27;</span>,<span class="number">2</span>,<span class="string">&#x27;10.jpg&#x27;</span>,<span class="number">1</span>,<span class="string">&#x27;2013-09-05&#x27;</span>,<span class="number">1</span>,now(),now()),</span><br><span class="line">	(<span class="number">11</span>,<span class="string">&#x27;luzhangke&#x27;</span>,<span class="string">&#x27;123456&#x27;</span>,<span class="string">&#x27;鹿杖客&#x27;</span>,<span class="number">1</span>,<span class="string">&#x27;11.jpg&#x27;</span>,<span class="number">5</span>,<span class="string">&#x27;2007-02-01&#x27;</span>,<span class="number">3</span>,now(),now()),</span><br><span class="line">	(<span class="number">12</span>,<span class="string">&#x27;hebiweng&#x27;</span>,<span class="string">&#x27;123456&#x27;</span>,<span class="string">&#x27;鹤笔翁&#x27;</span>,<span class="number">1</span>,<span class="string">&#x27;12.jpg&#x27;</span>,<span class="number">5</span>,<span class="string">&#x27;2008-08-18&#x27;</span>,<span class="number">3</span>,now(),now()),</span><br><span class="line">	(<span class="number">13</span>,<span class="string">&#x27;fangdongbai&#x27;</span>,<span class="string">&#x27;123456&#x27;</span>,<span class="string">&#x27;方东白&#x27;</span>,<span class="number">1</span>,<span class="string">&#x27;13.jpg&#x27;</span>,<span class="number">5</span>,<span class="string">&#x27;2012-11-01&#x27;</span>,<span class="number">3</span>,now(),now()),</span><br><span class="line">	(<span class="number">14</span>,<span class="string">&#x27;zhangsanfeng&#x27;</span>,<span class="string">&#x27;123456&#x27;</span>,<span class="string">&#x27;张三丰&#x27;</span>,<span class="number">1</span>,<span class="string">&#x27;14.jpg&#x27;</span>,<span class="number">2</span>,<span class="string">&#x27;2002-08-01&#x27;</span>,<span class="number">2</span>,now(),now()),</span><br><span class="line">	(<span class="number">15</span>,<span class="string">&#x27;yulianzhou&#x27;</span>,<span class="string">&#x27;123456&#x27;</span>,<span class="string">&#x27;俞莲舟&#x27;</span>,<span class="number">1</span>,<span class="string">&#x27;15.jpg&#x27;</span>,<span class="number">2</span>,<span class="string">&#x27;2011-05-01&#x27;</span>,<span class="number">2</span>,now(),now()),</span><br><span class="line">	(<span class="number">16</span>,<span class="string">&#x27;songyuanqiao&#x27;</span>,<span class="string">&#x27;123456&#x27;</span>,<span class="string">&#x27;宋远桥&#x27;</span>,<span class="number">1</span>,<span class="string">&#x27;16.jpg&#x27;</span>,<span class="number">2</span>,<span class="string">&#x27;2007-01-01&#x27;</span>,<span class="number">2</span>,now(),now()),</span><br><span class="line">	(<span class="number">17</span>,<span class="string">&#x27;chenyouliang&#x27;</span>,<span class="string">&#x27;123456&#x27;</span>,<span class="string">&#x27;陈友谅&#x27;</span>,<span class="number">1</span>,<span class="string">&#x27;17.jpg&#x27;</span>,<span class="keyword">NULL</span>,<span class="string">&#x27;2015-03-21&#x27;</span>,<span class="keyword">NULL</span>,now(),now());</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>实体类 （放在项目的com.itxg.pojo包下）</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> lombok.AllArgsConstructor;</span><br><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"><span class="keyword">import</span> lombok.NoArgsConstructor;</span><br><span class="line"><span class="keyword">import</span> java.time.LocalDateTime;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@NoArgsConstructor</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Dept</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> Integer id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> LocalDateTime createTime;</span><br><span class="line">    <span class="keyword">private</span> LocalDateTime updateTime;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> lombok.AllArgsConstructor;</span><br><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"><span class="keyword">import</span> lombok.NoArgsConstructor;</span><br><span class="line"><span class="keyword">import</span> java.time.LocalDate;</span><br><span class="line"><span class="keyword">import</span> java.time.LocalDateTime;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@NoArgsConstructor</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Emp</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> Integer id;</span><br><span class="line">    <span class="keyword">private</span> String username;</span><br><span class="line">    <span class="keyword">private</span> String password;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> Short gender;</span><br><span class="line">    <span class="keyword">private</span> String image;</span><br><span class="line">    <span class="keyword">private</span> Short job;</span><br><span class="line">    <span class="keyword">private</span> LocalDate entrydate;</span><br><span class="line">    <span class="keyword">private</span> Integer deptId;</span><br><span class="line">    <span class="keyword">private</span> LocalDateTime createTime;</span><br><span class="line">    <span class="keyword">private</span> LocalDateTime updateTime;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>3). 在application.properties中引入数据库连接信息(复制过来即可)</strong></p>
+<figure class="highlight properties"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">spring.datasource.driver-class-name</span>=<span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line"><span class="attr">spring.datasource.url</span>=<span class="string">jdbc:mysql://localhost:3306/tlias</span></span><br><span class="line"><span class="attr">spring.datasource.username</span>=<span class="string">root</span></span><br><span class="line"><span class="attr">spring.datasource.password</span>=<span class="string">1234</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">#开启mybatis的日志输出</span></span><br><span class="line"><span class="attr">mybatis.configuration.log-impl</span>=<span class="string">org.apache.ibatis.logging.stdout.StdOutImpl</span></span><br><span class="line"><span class="comment">#开启数据库表字段 到 实体类属性的驼峰映射</span></span><br><span class="line"><span class="attr">mybatis.configuration.map-underscore-to-camel-case</span>=<span class="string">true</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>4). 准备对应的Mapper接口、Service、Controller的基础代码</strong></p>
+<p>①. DeptMapper</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.ibatis.annotations.Mapper;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Mapper</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">DeptMapper</span> &#123;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>②. EmpMapper</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.apache.ibatis.annotations.Mapper;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Mapper</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">EmpMapper</span> &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>③. DeptService &#x2F; DeptServiceImpl</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">DeptService</span> &#123;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> lombok.extern.slf4j.Slf4j;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DeptServiceImpl</span> <span class="keyword">implements</span> <span class="title class_">DeptService</span> &#123;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>④. EmpService &#x2F; EmpServiceImpl</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">EmpService</span> &#123;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> lombok.extern.slf4j.Slf4j;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Service;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">EmpServiceImpl</span> <span class="keyword">implements</span> <span class="title class_">EmpService</span> &#123;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>⑤. DeptController</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.*;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DeptController</span> &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>⑥. EmpController</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.*;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">EmpController</span> &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>最终的结构如下:</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="assets/image-20220904112741014.png" alt="image-20220904112741014" style="zoom:80%;" /> 
+
+
+
+<h3 id="1-3-开发规范"><a href="#1-3-开发规范" class="headerlink" title="1.3 开发规范"></a>1.3 开发规范</h3><h4 id="1-3-1-REST风格"><a href="#1-3-1-REST风格" class="headerlink" title="1.3.1 REST风格"></a>1.3.1 REST风格</h4><p>当前案例，我们基于当前最为主流的前后端分离模式进行开发。 </p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/assets/image-20220904113014050.png" alt="image-20220904113014050"> </p>
+<p>在前后端分离的开发模式中，前后端开发人员都需要根据提前定义好的接口文档，来进行前后端功能的开发，而在前后端进行交互的时候，我们需要基于当前主流的REST风格的API接口进行交互。</p>
+<p>那么什么是REST风格呢?</p>
+<ul>
+<li>REST（Representational State Transfer），表现形式状态转换，它是一种软件架构风格。</li>
+</ul>
+<p>原来我们定义URL风格如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/assets/image-20220904121037476.png" alt="image-20220904121037476"> </p>
+<p>原始的传统URL呢，定义比较复杂，而且将资源的访问行为对外暴露出来了。</p>
+<p>如果是基于REST风格：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/assets/image-20220904121101103.png" alt="image-20220904121101103"> </p>
+<p>在REST风格的URL中，我们通过四种请求方式，来操作数据的增删改查。</p>
+<ul>
+<li>GET ： 查询</li>
+<li>POST ：新增</li>
+<li>PUT ：修改</li>
+<li>DELETE ：删除</li>
+</ul>
+<p>我们看到如果是基于REST风格，定义URL，URL将会更加简洁、更加规范、更加优雅。</p>
+<blockquote>
+<p>注意事项：</p>
+<pre><code>-	上述行为是风格，是约定方式，约定不是规范，可以打破，所以称为 REST风格，而不是REST规范。
+-	描述模块的功能通常使用复数，也就是加s的格式来描述，表示此类资源，而非单个资源。如：users、emps、books…
+</code></pre>
+</blockquote>
+<p>添加和新增不需要</p>
+<h4 id="1-3-2-统一响应结果"><a href="#1-3-2-统一响应结果" class="headerlink" title="1.3.2 统一响应结果"></a>1.3.2 统一响应结果</h4><p>前后端工程在进行交互时，使用统一响应结果 Result。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@NoArgsConstructor</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Result</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> Integer code;<span class="comment">//响应码，1 代表成功; 0 代表失败</span></span><br><span class="line">    <span class="keyword">private</span> String msg;  <span class="comment">//响应码 描述字符串</span></span><br><span class="line">    <span class="keyword">private</span> Object data; <span class="comment">//返回的数据</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//增删改 成功响应</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Result <span class="title function_">success</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Result</span>(<span class="number">1</span>,<span class="string">&quot;success&quot;</span>,<span class="literal">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//查询 成功响应</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Result <span class="title function_">success</span><span class="params">(Object data)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Result</span>(<span class="number">1</span>,<span class="string">&quot;success&quot;</span>,data);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//失败响应</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Result <span class="title function_">error</span><span class="params">(String msg)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">Result</span>(<span class="number">0</span>,msg,<span class="literal">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="1-3-3-开发流程"><a href="#1-3-3-开发流程" class="headerlink" title="1.3.3 开发流程"></a>1.3.3 开发流程</h4><p>我们在进行功能开发时，都是根据如下流程进行：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/assets/image-20220904125004138.png" alt="image-20220904125004138"> </p>
+<ul>
+<li><p>查询页面原型明确需求</p>
+</li>
+<li><p>阅读接口文档（已提供）</p>
+</li>
+<li><p>思路分析</p>
+</li>
+<li><p>接口开发：就是开发后台的业务功能，一个业务功能，我们称为一个接口。</p>
+</li>
+<li><p>接口测试：功能开发完毕后，先通过Postman进行接口测试，测试通过后，和前端进行联调测试。</p>
+</li>
+<li><p>前后端联调测试：和前端开发人员开发好的前端工程一起测试。</p>
+</li>
+</ul>
+<h2 id="2-部门管理"><a href="#2-部门管理" class="headerlink" title="2. 部门管理"></a>2. 部门管理</h2><h3 id="2-1-查询部门"><a href="#2-1-查询部门" class="headerlink" title="2.1 查询部门"></a>2.1 查询部门</h3><h4 id="2-1-1-需求"><a href="#2-1-1-需求" class="headerlink" title="2.1.1 需求"></a>2.1.1 需求</h4><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="assets/image-20220904125539751.png" alt="image-20220904125539751" style="zoom:67%;" /> 
+
+<p>通过页面原型以及需求描述，我们可以看到，部门查询，是不需要考虑分页操作的。</p>
+<h4 id="2-1-2-开发"><a href="#2-1-2-开发" class="headerlink" title="2.1.2 开发"></a>2.1.2 开发</h4><p>然后我们就可以查看资料中提供的，查询部门列表的接口文档。</p>
+<blockquote>
+<p>请求路径：&#x2F;depts</p>
+<p>请求方式：GET</p>
+<p>接口描述：该接口用于部门列表数据查询</p>
+</blockquote>
+<p>然后来开发对应的功能：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/assets/image-20220904125901117.png" alt="image-20220904125901117"> </p>
+<p>1). DeptMapper</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Mapper</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">DeptMapper</span> &#123;</span><br><span class="line">    <span class="comment">//查询全部部门数据</span></span><br><span class="line">    <span class="meta">@Select(&quot;select * from dept&quot;)</span></span><br><span class="line">    List&lt;Dept&gt; <span class="title function_">list</span><span class="params">()</span>;</span><br><span class="line">&#125;    </span><br></pre></td></tr></table></figure>
+
+
+
+<p>2). DeptService &#x2F; DeptServiceImpl</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">DeptService</span> &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 查询所有的部门数据</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    List&lt;Dept&gt; <span class="title function_">list</span><span class="params">()</span>;</span><br><span class="line">	</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DeptServiceImpl</span> <span class="keyword">implements</span> <span class="title class_">DeptService</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> DeptMapper deptMapper;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> List&lt;Dept&gt; <span class="title function_">list</span><span class="params">()</span> &#123;</span><br><span class="line">        List&lt;Dept&gt; deptList = deptMapper.list();</span><br><span class="line">        <span class="keyword">return</span> deptList;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;    </span><br></pre></td></tr></table></figure>
+
+
+
+<p>3). DeptController</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DeptController</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> DeptService deptService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Log</span></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/depts&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Result <span class="title function_">list</span><span class="params">()</span>&#123;</span><br><span class="line">        List&lt;Dept&gt; deptList = deptService.list();</span><br><span class="line">        <span class="keyword">return</span> Result.success(deptList);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-1-3-测试"><a href="#2-1-3-测试" class="headerlink" title="2.1.3 测试"></a>2.1.3 测试</h4><p>功能开发完成后，我们就可以启动项目，然后打开postman。发起GET请求，访问 ：<a target="_blank" rel="noopener" href="http://localhost:8080/depts">http://localhost:8080/depts</a></p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="assets/image-20220904130315247.png" alt="image-20220904130315247" style="zoom: 67%;" /> 
+
+<h3 id="2-2-删除部门"><a href="#2-2-删除部门" class="headerlink" title="2.2 删除部门"></a>2.2 删除部门</h3><h4 id="2-2-1-需求"><a href="#2-2-1-需求" class="headerlink" title="2.2.1 需求"></a>2.2.1 需求</h4><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="assets/image-20220904132440220.png" alt="image-20220904132440220" style="zoom:67%;" /> 
+
+<p>点击部门列表后面操作栏的 “删除” 按钮，就可以删除该部门信息。 此时，前端只需要给服务端传递一个ID参数就可以了。 我们从接口文档中也可以看得出来。</p>
+<h4 id="2-2-2-开发"><a href="#2-2-2-开发" class="headerlink" title="2.2.2 开发"></a>2.2.2 开发</h4><p>然后我们就可以查看资料中提供的，删除部门的接口文档。</p>
+<blockquote>
+<p>请求路径：&#x2F;depts&#x2F;{id}</p>
+<p>请求方式：DELETE</p>
+<p>接口描述：该接口用于根据ID删除部门数据</p>
+</blockquote>
+<p>然后来开发对应的功能：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/assets/image-20220904145456652.png" alt="image-20220904145456652"> </p>
+<p>1). DeptMapper</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//删除部门</span></span><br><span class="line"><span class="meta">@Delete(&quot;delete from dept where id = #&#123;id&#125;&quot;)</span></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">delete</span><span class="params">(Integer id)</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>2). DeptService &#x2F; DeptServiceImpl</p>
+<p>DeptService</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 删除部门</span></span><br><span class="line"><span class="comment">* <span class="doctag">@param</span> id</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">delete</span><span class="params">(Integer id)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>DeptServiceImpl</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">delete</span><span class="params">(Integer id)</span> &#123;</span><br><span class="line">    <span class="comment">//1. 删除部门</span></span><br><span class="line">    deptMapper.delete(id);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>3). DeptController</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@DeleteMapping(&quot;/&#123;id&#125;&quot;)</span></span><br><span class="line"><span class="keyword">public</span> Result <span class="title function_">delete</span><span class="params">(<span class="meta">@PathVariable</span> Integer id)</span>  &#123;</span><br><span class="line">    deptService.delete(id);</span><br><span class="line">    <span class="keyword">return</span> Result.success();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="2-2-3-测试"><a href="#2-2-3-测试" class="headerlink" title="2.2.3 测试"></a>2.2.3 测试</h4><p>功能开发完成后，我们就可以启动项目，然后打开postman。发起DELETE请求，访问 ：<a target="_blank" rel="noopener" href="http://localhost:8080/depts/5">http://localhost:8080/depts/5</a></p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="assets/image-20220904150239112.png" alt="image-20220904150239112" style="zoom: 67%;" /> 
+
+<h3 id="2-3-新增部门"><a href="#2-3-新增部门" class="headerlink" title="2.3 新增部门"></a>2.3 新增部门</h3><h4 id="2-3-1-需求"><a href="#2-3-1-需求" class="headerlink" title="2.3.1 需求"></a>2.3.1 需求</h4><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="assets/image-20220904150427982.png" alt="image-20220904150427982" style="zoom: 67%;" /> 
+
+<p>点击 “新增部门” 按钮，弹出新增部门对话框，输入部门名称，点击 “保存” ，将部门信息保存到数据库。</p>
+<h4 id="2-3-2-开发"><a href="#2-3-2-开发" class="headerlink" title="2.3.2 开发"></a>2.3.2 开发</h4><p>然后我们就可以查看资料中提供的，新增部门的接口文档。</p>
+<blockquote>
+<p>请求路径：&#x2F;depts</p>
+<p>请求方式：POST</p>
+<p>接口描述：该接口用于添加部门数据</p>
+</blockquote>
+<p>然后来开发对应的功能：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/assets/image-20220904150727559.png" alt="image-20220904150727559"> </p>
+<p>1). DeptMapper</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//新增部门</span></span><br><span class="line"><span class="meta">@Insert(&quot;insert into dept(name, create_time, update_time) values (#&#123;name&#125;,#&#123;createTime&#125;,#&#123;updateTime&#125;)&quot;)</span></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">save</span><span class="params">(Dept dept)</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>2). DeptService &#x2F; DeptServiceImpl</p>
+<p>DeptService：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 新增部门</span></span><br><span class="line"><span class="comment">* <span class="doctag">@param</span> dept</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">save</span><span class="params">(Dept dept)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>DeptServiceImpl：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">save</span><span class="params">(Dept dept)</span> &#123;</span><br><span class="line">    dept.setCreateTime(LocalDateTime.now());</span><br><span class="line">    dept.setUpdateTime(LocalDateTime.now());</span><br><span class="line">    deptMapper.save(dept);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>BeanUtils.copyProperties(deptDto, dept);</code> 是 Spring 框架提供的一个工具方法，作用是把 <strong>源对象</strong> 的属性值复制到 <strong>目标对象</strong> 的对应属性上。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Dept</span> <span class="variable">dept</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Dept</span>();                        <span class="comment">// 1. 新建空的实体对象</span></span><br><span class="line">BeanUtils.copyProperties(deptDto, dept);       <span class="comment">// 2. 把 DTO 的值拷到实体</span></span><br><span class="line">dept.setCreateTime(<span class="keyword">new</span> <span class="title class_">Date</span>());                <span class="comment">// 3. 补充 DTO 没有的字段</span></span><br><span class="line">dept.setUpdateTime(<span class="keyword">new</span> <span class="title class_">Date</span>());</span><br><span class="line"><span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> deptMapper.insertDept(dept);           <span class="comment">// 4. 插入数据库</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BeanUtils.copyProperties(source, target);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong><code>source</code></strong>：数据来源对象，这里是 <code>deptDto</code>（前端的参数 DTO）</li>
+<li><strong><code>target</code></strong>：目标对象，这里是 <code>dept</code>（即将插入数据库的实体）</li>
+</ul>
+<p><strong>需要注意的细节</strong></p>
+<ol>
+<li><strong>属性名必须一致</strong>（区分大小写），否则不会拷贝。</li>
+<li><strong>类型要兼容</strong>（比如 <code>String</code> 到 <code>String</code>，<code>Integer</code> 到 <code>int</code> 等），不匹配的属性会被跳过且不报错。</li>
+<li><strong>它是浅拷贝</strong>：如果属性是引用类型（如 <code>List</code>），只拷贝引用，两个对象会指向同一个集合，修改一个会相互影响。</li>
+<li><strong>BeanUtils 来源</strong>：这里用的是 <code>org.springframework.beans.BeanUtils</code>（Spring 的），它比 Apache 的 <code>BeanUtils</code> 性能稍好（参数顺序也不同，Spring 是 <code>(source, target)</code>）。</li>
+</ol>
+<p>3). DeptController</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@PostMapping</span></span><br><span class="line"><span class="keyword">public</span> Result <span class="title function_">save</span><span class="params">(<span class="meta">@RequestBody</span> Dept dept)</span>&#123;</span><br><span class="line">    deptService.save(dept);</span><br><span class="line">    <span class="keyword">return</span> Result.success();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-3-3-测试"><a href="#2-3-3-测试" class="headerlink" title="2.3.3 测试"></a>2.3.3 测试</h4><p>功能开发完成后，我们就可以启动项目，然后打开postman。发起POST请求，访问 ：<a target="_blank" rel="noopener" href="http://localhost:8080/depts%EF%BC%8C%E7%84%B6%E5%90%8E%E5%9C%A8%E8%AF%B7%E6%B1%82%E4%BD%93%E4%B8%AD%E4%BC%A0%E9%80%92json%E6%A0%BC%E5%BC%8F%E7%9A%84%E5%8F%82%E6%95%B0%E3%80%82">http://localhost:8080/depts，然后在请求体中传递json格式的参数。</a></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/assets/image-20220904151349369.png" alt="image-20220904151349369"> </p>
+<h3 id="2-4-请求路径"><a href="#2-4-请求路径" class="headerlink" title="2.4 请求路径"></a>2.4 请求路径</h3><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="assets/image-20220904151659403.png" alt="image-20220904151659403" style="zoom:67%;" /> 
+
+<p>前端我们开发的部门信息的列表查询、删除、新增功能接口，我们会看到，在方法上面加的注解中指定的请求路径中 ，都包含了 &#x2F;depts ，重复了。我们可以考虑将其抽取到类上，可以在类上加一个注解@RequestMapping，然后声明属性 value，来指定请求路径 &#x2F;depts。像下面这样：</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="assets/image-20220904152000563.png" alt="image-20220904152000563" style="zoom: 67%;" /> 
+
+
+
+<p>那如果类上添加了@RequestMapping注解，在方法上也添加了@RequestMapping注解(或者其衍生注解 @GetMapping、@PostMapping、@DeleteMapping、@PutMapping)，此时在进行请求访问时，完整的请求路径应该是 &#x3D;&#x3D;类上的@RequestMapping的value属性 + 方法上的@RequestMapping的value属性。&#x3D;&#x3D;</p>
+<h2 id="3-员工管理"><a href="#3-员工管理" class="headerlink" title="3. 员工管理"></a>3. 员工管理</h2><h3 id="3-1-分页查询"><a href="#3-1-分页查询" class="headerlink" title="3.1 分页查询"></a>3.1 分页查询</h3><h4 id="3-1-1-需求"><a href="#3-1-1-需求" class="headerlink" title="3.1.1 需求"></a>3.1.1 需求</h4><p>我们之前做的 <code>查询所有</code> 功能中将数据库中所有的数据查询出来并展示到页面上，试想如果数据库中的数据有很多（假设有十几万条）的时候，将数据全部展示出来肯定不现实，那如何解决这个问题呢？<strong>几乎所有的网站都会使用分页解决这个问题。每次只展示一页的数据</strong>，比如一页展示10条数据，如果还想看其他的数据，可以通过点击页码进行查询。</p>
+<p>意思是每次打开网页只显示第一页,其他的页面需要查询</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="assets/image-20220904152702147.png" alt="image-20220904152702147" style="zoom:67%;" /> 
+
+<p>通过提供的页面原型及需求可以看出，由于员工数据比较多，在展示的时候，需要进行分页展示。</p>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="assets/image-20220904152808452.png" alt="image-20220904152808452" style="zoom:80%;" /> 
+
+
+
+
+
+<h4 id="3-1-2-分析"><a href="#3-1-2-分析" class="headerlink" title="3.1.2 分析"></a>3.1.2 分析</h4><h5 id="3-1-2-1-介绍"><a href="#3-1-2-1-介绍" class="headerlink" title="3.1.2.1 介绍"></a>3.1.2.1 介绍</h5><p>分页查询也是从数据库进行查询的，所以我们要分页对应的SQL语句应该怎么写。分页查询使用 <code>LIMIT</code> 关键字，格式为：&#x3D;&#x3D;<code>LIMIT 开始索引 每页显示的条数</code>&#x3D;&#x3D;。</p>
+<p>以后前端页面在发送请求携带参数时，它并不明确开始索引是什么，但是它知道查询第几页。</p>
+<p>所以 <code>开始索引</code> 需要在后端进行计算，计算的公式是 ：&#x3D;&#x3D;开始索引 &#x3D; （当前页码 -  1）*  每页显示条数&#x3D;&#x3D;</p>
+<p>比如查询第1页的数据的 SQL 语句是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from emp  limit 0,10;</span><br></pre></td></tr></table></figure>
+
+<p>查询第2页的数据的 SQL 语句是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from emp  limit 10,10;</span><br></pre></td></tr></table></figure>
+
+<p>查询第3页的数据的 SQL 语句是：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">select * from emp  limit 20,10;</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="3-1-2-2-参数传递"><a href="#3-1-2-2-参数传递" class="headerlink" title="3.1.2.2 参数传递"></a>3.1.2.2 参数传递</h5><p>分页查询功能时候比较复杂的，所以我们要先分析清楚以下两个问题：</p>
+<p><strong>前端在请求服务端时，传递的参数：</strong></p>
+<ul>
+<li><p>当前页码 page</p>
+</li>
+<li><p>每页展示记录数 pageSize</p>
+</li>
+</ul>
+<p>**后端需要响应什么数据给前端: **</p>
+<p>上面的页面原型是分页查询页面展示的效果，从上面我们可以看出需要响应以下两份数据</p>
+<ul>
+<li>当前页需要展示的数据。<strong>我们在后端一般会存储到 List 集合中</strong></li>
+<li>总共记录数。在上图页面中需要展示总的记录数，所以这部分数据也需要。总的页码 elementUI 的分页组件会自动计算，我们不需要关心。</li>
+</ul>
+<p>而这两部分需要封装到 PageBean 对象中，并将该对象转换为 json 格式的数据响应回给浏览器</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/assets/image-20220904153814876.png" alt="image-20220904153814876"> </p>
+<h5 id="3-1-2-3-PageBean定义"><a href="#3-1-2-3-PageBean定义" class="headerlink" title="3.1.2.3 PageBean定义"></a>3.1.2.3 PageBean定义</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@NoArgsConstructor</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">PageBean</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> Long total; <span class="comment">//总记录数</span></span><br><span class="line">    <span class="keyword">private</span> List rows; <span class="comment">//当前页数据列表</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-1-3-开发"><a href="#3-1-3-开发" class="headerlink" title="3.1.3 开发"></a>3.1.3 开发</h4><p>后端需要响应<code>总记录数</code> 和 <code>当前页的数据</code> 两部分数据给前端，所以在 <code>EmpMapper</code>  接口中需要定义两个方法：</p>
+<ul>
+<li>page() ：查询当前页的数据的方法</li>
+<li>count() ：查询总记录的方法</li>
+</ul>
+<p>整体流程如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/assets/image-20220904153940924.png" alt="image-20220904153940924"> </p>
+<p>1). EmpMapper</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/emps&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">EmpController</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> EmpService empService;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping</span></span><br><span class="line">    <span class="keyword">public</span> Result <span class="title function_">empList</span><span class="params">(EmpPageQueryDto dto)</span>&#123;</span><br><span class="line">        PageBean&lt;Emp&gt; pageBean = empService.selectPageByQueryDto(dto);</span><br><span class="line">        <span class="keyword">return</span> Result.success(pageBean);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>2). EmpService &#x2F; EmpServiceImpl</p>
+<p>EmpService</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">EmpService</span> &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 条件分页查询</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> page 页码</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> pageSize 每页展示记录数</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    PageBean <span class="title function_">page</span><span class="params">(Integer page, Integer pageSize)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>EmpServiceImpl</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">EmpServiceImpl</span> <span class="keyword">implements</span> <span class="title class_">EmpService</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> EmpMapper empMapper;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> PageBean <span class="title function_">page</span><span class="params">(Integer page, Integer pageSize, String name, Short gender, LocalDate begin, LocalDate end)</span> &#123;</span><br><span class="line">        <span class="type">Long</span> <span class="variable">count</span> <span class="operator">=</span> empMapper.count(); <span class="comment">//获取总记录数</span></span><br><span class="line">        <span class="type">Integer</span> <span class="variable">start</span> <span class="operator">=</span> (page - <span class="number">1</span>) * pageSize; <span class="comment">//计算起始索引 , 公式: (页码-1)*页大小</span></span><br><span class="line">        List&lt;Emp&gt; empList = empMapper.page(start, pageSize);</span><br><span class="line"></span><br><span class="line">        <span class="type">PageBean</span> <span class="variable">pageBean</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">PageBean</span>(count , empList); <span class="comment">//封装PageBean</span></span><br><span class="line">        <span class="keyword">return</span> pageBean;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;    </span><br></pre></td></tr></table></figure>
+
+
+
+<p>3). EmpController</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/emps&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">EmpController</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> EmpService empService;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//条件分页查询</span></span><br><span class="line">    <span class="meta">@GetMapping</span></span><br><span class="line">    <span class="keyword">public</span> Result <span class="title function_">page</span><span class="params">(<span class="meta">@RequestParam(defaultValue = &quot;1&quot;)</span> Integer page ,</span></span><br><span class="line"><span class="params">                       <span class="meta">@RequestParam(defaultValue = &quot;10&quot;)</span> Integer pageSize)</span>&#123;</span><br><span class="line">        <span class="type">PageBean</span> <span class="variable">pageBean</span> <span class="operator">=</span> empService.page(page, pageSize, name, gender, begin, end);</span><br><span class="line">        <span class="keyword">return</span> Result.success(pageBean);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;    </span><br></pre></td></tr></table></figure>
+
+
+
+<blockquote>
+<p>@RequestParam ：</p>
+<p>​		可以通过该注解的defaultValue 属性来设置参数的默认值。</p>
+</blockquote>
+<h4 id="3-1-4-测试"><a href="#3-1-4-测试" class="headerlink" title="3.1.4 测试"></a>3.1.4 测试</h4><p>功能开发完成后，我们就可以启动项目，然后打开postman。发起GET请求，访问 ：<a target="_blank" rel="noopener" href="http://localhost:8080/emps?page=1&pageSize=5">http://localhost:8080/emps?page=1&amp;pageSize=5</a></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/assets/image-20220904154751275.png" alt="image-20220904154751275"> </p>
+<h4 id="3-1-5-思考"><a href="#3-1-5-思考" class="headerlink" title="3.1.5 思考"></a>3.1.5 思考</h4><p>我们通过上述方式已经实现了分页查询的需求，在数据库访问层 Mapper 接口中，我们编写两个方法：</p>
+<ul>
+<li>获取总记录数</li>
+<li>获取当前页的结果列表</li>
+</ul>
+<img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="assets/image-20220904155256800.png" alt="image-20220904155256800" style="zoom:67%;" /> 
+
+<p>如果我们通过这种方式来实现，也就意味着，我们所有的业务模块，只要涉及到分页，都需要指定上述的操作，步骤是固定的，而且代码比较繁琐。</p>
+<p>由于步骤是固定的，所以在Mybatis框架中，已经有组织将其封装为了一个简单易用的插件。从而来大大简化分页的操作。</p>
+<h3 id="3-2-分页插件"><a href="#3-2-分页插件" class="headerlink" title="3.2 分页插件"></a>3.2 分页插件</h3><h4 id="3-2-1-介绍"><a href="#3-2-1-介绍" class="headerlink" title="3.2.1 介绍"></a>3.2.1 介绍</h4><ul>
+<li><p>官网：<a target="_blank" rel="noopener" href="https://pagehelper.github.io/">https://pagehelper.github.io/</a></p>
+</li>
+<li><p>PageHelper 是Mybatis的一款功能强大、方便易用的分页插件，支持任何形式的单标、多表的分页查询。</p>
+</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/assets/image-20220904155552055.png" alt="image-20220904155552055"> </p>
+<p>如果使用了PageHelper分页插件进行分页，那我们是无需再Mapper这层来手动分页的。 Mapper这一层，我们进行正常的列表查询即可。我们需要在Service层中，调用Mapper的方法之前设置分页参数，在调用Mapper方法执行查询之后，解析分页结果，并将结果封装到PageBean对象中，返回。</p>
+<p>流程如下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/assets/image-20220904160130305.png" alt="image-20220904160130305"> </p>
+<p>接下来呢，我们就可以将上面手动实现的分页代码注释掉。 通过PageHelper分页插件，来实现分页操作。</p>
+<h4 id="3-2-2-分页实现"><a href="#3-2-2-分页实现" class="headerlink" title="3.2.2 分页实现"></a>3.2.2 分页实现</h4><p>1). pom.xml 引入依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.github.pagehelper<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>pagehelper-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.4.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>2). EmpMapper</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Mapper</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">EmpMapper</span> &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="type">long</span> <span class="title function_">selectCountByQueryDto</span><span class="params">(EmpPageQueryDto dto)</span>;</span><br><span class="line"></span><br><span class="line">    List&lt;Emp&gt; <span class="title function_">selectPageByQueryDto</span><span class="params">(EmpPageQueryDto dto)</span>;</span><br><span class="line"></span><br><span class="line">    List&lt;Emp&gt; <span class="title function_">selectPageByQueryDtoNoLimit</span><span class="params">(EmpPageQueryDto dto)</span>;</span><br><span class="line"></span><br><span class="line">    <span class="type">int</span> <span class="title function_">deleteByIds</span><span class="params">(<span class="meta">@Param(&quot;ids&quot;)</span> Integer[] ids)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>3). EmpServiceImpl</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="meta">@Primary</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">EmpServiceImpl2</span> <span class="keyword">implements</span> <span class="title class_">EmpService</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> EmpMapper empMapper;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> PageBean&lt;Emp&gt; <span class="title function_">selectPageByQueryDto</span><span class="params">(EmpPageQueryDto dto)</span> &#123;</span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">            1. 直接给 分页插件设置分页信息</span></span><br><span class="line"><span class="comment">            2: 直接调用 mapper 层的多条件查询的方法(sql不要带分页,也不需要我们自己查询数量)</span></span><br><span class="line"><span class="comment">            3: 把返回的结果,封装成一个 PageInfo ,再获取具体信息(或直接强制转成  Page 类型,获取信息)</span></span><br><span class="line"><span class="comment">            4: 封装成 PageBean并返回</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">        PageHelper.startPage(dto.getPage(), dto.getPageSize());</span><br><span class="line">        <span class="comment">//2: 直接调用 mapper 层的多条件查询的方法(sql不要带分页,也不需要我们自己查询数量)</span></span><br><span class="line">        List&lt;Emp&gt; list = empMapper.selectPageByQueryDtoNoLimit(dto);</span><br><span class="line">        <span class="comment">//3: 把返回的结果,封装成一个 PageInfo ,再获取具体信息(或直接强制转成  Page 类型,获取信息)</span></span><br><span class="line">        PageInfo&lt;Emp&gt; pageInfo = <span class="keyword">new</span> <span class="title class_">PageInfo</span>&lt;&gt;(list);</span><br><span class="line">        <span class="comment">//Page&lt;Emp&gt; pageInfo = (Page&lt;Emp&gt;) list; // 了解</span></span><br><span class="line">        <span class="type">long</span> <span class="variable">total</span> <span class="operator">=</span> pageInfo.getTotal();</span><br><span class="line">        List&lt;Emp&gt; list1 = pageInfo.getList();</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> <span class="title class_">PageBean</span>&lt;&gt;(total, list1);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">deleteByIds</span><span class="params">(Integer[] ids)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> empMapper.deleteByIds(ids);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="3-2-3-测试"><a href="#3-2-3-测试" class="headerlink" title="3.2.3 测试"></a>3.2.3 测试</h4><p>功能开发完成后，我们就可以启动项目，然后打开postman。发起GET请求，访问 ：<a target="_blank" rel="noopener" href="http://localhost:8080/emps?page=1&pageSize=5">http://localhost:8080/emps?page=1&amp;pageSize=5</a></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/assets/image-20220904154751275.png" alt="image-20220904154751275"> </p>
+<h3 id="3-3-分页查询-条件"><a href="#3-3-分页查询-条件" class="headerlink" title="3.3 分页查询(条件)"></a>3.3 分页查询(条件)</h3><h4 id="3-3-1-需求"><a href="#3-3-1-需求" class="headerlink" title="3.3.1 需求"></a>3.3.1 需求</h4><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="assets/image-20220904160711148.png" alt="image-20220904160711148" style="zoom:67%;" /> 
+
+<p>通过员工管理的页面原型我们可以看到，员工列表页面的查询，不仅仅需要考虑分页，还需要考虑查询条件。 分页查询我们已经实现了，接下来，我们需要考虑在分页查询的基础上，再加上查询条件。</p>
+<p>我们看到页面原型及需求中描述，搜索栏的搜索条件有三个，分别是：</p>
+<ul>
+<li>姓名：模糊匹配</li>
+<li>性别：精确匹配</li>
+<li>入职日期：范围匹配</li>
+</ul>
+<p>而且上述的三个条件，都是可以传递，也可以不传递的，也就是动态的。 想到这儿，大家马上就想起来了，我们前面在Mybatis中讲解的动态SQL 。</p>
+<h4 id="3-3-2-开发"><a href="#3-3-2-开发" class="headerlink" title="3.3.2 开发"></a>3.3.2 开发</h4><p>然后我们就可以查看资料中提供的，条件分页查询员工的接口文档。</p>
+<blockquote>
+<p>请求路径：&#x2F;emps</p>
+<p>请求方式：GET</p>
+<p>接口描述：该接口用于员工列表数据的条件分页查询</p>
+<p>请求参数：</p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>是否必须</th>
+<th>示例</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>name</td>
+<td>否</td>
+<td>张</td>
+<td>姓名</td>
+</tr>
+<tr>
+<td>gender</td>
+<td>否</td>
+<td>1</td>
+<td>性别 , 1 男 , 2 女</td>
+</tr>
+<tr>
+<td>begin</td>
+<td>否</td>
+<td>2010-01-01</td>
+<td>范围匹配的开始时间(入职日期)</td>
+</tr>
+<tr>
+<td>end</td>
+<td>否</td>
+<td>2020-01-01</td>
+<td>范围匹配的结束时间(入职日期)</td>
+</tr>
+<tr>
+<td>page</td>
+<td>是</td>
+<td>1</td>
+<td>分页查询的页码，如果未指定，默认为1</td>
+</tr>
+<tr>
+<td>pageSize</td>
+<td>是</td>
+<td>10</td>
+<td>分页查询的每页记录数，如果未指定，默认为10</td>
+</tr>
+</tbody></table>
+</blockquote>
+<p>然后来开发对应的功能：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/assets/image-20220904161312992.png" alt="image-20220904161312992"> </p>
+<p>需要在原来分页查询的代码基础上进行改造。</p>
+<p>1). EmpMapper</p>
+<p>EmpMapper接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Mapper</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">EmpMapper</span> &#123;</span><br><span class="line">	<span class="keyword">public</span> List&lt;Emp&gt; <span class="title function_">list</span><span class="params">(String name, Short gender, LocalDate begin, LocalDate end)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>EmpMapper.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span> ?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">mapper</span></span></span><br><span class="line"><span class="meta">        <span class="keyword">PUBLIC</span> <span class="string">&quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;</span></span></span><br><span class="line"><span class="meta">        <span class="string">&quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">mapper</span> <span class="attr">namespace</span>=<span class="string">&quot;com.itxg.mapper.EmpMapper&quot;</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">&quot;list&quot;</span> <span class="attr">resultType</span>=<span class="string">&quot;com.itxg.pojo.Emp&quot;</span>&gt;</span></span><br><span class="line">        select * from emp</span><br><span class="line">        <span class="tag">&lt;<span class="name">where</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;name != null and name != &#x27;&#x27;&quot;</span>&gt;</span></span><br><span class="line">                name like concat(&#x27;%&#x27;,#&#123;name&#125;,&#x27;%&#x27;)</span><br><span class="line">            <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;gender != null&quot;</span>&gt;</span></span><br><span class="line">               and gender = #&#123;gender&#125;</span><br><span class="line">            <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;begin != null and end != null&quot;</span>&gt;</span></span><br><span class="line">               and entrydate between #&#123;begin&#125; and #&#123;end&#125;</span><br><span class="line">            <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">where</span>&gt;</span></span><br><span class="line">        order by update_time desc</span><br><span class="line">    <span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br><span class="line">    </span><br><span class="line"><span class="tag">&lt;/<span class="name">mapper</span>&gt;</span>    </span><br></pre></td></tr></table></figure>
+
+
+
+<p>2). EmpService &#x2F; EmpServiceImpl</p>
+<p>EmpService</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">EmpService</span> &#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 条件分页查询</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> page 页码</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> pageSize 每页展示记录数</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> gender 性别</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> begin 范围 - 开始时间</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> end 范围 - 结束时间</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    PageBean <span class="title function_">page</span><span class="params">(Integer page, Integer pageSize, String name, Short gender, LocalDate begin, LocalDate end)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>EmpServiceImpl</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">EmpServiceImpl</span> <span class="keyword">implements</span> <span class="title class_">EmpService</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> EmpMapper empMapper;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> PageBean <span class="title function_">page</span><span class="params">(Integer page, Integer pageSize, String name, Short gender, LocalDate begin, LocalDate end)</span> &#123;</span><br><span class="line">        PageHelper.startPage(page, pageSize); <span class="comment">// 设置分页参数</span></span><br><span class="line">        List&lt;Emp&gt; empList = empMapper.list(name,gender,begin,end); <span class="comment">// 执行分页查询</span></span><br><span class="line">        Page&lt;Emp&gt; p = (Page&lt;Emp&gt;) empList;    <span class="comment">// 获取分页结果</span></span><br><span class="line"></span><br><span class="line">        <span class="type">PageBean</span> <span class="variable">pageBean</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">PageBean</span>(p.getTotal(), p.getResult()); <span class="comment">//封装PageBean</span></span><br><span class="line">        <span class="keyword">return</span> pageBean;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;    </span><br></pre></td></tr></table></figure>
+
+
+
+<p>3). EmpController</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/emps&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">EmpController</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> EmpService empService;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//条件分页查询</span></span><br><span class="line">    <span class="meta">@GetMapping</span></span><br><span class="line">    <span class="keyword">public</span> Result <span class="title function_">page</span><span class="params">(<span class="meta">@RequestParam(defaultValue = &quot;1&quot;)</span> Integer page ,</span></span><br><span class="line"><span class="params">                       <span class="meta">@RequestParam(defaultValue = &quot;10&quot;)</span> Integer pageSize,</span></span><br><span class="line"><span class="params">                       String name, Short gender,</span></span><br><span class="line"><span class="params">                       <span class="meta">@DateTimeFormat(pattern = &quot;yyyy-MM-dd&quot;)</span> LocalDate begin,</span></span><br><span class="line"><span class="params">                       <span class="meta">@DateTimeFormat(pattern = &quot;yyyy-MM-dd&quot;)</span> LocalDate end)</span>&#123;</span><br><span class="line">        <span class="type">PageBean</span> <span class="variable">pageBean</span> <span class="operator">=</span> empService.page(page, pageSize, name, gender, begin, end);</span><br><span class="line">        <span class="keyword">return</span> Result.success(pageBean);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;    </span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="3-3-3-测试"><a href="#3-3-3-测试" class="headerlink" title="3.3.3 测试"></a>3.3.3 测试</h4><p>功能开发完成后，我们就可以启动项目，然后打开postman。发起GET请求，访问 ：<a target="_blank" rel="noopener" href="http://localhost:8080/emps?page=1&pageSize=5">http://localhost:8080/emps?page=1&amp;pageSize=5</a></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/assets/image-20220904154751275.png" alt="image-20220904154751275"> </p>
+<h3 id="3-4-删除员工"><a href="#3-4-删除员工" class="headerlink" title="3.4 删除员工"></a>3.4 删除员工</h3><h4 id="3-4-1-需求"><a href="#3-4-1-需求" class="headerlink" title="3.4.1 需求"></a>3.4.1 需求</h4><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/assets/image-20220904162520759.png" alt="image-20220904162520759"> </p>
+<p>当我们勾选列表前面的复选框，然后点击 “批量删除” 按钮，就可以将这一批次的员工信息删除掉了。 </p>
+<h4 id="3-4-2-开发"><a href="#3-4-2-开发" class="headerlink" title="3.4.2 开发"></a>3.4.2 开发</h4><p>然后我们就可以查看资料中提供的，删除员工的接口文档。</p>
+<blockquote>
+<p>请求路径：&#x2F;emps&#x2F;{ids}</p>
+<p>请求方式：DELETE</p>
+<p>接口描述：该接口用于批量删除员工的数据信息</p>
+<p>请求样例：&#x2F;depts&#x2F;1,2,3</p>
+</blockquote>
+<p>从接口文档中，我们可以看出在路径参数中，传递过来了多个id，在springboot中，我们可以将这组id值封装到一个集合中，然后在Mybatis中，通过动态SQL来完成批量删除操作。</p>
+<p>对应的流程为：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/assets/image-20220904163231521.png" alt="image-20220904163231521"> </p>
+<p><strong>1). EmpMapper</strong></p>
+<p>EmpMapper接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//批量删除</span></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">delete</span><span class="params">(List&lt;Integer&gt; ids)</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>EmpMapper.xml</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;select id=<span class="string">&quot;delete&quot;</span>&gt;</span><br><span class="line">    delete from emp where id in</span><br><span class="line">    &lt;foreach collection=<span class="string">&quot;ids&quot;</span> item=<span class="string">&quot;id&quot;</span> open=<span class="string">&quot;(&quot;</span> close=<span class="string">&quot;)&quot;</span> separator=<span class="string">&quot;,&quot;</span>&gt;</span><br><span class="line">    	#&#123;id&#125;</span><br><span class="line">    &lt;/foreach&gt;</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>2). EmpService &#x2F; EmpServiceImpl</strong></p>
+<p>EmpService</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 批量删除操作</span></span><br><span class="line"><span class="comment">* <span class="doctag">@param</span> ids id集合</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">delete</span><span class="params">(List&lt;Integer&gt; ids)</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>EmpServiceImpl</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">delete</span><span class="params">(List&lt;Integer&gt; ids)</span> &#123;</span><br><span class="line">	empMapper.delete(ids);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>3). EmpController</strong></p>
+<p>通过接口文档我们可以看出，这一组id是通过路径参数传递过来的，接收路径参数，需要在集合前面加上 @PathVariable</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//批量删除</span></span><br><span class="line"><span class="meta">@DeleteMapping(&quot;/&#123;ids&#125;&quot;)</span></span><br><span class="line"><span class="keyword">public</span> Result <span class="title function_">delete</span><span class="params">(<span class="meta">@PathVariable</span> List&lt;Integer&gt; ids)</span>&#123;</span><br><span class="line">    empService.delete(ids);</span><br><span class="line">    <span class="keyword">return</span> Result.success();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="3-4-3-测试"><a href="#3-4-3-测试" class="headerlink" title="3.4.3 测试"></a>3.4.3 测试</h4><p>功能开发完成后，我们就可以启动项目，然后打开postman。发起DELETE请求，访问 ：<a target="_blank" rel="noopener" href="http://localhost:8080/emps/15,16,17">http://localhost:8080/emps/15,16,17</a></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/assets/image-20220904163654234.png" alt="image-20220904163654234"> </p>
+<h3 id="3-4-新增员工"><a href="#3-4-新增员工" class="headerlink" title="3.4 新增员工"></a>3.4 新增员工</h3><h4 id="3-4-1-需求-1"><a href="#3-4-1-需求-1" class="headerlink" title="3.4.1 需求"></a>3.4.1 需求</h4><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/assets/image-20220904183633532.png" alt="image-20220904183633532" style="zoom:67%;" /> 
+
+<p>在新增用户时，我们需要保存用户的基本信息，并且还需要上传的员工的图片，目前我们先完成第一步操作，保存用户的基本信息。 </p>
+<p>我们可以看一下接口文档，参照接口文档，进行功能的开发。</p>
+<h4 id="3-4-2-开发-1"><a href="#3-4-2-开发-1" class="headerlink" title="3.4.2 开发"></a>3.4.2 开发</h4><p>新增员工，最终呢，我们就是需要往数据库表结构中插入数据。具体的流程为：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/assets/image-20220904185601229.png" alt="image-20220904185601229"> </p>
+<p><strong>1). EmpMapper</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//保存员工信息</span></span><br><span class="line"><span class="meta">@Insert(&quot;insert into emp (username, name, gender, image, job, entrydate, dept_id, create_time, update_time) &quot; +</span></span><br><span class="line"><span class="meta">&quot;values (#&#123;username&#125;, #&#123;name&#125;, #&#123;gender&#125;, #&#123;image&#125;, #&#123;job&#125;, #&#123;entrydate&#125;, #&#123;deptId&#125;, #&#123;createTime&#125;, #&#123;updateTime&#125;);&quot;)</span></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">save</span><span class="params">(Emp emp)</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>2). EmpService &#x2F; EmpServiceImpl</strong></p>
+<p>EmpService</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 保存员工信息</span></span><br><span class="line"><span class="comment">* <span class="doctag">@param</span> emp</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">save</span><span class="params">(Emp emp)</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>EmpServiceImpl</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">save</span><span class="params">(Emp emp)</span> &#123;</span><br><span class="line">    emp.setCreateTime(LocalDateTime.now());</span><br><span class="line">    emp.setUpdateTime(LocalDateTime.now());</span><br><span class="line">    empMapper.save(emp);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>3). EmpController</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//新增</span></span><br><span class="line"><span class="meta">@PostMapping</span></span><br><span class="line"><span class="keyword">public</span> Result <span class="title function_">save</span><span class="params">(<span class="meta">@RequestBody</span> Emp emp)</span>&#123;</span><br><span class="line">    empService.save(emp);</span><br><span class="line">    <span class="keyword">return</span> Result.success();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h4 id="3-4-3-测试-1"><a href="#3-4-3-测试-1" class="headerlink" title="3.4.3 测试"></a>3.4.3 测试</h4><p>代码编写完毕后，启动服务器，打开Postman发送 POST 请求，请求连接：<a target="_blank" rel="noopener" href="http://localhost:8080/emps">http://localhost:8080/emps</a></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/assets/image-20220904190309786.png" alt="image-20220904190309786"> </p>
+<p>新增员工基本信息，我们已经保存到数据库了。那接下来，我们要来完成的是员工图像的上传。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/image-20220904190851736.png" alt="image-20220904190309786"></p>
+<h3 id="3-5-修改员工"><a href="#3-5-修改员工" class="headerlink" title="3.5 修改员工"></a>3.5 修改员工</h3><h4 id="3-5-1-需求"><a href="#3-5-1-需求" class="headerlink" title="3.5.1 需求"></a>3.5.1 需求</h4><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/assets/image-20220904220001994.png" alt="image-20220904220001994"> </p>
+<p>在进行修改员工信息的时候，我们首先先要根据员工的ID查询员工的信息用于页面回显展示，然后用户修改员工数据之后，点击保存按钮，就可以将修改的数据提交到服务端，保存到数据库。 所以呢，分为两部操作：</p>
+<ul>
+<li>根据ID查询员工信息</li>
+<li>保存修改</li>
+</ul>
+<h4 id="3-5-2-查询回显"><a href="#3-5-2-查询回显" class="headerlink" title="3.5.2 查询回显"></a>3.5.2 查询回显</h4><p>查询回显，就是根据ID查询员工的信息，用于页面回显展示。接下来，我们就需要参考接口文档进行开发：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/assets/image-20220904220653031.png" alt="image-20220904220653031"> </p>
+<p>1). EmpMapper</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//根据ID查询员工信息</span></span><br><span class="line"><span class="meta">@Select(&quot;select * from emp where id = #&#123;id&#125;&quot;)</span></span><br><span class="line">Emp <span class="title function_">getById</span><span class="params">(Integer id)</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>2). EmpService &#x2F; EmpServiceImpl</p>
+<p>EmpService</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 根据ID查询员工</span></span><br><span class="line"><span class="comment">* <span class="doctag">@param</span> id</span></span><br><span class="line"><span class="comment">* <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line">Emp <span class="title function_">getById</span><span class="params">(Integer id)</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>EmpServiceImpl</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> Emp <span class="title function_">getById</span><span class="params">(Integer id)</span> &#123;</span><br><span class="line">	<span class="keyword">return</span> empMapper.getById(id);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>3). EmpController</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//根据id查询</span></span><br><span class="line"><span class="meta">@GetMapping(&quot;/&#123;id&#125;&quot;)</span></span><br><span class="line"><span class="keyword">public</span> Result <span class="title function_">getById</span><span class="params">(<span class="meta">@PathVariable</span> Integer id)</span>&#123;</span><br><span class="line">    <span class="type">Emp</span> <span class="variable">emp</span> <span class="operator">=</span> empService.getById(id);</span><br><span class="line">    <span class="keyword">return</span> Result.success(emp);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>4). 测试</p>
+<p>代码编写完毕后，启动服务器，打开Postman发送 GET 请求，请求连接：<a target="_blank" rel="noopener" href="http://localhost:8080/emps/1">http://localhost:8080/emps/1</a></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/assets/image-20220904221209368.png" alt="image-20220904221209368"> </p>
+<h4 id="3-5-3-保存修改"><a href="#3-5-3-保存修改" class="headerlink" title="3.5.3 保存修改"></a>3.5.3 保存修改</h4><p>assets&#x2F;image-20220904221256025.png</p>
+<p>当用户修改完数据之后，点击保存按钮，就需要将数据提交到服务端，然后服务端需要将数据保存到数据库中。 具体的执行流程为：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/assets/image-20220904221401157.png" alt="image-20220904221401157"> </p>
+<p>接下来，我们就可以根据接口文档进行功能开发了。</p>
+<p><strong>1). EmpMapper</strong></p>
+<p>EmpMapper接口</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//修改员工信息</span></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">update</span><span class="params">(Emp emp)</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>EmpMapper.xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">update</span> <span class="attr">id</span>=<span class="string">&quot;update&quot;</span>&gt;</span></span><br><span class="line">    update emp</span><br><span class="line">    <span class="tag">&lt;<span class="name">set</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;username != null and username != &#x27;&#x27;&quot;</span>&gt;</span></span><br><span class="line">        	username = #&#123;username&#125;,</span><br><span class="line">        <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;password != null and password != &#x27;&#x27;&quot;</span>&gt;</span></span><br><span class="line">       	 	password = #&#123;password&#125;,</span><br><span class="line">        <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;name != null and name != &#x27;&#x27;&quot;</span>&gt;</span></span><br><span class="line">        	name = #&#123;name&#125;,</span><br><span class="line">        <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;gender != null&quot;</span>&gt;</span></span><br><span class="line">        	gender = #&#123;gender&#125;,</span><br><span class="line">        <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;image != null and image != &#x27;&#x27;&quot;</span>&gt;</span></span><br><span class="line">        	image = #&#123;image&#125;,</span><br><span class="line">        <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;job != null&quot;</span>&gt;</span></span><br><span class="line">        	job = #&#123;job&#125;,</span><br><span class="line">        <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;entrydate != null&quot;</span>&gt;</span></span><br><span class="line">        	entrydate = #&#123;entrydate&#125;,</span><br><span class="line">        <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;deptId != null&quot;</span>&gt;</span></span><br><span class="line">        	dept_id = #&#123;deptId&#125;,</span><br><span class="line">        <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">if</span> <span class="attr">test</span>=<span class="string">&quot;updateTime != null&quot;</span>&gt;</span></span><br><span class="line">        	update_time = #&#123;updateTime&#125;</span><br><span class="line">        <span class="tag">&lt;/<span class="name">if</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">set</span>&gt;</span></span><br><span class="line">    where id = #&#123;id&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">update</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>2). EmpService &#x2F; EmpServiceImpl</strong></p>
+<p>EmpService </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 更新员工</span></span><br><span class="line"><span class="comment">* <span class="doctag">@param</span> emp</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">update</span><span class="params">(Emp emp)</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p>EmpServiceImpl</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">update</span><span class="params">(Emp emp)</span> &#123;</span><br><span class="line">    emp.setUpdateTime(LocalDateTime.now()); <span class="comment">//更新修改时间为当前时间</span></span><br><span class="line">    empMapper.update(emp);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+<p><strong>3). EmpController</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//修改</span></span><br><span class="line"><span class="meta">@PutMapping</span></span><br><span class="line"><span class="keyword">public</span> Result <span class="title function_">update</span><span class="params">(<span class="meta">@RequestBody</span> Emp emp)</span>&#123;</span><br><span class="line">    empService.update(emp);</span><br><span class="line">    <span class="keyword">return</span> Result.success();</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<p><strong>4). 测试</strong></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/assets/image-20220904221941144.png" alt="image-20220904221941144"> </p>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="smithfont smith-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d20f536c64d06e5fcf4bfe2ec5dc25d.jpg" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d20f536c64d06e5fcf4bfe2ec5dc25d.jpg" title="头像" alt="头像"></a><div class="post-copyright__author_name">Smith</div><div class="post-copyright__author_desc">人生太短，要干的事太多，我要争分夺秒</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://smithhs.cn/2026/04/25/2026-04-25-SpringBoot&amp;Mybatis%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://smithhs.cn/2026/04/25/2026-04-25-SpringBoot&amp;Mybatis%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/')">SpringBoot&amp;Mybatis综合案例</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="smith.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="smithfont smith-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="smith.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="smithfont smith-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://smithhs.cn/2026/04/25/2026-04-25-SpringBoot&amp;Mybatis%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=SpringBoot&amp;Mybatis综合案例&amp;url=https://smithhs.cn/2026/04/25/2026-04-25-SpringBoot&amp;Mybatis%E7%BB%BC%E5%90%88%E6%A1%88%E4%BE%8B/&amp;pic=https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200&amp;q=80" rel="external nofollow noreferrer noopener"><i class="smithfont smith-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="smithfont smith-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://smithhs.cn" target="_blank">Smith</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/Java/"><span class="tags-punctuation"> <i class="smithfont smith-icon-tag"></i></span>Java<span class="tagsPageCount">67</span></a><a class="post-meta__box__tags" href="/tags/JavaWeb/"><span class="tags-punctuation"> <i class="smithfont smith-icon-tag"></i></span>JavaWeb<span class="tagsPageCount">39</span></a><a class="post-meta__box__tags" href="/tags/%E5%90%8E%E7%AB%AF/"><span class="tags-punctuation"> <i class="smithfont smith-icon-tag"></i></span>后端<span class="tagsPageCount">49</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1681455691814.png" data-sites="wechat,weibo,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2026/04/25/2026-04-25-api%E6%8E%A5%E5%8F%A3%E6%96%87%E6%A1%A3/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200&amp;q=80" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">api接口文档</div></div></a></div><div class="next-post pull-right"><a href="/2026/04/27/2026-04-27-SpringBootWeb%E7%99%BB%E5%BD%95%E8%AE%A4%E8%AF%81/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/image-20230105085212629.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">SpringBootWeb登录认证</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="smithfont smith-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/2026/03/19/2026-03-19-04-Web%E5%90%8E%E7%AB%AF%E5%9F%BA%E7%A1%80(%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86)/" title="04-Web后端基础(基础知识)"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/20250211204728.png" alt="cover"><div class="content is-center"><div class="date"><i class="smithfont smith-icon-calendar-days fa-fw"></i> 2026-03-19</div><div class="title">04-Web后端基础(基础知识)</div></div></a></div><div><a href="/2026/03/19/2026-03-19-11-%E5%90%8E%E7%AB%AFWeb%E5%AE%9E%E6%88%98(%E8%87%AA%E5%B7%B1%E5%AE%8C%E6%88%90)/" title="11-后端Web实战(自己完成)"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/20250310101827.png" alt="cover"><div class="content is-center"><div class="date"><i class="smithfont smith-icon-calendar-days fa-fw"></i> 2026-03-19</div><div class="title">11-后端Web实战(自己完成)</div></div></a></div><div><a href="/2026/03/19/2026-03-19-07-%E5%90%8E%E7%AB%AFWeb%E5%AE%9E%E6%88%98(%E9%83%A8%E9%97%A8%E7%AE%A1%E7%90%86)/" title="07-后端Web实战(部门管理)"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/20250216103352.png" alt="cover"><div class="content is-center"><div class="date"><i class="smithfont smith-icon-calendar-days fa-fw"></i> 2026-03-19</div><div class="title">07-后端Web实战(部门管理)</div></div></a></div><div><a href="/2026/03/19/2026-03-19-10-%E5%90%8E%E7%AB%AFWeb%E5%AE%9E%E6%88%98(%E5%91%98%E5%B7%A5%E7%AE%A1%E7%90%86)/" title="10-后端Web实战(员工管理)"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/20250308161321.png" alt="cover"><div class="content is-center"><div class="date"><i class="smithfont smith-icon-calendar-days fa-fw"></i> 2026-03-19</div><div class="title">10-后端Web实战(员工管理)</div></div></a></div><div><a href="/2026/03/19/2026-03-19-08-%E5%90%8E%E7%AB%AFWeb%E5%AE%9E%E6%88%98(%E5%91%98%E5%B7%A5%E7%AE%A1%E7%90%86)/" title="08-后端Web实战(员工管理)"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/20250216194944.png" alt="cover"><div class="content is-center"><div class="date"><i class="smithfont smith-icon-calendar-days fa-fw"></i> 2026-03-19</div><div class="title">08-后端Web实战(员工管理)</div></div></a></div><div><a href="/2026/03/19/2026-03-19-13-%E5%90%8E%E7%AB%AFWeb%E8%BF%9B%E9%98%B6(AOP)/" title="13-后端Web进阶(AOP)"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/20250311090750.png" alt="cover"><div class="content is-center"><div class="date"><i class="smithfont smith-icon-calendar-days fa-fw"></i> 2026-03-19</div><div class="title">13-后端Web进阶(AOP)</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="smithfont smith-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SpringBootWeb%E6%A1%88%E4%BE%8B"><span class="toc-number">1.</span> <span class="toc-text">SpringBootWeb案例</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-number">1.1.</span> <span class="toc-text">1. 准备工作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E9%9C%80%E6%B1%82"><span class="toc-number">1.1.1.</span> <span class="toc-text">1.1 需求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="toc-number">1.1.2.</span> <span class="toc-text">1.2 环境搭建</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E5%BC%80%E5%8F%91%E8%A7%84%E8%8C%83"><span class="toc-number">1.1.3.</span> <span class="toc-text">1.3 开发规范</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-1-REST%E9%A3%8E%E6%A0%BC"><span class="toc-number">1.1.3.1.</span> <span class="toc-text">1.3.1 REST风格</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-2-%E7%BB%9F%E4%B8%80%E5%93%8D%E5%BA%94%E7%BB%93%E6%9E%9C"><span class="toc-number">1.1.3.2.</span> <span class="toc-text">1.3.2 统一响应结果</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-3-3-%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B"><span class="toc-number">1.1.3.3.</span> <span class="toc-text">1.3.3 开发流程</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E9%83%A8%E9%97%A8%E7%AE%A1%E7%90%86"><span class="toc-number">1.2.</span> <span class="toc-text">2. 部门管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E6%9F%A5%E8%AF%A2%E9%83%A8%E9%97%A8"><span class="toc-number">1.2.1.</span> <span class="toc-text">2.1 查询部门</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-1-%E9%9C%80%E6%B1%82"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">2.1.1 需求</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-2-%E5%BC%80%E5%8F%91"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">2.1.2 开发</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-3-%E6%B5%8B%E8%AF%95"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">2.1.3 测试</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E5%88%A0%E9%99%A4%E9%83%A8%E9%97%A8"><span class="toc-number">1.2.2.</span> <span class="toc-text">2.2 删除部门</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-1-%E9%9C%80%E6%B1%82"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">2.2.1 需求</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-2-%E5%BC%80%E5%8F%91"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">2.2.2 开发</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-3-%E6%B5%8B%E8%AF%95"><span class="toc-number">1.2.2.3.</span> <span class="toc-text">2.2.3 测试</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E6%96%B0%E5%A2%9E%E9%83%A8%E9%97%A8"><span class="toc-number">1.2.3.</span> <span class="toc-text">2.3 新增部门</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-1-%E9%9C%80%E6%B1%82"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">2.3.1 需求</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-2-%E5%BC%80%E5%8F%91"><span class="toc-number">1.2.3.2.</span> <span class="toc-text">2.3.2 开发</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-3-%E6%B5%8B%E8%AF%95"><span class="toc-number">1.2.3.3.</span> <span class="toc-text">2.3.3 测试</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-%E8%AF%B7%E6%B1%82%E8%B7%AF%E5%BE%84"><span class="toc-number">1.2.4.</span> <span class="toc-text">2.4 请求路径</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%91%98%E5%B7%A5%E7%AE%A1%E7%90%86"><span class="toc-number">1.3.</span> <span class="toc-text">3. 员工管理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E5%88%86%E9%A1%B5%E6%9F%A5%E8%AF%A2"><span class="toc-number">1.3.1.</span> <span class="toc-text">3.1 分页查询</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-1-%E9%9C%80%E6%B1%82"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">3.1.1 需求</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-2-%E5%88%86%E6%9E%90"><span class="toc-number">1.3.1.2.</span> <span class="toc-text">3.1.2 分析</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#3-1-2-1-%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.3.1.2.1.</span> <span class="toc-text">3.1.2.1 介绍</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-1-2-2-%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92"><span class="toc-number">1.3.1.2.2.</span> <span class="toc-text">3.1.2.2 参数传递</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-1-2-3-PageBean%E5%AE%9A%E4%B9%89"><span class="toc-number">1.3.1.2.3.</span> <span class="toc-text">3.1.2.3 PageBean定义</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-3-%E5%BC%80%E5%8F%91"><span class="toc-number">1.3.1.3.</span> <span class="toc-text">3.1.3 开发</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-4-%E6%B5%8B%E8%AF%95"><span class="toc-number">1.3.1.4.</span> <span class="toc-text">3.1.4 测试</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-5-%E6%80%9D%E8%80%83"><span class="toc-number">1.3.1.5.</span> <span class="toc-text">3.1.5 思考</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E5%88%86%E9%A1%B5%E6%8F%92%E4%BB%B6"><span class="toc-number">1.3.2.</span> <span class="toc-text">3.2 分页插件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-1-%E4%BB%8B%E7%BB%8D"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">3.2.1 介绍</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-2-%E5%88%86%E9%A1%B5%E5%AE%9E%E7%8E%B0"><span class="toc-number">1.3.2.2.</span> <span class="toc-text">3.2.2 分页实现</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-3-%E6%B5%8B%E8%AF%95"><span class="toc-number">1.3.2.3.</span> <span class="toc-text">3.2.3 测试</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E5%88%86%E9%A1%B5%E6%9F%A5%E8%AF%A2-%E6%9D%A1%E4%BB%B6"><span class="toc-number">1.3.3.</span> <span class="toc-text">3.3 分页查询(条件)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-1-%E9%9C%80%E6%B1%82"><span class="toc-number">1.3.3.1.</span> <span class="toc-text">3.3.1 需求</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-2-%E5%BC%80%E5%8F%91"><span class="toc-number">1.3.3.2.</span> <span class="toc-text">3.3.2 开发</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-3-%E6%B5%8B%E8%AF%95"><span class="toc-number">1.3.3.3.</span> <span class="toc-text">3.3.3 测试</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-%E5%88%A0%E9%99%A4%E5%91%98%E5%B7%A5"><span class="toc-number">1.3.4.</span> <span class="toc-text">3.4 删除员工</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-4-1-%E9%9C%80%E6%B1%82"><span class="toc-number">1.3.4.1.</span> <span class="toc-text">3.4.1 需求</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-4-2-%E5%BC%80%E5%8F%91"><span class="toc-number">1.3.4.2.</span> <span class="toc-text">3.4.2 开发</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-4-3-%E6%B5%8B%E8%AF%95"><span class="toc-number">1.3.4.3.</span> <span class="toc-text">3.4.3 测试</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-%E6%96%B0%E5%A2%9E%E5%91%98%E5%B7%A5"><span class="toc-number">1.3.5.</span> <span class="toc-text">3.4 新增员工</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-4-1-%E9%9C%80%E6%B1%82-1"><span class="toc-number">1.3.5.1.</span> <span class="toc-text">3.4.1 需求</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-4-2-%E5%BC%80%E5%8F%91-1"><span class="toc-number">1.3.5.2.</span> <span class="toc-text">3.4.2 开发</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-4-3-%E6%B5%8B%E8%AF%95-1"><span class="toc-number">1.3.5.3.</span> <span class="toc-text">3.4.3 测试</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5-%E4%BF%AE%E6%94%B9%E5%91%98%E5%B7%A5"><span class="toc-number">1.3.6.</span> <span class="toc-text">3.5 修改员工</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-5-1-%E9%9C%80%E6%B1%82"><span class="toc-number">1.3.6.1.</span> <span class="toc-text">3.5.1 需求</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-5-2-%E6%9F%A5%E8%AF%A2%E5%9B%9E%E6%98%BE"><span class="toc-number">1.3.6.2.</span> <span class="toc-text">3.5.2 查询回显</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-5-3-%E4%BF%9D%E5%AD%98%E4%BF%AE%E6%94%B9"><span class="toc-number">1.3.6.3.</span> <span class="toc-text">3.5.3 保存修改</span></a></li></ol></li></ol></li></ol></li></ol></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2022 - 2026 By <a class="footer-bar-link" href="/" title="Smith" target="_blank">Smith</a></div></div><div id="footer-type-tips"></div><div class="js-pjax"><script>function subtitleType () {
+  fetch('https://v1.hitokoto.cn')
+    .then(response => response.json())
+    .then(data => {
+      if (true) {
+        const from = '出自 ' + data.from
+        const sub = []
+        sub.unshift(data.hitokoto, from)
+        window.typed = new Typed('#footer-type-tips', {
+          strings: sub,
+          startDelay: 300,
+          typeSpeed: 150,
+          loop: true,
+          backSpeed: 50,
+        })
+      } else {
+        document.getElementById('footer-type-tips').innerHTML = data.hitokoto
+      }
+    })
+}
+
+if (true) {
+  if (typeof Typed === 'function') {
+    subtitleType()
+  } else {
+    getScript('https://cdn.jsdelivr.net/npm/typed.js@2.0.12/dist/typed.min.js').then(subtitleType)
+  }
+} else {
+  subtitleType()
+}
+</script></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/Smithhss/smithhs.github.io.git" title="Hexo">Hexo</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">199</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">69</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">3</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="smithfont smith-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://smithhs.cn/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.png" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://github.com/Smithhss" title="Github"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/GitHub.png" alt="Github"/><span class="back-menu-item-text">Github</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="smithfont smith-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="smithfont smith-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="smithfont smith-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="smithfont smith-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="smithfont smith-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="smithfont smith-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/dailyPhoto/"><i class="smithfont smith-icon-camera faa-tada" style="font-size: 0.9em;"></i><span> 每日照片</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wallpaper/"><i class="smithfont smith-icon-image faa-tada" style="font-size: 0.9em;"></i><span> 壁纸</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wordScenery/"><i class="smithfont smith-icon-font faa-tada" style="font-size: 0.9em;"></i><span> 文字风景</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="smithfont smith-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于我</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="smithfont smith-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/love/"><i class="smithfont smith-icon-heart faa-tada" style="font-size: 0.9em;"></i><span> 爱情</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="smithfont smith-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Android-Studio/" style="font-size: 0.88rem;">Android Studio<sup>1</sup></a><a href="/tags/App/" style="font-size: 0.88rem;">App<sup>1</sup></a><a href="/tags/Butterfly/" style="font-size: 0.88rem;">Butterfly<sup>1</sup></a><a href="/tags/C/" style="font-size: 0.88rem;">C++<sup>3</sup></a><a href="/tags/CSS/" style="font-size: 0.88rem;">CSS<sup>1</sup></a><a href="/tags/Cisco-Packet-Tracer/" style="font-size: 0.88rem;">Cisco Packet Tracer<sup>1</sup></a><a href="/tags/Docker/" style="font-size: 0.88rem;">Docker<sup>2</sup></a><a href="/tags/Easypan/" style="font-size: 0.88rem;">Easypan<sup>2</sup></a><a href="/tags/FurtherMathematics/" style="font-size: 0.88rem;">FurtherMathematics<sup>1</sup></a><a href="/tags/GPT/" style="font-size: 0.88rem;">GPT<sup>1</sup></a><a href="/tags/Git2/" style="font-size: 0.88rem;">Git2<sup>1</sup></a><a href="/tags/HTML/" style="font-size: 0.88rem;">HTML<sup>1</sup></a><a href="/tags/Hexo/" style="font-size: 0.88rem;">Hexo<sup>1</sup></a><a href="/tags/Java/" style="font-size: 0.88rem;">Java<sup>67</sup></a><a href="/tags/JavaScript/" style="font-size: 0.88rem;">JavaScript<sup>1</sup></a><a href="/tags/Jrebel/" style="font-size: 0.88rem;">Jrebel<sup>1</sup></a><a href="/tags/LeetCode/" style="font-size: 0.88rem;">LeetCode<sup>1</sup></a><a href="/tags/Linux/" style="font-size: 0.88rem;">Linux<sup>3</sup></a><a href="/tags/Markdown/" style="font-size: 0.88rem;">Markdown<sup>2</sup></a><a href="/tags/Maven/" style="font-size: 0.88rem;">Maven<sup>2</sup></a><a href="/tags/MyBatis/" style="font-size: 0.88rem;">MyBatis<sup>1</sup></a><a href="/tags/MyBatis-Plus/" style="font-size: 0.88rem;">MyBatis-Plus<sup>1</sup></a><a href="/tags/Mysql/" style="font-size: 0.88rem;">Mysql<sup>1</sup></a><a href="/tags/Navicat/" style="font-size: 0.88rem;">Navicat<sup>1</sup></a><a href="/tags/NoSql/" style="font-size: 0.88rem;">NoSql<sup>1</sup></a><a href="/tags/Nodejs/" style="font-size: 0.88rem;">Nodejs<sup>2</sup></a><a href="/tags/Python/" style="font-size: 0.88rem;">Python<sup>4</sup></a><a href="/tags/Spring/" style="font-size: 0.88rem;">Spring<sup>2</sup></a><a href="/tags/VMware/" style="font-size: 0.88rem;">VMware<sup>2</sup></a><a href="/tags/WeChat/" style="font-size: 0.88rem;">WeChat<sup>1</sup></a><a href="/tags/YouHou/" style="font-size: 0.88rem;">YouHou<sup>1</sup></a><a href="/tags/books/" style="font-size: 0.88rem;">books<sup>1</sup></a><a href="/tags/butterfly/" style="font-size: 0.88rem;">butterfly<sup>1</sup></a><a href="/tags/clash/" style="font-size: 0.88rem;">clash<sup>1</sup></a><a href="/tags/error/" style="font-size: 0.88rem;">error<sup>1</sup></a><a href="/tags/project/" style="font-size: 0.88rem;">project<sup>4</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 0.88rem;">前端<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6/" style="font-size: 0.88rem;">开发框架<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" style="font-size: 0.88rem;">开发环境<sup>1</sup></a><a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="font-size: 0.88rem;">软件工程<sup>1</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="smithfont smith-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="smithfont smith-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="smithfont smith-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="smithfont smith-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="smithfont smith-icon-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="smithfont smith-icon-arrow-up"></i></button></div></div><div id="nav-music"><a id="nav-music-hoverTips" onclick="smith.musicToggle()" accesskey="m">播放音乐</a><div id="console-music-bg"></div><meting-js id="8805965276" server="netease" type="playlist" mutex="true" preload="none" theme="var(--smith-main)" data-lrctype="0" order="random" volume="0.7"></meting-js></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="smithfont smith-icon-xmark"></i></button></nav><div class="is-center" id="loading-database"><i class="smithfont smith-icon-spinner smith-pulse-icon"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="smithfont smith-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="smithfont smith-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="smithfont smith-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="smithfont smith-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="smithfont smith-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="smithfont smith-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="smithfont smith-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="smithfont smith-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="smithfont smith-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="smithfont smith-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="smithfont smith-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="smithfont smith-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="smithfont smith-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="smithfont smith-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="smithfont smith-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="smithfont smith-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="smithfont smith-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://music.163.com/#/my/m/music/playlist?id=464586318&quot;, &quot;_blank&quot;);" style="display: none;"><i class="smithfont smith-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="smithfont smith-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="smithfont smith-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="smithfont smith-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="smithfont smith-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="smithfont smith-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="smithfont smith-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="smithfont smith-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="smithfont smith-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn1.tianli0.top/npm/js-heo@1.0.6/translate/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@6.1.6/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.3.1/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.js"></script><script>var meting_api = "https://api.injahow.cn/meting/?server=:server&type=:type&id=:id&auth=:auth&r=:r";
+</script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/smith-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("07/01/2022 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用史先森!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+      ███████╗███╗   ███╗██╗████████╗██╗  ██╗
+      ██╔════╝████╗ ████║██║╚══██╔══╝██║  ██║
+      ███████╗██╔████╔██║██║   ██║   ███████║
+      ╚════██║██║╚██╔╝██║██║   ██║   ██╔══██║
+      ███████║██║ ╚═╝ ██║██║   ██║   ██║  ██║
+      ╚══════╝╚═╝     ╚═╝╚═╝   ╚═╝   ╚═╝  ╚═╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2022 By 史先森 V1.0.0",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/smith-blog@1.0.0/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 史先森 %c 你正在访问 Smith 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/smith/random.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><input type="hidden" name="page-type" id="page-type" value="post"></div><script async data-pjax src="https://npm.elemecdn.com/smith-theme-static@1.0.0/bubble/bubble.js"></script><script>var visitorMail = "visitor@smithhs.cn";
+</script><script async data-pjax src="https://cdn.jsdelivr.net/npm/waterfall.js@1.1.0/dist/waterfall.min.js"></script><script src="https://cdn.cbd.int/qrcodejs@1.0.0/qrcode.min.js"></script><script src="/js/smith/right_click_menu.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/smith-theme-static@1.0.2/icon/ali_iconfont_css.css"><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/dist/canvas-nest.min.js"></script><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script><script>AOS.init({
+  duration: 800,
+  easing: 'ease-out-cubic',
+  once: true,
+  offset: 50
+});
+</script><script src="https://lib.baomitu.com/pjax/0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  smith.removeGlobalFnEvent('pjax')
+  smith.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script charset="UTF-8" src="https://cdn.cbd.int/smith-theme-static@1.0.2/accesskey/accesskey.js"></script><div id="live2d-container"><canvas id="live2d-canvas"></canvas><button class="live2d-toggle" title="切换看板娘">🎭</button></div><script data-pjax src="/js/smith/live2d.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="smithfont smith-icon-arrow-circle-right"></i></div></div></div></body></html>

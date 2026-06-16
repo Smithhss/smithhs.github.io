@@ -1,0 +1,1001 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>13-后端Web进阶(AOP) | Smith</title><meta name="keywords" content="Java,JavaWeb,后端"><meta name="author" content="Smith"><meta name="copyright" content="Smith"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#fafaf8"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="13-后端Web进阶(AOP)"><meta name="application-name" content="13-后端Web进阶(AOP)"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#fafaf8"><meta property="og:type" content="article"><meta property="og:title" content="13-后端Web进阶(AOP)"><meta property="og:url" content="https://smithhs.cn/2026/03/19/2026-03-19-13-%E5%90%8E%E7%AB%AFWeb%E8%BF%9B%E9%98%B6(AOP)/index.html"><meta property="og:site_name" content="Smith"><meta property="og:description" content="接下来我们进入到AOP的学习。 AOP也是spring框架的第二大核心，我们先来学习AOP的基础。 什么是AOP？ AOP：Aspect Oriented Programming（面向切面编程、面向方面编程），其实说白了，面向切面编程就是面向特定方法编程。 那什么又是面向方法编程呢，为什么又需要面向"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/20250311090750.png"><meta property="article:author" content="Smith"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/20250311090750.png"><meta name="description" content="接下来我们进入到AOP的学习。 AOP也是spring框架的第二大核心，我们先来学习AOP的基础。 什么是AOP？ AOP：Aspect Oriented Programming（面向切面编程、面向方面编程），其实说白了，面向切面编程就是面向特定方法编程。 那什么又是面向方法编程呢，为什么又需要面向"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://smithhs.cn/2026/03/19/2026-03-19-13-%E5%90%8E%E7%AB%AFWeb%E8%BF%9B%E9%98%B6(AOP)/"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="manifest" href="/manifest.json"/><meta name="msapplication-TileColor" content="var(--smith-main)"/><link rel="mask-icon" href="/img/siteicon/apple-icon-180.png" color="#5bbad5"/><link rel="apple-touch-icon" sizes="180x180" href="/img/siteicon/apple-icon-180.png"/><link rel="apple-touch-icon-precomposed" sizes="180x180" href="/img/siteicon/apple-icon-180.png"/><link rel="icon" type="image/png" sizes="32x32" href="/img/siteicon/32.png"/><link rel="icon" type="image/png" sizes="16x16" href="/img/siteicon/16.png"/><link rel="bookmark" href="/img/siteicon/apple-icon-180.png"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2048-2732.jpg" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2732-2048.jpg" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1668-2388.jpg" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2388-1668.jpg" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1536-2048.jpg" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2048-1536.jpg" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1668-2224.jpg" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2224-1668.jpg" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1620-2160.jpg" media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2160-1620.jpg" media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1290-2796.jpg" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2796-1290.jpg" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1179-2556.jpg" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2556-1179.jpg" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1284-2778.jpg" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2778-1284.jpg" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1170-2532.jpg" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2532-1170.jpg" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1125-2436.jpg" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2436-1125.jpg" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1242-2688.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2688-1242.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-828-1792.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1792-828.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1242-2208.jpg" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2208-1242.jpg" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-750-1334.jpg" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1334-750.jpg" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-640-1136.jpg" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1136-640.jpg" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@6.1.6/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"><link rel="stylesheet" href="https://npm.elemecdn.com/smith-theme-static@1.0.2/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: undefined,
+  postHeadAiDescription: {"enable":true,"gptName":"Smith","mode":"api","switchBtn":false,"btnLink":"https://aicos.ink","randomNum":3,"basicWordCount":1000,"key":"sk-fpYVeik6Ps1EpZsVEbZpipNzy0Hal0Y0G9RpjexTGcpCLflG","Referer":"https://aicos.ink"},
+  diytitle: {"enable":true,"leaveTitle":"再看看嘛🌈！","backTitle":"欢迎回来✌️！"},
+  LA51: undefined,
+  greetingBox: {"enable":true,"default":"晚上好👋","list":[{"greeting":"晚安😴","startTime":0,"endTime":5},{"greeting":"早上好鸭👋, 祝你一天好心情！","startTime":6,"endTime":9},{"greeting":"上午好👋, 状态很好，鼓励一下～","startTime":10,"endTime":10},{"greeting":"11点多啦, 在坚持一下就吃饭啦～","startTime":11,"endTime":11},{"greeting":"午安👋, 宝贝","startTime":12,"endTime":14},{"greeting":"🌈充实的一天辛苦啦！","startTime":14,"endTime":18},{"greeting":"19点喽, 奖励一顿丰盛的大餐吧🍔。","startTime":19,"endTime":19},{"greeting":"晚上好👋, 在属于自己的时间好好放松😌~","startTime":20,"endTime":24}]},
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  music_page_default: "nav_music",
+  home_banner: {"enable":true,"interval":5000,"count":5},
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: true,
+  mainTone: undefined,
+  authorStatus: {"skills":["💻 后端开发 Java / Spring Cloud","🌐 前端探索 React / TypeScript","🤖 AI 工具深度用户","🏠 智能家居折腾达人","🔨 从设计到部署一条龙","📝 偶尔写写博客记录生活","🎵 听歌写代码双线并行","🚀 脚踏实地行动派"]},
+  algolia: undefined,
+  localSearch: {"path":"/search.json","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":240},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: Smith","link":"链接: ","source":"来源: Smith","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#4f7cff","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.2.0/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.2.0/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: 'Smith',
+  title: '13-后端Web进阶(AOP)',
+  postAI: '',
+  pageFillDescription: '1. AOP基础, 1.1 AOP入门, 1.2 AOP核心概念, 2. AOP进阶, 2.1 通知类型, 2.2 通知顺序, 2.3 切入点表达式, 2.3.1 execution, 2.3.2 @annotation, 2.4连接点, 3. AOP案例, 3.1 需求, 3.2 分析, 3.3 步骤, 3.4 代码实现, 3.6 获取当前登录员工, 3.6.1 ThreadLocal, 3.6.2 记录当前登录员工接下来我们进入到的学习也是框架的第二大核心我们先来学习的基础什么是面向切面编程面向方面编程其实说白了面向切面编程就是面向特定方法编程那什么又是面向方法编程呢为什么又需要面向方法编程呢来我们举个例子做一个说明比如我们这里有一个项目项目中开发了很多的业务功能然而有一些业务功能执行效率比较低执行耗时较长我们需要针对于这些业务方法进行优化那首先第一步就需要定位出执行耗时比较长的业务方法再针对于业务方法再来进行优化此时我们就需要统计当前这个项目当中每一个业务方法的执行耗时那么统计每一个业务方法的执行耗时该怎么实现可能多数人首先想到的就是在每一个业务方法运行之前记录这个方法运行的开始时间在这个方法运行完毕之后再来记录这个方法运行的结束时间拿结束时间减去开始时间不就是这个方法的执行耗时吗而这个功能如果通过来实现我们只需要单独定义下面这一小段代码即可不需要修改原始的任何业务方法即可记录每一个业务方法的执行耗时所以的优势主要体现在以下四个方面减少重复代码不需要在业务方法中定义大量的重复性的代码只需要将重复性的代码抽取到程序中即可代码无侵入在基于实现这些业务功能时对原有的业务代码是没有任何侵入的不需要修改任何的业务代码提高开发效率维护方便是一种思想而在框架中对这种思想进行了实现那我们要学习的就是基础入门在了解了什么是后我们下面通过一个快速入门程序体验下的开发并掌握中的开发步骤需求统计部门管理各个业务层方法执行耗时原始方式在原始的实现方式中我们需要在业务层的也一个方法执行执行获取方法运行的开始时间然后运行原始的方法逻辑最后在每一个方法运行结束时获取方法运行结束时间计算执行耗时实现步骤为演示方便可以直接导入资料中提供的项目工程导入依赖在文件中导入的依赖编写程序针对于特定方法根据业务需要进行编程当前类为切面类记录方法执行开始时间执行原始方法记录方法执行结束时间计算方法执行耗时方法执行耗时毫秒重新启动服务打开浏览器访问部门管理的功能进行测试我们可以看到在控制台中输出了方法的执行耗时我们通过入门程序完成了业务方法执行耗时的统计那其实的功能远不止于此常见的应用场景如下记录系统的操作日志权限控制事务管理我们前面所讲解的事务管理底层其实也是通过来实现的只要添加注解之后程序自动会在原始方法运行前先来开启事务在原始方法运行完毕之后提交或回滚事务这些都是应用的典型场景通过入门程序我们也应该感受到了面向切面编程的一些优势代码无侵入没有修改原始的业务方法就已经对原始的业务方法进行了功能的增强或者是功能的改变减少了重复代码提高开发效率维护方便核心概念通过的快速入门感受了一下面向切面编程的开发方式下面我们再来学习当中涉及到的一些核心概念连接点可以被控制的方法暗含方法执行时的相关信息连接点指的是可以被控制的方法例如入门程序当中所有的业务方法都是可以被控制的方法在提供的当中封装了连接点方法在执行时的相关信息后面会有具体的讲解通知指哪些重复的逻辑也就是共性功能最终体现为一个方法在入门程序中是需要统计各个业务方法的执行耗时的此时我们就需要在这些业务方法运行开始之前先记录这个方法运行的开始时间在每一个业务方法运行结束的时候再来记录这个方法运行的结束时间是在面向切面编程当中我们只需要将这部分重复的代码逻辑抽取出来单独定义抽取出来的这一部分重复的逻辑也就是共性的功能切入点匹配连接点的条件通知仅会在切入点方法执行时被应用在通知当中我们所定义的共性功能到底要应用在哪些方法上此时就涉及到了切入点概念切入点指的是匹配连接点的条件通知仅会在切入点方法运行时才会被应用在的开发当中我们通常会通过一个切入点表达式来描述切入点后面会有详解假如切入点表达式改为此时就代表仅仅只有这一个方法是切入点只有方法在运行的时候才会应用通知切面描述通知与切入点的对应关系通知切入点当通知和切入点结合在一起就形成了一个切面通过切面就能够描述当前程序需要针对于哪个原始方法在什么时候执行什么样的操作而切面所在的类称之为切面类被注解标识的类目标对象通知所应用的对象目标对象指的就是通知所应用的对象我们就称之为目标对象的核心概念我们介绍完毕之后接下来我们再来分析一下我们所定义的通知是如何与目标对象结合在一起对目标对象当中的方法进行功能增强的的底层是基于动态代理技术来实现的也就是说在程序运行的时候会自动的基于动态代理技术为目标对象生成一个对应的代理对象在代理对象当中就会对目标对象当中的原始方法进行功能的增强旨在管理对象的过程中主要通过底层的动态代理机制对特定的方法进行编程进阶的基础知识学习完之后下面我们对当中的各个细节进行详细的学习主要分为个部分通知类型通知顺序切入点表达式我们先来学习第一部分通知类型通知类型在入门程序当中我们已经使用了一种功能最为强大的通知类型环绕通知当前类为切面类记录方法执行开始时间执行原始方法记录方法执行结束时间计算方法执行耗时方法执行耗时毫秒只要我们在通知方法上加上了注解就代表当前通知是一个环绕通知通知类型环绕通知此注解标注的通知方法在目标方法前后都被执行前置通知此注解标注的通知方法在目标方法前被执行后置通知此注解标注的通知方法在目标方法后被执行无论是否有异常都会执行返回后通知此注解标注的通知方法在目标方法后被执行有异常不会执行异常后通知此注解标注的通知方法发生异常后执行下面我们通过代码演示来加深对于不同通知类型的理解前置通知环绕通知调用目标对象的原始方法执行原始方法如果执行时有异常环绕通知中的后置代码不会在执行了后置通知返回后通知程序在正常执行的情况下会执行的后置通知异常通知程序在出现异常的情况下执行的后置通知重新启动服务进行测试没有异常情况下使用测试查询所有部门数据查看中控制台日志输出程序没有发生异常的情况下标识的通知方法不会执行出现异常情况下修改业务实现类中的代码添加异常模拟异常省略其他代码重新启动服务测试发生异常情况下通知的执行查看中控制台日志输出程序发生异常的情况下标识的通知方法不会执行标识的通知方法执行了互斥环绕通知中原始方法调用时有异常通知中的环绕后的代码逻辑也不会在执行了因为原始方法调用已经出异常了在使用通知时的注意事项环绕通知需要自己调用来让原始方法执行其他通知不需要考虑目标方法执行环绕通知方法的返回值必须指定为来接收原始方法的返回值否则原始方法执行完毕是获取不到返回值的五种常见的通知类型我们已经测试完毕了此时我们再来看一下刚才所编写的代码有什么问题吗前置通知环绕通知后置通知返回后通知程序在正常执行的情况下会执行的后置通知异常通知程序在出现异常的情况下执行的后置通知我们发现啊每一个注解里面都指定了切入点表达式而且这些切入点表达式都一模一样此时我们的代码当中就存在了大量的重复性的切入点表达式假如此时切入点表达式需要变动就需要将所有的切入点表达式一个一个的来改动就变得非常繁琐了怎么来解决这个切入点表达式重复的问题答案就是抽取提供了注解该注解的作用是将公共的切入点表达式抽取出来需要用到时引用该切入点表达式即可切入点方法公共的切入点表达式前置通知引用切入点环绕通知调用目标对象的原始方法执行原始方法在执行时发生异常后续代码不在执行后置通知返回后通知程序在正常执行的情况下会执行的后置通知异常通知程序在出现异常的情况下执行的后置通知需要注意的是当切入点方法使用修饰时仅能在当前切面类中引用该表达式当外部其他切面类中也要引用当前类中的切入点表达式就需要把改为而在引用的时候具体的语法为引用切面类中的切入点表达式通知顺序讲解完了中所支持的种通知类型之后接下来我们再来研究通知的执行顺序当在项目开发当中我们定义了多个切面类而多个切面类中多个切入点都匹配到了同一个目标方法此时当目标方法在运行的时候这多个切面类当中的这些通知方法都会运行此时我们就有一个疑问这多个通知方法到底哪个先运行哪个后运行下面我们通过程序来验证这里呢我们就定义两种类型的通知进行测试一种是前置通知一种是后置通知定义多个切面类前置通知后置通知前置通知后置通知前置通知后置通知重新启动服务测试通知的执行顺序备注把实现类中模拟异常的代码删除或注释掉注释掉其他切面类把注释即可仅保留这样就可以清晰看到执行的结果而不被其他切面类干扰使用测试查询所有部门数据查看中控制台日志输出通过以上程序运行可以看出在不同切面类中默认按照切面类的类名字母排序目标方法前的通知方法字母排名靠前的先执行目标方法后的通知方法字母排名靠前的后执行如果我们想控制通知的执行顺序有两种方式修改切面类的类名这种方式非常繁琐而且不便管理使用提供的注解使用注解控制通知的执行顺序切面类的执行顺序前置通知数字越小先执行后置通知数字越小越后执行前置通知后置通知切面类的执行顺序前置通知数字越小先执行后置通知数字越小越后执行前置通知后置通知切面类的执行顺序前置通知数字越小先执行后置通知数字越小越后执行前置通知后置通知重新启动服务测试通知执行顺序通知的执行顺序大家主要知道两点即可不同的切面类当中默认情况下通知的执行顺序是与切面类的类名字母排序是有关系的可以在切面类上面加上注解来控制不同的切面类通知的执行顺序切入点表达式从的入门程序到现在我们一直都在使用切入点表达式来描述切入点下面我们就来详细的介绍一下切入点表达式的具体写法切入点表达式描述切入点方法的一种表达式作用主要用来决定项目中的哪些方法需要加入通知常见形式根据方法的签名来匹配根据注解匹配首先我们先学习第一种最为常见的切入点表达式主要根据方法的返回值包名类名方法名方法参数等信息来匹配语法为访问修饰符返回值包名类名方法名方法参数异常其中带的表示可以省略的部分访问修饰符可省略比如包名类名可省略异常可省略注意是方法上声明抛出的异常不是实际抛出的异常示例可以使用通配符描述切入点单个独立的任意符号可以通配任意返回值包名类名方法名任意类型的一个参数也可以通配包类方法名的一部分多个连续的任意符号可以通配任意层级的包或任意类型任意个数的参数切入点表达式的语法规则方法的访问修饰符可以省略返回值可以使用号代替任意返回值类型包名可以使用号代替代表任意包一层包使用一个使用配置包名标识此包以及此包下的所有子包类名可以使用号代替标识任意类方法名可以使用号代替表示任意方法可以使用配置参数一个任意类型的参数可以使用配置参数任意个任意类型的参数切入点表达式示例省略方法的修饰符号使用代替返回值类型使用代替包名一层包使用一个使用省略包名使用代替类名使用代替方法名使用代替参数使用省略参数注意事项根据业务需要可以使用且或非来组合比较复杂的切入点表达式切入点表达式的书写建议所有业务方法名在命名时尽量规范方便切入点表达式快速匹配如查询类方法都是开头更新类方法都是开头业务类省略代码省略代码省略代码省略代码其他代码匹配类中以开头的方法描述切入点方法通常基于接口描述而不是直接描述实现类增强拓展性在满足业务需要的前提下尽量缩小切入点的匹配范围如包名匹配尽量不使用使用匹配单个包切入点表达式书写建议所有业务方法名在命名时尽量规范方便切入点表达式快速匹配如描述切入点方法通常基于接口描述而不是直接描述实现类增强拓展性在满足业务需要的前提下尽量缩小切入点的匹配范围如包名尽量不使用使用匹配单个包已经学习了切入点表达式的语法那么如果我们要匹配多个无规则的方法比如和这两个方法这个时候我们基于这种切入点表达式来描述就不是很方便了而在之前我们是将两个切入点表达式组合在了一起完成的需求这个是比较繁琐的我们可以借助于另一种切入点表达式来描述这一类的切入点从而来简化切入点表达式的书写实现步骤编写自定义注解在业务类要做为连接点的方法上添加自定义注解自定义注解业务类自定义注解表示当前方法属于目标方法模拟异常自定义注解表示当前方法属于目标方法删除部门切面类针对方法方法进行前置通知和后置通知前置通知后置通知重启服务测试查询所有部门数据查看控制台日志到此我们两种常见的切入点表达式我已经介绍完了切入点表达式根据我们所指定的方法的描述信息来匹配切入点方法这种方式也是最为常用的一种方式如果我们要匹配的切入点方法的方法名不规则或者有一些比较特殊的需求通过切入点表达式描述比较繁琐切入点表达式基于注解的方式来匹配切入点方法这种方式虽然多一步操作我们需要自定义一个注解但是相对来比较灵活我们需要匹配哪个方法就在方法上加上对应的注解就可以了根据业务需要可以使用来组合比较复杂的切入点表达式连接点我们前面在讲解核心概念的时候我们提到过什么是连接点连接点可以简单理解为可以被控制的方法我们目标对象当中所有的方法是不是都是可以被控制的方法而在当中连接点又特指方法的执行在中用抽象了连接点用它可以获得方法执行时的相关信息如目标类名方法名方法参数等对于通知获取连接点信息只能使用类型对于其他四种通知获取连接点信息只能使用它是的父类型案例的相关知识我们就已经全部学习完毕了最后我们要通过一个案例来对进行一个综合的应用需求需求将案例智能学习辅助系统中增删改相关接口的操作日志记录到数据库表中就是当访问部门管理和员工管理当中的增删改相关功能接口时需要详细的操作日志并保存在数据表中便于后期数据追踪操作日志信息包含操作人操作时间执行方法的全类名执行方法名方法运行时参数返回值方法执行时长所记录的日志信息包括当前接口的操作人是谁操作的什么时间点操作的以及访问的是哪个类当中的哪个方法在访问这个方法的时候传入进来的参数是什么访问这个方法最终拿到的返回值是什么以及整个接口方法的运行时长是多长时间分析问题项目当中增删改相关的方法是不是有很多很多问题我们需要针对每一个功能接口方法进行修改在每一个功能接口当中都来记录这些操作日志吗这种做法比较繁琐以上两个问题的解决方案可以使用解决每一个增删改功能接口中要实现的记录操作日志的逻辑代码是相同可以把这部分记录操作日志的通用的重复性的逻辑代码抽取出来定义在一个通知方法当中我们通过面向切面编程的方式在不改动原始功能的基础上来对原始的功能进行增强目前我们所增强的功能就是来记录操作日志所以也可以使用的技术来实现使用的技术来实现也是最为简单最为方便的问题既然要基于面向切面编程的方式来完成的功能那么我们要使用五种通知类型当中的哪种通知类型答案环绕通知因为所记录的操作日志当中包括操作人操作时间访问的是哪个类哪个方法方法运行时参数方法的返回值方法的运行时长方法返回值是在原始方法执行后才能获取到的方法的运行时长需要原始方法运行之前记录开始时间原始方法运行之后记录结束时间通过计算获得方法的执行耗时基于以上的分析我们确定要使用环绕通知问题最后一个问题切入点表达式我们该怎么写答案使用来描述切入点表达式要匹配业务接口当中所有的增删改的方法而增删改方法在命名上没有共同的前缀或后缀此时如果使用切入点表达式也可以但是会比较繁琐当遇到增删改的方法名没有规律时就可以使用切入点表达式步骤简单分析了一下大概的实现思路后接下来我们就要来完成案例了案例的实现步骤其实就两步准备工作引入的起步依赖导入资料中准备好的数据库表结构并引入对应的实体类编码实现基于实现自定义注解定义切面类完成记录操作日志的逻辑代码实现请帮我基于中的环绕通知实现记录系统所有增删改功能接口的操作日志具体信息如下日志信息包含操作人操作时间执行方法的全类名执行方法名方法运行时参数返回值方法执行时长功能接口所在包为日志表为表对应的实体类为具体表结构如下操作人操作时间操作的类名操作的方法名方法参数返回值方法执行耗时单位操作日志表并且已经提供了接口来操作并在其中已经定义好了方法用来保存日志数据操作人操作时间操作的类名操作的方法名方法参数返回值方法执行耗时单位操作日志表准备工作在中引入的依赖创建数据库表结构操作日志表操作人操作时间操作的类名操作的方法名方法参数返回值存储格式方法执行耗时单位操作日志表引入资料中准备的实体类操作人操作时间操作类名操作方法名操作方法参数操作方法返回值操作耗时引入资料中准备的日志操作接口插入日志数据自定义注解自定义注解用于标识哪些方法需要记录日志定义记录日志的切面类环绕通知记录开始时间执行方法当前时间耗时构建日志对象需要实现方法插入日志示例方法获取当前用户这里应该根据实际情况从认证信息中获取当前登录用户的示例返回值在需要记录的日志的层的方法上加上注解新增班级重启服务测试操作日志记录功能打开浏览器针对于员工的数据部门的数据进行增删改之后我们打开数据库表结构可以来看一下我们会看到在数据库表中就清晰的记录了谁什么时间点调用了哪个类的哪个方法传入了什么参数返回了什么数据都清晰的记录在数据库中了获取当前登录员工员工登录成功后哪里存储的有当前登录员工的信息给客户端浏览器下发的令牌中如何从令牌中获取当前登录用户的信息呢获取请求头中传递的令牌并解析中已经解析了令牌的信息如何传递给程序呢并不是一个而是的局部变量为每个线程提供一份单独的存储空间具有线程隔离的效果不同的线程之间不会相互干扰常见方法设置当前线程的线程局部变量的值返回当前线程所对应的线程局部变量的值移除当前线程的线程局部变量记录当前登录员工具体操作步骤定义操作的工具类用于操作当前登录员工在引入工具类在中解析完当前登录员工将其存入用完之后需将其删除获取请求的地址判断是否是登录请求如果地址中包含则说明是登录请求放行登录请求放行获取请求中的判断是否为空如果为空响应状态码为空响应状态码响应状态码如果不为空调用工具类的方法解析如果解析失败响应状态码解析成功放行解析失败响应状态码放行清空当前线程绑定的在程序中从中获取当前登录员工的环绕通知记录开始时间执行方法当前时间耗时构建日志对象需要实现方法插入日志示例方法获取当前用户代码优化完毕之后我们重新启动服务测试就可以看到可以获取到不同的登录用户信息了在同一个线程同一个请求中进行数据共享就可以使用',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2026-06-02 11:18:32',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fafaf8')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="https://npm.elemecdn.com/lxgw-wenkai-screen-webfont@1.1.0/style.css" media="print" onload="this.media='all'"><meta name="generator" content="Hexo 7.3.0"></head><body data-type="smith"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d20f536c64d06e5fcf4bfe2ec5dc25d.jpg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/smith-theme-static@1.0.2/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="smithfont smith-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://smithhs.cn/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.png" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://github.com/Smithhss" title="Github"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/GitHub.png" alt="Github"/><span class="back-menu-item-text">Github</span></a></div></div></div></div><a id="site-name" href="/" accesskey="h"><div class="title">Smith</div><i class="smithfont smith-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:smith.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="smithfont smith-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="smithfont smith-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="smithfont smith-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="smithfont smith-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="smithfont smith-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="smithfont smith-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/dailyPhoto/"><i class="smithfont smith-icon-camera faa-tada" style="font-size: 0.9em;"></i><span> 每日照片</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wallpaper/"><i class="smithfont smith-icon-image faa-tada" style="font-size: 0.9em;"></i><span> 壁纸</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wordScenery/"><i class="smithfont smith-icon-font faa-tada" style="font-size: 0.9em;"></i><span> 文字风景</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="smithfont smith-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于我</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="smithfont smith-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/love/"><i class="smithfont smith-icon-heart faa-tada" style="font-size: 0.9em;"></i><span> 爱情</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="smithfont smith-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button only-home" id="travellings_button" title="随机前往一个开往项目网站"><a class="site-page" onclick="smith.totraveling()" title="随机前往一个开往项目网站" href="javascript:void(0);" rel="external nofollow" data-pjax-state="external"><i class="smithfont smith-icon-train"></i></a></div><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="smithfont smith-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="smithfont smith-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="smith.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg" target="_blank"><img class="post-qr-code-img" alt="wechat" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg" target="_blank"><img class="post-qr-code-img" alt="alipay" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Android-Studio/" style="font-size: 1.05rem;">Android Studio<sup>1</sup></a><a href="/tags/App/" style="font-size: 1.05rem;">App<sup>1</sup></a><a href="/tags/Butterfly/" style="font-size: 1.05rem;">Butterfly<sup>1</sup></a><a href="/tags/C/" style="font-size: 1.05rem;">C++<sup>3</sup></a><a href="/tags/CSS/" style="font-size: 1.05rem;">CSS<sup>1</sup></a><a href="/tags/Cisco-Packet-Tracer/" style="font-size: 1.05rem;">Cisco Packet Tracer<sup>1</sup></a><a href="/tags/Docker/" style="font-size: 1.05rem;">Docker<sup>2</sup></a><a href="/tags/Easypan/" style="font-size: 1.05rem;">Easypan<sup>2</sup></a><a href="/tags/FurtherMathematics/" style="font-size: 1.05rem;">FurtherMathematics<sup>1</sup></a><a href="/tags/GPT/" style="font-size: 1.05rem;">GPT<sup>1</sup></a><a href="/tags/Git2/" style="font-size: 1.05rem;">Git2<sup>1</sup></a><a href="/tags/HTML/" style="font-size: 1.05rem;">HTML<sup>1</sup></a><a href="/tags/Hexo/" style="font-size: 1.05rem;">Hexo<sup>1</sup></a><a href="/tags/Java/" style="font-size: 1.05rem;">Java<sup>67</sup></a><a href="/tags/JavaScript/" style="font-size: 1.05rem;">JavaScript<sup>1</sup></a><a href="/tags/Jrebel/" style="font-size: 1.05rem;">Jrebel<sup>1</sup></a><a href="/tags/LeetCode/" style="font-size: 1.05rem;">LeetCode<sup>1</sup></a><a href="/tags/Linux/" style="font-size: 1.05rem;">Linux<sup>3</sup></a><a href="/tags/Markdown/" style="font-size: 1.05rem;">Markdown<sup>2</sup></a><a href="/tags/Maven/" style="font-size: 1.05rem;">Maven<sup>2</sup></a><a href="/tags/MyBatis/" style="font-size: 1.05rem;">MyBatis<sup>1</sup></a><a href="/tags/MyBatis-Plus/" style="font-size: 1.05rem;">MyBatis-Plus<sup>1</sup></a><a href="/tags/Mysql/" style="font-size: 1.05rem;">Mysql<sup>1</sup></a><a href="/tags/Navicat/" style="font-size: 1.05rem;">Navicat<sup>1</sup></a><a href="/tags/NoSql/" style="font-size: 1.05rem;">NoSql<sup>1</sup></a><a href="/tags/Nodejs/" style="font-size: 1.05rem;">Nodejs<sup>2</sup></a><a href="/tags/Python/" style="font-size: 1.05rem;">Python<sup>4</sup></a><a href="/tags/Spring/" style="font-size: 1.05rem;">Spring<sup>2</sup></a><a href="/tags/VMware/" style="font-size: 1.05rem;">VMware<sup>2</sup></a><a href="/tags/WeChat/" style="font-size: 1.05rem;">WeChat<sup>1</sup></a><a href="/tags/YouHou/" style="font-size: 1.05rem;">YouHou<sup>1</sup></a><a href="/tags/books/" style="font-size: 1.05rem;">books<sup>1</sup></a><a href="/tags/butterfly/" style="font-size: 1.05rem;">butterfly<sup>1</sup></a><a href="/tags/clash/" style="font-size: 1.05rem;">clash<sup>1</sup></a><a href="/tags/error/" style="font-size: 1.05rem;">error<sup>1</sup></a><a href="/tags/project/" style="font-size: 1.05rem;">project<sup>4</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 1.05rem;">前端<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6/" style="font-size: 1.05rem;">开发框架<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" style="font-size: 1.05rem;">开发环境<sup>1</sup></a><a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="font-size: 1.05rem;">软件工程<sup>1</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="smithfont smith-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="smithfont smith-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="smithfont smith-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/05/"><span class="card-archive-list-date">五月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">16</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/04/"><span class="card-archive-list-date">四月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">31</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/03/"><span class="card-archive-list-date">三月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">75</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/02/"><span class="card-archive-list-date">二月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">7</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/11/"><span class="card-archive-list-date">十一月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">3</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/10/"><span class="card-archive-list-date">十月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/09/"><span class="card-archive-list-date">九月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">5</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/07/"><span class="card-archive-list-date">七月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="smithfont smith-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="smith.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="smithfont smith-icon-arrows-left-right"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="smith.musicToggle()" title="音乐开关"><a class="music-switch"><i class="smithfont smith-icon-music"></i></a></div></div><div class="console-mask" onclick="smith.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="smithfont smith-icon-arrow-up"></i><span id="percent" onclick="smith.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="smithfont smith-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="smithfont smith-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/" itemprop="url">编程开发</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/Java/" tabindex="-1" itemprop="url"> <span> <i class="smithfont smith-icon-hashtag"></i>Java</span></a><a class="article-meta__tags" href="/tags/JavaWeb/" tabindex="-1" itemprop="url"> <span> <i class="smithfont smith-icon-hashtag"></i>JavaWeb</span></a><a class="article-meta__tags" href="/tags/%E5%90%8E%E7%AB%AF/" tabindex="-1" itemprop="url"> <span> <i class="smithfont smith-icon-hashtag"></i>后端</span></a></span></div></div><h1 class="post-title" itemprop="name headline">13-后端Web进阶(AOP)</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="post-meta-icon smithfont smith-icon-calendar-days"></i><span class="post-meta-label">发表于</span><time itemprop="dateCreated datePublished" datetime="2026-03-19T12:05:54.000Z" title="发表于 2026-03-19 20:05:54">2026-03-19</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="smithfont smith-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">9.5k</span><span class="post-meta-separator"></span><i class="smithfont smith-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>34分钟</span></span><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title="13-后端Web进阶(AOP)"><i class="smithfont smith-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="smithfont smith-icon-spinner smith-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为石家庄"><i class="smithfont smith-icon-location-dot"></i>石家庄</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/20250311090750.png"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><div class="post-ai-description"><div class="ai-title"><i class="smithfont smith-icon-bilibili"></i><div class="ai-title-text">AI-摘要</div><i class="smithfont smith-icon-arrow-rotate-right"></i><i class="smithfont smith-icon-circle-dot" title="朗读摘要"></i><div id="ai-tag">Smith GPT</div></div><div class="ai-explanation">AI初始化中...</div><div class="ai-btn-box"><div class="ai-btn-item">介绍自己 🙈</div><div class="ai-btn-item">生成本文简介 👋</div><div class="ai-btn-item">推荐相关文章 📖</div><div class="ai-btn-item">前往主页 🏠</div><div class="ai-btn-item" id="go-api-link">了解更多</div></div><script data-pjax src="/js/smith/ai_abstract.js"></script></div><article class="post-content" id="article-container" itemscope itemtype="https://smithhs.cn/2026/03/19/2026-03-19-13-%E5%90%8E%E7%AB%AFWeb%E8%BF%9B%E9%98%B6(AOP)/"><header><a class="post-meta-categories" href="/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/" itemprop="url">编程开发</a><a href="/tags/Java/" tabindex="-1" itemprop="url">Java</a><a href="/tags/JavaWeb/" tabindex="-1" itemprop="url">JavaWeb</a><a href="/tags/%E5%90%8E%E7%AB%AF/" tabindex="-1" itemprop="url">后端</a><h1 id="CrawlerTitle" itemprop="name headline">13-后端Web进阶(AOP)</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">Smith</span><time itemprop="dateCreated datePublished" datetime="2026-03-19T12:05:54.000Z" title="undefined 2026-03-19 20:05:54">2026-03-19</time></header><p>接下来我们进入到AOP的学习。 AOP也是spring框架的第二大核心，我们先来学习AOP的基础。</p>
+<p><strong>什么是AOP？</strong></p>
+<p>AOP：Aspect Oriented Programming（面向切面编程、面向方面编程），其实说白了，面向切面编程就是面向特定方法编程。</p>
+<p>那什么又是面向方法编程呢，为什么又需要面向方法编程呢？</p>
+<p>来，我们举个例子做一个说明：</p>
+<p>比如，我们这里有一个项目，项目中开发了很多的业务功能。然而有一些业务功能执行效率比较低，执行耗时较长，我们需要针对于这些业务方法进行优化。 那首先第一步就需要定位出执行耗时比较长的业务方法，再针对于业务方法再来进行优化。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/20250311090750.png" alt="image.png"></p>
+<p>此时我们就需要统计当前这个项目当中每一个业务方法的执行耗时。那么统计每一个业务方法的执行耗时该怎么实现？</p>
+<p>可能多数人首先想到的就是在每一个业务方法运行之前，记录这个方法运行的开始时间。在这个方法运行完毕之后，再来记录这个方法运行的结束时间。拿结束时间减去开始时间，不就是这个方法的执行耗时吗。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/20250311090916.png" alt="image.png"></p>
+<p>而这个功能如果通过AOP来实现，我们只需要单独定义下面这一小段代码即可，不需要修改原始的任何业务方法即可记录每一个业务方法的执行耗时。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/20250311090938.png" alt="image.png"></p>
+<p>所以，AOP的优势主要体现在以下<em>四个方面</em>：</p>
+<ul>
+<li><p>减少重复代码：不需要在业务方法中定义大量的重复性的代码，只需要将重复性的代码抽取到AOP程序中即可。</p>
+</li>
+<li><p>代码无侵入：在基于AOP实现这些业务功能时，对原有的业务代码是没有任何侵入的，不需要修改任何的业务代码。</p>
+</li>
+<li><p>提高开发效率</p>
+</li>
+<li><p>维护方便</p>
+</li>
+</ul>
+<blockquote>
+<p>AOP是一种思想，而在Spring框架中，对这种思想进行了实现，那我们要学习的就是Spring AOP。</p>
+</blockquote>
+<h2 id="1-AOP基础"><a href="#1-AOP基础" class="headerlink" title="1. AOP基础"></a>1. AOP基础</h2><h3 id="1-1-AOP入门"><a href="#1-1-AOP入门" class="headerlink" title="1.1 AOP入门"></a>1.1 AOP入门</h3><p>在了解了什么是AOP后，我们下面通过一个快速入门程序，体验下AOP的开发，并掌握Spring中AOP的开发步骤。</p>
+<ul>
+<li><p><strong>需求：统计部门管理各个业务层方法执行耗时。</strong></p>
+</li>
+<li><p><strong>原始方式：</strong></p>
+</li>
+</ul>
+<p>在原始的实现方式中，我们需要在业务层的也一个方法执行执行，获取方法运行的开始时间； 然后运行原始的方法逻辑； 最后在每一个方法运行结束时，获取方法运行结束时间，计算执行耗时。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/20250311091657.png" alt="image.png"></p>
+<ul>
+<li><strong>SpringAOP实现步骤：</strong></li>
+</ul>
+<p>为演示方便，可以直接导入资料中提供的<code>springboot-aop-quickstart</code>项目工程</p>
+<p>1). 导入依赖：在 pom.xml 文件中导入 AOP 的依赖</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-aop<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>2). 编写AOP程序：针对于特定方法根据业务需要进行编程</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Aspect</span> <span class="comment">//当前类为切面类</span></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">RecordTimeAspect</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Around(&quot;execution(* com.itheima.service.impl.DeptServiceImpl.*(..))&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Object <span class="title function_">recordTime</span><span class="params">(ProceedingJoinPoint pjp)</span> <span class="keyword">throws</span> Throwable &#123;</span><br><span class="line">        <span class="comment">//记录方法执行开始时间</span></span><br><span class="line">        <span class="type">long</span> <span class="variable">begin</span> <span class="operator">=</span> System.currentTimeMillis();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//执行原始方法</span></span><br><span class="line">        <span class="type">Object</span> <span class="variable">result</span> <span class="operator">=</span> pjp.proceed();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//记录方法执行结束时间</span></span><br><span class="line">        <span class="type">long</span> <span class="variable">end</span> <span class="operator">=</span> System.currentTimeMillis();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//计算方法执行耗时</span></span><br><span class="line">        log.info(<span class="string">&quot;方法执行耗时: &#123;&#125;毫秒&quot;</span>,end-begin);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>重新启动SpringBoot服务，打开浏览器访问部门管理的功能进行测试：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/20250311092139.png" alt="image.png"></p>
+<p>我们可以看到，在控制台中输出了方法的执行耗时：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/20250311104238.png" alt="image.png"></p>
+<p>我们通过AOP入门程序完成了业务方法执行耗时的统计，那其实AOP的功能远不止于此，常见的应用场景如下：</p>
+<ul>
+<li>记录系统的操作日志</li>
+<li>权限控制</li>
+<li>事务管理：我们前面所讲解的Spring事务管理，底层其实也是通过AOP来实现的，只要添加@Transactional注解之后，AOP程序自动会在原始方法运行前先来开启事务，在原始方法运行完毕之后提交或回滚事务</li>
+</ul>
+<p>这些都是AOP应用的典型场景。</p>
+<p>通过入门程序，我们也应该感受到了AOP面向切面编程的一些优势：</p>
+<ul>
+<li>代码无侵入：没有修改原始的业务方法，就已经对原始的业务方法进行了功能的增强或者是功能的改变</li>
+<li>减少了重复代码</li>
+<li>提高开发效率</li>
+<li>维护方便</li>
+</ul>
+<h3 id="1-2-AOP核心概念"><a href="#1-2-AOP核心概念" class="headerlink" title="1.2 AOP核心概念"></a>1.2 AOP核心概念</h3><p>通过SpringAOP的快速入门，感受了一下AOP面向切面编程的开发方式。下面我们再来学习AOP当中涉及到的一些核心概念。</p>
+<ul>
+<li><p><strong>连接点：JoinPoint</strong>，可以被AOP控制的方法（暗含方法执行时的相关信息）</p>
+<ul>
+<li><p>连接点指的是可以被aop控制的方法。例如：入门程序当中所有的业务方法都是可以被aop控制的方法。</p>
+</li>
+<li><p>在SpringAOP提供的JoinPoint当中，封装了连接点方法在执行时的相关信息。（后面会有具体的讲解）</p>
+</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/20250311104415.png" alt="image.png"></p>
+</li>
+<li><p><strong>通知：Advice</strong>，指哪些重复的逻辑，也就是共性功能（最终体现为一个方法）</p>
+<ul>
+<li><p>在入门程序中是需要统计各个业务方法的执行耗时的，此时我们就需要在这些业务方法运行开始之前，先记录这个方法运行的开始时间，在每一个业务方法运行结束的时候，再来记录这个方法运行的结束时间。</p>
+</li>
+<li><p>是在AOP面向切面编程当中，我们只需要将这部分重复的代码逻辑抽取出来单独定义。抽取出来的这一部分重复的逻辑，也就是共性的功能。</p>
+</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/20250311104514.png" alt="image.png"></p>
+</li>
+<li><p><strong>切入点：PointCut</strong>，匹配连接点的条件，通知仅会在切入点方法执行时被应用。</p>
+<ul>
+<li><p>在通知当中，我们所定义的共性功能到底要应用在哪些方法上？此时就涉及到了切入点pointcut概念。切入点指的是匹配连接点的条件。通知仅会在切入点方法运行时才会被应用。</p>
+</li>
+<li><p>在aop的开发当中，我们通常会通过一个切入点表达式来描述切入点(后面会有详解)。</p>
+</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/20250311104611.png" alt="image.png"></p>
+<ul>
+<li>假如：切入点表达式改为DeptServiceImpl.list()，此时就代表仅仅只有list这一个方法是切入点。只有list()方法在运行的时候才会应用通知。</li>
+</ul>
+</li>
+<li><p><strong>切面：Aspect</strong>，描述通知与切入点的对应关系（通知+切入点）</p>
+</li>
+</ul>
+<p>当通知和切入点结合在一起，就形成了一个切面。通过切面就能够描述当前aop程序需要针对于哪个原始方法，在什么时候执行什么样的操作。</p>
+<p>而切面所在的类，称之为切面类（被<code>@Aspect</code>注解标识的类）。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/20250311104710.png" alt="image.png"></p>
+<ul>
+<li><strong>目标对象：Target</strong>，通知所应用的对象</li>
+</ul>
+<p>目标对象指的就是通知所应用的对象，我们就称之为目标对象。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/20250311104854.png" alt="image.png"></p>
+<p>AOP的核心概念我们介绍完毕之后，接下来我们再来分析一下我们所定义的通知是如何与目标对象结合在一起，对目标对象当中的方法进行功能增强的。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/20250311105140.png" alt="image.png"></p>
+<p>Spring的AOP底层是基于动态代理技术来实现的，也就是说在程序运行的时候，会自动的基于动态代理技术为目标对象生成一个对应的代理对象。在代理对象当中就会对目标对象当中的原始方法进行功能的增强。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/20250311105813.png" alt="image.png"></p>
+<blockquote>
+<p>SpringAOP 旨在管理bean对象的过程中，主要通过底层的动态代理机制，对特定的方法进行编程 。</p>
+</blockquote>
+<h2 id="2-AOP进阶"><a href="#2-AOP进阶" class="headerlink" title="2. AOP进阶"></a>2. AOP进阶</h2><p>AOP的基础知识学习完之后，下面我们对AOP当中的各个细节进行详细的学习。主要分为4个部分：</p>
+<ol>
+<li><p>通知类型</p>
+</li>
+<li><p>通知顺序</p>
+</li>
+</ol>
+<ol start="3">
+<li>切入点表达式</li>
+</ol>
+<p>我们先来学习第一部分通知类型。</p>
+<h3 id="2-1-通知类型"><a href="#2-1-通知类型" class="headerlink" title="2.1 通知类型"></a>2.1 通知类型</h3><p>在入门程序当中，我们已经使用了一种功能最为强大的通知类型：Around环绕通知。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Aspect</span> <span class="comment">//当前类为切面类</span></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TimeAspect</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Around(&quot;execution(* com.itheima.service.impl.DeptServiceImpl.*(..))&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Object <span class="title function_">recordTime</span><span class="params">(ProceedingJoinPoint pjp)</span> <span class="keyword">throws</span> Throwable &#123;</span><br><span class="line">        <span class="comment">//记录方法执行开始时间</span></span><br><span class="line">        <span class="type">long</span> <span class="variable">begin</span> <span class="operator">=</span> System.currentTimeMillis();</span><br><span class="line">        <span class="comment">//执行原始方法</span></span><br><span class="line">        <span class="type">Object</span> <span class="variable">result</span> <span class="operator">=</span> pjp.proceed();</span><br><span class="line">        <span class="comment">//记录方法执行结束时间</span></span><br><span class="line">        <span class="type">long</span> <span class="variable">end</span> <span class="operator">=</span> System.currentTimeMillis();</span><br><span class="line">        <span class="comment">//计算方法执行耗时</span></span><br><span class="line">        log.info(<span class="string">&quot;方法执行耗时: &#123;&#125;毫秒&quot;</span>,end-begin);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>只要我们在通知方法上加上了<code>@Around</code>注解，就代表当前通知是一个环绕通知。</p>
+<table>
+<thead>
+<tr>
+<th><strong>Spring AOP 通知类型</strong></th>
+<th></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>@Around</td>
+<td>环绕通知，此注解标注的通知方法在目标方法前、后都被执行</td>
+</tr>
+<tr>
+<td>@Before</td>
+<td>前置通知，此注解标注的通知方法在目标方法前被执行</td>
+</tr>
+<tr>
+<td>@After</td>
+<td>后置通知，此注解标注的通知方法在目标方法后被执行，无论是否有异常都会执行</td>
+</tr>
+<tr>
+<td>@AfterReturning</td>
+<td>返回后通知，此注解标注的通知方法在目标方法后被执行，有异常不会执行</td>
+</tr>
+<tr>
+<td>@AfterThrowing</td>
+<td>异常后通知，此注解标注的通知方法发生异常后执行</td>
+</tr>
+</tbody></table>
+<p>下面我们通过代码演示，来加深对于不同通知类型的理解：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Aspect</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyAspect1</span> &#123;</span><br><span class="line">    <span class="comment">//前置通知</span></span><br><span class="line">    <span class="meta">@Before(&quot;execution(* com.itheima.service.*.*(..))&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">before</span><span class="params">(JoinPoint joinPoint)</span>&#123;</span><br><span class="line">        log.info(<span class="string">&quot;before ...&quot;</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//环绕通知</span></span><br><span class="line">    <span class="meta">@Around(&quot;execution(* com.itheima.service.*.*(..))&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Object <span class="title function_">around</span><span class="params">(ProceedingJoinPoint proceedingJoinPoint)</span> <span class="keyword">throws</span> Throwable &#123;</span><br><span class="line">        log.info(<span class="string">&quot;around before ...&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//调用目标对象的原始方法执行</span></span><br><span class="line">        <span class="type">Object</span> <span class="variable">result</span> <span class="operator">=</span> proceedingJoinPoint.proceed();</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//原始方法如果执行时有异常，环绕通知中的后置代码不会在执行了</span></span><br><span class="line">        </span><br><span class="line">        log.info(<span class="string">&quot;around after ...&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//后置通知</span></span><br><span class="line">    <span class="meta">@After(&quot;execution(* com.itheima.service.*.*(..))&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">after</span><span class="params">(JoinPoint joinPoint)</span>&#123;</span><br><span class="line">        log.info(<span class="string">&quot;after ...&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//返回后通知（程序在正常执行的情况下，会执行的后置通知）</span></span><br><span class="line">    <span class="meta">@AfterReturning(&quot;execution(* com.itheima.service.*.*(..))&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">afterReturning</span><span class="params">(JoinPoint joinPoint)</span>&#123;</span><br><span class="line">        log.info(<span class="string">&quot;afterReturning ...&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//异常通知（程序在出现异常的情况下，执行的后置通知）</span></span><br><span class="line">    <span class="meta">@AfterThrowing(&quot;execution(* com.itheima.service.*.*(..))&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">afterThrowing</span><span class="params">(JoinPoint joinPoint)</span>&#123;</span><br><span class="line">        log.info(<span class="string">&quot;afterThrowing ...&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<p>重新启动SpringBoot服务，进行测试：</p>
+<p><strong>1). 没有异常情况下：</strong></p>
+<p>使用 Apifox 测试查询所有部门数据</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/20250311155015.png" alt="image.png"></p>
+<p>查看idea中控制台日志输出：</p>
+<blockquote>
+<p>程序没有发生异常的情况下，@AfterThrowing标识的通知方法不会执行。</p>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/20250311155333.png" alt="image.png"></p>
+<p><strong>2). 出现异常情况下：</strong></p>
+<p>修改DeptServiceImpl业务实现类中的代码： 添加异常</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DeptServiceImpl</span> <span class="keyword">implements</span> <span class="title class_">DeptService</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> DeptMapper deptMapper;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> List&lt;Dept&gt; <span class="title function_">list</span><span class="params">()</span> &#123;</span><br><span class="line"></span><br><span class="line">        List&lt;Dept&gt; deptList = deptMapper.list();</span><br><span class="line">        <span class="comment">//模拟异常</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">num</span> <span class="operator">=</span> <span class="number">10</span>/<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">return</span> deptList;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//省略其他代码...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>重新启动SpringBoot服务，测试发生异常情况下通知的执行：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/20250311155411.png" alt="image.png"></p>
+<p>查看idea中控制台日志输出</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/20250311155359.png" alt="image.png"></p>
+<blockquote>
+<p>程序发生异常的情况下：</p>
+<ul>
+<li><p>@AfterReturning标识的通知方法不会执行，@AfterThrowing标识的通知方法执行了  &#x2F;&#x2F;互斥</p>
+</li>
+<li><p>@Around环绕通知中原始方法调用时有异常，通知中的环绕后的代码逻辑也不会在执行了 （因为原始方法调用已经出异常了）</p>
+</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>在使用通知时的注意事项：</p>
+<ul>
+<li><p>@Around环绕通知需要自己调用 ProceedingJoinPoint.proceed() 来让原始方法执行，其他通知不需要考虑目标方法执行</p>
+</li>
+<li><p>@Around环绕通知方法的返回值，必须指定为Object，来接收原始方法的返回值，否则原始方法执行完毕，是获取不到返回值的。</p>
+</li>
+</ul>
+</blockquote>
+<p>五种常见的通知类型，我们已经测试完毕了，此时我们再来看一下刚才所编写的代码，有什么问题吗？</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//前置通知</span></span><br><span class="line"><span class="meta">@Before(&quot;execution(* com.itheima.service.*.*(..))&quot;)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//环绕通知</span></span><br><span class="line"><span class="meta">@Around(&quot;execution(* com.itheima.service.*.*(..))&quot;)</span></span><br><span class="line">  </span><br><span class="line"><span class="comment">//后置通知</span></span><br><span class="line"><span class="meta">@After(&quot;execution(* com.itheima.service.*.*(..))&quot;)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//返回后通知（程序在正常执行的情况下，会执行的后置通知）</span></span><br><span class="line"><span class="meta">@AfterReturning(&quot;execution(* com.itheima.service.*.*(..))&quot;)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//异常通知（程序在出现异常的情况下，执行的后置通知）</span></span><br><span class="line"><span class="meta">@AfterThrowing(&quot;execution(* com.itheima.service.*.*(..))&quot;)</span></span><br></pre></td></tr></table></figure>
+
+<p>我们发现啊，每一个注解里面都指定了切入点表达式，而且这些切入点表达式都一模一样。此时我们的代码当中就存在了大量的重复性的切入点表达式，假如此时切入点表达式需要变动，就需要将所有的切入点表达式一个一个的来改动，就变得非常繁琐了。</p>
+<p>怎么来解决这个切入点表达式重复的问题？ 答案就是：<strong>抽取</strong>   <em>Pointcut</em></p>
+<p>Spring提供了<code>@PointCut</code>注解，该注解的作用是将公共的切入点表达式抽取出来，需要用到时引用该切入点表达式即可。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Aspect</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyAspect1</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//切入点方法（公共的切入点表达式）</span></span><br><span class="line">    <span class="meta">@Pointcut(&quot;execution(* com.itheima.service.*.*(..))&quot;)</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">void</span> <span class="title function_">pt</span><span class="params">()</span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//前置通知（引用切入点）</span></span><br><span class="line">    <span class="meta">@Before(&quot;pt()&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">before</span><span class="params">(JoinPoint joinPoint)</span>&#123;</span><br><span class="line">        log.info(<span class="string">&quot;before ...&quot;</span>);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//环绕通知</span></span><br><span class="line">    <span class="meta">@Around(&quot;pt()&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Object <span class="title function_">around</span><span class="params">(ProceedingJoinPoint proceedingJoinPoint)</span> <span class="keyword">throws</span> Throwable &#123;</span><br><span class="line">        log.info(<span class="string">&quot;around before ...&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//调用目标对象的原始方法执行</span></span><br><span class="line">        <span class="type">Object</span> <span class="variable">result</span> <span class="operator">=</span> proceedingJoinPoint.proceed();</span><br><span class="line">        <span class="comment">//原始方法在执行时：发生异常</span></span><br><span class="line">        <span class="comment">//后续代码不在执行</span></span><br><span class="line"></span><br><span class="line">        log.info(<span class="string">&quot;around after ...&quot;</span>);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//后置通知</span></span><br><span class="line">    <span class="meta">@After(&quot;pt()&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">after</span><span class="params">(JoinPoint joinPoint)</span>&#123;</span><br><span class="line">        log.info(<span class="string">&quot;after ...&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//返回后通知（程序在正常执行的情况下，会执行的后置通知）</span></span><br><span class="line">    <span class="meta">@AfterReturning(&quot;pt()&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">afterReturning</span><span class="params">(JoinPoint joinPoint)</span>&#123;</span><br><span class="line">        log.info(<span class="string">&quot;afterReturning ...&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//异常通知（程序在出现异常的情况下，执行的后置通知）</span></span><br><span class="line">    <span class="meta">@AfterThrowing(&quot;pt()&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">afterThrowing</span><span class="params">(JoinPoint joinPoint)</span>&#123;</span><br><span class="line">        log.info(<span class="string">&quot;afterThrowing ...&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<p>需要注意的是：当切入点方法使用<code>private</code>修饰时，仅能在当前切面类中引用该表达式， 当外部其他切面类中也要引用当前类中的切入点表达式，就需要把<code>private</code>改为<code>public</code>，而在引用的时候，具体的语法为：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Aspect</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyAspect2</span> &#123;</span><br><span class="line">    <span class="comment">//引用MyAspect1切面类中的切入点表达式</span></span><br><span class="line">    <span class="meta">@Before(&quot;com.itheima.aspect.MyAspect1.pt()&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">before</span><span class="params">()</span>&#123;</span><br><span class="line">        log.info(<span class="string">&quot;MyAspect2 -&gt; before ...&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="2-2-通知顺序"><a href="#2-2-通知顺序" class="headerlink" title="2.2 通知顺序"></a>2.2 通知顺序</h3><p>讲解完了Spring中AOP所支持的5种通知类型之后，接下来我们再来研究通知的执行顺序。</p>
+<p>当在项目开发当中，我们定义了多个切面类，而多个切面类中多个切入点都匹配到了同一个目标方法。此时当目标方法在运行的时候，这多个切面类当中的这些通知方法都会运行。</p>
+<p>此时我们就有一个疑问，这多个通知方法到底哪个先运行，哪个后运行？ 下面我们通过程序来验证（这里呢，我们就定义两种类型的通知进行测试，一种是前置通知<code>@Before</code>，一种是后置通知<code>@After</code>）</p>
+<p>定义多个切面类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Aspect</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyAspect2</span> &#123;</span><br><span class="line">    <span class="comment">//前置通知</span></span><br><span class="line">    <span class="meta">@Before(&quot;execution(* com.itheima.service.*.*(..))&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">before</span><span class="params">()</span>&#123;</span><br><span class="line">        log.info(<span class="string">&quot;MyAspect2 -&gt; before ...&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//后置通知</span></span><br><span class="line">    <span class="meta">@After(&quot;execution(* com.itheima.service.*.*(..))&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">after</span><span class="params">()</span>&#123;</span><br><span class="line">        log.info(<span class="string">&quot;MyAspect2 -&gt; after ...&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Aspect</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyAspect3</span> &#123;</span><br><span class="line">    <span class="comment">//前置通知</span></span><br><span class="line">    <span class="meta">@Before(&quot;execution(* com.itheima.service.*.*(..))&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">before</span><span class="params">()</span>&#123;</span><br><span class="line">        log.info(<span class="string">&quot;MyAspect3 -&gt; before ...&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//后置通知</span></span><br><span class="line">    <span class="meta">@After(&quot;execution(* com.itheima.service.*.*(..))&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">after</span><span class="params">()</span>&#123;</span><br><span class="line">        log.info(<span class="string">&quot;MyAspect3 -&gt;  after ...&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Aspect</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyAspect4</span> &#123;</span><br><span class="line">    <span class="comment">//前置通知</span></span><br><span class="line">    <span class="meta">@Before(&quot;execution(* com.itheima.service.*.*(..))&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">before</span><span class="params">()</span>&#123;</span><br><span class="line">        log.info(<span class="string">&quot;MyAspect4 -&gt; before ...&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//后置通知</span></span><br><span class="line">    <span class="meta">@After(&quot;execution(* com.itheima.service.*.*(..))&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">after</span><span class="params">()</span>&#123;</span><br><span class="line">        log.info(<span class="string">&quot;MyAspect4 -&gt; after ...&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>重新启动SpringBoot服务，测试通知的执行顺序：</p>
+<blockquote>
+<p>备注：</p>
+<ol>
+<li><p>把DeptServiceImpl实现类中模拟异常的代码删除或注释掉。</p>
+</li>
+<li><p>注释掉其他切面类(把<code>@Aspect</code>注释即可)，仅保留MyAspect2、MyAspect3、MyAspect4 ，这样就可以清晰看到执行的结果，而不被其他切面类干扰。</p>
+</li>
+</ol>
+</blockquote>
+<p>使用 Apifox 测试查询所有部门数据。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/20250311160850.png" alt="image.png"></p>
+<p>查看idea中控制台日志输出</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/20250311160906.png" alt="image.png"></p>
+<ul>
+<li><p>通过以上程序运行可以看出在不同切面类中，默认按照切面类的类名字母排序：</p>
+<ul>
+<li>目标方法前的通知方法：字母排名靠前的先执行</li>
+<li>目标方法后的通知方法：字母排名靠前的后执行</li>
+</ul>
+</li>
+</ul>
+<p>如果我们想控制通知的执行顺序有两种方式：</p>
+<ol>
+<li>修改切面类的类名（这种方式非常繁琐、而且不便管理）</li>
+<li>使用Spring提供的<code>@Order</code>注解</li>
+</ol>
+<p>使用@Order注解，控制通知的执行顺序：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Aspect</span></span><br><span class="line"><span class="meta">@Order(2)</span>  <span class="comment">//切面类的执行顺序（前置通知：数字越小先执行; 后置通知：数字越小越后执行）</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyAspect2</span> &#123;</span><br><span class="line">    <span class="comment">//前置通知</span></span><br><span class="line">    <span class="meta">@Before(&quot;execution(* com.itheima.service.*.*(..))&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">before</span><span class="params">()</span>&#123;</span><br><span class="line">        log.info(<span class="string">&quot;MyAspect2 -&gt; before ...&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//后置通知 </span></span><br><span class="line">    <span class="meta">@After(&quot;execution(* com.itheima.service.*.*(..))&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">after</span><span class="params">()</span>&#123;</span><br><span class="line">        log.info(<span class="string">&quot;MyAspect2 -&gt; after ...&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Aspect</span></span><br><span class="line"><span class="meta">@Order(3)</span>  <span class="comment">//切面类的执行顺序（前置通知：数字越小先执行; 后置通知：数字越小越后执行）</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyAspect3</span> &#123;</span><br><span class="line">    <span class="comment">//前置通知</span></span><br><span class="line">    <span class="meta">@Before(&quot;execution(* com.itheima.service.*.*(..))&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">before</span><span class="params">()</span>&#123;</span><br><span class="line">        log.info(<span class="string">&quot;MyAspect3 -&gt; before ...&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//后置通知</span></span><br><span class="line">    <span class="meta">@After(&quot;execution(* com.itheima.service.*.*(..))&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">after</span><span class="params">()</span>&#123;</span><br><span class="line">        log.info(<span class="string">&quot;MyAspect3 -&gt;  after ...&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Aspect</span></span><br><span class="line"><span class="meta">@Order(1)</span> <span class="comment">//切面类的执行顺序（前置通知：数字越小先执行; 后置通知：数字越小越后执行）</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyAspect4</span> &#123;</span><br><span class="line">    <span class="comment">//前置通知</span></span><br><span class="line">    <span class="meta">@Before(&quot;execution(* com.itheima.service.*.*(..))&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">before</span><span class="params">()</span>&#123;</span><br><span class="line">        log.info(<span class="string">&quot;MyAspect4 -&gt; before ...&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//后置通知</span></span><br><span class="line">    <span class="meta">@After(&quot;execution(* com.itheima.service.*.*(..))&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">after</span><span class="params">()</span>&#123;</span><br><span class="line">        log.info(<span class="string">&quot;MyAspect4 -&gt; after ...&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>重新启动SpringBoot服务，测试通知执行顺序：</p>
+<blockquote>
+<p><strong>通知的执行顺序大家主要知道两点即可：</strong></p>
+<ol>
+<li><p><strong>不同的切面类当中，默认情况下通知的执行顺序是与切面类的类名字母排序是有关系的</strong></p>
+</li>
+<li><p><strong>可以在切面类上面加上@Order注解，来控制不同的切面类通知的执行顺序</strong></p>
+</li>
+</ol>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/20250311163724.png" alt="image.png"></p>
+<h3 id="2-3-切入点表达式"><a href="#2-3-切入点表达式" class="headerlink" title="2.3 切入点表达式"></a>2.3 切入点表达式</h3><p>从AOP的入门程序到现在，我们一直都在使用切入点表达式来描述切入点。下面我们就来详细的介绍一下切入点表达式的具体写法。</p>
+<p>切入点表达式：描述切入点方法的一种表达式</p>
+<ul>
+<li><p>作用：主要用来决定项目中的哪些方法需要加入通知</p>
+</li>
+<li><p>常见形式：</p>
+<ul>
+<li>execution(……)：根据方法的签名来匹配</li>
+</ul>
+</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/20250311164414.png" alt="image.png"></p>
+<ul>
+<li>@annotation(……) ：根据注解匹配</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/20250311164428.png" alt="image.png"></p>
+<p>首先我们先学习第一种最为常见的execution切入点表达式。</p>
+<h4 id="2-3-1-execution"><a href="#2-3-1-execution" class="headerlink" title="2.3.1 execution"></a>2.3.1 execution</h4><p>execution主要根据方法的返回值、包名、类名、方法名、方法参数等信息来匹配，语法为：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">execution(访问修饰符?  返回值  包名.类名.?方法名(方法参数) <span class="keyword">throws</span> 异常?)</span><br></pre></td></tr></table></figure>
+
+<p>其中带<code>?</code>的表示可以省略的部分</p>
+<ul>
+<li>访问修饰符：可省略（比如: public、protected）</li>
+<li>包名.类名： 可省略</li>
+<li>throws 异常：可省略（注意是方法上声明抛出的异常，不是实际抛出的异常）</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Before(&quot;execution(void com.itheima.service.impl.DeptServiceImpl.delete(java.lang.Integer))&quot;)</span></span><br></pre></td></tr></table></figure>
+
+<p>可以使用通配符描述切入点</p>
+<ul>
+<li><p><code>*</code> ：单个独立的任意符号，可以通配任意返回值、包名、类名、方法名、任意类型的一个参数，也可以通配包、类、方法名的一部分</p>
+</li>
+<li><p><code>..</code> ：多个连续的任意符号，可以通配任意层级的包，或任意类型、任意个数的参数</p>
+</li>
+</ul>
+<p>切入点表达式的语法规则：</p>
+<ol>
+<li>方法的访问修饰符可以省略</li>
+<li>返回值可以使用<code>*</code>号代替（任意返回值类型）</li>
+<li>包名可以使用<code>*</code>号代替，代表任意包（一层包使用一个<code>*</code>）</li>
+<li>使用<code>..</code>配置包名，标识此包以及此包下的所有子包</li>
+<li>类名可以使用<code>*</code>号代替，标识任意类</li>
+<li>方法名可以使用<code>*</code>号代替，表示任意方法</li>
+<li>可以使用 <code>*</code>  配置参数，一个任意类型的参数</li>
+<li>可以使用<code>..</code> 配置参数，任意个任意类型的参数</li>
+</ol>
+<p><strong>切入点表达式示例</strong></p>
+<ul>
+<li>省略方法的修饰符号</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">execution(<span class="keyword">void</span> com.itheima.service.impl.DeptServiceImpl.delete(java.lang.Integer))</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用<code>*</code>代替返回值类型</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">execution(* com.itheima.service.impl.DeptServiceImpl.delete(java.lang.Integer))</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用<code>*</code>代替包名（一层包使用一个<code>*</code>）</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">execution(* com.itheima.*.*.DeptServiceImpl.delete(java.lang.Integer))</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用<code>..</code>省略包名</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">execution(* com..DeptServiceImpl.delete(java.lang.Integer))  </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用<code>*</code>代替类名</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">execution(* com..*.delete(java.lang.Integer))</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用<code>*</code>代替方法名</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">execution(* com..*.*(java.lang.Integer))</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用 <code>*</code> 代替参数</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">execution(* com.itheima.service.impl.DeptServiceImpl.delete(*))</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>使用<code>..</code>省略参数</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">execution(* com..*.*(..))</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意事项：</strong></p>
+<ul>
+<li>根据业务需要，可以使用 且（&amp;&amp;）、或（||）、非（!） 来组合比较复杂的切入点表达式。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">execution(* com.itheima.service.DeptService.list(..)) || execution(* com.itheima.service.DeptService.delete(..))</span><br></pre></td></tr></table></figure>
+
+<p>切入点表达式的书写建议：</p>
+<ul>
+<li>所有业务方法名在命名时尽量规范，方便切入点表达式快速匹配。如：查询类方法都是 find 开头，更新类方法都是update开头</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//业务类</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DeptServiceImpl</span> <span class="keyword">implements</span> <span class="title class_">DeptService</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> List&lt;Dept&gt; <span class="title function_">findAllDept</span><span class="params">()</span> &#123;</span><br><span class="line">       <span class="comment">//省略代码...</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> Dept <span class="title function_">findDeptById</span><span class="params">(Integer id)</span> &#123;</span><br><span class="line">       <span class="comment">//省略代码...</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">updateDeptById</span><span class="params">(Integer id)</span> &#123;</span><br><span class="line">       <span class="comment">//省略代码...</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">updateDeptByMoreCondition</span><span class="params">(Dept dept)</span> &#123;</span><br><span class="line">       <span class="comment">//省略代码...</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//其他代码...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>&#x2F;&#x2F;匹配DeptServiceImpl类中以find开头的方法</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">execution(* com.itheima.service.impl.DeptServiceImpl.find*(..))</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>描述切入点方法通常基于接口描述，而不是直接描述实现类，增强拓展性</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">execution(* com.itheima.service.DeptService.*(..))</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在满足业务需要的前提下，尽量缩小切入点的匹配范围。如：包名匹配尽量不使用 ..，使用 * 匹配单个包</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">execution(* com.itheima.*.*.DeptServiceImpl.find*(..))</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>切入点表达式书写建议：</strong></p>
+<ul>
+<li><p>所有业务方法名在命名时尽量规范，方便切入点表达式快速匹配。如：findXxx，updateXxx。</p>
+</li>
+<li><p>描述切入点方法通常基于接口描述，而不是直接描述实现类，增强拓展性。</p>
+</li>
+<li><p>在满足业务需要的前提下，尽量缩小切入点的匹配范围。如：包名尽量不使用..，使用 <code>*</code> 匹配单个包。</p>
+</li>
+</ul>
+</blockquote>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/20250311184424.png" alt="image.png"></p>
+<h4 id="2-3-2-annotation"><a href="#2-3-2-annotation" class="headerlink" title="2.3.2 @annotation"></a>2.3.2 @annotation</h4><p>已经学习了execution切入点表达式的语法。那么如果我们要匹配多个无规则的方法，比如：list()和 delete()这两个方法。这个时候我们基于execution这种切入点表达式来描述就不是很方便了。而在之前我们是将两个切入点表达式组合在了一起完成的需求，这个是比较繁琐的。</p>
+<p>我们可以借助于另一种切入点表达式 <code>@annotation</code> 来描述这一类的切入点，从而来简化切入点表达式的书写。</p>
+<p>实现步骤：</p>
+<ol>
+<li><p>编写自定义注解</p>
+</li>
+<li><p>在业务类要做为连接点的方法上添加自定义注解</p>
+</li>
+</ol>
+<p><strong>自定义注解</strong>：<code>LogOperation</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Target(ElementType.METHOD)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> LogOperation&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>业务类</strong>：<code>DeptServiceImpl</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">DeptServiceImpl</span> <span class="keyword">implements</span> <span class="title class_">DeptService</span> &#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> DeptMapper deptMapper;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="meta">@LogOperation</span> <span class="comment">//自定义注解（表示：当前方法属于目标方法）</span></span><br><span class="line">    <span class="keyword">public</span> List&lt;Dept&gt; <span class="title function_">list</span><span class="params">()</span> &#123;</span><br><span class="line">        List&lt;Dept&gt; deptList = deptMapper.list();</span><br><span class="line">        <span class="comment">//模拟异常</span></span><br><span class="line">        <span class="comment">//int num = 10/0;</span></span><br><span class="line">        <span class="keyword">return</span> deptList;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="meta">@LogOperation</span> <span class="comment">//自定义注解（表示：当前方法属于目标方法）</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">delete</span><span class="params">(Integer id)</span> &#123;</span><br><span class="line">        <span class="comment">//1. 删除部门</span></span><br><span class="line">        deptMapper.delete(id);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">save</span><span class="params">(Dept dept)</span> &#123;</span><br><span class="line">        dept.setCreateTime(LocalDateTime.now());</span><br><span class="line">        dept.setUpdateTime(LocalDateTime.now());</span><br><span class="line">        deptMapper.save(dept);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> Dept <span class="title function_">getById</span><span class="params">(Integer id)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> deptMapper.getById(id);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">update</span><span class="params">(Dept dept)</span> &#123;</span><br><span class="line">        dept.setUpdateTime(LocalDateTime.now());</span><br><span class="line">        deptMapper.update(dept);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>切面类</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="meta">@Aspect</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyAspect6</span> &#123;</span><br><span class="line">    <span class="comment">//针对list方法、delete方法进行前置通知和后置通知</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//前置通知</span></span><br><span class="line">    <span class="meta">@Before(&quot;@annotation(com.itheima.anno.LogOperation)&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">before</span><span class="params">()</span>&#123;</span><br><span class="line">        log.info(<span class="string">&quot;MyAspect6 -&gt; before ...&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//后置通知</span></span><br><span class="line">    <span class="meta">@After(&quot;@annotation(com.itheima.anno.LogOperation)&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">after</span><span class="params">()</span>&#123;</span><br><span class="line">        log.info(<span class="string">&quot;MyAspect6 -&gt; after ...&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>重启SpringBoot服务，测试查询所有部门数据，查看控制台日志：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/20250311184524.png" alt="image.png"></p>
+<p>到此我们两种常见的切入点表达式我已经介绍完了。</p>
+<ul>
+<li><p>execution切入点表达式</p>
+<ul>
+<li>根据我们所指定的方法的描述信息来匹配切入点方法，这种方式也是最为常用的一种方式</li>
+<li>如果我们要匹配的切入点方法的方法名不规则，或者有一些比较特殊的需求，通过execution切入点表达式描述比较繁琐</li>
+</ul>
+</li>
+<li><p>annotation 切入点表达式</p>
+<ul>
+<li>基于注解的方式来匹配切入点方法。这种方式虽然多一步操作，我们需要自定义一个注解，但是相对来比较灵活。我们需要匹配哪个方法，就在方法上加上对应的注解就可以了</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>根据业务需要，可以使用 &amp;&amp; ，||，！ 来组合比较复杂的切入点表达式。</p>
+</blockquote>
+<h3 id="2-4连接点"><a href="#2-4连接点" class="headerlink" title="2.4连接点"></a>2.4连接点</h3><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/20250311185658.png" alt="image.png"></p>
+<p>我们前面在讲解AOP核心概念的时候，我们提到过什么是连接点，连接点可以简单理解为可以被AOP控制的方法。</p>
+<p>我们目标对象当中所有的方法是不是都是可以被AOP控制的方法。而在SpringAOP当中，连接点又特指方法的执行。</p>
+<p>在Spring中用JoinPoint抽象了连接点，用它可以获得方法执行时的相关信息，如目标类名、方法名、方法参数等。</p>
+<ul>
+<li>对于<code>@Around</code>通知，获取连接点信息只能使用<code>ProceedingJoinPoint</code>类型</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/20250311185212.png" alt="image.png"></p>
+<ul>
+<li>对于其他四种通知，获取连接点信息只能使用<code>JoinPoint</code>，它是<code>ProceedingJoinPoint</code>的父类型</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/20250311185222.png" alt="image.png"></p>
+<h2 id="3-AOP案例"><a href="#3-AOP案例" class="headerlink" title="3. AOP案例"></a>3. AOP案例</h2><p>SpringAOP的相关知识我们就已经全部学习完毕了。最后我们要通过一个案例来对AOP进行一个综合的应用。</p>
+<h3 id="3-1-需求"><a href="#3-1-需求" class="headerlink" title="3.1 需求"></a>3.1 需求</h3><p>需求：将案例（Tlias智能学习辅助系统）中增、删、改相关接口的操作日志记录到数据库表中</p>
+<ul>
+<li>就是当访问部门管理和员工管理当中的增、删、改相关功能接口时，需要详细的操作日志，并保存在数据表中，便于后期数据追踪。</li>
+</ul>
+<p>操作日志信息包含：</p>
+<ul>
+<li>操作人、操作时间、执行方法的全类名、执行方法名、方法运行时参数、返回值、方法执行时长</li>
+</ul>
+<blockquote>
+<p>所记录的日志信息包括当前接口的操作人是谁操作的，什么时间点操作的，以及访问的是哪个类当中的哪个方法，在访问这个方法的时候传入进来的参数是什么，访问这个方法最终拿到的返回值是什么，以及整个接口方法的运行时长是多长时间。</p>
+</blockquote>
+<h3 id="3-2-分析"><a href="#3-2-分析" class="headerlink" title="3.2 分析"></a>3.2 分析</h3><ul>
+<li><p>问题1：项目当中增删改相关的方法是不是有很多？</p>
+<ul>
+<li>很多</li>
+</ul>
+</li>
+<li><p>问题2：我们需要针对每一个功能接口方法进行修改，在每一个功能接口当中都来记录这些操作日志吗？</p>
+<ul>
+<li>这种做法比较繁琐</li>
+</ul>
+</li>
+</ul>
+<p>以上两个问题的解决方案：可以使用AOP解决(每一个增删改功能接口中要实现的记录操作日志的逻辑代码是相同)。</p>
+<p>可以把这部分记录操作日志的通用的、重复性的逻辑代码抽取出来定义在一个通知方法当中，我们通过AOP面向切面编程的方式，在不改动原始功能的基础上来对原始的功能进行增强。目前我们所增强的功能就是来记录操作日志，所以也可以使用AOP的技术来实现。使用AOP的技术来实现也是最为简单，最为方便的。</p>
+<ul>
+<li><p>问题3：既然要基于AOP面向切面编程的方式来完成的功能，那么我们要使用 AOP五种通知类型当中的哪种通知类型？</p>
+<ul>
+<li>答案：环绕通知 <code>@Around</code>。因为所记录的操作日志当中包括：操作人、操作时间，访问的是哪个类、哪个方法、方法运行时参数、方法的返回值、方法的运行时长。方法返回值，是在原始方法执行后才能获取到的。方法的运行时长，需要原始方法运行之前记录开始时间，原始方法运行之后记录结束时间。通过计算获得方法的执行耗时。基于以上的分析我们确定要使用Around环绕通知。</li>
+</ul>
+</li>
+<li><p>问题4：最后一个问题，切入点表达式我们该怎么写？</p>
+<ul>
+<li>答案：使用 <code>@annotation</code> 来描述切入点表达式。要匹配业务接口当中所有的增删改的方法，而增删改方法在命名上没有共同的前缀或后缀。此时如果使用<code>execution</code>切入点表达式也可以，但是会比较繁琐。 当遇到增删改的方法名没有规律时，就可以使用 <code>@annotation</code>切入点表达式</li>
+</ul>
+</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/20250311185019.png" alt="image.png"></p>
+<h3 id="3-3-步骤"><a href="#3-3-步骤" class="headerlink" title="3.3 步骤"></a>3.3 步骤</h3><p>简单分析了一下大概的实现思路后，接下来我们就要来完成案例了。案例的实现步骤其实就两步：</p>
+<ul>
+<li><p>准备工作</p>
+<ol>
+<li><p>引入AOP的起步依赖</p>
+</li>
+<li><p>导入资料中准备好的数据库表结构，并引入对应的实体类</p>
+</li>
+</ol>
+</li>
+<li><p>编码实现(基于AI实现)</p>
+<ol>
+<li><p>自定义注解<code>@LogOperation</code></p>
+</li>
+<li><p>定义切面类，完成记录操作日志的逻辑</p>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="3-4-代码实现"><a href="#3-4-代码实现" class="headerlink" title="3.4 代码实现"></a>3.4 代码实现</h3><blockquote>
+<p>请帮我基于Spring AOP中的环绕通知 @Around 实现记录系统所有增、删、改功能接口的操作日志。具体信息如下：</p>
+<ol>
+<li><p>日志信息包含：操作人、操作时间、执行方法的全类名、执行方法名、方法运行时参数、返回值、方法执行时长</p>
+</li>
+<li><p>功能接口所在包为 com.itheima.controller</p>
+</li>
+<li><p>日志表为 operate_log 表，对应的实体类为 OperateLog。 具体表结构如下：</p>
+</li>
+</ol>
+<p>create table operate_log(</p>
+<p>id int unsigned primary key auto_increment comment ‘ID’,</p>
+<p>operate_emp_id int unsigned comment ‘操作人ID’,</p>
+<p>operate_time datetime comment ‘操作时间’,</p>
+<p>class_name varchar(100) comment ‘操作的类名’,</p>
+<p>method_name varchar(100) comment ‘操作的方法名’,</p>
+<p>method_params varchar(1000) comment ‘方法参数’,</p>
+<p>return_value varchar(2000) comment ‘返回值’,</p>
+<p>cost_time int comment ‘方法执行耗时, 单位:ms’</p>
+<p>) comment ‘操作日志表’;</p>
+<ul>
+<li>并且已经提供了OperateLogMapper接口来操作 operate_log, 并在其中已经定义好了 insert 方法用来保存日志数据.</li>
+</ul>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">create table operate_log(​</span><br><span class="line"> id int unsigned primary key auto_increment comment &#x27;ID&#x27;,​</span><br><span class="line"> operate_emp_id int unsigned comment &#x27;操作人ID&#x27;,​</span><br><span class="line"> operate_time datetime comment &#x27;操作时间&#x27;,​</span><br><span class="line"> class_name varchar(100) comment &#x27;操作的类名&#x27;,​</span><br><span class="line"> method_name varchar(100) comment &#x27;操作的方法名&#x27;,​</span><br><span class="line"> method_params varchar(1000) comment &#x27;方法参数&#x27;,​</span><br><span class="line"> return_value varchar(2000) comment &#x27;返回值&#x27;,​</span><br><span class="line"> cost_time int comment &#x27;方法执行耗时, 单位:ms&#x27;​</span><br><span class="line">) comment &#x27;操作日志表&#x27;;</span><br></pre></td></tr></table></figure>
+
+<p><strong>1). 准备工作</strong></p>
+<ul>
+<li>在 pom.xml 中引入AOP的依赖</li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-aop<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>创建数据库表结构</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 操作日志表</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> operate_log(</span><br><span class="line">    id <span class="type">int</span> unsigned <span class="keyword">primary</span> key auto_increment comment <span class="string">&#x27;ID&#x27;</span>,</span><br><span class="line">    operate_emp_id <span class="type">int</span> unsigned comment <span class="string">&#x27;操作人ID&#x27;</span>,</span><br><span class="line">    operate_time datetime comment <span class="string">&#x27;操作时间&#x27;</span>,</span><br><span class="line">    class_name <span class="type">varchar</span>(<span class="number">100</span>) comment <span class="string">&#x27;操作的类名&#x27;</span>,</span><br><span class="line">    method_name <span class="type">varchar</span>(<span class="number">100</span>) comment <span class="string">&#x27;操作的方法名&#x27;</span>,</span><br><span class="line">    method_params <span class="type">varchar</span>(<span class="number">1000</span>) comment <span class="string">&#x27;方法参数&#x27;</span>,</span><br><span class="line">    return_value <span class="type">varchar</span>(<span class="number">2000</span>) comment <span class="string">&#x27;返回值, 存储json格式&#x27;</span>,</span><br><span class="line">    cost_time <span class="type">int</span> comment <span class="string">&#x27;方法执行耗时, 单位:ms&#x27;</span></span><br><span class="line">) comment <span class="string">&#x27;操作日志表&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>引入资料中准备的实体类</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.itheima.pojo;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> lombok.AllArgsConstructor;</span><br><span class="line"><span class="keyword">import</span> lombok.Data;</span><br><span class="line"><span class="keyword">import</span> lombok.NoArgsConstructor;</span><br><span class="line"><span class="keyword">import</span> java.time.LocalDateTime;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@NoArgsConstructor</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OperateLog</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> Integer id; <span class="comment">//ID</span></span><br><span class="line">    <span class="keyword">private</span> Integer operateEmpId; <span class="comment">//操作人ID</span></span><br><span class="line">    <span class="keyword">private</span> LocalDateTime operateTime; <span class="comment">//操作时间</span></span><br><span class="line">    <span class="keyword">private</span> String className; <span class="comment">//操作类名</span></span><br><span class="line">    <span class="keyword">private</span> String methodName; <span class="comment">//操作方法名</span></span><br><span class="line">    <span class="keyword">private</span> String methodParams; <span class="comment">//操作方法参数</span></span><br><span class="line">    <span class="keyword">private</span> String returnValue; <span class="comment">//操作方法返回值</span></span><br><span class="line">    <span class="keyword">private</span> Long costTime; <span class="comment">//操作耗时</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>引入资料中准备的日志操作Mapper接口 <code>OperateLogMapper</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.itheima.mapper;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.itheima.pojo.OperateLog;</span><br><span class="line"><span class="keyword">import</span> org.apache.ibatis.annotations.Insert;</span><br><span class="line"><span class="keyword">import</span> org.apache.ibatis.annotations.Mapper;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Mapper</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">OperateLogMapper</span> &#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//插入日志数据</span></span><br><span class="line">    <span class="meta">@Insert(&quot;insert into operate_log (operate_emp_id, operate_time, class_name, method_name, method_params, return_value, cost_time) &quot; +</span></span><br><span class="line"><span class="meta">            &quot;values (#&#123;operateEmpId&#125;, #&#123;operateTime&#125;, #&#123;className&#125;, #&#123;methodName&#125;, #&#123;methodParams&#125;, #&#123;returnValue&#125;, #&#123;costTime&#125;);&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">insert</span><span class="params">(OperateLog log)</span>;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>1). 自定义注解 <code>@LogOperation</code></strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *  自定义注解，用于标识哪些方法需要记录日志</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@Target(ElementType.METHOD)</span></span><br><span class="line"><span class="meta">@Retention(RetentionPolicy.RUNTIME)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> LogOperation &#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>2). 定义AOP记录日志的切面类</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> com.itheima.anno.LogOperation;</span><br><span class="line"><span class="keyword">import</span> com.itheima.mapper.OperateLogMapper;</span><br><span class="line"><span class="keyword">import</span> com.itheima.pojo.OperateLog;</span><br><span class="line"><span class="keyword">import</span> org.aspectj.lang.ProceedingJoinPoint;</span><br><span class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.Around;</span><br><span class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.Aspect;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"><span class="keyword">import</span> java.time.LocalDateTime;</span><br><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Aspect</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OperationLogAspect</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> OperateLogMapper operateLogMapper;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 环绕通知</span></span><br><span class="line">    <span class="meta">@Around(&quot;@annotation(com.itheima.anno.LogOperation)&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Object <span class="title function_">around</span><span class="params">(ProceedingJoinPoint joinPoint)</span> <span class="keyword">throws</span> Throwable &#123;</span><br><span class="line">        <span class="comment">// 记录开始时间</span></span><br><span class="line">        <span class="type">long</span> <span class="variable">startTime</span> <span class="operator">=</span> System.currentTimeMillis();</span><br><span class="line">        <span class="comment">// 执行方法</span></span><br><span class="line">        <span class="type">Object</span> <span class="variable">result</span> <span class="operator">=</span> joinPoint.proceed();</span><br><span class="line">        <span class="comment">// 当前时间</span></span><br><span class="line">        <span class="type">long</span> <span class="variable">endTime</span> <span class="operator">=</span> System.currentTimeMillis();</span><br><span class="line">        <span class="comment">// 耗时</span></span><br><span class="line">        <span class="type">long</span> <span class="variable">costTime</span> <span class="operator">=</span> endTime - startTime;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 构建日志对象</span></span><br><span class="line">        <span class="type">OperateLog</span> <span class="variable">operateLog</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">OperateLog</span>();</span><br><span class="line">        operateLog.setOperateEmpId(getCurrentUserId()); <span class="comment">// 需要实现 getCurrentUserId 方法</span></span><br><span class="line">        operateLog.setOperateTime(LocalDateTime.now());</span><br><span class="line">        operateLog.setClassName(joinPoint.getTarget().getClass().getName());</span><br><span class="line">        operateLog.setMethodName(joinPoint.getSignature().getName());</span><br><span class="line">        operateLog.setMethodParams(Arrays.toString(joinPoint.getArgs()));</span><br><span class="line">        operateLog.setReturnValue(result.toString());</span><br><span class="line">        operateLog.setCostTime(costTime);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 插入日志</span></span><br><span class="line">        operateLogMapper.insert(operateLog);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 示例方法，获取当前用户ID</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> <span class="title function_">getCurrentUserId</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">// 这里应该根据实际情况从认证信息中获取当前登录用户的ID</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>; <span class="comment">// 示例返回值</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>3). 在需要记录的日志的Controller层的方法上，加上注解 <code>@LogOperation</code></strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping(&quot;/clazzs&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ClazzController</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> ClazzService clazzService;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 新增班级</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@LogOperation</span></span><br><span class="line">    <span class="meta">@PostMapping</span></span><br><span class="line">    <span class="keyword">public</span> Result <span class="title function_">save</span><span class="params">(<span class="meta">@RequestBody</span> Clazz clazz)</span>&#123;</span><br><span class="line">        clazzService.save(clazz);</span><br><span class="line">        <span class="keyword">return</span> Result.success();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;    </span><br></pre></td></tr></table></figure>
+
+<p>重启SpringBoot服务，测试操作日志记录功能：</p>
+<p>打开浏览器，针对于员工的数据、部门的数据进行增删改之后。我们打开数据库表结构可以来看一下：</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/20250311185154.png" alt="image.png"></p>
+<p>我们会看到，在数据库表中，就清晰的记录了谁、什么时间点、调用了哪个类的哪个方法、传入了什么参数、返回了什么数据，都清晰的记录在数据库中了。</p>
+<h3 id="3-6-获取当前登录员工"><a href="#3-6-获取当前登录员工" class="headerlink" title="3.6 获取当前登录员工"></a>3.6 获取当前登录员工</h3><ul>
+<li><p>员工登录成功后，哪里存储的有当前登录员工的信息？ 给客户端浏览器下发的jwt令牌中</p>
+</li>
+<li><p>如何从JWT令牌中获取当前登录用户的信息呢？ 获取请求头中传递的jwt令牌，并解析</p>
+</li>
+<li><p>TokenFilter 中已经解析了令牌的信息，如何传递给AOP程序、Controller、Service呢？ThreadLocal</p>
+</li>
+</ul>
+<h4 id="3-6-1-ThreadLocal"><a href="#3-6-1-ThreadLocal" class="headerlink" title="3.6.1 ThreadLocal"></a>3.6.1 ThreadLocal</h4><ul>
+<li><p><strong>ThreadLocal</strong> 并不是一个Thread，而是Thread的局部变量。</p>
+</li>
+<li><p>ThreadLocal为每个线程提供一份单独的存储空间，具有线程隔离的效果，不同的线程之间不会相互干扰。</p>
+</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/20250311185241.png" alt="image.png"></p>
+<ul>
+<li><p>常见方法：</p>
+<ul>
+<li><p><code>public void set(T value) </code>  设置当前线程的线程局部变量的值</p>
+</li>
+<li><p><code>public T get() </code>                    返回当前线程所对应的线程局部变量的值</p>
+</li>
+<li><p><code>public void remove() </code>         移除当前线程的线程局部变量</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/20250311200140.png" alt="image.png"></p>
+<h4 id="3-6-2-记录当前登录员工"><a href="#3-6-2-记录当前登录员工" class="headerlink" title="3.6.2 记录当前登录员工"></a>3.6.2 记录当前登录员工</h4><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/20250311185315.png" alt="image.png"></p>
+<p>具体操作步骤：</p>
+<ol>
+<li>定义ThreadLocal操作的工具类，用于操作当前登录员工ID。</li>
+</ol>
+<p>在 <code>com.itheima.utils</code> 引入工具类 <code>CurrentHolder</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.itheima.utils;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CurrentHolder</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> ThreadLocal&lt;Integer&gt; CURRENT_LOCAL = <span class="keyword">new</span> <span class="title class_">ThreadLocal</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">setCurrentId</span><span class="params">(Integer employeeId)</span> &#123;</span><br><span class="line">        CURRENT_LOCAL.set(employeeId);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Integer <span class="title function_">getCurrentId</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> CURRENT_LOCAL.get();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">remove</span><span class="params">()</span> &#123;</span><br><span class="line">        CURRENT_LOCAL.remove();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在<code>TokenFilter</code>中，解析完当前登录员工ID，将其存入ThreadLocal（用完之后需将其删除）。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.itheima.filter;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.itheima.utils.CurrentHolder;</span><br><span class="line"><span class="keyword">import</span> com.itheima.utils.JwtUtils;</span><br><span class="line"><span class="keyword">import</span> io.jsonwebtoken.Claims;</span><br><span class="line"><span class="keyword">import</span> jakarta.servlet.*;</span><br><span class="line"><span class="keyword">import</span> jakarta.servlet.annotation.WebFilter;</span><br><span class="line"><span class="keyword">import</span> jakarta.servlet.http.HttpServletRequest;</span><br><span class="line"><span class="keyword">import</span> jakarta.servlet.http.HttpServletResponse;</span><br><span class="line"><span class="keyword">import</span> lombok.extern.slf4j.Slf4j;</span><br><span class="line"><span class="keyword">import</span> java.io.IOException;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Slf4j</span></span><br><span class="line"><span class="meta">@WebFilter(urlPatterns = &quot;/*&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TokenFilter</span> <span class="keyword">implements</span> <span class="title class_">Filter</span> &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">doFilter</span><span class="params">(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)</span> <span class="keyword">throws</span> IOException, ServletException &#123;</span><br><span class="line">        <span class="type">HttpServletRequest</span> <span class="variable">request</span> <span class="operator">=</span> (HttpServletRequest) servletRequest;</span><br><span class="line">        <span class="type">HttpServletResponse</span> <span class="variable">response</span> <span class="operator">=</span> (HttpServletResponse) servletResponse;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//1. 获取请求的url地址</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">uri</span> <span class="operator">=</span> request.getRequestURI(); <span class="comment">// /employee/login</span></span><br><span class="line">        <span class="comment">//String url = request.getRequestURL().toString(); // http://localhost:8080/employee/login</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//2. 判断是否是登录请求, 如果url地址中包含 login, 则说明是登录请求, 放行</span></span><br><span class="line">        <span class="keyword">if</span> (uri.contains(<span class="string">&quot;login&quot;</span>)) &#123;</span><br><span class="line">            log.info(<span class="string">&quot;登录请求, 放行&quot;</span>);</span><br><span class="line">            filterChain.doFilter(request, response);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//3. 获取请求中的token</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">token</span> <span class="operator">=</span> request.getHeader(<span class="string">&quot;token&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//4. 判断token是否为空, 如果为空, 响应401状态码</span></span><br><span class="line">        <span class="keyword">if</span> (token == <span class="literal">null</span> || token.isEmpty()) &#123;</span><br><span class="line">            log.info(<span class="string">&quot;token为空, 响应401状态码&quot;</span>);</span><br><span class="line">            response.setStatus(<span class="number">401</span>); <span class="comment">// 响应401状态码</span></span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//5. 如果token不为空, 调用JWtUtils工具类的方法解析token, 如果解析失败, 响应401状态码</span></span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="type">Claims</span> <span class="variable">claims</span> <span class="operator">=</span> JwtUtils.parseJWT(token);</span><br><span class="line">            <span class="type">Integer</span> <span class="variable">empId</span> <span class="operator">=</span> Integer.valueOf(claims.get(<span class="string">&quot;id&quot;</span>).toString());</span><br><span class="line">            CurrentHolder.setCurrentId(empId);</span><br><span class="line">            log.info(<span class="string">&quot;token解析成功, 放行&quot;</span>);</span><br><span class="line">        &#125; <span class="keyword">catch</span> (Exception e) &#123;</span><br><span class="line">            log.info(<span class="string">&quot;token解析失败, 响应401状态码&quot;</span>);</span><br><span class="line">            response.setStatus(<span class="number">401</span>);</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//6. 放行</span></span><br><span class="line">        filterChain.doFilter(request, response);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//7. 清空当前线程绑定的id</span></span><br><span class="line">        CurrentHolder.remove();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>在AOP程序中，从ThreadLocal中获取当前登录员工的ID。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.itheima.aop;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.itheima.anno.LogOperation;</span><br><span class="line"><span class="keyword">import</span> com.itheima.mapper.OperateLogMapper;</span><br><span class="line"><span class="keyword">import</span> com.itheima.pojo.OperateLog;</span><br><span class="line"><span class="keyword">import</span> com.itheima.utils.CurrentHolder;</span><br><span class="line"><span class="keyword">import</span> org.aspectj.lang.ProceedingJoinPoint;</span><br><span class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.Around;</span><br><span class="line"><span class="keyword">import</span> org.aspectj.lang.annotation.Aspect;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Component;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.time.LocalDateTime;</span><br><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Aspect</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">OperationLogAspect</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> OperateLogMapper operateLogMapper;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 环绕通知</span></span><br><span class="line">    <span class="meta">@Around(&quot;@annotation(com.itheima.anno.LogOperation)&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> Object <span class="title function_">around</span><span class="params">(ProceedingJoinPoint joinPoint)</span> <span class="keyword">throws</span> Throwable &#123;</span><br><span class="line">        <span class="comment">// 记录开始时间</span></span><br><span class="line">        <span class="type">long</span> <span class="variable">startTime</span> <span class="operator">=</span> System.currentTimeMillis();</span><br><span class="line">        <span class="comment">// 执行方法</span></span><br><span class="line">        <span class="type">Object</span> <span class="variable">result</span> <span class="operator">=</span> joinPoint.proceed();</span><br><span class="line">        <span class="comment">// 当前时间</span></span><br><span class="line">        <span class="type">long</span> <span class="variable">endTime</span> <span class="operator">=</span> System.currentTimeMillis();</span><br><span class="line">        <span class="comment">// 耗时</span></span><br><span class="line">        <span class="type">long</span> <span class="variable">costTime</span> <span class="operator">=</span> endTime - startTime;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 构建日志对象</span></span><br><span class="line">        <span class="type">OperateLog</span> <span class="variable">operateLog</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">OperateLog</span>();</span><br><span class="line">        operateLog.setOperateEmpId(getCurrentUserId()); <span class="comment">// 需要实现 getCurrentUserId 方法</span></span><br><span class="line">        operateLog.setOperateTime(LocalDateTime.now());</span><br><span class="line">        operateLog.setClassName(joinPoint.getTarget().getClass().getName());</span><br><span class="line">        operateLog.setMethodName(joinPoint.getSignature().getName());</span><br><span class="line">        operateLog.setMethodParams(Arrays.toString(joinPoint.getArgs()));</span><br><span class="line">        operateLog.setReturnValue(result.toString());</span><br><span class="line">        operateLog.setCostTime(costTime);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 插入日志</span></span><br><span class="line">        operateLogMapper.insert(operateLog);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 示例方法，获取当前用户ID</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> <span class="title function_">getCurrentUserId</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> CurrentHolder.getCurrentId();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>代码优化完毕之后，我们重新启动服务测试。就可以看到，可以获取到不同的登录用户信息了。</p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/20250311185335.png" alt="image.png"></p>
+<blockquote>
+<p>在同一个线程&#x2F;同一个请求中，进行数据共享就可以使用 ThreadLocal。</p>
+</blockquote>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="smithfont smith-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d20f536c64d06e5fcf4bfe2ec5dc25d.jpg" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d20f536c64d06e5fcf4bfe2ec5dc25d.jpg" title="头像" alt="头像"></a><div class="post-copyright__author_name">Smith</div><div class="post-copyright__author_desc">人生太短，要干的事太多，我要争分夺秒</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://smithhs.cn/2026/03/19/2026-03-19-13-%E5%90%8E%E7%AB%AFWeb%E8%BF%9B%E9%98%B6(AOP)/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://smithhs.cn/2026/03/19/2026-03-19-13-%E5%90%8E%E7%AB%AFWeb%E8%BF%9B%E9%98%B6(AOP)/')">13-后端Web进阶(AOP)</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="smith.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="smithfont smith-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="smith.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="smithfont smith-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://smithhs.cn/2026/03/19/2026-03-19-13-%E5%90%8E%E7%AB%AFWeb%E8%BF%9B%E9%98%B6(AOP)/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=13-后端Web进阶(AOP)&amp;url=https://smithhs.cn/2026/03/19/2026-03-19-13-%E5%90%8E%E7%AB%AFWeb%E8%BF%9B%E9%98%B6(AOP)/&amp;pic=https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/20250311090750.png" rel="external nofollow noreferrer noopener"><i class="smithfont smith-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="smithfont smith-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://smithhs.cn" target="_blank">Smith</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/Java/"><span class="tags-punctuation"> <i class="smithfont smith-icon-tag"></i></span>Java<span class="tagsPageCount">67</span></a><a class="post-meta__box__tags" href="/tags/JavaWeb/"><span class="tags-punctuation"> <i class="smithfont smith-icon-tag"></i></span>JavaWeb<span class="tagsPageCount">39</span></a><a class="post-meta__box__tags" href="/tags/%E5%90%8E%E7%AB%AF/"><span class="tags-punctuation"> <i class="smithfont smith-icon-tag"></i></span>后端<span class="tagsPageCount">49</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1681455691814.png" data-sites="wechat,weibo,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2026/03/19/2026-03-19-11-%E5%90%8E%E7%AB%AFWeb%E5%AE%9E%E6%88%98(%E8%87%AA%E5%B7%B1%E5%AE%8C%E6%88%90)/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/20250310101827.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">11-后端Web实战(自己完成)</div></div></a></div><div class="next-post pull-right"><a href="/2026/03/19/2026-03-19-14-%E5%90%8E%E7%AB%AFWeb%E8%BF%9B%E9%98%B6(SpringBoot%E5%8E%9F%E7%90%86)/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/20250312000559.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">14-后端Web进阶(SpringBoot原理)</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="smithfont smith-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/2026/03/19/2026-03-19-04-Web%E5%90%8E%E7%AB%AF%E5%9F%BA%E7%A1%80(%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86)/" title="04-Web后端基础(基础知识)"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/20250211204728.png" alt="cover"><div class="content is-center"><div class="date"><i class="smithfont smith-icon-calendar-days fa-fw"></i> 2026-03-19</div><div class="title">04-Web后端基础(基础知识)</div></div></a></div><div><a href="/2026/03/19/2026-03-19-11-%E5%90%8E%E7%AB%AFWeb%E5%AE%9E%E6%88%98(%E8%87%AA%E5%B7%B1%E5%AE%8C%E6%88%90)/" title="11-后端Web实战(自己完成)"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/20250310101827.png" alt="cover"><div class="content is-center"><div class="date"><i class="smithfont smith-icon-calendar-days fa-fw"></i> 2026-03-19</div><div class="title">11-后端Web实战(自己完成)</div></div></a></div><div><a href="/2026/03/19/2026-03-19-07-%E5%90%8E%E7%AB%AFWeb%E5%AE%9E%E6%88%98(%E9%83%A8%E9%97%A8%E7%AE%A1%E7%90%86)/" title="07-后端Web实战(部门管理)"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/20250216103352.png" alt="cover"><div class="content is-center"><div class="date"><i class="smithfont smith-icon-calendar-days fa-fw"></i> 2026-03-19</div><div class="title">07-后端Web实战(部门管理)</div></div></a></div><div><a href="/2026/03/19/2026-03-19-10-%E5%90%8E%E7%AB%AFWeb%E5%AE%9E%E6%88%98(%E5%91%98%E5%B7%A5%E7%AE%A1%E7%90%86)/" title="10-后端Web实战(员工管理)"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/20250308161321.png" alt="cover"><div class="content is-center"><div class="date"><i class="smithfont smith-icon-calendar-days fa-fw"></i> 2026-03-19</div><div class="title">10-后端Web实战(员工管理)</div></div></a></div><div><a href="/2026/03/19/2026-03-19-08-%E5%90%8E%E7%AB%AFWeb%E5%AE%9E%E6%88%98(%E5%91%98%E5%B7%A5%E7%AE%A1%E7%90%86)/" title="08-后端Web实战(员工管理)"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/20250216194944.png" alt="cover"><div class="content is-center"><div class="date"><i class="smithfont smith-icon-calendar-days fa-fw"></i> 2026-03-19</div><div class="title">08-后端Web实战(员工管理)</div></div></a></div><div><a href="/2026/03/19/2026-03-19-09-%E5%90%8E%E7%AB%AFWeb%E5%AE%9E%E6%88%98(%E5%91%98%E5%B7%A5%E7%AE%A1%E7%90%86)/" title="09-后端Web实战(员工管理)"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/20250307162931.png" alt="cover"><div class="content is-center"><div class="date"><i class="smithfont smith-icon-calendar-days fa-fw"></i> 2026-03-19</div><div class="title">09-后端Web实战(员工管理)</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="smithfont smith-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-AOP%E5%9F%BA%E7%A1%80"><span class="toc-number">1.</span> <span class="toc-text">1. AOP基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-AOP%E5%85%A5%E9%97%A8"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 AOP入门</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-AOP%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 AOP核心概念</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-AOP%E8%BF%9B%E9%98%B6"><span class="toc-number">2.</span> <span class="toc-text">2. AOP进阶</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E9%80%9A%E7%9F%A5%E7%B1%BB%E5%9E%8B"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 通知类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E9%80%9A%E7%9F%A5%E9%A1%BA%E5%BA%8F"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 通知顺序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E5%88%87%E5%85%A5%E7%82%B9%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 切入点表达式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-1-execution"><span class="toc-number">2.3.1.</span> <span class="toc-text">2.3.1 execution</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-2-annotation"><span class="toc-number">2.3.2.</span> <span class="toc-text">2.3.2 @annotation</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4%E8%BF%9E%E6%8E%A5%E7%82%B9"><span class="toc-number">2.4.</span> <span class="toc-text">2.4连接点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-AOP%E6%A1%88%E4%BE%8B"><span class="toc-number">3.</span> <span class="toc-text">3. AOP案例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E9%9C%80%E6%B1%82"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 需求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E5%88%86%E6%9E%90"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E6%AD%A5%E9%AA%A4"><span class="toc-number">3.3.</span> <span class="toc-text">3.3 步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="toc-number">3.4.</span> <span class="toc-text">3.4 代码实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-6-%E8%8E%B7%E5%8F%96%E5%BD%93%E5%89%8D%E7%99%BB%E5%BD%95%E5%91%98%E5%B7%A5"><span class="toc-number">3.5.</span> <span class="toc-text">3.6 获取当前登录员工</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-6-1-ThreadLocal"><span class="toc-number">3.5.1.</span> <span class="toc-text">3.6.1 ThreadLocal</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-6-2-%E8%AE%B0%E5%BD%95%E5%BD%93%E5%89%8D%E7%99%BB%E5%BD%95%E5%91%98%E5%B7%A5"><span class="toc-number">3.5.2.</span> <span class="toc-text">3.6.2 记录当前登录员工</span></a></li></ol></li></ol></li></ol></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2022 - 2026 By <a class="footer-bar-link" href="/" title="Smith" target="_blank">Smith</a></div></div><div id="footer-type-tips"></div><div class="js-pjax"><script>function subtitleType () {
+  fetch('https://v1.hitokoto.cn')
+    .then(response => response.json())
+    .then(data => {
+      if (true) {
+        const from = '出自 ' + data.from
+        const sub = []
+        sub.unshift(data.hitokoto, from)
+        window.typed = new Typed('#footer-type-tips', {
+          strings: sub,
+          startDelay: 300,
+          typeSpeed: 150,
+          loop: true,
+          backSpeed: 50,
+        })
+      } else {
+        document.getElementById('footer-type-tips').innerHTML = data.hitokoto
+      }
+    })
+}
+
+if (true) {
+  if (typeof Typed === 'function') {
+    subtitleType()
+  } else {
+    getScript('https://cdn.jsdelivr.net/npm/typed.js@2.0.12/dist/typed.min.js').then(subtitleType)
+  }
+} else {
+  subtitleType()
+}
+</script></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/Smithhss/smithhs.github.io.git" title="Hexo">Hexo</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">199</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">69</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">3</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="smithfont smith-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://smithhs.cn/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.png" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://github.com/Smithhss" title="Github"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/GitHub.png" alt="Github"/><span class="back-menu-item-text">Github</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="smithfont smith-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="smithfont smith-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="smithfont smith-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="smithfont smith-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="smithfont smith-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="smithfont smith-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/dailyPhoto/"><i class="smithfont smith-icon-camera faa-tada" style="font-size: 0.9em;"></i><span> 每日照片</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wallpaper/"><i class="smithfont smith-icon-image faa-tada" style="font-size: 0.9em;"></i><span> 壁纸</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wordScenery/"><i class="smithfont smith-icon-font faa-tada" style="font-size: 0.9em;"></i><span> 文字风景</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="smithfont smith-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于我</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="smithfont smith-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/love/"><i class="smithfont smith-icon-heart faa-tada" style="font-size: 0.9em;"></i><span> 爱情</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="smithfont smith-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Android-Studio/" style="font-size: 0.88rem;">Android Studio<sup>1</sup></a><a href="/tags/App/" style="font-size: 0.88rem;">App<sup>1</sup></a><a href="/tags/Butterfly/" style="font-size: 0.88rem;">Butterfly<sup>1</sup></a><a href="/tags/C/" style="font-size: 0.88rem;">C++<sup>3</sup></a><a href="/tags/CSS/" style="font-size: 0.88rem;">CSS<sup>1</sup></a><a href="/tags/Cisco-Packet-Tracer/" style="font-size: 0.88rem;">Cisco Packet Tracer<sup>1</sup></a><a href="/tags/Docker/" style="font-size: 0.88rem;">Docker<sup>2</sup></a><a href="/tags/Easypan/" style="font-size: 0.88rem;">Easypan<sup>2</sup></a><a href="/tags/FurtherMathematics/" style="font-size: 0.88rem;">FurtherMathematics<sup>1</sup></a><a href="/tags/GPT/" style="font-size: 0.88rem;">GPT<sup>1</sup></a><a href="/tags/Git2/" style="font-size: 0.88rem;">Git2<sup>1</sup></a><a href="/tags/HTML/" style="font-size: 0.88rem;">HTML<sup>1</sup></a><a href="/tags/Hexo/" style="font-size: 0.88rem;">Hexo<sup>1</sup></a><a href="/tags/Java/" style="font-size: 0.88rem;">Java<sup>67</sup></a><a href="/tags/JavaScript/" style="font-size: 0.88rem;">JavaScript<sup>1</sup></a><a href="/tags/Jrebel/" style="font-size: 0.88rem;">Jrebel<sup>1</sup></a><a href="/tags/LeetCode/" style="font-size: 0.88rem;">LeetCode<sup>1</sup></a><a href="/tags/Linux/" style="font-size: 0.88rem;">Linux<sup>3</sup></a><a href="/tags/Markdown/" style="font-size: 0.88rem;">Markdown<sup>2</sup></a><a href="/tags/Maven/" style="font-size: 0.88rem;">Maven<sup>2</sup></a><a href="/tags/MyBatis/" style="font-size: 0.88rem;">MyBatis<sup>1</sup></a><a href="/tags/MyBatis-Plus/" style="font-size: 0.88rem;">MyBatis-Plus<sup>1</sup></a><a href="/tags/Mysql/" style="font-size: 0.88rem;">Mysql<sup>1</sup></a><a href="/tags/Navicat/" style="font-size: 0.88rem;">Navicat<sup>1</sup></a><a href="/tags/NoSql/" style="font-size: 0.88rem;">NoSql<sup>1</sup></a><a href="/tags/Nodejs/" style="font-size: 0.88rem;">Nodejs<sup>2</sup></a><a href="/tags/Python/" style="font-size: 0.88rem;">Python<sup>4</sup></a><a href="/tags/Spring/" style="font-size: 0.88rem;">Spring<sup>2</sup></a><a href="/tags/VMware/" style="font-size: 0.88rem;">VMware<sup>2</sup></a><a href="/tags/WeChat/" style="font-size: 0.88rem;">WeChat<sup>1</sup></a><a href="/tags/YouHou/" style="font-size: 0.88rem;">YouHou<sup>1</sup></a><a href="/tags/books/" style="font-size: 0.88rem;">books<sup>1</sup></a><a href="/tags/butterfly/" style="font-size: 0.88rem;">butterfly<sup>1</sup></a><a href="/tags/clash/" style="font-size: 0.88rem;">clash<sup>1</sup></a><a href="/tags/error/" style="font-size: 0.88rem;">error<sup>1</sup></a><a href="/tags/project/" style="font-size: 0.88rem;">project<sup>4</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 0.88rem;">前端<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6/" style="font-size: 0.88rem;">开发框架<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" style="font-size: 0.88rem;">开发环境<sup>1</sup></a><a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="font-size: 0.88rem;">软件工程<sup>1</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="smithfont smith-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="smithfont smith-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="smithfont smith-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="smithfont smith-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="smithfont smith-icon-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="smithfont smith-icon-arrow-up"></i></button></div></div><div id="nav-music"><a id="nav-music-hoverTips" onclick="smith.musicToggle()" accesskey="m">播放音乐</a><div id="console-music-bg"></div><meting-js id="8805965276" server="netease" type="playlist" mutex="true" preload="none" theme="var(--smith-main)" data-lrctype="0" order="random" volume="0.7"></meting-js></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="smithfont smith-icon-xmark"></i></button></nav><div class="is-center" id="loading-database"><i class="smithfont smith-icon-spinner smith-pulse-icon"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="smithfont smith-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="smithfont smith-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="smithfont smith-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="smithfont smith-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="smithfont smith-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="smithfont smith-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="smithfont smith-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="smithfont smith-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="smithfont smith-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="smithfont smith-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="smithfont smith-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="smithfont smith-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="smithfont smith-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="smithfont smith-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="smithfont smith-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="smithfont smith-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="smithfont smith-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://music.163.com/#/my/m/music/playlist?id=464586318&quot;, &quot;_blank&quot;);" style="display: none;"><i class="smithfont smith-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="smithfont smith-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="smithfont smith-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="smithfont smith-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="smithfont smith-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="smithfont smith-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="smithfont smith-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="smithfont smith-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="smithfont smith-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn1.tianli0.top/npm/js-heo@1.0.6/translate/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@6.1.6/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.3.1/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.js"></script><script>var meting_api = "https://api.injahow.cn/meting/?server=:server&type=:type&id=:id&auth=:auth&r=:r";
+</script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/smith-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("07/01/2022 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用史先森!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+      ███████╗███╗   ███╗██╗████████╗██╗  ██╗
+      ██╔════╝████╗ ████║██║╚══██╔══╝██║  ██║
+      ███████╗██╔████╔██║██║   ██║   ███████║
+      ╚════██║██║╚██╔╝██║██║   ██║   ██╔══██║
+      ███████║██║ ╚═╝ ██║██║   ██║   ██║  ██║
+      ╚══════╝╚═╝     ╚═╝╚═╝   ╚═╝   ╚═╝  ╚═╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2022 By 史先森 V1.0.0",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/smith-blog@1.0.0/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 史先森 %c 你正在访问 Smith 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/smith/random.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><input type="hidden" name="page-type" id="page-type" value="post"></div><script async data-pjax src="https://npm.elemecdn.com/smith-theme-static@1.0.0/bubble/bubble.js"></script><script>var visitorMail = "visitor@smithhs.cn";
+</script><script async data-pjax src="https://cdn.jsdelivr.net/npm/waterfall.js@1.1.0/dist/waterfall.min.js"></script><script src="https://cdn.cbd.int/qrcodejs@1.0.0/qrcode.min.js"></script><script src="/js/smith/right_click_menu.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/smith-theme-static@1.0.2/icon/ali_iconfont_css.css"><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/dist/canvas-nest.min.js"></script><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script><script>AOS.init({
+  duration: 800,
+  easing: 'ease-out-cubic',
+  once: true,
+  offset: 50
+});
+</script><script src="https://lib.baomitu.com/pjax/0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  smith.removeGlobalFnEvent('pjax')
+  smith.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script charset="UTF-8" src="https://cdn.cbd.int/smith-theme-static@1.0.2/accesskey/accesskey.js"></script><div id="live2d-container"><canvas id="live2d-canvas"></canvas><button class="live2d-toggle" title="切换看板娘">🎭</button></div><script data-pjax src="/js/smith/live2d.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="smithfont smith-icon-arrow-circle-right"></i></div></div></div></body></html>

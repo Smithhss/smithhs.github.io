@@ -1827,7 +1827,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Banner carousel
     const bannerItems = document.querySelectorAll('.banner-item');
-    const bannerListItems = document.querySelectorAll('.banner-list-item');
+    const bannerListItems = document.querySelectorAll('.banner-nav-item');
     if (bannerItems.length > 0 && bannerListItems.length > 0) {
       let currentBannerIndex = 0;
       // Clear any existing banner interval from previous PJAX navigation
@@ -1867,17 +1867,27 @@ document.addEventListener("DOMContentLoaded", function () {
         }
       }
 
-      // Click on list items
+      // Hover on list items switches the big cover; click jumps to the article
       bannerListItems.forEach(item => {
-        item.addEventListener('click', () => {
+        item.addEventListener('mouseenter', () => {
           const index = parseInt(item.getAttribute('data-index'));
-          if (!isNaN(index)) {
-            stopBannerAutoplay();
-            switchBanner(index);
-            startBannerAutoplay();
-          }
+          if (!isNaN(index)) switchBanner(index);
+        });
+        item.addEventListener('click', () => {
+          const path = item.getAttribute('data-path');
+          if (path) location.href = path;
         });
       });
+
+      // Click on banner-left jumps to the currently displayed article
+      const bannerLeft = document.querySelector('.banner-left');
+      if (bannerLeft) {
+        bannerLeft.addEventListener('click', () => {
+          const activeItem = bannerItems[currentBannerIndex];
+          const path = activeItem && activeItem.getAttribute('data-path');
+          if (path) location.href = path;
+        });
+      }
 
       // Pause on hover
       const bannerContainer = document.querySelector('.home-banner');

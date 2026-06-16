@@ -3,9 +3,9 @@
   if (!config || !config.enable) return;
 
   const APIs = {
-    bilibili: "https://api.codelife.cc/api/top/list?lang=cn&id=bilibili",
-    weibo: "https://api.codelife.cc/api/top/list?lang=cn&id=KdYF6e9r",
-    zhihu: "https://api.codelife.cc/api/top/list?lang=cn&id=zhihu",
+    bilibili: "https://60s.viki.moe/v2/bili",
+    weibo: "https://60s.viki.moe/v2/weibo",
+    zhihu: "https://60s.viki.moe/v2/zhihu",
   };
 
   const tabNames = {

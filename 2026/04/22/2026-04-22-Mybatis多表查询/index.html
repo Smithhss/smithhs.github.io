@@ -1,0 +1,672 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>Mybatis多表查询 | Smith</title><meta name="keywords" content="Java,JavaWeb,后端"><meta name="author" content="Smith"><meta name="copyright" content="Smith"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#fafaf8"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="Mybatis多表查询"><meta name="application-name" content="Mybatis多表查询"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#fafaf8"><meta property="og:type" content="article"><meta property="og:title" content="Mybatis多表查询"><meta property="og:url" content="https://smithhs.cn/2026/04/22/2026-04-22-Mybatis%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/index.html"><meta property="og:site_name" content="Smith"><meta property="og:description" content="基于Spring Boot的MyBatis多表查询操作讲义一、什么是多表查询与关联映射在实际企业级应用中,数据往往分散在多张数据库表中,例如”用户表”和”订单表”、”文章表”和”评论表”。当我们需要同时获取这些关联数据时,就必须进行多表查询。MyBatis作为持久层框架,提供了两种核心机制来处理多表"><meta property="og:locale" content="zh-CN"><meta property="og:image" content="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200&amp;q=80"><meta property="article:author" content="Smith"><meta property="article:tag"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200&amp;q=80"><meta name="description" content="基于Spring Boot的MyBatis多表查询操作讲义一、什么是多表查询与关联映射在实际企业级应用中,数据往往分散在多张数据库表中,例如”用户表”和”订单表”、”文章表”和”评论表”。当我们需要同时获取这些关联数据时,就必须进行多表查询。MyBatis作为持久层框架,提供了两种核心机制来处理多表"><link rel="shortcut icon" href="/favicon.ico"><link rel="canonical" href="https://smithhs.cn/2026/04/22/2026-04-22-Mybatis%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="manifest" href="/manifest.json"/><meta name="msapplication-TileColor" content="var(--smith-main)"/><link rel="mask-icon" href="/img/siteicon/apple-icon-180.png" color="#5bbad5"/><link rel="apple-touch-icon" sizes="180x180" href="/img/siteicon/apple-icon-180.png"/><link rel="apple-touch-icon-precomposed" sizes="180x180" href="/img/siteicon/apple-icon-180.png"/><link rel="icon" type="image/png" sizes="32x32" href="/img/siteicon/32.png"/><link rel="icon" type="image/png" sizes="16x16" href="/img/siteicon/16.png"/><link rel="bookmark" href="/img/siteicon/apple-icon-180.png"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2048-2732.jpg" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2732-2048.jpg" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1668-2388.jpg" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2388-1668.jpg" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1536-2048.jpg" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2048-1536.jpg" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1668-2224.jpg" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2224-1668.jpg" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1620-2160.jpg" media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2160-1620.jpg" media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1290-2796.jpg" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2796-1290.jpg" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1179-2556.jpg" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2556-1179.jpg" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1284-2778.jpg" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2778-1284.jpg" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1170-2532.jpg" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2532-1170.jpg" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1125-2436.jpg" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2436-1125.jpg" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1242-2688.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2688-1242.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-828-1792.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1792-828.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1242-2208.jpg" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-2208-1242.jpg" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-750-1334.jpg" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1334-750.jpg" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-640-1136.jpg" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)"/><link rel="apple-touch-startup-image" href="/img/siteicon/apple-splash-1136-640.jpg" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@6.1.6/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"><link rel="stylesheet" href="https://npm.elemecdn.com/smith-theme-static@1.0.2/swiper/swiper.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: undefined,
+  postHeadAiDescription: {"enable":true,"gptName":"Smith","mode":"api","switchBtn":false,"btnLink":"https://aicos.ink","randomNum":3,"basicWordCount":1000,"key":"sk-fpYVeik6Ps1EpZsVEbZpipNzy0Hal0Y0G9RpjexTGcpCLflG","Referer":"https://aicos.ink"},
+  diytitle: {"enable":true,"leaveTitle":"再看看嘛🌈！","backTitle":"欢迎回来✌️！"},
+  LA51: undefined,
+  greetingBox: {"enable":true,"default":"晚上好👋","list":[{"greeting":"晚安😴","startTime":0,"endTime":5},{"greeting":"早上好鸭👋, 祝你一天好心情！","startTime":6,"endTime":9},{"greeting":"上午好👋, 状态很好，鼓励一下～","startTime":10,"endTime":10},{"greeting":"11点多啦, 在坚持一下就吃饭啦～","startTime":11,"endTime":11},{"greeting":"午安👋, 宝贝","startTime":12,"endTime":14},{"greeting":"🌈充实的一天辛苦啦！","startTime":14,"endTime":18},{"greeting":"19点喽, 奖励一顿丰盛的大餐吧🍔。","startTime":19,"endTime":19},{"greeting":"晚上好👋, 在属于自己的时间好好放松😌~","startTime":20,"endTime":24}]},
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  music_page_default: "nav_music",
+  home_banner: {"enable":true,"interval":5000,"count":5},
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: true,
+  mainTone: undefined,
+  authorStatus: {"skills":["💻 后端开发 Java / Spring Cloud","🌐 前端探索 React / TypeScript","🤖 AI 工具深度用户","🏠 智能家居折腾达人","🔨 从设计到部署一条龙","📝 偶尔写写博客记录生活","🎵 听歌写代码双线并行","🚀 脚踏实地行动派"]},
+  algolia: undefined,
+  localSearch: {"path":"/search.json","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":240},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: Smith","link":"链接: ","source":"来源: Smith","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#4f7cff","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.2.0/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.2.0/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: 'Smith',
+  title: 'Mybatis多表查询',
+  postAI: '',
+  pageFillDescription: '基于Spring Boot的MyBatis多表查询操作讲义, 一、什么是多表查询与关联映射, 二、为什么要使用多表与关联映射的优势, 三、如何基于Spring Boot环境实现多表查询, 环境准备, 1. 一对一映射(使用 association), 方式一嵌套结果(一条SQL连接查询), 方式二分步查询(两条SQL), 第二部分：一对多查询（用户 → 多个订单）, 场景：我想看所有用户并且每个用户下面要列出他的所有订单。, 方法一：一条 SQL 连接查询（嵌套结果）, 2. 一对多映射(使用 collection), 方式一嵌套结果(一条SQL连接查询), 方式二分步查询, 3. 业务层分步骤实现查询(手动控制), 四、测试类完整示例, 五、总结对比与最佳实践基于的多表查询操作讲义一什么是多表查询与关联映射在实际企业级应用中数据往往分散在多张数据库表中例如用户表和订单表文章表和评论表当我们需要同时获取这些关联数据时就必须进行多表查询作为持久层框架提供了两种核心机制来处理多表查询的结果映射自定义结果集映射规则解决实体类属性名与数据库字段名不一致的问题更重要的是支持嵌套映射即通过一对一和一对多标签将关联表的数据封装到实体类的关联属性中分步查询通过属性指定另一个方法先查询主表再根据主表的结果分步查询关联表可以配合延迟加载提升性能核心标签一对一关联例如订单用户一对多关联例如用户订单列表的属性可复用映射规则二为什么要使用多表与关联映射的优势面向对象导航通过实体类的嵌套对象如直接获取关联数据符合面向对象思维避免手动拼接多个查询结果解耦与代码复杂的多表查询逻辑写在映射文件中便于维护和优化分步查询还能拆分提高复用性性能可控嵌套结果单条连接查询性能较高分步查询延迟加载可按需加载关联数据避免一次性获取大量无用信息解决问题的灵活变通虽然分步查询可能导致次但结合和可减轻问题也可在业务层手动批量查询优化三如何基于环境实现多表查询环境准备驱动已有实体和对应的单表能力课前已学数据模型示例实体类一个用户对象可以包含多个订单对象每个订单对象只能找到一个所属的用户对象解释类中持有体现一个用户对应多个订单的一对多关系类中持有体现每个订单只属于一个用户的一对一关系这种双向关联是后面做关联映射的基础一对一映射使用场景查询订单及其对应的用户信息方式一嵌套结果一条连接查询思路写一条的一次性把订单表和用户表的数据都查出来然后通过告诉如何把结果集中用户那几列封装成对象里的属性订单起个别名防止和用户重名执行结果类似这样手机张三北京耳机张三北京电脑李四上海映射嵌套结果方式一条查出所有字段手动把用户的字段映射到属性给这个映射规则起个名字后面好用要映射成什么类型的对象这里就是类主键字段用标签用它判断是不是同一个对象重点来了表示一对一关联数据要填到对象的属性里这个属性的类型是类用户表的主键这样执行完后就会返回一个每个里面的属性都已经填好了因为是一条查出来的所以效率很高接口使用引用中定义的映射规则调用解释中用别名避免两表列冲突里的非常重要它告诉用哪一列判断是不是同一个用户避免重复对象嵌套结果只执行条性能最好但和映射都比较重方式二分步查询两条优势可复用支持延迟加载思路先查订单表拿到当代码真正用到的时候再拿着去查用户表映射里的属性指定第二步要调用的查询方法全限定名把第一步查到的列的值作为参数传给第二步延迟加载用到了才查不用就不查修改接口定义第二步调用的方法根据用户查用户执行流程演示执行这个方法只发出一条遍历订单但先不访问只打印商品名不会查用户表当代码执行到这里访问了此时才会发出第二条去查用户延迟加载的好处如果我的页面只展示订单列表不需要显示买家名字那第二步根本不会执行省了数据库资源各属性详解属性作用要封装到实体中的哪个属性这里是这个属性的类型把主查询结果的哪一列值作为参数传给下一步查询这里传要调用的第二步方法的全限定名方法名延迟加载用到时才查立即加载开启延迟加载全局开启延迟加载按需触发访问关联属性才加载业务层调用解释执行这段代码时先执行得到条订单由于开启了只有在代码真正访问时才会触发的第二条如果只关心订单本身不碰那第二条根本不会发这就是延迟加载省资源的核心价值第二部分一对多查询用户多个订单场景我想看所有用户并且每个用户下面要列出他的所有订单方法一一条连接查询嵌套结果语句结果可能是张三北京手机张三北京耳机李四上海电脑注意张三这个人出现了两次因为他有两个订单一对多映射使用场景查询用户及其所有订单方式一嵌套结果一条连接查询接口告诉查询的结果按我们在里面指定的规则进行封装映射表示一对多关联数据要填到对象的属性这是个这个里面装的是类型的对象注意若一个用户有多个订单结果集中用户信息会重复通过自动合并到同一个对象解释连接查询的结果行数用户数该用户的订单数例如张三有个订单在结果集里张三那行会出现次发现外层的值相同就知道是同一个把后面的订单追加到集合里而不是创建新的和的关键区别用指定集合元素类型因为集合本身已经是用指定属性类型方式二分步查询接口分步查询只查用户表订单留给第二步映射手动定义一个封装的规则分步查询接口作为一对多分步查询的第二步根据查该用户所有订单这里不需要再为配置因为的列名和实体的属性几乎一致只需通过开启驼峰映射就会自动映射到业务层调用示例解释的表示把用户表查询结果的列值作为参数传给执行过程先查出个用户对每个用户触发一次总共条这就是典型的问题因此一对多的分步查询几乎必须搭配只有真正遍历时才发第二条业务层分步骤实现查询手动控制有时我们不需要自动分步查询而是由业务层显式控制查询步骤以达到更精细的事务管理或缓存策略示例业务层手动分步查询先查所有用户再一次性批量查出所有订单最后在内存中按分组装配到各个中这种做法只发条从根本上规避了问题第一步查所有用户普通的第二步收集所有一次性批量查订单第三步按分组第四步装配到每个对象中这种做法完全透明适合需要额外处理如数据过滤组装多个来源数据的场景也是分步查询的一种替代方案解释相比自动分步条业务层手动分步只需固定条一条查用户一条用查所有订单在内存里分组装配在用户量大时性能提升非常明显是生产项目里的常见优化套路四测试类完整示例下面是完整的测试类串联了前面三种查询方式一对多嵌套结果一条查出用户和订单通过的把订单合并到一对多分步查询先查用户再懒加载订单只有在访问时才会触发第二条一对一分步查询先查所有订单再按懒加载用户打印时才会触发解释三个测试用例分别对应前面讲的三种典型场景建议在中配上这样能在控制台直接看到打印的帮助你直观感受条条的区别以及延迟加载何时触发五总结对比与最佳实践对比维度嵌套结果一条分步查询两条或多条复杂度较高多表连接注意字段别名低单表查询清晰简单网络数据库交互次次为关联记录数但延迟加载可减少无效查询性能适合数据量不大关联表较少的情况适合关联数据访问频率不确定的场景配合延迟加载可节省资源代码复用较低专用高分步查询的方法可复用调试单条易于优化但结果映射复杂多条定位问题更简单选择建议优先使用嵌套结果当需要一次性展示完整对象图且关联数据量不大如一页订单列表同时显示用户信息时一条连接查询效率最高分步查询延迟加载当关联数据不是每次都必须使用时例如管理后台用户列表不一定要立即显示订单可开启延迟加载避免浪费注意避免循环调用导致问题业务层手动分步适合需要对中间结果进行校验转换或批量优化的场景例如查询用户列表后批量查出所有用户的订单避免逐个查询注意事项使用时指定集合元素类型可省略默认为分步查询的属性支持传递多个参数延迟加载需要代理对象注意序列化问题可防止无限递归一对多嵌套结果如果左连接数据库返回的记录数等于主表记录从表记录当一对多关系层级较深时可能导致结果集膨胀此时分步查询更优通过掌握和分步查询你可以在项目中灵活应对各种复杂关联场景编写出既符合面向对象思想又高效的数据访问代码',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2026-06-02 11:58:01',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fafaf8')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="https://npm.elemecdn.com/lxgw-wenkai-screen-webfont@1.1.0/style.css" media="print" onload="this.media='all'"><meta name="generator" content="Hexo 7.3.0"></head><body data-type="smith"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d20f536c64d06e5fcf4bfe2ec5dc25d.jpg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/smith-theme-static@1.0.2/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="smithfont smith-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://smithhs.cn/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.png" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://github.com/Smithhss" title="Github"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/GitHub.png" alt="Github"/><span class="back-menu-item-text">Github</span></a></div></div></div></div><a id="site-name" href="/" accesskey="h"><div class="title">Smith</div><i class="smithfont smith-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:smith.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="smithfont smith-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="smithfont smith-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="smithfont smith-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="smithfont smith-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="smithfont smith-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="smithfont smith-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/dailyPhoto/"><i class="smithfont smith-icon-camera faa-tada" style="font-size: 0.9em;"></i><span> 每日照片</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wallpaper/"><i class="smithfont smith-icon-image faa-tada" style="font-size: 0.9em;"></i><span> 壁纸</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wordScenery/"><i class="smithfont smith-icon-font faa-tada" style="font-size: 0.9em;"></i><span> 文字风景</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="smithfont smith-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于我</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="smithfont smith-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/love/"><i class="smithfont smith-icon-heart faa-tada" style="font-size: 0.9em;"></i><span> 爱情</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="smithfont smith-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button only-home" id="travellings_button" title="随机前往一个开往项目网站"><a class="site-page" onclick="smith.totraveling()" title="随机前往一个开往项目网站" href="javascript:void(0);" rel="external nofollow" data-pjax-state="external"><i class="smithfont smith-icon-train"></i></a></div><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="smithfont smith-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍" accesskey="s"><i class="smithfont smith-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="smith.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg" target="_blank"><img class="post-qr-code-img" alt="wechat" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg" target="_blank"><img class="post-qr-code-img" alt="alipay" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Android-Studio/" style="font-size: 1.05rem;">Android Studio<sup>1</sup></a><a href="/tags/App/" style="font-size: 1.05rem;">App<sup>1</sup></a><a href="/tags/Butterfly/" style="font-size: 1.05rem;">Butterfly<sup>1</sup></a><a href="/tags/C/" style="font-size: 1.05rem;">C++<sup>3</sup></a><a href="/tags/CSS/" style="font-size: 1.05rem;">CSS<sup>1</sup></a><a href="/tags/Cisco-Packet-Tracer/" style="font-size: 1.05rem;">Cisco Packet Tracer<sup>1</sup></a><a href="/tags/Docker/" style="font-size: 1.05rem;">Docker<sup>2</sup></a><a href="/tags/Easypan/" style="font-size: 1.05rem;">Easypan<sup>2</sup></a><a href="/tags/FurtherMathematics/" style="font-size: 1.05rem;">FurtherMathematics<sup>1</sup></a><a href="/tags/GPT/" style="font-size: 1.05rem;">GPT<sup>1</sup></a><a href="/tags/Git2/" style="font-size: 1.05rem;">Git2<sup>1</sup></a><a href="/tags/HTML/" style="font-size: 1.05rem;">HTML<sup>1</sup></a><a href="/tags/Hexo/" style="font-size: 1.05rem;">Hexo<sup>1</sup></a><a href="/tags/Java/" style="font-size: 1.05rem;">Java<sup>67</sup></a><a href="/tags/JavaScript/" style="font-size: 1.05rem;">JavaScript<sup>1</sup></a><a href="/tags/Jrebel/" style="font-size: 1.05rem;">Jrebel<sup>1</sup></a><a href="/tags/LeetCode/" style="font-size: 1.05rem;">LeetCode<sup>1</sup></a><a href="/tags/Linux/" style="font-size: 1.05rem;">Linux<sup>3</sup></a><a href="/tags/Markdown/" style="font-size: 1.05rem;">Markdown<sup>2</sup></a><a href="/tags/Maven/" style="font-size: 1.05rem;">Maven<sup>2</sup></a><a href="/tags/MyBatis/" style="font-size: 1.05rem;">MyBatis<sup>1</sup></a><a href="/tags/MyBatis-Plus/" style="font-size: 1.05rem;">MyBatis-Plus<sup>1</sup></a><a href="/tags/Mysql/" style="font-size: 1.05rem;">Mysql<sup>1</sup></a><a href="/tags/Navicat/" style="font-size: 1.05rem;">Navicat<sup>1</sup></a><a href="/tags/NoSql/" style="font-size: 1.05rem;">NoSql<sup>1</sup></a><a href="/tags/Nodejs/" style="font-size: 1.05rem;">Nodejs<sup>2</sup></a><a href="/tags/Python/" style="font-size: 1.05rem;">Python<sup>4</sup></a><a href="/tags/Spring/" style="font-size: 1.05rem;">Spring<sup>2</sup></a><a href="/tags/VMware/" style="font-size: 1.05rem;">VMware<sup>2</sup></a><a href="/tags/WeChat/" style="font-size: 1.05rem;">WeChat<sup>1</sup></a><a href="/tags/YouHou/" style="font-size: 1.05rem;">YouHou<sup>1</sup></a><a href="/tags/books/" style="font-size: 1.05rem;">books<sup>1</sup></a><a href="/tags/butterfly/" style="font-size: 1.05rem;">butterfly<sup>1</sup></a><a href="/tags/clash/" style="font-size: 1.05rem;">clash<sup>1</sup></a><a href="/tags/error/" style="font-size: 1.05rem;">error<sup>1</sup></a><a href="/tags/project/" style="font-size: 1.05rem;">project<sup>4</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 1.05rem;">前端<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6/" style="font-size: 1.05rem;">开发框架<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" style="font-size: 1.05rem;">开发环境<sup>1</sup></a><a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="font-size: 1.05rem;">软件工程<sup>1</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="smithfont smith-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="smithfont smith-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="smithfont smith-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/05/"><span class="card-archive-list-date">五月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">16</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/04/"><span class="card-archive-list-date">四月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">31</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/03/"><span class="card-archive-list-date">三月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">75</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/02/"><span class="card-archive-list-date">二月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">7</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/11/"><span class="card-archive-list-date">十一月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">3</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/10/"><span class="card-archive-list-date">十月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/09/"><span class="card-archive-list-date">九月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">5</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/07/"><span class="card-archive-list-date">七月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="smithfont smith-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="smith.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="smithfont smith-icon-arrows-left-right"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="smith.musicToggle()" title="音乐开关"><a class="music-switch"><i class="smithfont smith-icon-music"></i></a></div></div><div class="console-mask" onclick="smith.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="smithfont smith-icon-arrow-up"></i><span id="percent" onclick="smith.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="smithfont smith-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="smithfont smith-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/" itemprop="url">编程开发</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/Java/" tabindex="-1" itemprop="url"> <span> <i class="smithfont smith-icon-hashtag"></i>Java</span></a><a class="article-meta__tags" href="/tags/JavaWeb/" tabindex="-1" itemprop="url"> <span> <i class="smithfont smith-icon-hashtag"></i>JavaWeb</span></a><a class="article-meta__tags" href="/tags/%E5%90%8E%E7%AB%AF/" tabindex="-1" itemprop="url"> <span> <i class="smithfont smith-icon-hashtag"></i>后端</span></a></span></div></div><h1 class="post-title" itemprop="name headline">Mybatis多表查询</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="post-meta-icon smithfont smith-icon-calendar-days"></i><span class="post-meta-label">发表于</span><time itemprop="dateCreated datePublished" datetime="2026-04-22T11:56:01.000Z" title="发表于 2026-04-22 19:56:01">2026-04-22</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="smithfont smith-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">4.3k</span><span class="post-meta-separator"></span><i class="smithfont smith-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>17分钟</span></span><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title="Mybatis多表查询"><i class="smithfont smith-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="smithfont smith-icon-spinner smith-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为石家庄"><i class="smithfont smith-icon-location-dot"></i>石家庄</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200&amp;q=80"></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><div class="post-ai-description"><div class="ai-title"><i class="smithfont smith-icon-bilibili"></i><div class="ai-title-text">AI-摘要</div><i class="smithfont smith-icon-arrow-rotate-right"></i><i class="smithfont smith-icon-circle-dot" title="朗读摘要"></i><div id="ai-tag">Smith GPT</div></div><div class="ai-explanation">AI初始化中...</div><div class="ai-btn-box"><div class="ai-btn-item">介绍自己 🙈</div><div class="ai-btn-item">生成本文简介 👋</div><div class="ai-btn-item">推荐相关文章 📖</div><div class="ai-btn-item">前往主页 🏠</div><div class="ai-btn-item" id="go-api-link">了解更多</div></div><script data-pjax src="/js/smith/ai_abstract.js"></script></div><article class="post-content" id="article-container" itemscope itemtype="https://smithhs.cn/2026/04/22/2026-04-22-Mybatis%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/"><header><a class="post-meta-categories" href="/categories/%E7%BC%96%E7%A8%8B%E5%BC%80%E5%8F%91/" itemprop="url">编程开发</a><a href="/tags/Java/" tabindex="-1" itemprop="url">Java</a><a href="/tags/JavaWeb/" tabindex="-1" itemprop="url">JavaWeb</a><a href="/tags/%E5%90%8E%E7%AB%AF/" tabindex="-1" itemprop="url">后端</a><h1 id="CrawlerTitle" itemprop="name headline">Mybatis多表查询</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">Smith</span><time itemprop="dateCreated datePublished" datetime="2026-04-22T11:56:01.000Z" title="undefined 2026-04-22 19:56:01">2026-04-22</time></header><h2 id="基于Spring-Boot的MyBatis多表查询操作讲义"><a href="#基于Spring-Boot的MyBatis多表查询操作讲义" class="headerlink" title="基于Spring Boot的MyBatis多表查询操作讲义"></a>基于Spring Boot的MyBatis多表查询操作讲义</h2><h3 id="一、什么是多表查询与关联映射"><a href="#一、什么是多表查询与关联映射" class="headerlink" title="一、什么是多表查询与关联映射"></a>一、什么是多表查询与关联映射</h3><p>在实际企业级应用中,数据往往分散在多张数据库表中,例如”用户表”和”订单表”、”文章表”和”评论表”。当我们需要同时获取这些关联数据时,就必须进行<strong>多表查询</strong>。MyBatis作为持久层框架,提供了两种核心机制来处理多表查询的结果映射:</p>
+<ul>
+<li><strong><code>resultMap</code></strong>:自定义结果集映射规则,解决实体类属性名与数据库字段名不一致的问题,更重要的是支持<strong>嵌套映射</strong>,即通过<code>association</code>(一对一)和<code>collection</code>(一对多)标签将关联表的数据封装到实体类的关联属性中。</li>
+<li><strong>分步查询</strong>:通过<code>select</code>属性指定另一个Mapper方法,先查询主表,再根据主表的结果”分步”查询关联表。可以配合<strong>延迟加载</strong>提升性能。</li>
+</ul>
+<p><strong>核心标签:</strong></p>
+<ul>
+<li><code>&lt;association&gt;</code>:<strong>一对一关联</strong>(例如:订单 → 用户)</li>
+<li><code>&lt;collection&gt;</code>:<strong>一对多关联</strong>(例如:用户 → 订单列表)</li>
+<li><code>resultMap</code> 的 <code>extends</code> 属性可复用映射规则</li>
+</ul>
+<h3 id="二、为什么要使用多表与关联映射的优势"><a href="#二、为什么要使用多表与关联映射的优势" class="headerlink" title="二、为什么要使用多表与关联映射的优势"></a>二、为什么要使用多表与关联映射的优势</h3><ol>
+<li><strong>面向对象导航</strong>:通过实体类的嵌套对象(如<code>Order.getUser()</code>)直接获取关联数据,符合Java面向对象思维,避免手动拼接多个查询结果。</li>
+<li><strong>解耦SQL与代码</strong>:复杂的多表查询逻辑写在映射文件中,便于维护和优化。分步查询还能拆分SQL,提高复用性。</li>
+<li><strong>性能可控</strong>:嵌套结果(单条SQL连接查询)性能较高;分步查询 + 延迟加载可按需加载关联数据,避免一次性获取大量无用信息。</li>
+<li><strong>解决N+1问题的灵活变通</strong>:虽然分步查询可能导致N+1次SQL,但结合<code>lazyLoadingEnabled</code>和<code>aggressiveLazyLoading</code>可减轻问题;也可在业务层手动批量查询优化。</li>
+</ol>
+<h3 id="三、如何基于Spring-Boot环境实现多表查询"><a href="#三、如何基于Spring-Boot环境实现多表查询" class="headerlink" title="三、如何基于Spring Boot环境实现多表查询"></a>三、如何基于Spring Boot环境实现多表查询</h3><h4 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h4><ul>
+<li>Spring Boot 3.x</li>
+<li>MyBatis Starter、MySQL驱动</li>
+<li>已有<code>User</code>、<code>Order</code>实体和对应的单表CRUD能力(课前已学)</li>
+</ul>
+<p><strong>数据模型示例:</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> `tb_order`</span><br><span class="line">(</span><br><span class="line">    id           <span class="type">bigint</span> auto_increment</span><br><span class="line">        <span class="keyword">primary</span> key,</span><br><span class="line">    user_id      <span class="type">bigint</span>         <span class="keyword">null</span>,</span><br><span class="line">    product_name <span class="type">varchar</span>(<span class="number">100</span>)   <span class="keyword">null</span>,</span><br><span class="line">    price        <span class="type">decimal</span>(<span class="number">10</span>, <span class="number">2</span>) <span class="keyword">null</span></span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">table</span> <span class="keyword">user</span></span><br><span class="line">(</span><br><span class="line">    id      <span class="type">bigint</span> auto_increment</span><br><span class="line">        <span class="keyword">primary</span> key,</span><br><span class="line">    name    <span class="type">varchar</span>(<span class="number">50</span>)  <span class="keyword">null</span>,</span><br><span class="line">    address <span class="type">varchar</span>(<span class="number">100</span>) <span class="keyword">null</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p><strong>实体类:</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@NoArgsConstructor</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">User</span> <span class="keyword">implements</span> <span class="title class_">Serializable</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> Long id;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String address;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 一个用户对象,可以包含多个订单对象</span></span><br><span class="line">    <span class="keyword">private</span> List&lt;Order&gt; orders;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@NoArgsConstructor</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Order</span> <span class="keyword">implements</span> <span class="title class_">Serializable</span> &#123;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Long id;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Long userId;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String productName;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Double price;</span><br><span class="line">    <span class="comment">// 每个订单对象,只能找到一个所属的用户对象</span></span><br><span class="line">    <span class="keyword">private</span> User user;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>解释:</strong> <code>User</code> 类中持有 <code>List&lt;Order&gt; orders</code>,体现”一个用户对应多个订单”的一对多关系;<code>Order</code> 类中持有 <code>User user</code>,体现”每个订单只属于一个用户”的一对一关系。这种<strong>双向关联</strong>是后面做关联映射的基础。</p>
+</blockquote>
+<h4 id="1-一对一映射-使用-association"><a href="#1-一对一映射-使用-association" class="headerlink" title="1. 一对一映射(使用 association)"></a>1. 一对一映射(使用 <code>association</code>)</h4><p><strong>场景</strong>:查询订单及其对应的用户信息。</p>
+<h5 id="方式一-嵌套结果-一条SQL连接查询"><a href="#方式一-嵌套结果-一条SQL连接查询" class="headerlink" title="方式一:嵌套结果(一条SQL连接查询)"></a>方式一:嵌套结果(一条SQL连接查询)</h5><p>思路:写一条 JOIN 的 SQL,一次性把订单表和用户表的数据都查出来,然后通过 <code>&lt;association&gt;</code> 告诉 MyBatis 如何把结果集中”用户那几列”封装成 <code>Order</code> 对象里的 <code>user</code> 属性。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">    o.id <span class="keyword">AS</span> oid,          <span class="comment">-- 订单id起个别名，防止和用户id重名</span></span><br><span class="line">    o.user_id, </span><br><span class="line">    o.product_name, </span><br><span class="line">    o.price,</span><br><span class="line">    u.id <span class="keyword">AS</span> uid, </span><br><span class="line">    u.name, </span><br><span class="line">    u.address</span><br><span class="line"><span class="keyword">FROM</span> tb_order o</span><br><span class="line"><span class="keyword">JOIN</span> <span class="keyword">user</span> u <span class="keyword">ON</span> o.user_id <span class="operator">=</span> u.id</span><br></pre></td></tr></table></figure>
+
+<p>执行结果类似这样：</p>
+<table>
+<thead>
+<tr>
+<th align="left">oid</th>
+<th align="left">user_id</th>
+<th align="left">product_name</th>
+<th align="left">price</th>
+<th align="left">uid</th>
+<th align="left">name</th>
+<th align="left">address</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">101</td>
+<td align="left">1</td>
+<td align="left">手机</td>
+<td align="left">2999.0</td>
+<td align="left">1</td>
+<td align="left">张三</td>
+<td align="left">北京</td>
+</tr>
+<tr>
+<td align="left">102</td>
+<td align="left">1</td>
+<td align="left">耳机</td>
+<td align="left">199.0</td>
+<td align="left">1</td>
+<td align="left">张三</td>
+<td align="left">北京</td>
+</tr>
+<tr>
+<td align="left">103</td>
+<td align="left">2</td>
+<td align="left">电脑</td>
+<td align="left">5999.0</td>
+<td align="left">2</td>
+<td align="left">李四</td>
+<td align="left">上海</td>
+</tr>
+</tbody></table>
+<p><strong>XML映射</strong>:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--嵌套结果方式:一条 SQL 查出所有字段,手动把用户的字段映射到 user 属性--&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- </span></span><br><span class="line"><span class="comment">    id=&quot;orderIncludeUser&quot; : 给这个映射规则起个名字，后面好用</span></span><br><span class="line"><span class="comment">    type=&quot;order&quot;          : 要映射成什么类型的对象（这里就是 Order 类）</span></span><br><span class="line"><span class="comment">--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">&quot;orderIncludeUser&quot;</span> <span class="attr">type</span>=<span class="string">&quot;order&quot;</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 主键字段用 &lt;id&gt; 标签，MyBatis 用它判断是不是同一个对象 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span> <span class="attr">property</span>=<span class="string">&quot;id&quot;</span> <span class="attr">column</span>=<span class="string">&quot;oid&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">&quot;userId&quot;</span> <span class="attr">column</span>=<span class="string">&quot;user_id&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">&quot;productName&quot;</span> <span class="attr">column</span>=<span class="string">&quot;product_name&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">&quot;price&quot;</span> <span class="attr">column</span>=<span class="string">&quot;price&quot;</span>/&gt;</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">&lt;!-- 重点来了：association 表示一对一关联</span></span><br><span class="line"><span class="comment">        property=&quot;user&quot; : 数据要填到 Order 对象的 user 属性里</span></span><br><span class="line"><span class="comment">        javaType=&quot;user&quot;  : 这个属性的类型是 User 类--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">association</span> <span class="attr">property</span>=<span class="string">&quot;user&quot;</span> <span class="attr">javaType</span>=<span class="string">&quot;user&quot;</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!-- 用户表的主键 --&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span> <span class="attr">property</span>=<span class="string">&quot;id&quot;</span> <span class="attr">column</span>=<span class="string">&quot;uid&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">&quot;name&quot;</span> <span class="attr">column</span>=<span class="string">&quot;name&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">&quot;address&quot;</span> <span class="attr">column</span>=<span class="string">&quot;address&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">association</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这样，MyBatis 执行完 SQL 后，就会返回一个 <code>List&lt;Order&gt;</code>，每个 <code>Order</code> 里面的 <code>user</code> 属性都已经填好了。因为是一条 SQL 查出来的，所以<strong>效率很高</strong>。</p>
+<p><strong>Mapper接口</strong>:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">OrderMapper</span> &#123;</span><br><span class="line">    <span class="comment">// 使用 @ResultMap 引用 XML 中定义的 orderIncludeUser 映射规则</span></span><br><span class="line">    <span class="meta">@Select(&quot;select o.id oid, user_id, product_name, price, u.id uid, name, address &quot; +</span></span><br><span class="line"><span class="meta">            &quot;from tb_order o, user u where o.user_id = u.id&quot;)</span></span><br><span class="line">    <span class="meta">@ResultMap(&quot;orderIncludeUser&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> List&lt;Order&gt; <span class="title function_">selectAllIncludeUserNested</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>调用</strong>:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">testOrderSelectAllNested</span><span class="params">()</span> &#123;</span><br><span class="line">    orderMapper.selectAllIncludeUserNested().forEach(order -&gt; &#123;</span><br><span class="line">        System.out.println(order.getId() + <span class="string">&quot; =&gt; &quot;</span> + order.getProductName()</span><br><span class="line">                + <span class="string">&quot; =&gt; &quot;</span> + order.getUser());</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>解释:</strong> SQL 中用别名 <code>oid</code>、<code>uid</code> 避免两表 <code>id</code> 列冲突。<code>&lt;association&gt;</code> 里的 <code>&lt;id&gt;</code> 非常重要——它告诉 MyBatis 用哪一列判断”是不是同一个用户”,避免重复对象。嵌套结果<strong>只执行 1 条 SQL</strong>,性能最好,但 SQL 和映射都比较”重”。</p>
+</blockquote>
+<h5 id="方式二-分步查询-两条SQL"><a href="#方式二-分步查询-两条SQL" class="headerlink" title="方式二:分步查询(两条SQL)"></a>方式二:分步查询(两条SQL)</h5><p><strong>优势</strong>:可复用,支持延迟加载。</p>
+<p>思路:</p>
+<ol>
+<li>先查订单表，拿到 <code>user_id</code>。</li>
+<li>当代码<strong>真正用到</strong> <code>order.getUser()</code> 的时候，再拿着 <code>user_id</code> 去查用户表。</li>
+</ol>
+<p><strong>XML映射</strong>:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">&quot;orderResultMap&quot;</span> <span class="attr">type</span>=<span class="string">&quot;order&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span> <span class="attr">property</span>=<span class="string">&quot;id&quot;</span> <span class="attr">column</span>=<span class="string">&quot;id&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">&quot;productName&quot;</span> <span class="attr">column</span>=<span class="string">&quot;product_name&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">&quot;price&quot;</span> <span class="attr">column</span>=<span class="string">&quot;price&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">&quot;userId&quot;</span> <span class="attr">column</span>=<span class="string">&quot;user_id&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- </span></span><br><span class="line"><span class="comment">        association 里的 select 属性：指定第二步要调用的查询方法（全限定名）</span></span><br><span class="line"><span class="comment">        column=&quot;user_id&quot;            ：把第一步查到的 user_id 列的值，作为参数传给第二步</span></span><br><span class="line"><span class="comment">        fetchType=&quot;lazy&quot;            ：延迟加载，用到了才查，不用就不查</span></span><br><span class="line"><span class="comment">    --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">association</span> </span></span><br><span class="line"><span class="tag">        <span class="attr">property</span>=<span class="string">&quot;user&quot;</span> </span></span><br><span class="line"><span class="tag">        <span class="attr">javaType</span>=<span class="string">&quot;user&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">column</span>=<span class="string">&quot;user_id&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">select</span>=<span class="string">&quot;com.xxx.mapper.UserMapper.selectById&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">fetchType</span>=<span class="string">&quot;lazy&quot;</span></span></span><br><span class="line"><span class="tag">    /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>修改<code>OrderMapper</code>接口</strong>:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">OrderMapper</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Select(&quot;select * from tb_order&quot;)</span></span><br><span class="line">    <span class="meta">@ResultMap(&quot;orderResultMap&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> List&lt;Order&gt; <span class="title function_">selectAllIncludeUser</span><span class="params">()</span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Select(&quot;select * from tb_order where user_id=#&#123;uid&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> List&lt;Order&gt; <span class="title function_">selectOrdersByUid</span><span class="params">(Integer uid)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>UserMapper定义</strong>:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">UserMapper</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 第二步调用的方法:根据用户 id 查用户</span></span><br><span class="line">    <span class="meta">@Select(&quot;select * from user where id = #&#123;id&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> User <span class="title function_">selectById</span><span class="params">(Long id)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>执行流程演示：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 执行这个方法，只发出一条 SQL：select * from tb_order</span></span><br><span class="line">List&lt;Order&gt; orders = orderMapper.selectAllIncludeUser();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 遍历订单，但先不访问 order.getUser()</span></span><br><span class="line"><span class="keyword">for</span> (Order order : orders) &#123;</span><br><span class="line">    System.out.println(order.getProductName());  <span class="comment">// 只打印商品名，不会查用户表</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. 当代码执行到这里，访问了 order.getUser()</span></span><br><span class="line"><span class="keyword">for</span> (Order order : orders) &#123;</span><br><span class="line">    System.out.println(order.getUser().getName()); <span class="comment">// 此时才会发出第二条 SQL 去查用户</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>延迟加载的好处</strong>：如果我的页面只展示订单列表，不需要显示买家名字，那第二步 SQL 根本不会执行，省了数据库资源。</p>
+<p><strong><code>&lt;association&gt;</code> 各属性详解:</strong></p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>property</code></td>
+<td>要封装到 <code>Order</code> 实体中的哪个属性(这里是 <code>user</code>)</td>
+</tr>
+<tr>
+<td><code>javaType</code></td>
+<td>这个属性的 Java 类型</td>
+</tr>
+<tr>
+<td><code>column</code></td>
+<td>把主查询结果的哪一列值,作为参数传给下一步查询(这里传 <code>user_id</code>)</td>
+</tr>
+<tr>
+<td><code>select</code></td>
+<td>要调用的第二步方法的<strong>全限定名</strong>(namespace.方法名)</td>
+</tr>
+<tr>
+<td><code>fetchType</code></td>
+<td><code>lazy</code>&#x3D;延迟加载(用到 <code>user</code> 时才查), <code>eager</code>&#x3D;立即加载</td>
+</tr>
+</tbody></table>
+<p><strong>开启延迟加载(application.yml)</strong>:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">mybatis:</span></span><br><span class="line">  <span class="attr">configuration:</span></span><br><span class="line">    <span class="attr">lazy-loading-enabled:</span> <span class="literal">true</span>      <span class="comment"># 全局开启延迟加载</span></span><br><span class="line">    <span class="attr">aggressive-lazy-loading:</span> <span class="literal">false</span>  <span class="comment"># 按需触发(访问关联属性才加载)</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>业务层调用</strong>:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">testOrderSelectAll</span><span class="params">()</span> &#123;</span><br><span class="line">    orderMapper.selectAllIncludeUser().forEach(order -&gt; &#123;</span><br><span class="line">        System.out.println(order.getPrice() + <span class="string">&quot;====&gt;&quot;</span> + order.getProductName()</span><br><span class="line">                + <span class="string">&quot;====&gt;&quot;</span> + order.getId() + <span class="string">&quot;====&gt;&quot;</span> + order.getUser());</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>解释:</strong> 执行这段代码时,MyBatis 先执行 <code>select * from tb_order</code> 得到 N 条订单。由于开启了 <code>lazy</code>,只有在代码<strong>真正访问</strong> <code>order.getUser()</code> 时,才会触发 <code>select * from user where id = ?</code> 的第二条 SQL。如果只关心订单本身,不碰 <code>user</code>,那第二条 SQL 根本不会发,这就是延迟加载省资源的核心价值。</p>
+</blockquote>
+<h3 id="第二部分：一对多查询（用户-→-多个订单）"><a href="#第二部分：一对多查询（用户-→-多个订单）" class="headerlink" title="第二部分：一对多查询（用户 → 多个订单）"></a>第二部分：一对多查询（用户 → 多个订单）</h3><h4 id="场景：我想看所有用户，并且每个用户下面要列出他的所有订单。"><a href="#场景：我想看所有用户，并且每个用户下面要列出他的所有订单。" class="headerlink" title="场景：我想看所有用户，并且每个用户下面要列出他的所有订单。"></a>场景：我想看所有用户，并且每个用户下面要列出他的所有订单。</h4><h5 id="方法一：一条-SQL-连接查询（嵌套结果）"><a href="#方法一：一条-SQL-连接查询（嵌套结果）" class="headerlink" title="方法一：一条 SQL 连接查询（嵌套结果）"></a>方法一：一条 SQL 连接查询（嵌套结果）</h5><p><strong>SQL 语句：</strong></p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> </span><br><span class="line">    u.id <span class="keyword">AS</span> uid, u.name, u.address,</span><br><span class="line">    o.id <span class="keyword">AS</span> oid, o.product_name, o.price</span><br><span class="line"><span class="keyword">FROM</span> <span class="keyword">user</span> u</span><br><span class="line"><span class="keyword">LEFT</span></span><br></pre></td></tr></table></figure>
+
+<p>结果可能是：</p>
+<table>
+<thead>
+<tr>
+<th align="left">uid</th>
+<th align="left">name</th>
+<th align="left">address</th>
+<th align="left">oid</th>
+<th align="left">product_name</th>
+<th align="left">price</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">1</td>
+<td align="left">张三</td>
+<td align="left">北京</td>
+<td align="left">101</td>
+<td align="left">手机</td>
+<td align="left">2999.0</td>
+</tr>
+<tr>
+<td align="left">1</td>
+<td align="left">张三</td>
+<td align="left">北京</td>
+<td align="left">102</td>
+<td align="left">耳机</td>
+<td align="left">199.0</td>
+</tr>
+<tr>
+<td align="left">2</td>
+<td align="left">李四</td>
+<td align="left">上海</td>
+<td align="left">103</td>
+<td align="left">电脑</td>
+<td align="left">5999.0</td>
+</tr>
+</tbody></table>
+<p>注意：张三这个人出现了两次（因为他有两个订单）。</p>
+<h4 id="2-一对多映射-使用-collection"><a href="#2-一对多映射-使用-collection" class="headerlink" title="2. 一对多映射(使用 collection)"></a>2. 一对多映射(使用 <code>collection</code>)</h4><p><strong>场景</strong>:查询用户及其所有订单。</p>
+<h5 id="方式一-嵌套结果-一条SQL连接查询-1"><a href="#方式一-嵌套结果-一条SQL连接查询-1" class="headerlink" title="方式一:嵌套结果(一条SQL连接查询)"></a>方式一:嵌套结果(一条SQL连接查询)</h5><p><strong>Mapper接口</strong>:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">UserMapper</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Select(&quot;select u.id uid, name, address, o.id oid, user_id, product_name, price &quot; +</span></span><br><span class="line"><span class="meta">            &quot;from user u, tb_order o where u.id = o.user_id&quot;)</span></span><br><span class="line">    <span class="meta">@ResultMap(&quot;userIncludeOrders&quot;)</span> <span class="comment">// 告诉mybatis查询的结果,按我们在 userIncludeOrders 里面指定的规则进行封装!!!!</span></span><br><span class="line">    <span class="keyword">public</span> List&lt;User&gt; <span class="title function_">selectAll</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>XML映射</strong>:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">&quot;userIncludeOrders&quot;</span> <span class="attr">type</span>=<span class="string">&quot;user&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span> <span class="attr">property</span>=<span class="string">&quot;id&quot;</span> <span class="attr">column</span>=<span class="string">&quot;uid&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">&quot;name&quot;</span> <span class="attr">column</span>=<span class="string">&quot;name&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">&quot;address&quot;</span> <span class="attr">column</span>=<span class="string">&quot;address&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">&lt;!-- </span></span><br><span class="line"><span class="comment">        collection 表示一对多关联</span></span><br><span class="line"><span class="comment">        property=&quot;orders&quot; : 数据要填到 User 对象的 orders 属性（这是个 List）</span></span><br><span class="line"><span class="comment">        ofType=&quot;order&quot;    : 这个 List 里面装的是 Order 类型的对象</span></span><br><span class="line"><span class="comment">    --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">collection</span> <span class="attr">property</span>=<span class="string">&quot;orders&quot;</span> <span class="attr">ofType</span>=<span class="string">&quot;order&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">id</span> <span class="attr">property</span>=<span class="string">&quot;id&quot;</span> <span class="attr">column</span>=<span class="string">&quot;oid&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">&quot;productName&quot;</span> <span class="attr">column</span>=<span class="string">&quot;product_name&quot;</span>/&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">&quot;price&quot;</span> <span class="attr">column</span>=<span class="string">&quot;price&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">collection</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>注意</strong>:若一个用户有多个订单,结果集中用户信息会重复,MyBatis通过<code>&lt;id&gt;</code>自动合并到同一个User对象。</p>
+<blockquote>
+<p><strong>解释:</strong> 连接查询的结果行数 &#x3D; 用户数 × 该用户的订单数。例如张三有 3 个订单,在结果集里”张三那行”会出现 3 次。MyBatis 发现外层 <code>&lt;id property=&quot;id&quot; column=&quot;uid&quot;/&gt;</code> 的值相同,就知道是同一个 <code>User</code>,把后面的订单追加到 <code>orders</code> 集合里,而不是创建新的 <code>User</code>。</p>
+<p><code>&lt;collection&gt;</code> 和 <code>&lt;association&gt;</code> 的关键区别:<code>collection</code> 用 <code>ofType</code> 指定集合<strong>元素类型</strong>(因为集合本身已经是 <code>List</code>),<code>association</code> 用 <code>javaType</code> 指定属性类型。</p>
+</blockquote>
+<h5 id="方式二-分步查询"><a href="#方式二-分步查询" class="headerlink" title="方式二:分步查询"></a>方式二:分步查询</h5><p><strong>UserMapper接口</strong>:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">UserMapper</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 分步查询:只查用户表,订单留给第二步</span></span><br><span class="line">    <span class="meta">@Select(&quot;select * from user&quot;)</span></span><br><span class="line">    <span class="meta">@ResultMap(&quot;userIncludeOrders2&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> List&lt;User&gt; <span class="title function_">selectAll2</span><span class="params">()</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>XML映射</strong>:</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--手动定义一个封装的规则  分步查询 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">resultMap</span> <span class="attr">id</span>=<span class="string">&quot;userIncludeOrders2&quot;</span> <span class="attr">type</span>=<span class="string">&quot;user&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">id</span> <span class="attr">property</span>=<span class="string">&quot;id&quot;</span> <span class="attr">column</span>=<span class="string">&quot;id&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">&quot;name&quot;</span> <span class="attr">column</span>=<span class="string">&quot;name&quot;</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">result</span> <span class="attr">property</span>=<span class="string">&quot;address&quot;</span> <span class="attr">column</span>=<span class="string">&quot;address&quot;</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">collection</span> </span></span><br><span class="line"><span class="tag">        <span class="attr">property</span>=<span class="string">&quot;orders&quot;</span> </span></span><br><span class="line"><span class="tag">        <span class="attr">ofType</span>=<span class="string">&quot;order&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">column</span>=<span class="string">&quot;id&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">select</span>=<span class="string">&quot;com.xxx.mapper.OrderMapper.selectOrdersByUid&quot;</span></span></span><br><span class="line"><span class="tag">        <span class="attr">fetchType</span>=<span class="string">&quot;lazy&quot;</span></span></span><br><span class="line"><span class="tag">    /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">resultMap</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>OrderMapper接口</strong>:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">OrderMapper</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 作为一对多分步查询的第二步:根据 user_id 查该用户所有订单</span></span><br><span class="line">    <span class="meta">@Select(&quot;select * from tb_order where user_id=#&#123;uid&#125;&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> List&lt;Order&gt; <span class="title function_">selectOrdersByUid</span><span class="params">(Integer uid)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>xml</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- OrderMapper.xml 这里不需要再为 selectOrdersByUid 配置 resultMap,</span></span><br><span class="line"><span class="comment">     因为 tb_order 的列名和 Order 实体的属性几乎一致,</span></span><br><span class="line"><span class="comment">     只需通过 mybatis.configuration.map-underscore-to-camel-case=true</span></span><br><span class="line"><span class="comment">     开启驼峰映射,product_name 就会自动映射到 productName --&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>业务层调用示例</strong>:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="keyword">void</span> <span class="title function_">testUserSelectAll2</span><span class="params">()</span> &#123;</span><br><span class="line">    userMapper.selectAll2().forEach(user -&gt; &#123;</span><br><span class="line">        System.out.println(user.getId() + <span class="string">&quot;====&gt;&quot;</span> + user.getName()</span><br><span class="line">                + <span class="string">&quot;====&gt;&quot;</span> + user.getAddress() + <span class="string">&quot;====&gt;&quot;</span> + user.getOrders());</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>解释:</strong> <code>&lt;collection&gt;</code> 的 <code>column=&quot;id&quot;</code> 表示把用户表查询结果的 <code>id</code> 列值,作为参数 <code>#&#123;uid&#125;</code> 传给 <code>OrderMapper.selectOrdersByUid</code>。</p>
+<p>执行过程:先 <code>select * from user</code> 查出 N 个用户 → 对每个用户触发一次 <code>select * from tb_order where user_id=?</code> → 总共 <strong>1 + N 条 SQL</strong>,这就是典型的 <strong>N+1 问题</strong>。因此<strong>一对多的分步查询几乎必须搭配 <code>fetchType=&quot;lazy&quot;</code></strong>,只有真正遍历 <code>user.getOrders()</code> 时才发第二条 SQL。</p>
+</blockquote>
+<h4 id="3-业务层分步骤实现查询-手动控制"><a href="#3-业务层分步骤实现查询-手动控制" class="headerlink" title="3. 业务层分步骤实现查询(手动控制)"></a>3. 业务层分步骤实现查询(手动控制)</h4><p>有时我们不需要ORM自动分步查询,而是由业务层显式控制查询步骤,以达到更精细的事务管理或缓存策略。示例:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserService</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> UserMapper userMapper;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> OrderMapper orderMapper;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 业务层手动分步查询:先查所有用户,再&quot;一次性&quot;批量查出所有订单,</span></span><br><span class="line"><span class="comment">     * 最后在内存中按 userId 分组,装配到各个 User.orders 中。</span></span><br><span class="line"><span class="comment">     * 这种做法只发 2 条 SQL,从根本上规避了 N+1 问题。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> List&lt;User&gt; <span class="title function_">listUsersWithOrders</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="comment">// 第一步:查所有用户</span></span><br><span class="line">        List&lt;User&gt; users = userMapper.selectAllPlain(); <span class="comment">// 普通的 select * from user</span></span><br><span class="line">        <span class="keyword">if</span> (users.isEmpty()) &#123;</span><br><span class="line">            <span class="keyword">return</span> users;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 第二步:收集所有 userId,一次性批量查订单</span></span><br><span class="line">        List&lt;Long&gt; userIds = users.stream()</span><br><span class="line">                .map(User::getId)</span><br><span class="line">                .collect(Collectors.toList());</span><br><span class="line">        List&lt;Order&gt; allOrders = orderMapper.selectByUserIdIn(userIds); <span class="comment">// where user_id in (...)</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 第三步:按 userId 分组</span></span><br><span class="line">        Map&lt;Long, List&lt;Order&gt;&gt; ordersGroupByUid = allOrders.stream()</span><br><span class="line">                .collect(Collectors.groupingBy(Order::getUserId));</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 第四步:装配到每个 User 对象中</span></span><br><span class="line">        users.forEach(u -&gt; u.setOrders(</span><br><span class="line">                ordersGroupByUid.getOrDefault(u.getId(), Collections.emptyList())</span><br><span class="line">        ));</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> users;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这种做法完全透明,适合需要额外处理(如数据过滤、组装多个来源数据)的场景,也是分步查询的一种替代方案。</p>
+<blockquote>
+<p><strong>解释:</strong> 相比 MyBatis 自动分步(1+N 条 SQL),业务层手动分步只需<strong>固定 2 条 SQL</strong>:一条查用户,一条用 <code>IN</code> 查所有订单,在内存里分组装配。在用户量大时性能提升非常明显,是生产项目里的常见优化套路。</p>
+</blockquote>
+<h3 id="四、测试类完整示例"><a href="#四、测试类完整示例" class="headerlink" title="四、测试类完整示例"></a>四、测试类完整示例</h3><p>下面是完整的测试类,串联了前面三种查询方式:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SpringBootTest</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Day29MybatisDuoBiaoApplicationTests</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> UserMapper userMapper;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> OrderMapper orderMapper;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 一对多-嵌套结果:一条 JOIN SQL 查出用户和订单,</span></span><br><span class="line"><span class="comment">     * 通过 userIncludeOrders 的 &lt;collection&gt; 把订单合并到 User.orders</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">testUserSelectAll</span><span class="params">()</span> &#123;</span><br><span class="line">        userMapper.selectAll().forEach(System.out::println);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 一对多-分步查询:先查用户,再懒加载订单。</span></span><br><span class="line"><span class="comment">     * 只有在访问 user.getOrders() 时,才会触发第二条 SQL。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">testUserSelectAll2</span><span class="params">()</span> &#123;</span><br><span class="line">        userMapper.selectAll2().forEach(user -&gt; &#123;</span><br><span class="line">            System.out.println(user.getId() + <span class="string">&quot;====&gt;&quot;</span> + user.getName()</span><br><span class="line">                    + <span class="string">&quot;====&gt;&quot;</span> + user.getAddress() + <span class="string">&quot;====&gt;&quot;</span> + user.getOrders());</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 一对一-分步查询:先查所有订单,再按 user_id 懒加载用户。</span></span><br><span class="line"><span class="comment">     * 打印 order.getUser() 时才会触发 select * from user where id = ?。</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">testOrderSelectAll</span><span class="params">()</span> &#123;</span><br><span class="line">        orderMapper.selectAllIncludeUser().forEach(order -&gt; &#123;</span><br><span class="line">            System.out.println(order.getPrice() + <span class="string">&quot;====&gt;&quot;</span> + order.getProductName()</span><br><span class="line">                    + <span class="string">&quot;====&gt;&quot;</span> + order.getId() + <span class="string">&quot;====&gt;&quot;</span> + order.getUser());</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p><strong>解释:</strong> 三个测试用例分别对应前面讲的三种典型场景。建议在 <code>application.yml</code> 中配上 <code>logging.level.com.zxq.day29_mybatis_duo_biao.mapper=debug</code>,这样能在控制台直接看到 MyBatis 打印的 SQL,帮助你**直观感受”1 条” vs “1+N 条”**的区别,以及延迟加载何时触发。</p>
+</blockquote>
+<h3 id="五、总结-对比与最佳实践"><a href="#五、总结-对比与最佳实践" class="headerlink" title="五、总结:对比与最佳实践"></a>五、总结:对比与最佳实践</h3><table>
+<thead>
+<tr>
+<th align="left">对比维度</th>
+<th align="left">嵌套结果(一条SQL)</th>
+<th align="left">分步查询(两条或多条SQL)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>SQL复杂度</strong></td>
+<td align="left">较高(多表连接,注意字段别名)</td>
+<td align="left">低(单表查询,清晰简单)</td>
+</tr>
+<tr>
+<td align="left"><strong>网络&#x2F;数据库交互</strong></td>
+<td align="left">1次</td>
+<td align="left">N+1次(N为关联记录数),但延迟加载可减少无效查询</td>
+</tr>
+<tr>
+<td align="left"><strong>性能</strong></td>
+<td align="left">适合数据量不大、关联表较少的情况</td>
+<td align="left">适合关联数据访问频率不确定的场景,配合延迟加载可节省资源</td>
+</tr>
+<tr>
+<td align="left"><strong>代码复用</strong></td>
+<td align="left">较低(SQL专用)</td>
+<td align="left">高(分步查询的Mapper方法可复用)</td>
+</tr>
+<tr>
+<td align="left"><strong>调试</strong></td>
+<td align="left">单条SQL易于优化,但结果映射复杂</td>
+<td align="left">多条SQL定位问题更简单</td>
+</tr>
+</tbody></table>
+<p><strong>选择建议:</strong></p>
+<ol>
+<li><strong>优先使用嵌套结果</strong>:当需要一次性展示完整对象图,且关联数据量不大(如一页订单列表同时显示用户信息)时,一条连接查询效率最高。</li>
+<li><strong>分步查询 + 延迟加载</strong>:当关联数据不是每次都必须使用时(例如管理后台,用户列表不一定要立即显示订单),可开启延迟加载避免浪费。注意避免循环调用导致N+1问题。</li>
+<li><strong>业务层手动分步</strong>:适合需要对中间结果进行校验、转换或批量优化的场景。例如查询用户列表后,批量查出所有用户的订单(<code>select ... where user_id in (...)</code>),避免逐个查询。</li>
+</ol>
+<p><strong>注意事项:</strong></p>
+<ul>
+<li>使用<code>collection</code>时,<code>ofType</code>指定集合元素类型,<code>javaType</code>可省略(默认为<code>ArrayList</code>)。</li>
+<li>分步查询的<code>column</code>属性支持传递多个参数:<code>column=&quot;&#123;userId=id, orderStatus=status&#125;&quot;</code>。</li>
+<li>延迟加载需要代理对象,注意序列化问题(JsonIgnore可防止无限递归)。</li>
+<li>一对多嵌套结果如果左连接,数据库返回的记录数等于”主表记录 × 从表记录”,当一对多关系层级较深时可能导致结果集膨胀,此时分步查询更优。</li>
+</ul>
+<p>通过掌握<code>association</code>、<code>collection</code>和分步查询,你可以在Spring Boot项目中灵活应对各种复杂关联场景,编写出既符合面向对象思想又高效的数据访问代码。</p>
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="smithfont smith-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d20f536c64d06e5fcf4bfe2ec5dc25d.jpg" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d20f536c64d06e5fcf4bfe2ec5dc25d.jpg" title="头像" alt="头像"></a><div class="post-copyright__author_name">Smith</div><div class="post-copyright__author_desc">人生太短，要干的事太多，我要争分夺秒</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://smithhs.cn/2026/04/22/2026-04-22-Mybatis%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://smithhs.cn/2026/04/22/2026-04-22-Mybatis%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/')">Mybatis多表查询</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="smith.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="smithfont smith-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg" alt="wechat"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg" alt="alipay"/></a><div class="post-qr-code-desc">alipay</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="smith.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="smithfont smith-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://smithhs.cn/2026/04/22/2026-04-22-Mybatis%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=Mybatis多表查询&amp;url=https://smithhs.cn/2026/04/22/2026-04-22-Mybatis%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/&amp;pic=https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200&amp;q=80" rel="external nofollow noreferrer noopener"><i class="smithfont smith-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="smithfont smith-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://smithhs.cn" target="_blank">Smith</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/Java/"><span class="tags-punctuation"> <i class="smithfont smith-icon-tag"></i></span>Java<span class="tagsPageCount">67</span></a><a class="post-meta__box__tags" href="/tags/JavaWeb/"><span class="tags-punctuation"> <i class="smithfont smith-icon-tag"></i></span>JavaWeb<span class="tagsPageCount">39</span></a><a class="post-meta__box__tags" href="/tags/%E5%90%8E%E7%AB%AF/"><span class="tags-punctuation"> <i class="smithfont smith-icon-tag"></i></span>后端<span class="tagsPageCount">49</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1681455691814.png" data-sites="wechat,weibo,qq"></div><link rel="stylesheet" href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2026/04/22/2026-04-22-ThreadLocal%E8%AE%B2%E4%B9%89/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200&amp;q=80" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">ThreadLocal讲义</div></div></a></div><div class="next-post pull-right"><a href="/2026/04/24/2026-04-24-%E5%8A%A8%E6%80%81%E4%BB%A3%E7%90%86%E7%AC%94%E8%AE%B0/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200&amp;q=80" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">动态代理笔记</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="smithfont smith-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/2026/03/19/2026-03-19-04-Web%E5%90%8E%E7%AB%AF%E5%9F%BA%E7%A1%80(%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86)/" title="04-Web后端基础(基础知识)"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/20250211204728.png" alt="cover"><div class="content is-center"><div class="date"><i class="smithfont smith-icon-calendar-days fa-fw"></i> 2026-03-19</div><div class="title">04-Web后端基础(基础知识)</div></div></a></div><div><a href="/2026/03/19/2026-03-19-11-%E5%90%8E%E7%AB%AFWeb%E5%AE%9E%E6%88%98(%E8%87%AA%E5%B7%B1%E5%AE%8C%E6%88%90)/" title="11-后端Web实战(自己完成)"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/20250310101827.png" alt="cover"><div class="content is-center"><div class="date"><i class="smithfont smith-icon-calendar-days fa-fw"></i> 2026-03-19</div><div class="title">11-后端Web实战(自己完成)</div></div></a></div><div><a href="/2026/03/19/2026-03-19-07-%E5%90%8E%E7%AB%AFWeb%E5%AE%9E%E6%88%98(%E9%83%A8%E9%97%A8%E7%AE%A1%E7%90%86)/" title="07-后端Web实战(部门管理)"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/20250216103352.png" alt="cover"><div class="content is-center"><div class="date"><i class="smithfont smith-icon-calendar-days fa-fw"></i> 2026-03-19</div><div class="title">07-后端Web实战(部门管理)</div></div></a></div><div><a href="/2026/03/19/2026-03-19-10-%E5%90%8E%E7%AB%AFWeb%E5%AE%9E%E6%88%98(%E5%91%98%E5%B7%A5%E7%AE%A1%E7%90%86)/" title="10-后端Web实战(员工管理)"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/20250308161321.png" alt="cover"><div class="content is-center"><div class="date"><i class="smithfont smith-icon-calendar-days fa-fw"></i> 2026-03-19</div><div class="title">10-后端Web实战(员工管理)</div></div></a></div><div><a href="/2026/03/19/2026-03-19-08-%E5%90%8E%E7%AB%AFWeb%E5%AE%9E%E6%88%98(%E5%91%98%E5%B7%A5%E7%AE%A1%E7%90%86)/" title="08-后端Web实战(员工管理)"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/20250216194944.png" alt="cover"><div class="content is-center"><div class="date"><i class="smithfont smith-icon-calendar-days fa-fw"></i> 2026-03-19</div><div class="title">08-后端Web实战(员工管理)</div></div></a></div><div><a href="/2026/03/19/2026-03-19-13-%E5%90%8E%E7%AB%AFWeb%E8%BF%9B%E9%98%B6(AOP)/" title="13-后端Web进阶(AOP)"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/20250311090750.png" alt="cover"><div class="content is-center"><div class="date"><i class="smithfont smith-icon-calendar-days fa-fw"></i> 2026-03-19</div><div class="title">13-后端Web进阶(AOP)</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="smithfont smith-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8ESpring-Boot%E7%9A%84MyBatis%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2%E6%93%8D%E4%BD%9C%E8%AE%B2%E4%B9%89"><span class="toc-number">1.</span> <span class="toc-text">基于Spring Boot的MyBatis多表查询操作讲义</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2%E4%B8%8E%E5%85%B3%E8%81%94%E6%98%A0%E5%B0%84"><span class="toc-number">1.1.</span> <span class="toc-text">一、什么是多表查询与关联映射</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E4%BD%BF%E7%94%A8%E5%A4%9A%E8%A1%A8%E4%B8%8E%E5%85%B3%E8%81%94%E6%98%A0%E5%B0%84%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="toc-number">1.2.</span> <span class="toc-text">二、为什么要使用多表与关联映射的优势</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%A6%82%E4%BD%95%E5%9F%BA%E4%BA%8ESpring-Boot%E7%8E%AF%E5%A2%83%E5%AE%9E%E7%8E%B0%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2"><span class="toc-number">1.3.</span> <span class="toc-text">三、如何基于Spring Boot环境实现多表查询</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87"><span class="toc-number">1.3.1.</span> <span class="toc-text">环境准备</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E4%B8%80%E5%AF%B9%E4%B8%80%E6%98%A0%E5%B0%84-%E4%BD%BF%E7%94%A8-association"><span class="toc-number">1.3.2.</span> <span class="toc-text">1. 一对一映射(使用 association)</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%96%B9%E5%BC%8F%E4%B8%80-%E5%B5%8C%E5%A5%97%E7%BB%93%E6%9E%9C-%E4%B8%80%E6%9D%A1SQL%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A2"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">方式一:嵌套结果(一条SQL连接查询)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%96%B9%E5%BC%8F%E4%BA%8C-%E5%88%86%E6%AD%A5%E6%9F%A5%E8%AF%A2-%E4%B8%A4%E6%9D%A1SQL"><span class="toc-number">1.3.2.2.</span> <span class="toc-text">方式二:分步查询(两条SQL)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E9%83%A8%E5%88%86%EF%BC%9A%E4%B8%80%E5%AF%B9%E5%A4%9A%E6%9F%A5%E8%AF%A2%EF%BC%88%E7%94%A8%E6%88%B7-%E2%86%92-%E5%A4%9A%E4%B8%AA%E8%AE%A2%E5%8D%95%EF%BC%89"><span class="toc-number">1.4.</span> <span class="toc-text">第二部分：一对多查询（用户 → 多个订单）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF%EF%BC%9A%E6%88%91%E6%83%B3%E7%9C%8B%E6%89%80%E6%9C%89%E7%94%A8%E6%88%B7%EF%BC%8C%E5%B9%B6%E4%B8%94%E6%AF%8F%E4%B8%AA%E7%94%A8%E6%88%B7%E4%B8%8B%E9%9D%A2%E8%A6%81%E5%88%97%E5%87%BA%E4%BB%96%E7%9A%84%E6%89%80%E6%9C%89%E8%AE%A2%E5%8D%95%E3%80%82"><span class="toc-number">1.4.1.</span> <span class="toc-text">场景：我想看所有用户，并且每个用户下面要列出他的所有订单。</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80%EF%BC%9A%E4%B8%80%E6%9D%A1-SQL-%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A2%EF%BC%88%E5%B5%8C%E5%A5%97%E7%BB%93%E6%9E%9C%EF%BC%89"><span class="toc-number">1.4.1.1.</span> <span class="toc-text">方法一：一条 SQL 连接查询（嵌套结果）</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E4%B8%80%E5%AF%B9%E5%A4%9A%E6%98%A0%E5%B0%84-%E4%BD%BF%E7%94%A8-collection"><span class="toc-number">1.4.2.</span> <span class="toc-text">2. 一对多映射(使用 collection)</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%96%B9%E5%BC%8F%E4%B8%80-%E5%B5%8C%E5%A5%97%E7%BB%93%E6%9E%9C-%E4%B8%80%E6%9D%A1SQL%E8%BF%9E%E6%8E%A5%E6%9F%A5%E8%AF%A2-1"><span class="toc-number">1.4.2.1.</span> <span class="toc-text">方式一:嵌套结果(一条SQL连接查询)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%96%B9%E5%BC%8F%E4%BA%8C-%E5%88%86%E6%AD%A5%E6%9F%A5%E8%AF%A2"><span class="toc-number">1.4.2.2.</span> <span class="toc-text">方式二:分步查询</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E4%B8%9A%E5%8A%A1%E5%B1%82%E5%88%86%E6%AD%A5%E9%AA%A4%E5%AE%9E%E7%8E%B0%E6%9F%A5%E8%AF%A2-%E6%89%8B%E5%8A%A8%E6%8E%A7%E5%88%B6"><span class="toc-number">1.4.3.</span> <span class="toc-text">3. 业务层分步骤实现查询(手动控制)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E6%B5%8B%E8%AF%95%E7%B1%BB%E5%AE%8C%E6%95%B4%E7%A4%BA%E4%BE%8B"><span class="toc-number">1.5.</span> <span class="toc-text">四、测试类完整示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E6%80%BB%E7%BB%93-%E5%AF%B9%E6%AF%94%E4%B8%8E%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5"><span class="toc-number">1.6.</span> <span class="toc-text">五、总结:对比与最佳实践</span></a></li></ol></li></ol></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2022 - 2026 By <a class="footer-bar-link" href="/" title="Smith" target="_blank">Smith</a></div></div><div id="footer-type-tips"></div><div class="js-pjax"><script>function subtitleType () {
+  fetch('https://v1.hitokoto.cn')
+    .then(response => response.json())
+    .then(data => {
+      if (true) {
+        const from = '出自 ' + data.from
+        const sub = []
+        sub.unshift(data.hitokoto, from)
+        window.typed = new Typed('#footer-type-tips', {
+          strings: sub,
+          startDelay: 300,
+          typeSpeed: 150,
+          loop: true,
+          backSpeed: 50,
+        })
+      } else {
+        document.getElementById('footer-type-tips').innerHTML = data.hitokoto
+      }
+    })
+}
+
+if (true) {
+  if (typeof Typed === 'function') {
+    subtitleType()
+  } else {
+    getScript('https://cdn.jsdelivr.net/npm/typed.js@2.0.12/dist/typed.min.js').then(subtitleType)
+  }
+} else {
+  subtitleType()
+}
+</script></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/Smithhss/smithhs.github.io.git" title="Hexo">Hexo</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">199</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">69</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">3</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="smithfont smith-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://smithhs.cn/" title="博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="/img/favicon.png" alt="博客"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" target="_blank" rel="noopener" href="https://github.com/Smithhss" title="Github"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;/img/404.jpg&quot;" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/GitHub.png" alt="Github"/><span class="back-menu-item-text">Github</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="smithfont smith-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="smithfont smith-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="smithfont smith-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="smithfont smith-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="smithfont smith-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="smithfont smith-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/dailyPhoto/"><i class="smithfont smith-icon-camera faa-tada" style="font-size: 0.9em;"></i><span> 每日照片</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wallpaper/"><i class="smithfont smith-icon-image faa-tada" style="font-size: 0.9em;"></i><span> 壁纸</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wordScenery/"><i class="smithfont smith-icon-font faa-tada" style="font-size: 0.9em;"></i><span> 文字风景</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="smithfont smith-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于我</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="smithfont smith-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/love/"><i class="smithfont smith-icon-heart faa-tada" style="font-size: 0.9em;"></i><span> 爱情</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="smithfont smith-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Android-Studio/" style="font-size: 0.88rem;">Android Studio<sup>1</sup></a><a href="/tags/App/" style="font-size: 0.88rem;">App<sup>1</sup></a><a href="/tags/Butterfly/" style="font-size: 0.88rem;">Butterfly<sup>1</sup></a><a href="/tags/C/" style="font-size: 0.88rem;">C++<sup>3</sup></a><a href="/tags/CSS/" style="font-size: 0.88rem;">CSS<sup>1</sup></a><a href="/tags/Cisco-Packet-Tracer/" style="font-size: 0.88rem;">Cisco Packet Tracer<sup>1</sup></a><a href="/tags/Docker/" style="font-size: 0.88rem;">Docker<sup>2</sup></a><a href="/tags/Easypan/" style="font-size: 0.88rem;">Easypan<sup>2</sup></a><a href="/tags/FurtherMathematics/" style="font-size: 0.88rem;">FurtherMathematics<sup>1</sup></a><a href="/tags/GPT/" style="font-size: 0.88rem;">GPT<sup>1</sup></a><a href="/tags/Git2/" style="font-size: 0.88rem;">Git2<sup>1</sup></a><a href="/tags/HTML/" style="font-size: 0.88rem;">HTML<sup>1</sup></a><a href="/tags/Hexo/" style="font-size: 0.88rem;">Hexo<sup>1</sup></a><a href="/tags/Java/" style="font-size: 0.88rem;">Java<sup>67</sup></a><a href="/tags/JavaScript/" style="font-size: 0.88rem;">JavaScript<sup>1</sup></a><a href="/tags/Jrebel/" style="font-size: 0.88rem;">Jrebel<sup>1</sup></a><a href="/tags/LeetCode/" style="font-size: 0.88rem;">LeetCode<sup>1</sup></a><a href="/tags/Linux/" style="font-size: 0.88rem;">Linux<sup>3</sup></a><a href="/tags/Markdown/" style="font-size: 0.88rem;">Markdown<sup>2</sup></a><a href="/tags/Maven/" style="font-size: 0.88rem;">Maven<sup>2</sup></a><a href="/tags/MyBatis/" style="font-size: 0.88rem;">MyBatis<sup>1</sup></a><a href="/tags/MyBatis-Plus/" style="font-size: 0.88rem;">MyBatis-Plus<sup>1</sup></a><a href="/tags/Mysql/" style="font-size: 0.88rem;">Mysql<sup>1</sup></a><a href="/tags/Navicat/" style="font-size: 0.88rem;">Navicat<sup>1</sup></a><a href="/tags/NoSql/" style="font-size: 0.88rem;">NoSql<sup>1</sup></a><a href="/tags/Nodejs/" style="font-size: 0.88rem;">Nodejs<sup>2</sup></a><a href="/tags/Python/" style="font-size: 0.88rem;">Python<sup>4</sup></a><a href="/tags/Spring/" style="font-size: 0.88rem;">Spring<sup>2</sup></a><a href="/tags/VMware/" style="font-size: 0.88rem;">VMware<sup>2</sup></a><a href="/tags/WeChat/" style="font-size: 0.88rem;">WeChat<sup>1</sup></a><a href="/tags/YouHou/" style="font-size: 0.88rem;">YouHou<sup>1</sup></a><a href="/tags/books/" style="font-size: 0.88rem;">books<sup>1</sup></a><a href="/tags/butterfly/" style="font-size: 0.88rem;">butterfly<sup>1</sup></a><a href="/tags/clash/" style="font-size: 0.88rem;">clash<sup>1</sup></a><a href="/tags/error/" style="font-size: 0.88rem;">error<sup>1</sup></a><a href="/tags/project/" style="font-size: 0.88rem;">project<sup>4</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 0.88rem;">前端<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6/" style="font-size: 0.88rem;">开发框架<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" style="font-size: 0.88rem;">开发环境<sup>1</sup></a><a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="font-size: 0.88rem;">软件工程<sup>1</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="smithfont smith-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="smithfont smith-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="smithfont smith-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="smithfont smith-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="smithfont smith-icon-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="smithfont smith-icon-arrow-up"></i></button></div></div><div id="nav-music"><a id="nav-music-hoverTips" onclick="smith.musicToggle()" accesskey="m">播放音乐</a><div id="console-music-bg"></div><meting-js id="8805965276" server="netease" type="playlist" mutex="true" preload="none" theme="var(--smith-main)" data-lrctype="0" order="random" volume="0.7"></meting-js></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="smithfont smith-icon-xmark"></i></button></nav><div class="is-center" id="loading-database"><i class="smithfont smith-icon-spinner smith-pulse-icon"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="smithfont smith-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="smithfont smith-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="smithfont smith-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="smithfont smith-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="smithfont smith-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="smithfont smith-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="smithfont smith-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="smithfont smith-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="smithfont smith-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="smithfont smith-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="smithfont smith-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="smithfont smith-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="smithfont smith-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="smithfont smith-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="smithfont smith-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="smithfont smith-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="smithfont smith-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://music.163.com/#/my/m/music/playlist?id=464586318&quot;, &quot;_blank&quot;);" style="display: none;"><i class="smithfont smith-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="smithfont smith-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="smithfont smith-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="smithfont smith-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="smithfont smith-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="smithfont smith-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="smithfont smith-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="smithfont smith-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="smithfont smith-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn1.tianli0.top/npm/js-heo@1.0.6/translate/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@6.1.6/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.3.1/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.js"></script><script>var meting_api = "https://api.injahow.cn/meting/?server=:server&type=:type&id=:id&auth=:auth&r=:r";
+</script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/smith-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("07/01/2022 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用史先森!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+      ███████╗███╗   ███╗██╗████████╗██╗  ██╗
+      ██╔════╝████╗ ████║██║╚══██╔══╝██║  ██║
+      ███████╗██╔████╔██║██║   ██║   ███████║
+      ╚════██║██║╚██╔╝██║██║   ██║   ██╔══██║
+      ███████║██║ ╚═╝ ██║██║   ██║   ██║  ██║
+      ╚══════╝╚═╝     ╚═╝╚═╝   ╚═╝   ╚═╝  ╚═╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2022 By 史先森 V1.0.0",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/smith-blog@1.0.0/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 史先森 %c 你正在访问 Smith 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/smith/random.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><input type="hidden" name="page-type" id="page-type" value="post"></div><script async data-pjax src="https://npm.elemecdn.com/smith-theme-static@1.0.0/bubble/bubble.js"></script><script>var visitorMail = "visitor@smithhs.cn";
+</script><script async data-pjax src="https://cdn.jsdelivr.net/npm/waterfall.js@1.1.0/dist/waterfall.min.js"></script><script src="https://cdn.cbd.int/qrcodejs@1.0.0/qrcode.min.js"></script><script src="/js/smith/right_click_menu.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/smith-theme-static@1.0.2/icon/ali_iconfont_css.css"><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/dist/canvas-nest.min.js"></script><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script><script>AOS.init({
+  duration: 800,
+  easing: 'ease-out-cubic',
+  once: true,
+  offset: 50
+});
+</script><script src="https://lib.baomitu.com/pjax/0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  smith.removeGlobalFnEvent('pjax')
+  smith.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script charset="UTF-8" src="https://cdn.cbd.int/smith-theme-static@1.0.2/accesskey/accesskey.js"></script><div id="live2d-container"><canvas id="live2d-canvas"></canvas><button class="live2d-toggle" title="切换看板娘">🎭</button></div><script data-pjax src="/js/smith/live2d.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="smithfont smith-icon-arrow-circle-right"></i></div></div></div></body></html>
