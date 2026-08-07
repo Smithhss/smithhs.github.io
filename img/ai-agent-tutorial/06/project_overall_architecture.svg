@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="760" viewBox="0 0 1280 760">
+  <defs>
+    <style>
+      .bg{fill:#f7f9fb}
+      .title{font:700 30px Arial,"Microsoft YaHei",sans-serif;fill:#172033}
+      .sub{font:15px Arial,"Microsoft YaHei",sans-serif;fill:#667085}
+      .group{fill:#fff;stroke:#c9d3df;stroke-width:2;rx:14}
+      .box{fill:#fff;stroke:#aebccc;stroke-width:2;rx:10}
+      .front{fill:#eaf4ff;stroke:#4f8fd9}
+      .java{fill:#eaf8f0;stroke:#46a36c}
+      .python{fill:#f4efff;stroke:#8b6bd9}
+      .store{fill:#fff6ea;stroke:#d98a22}
+      .external{fill:#f9eef1;stroke:#d66f86}
+      .label{font:700 17px Arial,"Microsoft YaHei",sans-serif;fill:#172033}
+      .text{font:14px Arial,"Microsoft YaHei",sans-serif;fill:#344054}
+      .small{font:12px Arial,"Microsoft YaHei",sans-serif;fill:#667085}
+      .arrow{stroke:#617083;stroke-width:2.2;fill:none;marker-end:url(#arrow)}
+      .dash{stroke:#617083;stroke-width:2.2;fill:none;stroke-dasharray:7 6;marker-end:url(#arrow)}
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#617083"/>
+    </marker>
+  </defs>
+  <rect class="bg" width="1280" height="760"/>
+  <text x="40" y="48" class="title">学生端 AI 问答项目总架构</text>
+  <text x="40" y="76" class="sub">前端负责聊天体验，Java 负责业务、鉴权和落库，Python 负责 AI 编排，Milvus 保存向量，百炼提供模型与 embedding。</text>
+
+  <rect x="34" y="112" width="246" height="560" class="group"/>
+  <text x="58" y="145" class="label">学生前端</text>
+  <text x="58" y="168" class="small">YanQue-Student-Web</text>
+  <rect x="58" y="198" width="194" height="72" class="box front"/>
+  <text x="84" y="228" class="label">AI 问答页面</text>
+  <text x="83" y="252" class="small">StudentAiChatPage.tsx</text>
+  <rect x="58" y="302" width="194" height="72" class="box front"/>
+  <text x="86" y="332" class="label">学生 API 封装</text>
+  <text x="85" y="356" class="small">student.ts / fetch SSE</text>
+  <rect x="58" y="406" width="194" height="72" class="box front"/>
+  <text x="77" y="436" class="label">会话和消息状态</text>
+  <text x="83" y="460" class="small">sessions / messages / streaming</text>
+
+  <rect x="320" y="112" width="332" height="560" class="group"/>
+  <text x="344" y="145" class="label">Java 业务后端</text>
+  <text x="344" y="168" class="small">YanQue-Admin / Spring Boot</text>
+  <rect x="346" y="194" width="280" height="66" class="box java"/>
+  <text x="375" y="222" class="label">StudentAiChatController</text>
+  <text x="390" y="244" class="small">/student/ai-chat/**</text>
+  <rect x="346" y="282" width="280" height="66" class="box java"/>
+  <text x="394" y="310" class="label">StudentAiChatBiz</text>
+  <text x="377" y="332" class="small">构造 Python 请求 / 转发 SSE</text>
+  <rect x="346" y="370" width="280" height="66" class="box java"/>
+  <text x="382" y="398" class="label">StudentAiChatService</text>
+  <text x="382" y="420" class="small">会话校验 / 历史消息 / 落库</text>
+  <rect x="346" y="458" width="280" height="66" class="box java"/>
+  <text x="391" y="486" class="label">PythonAiChatClient</text>
+  <text x="382" y="508" class="small">HTTP 调 Python / 解析 SSE</text>
+  <rect x="346" y="546" width="280" height="66" class="box java"/>
+  <text x="370" y="574" class="label">内部工具和提示词接口</text>
+  <text x="372" y="596" class="small">/internal/ai/tools / prompt</text>
+
+  <rect x="700" y="112" width="310" height="560" class="group"/>
+  <text x="724" y="145" class="label">Python AI 服务</text>
+  <text x="724" y="168" class="small">YanQue-AI / FastAPI</text>
+  <rect x="730" y="194" width="250" height="66" class="box python"/>
+  <text x="787" y="222" class="label">chat_api.py</text>
+  <text x="787" y="244" class="small">/api/ai-chat/stream</text>
+  <rect x="730" y="282" width="250" height="66" class="box python"/>
+  <text x="792" y="310" class="label">ChatService</text>
+  <text x="756" y="332" class="small">RAG / Prompt / Tool / LLM</text>
+  <rect x="730" y="370" width="250" height="66" class="box python"/>
+  <text x="765" y="398" class="label">ChatRagService</text>
+  <text x="760" y="420" class="small">知识库路由和检索</text>
+  <rect x="730" y="458" width="250" height="66" class="box python"/>
+  <text x="770" y="486" class="label">ToolChatAgent</text>
+  <text x="755" y="508" class="small">工具选择 / 执行 / 二次回答</text>
+  <rect x="730" y="546" width="250" height="66" class="box python"/>
+  <text x="770" y="574" class="label">KnowledgeService</text>
+  <text x="756" y="596" class="small">文档入库 / 检索 / 切块查询</text>
+
+  <rect x="1054" y="112" width="190" height="560" class="group"/>
+  <text x="1078" y="145" class="label">外部与存储</text>
+  <rect x="1080" y="194" width="138" height="66" class="box external"/>
+  <text x="1114" y="222" class="label">百炼模型</text>
+  <text x="1098" y="244" class="small">Chat / Tool Call</text>
+  <rect x="1080" y="300" width="138" height="66" class="box external"/>
+  <text x="1110" y="328" class="label">Embedding</text>
+  <text x="1098" y="350" class="small">text-embedding-v4</text>
+  <rect x="1080" y="406" width="138" height="66" class="box store"/>
+  <text x="1122" y="434" class="label">Milvus</text>
+  <text x="1094" y="456" class="small">向量 Collection</text>
+  <rect x="1080" y="512" width="138" height="66" class="box store"/>
+  <text x="1104" y="540" class="label">MySQL/TOS</text>
+  <text x="1094" y="562" class="small">业务表 / 文档文件</text>
+
+  <path d="M252 338 H346" class="arrow"/>
+  <path d="M626 492 H730" class="arrow"/>
+  <path d="M730 228 H626" class="dash"/>
+  <path d="M980 226 H1080" class="arrow"/>
+  <path d="M980 404 H1080" class="arrow"/>
+  <path d="M980 580 C1030 580 1030 545 1080 545" class="arrow"/>
+  <path d="M730 492 C680 492 678 580 626 580" class="dash"/>
+  <path d="M346 580 C304 580 304 545 252 445" class="dash"/>
+  <text x="284" y="326" class="small">HTTP + SSE</text>
+  <text x="648" y="480" class="small">HTTP</text>
+  <text x="645" y="224" class="small">SSE 事件返回</text>
+  <text x="1018" y="213" class="small">模型调用</text>
+  <text x="1010" y="392" class="small">检索</text>
+</svg>

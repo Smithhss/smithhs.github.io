@@ -1,0 +1,126 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="900" viewBox="0 0 1280 900">
+  <defs>
+    <style>
+      .bg{fill:#f7f9fb}
+      .title{font:700 32px Arial,"Microsoft YaHei",sans-serif;fill:#172033}
+      .sub{font:15px Arial,"Microsoft YaHei",sans-serif;fill:#667085}
+      .col{fill:#fff;stroke:#c9d3df;stroke-width:2;rx:14}
+      .colTitle{font:700 18px Arial,"Microsoft YaHei",sans-serif;fill:#172033}
+      .step{fill:#fff;stroke:#aebccc;stroke-width:2;rx:9}
+      .front{fill:#eaf4ff;stroke:#4f8fd9}
+      .java{fill:#eaf8f0;stroke:#46a36c}
+      .python{fill:#f4efff;stroke:#8b6bd9}
+      .model{fill:#f9eef1;stroke:#d66f86}
+      .store{fill:#fff6ea;stroke:#d98a22}
+      .numCircle{fill:#50677f}
+      .num{font:700 13px Arial,"Microsoft YaHei",sans-serif;fill:#fff}
+      .label{font:700 15px Arial,"Microsoft YaHei",sans-serif;fill:#172033}
+      .small{font:12px Arial,"Microsoft YaHei",sans-serif;fill:#667085}
+      .arrow{stroke:#617083;stroke-width:2;fill:none;marker-end:url(#arrow)}
+      .dash{stroke:#617083;stroke-width:2;fill:none;stroke-dasharray:7 6;marker-end:url(#arrow)}
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#617083"/>
+    </marker>
+  </defs>
+  <rect width="1280" height="900" class="bg"/>
+  <text x="40" y="52" class="title">学生端一次 AI 问答，按 12 步看懂</text>
+  <text x="40" y="82" class="sub">这张图先看主流程。先不展开全部类名，先看懂请求怎么走、数据什么时候保存。</text>
+
+  <rect x="40" y="125" width="210" height="680" class="col"/>
+  <text x="92" y="158" class="colTitle">学生前端</text>
+  <rect x="65" y="205" width="160" height="64" class="step front"/>
+  <circle cx="88" cy="228" r="14" class="numCircle"/><text x="84" y="233" class="num">1</text>
+  <text x="112" y="230" class="label">发送问题</text>
+  <text x="88" y="252" class="small">创建临时消息</text>
+  <rect x="65" y="650" width="160" height="64" class="step front"/>
+  <circle cx="88" cy="673" r="14" class="numCircle"/><text x="84" y="678" class="num">11</text>
+  <text x="112" y="675" class="label">显示 chunk</text>
+  <text x="88" y="697" class="small">边生成边展示</text>
+  <rect x="65" y="735" width="160" height="64" class="step front"/>
+  <circle cx="88" cy="758" r="14" class="numCircle"/><text x="84" y="763" class="num">12</text>
+  <text x="112" y="760" class="label">刷新消息</text>
+  <text x="88" y="782" class="small">done 后查库</text>
+
+  <rect x="295" y="125" width="235" height="680" class="col"/>
+  <text x="370" y="158" class="colTitle">Java 后端</text>
+  <rect x="325" y="205" width="175" height="64" class="step java"/>
+  <circle cx="348" cy="228" r="14" class="numCircle"/><text x="344" y="233" class="num">2</text>
+  <text x="372" y="230" class="label">鉴权和会话校验</text>
+  <text x="348" y="252" class="small">确认当前学生</text>
+  <rect x="325" y="290" width="175" height="64" class="step java"/>
+  <circle cx="348" cy="313" r="14" class="numCircle"/><text x="344" y="318" class="num">3</text>
+  <text x="372" y="315" class="label">查询历史</text>
+  <text x="348" y="337" class="small">最近 N 条</text>
+  <rect x="325" y="375" width="175" height="64" class="step java"/>
+  <circle cx="348" cy="398" r="14" class="numCircle"/><text x="344" y="403" class="num">4</text>
+  <text x="372" y="400" class="label">保存用户消息</text>
+  <text x="348" y="422" class="small">role=user</text>
+  <rect x="325" y="460" width="175" height="64" class="step java"/>
+  <circle cx="348" cy="483" r="14" class="numCircle"/><text x="344" y="488" class="num">5</text>
+  <text x="372" y="485" class="label">调用 Python</text>
+  <text x="348" y="507" class="small">POST /api/ai-chat/stream</text>
+  <rect x="325" y="650" width="175" height="64" class="step java"/>
+  <circle cx="348" cy="673" r="14" class="numCircle"/><text x="344" y="678" class="num">10</text>
+  <text x="372" y="675" class="label">转发 SSE</text>
+  <text x="348" y="697" class="small">chunk/done 给前端</text>
+  <rect x="325" y="735" width="175" height="64" class="step java"/>
+  <circle cx="348" cy="758" r="14" class="numCircle"/><text x="344" y="763" class="num">12</text>
+  <text x="372" y="760" class="label">保存 AI 回答</text>
+  <text x="348" y="782" class="small">role=assistant</text>
+
+  <rect x="575" y="125" width="245" height="680" class="col"/>
+  <text x="642" y="158" class="colTitle">Python AI 服务</text>
+  <rect x="605" y="205" width="185" height="64" class="step python"/>
+  <circle cx="628" cy="228" r="14" class="numCircle"/><text x="624" y="233" class="num">6</text>
+  <text x="652" y="230" class="label">获取提示词</text>
+  <text x="628" y="252" class="small">从 Java 提示词中心读取</text>
+  <rect x="605" y="290" width="185" height="64" class="step python"/>
+  <circle cx="628" cy="313" r="14" class="numCircle"/><text x="624" y="318" class="num">7</text>
+  <text x="652" y="315" class="label">判断是否 RAG</text>
+  <text x="628" y="337" class="small">关键词或小模型路由</text>
+  <rect x="605" y="375" width="185" height="64" class="step python"/>
+  <circle cx="628" cy="398" r="14" class="numCircle"/><text x="624" y="403" class="num">8</text>
+  <text x="652" y="400" class="label">组装 messages</text>
+  <text x="628" y="422" class="small">提示词+资料+历史+问题</text>
+  <rect x="605" y="460" width="185" height="64" class="step python"/>
+  <circle cx="628" cy="483" r="14" class="numCircle"/><text x="624" y="488" class="num">9</text>
+  <text x="652" y="485" class="label">判断是否工具</text>
+  <text x="628" y="507" class="small">课表/值日等</text>
+  <rect x="605" y="650" width="185" height="64" class="step python"/>
+  <circle cx="628" cy="673" r="14" class="numCircle"/><text x="624" y="678" class="num">10</text>
+  <text x="652" y="675" class="label">输出 SSE</text>
+  <text x="628" y="697" class="small">message_start/chunk/done</text>
+
+  <rect x="865" y="125" width="170" height="680" class="col"/>
+  <text x="910" y="158" class="colTitle">检索/工具</text>
+  <rect x="890" y="290" width="120" height="64" class="step store"/>
+  <text x="916" y="318" class="label">Milvus</text>
+  <text x="900" y="340" class="small">查知识库 chunk</text>
+  <rect x="890" y="460" width="120" height="64" class="step store"/>
+  <text x="910" y="488" class="label">Java 工具</text>
+  <text x="900" y="510" class="small">查课表/值日</text>
+
+  <rect x="1080" y="125" width="160" height="680" class="col"/>
+  <text x="1120" y="158" class="colTitle">大模型</text>
+  <rect x="1105" y="545" width="110" height="64" class="step model"/>
+  <text x="1130" y="573" class="label">百炼</text>
+  <text x="1116" y="595" class="small">流式生成回答</text>
+
+  <path d="M225 237 H325" class="arrow"/>
+  <path d="M412 269 V290" class="arrow"/>
+  <path d="M412 354 V375" class="arrow"/>
+  <path d="M412 439 V460" class="arrow"/>
+  <path d="M500 492 H605" class="arrow"/>
+  <path d="M698 269 V290" class="arrow"/>
+  <path d="M790 322 H890" class="arrow"/>
+  <path d="M698 354 V375" class="arrow"/>
+  <path d="M698 439 V460" class="arrow"/>
+  <path d="M790 492 H890" class="dash"/>
+  <path d="M790 492 C900 565 1000 577 1105 577" class="arrow"/>
+  <path d="M1105 577 C1000 650 820 682 790 682" class="dash"/>
+  <path d="M605 682 H500" class="dash"/>
+  <path d="M325 682 H225" class="arrow"/>
+  <path d="M145 714 V735" class="arrow"/>
+  <path d="M412 714 V735" class="arrow"/>
+</svg>

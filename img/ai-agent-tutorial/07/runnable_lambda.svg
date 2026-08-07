@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="380" viewBox="0 0 980 380">
+  <defs>
+    <style>
+      .title{font:700 28px Arial,"Microsoft YaHei",sans-serif;fill:#172033}
+      .label{font:700 19px Arial,"Microsoft YaHei",sans-serif;fill:#172033}
+      .text{font:15px Arial,"Microsoft YaHei",sans-serif;fill:#344054}
+      .small{font:13px Arial,"Microsoft YaHei",sans-serif;fill:#667085}
+      .box{fill:#fff;stroke:#b8c2cc;stroke-width:2;rx:10}
+      .accent{fill:#f4efff;stroke:#8b6bd9}
+      .green{fill:#eaf8f0;stroke:#46a36c}
+      .arrow{stroke:#62748a;stroke-width:2.5;fill:none;marker-end:url(#arrow)}
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#62748a"/>
+    </marker>
+  </defs>
+  <rect width="980" height="380" fill="#f7f9fb"/>
+  <text x="40" y="50" class="title">RunnableLambda：把现有 Python 函数接进 LangChain</text>
+  <text x="40" y="82" class="text">项目里已有知识库查询、历史消息转换、工具筛选等函数，不需要全部重写成框架内置组件。</text>
+
+  <rect x="58" y="142" width="160" height="88" class="box"/>
+  <text x="98" y="176" class="label">输入问题</text>
+  <text x="88" y="204" class="small">question</text>
+
+  <rect x="282" y="118" width="220" height="136" class="box accent"/>
+  <text x="325" y="154" class="label">RunnableLambda</text>
+  <text x="312" y="185" class="text">调用自己的函数</text>
+  <text x="310" y="214" class="small">查知识库 / 查历史 / 格式转换</text>
+
+  <rect x="565" y="142" width="160" height="88" class="box green"/>
+  <text x="604" y="176" class="label">Prompt</text>
+  <text x="596" y="204" class="small">得到完整变量</text>
+
+  <rect x="780" y="142" width="142" height="88" class="box"/>
+  <text x="826" y="176" class="label">模型</text>
+  <text x="815" y="204" class="small">生成回答</text>
+
+  <path d="M218 186 H282" class="arrow"/>
+  <path d="M502 186 H565" class="arrow"/>
+  <path d="M725 186 H780" class="arrow"/>
+
+  <text x="300" y="314" class="small">关键理解：LangChain 可以组织我们的函数，而不是要求我们放弃已有项目代码。</text>
+</svg>

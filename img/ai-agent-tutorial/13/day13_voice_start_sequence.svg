@@ -1,0 +1,83 @@
+<svg width="1280" height="900" viewBox="0 0 1280 900" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">语音面试启动时序</title>
+  <desc id="desc">从学生点击开始，到前端 WebSocket 和火山 WebSocket 都准备好的完整时序。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#26364a"/>
+    </marker>
+    <style>
+      .title{font:700 31px Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#172033}
+      .sub{font:16px Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#667085}
+      .lane{fill:#fff;stroke:#d0dae7;stroke-width:2}
+      .front{fill:#eaf4ff;stroke:#3f7fc7;stroke-width:2}
+      .java{fill:#ecfdf3;stroke:#329261;stroke-width:2}
+      .volc{fill:#f4efff;stroke:#7a5bc8;stroke-width:2}
+      .head{font:700 19px Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#172033;text-anchor:middle}
+      .small{font:13px Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#667085;text-anchor:middle}
+      .text{font:15px Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#344054;text-anchor:middle}
+      .box{fill:#fff;stroke:#b8c5d5;stroke-width:2}
+      .line{stroke:#26364a;stroke-width:2.2;fill:none;marker-end:url(#arrow)}
+      .dash{stroke:#667085;stroke-width:2;fill:none;stroke-dasharray:7 6;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1280" height="900" fill="#fbfcff"/>
+  <text x="54" y="55" class="title">一次语音面试启动，要先让两条连接都 Ready</text>
+  <text x="54" y="84" class="sub">HTTP 负责创建语音会话；WebSocket 负责后续实时音频流。</text>
+
+  <rect x="58" y="120" width="250" height="710" rx="14" class="lane"/>
+  <rect x="94" y="150" width="178" height="60" rx="10" class="front"/>
+  <text x="183" y="176" class="head">前端页面</text>
+  <text x="183" y="198" class="small">React</text>
+
+  <rect x="384" y="120" width="250" height="710" rx="14" class="lane"/>
+  <rect x="420" y="150" width="178" height="60" rx="10" class="java"/>
+  <text x="509" y="176" class="head">Java 后端</text>
+  <text x="509" y="198" class="small">业务 + WebSocket</text>
+
+  <rect x="710" y="120" width="250" height="710" rx="14" class="lane"/>
+  <rect x="746" y="150" width="178" height="60" rx="10" class="volc"/>
+  <text x="835" y="176" class="head">火山 Realtime</text>
+  <text x="835" y="198" class="small">语音模型</text>
+
+  <rect x="1015" y="170" width="210" height="530" rx="14" fill="#fff7e8" stroke="#d18b22" stroke-width="2"/>
+  <text x="1120" y="205" class="head">关键状态</text>
+  <text x="1120" y="245" class="text">1. 火山连接成功</text>
+  <text x="1120" y="285" class="text">2. StartConnection 成功</text>
+  <text x="1120" y="325" class="text">3. StartSession 成功</text>
+  <text x="1120" y="365" class="text">4. 返回 voiceSessionId</text>
+  <text x="1120" y="405" class="text">5. 前端 WS 成功</text>
+  <text x="1120" y="445" class="text">6. VOICE_WS_READY</text>
+  <text x="1120" y="515" class="small">全部完成后</text>
+  <text x="1120" y="540" class="head">才开始录音</text>
+
+  <rect x="92" y="250" width="184" height="54" rx="9" class="box"/>
+  <text x="184" y="282" class="text">点击开始语音面试</text>
+  <path d="M276 277 H420" class="line"/>
+  <text x="348" y="258" class="small">POST /voice/start</text>
+
+  <rect x="420" y="335" width="178" height="54" rx="9" class="box"/>
+  <text x="509" y="367" class="text">生成 voiceSessionId</text>
+  <path d="M598 362 H746" class="line"/>
+  <text x="672" y="343" class="small">建立火山 WebSocket</text>
+
+  <rect x="746" y="420" width="178" height="54" rx="9" class="box"/>
+  <text x="835" y="452" class="text">握手成功</text>
+  <path d="M746 447 H598" class="dash"/>
+
+  <path d="M598 515 H746" class="line"/>
+  <text x="672" y="496" class="small">StartConnection</text>
+  <path d="M746 548 H598" class="dash"/>
+  <text x="672" y="572" class="small">event=50</text>
+
+  <path d="M598 620 H746" class="line"/>
+  <text x="672" y="601" class="small">StartSession</text>
+  <path d="M746 653 H598" class="dash"/>
+  <text x="672" y="677" class="small">event=150</text>
+
+  <path d="M420 730 H276" class="dash"/>
+  <text x="348" y="713" class="small">返回 voiceSessionId</text>
+  <path d="M276 770 H420" class="line"/>
+  <text x="348" y="753" class="small">new WebSocket</text>
+  <path d="M420 805 H276" class="dash"/>
+  <text x="348" y="792" class="small">VOICE_WS_READY</text>
+</svg>

@@ -1,0 +1,43 @@
+<svg width="1280" height="720" viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">第十四天已完成和未完成边界</title>
+  <desc id="desc">当前已经完成语音闭环、AI 流式生成、TTS 播放和对话入库；题库状态机、决策模型和报告还没有完成。</desc>
+  <defs>
+    <style>
+      .title{font:700 32px Arial,"PingFang SC","Microsoft YaHei";fill:#111827}
+      .sub{font:16px Arial,"PingFang SC","Microsoft YaHei";fill:#667085}
+      .panel{fill:#fff;stroke:#d7e0ea;stroke-width:2}
+      .done{fill:#ecfdf3;stroke:#22c55e;stroke-width:2}
+      .todo{fill:#fff7ed;stroke:#f97316;stroke-width:2}
+      .head{font:700 24px Arial,"PingFang SC","Microsoft YaHei";fill:#1f2937;text-anchor:middle}
+      .txt{font:17px Arial,"PingFang SC","Microsoft YaHei";fill:#344054}
+      .small{font:14px Arial,"PingFang SC","Microsoft YaHei";fill:#667085}
+    </style>
+  </defs>
+  <rect width="1280" height="720" fill="#fbfcff"/>
+  <text x="60" y="58" class="title">当前完成边界：语音闭环已成型，题库驱动还没接入</text>
+  <text x="60" y="88" class="sub">这张图用来避免误解：现在不是最终版面试官，只是 V2 自控语音链路。</text>
+
+  <rect x="70" y="142" width="520" height="455" rx="18" class="panel"/>
+  <rect x="110" y="185" width="440" height="54" rx="12" class="done"/>
+  <text x="330" y="220" class="head">已经完成</text>
+  <text x="115" y="285" class="txt">✓ 前端到 Java 的 V2 WebSocket 页面</text>
+  <text x="115" y="328" class="txt">✓ 火山流式 ASR：一轮回答一个 ASR WS</text>
+  <text x="115" y="371" class="txt">✓ ASR_FINAL 后保存 STUDENT 消息</text>
+  <text x="115" y="414" class="txt">✓ YanQue-AI LangChain 流式生成面试官文本</text>
+  <text x="115" y="457" class="txt">✓ 火山双向流式 TTS：文本 chunk 转 PCM</text>
+  <text x="115" y="500" class="txt">✓ 前端播放 PCM，并在 AI 播放时锁住学生录音</text>
+  <text x="115" y="543" class="txt">✓ 结束面试：status=FINISHED，关闭当前资源</text>
+
+  <rect x="690" y="142" width="520" height="455" rx="18" class="panel"/>
+  <rect x="730" y="185" width="440" height="54" rx="12" class="todo"/>
+  <text x="950" y="220" class="head">还没有完成</text>
+  <text x="735" y="285" class="txt">○ 题库主线：currentQuestionIndex</text>
+  <text x="735" y="328" class="txt">○ 追问次数：followUpCount / maxFollowUps</text>
+  <text x="735" y="371" class="txt">○ 决策模型：ASK_FOLLOW_UP / NEXT / HINT</text>
+  <text x="735" y="414" class="txt">○ 面试状态持久化：WAITING_STUDENT 等状态</text>
+  <text x="735" y="457" class="txt">○ 多轮聊天气泡式展示 V2 对话</text>
+  <text x="735" y="500" class="txt">○ 面试报告：总评、技术点、建议</text>
+  <text x="735" y="543" class="txt">○ TTS 音色和资源需要按账号最终确认</text>
+
+  <text x="70" y="653" class="small">建议下一步：先做 Java 题库状态表和规则版状态机，再把规则决策替换成短 JSON 决策模型。</text>
+</svg>

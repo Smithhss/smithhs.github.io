@@ -1,0 +1,104 @@
+<svg width="1180" height="650" viewBox="0 0 1180 650" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">为什么学完 RAG 还要学 LlamaIndex</title>
+  <desc id="desc">图中对比手写 RAG 流程和使用 LlamaIndex 后的工程化流程，说明 LlamaIndex 负责组织资料读取、切分、索引、检索和问答，Milvus 负责向量存储和检索。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#475569"/>
+    </marker>
+    <style>
+      .bg { fill: #f8fafc; }
+      .panel { fill: #ffffff; stroke: #cbd5e1; stroke-width: 2; }
+      .panel-title { font: 700 28px sans-serif; fill: #0f172a; }
+      .subtitle { font: 500 17px sans-serif; fill: #475569; }
+      .box { fill: #eef2ff; stroke: #6366f1; stroke-width: 2; }
+      .box2 { fill: #ecfdf5; stroke: #10b981; stroke-width: 2; }
+      .box3 { fill: #fff7ed; stroke: #f97316; stroke-width: 2; }
+      .box4 { fill: #f1f5f9; stroke: #64748b; stroke-width: 2; }
+      .label { font: 700 19px sans-serif; fill: #111827; }
+      .small { font: 500 15px sans-serif; fill: #475569; }
+      .note { font: 700 20px sans-serif; fill: #334155; }
+      .line { stroke: #475569; stroke-width: 2.5; fill: none; marker-end: url(#arrow); }
+      .dashed { stroke: #94a3b8; stroke-width: 2; stroke-dasharray: 8 7; fill: none; }
+    </style>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1180" height="650"/>
+
+  <text x="590" y="48" text-anchor="middle" font-family="sans-serif" font-size="34" font-weight="800" fill="#0f172a">为什么学完 RAG 还要学 LlamaIndex</text>
+  <text x="590" y="80" text-anchor="middle" class="subtitle">第三天理解每一步，第四天用框架把流程组织成真实项目写法</text>
+
+  <rect class="panel" x="50" y="118" width="500" height="455" rx="8"/>
+  <text x="300" y="158" text-anchor="middle" class="panel-title">手写 RAG</text>
+  <text x="300" y="188" text-anchor="middle" class="subtitle">每个环节都要自己串起来</text>
+
+  <rect class="box4" x="95" y="220" width="170" height="58" rx="8"/>
+  <text x="180" y="245" text-anchor="middle" class="label">读取资料</text>
+  <text x="180" y="267" text-anchor="middle" class="small">txt / md / PDF</text>
+
+  <rect class="box4" x="335" y="220" width="170" height="58" rx="8"/>
+  <text x="420" y="245" text-anchor="middle" class="label">切分 chunk</text>
+  <text x="420" y="267" text-anchor="middle" class="small">大小、重叠</text>
+
+  <rect class="box4" x="95" y="320" width="170" height="58" rx="8"/>
+  <text x="180" y="345" text-anchor="middle" class="label">生成向量</text>
+  <text x="180" y="367" text-anchor="middle" class="small">Embedding</text>
+
+  <rect class="box3" x="335" y="320" width="170" height="58" rx="8"/>
+  <text x="420" y="345" text-anchor="middle" class="label">写入 Milvus</text>
+  <text x="420" y="367" text-anchor="middle" class="small">Collection / dim</text>
+
+  <rect class="box4" x="95" y="420" width="170" height="58" rx="8"/>
+  <text x="180" y="445" text-anchor="middle" class="label">检索资料</text>
+  <text x="180" y="467" text-anchor="middle" class="small">top-k / score</text>
+
+  <rect class="box4" x="335" y="420" width="170" height="58" rx="8"/>
+  <text x="420" y="445" text-anchor="middle" class="label">拼 Prompt</text>
+  <text x="420" y="467" text-anchor="middle" class="small">上下文顺序</text>
+
+  <path class="line" d="M265 249 H326"/>
+  <path class="line" d="M420 278 V311"/>
+  <path class="line" d="M335 349 H274"/>
+  <path class="line" d="M180 378 V411"/>
+  <path class="line" d="M265 449 H326"/>
+
+  <text x="300" y="527" text-anchor="middle" class="note">能理解原理，但代码容易分散</text>
+
+  <rect class="panel" x="630" y="118" width="500" height="455" rx="8"/>
+  <text x="880" y="158" text-anchor="middle" class="panel-title">LlamaIndex 组织流程</text>
+  <text x="880" y="188" text-anchor="middle" class="subtitle">框架负责串流程，Milvus 负责存向量</text>
+
+  <rect class="box" x="690" y="225" width="170" height="64" rx="8"/>
+  <text x="775" y="251" text-anchor="middle" class="label">Document</text>
+  <text x="775" y="273" text-anchor="middle" class="small">读取后的资料</text>
+
+  <rect class="box" x="900" y="225" width="170" height="64" rx="8"/>
+  <text x="985" y="251" text-anchor="middle" class="label">Node</text>
+  <text x="985" y="273" text-anchor="middle" class="small">切分后的片段</text>
+
+  <rect class="box" x="690" y="335" width="170" height="64" rx="8"/>
+  <text x="775" y="361" text-anchor="middle" class="label">VectorStoreIndex</text>
+  <text x="775" y="383" text-anchor="middle" class="small">建立向量索引</text>
+
+  <rect class="box3" x="900" y="335" width="170" height="64" rx="8"/>
+  <text x="985" y="361" text-anchor="middle" class="label">Milvus</text>
+  <text x="985" y="383" text-anchor="middle" class="small">保存和检索向量</text>
+
+  <rect class="box2" x="790" y="455" width="180" height="64" rx="8"/>
+  <text x="880" y="481" text-anchor="middle" class="label">QueryEngine</text>
+  <text x="880" y="503" text-anchor="middle" class="small">检索 + 生成回答</text>
+
+  <path class="line" d="M860 257 H891"/>
+  <path class="line" d="M985 289 V326"/>
+  <path class="line" d="M900 367 H869"/>
+  <path class="line" d="M775 399 C775 430 815 445 858 452"/>
+  <path class="line" d="M985 399 C985 430 944 445 902 452"/>
+
+  <rect x="705" y="545" width="350" height="44" rx="8" fill="#f8fafc" stroke="#94a3b8" stroke-width="2"/>
+  <text x="880" y="574" text-anchor="middle" class="note">更适合扩展成真实知识库项目</text>
+
+  <path class="dashed" d="M575 240 V520"/>
+  <text x="590" y="313" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="700" fill="#64748b">从</text>
+  <text x="590" y="342" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="700" fill="#64748b">理解原理</text>
+  <text x="590" y="371" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="700" fill="#64748b">到</text>
+  <text x="590" y="400" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="700" fill="#64748b">工程封装</text>
+</svg>

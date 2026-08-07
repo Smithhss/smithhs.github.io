@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620">
+  <rect width="1200" height="620" fill="#f8fafc"/>
+  <text x="600" y="56" text-anchor="middle" font-family="Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="32" font-weight="700" fill="#1f2937">本课程要学习的核心模块</text>
+  <text x="600" y="92" text-anchor="middle" font-family="Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" fill="#64748b">先理解大模型基础，再逐步组合成可落地的 AI 应用</text>
+
+  <defs>
+    <marker id="arrow-course" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#475569"/>
+    </marker>
+  </defs>
+
+  <g font-family="Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+    <rect x="32" y="155" width="135" height="130" rx="14" fill="#f1f5f9" stroke="#94a3b8" stroke-width="2"/>
+    <text x="100" y="198" text-anchor="middle" font-size="20" font-weight="700" fill="#334155">大模型基础</text>
+    <text x="100" y="232" text-anchor="middle" font-size="14" fill="#334155">Token 参数</text>
+    <text x="100" y="254" text-anchor="middle" font-size="14" fill="#334155">神经网络 Transformer</text>
+
+    <rect x="195" y="155" width="135" height="130" rx="14" fill="#ede9fe" stroke="#a78bfa" stroke-width="2"/>
+    <text x="262" y="198" text-anchor="middle" font-size="20" font-weight="700" fill="#6d28d9">API 调用</text>
+    <text x="262" y="232" text-anchor="middle" font-size="14" fill="#334155">把模型接进</text>
+    <text x="262" y="254" text-anchor="middle" font-size="14" fill="#334155">自己的程序</text>
+
+    <rect x="358" y="155" width="135" height="130" rx="14" fill="#fef2f2" stroke="#f87171" stroke-width="2"/>
+    <text x="425" y="198" text-anchor="middle" font-size="20" font-weight="700" fill="#b91c1c">Prompt</text>
+    <text x="425" y="232" text-anchor="middle" font-size="14" fill="#334155">控制模型</text>
+    <text x="425" y="254" text-anchor="middle" font-size="14" fill="#334155">怎么回答</text>
+
+    <rect x="521" y="155" width="135" height="130" rx="14" fill="#fff7ed" stroke="#fb923c" stroke-width="2"/>
+    <text x="588" y="198" text-anchor="middle" font-size="20" font-weight="700" fill="#c2410c">Memory</text>
+    <text x="588" y="232" text-anchor="middle" font-size="14" fill="#334155">管理对话历史</text>
+    <text x="588" y="254" text-anchor="middle" font-size="14" fill="#334155">和上下文</text>
+
+    <rect x="684" y="155" width="135" height="130" rx="14" fill="#ecfdf5" stroke="#34d399" stroke-width="2"/>
+    <text x="752" y="198" text-anchor="middle" font-size="20" font-weight="700" fill="#047857">RAG</text>
+    <text x="752" y="232" text-anchor="middle" font-size="14" fill="#334155">让模型查询</text>
+    <text x="752" y="254" text-anchor="middle" font-size="14" fill="#334155">外部知识库</text>
+
+    <rect x="847" y="155" width="135" height="130" rx="14" fill="#eff6ff" stroke="#60a5fa" stroke-width="2"/>
+    <text x="914" y="198" text-anchor="middle" font-size="20" font-weight="700" fill="#1d4ed8">Tools</text>
+    <text x="914" y="232" text-anchor="middle" font-size="14" fill="#334155">调用接口</text>
+    <text x="914" y="254" text-anchor="middle" font-size="14" fill="#334155">数据库和工具</text>
+
+    <rect x="1010" y="155" width="135" height="130" rx="14" fill="#fdf2f8" stroke="#f472b6" stroke-width="2"/>
+    <text x="1078" y="198" text-anchor="middle" font-size="20" font-weight="700" fill="#be185d">Agent</text>
+    <text x="1078" y="232" text-anchor="middle" font-size="14" fill="#334155">拆解任务</text>
+    <text x="1078" y="254" text-anchor="middle" font-size="14" fill="#334155">并执行步骤</text>
+
+    <path d="M171 220 H188" stroke="#475569" stroke-width="3" marker-end="url(#arrow-course)"/>
+    <path d="M334 220 H351" stroke="#475569" stroke-width="3" marker-end="url(#arrow-course)"/>
+    <path d="M497 220 H514" stroke="#475569" stroke-width="3" marker-end="url(#arrow-course)"/>
+    <path d="M660 220 H677" stroke="#475569" stroke-width="3" marker-end="url(#arrow-course)"/>
+    <path d="M823 220 H840" stroke="#475569" stroke-width="3" marker-end="url(#arrow-course)"/>
+    <path d="M986 220 H1003" stroke="#475569" stroke-width="3" marker-end="url(#arrow-course)"/>
+
+    <rect x="185" y="385" width="830" height="86" rx="16" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <text x="600" y="420" text-anchor="middle" font-size="21" font-weight="700" fill="#1f2937">工程能力贯穿所有模块</text>
+    <text x="600" y="452" text-anchor="middle" font-size="17" fill="#475569">稳定性、权限、安全、成本、日志、部署、监控</text>
+  </g>
+</svg>

@@ -1,0 +1,49 @@
+<svg width="1280" height="620" viewBox="0 0 1280 620" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">录音识别任务设计</title>
+  <desc id="desc">展示面试录音从对象存储临时地址进入 ASR 识别服务，再输出带说话人的分句结果。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M2,2 L10,6 L2,10 Z" fill="#344054"/></marker>
+    <style>
+      .bg{fill:#fbfcff}
+      .title{font:700 30px Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#172033}
+      .sub{font:16px Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#5c6b7c}
+      .box{fill:#eef4ff;stroke:#3867b7;stroke-width:2}
+      .green{fill:#ecfdf3;stroke:#2b8a55;stroke-width:2}
+      .orange{fill:#fff7e8;stroke:#d18b22;stroke-width:2}
+      .purple{fill:#f3efff;stroke:#7a5bc8;stroke-width:2}
+      .label{font:700 18px Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#172033;text-anchor:middle}
+      .small{font:14px Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#526173;text-anchor:middle}
+      .line{stroke:#344054;stroke-width:2.5;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect class="bg" width="1280" height="620"/>
+  <text x="56" y="58" class="title">录音识别任务：把音频变成可复盘的对话稿</text>
+  <text x="56" y="88" class="sub">学生上传的是录音文件，复盘系统需要的是带说话人区分的文字对话。</text>
+
+  <rect x="86" y="180" width="220" height="92" rx="16" class="box"/>
+  <text x="196" y="218" class="label">录音文件</text>
+  <text x="196" y="246" class="small">学生上传到对象存储</text>
+
+  <rect x="398" y="180" width="240" height="92" rx="16" class="green"/>
+  <text x="518" y="218" class="label">临时下载地址</text>
+  <text x="518" y="246" class="small">后端生成，限时访问</text>
+
+  <rect x="730" y="160" width="240" height="132" rx="16" class="orange"/>
+  <text x="850" y="205" class="label">ASR 识别任务</text>
+  <text x="850" y="234" class="small">自动标点</text>
+  <text x="850" y="258" class="small">文本规整</text>
+
+  <rect x="730" y="360" width="240" height="92" rx="16" class="purple"/>
+  <text x="850" y="398" class="label">说话人分离</text>
+  <text x="850" y="426" class="small">区分不同声音</text>
+
+  <rect x="1060" y="250" width="170" height="112" rx="16" class="green"/>
+  <text x="1145" y="293" class="label">对话稿</text>
+  <text x="1145" y="322" class="small">speaker</text>
+  <text x="1145" y="346" class="small">text</text>
+
+  <path d="M306 226 H388" class="line"/>
+  <path d="M638 226 H720" class="line"/>
+  <path d="M850 292 V350" class="line"/>
+  <path d="M970 406 C1040 404 1038 324 1050 306" class="line"/>
+</svg>

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520">
+  <rect width="1200" height="520" fill="#fbfbf8"/>
+  <text x="600" y="56" text-anchor="middle" font-family="Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="32" font-weight="700" fill="#1f2937">机器学习的典型应用</text>
+  <text x="600" y="92" text-anchor="middle" font-family="Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" fill="#64748b">同一套思想可以用于分类、预测、排序和推荐</text>
+
+  <g font-family="Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+    <rect x="65" y="150" width="155" height="170" rx="16" fill="#eff6ff" stroke="#60a5fa" stroke-width="2"/>
+    <text x="142" y="195" text-anchor="middle" font-size="40">✉</text>
+    <text x="142" y="240" text-anchor="middle" font-size="20" font-weight="700" fill="#1d4ed8">垃圾邮件识别</text>
+    <text x="142" y="273" text-anchor="middle" font-size="15" fill="#475569">分类问题</text>
+
+    <rect x="245" y="150" width="155" height="170" rx="16" fill="#f0fdf4" stroke="#4ade80" stroke-width="2"/>
+    <text x="322" y="195" text-anchor="middle" font-size="40">★</text>
+    <text x="322" y="240" text-anchor="middle" font-size="20" font-weight="700" fill="#15803d">推荐系统</text>
+    <text x="322" y="273" text-anchor="middle" font-size="15" fill="#475569">匹配与排序</text>
+
+    <rect x="425" y="150" width="155" height="170" rx="16" fill="#fff7ed" stroke="#fb923c" stroke-width="2"/>
+    <text x="502" y="195" text-anchor="middle" font-size="40">¥</text>
+    <text x="502" y="240" text-anchor="middle" font-size="20" font-weight="700" fill="#c2410c">风控评分</text>
+    <text x="502" y="273" text-anchor="middle" font-size="15" fill="#475569">风险预测</text>
+
+    <rect x="605" y="150" width="155" height="170" rx="16" fill="#fdf2f8" stroke="#f472b6" stroke-width="2"/>
+    <text x="682" y="195" text-anchor="middle" font-size="40">↗</text>
+    <text x="682" y="240" text-anchor="middle" font-size="20" font-weight="700" fill="#be185d">广告点击率</text>
+    <text x="682" y="273" text-anchor="middle" font-size="15" fill="#475569">概率预测</text>
+
+    <rect x="785" y="150" width="155" height="170" rx="16" fill="#ede9fe" stroke="#a78bfa" stroke-width="2"/>
+    <text x="862" y="195" text-anchor="middle" font-size="40">▣</text>
+    <text x="862" y="240" text-anchor="middle" font-size="20" font-weight="700" fill="#6d28d9">商品销量预测</text>
+    <text x="862" y="273" text-anchor="middle" font-size="15" fill="#475569">回归预测</text>
+
+    <rect x="965" y="150" width="155" height="170" rx="16" fill="#ecfeff" stroke="#22d3ee" stroke-width="2"/>
+    <text x="1042" y="195" text-anchor="middle" font-size="40">⌕</text>
+    <text x="1042" y="240" text-anchor="middle" font-size="20" font-weight="700" fill="#0e7490">搜索排序</text>
+    <text x="1042" y="273" text-anchor="middle" font-size="15" fill="#475569">排序问题</text>
+
+    <rect x="190" y="380" width="820" height="58" rx="12" fill="#ffffff" stroke="#cbd5e1"/>
+    <text x="600" y="415" text-anchor="middle" font-size="18" fill="#334155">这些应用不是靠手写所有规则，而是依赖数据、特征和模型学习出来的规律。</text>
+  </g>
+</svg>

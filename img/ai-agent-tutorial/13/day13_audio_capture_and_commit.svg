@@ -1,0 +1,42 @@
+<svg width="1280" height="760" viewBox="0 0 1280 760" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">前端采集音频并手动提交回答</title>
+  <desc id="desc">浏览器麦克风采集、PCM 转换、持续上传音频、学生点击说完了后发送 AUDIO_COMMIT。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M2,2 L10,6 L2,10 Z" fill="#26364a"/></marker>
+    <style>
+      .title{font:700 31px Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#172033}
+      .sub{font:16px Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#667085}
+      .box{fill:#eef4ff;stroke:#3867b7;stroke-width:2}
+      .safe{fill:#ecfdf3;stroke:#2b8a55;stroke-width:2}
+      .warn{fill:#fff7e8;stroke:#d18b22;stroke-width:2}
+      .end{fill:#f3efff;stroke:#7a5bc8;stroke-width:2}
+      .text{font:18px Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#1f2d3d;text-anchor:middle}
+      .small{font:14px Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#526173;text-anchor:middle}
+      .line{stroke:#26364a;stroke-width:2.5;fill:none;marker-end:url(#arrow)}
+      .dash{stroke:#667085;stroke-width:2.2;fill:none;stroke-dasharray:8 7;marker-end:url(#arrow)}
+      .diamond{fill:#fff7e8;stroke:#d18b22;stroke-width:2}
+    </style>
+  </defs>
+  <rect width="1280" height="760" fill="#fbfcff"/>
+  <text x="56" y="58" class="title">前端：把麦克风声音变成火山能接收的 PCM</text>
+  <text x="56" y="88" class="sub">录音时持续上传 PCM；学生说完后点击按钮，前端再发送 AUDIO_COMMIT。</text>
+
+  <g transform="translate(70,150)">
+    <rect class="box" x="0" y="0" width="180" height="78" rx="10"/><text class="text" x="90" y="34">麦克风</text><text class="small" x="90" y="58">getUserMedia</text>
+    <rect class="box" x="235" y="0" width="190" height="78" rx="10"/><text class="text" x="330" y="34">音频上下文</text><text class="small" x="330" y="58">AudioContext</text>
+    <rect class="box" x="480" y="0" width="210" height="78" rx="10"/><text class="text" x="585" y="34">分片读取</text><text class="small" x="585" y="58">ScriptProcessorNode</text>
+    <rect class="warn" x="745" y="0" width="190" height="78" rx="10"/><text class="text" x="840" y="34">Float32Array</text><text class="small" x="840" y="58">浏览器原始音频</text>
+    <rect class="safe" x="990" y="0" width="190" height="78" rx="10"/><text class="text" x="1085" y="34">PCM 16k</text><text class="small" x="1085" y="58">发给 Java</text>
+    <path class="line" d="M180,39 H225"/><path class="line" d="M425,39 H470"/><path class="line" d="M690,39 H735"/><path class="line" d="M935,39 H980"/>
+  </g>
+
+  <g transform="translate(165,360)">
+    <rect class="safe" x="0" y="0" width="230" height="78" rx="10"/><text class="text" x="115" y="33">持续上传音频</text><text class="small" x="115" y="58">WebSocket Binary</text>
+    <path class="line" d="M230,39 H305"/>
+    <rect class="warn" x="305" y="0" width="230" height="78" rx="10"/><text class="text" x="420" y="33">学生说完回答</text><text class="small" x="420" y="58">手动点击按钮</text>
+    <path class="line" d="M535,39 H610"/>
+    <rect class="end" x="610" y="0" width="260" height="78" rx="10"/><text class="text" x="740" y="33">发送 AUDIO_COMMIT</text><text class="small" x="740" y="58">提交当前这一轮回答</text>
+  </g>
+
+  <text x="650" y="690" class="sub" text-anchor="middle">AUDIO_COMMIT 不是关闭整场面试，只是告诉后端：这一轮回答可以交给火山处理了。</text>
+</svg>

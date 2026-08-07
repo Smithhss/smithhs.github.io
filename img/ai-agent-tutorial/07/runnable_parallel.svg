@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="430" viewBox="0 0 980 430">
+  <defs>
+    <style>
+      .title{font:700 28px Arial,"Microsoft YaHei",sans-serif;fill:#172033}
+      .label{font:700 19px Arial,"Microsoft YaHei",sans-serif;fill:#172033}
+      .text{font:15px Arial,"Microsoft YaHei",sans-serif;fill:#344054}
+      .small{font:13px Arial,"Microsoft YaHei",sans-serif;fill:#667085}
+      .box{fill:#fff;stroke:#b8c2cc;stroke-width:2;rx:10}
+      .blue{fill:#eef6ff;stroke:#4f8fd9}
+      .green{fill:#eaf8f0;stroke:#46a36c}
+      .orange{fill:#fff6ea;stroke:#d98a22}
+      .purple{fill:#f4efff;stroke:#8b6bd9}
+      .arrow{stroke:#62748a;stroke-width:2.5;fill:none;marker-end:url(#arrow)}
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#62748a"/>
+    </marker>
+  </defs>
+  <rect width="980" height="430" fill="#f7f9fb"/>
+  <text x="40" y="50" class="title">RunnableParallel：同时准备 Prompt 需要的多个变量</text>
+  <text x="40" y="82" class="text">AI 问答回答前，常常要同时准备问题、历史消息、知识库资料和业务上下文。</text>
+
+  <rect x="55" y="190" width="145" height="76" class="box"/>
+  <text x="90" y="222" class="label">用户问题</text>
+  <text x="82" y="247" class="small">question</text>
+
+  <rect x="268" y="104" width="195" height="70" class="box blue"/>
+  <text x="316" y="134" class="label">保留原问题</text>
+  <text x="324" y="158" class="small">RunnablePassthrough</text>
+
+  <rect x="268" y="198" width="195" height="70" class="box green"/>
+  <text x="318" y="228" class="label">查询知识库</text>
+  <text x="316" y="252" class="small">search_knowledge</text>
+
+  <rect x="268" y="292" width="195" height="70" class="box orange"/>
+  <text x="318" y="322" class="label">加载历史</text>
+  <text x="322" y="346" class="small">load_history</text>
+
+  <rect x="548" y="190" width="170" height="92" class="box purple"/>
+  <text x="580" y="226" class="label">Prompt 变量</text>
+  <text x="578" y="253" class="small">question/context/history</text>
+
+  <rect x="780" y="190" width="142" height="92" class="box"/>
+  <text x="826" y="226" class="label">链路</text>
+  <text x="810" y="253" class="small">Prompt | Model</text>
+
+  <path d="M200 228 C230 228 234 140 268 140" class="arrow"/>
+  <path d="M200 228 H268" class="arrow"/>
+  <path d="M200 228 C230 228 234 328 268 328" class="arrow"/>
+  <path d="M463 140 C510 150 512 214 548 224" class="arrow"/>
+  <path d="M463 233 H548" class="arrow"/>
+  <path d="M463 328 C510 315 512 260 548 250" class="arrow"/>
+  <path d="M718 236 H780" class="arrow"/>
+</svg>

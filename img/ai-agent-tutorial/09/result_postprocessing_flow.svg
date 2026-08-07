@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="540" viewBox="0 0 1200 540" role="img" aria-labelledby="title desc">
+  <title id="title">查询结果后处理</title><desc id="desc">原始数据被标准化、选择展示方式并生成可信自然语言总结。</desc>
+  <rect width="1200" height="540" fill="#ffffff"/>
+  <text x="55" y="58" font-family="Arial, PingFang SC, Microsoft YaHei" font-size="30" font-weight="700" fill="#182230">原始结果不是最终答案：结果后处理决定用户怎样理解数据</text>
+  <g font-family="Arial, PingFang SC, Microsoft YaHei" font-size="18" text-anchor="middle">
+    <rect x="55" y="180" width="175" height="88" rx="10" fill="#ffecee" stroke="#e6a2ad"/><text x="143" y="219" fill="#b03b4c">数据库原始行</text><text x="143" y="246" font-size="15" fill="#81515a">日期、金额、状态</text>
+    <rect x="285" y="180" width="195" height="88" rx="10" fill="#e8f0ff" stroke="#94b7f5"/><text x="383" y="219" fill="#245aa7">程序标准化</text><text x="383" y="246" font-size="15" fill="#4c6280">单位、格式、脱敏、空值</text>
+    <rect x="535" y="180" width="195" height="88" rx="10" fill="#e6f8f2" stroke="#8ccdaf"/><text x="633" y="219" fill="#147a4b">识别数据形态</text><text x="633" y="246" font-size="15" fill="#477a60">单值 / 时间 / 分类 / 明细</text>
+    <rect x="785" y="130" width="180" height="72" rx="10" fill="#fff5df" stroke="#e4be69"/><text x="875" y="173" fill="#ad6a00">表格 / 指标卡</text>
+    <rect x="785" y="245" width="180" height="72" rx="10" fill="#f4ebff" stroke="#c3a3ed"/><text x="875" y="288" fill="#6d3caf">折线 / 柱状图</text>
+    <rect x="1010" y="180" width="145" height="88" rx="10" fill="#edf4f8" stroke="#9bbbc9"/><text x="1083" y="219" fill="#286274">可信总结</text><text x="1083" y="246" font-size="15" fill="#57747d">仅基于结果</text>
+  </g>
+  <g stroke="#6f8092" stroke-width="3" fill="none" marker-end="url(#m)"><path d="M233 224H279"/><path d="M483 224H529"/><path d="M733 224H778V165"/><path d="M733 224H778V281"/><path d="M968 165H1004V210"/><path d="M968 281H1004V238"/></g>
+  <text x="55" y="410" font-family="Arial, PingFang SC, Microsoft YaHei" font-size="18" fill="#536475">程序负责结构与展示安全；模型负责把已确认的数据组织成用户能读懂的结论。</text>
+  <defs><marker id="m" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#6f8092"/></marker></defs>
+</svg>

@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1300" height="600" viewBox="0 0 1300 600" role="img" aria-labelledby="title desc">
+  <title id="title">State 和 Checkpoint 的关系</title>
+  <desc id="desc">State 是流程正在使用的数据，Checkpoint 是把某一刻的 State 保存成进度记录。</desc>
+  <rect width="1300" height="600" fill="#ffffff"/>
+  <text x="55" y="58" font-family="Arial, PingFang SC, Microsoft YaHei" font-size="31" font-weight="700" fill="#182230">State 是正在使用的数据，Checkpoint 是保存下来的进度</text>
+
+  <g font-family="Arial, PingFang SC, Microsoft YaHei">
+    <rect x="80" y="130" width="430" height="330" rx="14" fill="#e8f0ff" stroke="#94b7f5" stroke-width="2"/>
+    <text x="295" y="174" text-anchor="middle" font-size="26" font-weight="700" fill="#245aa7">当前 State</text>
+    <text x="295" y="205" text-anchor="middle" font-size="17" fill="#4c6280">流程正在手里拿着的数据</text>
+
+    <rect x="130" y="240" width="330" height="42" rx="8" fill="#ffffff" stroke="#94b7f5"/>
+    <text x="295" y="267" text-anchor="middle" font-size="17" fill="#245aa7">用户问题：最近 7 天未支付订单？</text>
+    <rect x="130" y="296" width="330" height="42" rx="8" fill="#ffffff" stroke="#94b7f5"/>
+    <text x="295" y="323" text-anchor="middle" font-size="17" fill="#245aa7">请求类型：DATA_QUERY</text>
+    <rect x="130" y="352" width="330" height="42" rx="8" fill="#ffffff" stroke="#94b7f5"/>
+    <text x="295" y="379" text-anchor="middle" font-size="17" fill="#245aa7">查询计划：按订单状态和时间过滤</text>
+
+    <rect x="760" y="110" width="350" height="105" rx="12" fill="#e6f8f2" stroke="#8ccdaf" stroke-width="2"/>
+    <text x="935" y="150" text-anchor="middle" font-size="23" font-weight="700" fill="#147a4b">Checkpoint 1</text>
+    <text x="935" y="181" text-anchor="middle" font-size="17" fill="#477a60">保存 Router 后的 State</text>
+
+    <rect x="760" y="250" width="350" height="105" rx="12" fill="#fff5df" stroke="#e4be69" stroke-width="2"/>
+    <text x="935" y="290" text-anchor="middle" font-size="23" font-weight="700" fill="#ad6a00">Checkpoint 2</text>
+    <text x="935" y="321" text-anchor="middle" font-size="17" fill="#775d27">保存查询规划后的 State</text>
+
+    <rect x="760" y="390" width="350" height="105" rx="12" fill="#ffecee" stroke="#e6a2ad" stroke-width="2"/>
+    <text x="935" y="430" text-anchor="middle" font-size="23" font-weight="700" fill="#b03b4c">Checkpoint 3</text>
+    <text x="935" y="461" text-anchor="middle" font-size="17" fill="#81515a">保存执行结果后的 State</text>
+
+    <rect x="530" y="247" width="180" height="96" rx="12" fill="#f4ebff" stroke="#c3a3ed" stroke-width="2"/>
+    <text x="620" y="287" text-anchor="middle" font-size="22" font-weight="700" fill="#6d3caf">保存</text>
+    <text x="620" y="317" text-anchor="middle" font-size="16" fill="#705d87">把当前 State 存下来</text>
+  </g>
+
+  <g stroke="#6f8092" stroke-width="3" fill="none" marker-end="url(#arrow)">
+    <path d="M515 295H524"/>
+    <path d="M714 295C735 235 744 180 756 161"/>
+    <path d="M714 295H754"/>
+    <path d="M714 295C735 356 744 421 756 442"/>
+  </g>
+
+  <g font-family="Arial, PingFang SC, Microsoft YaHei" font-size="17" fill="#536475">
+    <text x="80" y="535">一句话记住：State 是运行时的数据；Checkpoint 是把某一刻的 State 保存成进度记录。</text>
+  </g>
+
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0 0L8 4L0 8Z" fill="#6f8092"/>
+    </marker>
+  </defs>
+</svg>

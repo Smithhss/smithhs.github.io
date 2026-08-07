@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#f8fafc"/>
+  <text x="640" y="72" text-anchor="middle" font-family="Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="38" font-weight="700" fill="#111827">大模型训练通常不是一步完成</text>
+  <text x="640" y="114" text-anchor="middle" font-family="Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="22" fill="#64748b">先学语言规律，再学怎么回答，最后继续对齐人类偏好</text>
+
+  <defs>
+    <marker id="arrow-stage" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#475569"/>
+    </marker>
+    <filter id="shadow" x="-8%" y="-10%" width="116%" height="130%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#cbd5e1" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+
+  <g font-family="Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+    <rect x="70" y="206" width="280" height="310" rx="20" fill="#eef2ff" stroke="#818cf8" stroke-width="3" filter="url(#shadow)"/>
+    <text x="210" y="258" text-anchor="middle" font-size="28" font-weight="700" fill="#3730a3">1. 预训练</text>
+    <text x="210" y="306" text-anchor="middle" font-size="20" fill="#334155">大量文本 / 代码 / 网页</text>
+    <text x="210" y="350" text-anchor="middle" font-size="20" fill="#334155">练习预测下一个 Token</text>
+    <rect x="104" y="394" width="212" height="70" rx="12" fill="#ffffff" stroke="#c7d2fe"/>
+    <text x="210" y="424" text-anchor="middle" font-size="18" fill="#475569">主要学会</text>
+    <text x="210" y="452" text-anchor="middle" font-size="18" font-weight="700" fill="#334155">语言和知识规律</text>
+
+    <rect x="500" y="206" width="280" height="310" rx="20" fill="#ecfeff" stroke="#22d3ee" stroke-width="3" filter="url(#shadow)"/>
+    <text x="640" y="258" text-anchor="middle" font-size="28" font-weight="700" fill="#0e7490">2. 监督微调</text>
+    <text x="640" y="306" text-anchor="middle" font-size="20" fill="#334155">高质量问答数据</text>
+    <text x="640" y="350" text-anchor="middle" font-size="20" fill="#334155">题目 + 标准回答</text>
+    <rect x="534" y="394" width="212" height="70" rx="12" fill="#ffffff" stroke="#a5f3fc"/>
+    <text x="640" y="424" text-anchor="middle" font-size="18" fill="#475569">主要学会</text>
+    <text x="640" y="452" text-anchor="middle" font-size="18" font-weight="700" fill="#334155">按指令回答</text>
+
+    <rect x="930" y="206" width="280" height="310" rx="20" fill="#f0fdf4" stroke="#22c55e" stroke-width="3" filter="url(#shadow)"/>
+    <text x="1070" y="258" text-anchor="middle" font-size="28" font-weight="700" fill="#15803d">3. 偏好对齐</text>
+    <text x="1070" y="306" text-anchor="middle" font-size="20" fill="#334155">人类反馈 / 奖励模型</text>
+    <text x="1070" y="350" text-anchor="middle" font-size="20" fill="#334155">比较哪个回答更好</text>
+    <rect x="964" y="394" width="212" height="70" rx="12" fill="#ffffff" stroke="#bbf7d0"/>
+    <text x="1070" y="424" text-anchor="middle" font-size="18" fill="#475569">主要学会</text>
+    <text x="1070" y="452" text-anchor="middle" font-size="18" font-weight="700" fill="#334155">更符合人类偏好</text>
+
+    <line x1="350" y1="361" x2="480" y2="361" stroke="#475569" stroke-width="4" marker-end="url(#arrow-stage)"/>
+    <line x1="780" y1="361" x2="910" y2="361" stroke="#475569" stroke-width="4" marker-end="url(#arrow-stage)"/>
+
+    <rect x="140" y="594" width="1000" height="54" rx="14" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <text x="640" y="629" text-anchor="middle" font-size="20" font-weight="700" fill="#334155">大模型训练经常会组合多种学习方式，而不是只靠某一种</text>
+  </g>
+</svg>

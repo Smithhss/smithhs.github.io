@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="520" viewBox="0 0 1120 520">
+  <defs>
+    <style>
+      .title{font-family:Arial,'Microsoft YaHei',sans-serif;font-size:30px;font-weight:700;fill:#222}
+      .text{font-family:Arial,'Microsoft YaHei',sans-serif;font-size:20px;fill:#333}
+      .small{font-family:Arial,'Microsoft YaHei',sans-serif;font-size:16px;fill:#555}
+      .code{font-family:Menlo,Consolas,monospace;font-size:17px;fill:#253042}
+      .box{fill:#fff;stroke:#ccd5e0;stroke-width:2;rx:10}
+      .system{fill:#eef6ff;stroke:#4d92d9}
+      .user{fill:#f4fbf3;stroke:#62a765}
+      .assistant{fill:#fff7ea;stroke:#df9b3f}
+      .model{fill:#f7f5ff;stroke:#7a68d8}
+      .arrow{stroke:#53616f;stroke-width:2.5;fill:none;marker-end:url(#arrow)}
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#53616f"/>
+    </marker>
+  </defs>
+  <rect width="1120" height="520" fill="#fbfcfe"/>
+  <text x="48" y="58" class="title">一次模型请求，本质上是一组 messages</text>
+  <text x="48" y="92" class="small">模型不是只看最后一句问题，而是按顺序阅读系统规则、历史上下文和本次问题。</text>
+
+  <rect x="58" y="135" width="250" height="120" class="box system"/>
+  <text x="82" y="172" class="text" font-weight="700">system</text>
+  <text x="82" y="205" class="small">告诉模型身份、边界、风格</text>
+  <text x="82" y="231" class="code">AI 课程助教</text>
+
+  <rect x="58" y="300" width="250" height="120" class="box user"/>
+  <text x="82" y="337" class="text" font-weight="700">user</text>
+  <text x="82" y="370" class="small">用户本次真正提出的问题</text>
+  <text x="82" y="396" class="code">什么是 RAG？</text>
+
+  <rect x="382" y="135" width="260" height="120" class="box assistant"/>
+  <text x="406" y="172" class="text" font-weight="700">assistant</text>
+  <text x="406" y="205" class="small">模型之前给出的回答</text>
+  <text x="406" y="231" class="code">上一轮解释内容</text>
+
+  <rect x="382" y="300" width="260" height="120" class="box system"/>
+  <text x="406" y="337" class="text" font-weight="700">knowledge system</text>
+  <text x="406" y="370" class="small">把知识库资料作为参考资料放入上下文</text>
+  <text x="406" y="396" class="code">[资料1] ...</text>
+
+  <rect x="740" y="185" width="300" height="180" class="box model"/>
+  <text x="770" y="230" class="text" font-weight="700">大模型</text>
+  <text x="770" y="266" class="small">按 messages 顺序理解任务</text>
+  <text x="770" y="294" class="small">根据规则和资料生成回答</text>
+  <text x="770" y="328" class="code">assistant: 最终回答</text>
+
+  <path d="M308 195 C340 195 350 195 382 195" class="arrow"/>
+  <path d="M308 360 C340 360 350 360 382 360" class="arrow"/>
+  <path d="M642 195 C690 195 698 225 740 245" class="arrow"/>
+  <path d="M642 360 C690 360 698 320 740 300" class="arrow"/>
+</svg>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" role="img" aria-labelledby="title desc">
+  <title id="title">完整查询由哪些部分组成</title><desc id="desc">用一个交易额查询展示指标、时间、筛选、维度、排序和展示形式。</desc>
+  <rect width="1200" height="520" fill="#ffffff"/>
+  <text x="55" y="58" font-family="Arial, PingFang SC, Microsoft YaHei" font-size="30" font-weight="700" fill="#182230">完整数据查询，不只有一个指标</text>
+  <rect x="55" y="95" width="1090" height="62" rx="10" fill="#172c45"/>
+  <text x="85" y="135" font-family="Arial, PingFang SC, Microsoft YaHei" font-size="22" fill="#ffffff">最近 7 天线上课程按产品分组的支付成功订单金额，按金额倒序取前 10 名</text>
+  <g font-family="Arial, PingFang SC, Microsoft YaHei">
+    <rect x="75" y="205" width="210" height="110" rx="10" fill="#e8f0ff" stroke="#94b7f5"/><text x="100" y="242" font-size="21" font-weight="700" fill="#245aa7">指标</text><text x="100" y="275" font-size="18" fill="#364c68">支付成功订单金额</text>
+    <rect x="325" y="205" width="210" height="110" rx="10" fill="#fff5df" stroke="#e4be69"/><text x="350" y="242" font-size="21" font-weight="700" fill="#ad6a00">时间范围</text><text x="350" y="275" font-size="18" fill="#69542b">最近 7 天</text>
+    <rect x="575" y="205" width="210" height="110" rx="10" fill="#e6f8f2" stroke="#8ccdaf"/><text x="600" y="242" font-size="21" font-weight="700" fill="#147a4b">筛选条件</text><text x="600" y="275" font-size="18" fill="#44715b">线上课程、支付成功</text>
+    <rect x="825" y="205" width="250" height="110" rx="10" fill="#f4ebff" stroke="#c3a3ed"/><text x="850" y="242" font-size="21" font-weight="700" fill="#6d3caf">维度与分组</text><text x="850" y="275" font-size="18" fill="#705d87">按产品分组</text>
+    <rect x="195" y="355" width="300" height="100" rx="10" fill="#ffecee" stroke="#e6a2ad"/><text x="220" y="392" font-size="21" font-weight="700" fill="#b03b4c">排序与数量</text><text x="220" y="423" font-size="18" fill="#82555c">交易额倒序，前 10 名</text>
+    <rect x="690" y="355" width="300" height="100" rx="10" fill="#edf4f8" stroke="#9bbbc9"/><text x="715" y="392" font-size="21" font-weight="700" fill="#286274">展示形式</text><text x="715" y="423" font-size="18" fill="#57747d">排名表格或柱状图</text>
+  </g>
+</svg>

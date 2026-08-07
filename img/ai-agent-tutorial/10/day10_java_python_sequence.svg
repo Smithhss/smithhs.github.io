@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1320" height="920" viewBox="0 0 1320 920" role="img" aria-labelledby="title desc">
+  <title id="title">Text-to-SQL Java 和 Python 调用时序图</title>
+  <desc id="desc">展示用户从前端发起问题后，Java 调用 Python，Python 编排 LangGraph，再回调 Java 内部接口执行 SQL 的完整时序。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#475569"/>
+    </marker>
+    <style>
+      .title{font-family:Arial,"PingFang SC","Microsoft YaHei",sans-serif;font-size:32px;font-weight:700;fill:#172033}
+      .sub{font-family:Arial,"PingFang SC","Microsoft YaHei",sans-serif;font-size:16px;fill:#5b677a}
+      .head{font-family:Arial,"PingFang SC","Microsoft YaHei",sans-serif;font-size:18px;font-weight:700;fill:#172033}
+      .small{font-family:Arial,"PingFang SC","Microsoft YaHei",sans-serif;font-size:13px;fill:#64748b}
+      .msg{font-family:Arial,"PingFang SC","Microsoft YaHei",sans-serif;font-size:14px;font-weight:700;fill:#334155}
+      .life{stroke:#cbd5e1;stroke-width:2;stroke-dasharray:7 7}
+      .arrow{stroke:#475569;stroke-width:2;fill:none;marker-end:url(#arrow)}
+      .return{stroke:#64748b;stroke-width:2;fill:none;stroke-dasharray:5 5;marker-end:url(#arrow)}
+      .step{fill:#ffffff;stroke:#cbd5e1;stroke-width:1.5}
+    </style>
+  </defs>
+
+  <rect width="1320" height="920" fill="#f8fafc"/>
+  <text x="60" y="58" class="title">一次 Text-to-SQL 请求的调用时序</text>
+  <text x="60" y="88" class="sub">注意中间的回调：Python 不直接查库，而是调用 Java 内部接口执行只读 SQL。</text>
+
+  <rect x="70" y="130" width="170" height="58" rx="10" fill="#eff6ff" stroke="#93c5fd" stroke-width="2"/>
+  <text x="105" y="164" class="head">前端页面</text>
+  <text x="92" y="183" class="small">TextToSqlPage</text>
+
+  <rect x="300" y="130" width="190" height="58" rx="10" fill="#ecfdf5" stroke="#86efac" stroke-width="2"/>
+  <text x="333" y="164" class="head">Java 对外接口</text>
+  <text x="326" y="183" class="small">/api/textToSql</text>
+
+  <rect x="555" y="130" width="190" height="58" rx="10" fill="#fff7ed" stroke="#fdba74" stroke-width="2"/>
+  <text x="589" y="164" class="head">Python API</text>
+  <text x="585" y="183" class="small">/api/text-to-sql</text>
+
+  <rect x="810" y="130" width="190" height="58" rx="10" fill="#fefce8" stroke="#fde047" stroke-width="2"/>
+  <text x="842" y="164" class="head">LangGraph</text>
+  <text x="844" y="183" class="small">graph.py</text>
+
+  <rect x="1070" y="130" width="190" height="58" rx="10" fill="#f1f5f9" stroke="#94a3b8" stroke-width="2"/>
+  <text x="1098" y="164" class="head">Java 内部执行</text>
+  <text x="1095" y="183" class="small">/internal/ai/text-to-sql</text>
+
+  <line x1="155" y1="188" x2="155" y2="860" class="life"/>
+  <line x1="395" y1="188" x2="395" y2="860" class="life"/>
+  <line x1="650" y1="188" x2="650" y2="860" class="life"/>
+  <line x1="905" y1="188" x2="905" y2="860" class="life"/>
+  <line x1="1165" y1="188" x2="1165" y2="860" class="life"/>
+
+  <path class="arrow" d="M155 245 L395 245"/>
+  <text x="185" y="234" class="msg">1. POST /api/textToSql/route</text>
+  <rect x="410" y="226" width="210" height="38" rx="7" class="step"/>
+  <text x="424" y="250" class="small">Controller -> Biz -> PythonClient</text>
+
+  <path class="arrow" d="M395 315 L650 315"/>
+  <text x="430" y="304" class="msg">2. POST /api/text-to-sql/route</text>
+  <rect x="665" y="296" width="205" height="38" rx="7" class="step"/>
+  <text x="681" y="320" class="small">TextToSqlService.process_question</text>
+
+  <path class="arrow" d="M650 385 L905 385"/>
+  <text x="682" y="374" class="msg">3. graph.invoke(thread_id=conversation_id)</text>
+
+  <rect x="780" y="418" width="250" height="132" rx="10" fill="#ffffff" stroke="#fed7aa" stroke-width="2"/>
+  <text x="805" y="448" class="head">4. 图内节点流转</text>
+  <text x="805" y="478" class="small">classify_question</text>
+  <text x="805" y="503" class="small">retrieve_metrics + route_tables</text>
+  <text x="805" y="528" class="small">judge_and_generate_sql</text>
+
+  <path class="arrow" d="M905 590 L1165 590"/>
+  <text x="935" y="579" class="msg">5. execute_sql 调 Java 内部接口</text>
+  <rect x="1030" y="615" width="270" height="96" rx="10" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+  <text x="1055" y="646" class="head">6. Java 二次校验并查询</text>
+  <text x="1055" y="675" class="small">token / SELECT / usedTables / LIMIT</text>
+  <text x="1055" y="700" class="small">JdbcTemplate 查询 MySQL</text>
+
+  <path class="return" d="M1165 750 L905 750"/>
+  <text x="948" y="739" class="msg">7. 返回 columns / rows / executedSql</text>
+
+  <rect x="780" y="775" width="250" height="64" rx="10" fill="#ffffff" stroke="#fed7aa" stroke-width="2"/>
+  <text x="805" y="804" class="head">8. analyze_query_result</text>
+  <text x="805" y="829" class="small">生成 summary / findings / chart</text>
+
+  <path class="return" d="M905 860 L650 860"/>
+  <text x="698" y="848" class="msg">9. TextToSqlRouteResponse</text>
+
+  <path class="return" d="M650 805 L395 805"/>
+  <text x="448" y="793" class="msg">10. Java 透传 RouteRes</text>
+
+  <path class="return" d="M395 735 L155 735"/>
+  <text x="205" y="723" class="msg">11. 前端展示结果</text>
+
+  <rect x="65" y="790" width="250" height="66" rx="10" fill="#eff6ff" stroke="#93c5fd" stroke-width="2"/>
+  <text x="88" y="820" class="head">页面最终展示</text>
+  <text x="88" y="845" class="small">摘要、关键发现、图表、表格、调试 SQL</text>
+</svg>

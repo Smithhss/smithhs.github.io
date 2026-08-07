@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" role="img" aria-labelledby="title desc">
+  <title id="title">SQL Guard 与 EXPLAIN 检查</title><desc id="desc">模型生成 SQL 后由程序完成安全检查、执行计划检查和放行决策。</desc>
+  <rect width="1200" height="520" fill="#ffffff"/>
+  <text x="55" y="58" font-family="Arial, PingFang SC, Microsoft YaHei" font-size="30" font-weight="700" fill="#182230">模型不拥有执行权：程序用 SQL Guard 和 EXPLAIN 决定是否放行</text>
+  <g font-family="Arial, PingFang SC, Microsoft YaHei" font-size="19" text-anchor="middle">
+    <rect x="65" y="190" width="165" height="74" rx="10" fill="#f4ebff" stroke="#c3a3ed"/><text x="148" y="234" fill="#6d3caf">模型生成 SQL</text>
+    <rect x="295" y="190" width="190" height="74" rx="10" fill="#fff5df" stroke="#e4be69"/><text x="390" y="226" fill="#ad6a00">程序静态检查</text><text x="390" y="250" font-size="15" fill="#775d27">只读、白名单、权限</text>
+    <rect x="550" y="190" width="190" height="74" rx="10" fill="#e8f0ff" stroke="#94b7f5"/><text x="645" y="226" fill="#245aa7">EXPLAIN 计划检查</text><text x="645" y="250" font-size="15" fill="#4c6280">索引、扫描行数、排序</text>
+    <rect x="805" y="190" width="160" height="74" rx="10" fill="#e6f8f2" stroke="#8ccdaf"/><text x="885" y="234" fill="#147a4b">风险可接受</text>
+    <rect x="995" y="130" width="145" height="60" rx="10" fill="#dff4e8" stroke="#8ccdaf"/><text x="1068" y="167" fill="#147a4b">只读库执行</text>
+    <rect x="995" y="295" width="145" height="60" rx="10" fill="#ffecee" stroke="#e6a2ad"/><text x="1068" y="332" fill="#b03b4c">拒绝或降级</text>
+  </g>
+  <g stroke="#6f8092" stroke-width="3" fill="none" marker-end="url(#a)"><path d="M233 227H289"/><path d="M488 227H544"/><path d="M743 227H799"/><path d="M968 220H988V180"/><path d="M885 266V325H988"/></g>
+  <text x="340" y="430" font-family="Arial, PingFang SC, Microsoft YaHei" font-size="18" fill="#536475">大模型可以根据安全错误重写 SQL，但不能审核并放行自己生成的 SQL。</text>
+  <defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#6f8092"/></marker></defs>
+</svg>

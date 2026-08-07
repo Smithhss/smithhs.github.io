@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="760" viewBox="0 0 1280 760">
+  <defs>
+    <style>
+      .bg{fill:#f7f9fb}
+      .title{font:700 30px Arial,"Microsoft YaHei",sans-serif;fill:#172033}
+      .lane{fill:#fff;stroke:#c9d3df;stroke-width:2;rx:12}
+      .label{font:700 16px Arial,"Microsoft YaHei",sans-serif;fill:#172033}
+      .text{font:13px Arial,"Microsoft YaHei",sans-serif;fill:#344054}
+      .small{font:12px Arial,"Microsoft YaHei",sans-serif;fill:#667085}
+      .box{fill:#fff;stroke:#aebccc;stroke-width:2;rx:9}
+      .admin{fill:#eaf4ff;stroke:#4f8fd9}
+      .java{fill:#eaf8f0;stroke:#46a36c}
+      .python{fill:#f4efff;stroke:#8b6bd9}
+      .store{fill:#fff6ea;stroke:#d98a22}
+      .external{fill:#f9eef1;stroke:#d66f86}
+      .arrow{stroke:#617083;stroke-width:2.1;fill:none;marker-end:url(#arrow)}
+      .dash{stroke:#617083;stroke-width:2.1;fill:none;stroke-dasharray:7 6;marker-end:url(#arrow)}
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#617083"/>
+    </marker>
+  </defs>
+  <rect class="bg" width="1280" height="760"/>
+  <text x="40" y="48" class="title">知识库文档入库完整流程</text>
+  <text x="40" y="76" class="small">Java 保存知识库和文档状态，Python 负责下载 Markdown、切块、向量化、写入 Milvus。</text>
+
+  <rect x="35" y="112" width="205" height="560" class="lane"/>
+  <text x="84" y="145" class="label">管理端</text>
+  <rect x="58" y="198" width="158" height="64" class="box admin"/>
+  <text x="85" y="225" class="label">上传文档</text>
+  <text x="74" y="247" class="small">objectKey / fileSize</text>
+  <rect x="58" y="330" width="158" height="64" class="box admin"/>
+  <text x="82" y="357" class="label">点击入库</text>
+  <text x="75" y="379" class="small">index / reindex</text>
+
+  <rect x="280" y="112" width="270" height="560" class="lane"/>
+  <text x="350" y="145" class="label">Java 知识库模块</text>
+  <rect x="308" y="174" width="214" height="64" class="box java"/>
+  <text x="348" y="201" class="label">文档记录 PENDING</text>
+  <text x="334" y="223" class="small">knowledge_document</text>
+  <rect x="308" y="272" width="214" height="64" class="box java"/>
+  <text x="353" y="299" class="label">标记 INDEXING</text>
+  <text x="343" y="321" class="small">markIndexing</text>
+  <rect x="308" y="370" width="214" height="64" class="box java"/>
+  <text x="342" y="397" class="label">生成预签名下载地址</text>
+  <text x="358" y="419" class="small">UploadService / TOS</text>
+  <rect x="308" y="468" width="214" height="64" class="box java"/>
+  <text x="345" y="495" class="label">调用 Python 入库</text>
+  <text x="342" y="517" class="small">PythonKnowledgeClient</text>
+  <rect x="308" y="566" width="214" height="64" class="box java"/>
+  <text x="337" y="593" class="label">更新 INDEXED/FAILED</text>
+  <text x="340" y="615" class="small">chunkCount / vectorDim</text>
+
+  <rect x="610" y="112" width="300" height="560" class="lane"/>
+  <text x="700" y="145" class="label">Python KnowledgeService</text>
+  <rect x="638" y="174" width="244" height="64" class="box python"/>
+  <text x="690" y="201" class="label">下载 Markdown</text>
+  <text x="686" y="223" class="small">KnowledgeDocumentLoader</text>
+  <rect x="638" y="272" width="244" height="64" class="box python"/>
+  <text x="682" y="299" class="label">按 Markdown 切块</text>
+  <text x="690" y="321" class="small">KnowledgeChunker</text>
+  <rect x="638" y="370" width="244" height="64" class="box python"/>
+  <text x="670" y="397" class="label">构建 MilvusVectorStore</text>
+  <text x="668" y="419" class="small">按 knowledgeBaseId 分 Collection</text>
+  <rect x="638" y="468" width="244" height="64" class="box python"/>
+  <text x="690" y="495" class="label">删除旧 chunk</text>
+  <text x="684" y="517" class="small">同文档重新入库 replace</text>
+  <rect x="638" y="566" width="244" height="64" class="box python"/>
+  <text x="684" y="593" class="label">VectorStoreIndex 写入</text>
+  <text x="682" y="615" class="small">生成 embedding 并存向量</text>
+
+  <rect x="970" y="112" width="245" height="560" class="lane"/>
+  <text x="1035" y="145" class="label">存储和外部服务</text>
+  <rect x="1002" y="198" width="182" height="64" class="box store"/>
+  <text x="1058" y="225" class="label">TOS</text>
+  <text x="1025" y="247" class="small">Markdown 原文件</text>
+  <rect x="1002" y="360" width="182" height="64" class="box external"/>
+  <text x="1036" y="387" class="label">百炼 Embedding</text>
+  <text x="1038" y="409" class="small">text-embedding-v4</text>
+  <rect x="1002" y="522" width="182" height="64" class="box store"/>
+  <text x="1064" y="549" class="label">Milvus</text>
+  <text x="1028" y="571" class="small">text / vector / metadata</text>
+
+  <path d="M216 230 H308" class="arrow"/>
+  <path d="M415 238 V272" class="arrow"/>
+  <path d="M415 336 V370" class="arrow"/>
+  <path d="M522 402 H1002" class="dash"/>
+  <path d="M415 434 V468" class="arrow"/>
+  <path d="M522 500 H638" class="arrow"/>
+  <path d="M760 238 V272" class="arrow"/>
+  <path d="M760 336 V370" class="arrow"/>
+  <path d="M882 402 H1002" class="dash"/>
+  <path d="M760 434 V468" class="arrow"/>
+  <path d="M760 532 V566" class="arrow"/>
+  <path d="M882 598 H1002" class="dash"/>
+  <path d="M638 206 H522" class="dash"/>
+  <path d="M522 598 H638" class="dash"/>
+  <path d="M216 362 H308" class="arrow"/>
+</svg>

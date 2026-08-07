@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="500" viewBox="0 0 1120 500">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#2563eb"/>
+    </marker>
+    <style>
+      .title{font:700 30px Arial,"Microsoft YaHei",sans-serif;fill:#1f2937}
+      .box{fill:#fff;stroke:#2563eb;stroke-width:2;rx:12}
+      .llama{fill:#eef6ff;stroke:#2563eb;stroke-width:2;rx:12}
+      .store{fill:#fff7e8;stroke:#d97706;stroke-width:2;rx:12}
+      .text{font:700 20px Arial,"Microsoft YaHei",sans-serif;fill:#111827}
+      .small{font:16px Arial,"Microsoft YaHei",sans-serif;fill:#4b5563}
+      .arrow{stroke:#2563eb;stroke-width:2.5;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1120" height="500" fill="#fbfdff"/>
+  <text x="40" y="50" class="title">知识库入库流程：Markdown 如何变成 Milvus 里的向量数据</text>
+  <rect x="50" y="120" width="160" height="95" class="box"/>
+  <text x="130" y="155" text-anchor="middle" class="text">Java</text>
+  <text x="130" y="185" text-anchor="middle" class="small">传文档 ID</text>
+  <text x="130" y="207" text-anchor="middle" class="small">文档内容/URL</text>
+  <rect x="260" y="120" width="180" height="95" class="box"/>
+  <text x="350" y="155" text-anchor="middle" class="text">Loader</text>
+  <text x="350" y="185" text-anchor="middle" class="small">读取 Markdown</text>
+  <rect x="490" y="90" width="180" height="80" class="llama"/>
+  <text x="580" y="122" text-anchor="middle" class="text">Document</text>
+  <text x="580" y="150" text-anchor="middle" class="small">一整份资料</text>
+  <rect x="490" y="220" width="180" height="80" class="llama"/>
+  <text x="580" y="252" text-anchor="middle" class="text">Node</text>
+  <text x="580" y="280" text-anchor="middle" class="small">切分后的片段</text>
+  <rect x="730" y="120" width="180" height="95" class="llama"/>
+  <text x="820" y="155" text-anchor="middle" class="text">Embedding</text>
+  <text x="820" y="185" text-anchor="middle" class="small">正文转向量</text>
+  <rect x="960" y="120" width="130" height="95" class="store"/>
+  <text x="1025" y="155" text-anchor="middle" class="text">Milvus</text>
+  <text x="1025" y="185" text-anchor="middle" class="small">vector</text>
+  <text x="1025" y="207" text-anchor="middle" class="small">metadata</text>
+  <rect x="320" y="350" width="500" height="85" class="store"/>
+  <text x="570" y="383" text-anchor="middle" class="text">replace_document()</text>
+  <text x="570" y="415" text-anchor="middle" class="small">同一文档重新入库：先 delete(ref_doc_id)，再写入新 chunk</text>
+  <path d="M210 168 L260 168" class="arrow"/>
+  <path d="M440 168 L490 132" class="arrow"/>
+  <path d="M580 170 L580 220" class="arrow"/>
+  <path d="M670 260 C710 245 720 205 730 170" class="arrow"/>
+  <path d="M910 168 L960 168" class="arrow"/>
+  <path d="M570 350 C580 320 590 305 600 300" class="arrow"/>
+  <text x="690" y="246" class="small">MarkdownNodeParser + SentenceSplitter</text>
+  <text x="920" y="148" class="small">MilvusVectorStore</text>
+</svg>

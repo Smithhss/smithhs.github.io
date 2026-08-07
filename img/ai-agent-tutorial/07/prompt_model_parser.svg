@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="360" viewBox="0 0 980 360">
+  <defs>
+    <style>
+      .title{font:700 28px Arial,"Microsoft YaHei",sans-serif;fill:#172033}
+      .label{font:700 20px Arial,"Microsoft YaHei",sans-serif;fill:#172033}
+      .text{font:15px Arial,"Microsoft YaHei",sans-serif;fill:#344054}
+      .code{font:16px Menlo,Consolas,monospace;fill:#172033}
+      .box{fill:#fff;stroke:#b8c2cc;stroke-width:2;rx:10}
+      .p{fill:#eef6ff;stroke:#4f8fd9}
+      .m{fill:#f2f8ee;stroke:#5d9f45}
+      .r{fill:#fff6ea;stroke:#d98a22}
+      .arrow{stroke:#62748a;stroke-width:2.5;fill:none;marker-end:url(#arrow)}
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#62748a"/>
+    </marker>
+  </defs>
+  <rect width="980" height="360" fill="#f7f9fb"/>
+  <text x="40" y="50" class="title">LangChain 最核心的一条链：Prompt | Model | Parser</text>
+  <text x="40" y="82" class="text">先让模板生成 messages，再让模型生成 AIMessage，最后把输出解析成业务代码容易使用的结果。</text>
+
+  <rect x="42" y="146" width="175" height="92" class="box"/>
+  <text x="78" y="180" class="label">输入变量</text>
+  <text x="68" y="210" class="code">{"question": ...}</text>
+
+  <rect x="275" y="128" width="165" height="128" class="box p"/>
+  <text x="326" y="165" class="label">Prompt</text>
+  <text x="306" y="197" class="text">生成 messages</text>
+  <text x="302" y="224" class="text">放入系统规则</text>
+
+  <rect x="505" y="128" width="165" height="128" class="box m"/>
+  <text x="560" y="165" class="label">Model</text>
+  <text x="530" y="197" class="text">调用大模型</text>
+  <text x="532" y="224" class="text">返回 AIMessage</text>
+
+  <rect x="735" y="128" width="165" height="128" class="box r"/>
+  <text x="777" y="165" class="label">Parser</text>
+  <text x="766" y="197" class="text">解析模型输出</text>
+  <text x="772" y="224" class="text">得到字符串</text>
+
+  <path d="M217 192 H275" class="arrow"/>
+  <path d="M440 192 H505" class="arrow"/>
+  <path d="M670 192 H735" class="arrow"/>
+  <text x="310" y="306" class="code">chain = prompt | model | StrOutputParser()</text>
+</svg>

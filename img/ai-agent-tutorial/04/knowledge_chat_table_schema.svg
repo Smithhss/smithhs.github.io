@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="640" viewBox="0 0 1120 640">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#334155"/>
+    </marker>
+    <style>
+      .title{font:700 30px Arial,"Microsoft YaHei",sans-serif;fill:#1f2937}
+      .table{fill:#fff;stroke:#2563eb;stroke-width:2;rx:10}
+      .chat{fill:#f8fbff;stroke:#0f766e;stroke-width:2;rx:10}
+      .vector{fill:#fff7e8;stroke:#d97706;stroke-width:2;rx:10}
+      .head{font:700 21px Arial,"Microsoft YaHei",sans-serif;fill:#111827}
+      .field{font:15px Menlo,Consolas,monospace;fill:#374151}
+      .note{font:15px Arial,"Microsoft YaHei",sans-serif;fill:#4b5563}
+      .arrow{stroke:#334155;stroke-width:2.2;fill:none;marker-end:url(#arrow)}
+      .dash{stroke:#d97706;stroke-width:2.2;fill:none;stroke-dasharray:7 6;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1120" height="640" fill="#fbfdff"/>
+  <text x="40" y="50" class="title">知识库和问答表结构关系</text>
+
+  <rect x="70" y="95" width="300" height="210" class="table"/>
+  <text x="220" y="130" text-anchor="middle" class="head">knowledge_base</text>
+  <text x="95" y="165" class="field">id</text>
+  <text x="95" y="190" class="field">knowledge_base_name</text>
+  <text x="95" y="215" class="field">description</text>
+  <text x="95" y="240" class="field">status</text>
+  <text x="95" y="265" class="field">created_at / updated_at</text>
+  <text x="95" y="292" class="note">保存一个知识库的主信息</text>
+
+  <rect x="500" y="95" width="350" height="280" class="table"/>
+  <text x="675" y="130" text-anchor="middle" class="head">knowledge_document</text>
+  <text x="525" y="165" class="field">id</text>
+  <text x="525" y="190" class="field">knowledge_base_id</text>
+  <text x="525" y="215" class="field">document_name</text>
+  <text x="525" y="240" class="field">object_key / file_size</text>
+  <text x="525" y="265" class="field">version</text>
+  <text x="525" y="290" class="field">index_status</text>
+  <text x="525" y="315" class="field">chunk_count / vector_dim</text>
+  <text x="525" y="340" class="field">error_message / indexed_at</text>
+  <text x="525" y="365" class="note">保存文档业务状态，不保存向量</text>
+
+  <rect x="130" y="390" width="300" height="190" class="chat"/>
+  <text x="280" y="425" text-anchor="middle" class="head">ai_chat_session</text>
+  <text x="155" y="460" class="field">id</text>
+  <text x="155" y="485" class="field">student_id</text>
+  <text x="155" y="510" class="field">title</text>
+  <text x="155" y="535" class="field">status</text>
+  <text x="155" y="560" class="field">created_at / updated_at</text>
+
+  <rect x="560" y="390" width="300" height="190" class="chat"/>
+  <text x="710" y="425" text-anchor="middle" class="head">ai_chat_message</text>
+  <text x="585" y="460" class="field">id</text>
+  <text x="585" y="485" class="field">session_id</text>
+  <text x="585" y="510" class="field">role</text>
+  <text x="585" y="535" class="field">content</text>
+  <text x="585" y="560" class="field">model / tokens / created_at</text>
+
+  <rect x="900" y="170" width="170" height="150" class="vector"/>
+  <text x="985" y="205" text-anchor="middle" class="head">Milvus</text>
+  <text x="925" y="240" class="field">text</text>
+  <text x="925" y="265" class="field">vector</text>
+  <text x="925" y="290" class="field">metadata</text>
+  <text x="925" y="315" class="note">chunk 级数据</text>
+
+  <path d="M370 195 L500 195" class="arrow"/>
+  <text x="405" y="180" class="note">1 对多</text>
+  <path d="M430 485 L560 485" class="arrow"/>
+  <text x="465" y="470" class="note">1 对多</text>
+  <path d="M850 245 L900 245" class="dash"/>
+  <text x="845" y="230" class="note">入库后写入</text>
+
+  <text x="70" y="620" class="note">MySQL 保存业务记录和状态；Milvus 保存文档 chunk 的正文、向量和 metadata，用于语义检索。</text>
+</svg>

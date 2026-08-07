@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="520" viewBox="0 0 1120 520">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#7c3aed"/>
+    </marker>
+    <style>
+      .title{font:700 30px Arial,"Microsoft YaHei",sans-serif;fill:#1f2937}
+      .base{fill:#f4efff;stroke:#7c3aed;stroke-width:2;rx:12}
+      .impl{fill:#ffffff;stroke:#7c3aed;stroke-width:2;rx:12}
+      .flow{fill:#eef6ff;stroke:#2563eb;stroke-width:2;rx:12}
+      .text{font:700 20px Arial,"Microsoft YaHei",sans-serif;fill:#111827}
+      .small{font:16px Arial,"Microsoft YaHei",sans-serif;fill:#4b5563}
+      .mono{font:15px Menlo,Consolas,monospace;fill:#374151}
+      .arrow{stroke:#7c3aed;stroke-width:2.4;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1120" height="520" fill="#fdfcff"/>
+  <text x="40" y="50" class="title">模型 Provider 扩展设计：问答流程不绑定具体模型厂商</text>
+  <rect x="70" y="120" width="250" height="105" class="flow"/>
+  <text x="195" y="158" text-anchor="middle" class="text">ChatService</text>
+  <text x="195" y="188" text-anchor="middle" class="small">只调用 provider</text>
+  <text x="195" y="210" text-anchor="middle" class="small">不关心厂商 SDK</text>
+  <rect x="420" y="100" width="280" height="145" class="base"/>
+  <text x="560" y="135" text-anchor="middle" class="text">LlmProvider</text>
+  <text x="450" y="170" class="mono">chat(messages)</text>
+  <text x="450" y="198" class="mono">chat_with_model(model, messages)</text>
+  <text x="450" y="226" class="mono">stream_chat(messages)</text>
+  <rect x="810" y="70" width="240" height="90" class="impl"/>
+  <text x="930" y="105" text-anchor="middle" class="text">BailianLlmProvider</text>
+  <text x="930" y="134" text-anchor="middle" class="small">真实调用百炼</text>
+  <rect x="810" y="205" width="240" height="90" class="impl"/>
+  <text x="930" y="240" text-anchor="middle" class="text">MockLlmProvider</text>
+  <text x="930" y="269" text-anchor="middle" class="small">本地联调流式链路</text>
+  <rect x="810" y="340" width="240" height="90" class="impl"/>
+  <text x="930" y="375" text-anchor="middle" class="text">未来新 Provider</text>
+  <text x="930" y="404" text-anchor="middle" class="small">豆包 / 智谱 / Ollama</text>
+  <path d="M320 172 L420 172" class="arrow"/>
+  <path d="M700 150 L810 115" class="arrow"/>
+  <path d="M700 190 L810 250" class="arrow"/>
+  <path d="M700 225 C740 300 760 360 810 385" class="arrow"/>
+  <text x="95" y="330" class="small">扩展模型时，新增 Provider 实现基类方法。</text>
+  <text x="95" y="365" class="small">ChatService、RAG、PromptBuilder 不需要跟着改。</text>
+  <text x="95" y="400" class="small">模型选择集中在 build_llm_provider(settings)。</text>
+</svg>

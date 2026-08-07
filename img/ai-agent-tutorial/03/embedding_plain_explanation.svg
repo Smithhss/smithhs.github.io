@@ -1,0 +1,53 @@
+<svg width="1280" height="720" viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1280" height="720" fill="#f8fafc"/>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#2563eb"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#0f172a" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+  <g font-family="Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+    <text x="640" y="64" text-anchor="middle" font-size="36" font-weight="700" fill="#111827">Embedding 可以先理解成：给文字找位置</text>
+    <text x="640" y="104" text-anchor="middle" font-size="21" fill="#64748b">意思相近的文字，在“语义地图”上会更靠近</text>
+
+    <rect x="70" y="150" width="300" height="430" rx="10" fill="#ffffff" stroke="#cbd5e1" filter="url(#shadow)"/>
+    <text x="220" y="198" text-anchor="middle" font-size="26" font-weight="700" fill="#111827">原始文字</text>
+    <rect x="105" y="240" width="230" height="70" rx="8" fill="#eff6ff" stroke="#bfdbfe"/>
+    <text x="220" y="283" text-anchor="middle" font-size="20" fill="#1e3a8a">请假后怎么补课？</text>
+    <rect x="105" y="340" width="230" height="70" rx="8" fill="#f0fdf4" stroke="#bbf7d0"/>
+    <text x="220" y="383" text-anchor="middle" font-size="20" fill="#166534">请假后可以补课</text>
+    <rect x="105" y="440" width="230" height="70" rx="8" fill="#fff7ed" stroke="#fed7aa"/>
+    <text x="220" y="483" text-anchor="middle" font-size="20" fill="#9a3412">作业晚上提交</text>
+
+    <line x1="390" y1="365" x2="510" y2="365" stroke="#2563eb" stroke-width="5" marker-end="url(#arrow)"/>
+    <rect x="515" y="270" width="250" height="190" rx="10" fill="#ffffff" stroke="#cbd5e1" filter="url(#shadow)"/>
+    <text x="640" y="320" text-anchor="middle" font-size="26" font-weight="700" fill="#111827">Embedding 模型</text>
+    <text x="640" y="365" text-anchor="middle" font-size="20" fill="#475569">把文字转换成</text>
+    <text x="640" y="400" text-anchor="middle" font-size="20" fill="#475569">系统能比较的形式</text>
+
+    <line x1="770" y1="365" x2="890" y2="365" stroke="#2563eb" stroke-width="5" marker-end="url(#arrow)"/>
+    <rect x="900" y="150" width="310" height="430" rx="10" fill="#ffffff" stroke="#cbd5e1" filter="url(#shadow)"/>
+    <text x="1055" y="198" text-anchor="middle" font-size="26" font-weight="700" fill="#111827">语义地图</text>
+    <text x="1055" y="232" text-anchor="middle" font-size="18" fill="#64748b">位置越近，意思越接近</text>
+
+    <line x1="940" y1="515" x2="1170" y2="515" stroke="#94a3b8" stroke-width="3"/>
+    <line x1="940" y1="515" x2="940" y2="270" stroke="#94a3b8" stroke-width="3"/>
+
+    <circle cx="1010" cy="345" r="14" fill="#2563eb"/>
+    <text x="1030" y="352" font-size="18" font-weight="700" fill="#1d4ed8">问题：请假后怎么补课</text>
+
+    <circle cx="1045" cy="385" r="14" fill="#16a34a"/>
+    <text x="1065" y="392" font-size="18" font-weight="700" fill="#15803d">资料：请假后可以补课</text>
+
+    <circle cx="1125" cy="475" r="14" fill="#f97316"/>
+    <text x="1010" y="492" font-size="18" font-weight="700" fill="#c2410c">资料：作业晚上提交</text>
+
+    <path d="M1010 345 C1020 355, 1030 370, 1045 385" fill="none" stroke="#22c55e" stroke-width="4" stroke-dasharray="8 8"/>
+    <text x="1010" y="295" font-size="19" font-weight="700" fill="#166534">更近：更可能相关</text>
+
+    <rect x="205" y="620" width="870" height="60" rx="8" fill="#eef2ff" stroke="#c7d2fe"/>
+    <text x="640" y="657" text-anchor="middle" font-size="22" font-weight="700" fill="#3730a3">Embedding 的重点不是让人读数字，而是让系统能比较“意思像不像”</text>
+  </g>
+</svg>

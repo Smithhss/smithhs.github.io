@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1300" height="620" viewBox="0 0 1300 620" role="img" aria-labelledby="title desc">
+  <title id="title">State 和 runtime.context 的区别</title>
+  <desc id="desc">展示 State 保存流程数据，runtime.context 保存用户、租户、权限等运行时业务上下文。</desc>
+  <rect width="1300" height="620" fill="#ffffff"/>
+  <text x="55" y="58" font-family="Arial, PingFang SC, Microsoft YaHei" font-size="31" font-weight="700" fill="#182230">State 是被加工的数据，context 是运行时边界</text>
+
+  <g font-family="Arial, PingFang SC, Microsoft YaHei" text-anchor="middle">
+    <rect x="80" y="150" width="360" height="290" rx="14" fill="#e8f0ff" stroke="#94b7f5" stroke-width="2"/>
+    <text x="260" y="195" font-size="26" font-weight="700" fill="#245aa7">State</text>
+    <text x="260" y="238" font-size="18" fill="#536475">流程正在加工的数据</text>
+    <text x="260" y="285" font-size="18" fill="#334155">question</text>
+    <text x="260" y="325" font-size="18" fill="#334155">selected_tables</text>
+    <text x="260" y="365" font-size="18" fill="#334155">sql</text>
+    <text x="260" y="405" font-size="18" fill="#334155">answer</text>
+
+    <rect x="860" y="150" width="360" height="290" rx="14" fill="#fff5df" stroke="#e4be69" stroke-width="2"/>
+    <text x="1040" y="195" font-size="26" font-weight="700" fill="#ad6a00">runtime.context</text>
+    <text x="1040" y="238" font-size="18" fill="#536475">运行这次图的外部条件</text>
+    <text x="1040" y="285" font-size="18" fill="#334155">user_id</text>
+    <text x="1040" y="325" font-size="18" fill="#334155">tenant_id</text>
+    <text x="1040" y="365" font-size="18" fill="#334155">allowed_tables</text>
+    <text x="1040" y="405" font-size="18" fill="#334155">权限范围</text>
+
+    <rect x="510" y="235" width="280" height="120" rx="14" fill="#e6f8f2" stroke="#8ccdaf" stroke-width="2"/>
+    <text x="650" y="284" font-size="24" font-weight="700" fill="#147a4b">节点函数</text>
+    <text x="650" y="322" font-size="18" fill="#477a60">读取 State 和 context</text>
+  </g>
+
+  <g stroke="#6f8092" stroke-width="3" fill="none" marker-end="url(#arrow)">
+    <path d="M445 295H505"/>
+    <path d="M855 295H795"/>
+  </g>
+
+  <text x="65" y="540" font-family="Arial, PingFang SC, Microsoft YaHei" font-size="18" fill="#536475">记法：节点可以读取 runtime.context，但返回值只写回 State；context 不需要返回，也不应该塞进 State。</text>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0 0L8 4L0 8Z" fill="#6f8092"/>
+    </marker>
+  </defs>
+</svg>

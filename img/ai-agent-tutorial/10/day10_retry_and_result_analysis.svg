@@ -1,0 +1,39 @@
+<svg width="1280" height="720" viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">SQL 失败重试与结果分析</title>
+  <desc id="desc">SQL 执行失败时最多修复 3 次，成功后进入结果结构分析、图表推荐和自然语言解释。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M2,2 L10,6 L2,10 Z" fill="#26364a"/></marker>
+    <style>
+      .title{font:700 30px Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#172033}
+      .box{fill:#eef4ff;stroke:#3867b7;stroke-width:2}
+      .warn{fill:#fff7e8;stroke:#d18b22;stroke-width:2}
+      .safe{fill:#ecfdf3;stroke:#2b8a55;stroke-width:2}
+      .reject{fill:#ffecef;stroke:#c2475b;stroke-width:2}
+      .end{fill:#f3efff;stroke:#7a5bc8;stroke-width:2}
+      .text{font:18px Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#1f2d3d;text-anchor:middle}
+      .small{font:14px Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#526173;text-anchor:middle}
+      .line{stroke:#26364a;stroke-width:2.5;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1280" height="720" fill="#fbfcff"/>
+  <text x="60" y="58" class="title">执行失败要有限修复，执行成功要做结果分析</text>
+  <rect class="box" x="90" y="295" width="180" height="82" rx="10"/><text class="text" x="180" y="328">执行 SQL</text><text class="small" x="180" y="353">只读查询</text>
+  <path class="line" d="M270,336 H360"/>
+  <path class="warn" d="M450 250 L565 336 L450 422 L335 336 Z"/>
+  <text class="text" x="450" y="328">执行成功？</text>
+  <text class="small" x="450" y="354">判断结果</text>
+  <rect class="warn" x="380" y="505" width="200" height="88" rx="10"/><text class="text" x="480" y="538">修复 SQL</text><text class="small" x="480" y="565">带错误信息重试</text>
+  <rect class="reject" x="120" y="505" width="200" height="88" rx="10"/><text class="text" x="220" y="538">失败 3 次</text><text class="small" x="220" y="565">返回明确原因</text>
+  <path class="line" d="M450,422 V495"/><text class="small" x="505" y="462">失败</text>
+  <path class="line" d="M380,550 H330"/>
+  <path class="line" d="M480,505 C660,430 610,275 565,336"/>
+  <rect class="safe" x="690" y="190" width="190" height="82" rx="10"/><text class="text" x="785" y="223">拿到数据</text><text class="small" x="785" y="248">rows / columns</text>
+  <rect class="safe" x="690" y="330" width="190" height="82" rx="10"/><text class="text" x="785" y="363">结果结构分析</text><text class="small" x="785" y="388">维度、指标、时间</text>
+  <rect class="end" x="955" y="180" width="210" height="88" rx="10"/><text class="text" x="1060" y="213">图表推荐</text><text class="small" x="1060" y="240">指标卡 / 柱状图 / 折线图</text>
+  <rect class="end" x="955" y="340" width="210" height="88" rx="10"/><text class="text" x="1060" y="373">大模型解释</text><text class="small" x="1060" y="400">把数据讲给用户听</text>
+  <path class="line" d="M565,336 C630,290 650,235 680,231"/><text class="small" x="620" y="270">成功</text>
+  <path class="line" d="M785,272 V320"/>
+  <path class="line" d="M880,230 H945"/>
+  <path class="line" d="M880,371 H945"/>
+  <text class="small" x="820" y="635">最终结果不是 SQL，而是用户能理解的数据答案、表格或图表。</text>
+</svg>

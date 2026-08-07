@@ -1,0 +1,70 @@
+<svg width="1180" height="620" viewBox="0 0 1180 620" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1180" height="620" rx="20" fill="#F8FAFC"/>
+  <text x="590" y="58" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="34" font-weight="700" fill="#172033">今天学完后，要能看懂这条 RAG 主线</text>
+  <text x="590" y="92" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="18" fill="#64748B">先把资料整理成知识库，提问时再检索资料并交给大模型回答</text>
+
+  <rect x="64" y="145" width="480" height="365" rx="18" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+  <rect x="636" y="145" width="480" height="365" rx="18" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+
+  <text x="304" y="185" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="26" font-weight="700" fill="#1D4ED8">资料入库阶段</text>
+  <text x="876" y="185" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="26" font-weight="700" fill="#047857">用户提问阶段</text>
+
+  <g font-family="Arial, 'PingFang SC', sans-serif">
+    <rect x="112" y="225" width="150" height="58" rx="12" fill="#DBEAFE"/>
+    <text x="187" y="261" text-anchor="middle" font-size="19" font-weight="700" fill="#1E40AF">准备资料</text>
+
+    <path d="M272 254H326" stroke="#94A3B8" stroke-width="3" stroke-linecap="round"/>
+    <path d="M326 254L314 245V263L326 254Z" fill="#94A3B8"/>
+
+    <rect x="336" y="225" width="150" height="58" rx="12" fill="#E0F2FE"/>
+    <text x="411" y="261" text-anchor="middle" font-size="19" font-weight="700" fill="#075985">切分 chunk</text>
+
+    <path d="M411 293V332" stroke="#94A3B8" stroke-width="3" stroke-linecap="round"/>
+    <path d="M411 332L402 320H420L411 332Z" fill="#94A3B8"/>
+
+    <rect x="336" y="342" width="150" height="58" rx="12" fill="#F0FDFA"/>
+    <text x="411" y="378" text-anchor="middle" font-size="19" font-weight="700" fill="#0F766E">生成向量</text>
+
+    <path d="M326 371H272" stroke="#94A3B8" stroke-width="3" stroke-linecap="round"/>
+    <path d="M272 371L284 362V380L272 371Z" fill="#94A3B8"/>
+
+    <rect x="112" y="342" width="150" height="58" rx="12" fill="#ECFDF5"/>
+    <text x="187" y="378" text-anchor="middle" font-size="19" font-weight="700" fill="#166534">存入向量库</text>
+
+    <rect x="153" y="432" width="300" height="42" rx="10" fill="#F1F5F9"/>
+    <text x="303" y="459" text-anchor="middle" font-size="16" fill="#475569">把资料变成“可检索”的知识库</text>
+  </g>
+
+  <path d="M552 328H626" stroke="#64748B" stroke-width="4" stroke-linecap="round"/>
+  <path d="M626 328L610 316V340L626 328Z" fill="#64748B"/>
+  <text x="589" y="308" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="17" font-weight="700" fill="#475569">建好后</text>
+
+  <g font-family="Arial, 'PingFang SC', sans-serif">
+    <rect x="688" y="225" width="150" height="58" rx="12" fill="#DCFCE7"/>
+    <text x="763" y="261" text-anchor="middle" font-size="19" font-weight="700" fill="#166534">用户问题</text>
+
+    <path d="M848 254H902" stroke="#94A3B8" stroke-width="3" stroke-linecap="round"/>
+    <path d="M902 254L890 245V263L902 254Z" fill="#94A3B8"/>
+
+    <rect x="912" y="225" width="150" height="58" rx="12" fill="#FEF3C7"/>
+    <text x="987" y="261" text-anchor="middle" font-size="19" font-weight="700" fill="#92400E">检索 Top-K</text>
+
+    <path d="M987 293V332" stroke="#94A3B8" stroke-width="3" stroke-linecap="round"/>
+    <path d="M987 332L978 320H996L987 332Z" fill="#94A3B8"/>
+
+    <rect x="912" y="342" width="150" height="58" rx="12" fill="#FFEDD5"/>
+    <text x="987" y="378" text-anchor="middle" font-size="19" font-weight="700" fill="#9A3412">Rerank</text>
+
+    <path d="M902 371H848" stroke="#94A3B8" stroke-width="3" stroke-linecap="round"/>
+    <path d="M848 371L860 362V380L848 371Z" fill="#94A3B8"/>
+
+    <rect x="688" y="342" width="150" height="58" rx="12" fill="#FCE7F3"/>
+    <text x="763" y="378" text-anchor="middle" font-size="19" font-weight="700" fill="#9D174D">拼接上下文</text>
+
+    <rect x="729" y="432" width="300" height="42" rx="10" fill="#F1F5F9"/>
+    <text x="879" y="459" text-anchor="middle" font-size="16" fill="#475569">把正确资料交给大模型回答</text>
+  </g>
+
+  <rect x="206" y="542" width="768" height="46" rx="12" fill="#EEF6FF" stroke="#BFDBFE" stroke-width="2"/>
+  <text x="590" y="571" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="20" font-weight="700" fill="#1E3A8A">RAG 的关键：不是资料越多越好，而是找到和问题最相关的资料</text>
+</svg>

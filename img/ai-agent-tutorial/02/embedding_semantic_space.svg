@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#f8fafc"/>
+  <text x="640" y="72" text-anchor="middle" font-family="Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="38" font-weight="700" fill="#111827">Embedding 可以理解成语义位置</text>
+  <text x="640" y="114" text-anchor="middle" font-family="Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="22" fill="#64748b">意思相近的 Token，在向量空间里通常会更接近</text>
+
+  <defs>
+    <filter id="shadow" x="-8%" y="-12%" width="116%" height="136%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#cbd5e1" flood-opacity="0.55"/>
+    </filter>
+  </defs>
+
+  <g font-family="Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+    <rect x="92" y="165" width="1096" height="455" rx="26" fill="#ffffff" stroke="#cbd5e1" stroke-width="2.5" filter="url(#shadow)"/>
+    <line x1="170" y1="540" x2="1115" y2="540" stroke="#334155" stroke-width="4"/>
+    <line x1="170" y1="540" x2="170" y2="225" stroke="#334155" stroke-width="4"/>
+    <text x="1118" y="572" font-size="18" fill="#475569">向量维度示意</text>
+    <text x="112" y="230" font-size="18" fill="#475569">向量维度示意</text>
+
+    <ellipse cx="390" cy="355" rx="190" ry="116" fill="#eef2ff" stroke="#818cf8" stroke-width="3"/>
+    <text x="390" y="252" text-anchor="middle" font-size="22" font-weight="700" fill="#3730a3">运动相关</text>
+
+    <circle cx="318" cy="345" r="16" fill="#6366f1"/>
+    <text x="318" y="315" text-anchor="middle" font-size="22" font-weight="700" fill="#334155">篮球</text>
+
+    <circle cx="405" cy="392" r="16" fill="#6366f1"/>
+    <text x="405" y="430" text-anchor="middle" font-size="22" font-weight="700" fill="#334155">足球</text>
+
+    <circle cx="468" cy="325" r="16" fill="#6366f1"/>
+    <text x="468" y="296" text-anchor="middle" font-size="22" font-weight="700" fill="#334155">网球</text>
+
+    <ellipse cx="870" cy="355" rx="190" ry="116" fill="#ecfeff" stroke="#22d3ee" stroke-width="3"/>
+    <text x="870" y="252" text-anchor="middle" font-size="22" font-weight="700" fill="#0e7490">金融相关</text>
+
+    <circle cx="792" cy="345" r="16" fill="#06b6d4"/>
+    <text x="792" y="315" text-anchor="middle" font-size="22" font-weight="700" fill="#334155">银行</text>
+
+    <circle cx="880" cy="395" r="16" fill="#06b6d4"/>
+    <text x="880" y="433" text-anchor="middle" font-size="22" font-weight="700" fill="#334155">贷款</text>
+
+    <circle cx="952" cy="326" r="16" fill="#06b6d4"/>
+    <text x="952" y="296" text-anchor="middle" font-size="22" font-weight="700" fill="#334155">利率</text>
+
+    <path d="M500 368 C600 325, 660 325, 760 368" fill="none" stroke="#94a3b8" stroke-width="3" stroke-dasharray="10 10"/>
+    <text x="640" y="335" text-anchor="middle" font-size="20" fill="#64748b">距离较远，语义关系较弱</text>
+
+    <rect x="250" y="584" width="780" height="54" rx="14" fill="#f0fdf4" stroke="#86efac" stroke-width="2"/>
+    <text x="640" y="619" text-anchor="middle" font-size="21" font-weight="700" fill="#166534">Embedding 不是一个简单编号，而是一组能表达语义关系的数字</text>
+  </g>
+</svg>

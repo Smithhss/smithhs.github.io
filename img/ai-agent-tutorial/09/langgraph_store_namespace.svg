@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1300" height="620" viewBox="0 0 1300 620" role="img" aria-labelledby="title desc">
+  <title id="title">Store namespace 和长期记忆</title>
+  <desc id="desc">展示 namespace tuple 如何像路径一样组织 Store 中的长期记忆。</desc>
+  <rect width="1300" height="620" fill="#ffffff"/>
+  <text x="55" y="58" font-family="Arial, PingFang SC, Microsoft YaHei" font-size="31" font-weight="700" fill="#182230">Store 用 namespace 把长期记忆分组保存</text>
+
+  <g font-family="Arial, PingFang SC, Microsoft YaHei">
+    <rect x="70" y="115" width="450" height="385" rx="14" fill="#f5fff9" stroke="#8ccdaf" stroke-width="2"/>
+    <text x="110" y="160" font-size="24" font-weight="700" fill="#147a4b">namespace tuple</text>
+    <text x="110" y="205" font-size="20" fill="#334155">("tenant-001", "student-1001", "memories")</text>
+    <text x="110" y="255" font-size="18" fill="#536475">可以理解成路径：</text>
+    <text x="135" y="300" font-size="21" fill="#147a4b">tenant-001 / student-1001 / memories</text>
+    <text x="110" y="360" font-size="18" fill="#536475">tuple 是固定的一组值，适合表示分组路径。</text>
+    <text x="110" y="400" font-size="18" fill="#536475">list 更适合可变列表，namespace 不用 list。</text>
+
+    <rect x="725" y="115" width="480" height="385" rx="14" fill="#f3f7fb" stroke="#a9bdcf" stroke-width="2"/>
+    <text x="765" y="160" font-size="24" font-weight="700" fill="#286274">Store 里的数据</text>
+    <rect x="765" y="205" width="360" height="54" rx="8" fill="#ffffff" stroke="#c9d6e2"/>
+    <text x="790" y="239" font-size="18" fill="#334155">key: example_language_preference</text>
+    <rect x="765" y="285" width="360" height="90" rx="8" fill="#ffffff" stroke="#c9d6e2"/>
+    <text x="790" y="320" font-size="18" fill="#334155">value:</text>
+    <text x="850" y="320" font-size="18" fill="#536475">用户希望以后尽量用 Java 举例</text>
+    <rect x="765" y="405" width="360" height="54" rx="8" fill="#ffffff" stroke="#c9d6e2"/>
+    <text x="790" y="439" font-size="18" fill="#334155">search(namespace) 查这一组记忆</text>
+  </g>
+
+  <g stroke="#6f8092" stroke-width="3" fill="none" marker-end="url(#arrow)">
+    <path d="M525 300H715"/>
+  </g>
+  <text x="565" y="280" font-family="Arial, PingFang SC, Microsoft YaHei" font-size="18" fill="#536475">put / search</text>
+
+  <text x="65" y="575" font-family="Arial, PingFang SC, Microsoft YaHei" font-size="18" fill="#536475">记法：namespace 是“去哪个分组找”，key 是“这个分组里哪一条”，value 才是真正保存的记忆内容。</text>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0 0L8 4L0 8Z" fill="#6f8092"/>
+    </marker>
+  </defs>
+</svg>

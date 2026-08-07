@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1300" height="620" viewBox="0 0 1300 620" role="img" aria-labelledby="title desc">
+  <title id="title">Fault tolerance 重试和降级</title>
+  <desc id="desc">展示节点失败后先按 retry policy 重试，重试耗尽后进入 error handler 降级。</desc>
+  <rect width="1300" height="620" fill="#ffffff"/>
+  <text x="55" y="58" font-family="Arial, PingFang SC, Microsoft YaHei" font-size="31" font-weight="700" fill="#182230">Fault tolerance：失败先重试，仍失败就降级处理</text>
+
+  <g font-family="Arial, PingFang SC, Microsoft YaHei" text-anchor="middle">
+    <rect x="90" y="210" width="230" height="90" rx="12" fill="#e8f0ff" stroke="#94b7f5" stroke-width="2"/>
+    <text x="205" y="248" font-size="20" font-weight="700" fill="#245aa7">调用外部服务</text>
+    <text x="205" y="278" font-size="16" fill="#536475">模型 / 数据库 / 工具</text>
+
+    <rect x="420" y="160" width="250" height="190" rx="14" fill="#fff5df" stroke="#e4be69" stroke-width="2"/>
+    <text x="545" y="204" font-size="22" font-weight="700" fill="#ad6a00">retry_policy</text>
+    <text x="545" y="245" font-size="17" fill="#775d27">失败后自动重试</text>
+    <text x="545" y="285" font-size="17" fill="#775d27">max_attempts = 3</text>
+    <text x="545" y="320" font-size="17" fill="#775d27">retry_on = ConnectionError</text>
+
+    <rect x="780" y="160" width="250" height="190" rx="14" fill="#ffecee" stroke="#e6a2ad" stroke-width="2"/>
+    <text x="905" y="204" font-size="22" font-weight="700" fill="#b03b4c">error_handler</text>
+    <text x="905" y="245" font-size="17" fill="#81515a">重试耗尽后进入这里</text>
+    <text x="905" y="285" font-size="17" fill="#81515a">生成降级数据</text>
+    <text x="905" y="320" font-size="17" fill="#81515a">goto = answer</text>
+
+    <rect x="1080" y="210" width="160" height="90" rx="12" fill="#e6f8f2" stroke="#8ccdaf" stroke-width="2"/>
+    <text x="1160" y="263" font-size="20" font-weight="700" fill="#147a4b">返回回答</text>
+  </g>
+
+  <g stroke="#6f8092" stroke-width="3" fill="none" marker-end="url(#arrow)">
+    <path d="M320 255H415"/>
+    <path d="M670 255H775"/>
+    <path d="M1030 255H1075"/>
+    <path d="M545 355C505 415 455 415 430 355"/>
+  </g>
+  <text x="435" y="445" font-family="Arial, PingFang SC, Microsoft YaHei" font-size="17" fill="#536475">可恢复错误会重试，不要每个节点都手写 try/except</text>
+  <text x="65" y="565" font-family="Arial, PingFang SC, Microsoft YaHei" font-size="18" fill="#536475">记法：retry_policy 负责“再试几次”，error_handler 负责“还是失败时怎么收场”。</text>
+
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0 0L8 4L0 8Z" fill="#6f8092"/>
+    </marker>
+  </defs>
+</svg>

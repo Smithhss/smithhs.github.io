@@ -1,0 +1,58 @@
+<svg width="1180" height="560" viewBox="0 0 1180 560" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1180" height="560" rx="24" fill="#F8FAFC"/>
+  <text x="590" y="58" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="34" font-weight="700" fill="#172033">MCP 在 Agent 系统中的位置</text>
+  <text x="590" y="94" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="18" fill="#64748B">把外部系统能力封装成 Agent 可以安全调用的工具</text>
+
+  <defs>
+    <marker id="mcp-arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M2 2L10 6L2 10" fill="#475569"/>
+    </marker>
+    <filter id="mcp-shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#0F172A" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#mcp-shadow)">
+    <rect x="70" y="190" width="210" height="150" rx="18" fill="#FFFFFF" stroke="#CBD5E1"/>
+    <circle cx="175" cy="228" r="26" fill="#DBEAFE" stroke="#3B82F6" stroke-width="3"/>
+    <text x="175" y="237" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="23" font-weight="700" fill="#1D4ED8">1</text>
+    <text x="175" y="276" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="24" font-weight="700" fill="#172033">用户目标</text>
+    <text x="175" y="308" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="16" fill="#64748B">自然语言提出任务</text>
+
+    <rect x="350" y="160" width="230" height="210" rx="20" fill="#FFFFFF" stroke="#CBD5E1"/>
+    <circle cx="465" cy="206" r="28" fill="#FEF3C7" stroke="#F59E0B" stroke-width="3"/>
+    <text x="465" y="215" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="24" font-weight="700" fill="#B45309">2</text>
+    <text x="465" y="258" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="25" font-weight="700" fill="#172033">大模型 + Agent</text>
+    <text x="465" y="292" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="16" fill="#64748B">理解目标</text>
+    <text x="465" y="318" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="16" fill="#64748B">拆解步骤</text>
+    <text x="465" y="344" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="16" fill="#64748B">选择工具</text>
+
+    <rect x="650" y="146" width="220" height="238" rx="20" fill="#ECFDF5" stroke="#22C55E" stroke-width="2"/>
+    <text x="760" y="190" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="27" font-weight="700" fill="#166534">MCP Server</text>
+    <text x="760" y="224" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="16" fill="#166534">统一封装工具能力</text>
+    <rect x="685" y="252" width="150" height="34" rx="9" fill="#FFFFFF"/>
+    <text x="760" y="275" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="16" fill="#166534">工具列表</text>
+    <rect x="685" y="300" width="150" height="34" rx="9" fill="#FFFFFF"/>
+    <text x="760" y="323" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="16" fill="#166534">参数校验</text>
+    <rect x="685" y="348" width="150" height="34" rx="9" fill="#FFFFFF"/>
+    <text x="760" y="371" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="16" fill="#166534">调用结果</text>
+
+    <rect x="940" y="120" width="190" height="292" rx="20" fill="#FFFFFF" stroke="#CBD5E1"/>
+    <text x="1035" y="162" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="24" font-weight="700" fill="#172033">业务系统</text>
+    <rect x="970" y="194" width="130" height="36" rx="9" fill="#EEF2FF"/>
+    <text x="1035" y="218" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="15" fill="#3730A3">课程资料</text>
+    <rect x="970" y="244" width="130" height="36" rx="9" fill="#F0FDF4"/>
+    <text x="1035" y="268" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="15" fill="#166534">学员信息</text>
+    <rect x="970" y="294" width="130" height="36" rx="9" fill="#FEF3C7"/>
+    <text x="1035" y="318" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="15" fill="#92400E">教务数据</text>
+    <rect x="970" y="344" width="130" height="36" rx="9" fill="#FCE7F3"/>
+    <text x="1035" y="368" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="15" fill="#9D174D">订单 / CRM</text>
+  </g>
+
+  <line x1="280" y1="265" x2="343" y2="265" stroke="#475569" stroke-width="4" marker-end="url(#mcp-arrow)"/>
+  <line x1="580" y1="265" x2="643" y2="265" stroke="#475569" stroke-width="4" marker-end="url(#mcp-arrow)"/>
+  <line x1="870" y1="265" x2="933" y2="265" stroke="#475569" stroke-width="4" marker-end="url(#mcp-arrow)"/>
+
+  <rect x="190" y="454" width="800" height="58" rx="14" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+  <text x="590" y="490" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="20" font-weight="700" fill="#334155">MCP 的价值：让 Agent 用标准方式调用企业系统能力，而不是到处硬编码接口</text>
+</svg>

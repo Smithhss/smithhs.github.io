@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" role="img" aria-labelledby="title desc">
+  <title id="title">传统数据查询与 Text-to-SQL 对比</title><desc id="desc">左侧是传统开发流程，右侧是自然语言查询流程。</desc>
+  <rect width="1200" height="520" fill="#ffffff"/>
+  <text x="60" y="60" font-family="Arial, PingFang SC, Microsoft YaHei" font-size="30" font-weight="700" fill="#182230">同一个数据问题，两种解决方式</text>
+  <rect x="60" y="100" width="500" height="350" rx="14" fill="#fff7f3" stroke="#f0b9a5" stroke-width="2"/>
+  <text x="90" y="145" font-family="Arial, PingFang SC, Microsoft YaHei" font-size="24" font-weight="700" fill="#b64120">传统方式：每个问题重新开发</text>
+  <g font-family="Arial, PingFang SC, Microsoft YaHei" font-size="19" fill="#3b4655">
+    <rect x="95" y="175" width="180" height="55" rx="8" fill="#ffffff" stroke="#e7c6b9"/><text x="126" y="210">业务提出需求</text>
+    <rect x="335" y="175" width="180" height="55" rx="8" fill="#ffffff" stroke="#e7c6b9"/><text x="367" y="210">产品设计页面</text>
+    <rect x="95" y="285" width="180" height="55" rx="8" fill="#ffffff" stroke="#e7c6b9"/><text x="128" y="320">前后端开发</text>
+    <rect x="335" y="285" width="180" height="55" rx="8" fill="#ffffff" stroke="#e7c6b9"/><text x="372" y="320">测试与上线</text>
+    <text x="110" y="400" font-size="18" fill="#b64120">周期长，需求一变就要再开发</text>
+  </g>
+  <path d="M275 202H330 M425 232V280 M330 312H280" stroke="#d27759" stroke-width="3" fill="none" marker-end="url(#a)"/>
+  <rect x="640" y="100" width="500" height="350" rx="14" fill="#f2fbf7" stroke="#8fcdb0" stroke-width="2"/>
+  <text x="670" y="145" font-family="Arial, PingFang SC, Microsoft YaHei" font-size="24" font-weight="700" fill="#147a4b">Text-to-SQL：自然语言即查询</text>
+  <rect x="680" y="178" width="420" height="70" rx="8" fill="#ffffff" stroke="#a9d9be"/><text x="718" y="220" font-family="Arial, PingFang SC, Microsoft YaHei" font-size="20" fill="#243040">“最近 7 天未支付订单有多少？”</text>
+  <path d="M890 250V280" stroke="#35a66e" stroke-width="3" marker-end="url(#b)"/>
+  <rect x="680" y="288" width="195" height="65" rx="8" fill="#e0f4e8"/><text x="724" y="328" font-family="Arial, PingFang SC, Microsoft YaHei" font-size="19" fill="#147a4b">理解与生成 SQL</text>
+  <rect x="905" y="288" width="195" height="65" rx="8" fill="#e0f4e8"/><text x="952" y="328" font-family="Arial, PingFang SC, Microsoft YaHei" font-size="19" fill="#147a4b">返回查询结果</text>
+  <path d="M878 320H900" stroke="#35a66e" stroke-width="3" marker-end="url(#b)"/>
+  <text x="708" y="405" font-family="Arial, PingFang SC, Microsoft YaHei" font-size="18" fill="#147a4b">临时、探索性问题可以即时回答</text>
+  <defs><marker id="a" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#d27759"/></marker><marker id="b" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#35a66e"/></marker></defs>
+</svg>

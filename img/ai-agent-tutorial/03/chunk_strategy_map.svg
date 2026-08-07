@@ -1,0 +1,51 @@
+<svg width="1280" height="700" viewBox="0 0 1280 700" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1280" height="700" fill="#f8fafc"/>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#2563eb"/>
+    </marker>
+  </defs>
+  <g font-family="Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+    <text x="640" y="62" text-anchor="middle" font-size="34" font-weight="700" fill="#111827">资料切分方式怎么选</text>
+    <text x="640" y="100" text-anchor="middle" font-size="20" fill="#64748b">先看资料结构，再决定切分边界和长度控制</text>
+
+    <rect x="105" y="165" width="250" height="100" rx="8" fill="#ffffff" stroke="#bfdbfe"/>
+    <text x="230" y="205" text-anchor="middle" font-size="23" font-weight="700" fill="#1d4ed8">资料有标题吗</text>
+    <text x="230" y="238" text-anchor="middle" font-size="18" fill="#475569">章节结构清楚</text>
+    <line x1="355" y1="215" x2="455" y2="215" stroke="#2563eb" stroke-width="4" marker-end="url(#arrow)"/>
+
+    <rect x="470" y="165" width="250" height="100" rx="8" fill="#eff6ff" stroke="#bfdbfe"/>
+    <text x="595" y="205" text-anchor="middle" font-size="23" font-weight="700" fill="#1d4ed8">优先按标题切</text>
+    <text x="595" y="238" text-anchor="middle" font-size="18" fill="#475569">保留章节关系</text>
+    <line x1="720" y1="215" x2="820" y2="215" stroke="#2563eb" stroke-width="4" marker-end="url(#arrow)"/>
+
+    <rect x="835" y="165" width="340" height="100" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+    <text x="1005" y="205" text-anchor="middle" font-size="23" font-weight="700" fill="#334155">标题下内容太长吗</text>
+    <text x="1005" y="238" text-anchor="middle" font-size="18" fill="#475569">超过 chunk_size 就继续拆</text>
+
+    <line x1="1005" y1="265" x2="1005" y2="325" stroke="#2563eb" stroke-width="4" marker-end="url(#arrow)"/>
+
+    <rect x="835" y="340" width="340" height="100" rx="8" fill="#f0fdf4" stroke="#86efac"/>
+    <text x="1005" y="380" text-anchor="middle" font-size="23" font-weight="700" fill="#15803d">按段落 / 句子继续切</text>
+    <text x="1005" y="413" text-anchor="middle" font-size="18" fill="#475569">尽量不破坏完整意思</text>
+
+    <rect x="105" y="390" width="250" height="100" rx="8" fill="#ffffff" stroke="#ddd6fe"/>
+    <text x="230" y="430" text-anchor="middle" font-size="23" font-weight="700" fill="#6d28d9">没有明显结构</text>
+    <text x="230" y="463" text-anchor="middle" font-size="18" fill="#475569">大段文字或解析混乱</text>
+    <line x1="355" y1="440" x2="455" y2="440" stroke="#2563eb" stroke-width="4" marker-end="url(#arrow)"/>
+
+    <rect x="470" y="390" width="250" height="100" rx="8" fill="#f5f3ff" stroke="#ddd6fe"/>
+    <text x="595" y="430" text-anchor="middle" font-size="23" font-weight="700" fill="#6d28d9">按长度控制</text>
+    <text x="595" y="463" text-anchor="middle" font-size="18" fill="#475569">靠近边界时找句号</text>
+    <line x1="720" y1="440" x2="820" y2="440" stroke="#2563eb" stroke-width="4" marker-end="url(#arrow)"/>
+
+    <rect x="835" y="515" width="340" height="100" rx="8" fill="#fff7ed" stroke="#fed7aa"/>
+    <text x="1005" y="555" text-anchor="middle" font-size="23" font-weight="700" fill="#c2410c">必要时加 overlap</text>
+    <text x="1005" y="588" text-anchor="middle" font-size="18" fill="#475569">保护边界处上下文</text>
+
+    <line x1="1005" y1="440" x2="1005" y2="500" stroke="#2563eb" stroke-width="4" marker-end="url(#arrow)"/>
+
+    <rect x="230" y="565" width="430" height="70" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+    <text x="445" y="609" text-anchor="middle" font-size="21" font-weight="700" fill="#334155">原则：切分规则要和资料结构匹配</text>
+  </g>
+</svg>

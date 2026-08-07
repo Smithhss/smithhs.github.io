@@ -1,0 +1,56 @@
+<svg width="1280" height="700" viewBox="0 0 1280 700" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">前端 AI 播放状态控制</title>
+  <desc id="desc">AI 播放中禁用按钮，并在音频采集回调中阻止发送 PCM。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M2,2 L10,6 L2,10 Z" fill="#243447"/></marker>
+    <style>
+      .title{font:700 32px Arial,"PingFang SC","Microsoft YaHei";fill:#111827}
+      .sub{font:16px Arial,"PingFang SC","Microsoft YaHei";fill:#667085}
+      .box{fill:#fff;stroke:#d7e0ea;stroke-width:2}
+      .blue{fill:#eaf4ff;stroke:#3b82f6;stroke-width:2}
+      .green{fill:#ecfdf3;stroke:#22c55e;stroke-width:2}
+      .red{fill:#fef2f2;stroke:#ef4444;stroke-width:2}
+      .head{font:700 20px Arial,"PingFang SC","Microsoft YaHei";fill:#1f2937;text-anchor:middle}
+      .txt{font:16px Arial,"PingFang SC","Microsoft YaHei";fill:#344054;text-anchor:middle}
+      .small{font:14px Arial,"PingFang SC","Microsoft YaHei";fill:#667085;text-anchor:middle}
+      .line{stroke:#243447;stroke-width:2.5;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1280" height="700" fill="#fbfcff"/>
+  <text x="60" y="58" class="title">前端播放控制：AI 说话时学生不能录音</text>
+  <text x="60" y="88" class="sub">不只禁用按钮，还要在底层音频采集回调里阻止发送 PCM。</text>
+
+  <rect x="70" y="150" width="250" height="120" rx="16" class="blue"/>
+  <text x="195" y="192" class="head">收到 TTS Binary</text>
+  <text x="195" y="224" class="txt">queueAssistantAudioBytes</text>
+  <text x="195" y="248" class="small">assistantSpeaking=true</text>
+
+  <rect x="400" y="150" width="250" height="120" rx="16" class="red"/>
+  <text x="525" y="192" class="head">UI 层锁定</text>
+  <text x="525" y="224" class="txt">按钮显示 AI 播放中</text>
+  <text x="525" y="248" class="small">开始回答 / 说完了 禁用</text>
+
+  <rect x="730" y="150" width="250" height="120" rx="16" class="red"/>
+  <text x="855" y="192" class="head">采集层锁定</text>
+  <text x="855" y="224" class="txt">onaudioprocess 直接 return</text>
+  <text x="855" y="248" class="small">不向 Java 发 PCM</text>
+
+  <rect x="400" y="390" width="250" height="120" rx="16" class="green"/>
+  <text x="525" y="432" class="head">播放队列结束</text>
+  <text x="525" y="464" class="txt">setAssistantSpeaking(false)</text>
+  <text x="525" y="488" class="small">按钮解锁为“开始回答”</text>
+
+  <rect x="730" y="390" width="250" height="120" rx="16" class="green"/>
+  <text x="855" y="432" class="head">用户点击开始回答</text>
+  <text x="855" y="464" class="txt">READY_FOR_STUDENT_SPEECH</text>
+  <text x="855" y="488" class="small">后端才打开 ASR</text>
+
+  <path d="M320 210 H400" class="line"/>
+  <path d="M650 210 H730" class="line"/>
+  <path d="M855 270 C855 340 670 356 580 390" class="line"/>
+  <path d="M650 450 H730" class="line"/>
+
+  <rect x="126" y="575" width="1028" height="58" rx="14" fill="#fff7ed" stroke="#fdba74" stroke-width="2"/>
+  <text x="640" y="600" class="txt">关键点：AI 播放完不会自动创建 ASR；只解锁按钮。用户点击“开始回答”后才创建 ASR。</text>
+  <text x="640" y="624" class="small">这是为了避免火山 ASR 空等超时，也避免 AI 声音被学生麦克风收进去。</text>
+</svg>

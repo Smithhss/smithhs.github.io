@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#f8fafc"/>
+  <text x="640" y="70" text-anchor="middle" font-family="Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="38" font-weight="700" fill="#111827">第二天学习路线</text>
+  <text x="640" y="112" text-anchor="middle" font-family="Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="22" fill="#64748b">从 AIGC 现象出发，一步步理解大模型的必要原理</text>
+
+  <defs>
+    <marker id="arrow-map" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#475569"/>
+    </marker>
+    <filter id="shadow" x="-8%" y="-12%" width="116%" height="136%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#cbd5e1" flood-opacity="0.55"/>
+    </filter>
+  </defs>
+
+  <g font-family="Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+    <rect x="72" y="210" width="150" height="112" rx="18" fill="#eef2ff" stroke="#818cf8" stroke-width="3" filter="url(#shadow)"/>
+    <text x="147" y="254" text-anchor="middle" font-size="25" font-weight="700" fill="#3730a3">AIGC</text>
+    <text x="147" y="288" text-anchor="middle" font-size="18" fill="#475569">AI 生成内容</text>
+
+    <line x1="222" y1="266" x2="292" y2="266" stroke="#475569" stroke-width="4" marker-end="url(#arrow-map)"/>
+
+    <rect x="310" y="210" width="150" height="112" rx="18" fill="#ecfeff" stroke="#22d3ee" stroke-width="3" filter="url(#shadow)"/>
+    <text x="385" y="254" text-anchor="middle" font-size="25" font-weight="700" fill="#0e7490">大模型</text>
+    <text x="385" y="288" text-anchor="middle" font-size="18" fill="#475569">能力来源</text>
+
+    <line x1="460" y1="266" x2="530" y2="266" stroke="#475569" stroke-width="4" marker-end="url(#arrow-map)"/>
+
+    <rect x="548" y="210" width="150" height="112" rx="18" fill="#f0fdf4" stroke="#22c55e" stroke-width="3" filter="url(#shadow)"/>
+    <text x="623" y="254" text-anchor="middle" font-size="25" font-weight="700" fill="#15803d">神经网络</text>
+    <text x="623" y="288" text-anchor="middle" font-size="18" fill="#475569">结构和参数</text>
+
+    <line x1="698" y1="266" x2="768" y2="266" stroke="#475569" stroke-width="4" marker-end="url(#arrow-map)"/>
+
+    <rect x="786" y="210" width="150" height="112" rx="18" fill="#fff7ed" stroke="#fb923c" stroke-width="3" filter="url(#shadow)"/>
+    <text x="861" y="254" text-anchor="middle" font-size="25" font-weight="700" fill="#c2410c">训练</text>
+    <text x="861" y="288" text-anchor="middle" font-size="18" fill="#475569">参数怎么学</text>
+
+    <line x1="936" y1="266" x2="1006" y2="266" stroke="#475569" stroke-width="4" marker-end="url(#arrow-map)"/>
+
+    <rect x="1024" y="210" width="184" height="112" rx="18" fill="#fdf2f8" stroke="#f472b6" stroke-width="3" filter="url(#shadow)"/>
+    <text x="1116" y="254" text-anchor="middle" font-size="25" font-weight="700" fill="#be185d">学习方式</text>
+    <text x="1116" y="288" text-anchor="middle" font-size="18" fill="#475569">数据和反馈</text>
+
+    <path d="M1116 322 C1116 410, 147 410, 147 458" fill="none" stroke="#475569" stroke-width="4" marker-end="url(#arrow-map)"/>
+
+    <rect x="72" y="458" width="210" height="112" rx="18" fill="#eff6ff" stroke="#60a5fa" stroke-width="3" filter="url(#shadow)"/>
+    <text x="177" y="502" text-anchor="middle" font-size="25" font-weight="700" fill="#1d4ed8">Token / Embedding</text>
+    <text x="177" y="536" text-anchor="middle" font-size="18" fill="#475569">文字变数字</text>
+
+    <line x1="282" y1="514" x2="382" y2="514" stroke="#475569" stroke-width="4" marker-end="url(#arrow-map)"/>
+
+    <rect x="400" y="458" width="190" height="112" rx="18" fill="#f5f3ff" stroke="#a78bfa" stroke-width="3" filter="url(#shadow)"/>
+    <text x="495" y="502" text-anchor="middle" font-size="25" font-weight="700" fill="#6d28d9">Transformer</text>
+    <text x="495" y="536" text-anchor="middle" font-size="18" fill="#475569">理解上下文</text>
+
+    <line x1="590" y1="514" x2="690" y2="514" stroke="#475569" stroke-width="4" marker-end="url(#arrow-map)"/>
+
+    <rect x="708" y="458" width="220" height="112" rx="18" fill="#f0fdfa" stroke="#2dd4bf" stroke-width="3" filter="url(#shadow)"/>
+    <text x="818" y="502" text-anchor="middle" font-size="25" font-weight="700" fill="#0f766e">接入真实项目</text>
+    <text x="818" y="536" text-anchor="middle" font-size="18" fill="#475569">API / Prompt / 系统</text>
+
+    <rect x="230" y="628" width="820" height="50" rx="14" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <text x="640" y="660" text-anchor="middle" font-size="20" font-weight="700" fill="#334155">今天不是死记概念，而是看清楚大模型能力进入项目系统之前发生了什么</text>
+  </g>
+</svg>

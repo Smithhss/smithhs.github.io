@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="860" viewBox="0 0 1280 860">
+  <defs>
+    <style>
+      .bg{fill:#f7f9fb}
+      .title{font:700 30px Arial,"Microsoft YaHei",sans-serif;fill:#172033}
+      .sub{font:14px Arial,"Microsoft YaHei",sans-serif;fill:#667085}
+      .group{fill:#fff;stroke:#c9d3df;stroke-width:2;rx:14}
+      .box{fill:#fff;stroke:#aebccc;stroke-width:2;rx:9}
+      .front{fill:#eaf4ff;stroke:#4f8fd9}
+      .java{fill:#eaf8f0;stroke:#46a36c}
+      .python{fill:#f4efff;stroke:#8b6bd9}
+      .store{fill:#fff6ea;stroke:#d98a22}
+      .external{fill:#f9eef1;stroke:#d66f86}
+      .label{font:700 16px Arial,"Microsoft YaHei",sans-serif;fill:#172033}
+      .text{font:13px Arial,"Microsoft YaHei",sans-serif;fill:#344054}
+      .small{font:12px Arial,"Microsoft YaHei",sans-serif;fill:#667085}
+      .arrow{stroke:#617083;stroke-width:2;fill:none;marker-end:url(#arrow)}
+      .dash{stroke:#617083;stroke-width:2;fill:none;stroke-dasharray:7 6;marker-end:url(#arrow)}
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#617083"/>
+    </marker>
+  </defs>
+  <rect width="1280" height="860" class="bg"/>
+  <text x="40" y="48" class="title">管理端 AI 能力配置流程：知识库、检索、提示词</text>
+  <text x="40" y="76" class="sub">这张图补充说明后台管理页面如何维护 AI 问答运行所需的资料和提示词。</text>
+
+  <rect x="40" y="116" width="250" height="650" class="group"/>
+  <text x="70" y="150" class="label">管理端前端页面</text>
+  <text x="70" y="172" class="small">YanQue-Admin-Web</text>
+  <rect x="70" y="210" width="190" height="72" class="box front"/>
+  <text x="116" y="238" class="label">知识库管理</text>
+  <text x="92" y="260" class="small">KnowledgeBasesPage.tsx</text>
+  <rect x="70" y="332" width="190" height="72" class="box front"/>
+  <text x="116" y="360" class="label">知识库检索</text>
+  <text x="92" y="382" class="small">KnowledgeSearchPage.tsx</text>
+  <rect x="70" y="454" width="190" height="72" class="box front"/>
+  <text x="116" y="482" class="label">提示词管理</text>
+  <text x="90" y="504" class="small">PromptTemplatesPage.tsx</text>
+  <rect x="70" y="576" width="190" height="72" class="box front"/>
+  <text x="110" y="604" class="label">统一 API 封装</text>
+  <text x="104" y="626" class="small">src/api/system.ts</text>
+
+  <rect x="335" y="116" width="350" height="650" class="group"/>
+  <text x="365" y="150" class="label">Java 管理接口</text>
+  <text x="365" y="172" class="small">YanQue-Admin / Spring Boot</text>
+  <rect x="365" y="194" width="290" height="62" class="box java"/>
+  <text x="390" y="220" class="label">/api/knowledgeBases</text>
+  <text x="392" y="242" class="small">新增 / 修改 / 删除 / 详情 / 分页</text>
+  <rect x="365" y="286" width="290" height="82" class="box java"/>
+  <text x="382" y="314" class="label">/api/knowledgeBases/{id}/documents</text>
+  <text x="392" y="336" class="small">文档分页</text>
+  <text x="392" y="356" class="small">/documents/index 上传并入库</text>
+  <rect x="365" y="398" width="290" height="82" class="box java"/>
+  <text x="388" y="426" class="label">/api/knowledgeDocuments/{id}</text>
+  <text x="392" y="448" class="small">reindex / download-url / chunks / delete</text>
+  <text x="392" y="468" class="small">文档重入库、预览、切块明细</text>
+  <rect x="365" y="510" width="290" height="62" class="box java"/>
+  <text x="392" y="536" class="label">/api/knowledgeSearch/search</text>
+  <text x="392" y="558" class="small">管理端手动语义检索验证</text>
+  <rect x="365" y="602" width="290" height="82" class="box java"/>
+  <text x="394" y="630" class="label">/api/promptTemplates</text>
+  <text x="392" y="652" class="small">模板 CRUD / 版本 CRUD</text>
+  <text x="392" y="672" class="small">versions/{versionId}/publish 发布/回滚</text>
+
+  <rect x="735" y="116" width="250" height="650" class="group"/>
+  <text x="765" y="150" class="label">Python AI 服务</text>
+  <text x="765" y="172" class="small">YanQue-AI</text>
+  <rect x="765" y="222" width="190" height="72" class="box python"/>
+  <text x="798" y="250" class="label">KnowledgeService</text>
+  <text x="788" y="272" class="small">index/search/chunks</text>
+  <rect x="765" y="354" width="190" height="72" class="box python"/>
+  <text x="804" y="382" class="label">VectorStore</text>
+  <text x="786" y="404" class="small">LlamaIndex + Milvus</text>
+  <rect x="765" y="486" width="190" height="72" class="box python"/>
+  <text x="800" y="514" class="label">JavaPromptClient</text>
+  <text x="784" y="536" class="small">运行时取生效提示词</text>
+  <rect x="765" y="618" width="190" height="72" class="box python"/>
+  <text x="802" y="646" class="label">短时缓存</text>
+  <text x="786" y="668" class="small">TTL 后刷新最新版本</text>
+
+  <rect x="1035" y="116" width="205" height="650" class="group"/>
+  <text x="1065" y="150" class="label">数据和外部服务</text>
+  <rect x="1060" y="202" width="155" height="62" class="box store"/>
+  <text x="1084" y="228" class="label">MySQL</text>
+  <text x="1074" y="250" class="small">知识库/提示词表</text>
+  <rect x="1060" y="314" width="155" height="62" class="box store"/>
+  <text x="1096" y="340" class="label">TOS</text>
+  <text x="1072" y="362" class="small">Markdown 原文件</text>
+  <rect x="1060" y="426" width="155" height="62" class="box external"/>
+  <text x="1086" y="452" class="label">百炼 Embedding</text>
+  <text x="1078" y="474" class="small">chunk 向量化</text>
+  <rect x="1060" y="538" width="155" height="62" class="box store"/>
+  <text x="1094" y="564" class="label">Milvus</text>
+  <text x="1074" y="586" class="small">向量和 metadata</text>
+  <rect x="1060" y="650" width="155" height="62" class="box store"/>
+  <text x="1085" y="676" class="label">Active Prompt</text>
+  <text x="1072" y="698" class="small">当前发布版本</text>
+
+  <path d="M260 246 H365" class="arrow"/>
+  <path d="M260 368 H365" class="arrow"/>
+  <path d="M260 490 H365" class="arrow"/>
+  <path d="M655 327 H765" class="arrow"/>
+  <path d="M655 541 C710 541 710 258 765 258" class="arrow"/>
+  <path d="M655 643 C708 643 712 522 765 522" class="dash"/>
+  <path d="M955 258 C1004 258 1010 233 1060 233" class="dash"/>
+  <path d="M955 258 C1004 258 1010 345 1060 345" class="dash"/>
+  <path d="M955 390 C1004 390 1010 456 1060 456" class="dash"/>
+  <path d="M955 390 C1004 390 1010 568 1060 568" class="dash"/>
+  <path d="M955 522 C1004 522 1010 681 1060 681" class="dash"/>
+</svg>

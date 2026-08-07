@@ -1,0 +1,38 @@
+<svg width="1280" height="640" viewBox="0 0 1280 640" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1280" height="640" fill="#f8fafc"/>
+  <g font-family="Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+    <text x="640" y="58" text-anchor="middle" font-size="34" font-weight="700" fill="#111827">欧氏距离：看两个点离多远</text>
+    <text x="640" y="96" text-anchor="middle" font-size="20" fill="#64748b">距离越小，表示两个向量越接近</text>
+
+    <rect x="70" y="135" width="590" height="420" rx="10" fill="#ffffff" stroke="#cbd5e1"/>
+    <line x1="150" y1="485" x2="575" y2="485" stroke="#94a3b8" stroke-width="3"/>
+    <line x1="150" y1="485" x2="150" y2="190" stroke="#94a3b8" stroke-width="3"/>
+    <text x="580" y="493" font-size="18" fill="#64748b">特征 1</text>
+    <text x="105" y="185" font-size="18" fill="#64748b">特征 2</text>
+
+    <circle cx="285" cy="315" r="16" fill="#2563eb"/>
+    <text x="305" y="307" font-size="20" font-weight="700" fill="#1d4ed8">用户问题</text>
+
+    <circle cx="330" cy="350" r="16" fill="#16a34a"/>
+    <text x="350" y="358" font-size="20" font-weight="700" fill="#15803d">资料 A</text>
+
+    <circle cx="505" cy="450" r="16" fill="#dc2626"/>
+    <text x="525" y="458" font-size="20" font-weight="700" fill="#b91c1c">资料 B</text>
+
+    <line x1="285" y1="315" x2="330" y2="350" stroke="#16a34a" stroke-width="5" stroke-dasharray="8 8"/>
+    <line x1="285" y1="315" x2="505" y2="450" stroke="#dc2626" stroke-width="5" stroke-dasharray="8 8"/>
+
+    <text x="270" y="395" font-size="19" font-weight="700" fill="#15803d">距离近</text>
+    <text x="420" y="365" font-size="19" font-weight="700" fill="#b91c1c">距离远</text>
+
+    <rect x="730" y="155" width="470" height="360" rx="10" fill="#ffffff" stroke="#cbd5e1"/>
+    <text x="965" y="205" text-anchor="middle" font-size="26" font-weight="700" fill="#111827">怎么判断</text>
+    <text x="780" y="270" font-size="21" fill="#334155">如果问题向量离资料 A 更近：</text>
+    <text x="815" y="320" font-size="24" font-weight="700" fill="#15803d">优先返回资料 A</text>
+    <text x="780" y="385" font-size="21" fill="#334155">如果离资料 B 更远：</text>
+    <text x="815" y="435" font-size="24" font-weight="700" fill="#b91c1c">资料 B 排名靠后</text>
+
+    <rect x="220" y="580" width="840" height="42" rx="8" fill="#eef2ff" stroke="#c7d2fe"/>
+    <text x="640" y="607" text-anchor="middle" font-size="20" font-weight="700" fill="#3730a3">欧氏距离的直觉：在语义地图上，离得越近越像</text>
+  </g>
+</svg>

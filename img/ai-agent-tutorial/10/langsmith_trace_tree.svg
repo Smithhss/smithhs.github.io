@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+  <title id="title">LangSmith Trace 树结构</title>
+  <desc id="desc">展示一次 AI 调用在 LangSmith 里如何展开为根 Trace 和多个子 Run。</desc>
+  <defs>
+    <style>
+      .title{font:700 32px Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#172033}
+      .sub{font:16px Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#64748b}
+      .box{fill:#ffffff;stroke:#cbd5e1;stroke-width:2}
+      .root{fill:#eff6ff;stroke:#3b82f6;stroke-width:2}
+      .llm{fill:#fff7ed;stroke:#fb923c;stroke-width:2}
+      .tool{fill:#ecfdf5;stroke:#22c55e;stroke-width:2}
+      .parser{fill:#f5f3ff;stroke:#8b5cf6;stroke-width:2}
+      .text{font:700 19px Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#1f2937}
+      .small{font:15px Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#475569}
+      .line{stroke:#94a3b8;stroke-width:2.2;fill:none}
+    </style>
+  </defs>
+  <rect width="1280" height="720" fill="#fbfdff"/>
+  <text x="60" y="58" class="title">Trace 怎么看：一次请求会展开成一棵树</text>
+  <text x="60" y="88" class="sub">根节点表示一次完整调用，子节点表示 Prompt、模型、检索、工具、解析等具体步骤。</text>
+
+  <rect class="root" x="90" y="150" width="310" height="85" rx="12"/>
+  <text x="120" y="185" class="text">Root Trace：一次用户请求</text>
+  <text x="120" y="212" class="small">输入：用户问题 / 会话 ID</text>
+
+  <path class="line" d="M245 235 V285"/>
+  <path class="line" d="M245 285 H690"/>
+  <path class="line" d="M245 285 V325"/>
+  <path class="line" d="M470 285 V325"/>
+  <path class="line" d="M690 285 V325"/>
+  <path class="line" d="M915 285 V325"/>
+
+  <rect class="box" x="90" y="325" width="310" height="85" rx="12"/>
+  <text x="120" y="360" class="text">Prompt / 输入组装</text>
+  <text x="120" y="387" class="small">看到最终发给模型的上下文</text>
+
+  <rect class="llm" x="315" y="325" width="310" height="85" rx="12"/>
+  <text x="345" y="360" class="text">LLM Run</text>
+  <text x="345" y="387" class="small">模型、耗时、输入输出、token</text>
+
+  <rect class="tool" x="540" y="465" width="310" height="85" rx="12"/>
+  <text x="570" y="500" class="text">Retriever / Tool Run</text>
+  <text x="570" y="527" class="small">知识库检索、业务工具调用</text>
+
+  <rect class="parser" x="765" y="325" width="310" height="85" rx="12"/>
+  <text x="795" y="360" class="text">Parser / 输出解析</text>
+  <text x="795" y="387" class="small">JSON 解析、结构化结果</text>
+
+  <path class="line" d="M695 410 V465"/>
+  <path class="line" d="M470 410 C505 445 560 450 620 465"/>
+  <path class="line" d="M920 410 C880 445 815 450 760 465"/>
+
+  <rect class="root" x="90" y="575" width="985" height="75" rx="12"/>
+  <text x="120" y="607" class="text">看 Trace 时重点查什么？</text>
+  <text x="120" y="635" class="small">Prompt 有没有拼错、检索结果对不对、模型输出是否符合 JSON、哪一步最慢、错误发生在哪个子步骤。</text>
+</svg>

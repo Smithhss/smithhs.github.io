@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="360" viewBox="0 0 1040 360">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#334155"/></marker>
+    <style>
+      .title{font:700 20px Arial,'Microsoft YaHei',sans-serif;fill:#0f172a}
+      .box{fill:#fff;stroke:#cbd5e1;stroke-width:1.5;rx:12}
+      .h{font:700 16px Arial,'Microsoft YaHei',sans-serif;fill:#172033}
+      .t{font:13px Arial,'Microsoft YaHei',sans-serif;fill:#475569}
+      .line{stroke:#334155;stroke-width:2;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <text x="35" y="38" class="title">后台页面使用流程</text>
+  <rect x="55" y="90" width="230" height="145" class="box"/>
+  <text x="82" y="125" class="h">评测样本</text>
+  <text x="82" y="154" class="t">录入问题</text>
+  <text x="82" y="178" class="t">维护判断标准</text>
+  <text x="82" y="202" class="t">启用 ACTIVE</text>
+  <rect x="405" y="90" width="230" height="145" class="box"/>
+  <text x="432" y="125" class="h">评测任务</text>
+  <text x="432" y="154" class="t">选择正式样本</text>
+  <text x="432" y="178" class="t">异步运行评测</text>
+  <text x="432" y="202" class="t">查看通过率和失败分布</text>
+  <rect x="755" y="90" width="230" height="145" class="box"/>
+  <text x="782" y="125" class="h">结果和运行记录</text>
+  <text x="782" y="154" class="t">查看规则和断言结果</text>
+  <text x="782" y="178" class="t">补充澄清继续评测</text>
+  <text x="782" y="202" class="t">筛选 EVAL 排查 graph</text>
+  <path d="M285 162 H395" class="line"/>
+  <path d="M635 162 H745" class="line"/>
+  <path d="M875 235 C760 305 330 305 170 235" class="line"/>
+  <text x="430" y="310" class="t">失败样本沉淀经验，继续优化样本和规则</text>
+</svg>

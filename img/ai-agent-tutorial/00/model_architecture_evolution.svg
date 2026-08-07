@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="680" viewBox="0 0 1200 680">
+  <rect width="1200" height="680" fill="#fbfbf8"/>
+  <text x="600" y="58" text-anchor="middle" font-family="Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="34" font-weight="700" fill="#1f2937">从 RNN 到 Transformer，再到 Agent</text>
+  <text x="600" y="96" text-anchor="middle" font-family="Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" fill="#64748b">模型能力从处理序列，走向理解上下文，再走向调用工具完成任务</text>
+
+  <defs>
+    <marker id="arrow-arch" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#475569"/>
+    </marker>
+  </defs>
+
+  <g font-family="Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+    <rect x="75" y="170" width="260" height="330" rx="18" fill="#fff7ed" stroke="#fb923c" stroke-width="2"/>
+    <text x="205" y="215" text-anchor="middle" font-size="26" font-weight="700" fill="#9a3412">RNN / LSTM</text>
+    <text x="205" y="260" text-anchor="middle" font-size="17" fill="#334155">按顺序读文本</text>
+    <text x="205" y="292" text-anchor="middle" font-size="17" fill="#334155">适合语音、文本、时间序列</text>
+    <text x="205" y="350" text-anchor="middle" font-size="16" fill="#475569">局限</text>
+    <text x="205" y="382" text-anchor="middle" font-size="16" fill="#475569">长文本容易遗忘</text>
+    <text x="205" y="412" text-anchor="middle" font-size="16" fill="#475569">训练并行能力弱</text>
+
+    <rect x="470" y="170" width="260" height="330" rx="18" fill="#eff6ff" stroke="#60a5fa" stroke-width="2"/>
+    <text x="600" y="215" text-anchor="middle" font-size="26" font-weight="700" fill="#1d4ed8">Transformer</text>
+    <text x="600" y="260" text-anchor="middle" font-size="17" fill="#334155">用 Attention 看上下文关系</text>
+    <text x="600" y="292" text-anchor="middle" font-size="17" fill="#334155">支持并行训练</text>
+    <text x="600" y="350" text-anchor="middle" font-size="16" fill="#475569">代表产物</text>
+    <text x="600" y="382" text-anchor="middle" font-size="16" fill="#475569">BERT / GPT / T5 / ViT</text>
+    <text x="600" y="412" text-anchor="middle" font-size="16" fill="#475569">大语言模型基础</text>
+
+    <rect x="865" y="170" width="260" height="330" rx="18" fill="#f0fdf4" stroke="#4ade80" stroke-width="2"/>
+    <text x="995" y="215" text-anchor="middle" font-size="26" font-weight="700" fill="#15803d">Agent 应用</text>
+    <text x="995" y="260" text-anchor="middle" font-size="17" fill="#334155">模型 + 工具 + 记忆</text>
+    <text x="995" y="292" text-anchor="middle" font-size="17" fill="#334155">从回答走向执行</text>
+    <text x="995" y="350" text-anchor="middle" font-size="16" fill="#475569">典型能力</text>
+    <text x="995" y="382" text-anchor="middle" font-size="16" fill="#475569">RAG / Tools / Memory</text>
+    <text x="995" y="412" text-anchor="middle" font-size="16" fill="#475569">规划、调用、校验</text>
+
+    <path d="M340 335 H455" stroke="#475569" stroke-width="4" marker-end="url(#arrow-arch)"/>
+    <path d="M735 335 H850" stroke="#475569" stroke-width="4" marker-end="url(#arrow-arch)"/>
+
+    <text x="397" y="313" text-anchor="middle" font-size="15" fill="#64748b">注意力机制</text>
+    <text x="792" y="313" text-anchor="middle" font-size="15" fill="#64748b">工程组合</text>
+
+    <rect x="200" y="560" width="800" height="54" rx="12" fill="#ffffff" stroke="#cbd5e1"/>
+    <text x="600" y="593" text-anchor="middle" font-size="18" fill="#334155">这门课重点不是复现模型结构，而是学习如何基于模型能力开发 AI 应用</text>
+  </g>
+</svg>

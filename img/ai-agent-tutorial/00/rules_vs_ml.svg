@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="680" viewBox="0 0 1200 680">
+  <rect width="1200" height="680" fill="#f8fafc"/>
+  <text x="600" y="58" text-anchor="middle" font-family="Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="34" font-weight="700" fill="#1f2937">规则 AI 与机器学习的区别</text>
+  <text x="600" y="96" text-anchor="middle" font-family="Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" fill="#64748b">一个是人写规则，一个是模型从样本中学习规律</text>
+
+  <defs>
+    <marker id="arrow-rules" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#475569"/>
+    </marker>
+  </defs>
+
+  <g font-family="Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+    <rect x="80" y="150" width="470" height="400" rx="18" fill="#eff6ff" stroke="#60a5fa" stroke-width="2"/>
+    <text x="315" y="195" text-anchor="middle" font-size="26" font-weight="700" fill="#1d4ed8">规则 AI</text>
+    <rect x="135" y="245" width="130" height="62" rx="12" fill="#ffffff" stroke="#bfdbfe"/>
+    <text x="200" y="282" text-anchor="middle" font-size="17" fill="#1f2937">专家经验</text>
+    <rect x="335" y="245" width="130" height="62" rx="12" fill="#ffffff" stroke="#bfdbfe"/>
+    <text x="400" y="282" text-anchor="middle" font-size="17" fill="#1f2937">人工规则</text>
+    <rect x="235" y="365" width="160" height="70" rx="12" fill="#dbeafe" stroke="#3b82f6"/>
+    <text x="315" y="394" text-anchor="middle" font-size="18" font-weight="700" fill="#1e3a8a">程序执行</text>
+    <text x="315" y="420" text-anchor="middle" font-size="15" fill="#334155">if / else / 规则库</text>
+    <text x="315" y="500" text-anchor="middle" font-size="17" fill="#334155">适合规则清楚、边界明确的场景</text>
+
+    <path d="M265 276 H325" stroke="#475569" stroke-width="3" marker-end="url(#arrow-rules)"/>
+    <path d="M400 307 C400 335 360 346 332 362" fill="none" stroke="#475569" stroke-width="3" marker-end="url(#arrow-rules)"/>
+    <path d="M200 307 C200 335 245 346 298 362" fill="none" stroke="#475569" stroke-width="3" marker-end="url(#arrow-rules)"/>
+
+    <rect x="650" y="150" width="470" height="400" rx="18" fill="#f0fdf4" stroke="#4ade80" stroke-width="2"/>
+    <text x="885" y="195" text-anchor="middle" font-size="26" font-weight="700" fill="#15803d">机器学习</text>
+    <rect x="705" y="245" width="130" height="62" rx="12" fill="#ffffff" stroke="#bbf7d0"/>
+    <text x="770" y="282" text-anchor="middle" font-size="17" fill="#1f2937">样本数据</text>
+    <rect x="935" y="245" width="130" height="62" rx="12" fill="#ffffff" stroke="#bbf7d0"/>
+    <text x="1000" y="282" text-anchor="middle" font-size="17" fill="#1f2937">标签答案</text>
+    <rect x="805" y="365" width="160" height="70" rx="12" fill="#dcfce7" stroke="#22c55e"/>
+    <text x="885" y="394" text-anchor="middle" font-size="18" font-weight="700" fill="#166534">训练模型</text>
+    <text x="885" y="420" text-anchor="middle" font-size="15" fill="#334155">学习数据规律</text>
+    <text x="885" y="500" text-anchor="middle" font-size="17" fill="#334155">适合规律复杂、难以手写规则的场景</text>
+
+    <path d="M835 276 H925" stroke="#475569" stroke-width="3" marker-end="url(#arrow-rules)"/>
+    <path d="M770 307 C770 335 815 346 864 362" fill="none" stroke="#475569" stroke-width="3" marker-end="url(#arrow-rules)"/>
+    <path d="M1000 307 C1000 335 950 346 906 362" fill="none" stroke="#475569" stroke-width="3" marker-end="url(#arrow-rules)"/>
+
+    <rect x="270" y="590" width="660" height="48" rx="12" fill="#ffffff" stroke="#cbd5e1"/>
+    <text x="600" y="620" text-anchor="middle" font-size="18" fill="#334155">从规则 AI 到机器学习：核心变化是从“人总结规则”变成“模型总结规律”</text>
+  </g>
+</svg>

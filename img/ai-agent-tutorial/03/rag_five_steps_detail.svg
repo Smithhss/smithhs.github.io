@@ -1,0 +1,58 @@
+<svg width="1280" height="720" viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1280" height="720" fill="#f8fafc"/>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#2563eb"/>
+    </marker>
+    <filter id="shadow" x="-10%" y="-20%" width="120%" height="150%">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#0f172a" flood-opacity="0.12"/>
+    </filter>
+  </defs>
+  <g font-family="Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+    <text x="640" y="64" text-anchor="middle" font-size="34" font-weight="700" fill="#111827">一个最小 RAG 的五步</text>
+    <text x="640" y="102" text-anchor="middle" font-size="20" fill="#64748b">每一步都有明确的输入和输出</text>
+
+    <g filter="url(#shadow)">
+      <rect x="60" y="210" width="190" height="150" rx="8" fill="#ffffff" stroke="#bfdbfe"/>
+      <text x="155" y="250" text-anchor="middle" font-size="23" font-weight="700" fill="#1d4ed8">准备资料</text>
+      <text x="155" y="292" text-anchor="middle" font-size="17" fill="#475569">文档 / 制度</text>
+      <text x="155" y="322" text-anchor="middle" font-size="17" fill="#475569">课程讲义</text>
+    </g>
+    <line x1="250" y1="285" x2="300" y2="285" stroke="#2563eb" stroke-width="4" marker-end="url(#arrow)"/>
+
+    <g filter="url(#shadow)">
+      <rect x="310" y="210" width="190" height="150" rx="8" fill="#ffffff" stroke="#ddd6fe"/>
+      <text x="405" y="250" text-anchor="middle" font-size="23" font-weight="700" fill="#6d28d9">切分资料</text>
+      <text x="405" y="292" text-anchor="middle" font-size="17" fill="#475569">长文档</text>
+      <text x="405" y="322" text-anchor="middle" font-size="17" fill="#475569">变成 chunks</text>
+    </g>
+    <line x1="500" y1="285" x2="550" y2="285" stroke="#2563eb" stroke-width="4" marker-end="url(#arrow)"/>
+
+    <g filter="url(#shadow)">
+      <rect x="560" y="210" width="190" height="150" rx="8" fill="#ffffff" stroke="#bbf7d0"/>
+      <text x="655" y="250" text-anchor="middle" font-size="23" font-weight="700" fill="#15803d">检索资料</text>
+      <text x="655" y="292" text-anchor="middle" font-size="17" fill="#475569">根据问题</text>
+      <text x="655" y="322" text-anchor="middle" font-size="17" fill="#475569">找相关 chunk</text>
+    </g>
+    <line x1="750" y1="285" x2="800" y2="285" stroke="#2563eb" stroke-width="4" marker-end="url(#arrow)"/>
+
+    <g filter="url(#shadow)">
+      <rect x="810" y="210" width="190" height="150" rx="8" fill="#ffffff" stroke="#fed7aa"/>
+      <text x="905" y="250" text-anchor="middle" font-size="23" font-weight="700" fill="#c2410c">增强 Prompt</text>
+      <text x="905" y="292" text-anchor="middle" font-size="17" fill="#475569">资料 + 问题</text>
+      <text x="905" y="322" text-anchor="middle" font-size="17" fill="#475569">一起给模型</text>
+    </g>
+    <line x1="1000" y1="285" x2="1050" y2="285" stroke="#2563eb" stroke-width="4" marker-end="url(#arrow)"/>
+
+    <g filter="url(#shadow)">
+      <rect x="1060" y="210" width="170" height="150" rx="8" fill="#ffffff" stroke="#fecdd3"/>
+      <text x="1145" y="250" text-anchor="middle" font-size="23" font-weight="700" fill="#be123c">生成回答</text>
+      <text x="1145" y="292" text-anchor="middle" font-size="17" fill="#475569">基于资料</text>
+      <text x="1145" y="322" text-anchor="middle" font-size="17" fill="#475569">组织答案</text>
+    </g>
+
+    <rect x="140" y="470" width="1000" height="115" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+    <text x="640" y="515" text-anchor="middle" font-size="25" font-weight="700" fill="#111827">五步的核心变化</text>
+    <text x="640" y="560" text-anchor="middle" font-size="22" fill="#334155">原始资料 → 可检索 chunk → 相关资料 → 带资料的 Prompt → 有依据的回答</text>
+  </g>
+</svg>

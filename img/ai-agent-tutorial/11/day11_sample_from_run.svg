@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="300" viewBox="0 0 1000 300">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#475569"/></marker>
+    <style>
+      .title{font:700 20px Arial,'Microsoft YaHei',sans-serif;fill:#0f172a}
+      .box{fill:#fff;stroke:#cbd5e1;stroke-width:1.5;rx:10}
+      .blue{fill:#eff6ff;stroke:#93c5fd}
+      .green{fill:#f0fdf4;stroke:#86efac}
+      .orange{fill:#fff7ed;stroke:#fdba74}
+      .h{font:700 15px Arial,'Microsoft YaHei',sans-serif;fill:#172033}
+      .t{font:13px Arial,'Microsoft YaHei',sans-serif;fill:#475569}
+      .line{stroke:#475569;stroke-width:2;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <text x="35" y="38" class="title">从真实运行沉淀评测样本</text>
+  <rect x="55" y="85" width="170" height="95" class="box blue"/>
+  <text x="78" y="120" class="h">真实用户提问</text>
+  <text x="78" y="145" class="t">source_type = USER</text>
+  <rect x="275" y="85" width="170" height="95" class="box"/>
+  <text x="298" y="120" class="h">运行记录</text>
+  <text x="298" y="145" class="t">State / SQL / 回答</text>
+  <rect x="495" y="85" width="170" height="95" class="box orange"/>
+  <text x="518" y="120" class="h">人工反馈</text>
+  <text x="518" y="145" class="t">标记正确或错误</text>
+  <rect x="715" y="85" width="210" height="95" class="box green"/>
+  <text x="738" y="120" class="h">评测样本</text>
+  <text x="738" y="145" class="t">整理问题和判断标准</text>
+  <path d="M225 132 H265" class="line"/>
+  <path d="M445 132 H485" class="line"/>
+  <path d="M665 132 H705" class="line"/>
+  <text x="740" y="225" class="t">DRAFT 整理完成后改为 ACTIVE，进入评测任务</text>
+</svg>

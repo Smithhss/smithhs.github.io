@@ -1,0 +1,49 @@
+<svg width="1280" height="680" viewBox="0 0 1280 680" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1280" height="680" fill="#f8fafc"/>
+  <defs>
+    <marker id="arrow-blue" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrow-green" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#16a34a"/>
+    </marker>
+    <marker id="arrow-red" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#dc2626"/>
+    </marker>
+  </defs>
+  <g font-family="Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+    <text x="640" y="62" text-anchor="middle" font-size="34" font-weight="700" fill="#111827">向量之间怎么判断相似</text>
+    <text x="640" y="100" text-anchor="middle" font-size="20" fill="#64748b">问题向量和资料向量越接近，越可能被检索出来</text>
+
+    <line x1="170" y1="540" x2="610" y2="540" stroke="#94a3b8" stroke-width="3"/>
+    <line x1="170" y1="540" x2="170" y2="165" stroke="#94a3b8" stroke-width="3"/>
+    <text x="615" y="548" font-size="18" fill="#64748b">维度 1</text>
+    <text x="130" y="160" font-size="18" fill="#64748b">维度 2</text>
+
+    <line x1="170" y1="540" x2="440" y2="255" stroke="#2563eb" stroke-width="7" marker-end="url(#arrow-blue)"/>
+    <text x="455" y="250" font-size="22" font-weight="700" fill="#1d4ed8">问题向量</text>
+
+    <line x1="170" y1="540" x2="465" y2="230" stroke="#16a34a" stroke-width="7" marker-end="url(#arrow-green)"/>
+    <text x="480" y="225" font-size="22" font-weight="700" fill="#15803d">资料 A</text>
+    <text x="480" y="255" font-size="18" fill="#15803d">方向接近</text>
+
+    <line x1="170" y1="540" x2="510" y2="470" stroke="#dc2626" stroke-width="7" marker-end="url(#arrow-red)"/>
+    <text x="525" y="470" font-size="22" font-weight="700" fill="#b91c1c">资料 B</text>
+    <text x="525" y="500" font-size="18" fill="#b91c1c">方向差得多</text>
+
+    <rect x="710" y="170" width="440" height="330" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+    <text x="930" y="220" text-anchor="middle" font-size="26" font-weight="700" fill="#111827">常见相似度方法</text>
+
+    <text x="750" y="280" font-size="22" font-weight="700" fill="#1d4ed8">余弦相似度</text>
+    <text x="750" y="312" font-size="18" fill="#475569">看两个向量方向像不像</text>
+
+    <text x="750" y="370" font-size="22" font-weight="700" fill="#15803d">点积</text>
+    <text x="750" y="402" font-size="18" fill="#475569">看两个向量整体匹配分数</text>
+
+    <text x="750" y="460" font-size="22" font-weight="700" fill="#c2410c">欧氏距离</text>
+    <text x="750" y="492" font-size="18" fill="#475569">看两个点在空间里离多远</text>
+
+    <rect x="250" y="590" width="780" height="55" rx="8" fill="#eff6ff" stroke="#bfdbfe"/>
+    <text x="640" y="625" text-anchor="middle" font-size="21" font-weight="700" fill="#1e3a8a">课程里先理解用途：相似度算法用来找最接近用户问题的 chunk</text>
+  </g>
+</svg>

@@ -1,0 +1,1665 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="zh-CN"><head><meta charset="utf-8"/><meta content="IE=edge" http-equiv="X-UA-Compatible"/><meta content="width=device-width, initial-scale=1.0, user-scalable=no" name="viewport"/><title>Text-to-SQL 评测体系建设 | Smith</title><meta content="AI Agent,大模型,教程,RAG,LangChain,Text-to-SQL" name="keywords"/><meta content="Smith" name="author"/><meta content="Smith" name="copyright"/><meta content="telephone=no" name="format-detection"/><meta content="#fafaf8" name="theme-color"/><meta content="yes" name="mobile-web-app-capable"/><meta content="yes" name="apple-touch-fullscreen"/><meta content="Text-to-SQL 评测体系建设" name="apple-mobile-web-app-title"/><meta content="Text-to-SQL 评测体系建设" name="application-name"/><meta content="yes" name="apple-mobile-web-app-capable"/><meta content="#fafaf8" name="apple-mobile-web-app-status-bar-style"/><meta content="article" property="og:type"/><meta content="Text-to-SQL 评测体系建设" property="og:title"/><meta content="https://smithhs.cn/2026/07/31/2026-07-31-ai-agent-11-text-to-sql-evaluation/index.html" property="og:url"/><meta content="Smith" property="og:site_name"/><meta content="围绕 SQL 正确性、执行结果、用例集和指标，建立 Text-to-SQL 的评测闭环。" property="og:description"/><meta content="zh-CN" property="og:locale"/><meta content="/img/ai-agent-tutorial/covers/ai-agent-11-text-to-sql-evaluation.png" property="og:image"/><meta content="Smith" property="article:author"/><meta property="article:tag"/><meta content="summary" name="twitter:card"/><meta content="/img/ai-agent-tutorial/covers/ai-agent-11-text-to-sql-evaluation.png" name="twitter:image"/><meta content="围绕 SQL 正确性、执行结果、用例集和指标，建立 Text-to-SQL 的评测闭环。" name="description"/><link href="/favicon.ico" rel="shortcut icon"/><link href="https://smithhs.cn/2026/07/31/2026-07-31-ai-agent-11-text-to-sql-evaluation/" rel="canonical"/><link href="//cdn.cbd.int" rel="preconnect"><link href="//busuanzi.ibruce.info" rel="preconnect"><link href="/manifest.json" rel="manifest"/><meta content="var(--smith-main)" name="msapplication-TileColor"><link color="#5bbad5" href="/img/siteicon/apple-icon-180.png" rel="mask-icon"/><link href="/img/siteicon/apple-icon-180.png" rel="apple-touch-icon" sizes="180x180"/><link href="/img/siteicon/apple-icon-180.png" rel="apple-touch-icon-precomposed" sizes="180x180"/><link href="/img/siteicon/32.png" rel="icon" sizes="32x32" type="image/png"/><link href="/img/siteicon/16.png" rel="icon" sizes="16x16" type="image/png"/><link href="/img/siteicon/apple-icon-180.png" rel="bookmark"/><link href="/img/siteicon/apple-splash-2048-2732.jpg" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-2732-2048.jpg" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-1668-2388.jpg" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-2388-1668.jpg" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-1536-2048.jpg" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-2048-1536.jpg" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-1668-2224.jpg" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-2224-1668.jpg" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-1620-2160.jpg" media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-2160-1620.jpg" media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-1290-2796.jpg" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-2796-1290.jpg" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-1179-2556.jpg" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-2556-1179.jpg" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-1284-2778.jpg" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-2778-1284.jpg" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-1170-2532.jpg" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-2532-1170.jpg" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-1125-2436.jpg" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-2436-1125.jpg" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-1242-2688.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-2688-1242.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-828-1792.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-1792-828.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-1242-2208.jpg" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-2208-1242.jpg" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-750-1334.jpg" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-1334-750.jpg" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-640-1136.jpg" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-1136-640.jpg" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/css/index.css" rel="stylesheet"/><link href="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'" rel="stylesheet"/><link href="https://cdn.cbd.int/@fancyapps/ui@6.1.6/dist/fancybox/fancybox.css" media="print" onload="this.media='all'" rel="stylesheet"/><link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet"/><link href="https://npm.elemecdn.com/smith-theme-static@1.0.2/swiper/swiper.min.css" media="print" onload="this.media='all'" rel="stylesheet"/><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: undefined,
+  postHeadAiDescription: {"enable":true,"gptName":"Smith","mode":"api","switchBtn":false,"btnLink":"https://aicos.ink","randomNum":3,"basicWordCount":1000,"key":"","Referer":"https://aicos.ink"},
+  diytitle: {"enable":true,"leaveTitle":"再看看嘛🌈！","backTitle":"欢迎回来✌️！"},
+  LA51: undefined,
+  greetingBox: {"enable":true,"default":"晚上好👋","list":[{"greeting":"晚安😴","startTime":0,"endTime":5},{"greeting":"早上好鸭👋, 祝你一天好心情！","startTime":6,"endTime":9},{"greeting":"上午好👋, 状态很好，鼓励一下～","startTime":10,"endTime":10},{"greeting":"11点多啦, 在坚持一下就吃饭啦～","startTime":11,"endTime":11},{"greeting":"午安👋, 宝贝","startTime":12,"endTime":14},{"greeting":"🌈充实的一天辛苦啦！","startTime":14,"endTime":18},{"greeting":"19点喽, 奖励一顿丰盛的大餐吧🍔。","startTime":19,"endTime":19},{"greeting":"晚上好👋, 在属于自己的时间好好放松😌~","startTime":20,"endTime":24}]},
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  music_page_default: "nav_music",
+  home_banner: {"enable":true,"interval":5000,"count":5},
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: true,
+  mainTone: undefined,
+  authorStatus: {"skills":["💻 后端开发 Java / Spring Cloud","🌐 前端探索 React / TypeScript","🤖 AI 工具深度用户","🏠 智能家居折腾达人","🔨 从设计到部署一条龙","📝 偶尔写写博客记录生活","🎵 听歌写代码双线并行","🚀 脚踏实地行动派"]},
+  algolia: undefined,
+  localSearch: {"path":"/search.json","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":240},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: Smith","link":"链接: ","source":"来源: Smith","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#4f7cff","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.2.0/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.2.0/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: 'Smith',
+  title: 'SpringCloud01',
+  postAI: '',
+  pageFillDescription: 'SpringCloud01, 一、微服务, 1.1单体架构, 1.2 微服务, 1.3微服务的重要性, 二、SpringCloud, 2.1认识SpringCloud, 2.2 环境准备, 2.2.1搭建SpringCloud环境, 三、实现远程调用, 3.1 服务准备, 3.2 调用流程, 3.3 RestTemplete的使用, 3.4.提供者与消费者, 四、Feign远程调用, 5.1Feign 是什么, 5.2为什么选择 Feign, 5.3Feign替代RestTemplate, 引入依赖, 添加注解, 编写Feign的客户端, 测试, 总结, 抽取api, OpenFeign的超时控制, Openfeign日志打印功能, 配置文件方式  – springboot3.3.4 对应的openFeign版本一微服务随着互联网行业的发展对服务的要求也越来越高服务架构也从单体架构逐渐演变为现在流行的微服务架构这些架构之间有怎样的差别呢单体架构单体架构将业务的所有功能集中在一个项目中开发打成一个包部署单体架构的优缺点如下优点架构简单部署成本低缺点耦合度高维护困难升级困难微服务分布式架构根据业务功能对系统做拆分每个业务功能模块作为独立项目开发称为一个服务并且各个服务之间可以相互调用优点拆分粒度更小服务更独立耦合度更低缺点服务调用关系错综复杂提升部署难度微服务这种方案需要技术框架来落地全球的互联网公司都在积极尝试自己的微服务落地技术在国内最知名的就是和微服务的重要性二认识是目前国内使用最广泛的微服务框架官网地址集成了各种微服务功能组件并基于实现了这些组件的自动装配从而提供了良好的开箱即用体验其中常见的组件包括功能组件服务注册和发现服务远程调用统一配置管理服务链路监控统一网关路由流控降级保护微服务技术对比兼容版本底层是依赖于的并且有版本的兼容关系如下环境准备搭建环境创建订单表参考之前整合代码整合环境完成订单表的增删改查功能创建用户表完成用户表的增删改查略搭建用户服务和订单服务略版本三实现远程调用服务准备目前程序中我们可以通过订单查询到订单服务订单对象中只存在用户并没有用户的具体信息成功铲车莆田接下来我们需要做的是搭建用户服务并且通过订单服务调用用户服务得到用户完整信息调用流程我们需要在中向发起一个的请求调用这个接口大概的步骤是这样的修改服务中的方法根据对象中的查询将查询的填充到对象一起返回的使用是提供的用于访问服务的客户端它提供了很多可以方便访问远程服务的方法这些方法可以帮助开发人员减少编写客户端代码的工作量导入依赖编写配置类注入完成服务代码补充注意在调用过程中需要使用到进行对象转换提供者与消费者在服务调用关系中会有两个不同的角色服务提供者一次业务中被其它微服务调用的服务提供接口给其它微服务服务消费者一次业务中调用其它微服务的服务调用其它微服务提供的接口但是服务提供者与服务消费者的角色并不是绝对的而是相对于业务而言如果服务调用了服务而服务又调用了服务服务的角色是什么对于调用的业务而言是服务消费者是服务提供者对于调用的业务而言是服务消费者是服务提供者因此服务既可以是服务提供者也可以是服务消费者四远程调用是什么是一个请求调用的轻量级框架可以以接口注解的方式调用请求当实际调用的时候传入参数根据参数再应用到请求上进而转化成真正的请求封装了调用流程为什么选择如果不使用框架那么调用服务需要走的话无论是使用自带的还是使用工具包的亦或是都需要自行配置请求然后才能发起请求获得响应体后还需解析等操作十分繁琐而只需要定义一个接口并且通过注解的形式定义好请求模板就可以项使用本地接口一样使用请求看我们以前利用发起远程调用的代码存在下面的问题代码可读性差编程体验不统一参数复杂难以维护替代的使用步骤如下引入依赖我们在服务的文件中引入的依赖负载均衡添加注解在的启动类添加注解开启的功能编写的客户端在中新建一个接口内容如下这个客户端主要是基于的注解来声明远程调用的信息比如服务名称服务提供者的名称请求方式请求路径请求参数返回值类型注意如果是请求一定要在参数前面加上注解否则会转为请求去标签体中寻找参数先启动提供者再启动消费者测试使用客户端代替这样就可以帮助我们发送请求无需自己使用来发送了总结使用的步骤引入依赖添加注解编写接口使用中定义的方法代替抽取对于公共部分的实体类以及接口统一抽取到模块中的超时控制通过配置可以控制与远程服务器建立连接和读取响应的超时时间参数指定了连接超时时间默认时间为秒也就是在尝试建立连接时如果在指定时间内无法建立连接就会抛出异常参数指定了读取响应超时时间默认时间为秒也就是在发送请求后如果在指定时间内没有接收到响应就会抛出异常在服务中加入断点后服务两秒内没有收到响应则会报错日志打印功能提供了日志打印功能我们可以通过配置来调整日志级别从而了解中请求的细节也就是说对接口的调用情况进行日志输出而日志的级别分为四种不记录任何日志信息这是默认值仅记录请求的方法以及响应状态码和执行时间在的基础上额外记录了请求和响应的头信息记录所有请求和响应的明细包括头信息请求体元数据配置文件方式对应的版本自己的接口包路径表示全局配置对所有客户端生效连接超时时间单位毫秒默认秒建议根据业务调整读取响应超时时间单位毫秒默认秒建议根据业务调整可选配置日志级别方便调试级别',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2026-06-02 11:22:08',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fafaf8')
+        }
+      }
+      const t = saveToLocal.get('theme')
+
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link href="https://npm.elemecdn.com/lxgw-wenkai-screen-webfont@1.1.0/style.css" media="print" onload="this.media='all'" rel="stylesheet"/><meta content="Hexo 7.3.0" name="generator"/></meta></link></link><style>.ai-series-intro{border-left:4px solid var(--smith-main,#49b1f5);background:rgba(73,177,245,.08);border-radius:12px;padding:1rem 1.2rem}.ai-series-index{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin:1.2rem 0}.ai-series-index a{display:block;border:1px solid rgba(127,127,127,.18);border-radius:16px;padding:14px 16px;background:rgba(255,255,255,.65);box-shadow:0 8px 24px rgba(15,23,42,.06)}.ai-series-index .no{font-weight:700;color:var(--smith-main,#49b1f5);font-size:.9rem}.ai-series-index .ttl{font-weight:700;margin:.3rem 0}#article-container img{border-radius:12px;box-shadow:0 8px 28px rgba(15,23,42,.08)}#article-container table{display:block;overflow:auto}</style></head><body data-type="smith"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick='document.getElementById("loading-box").classList.add("loaded")'><div class="loading-bg"><img alt="加载头像" class="loading-img nolazyload" src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d20f536c64d06e5fcf4bfe2ec5dc25d.jpg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link href="https://cdn.cbd.int/smith-theme-static@1.0.2/progress_bar/progress_bar.css" rel="stylesheet"><script async="async" data-pace-options='{ "restartOnRequestAfter":false,"eventLag":false}' src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="smithfont smith-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://smithhs.cn/" title="博客"><img alt="博客" class="back-menu-item-icon" data-lazy-src="/img/favicon.png" onerror='this.onerror=null,this.src="/img/404.jpg"' src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" href="https://github.com/Smithhss" rel="noopener" target="_blank" title="Github"><img alt="Github" class="back-menu-item-icon" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/GitHub.png" onerror='this.onerror=null,this.src="/img/404.jpg"' src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"/><span class="back-menu-item-text">Github</span></a></div></div></div></div><a accesskey="h" href="/" id="site-name"><div class="title">Smith</div><i class="smithfont smith-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a href="javascript:smith.scrollToDest(0, 500)" id="page-name">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="smithfont smith-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="smithfont smith-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="smithfont smith-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="smithfont smith-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="smithfont smith-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="smithfont smith-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/dailyPhoto/"><i class="smithfont smith-icon-camera faa-tada" style="font-size: 0.9em;"></i><span> 每日照片</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wallpaper/"><i class="smithfont smith-icon-image faa-tada" style="font-size: 0.9em;"></i><span> 壁纸</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wordScenery/"><i class="smithfont smith-icon-font faa-tada" style="font-size: 0.9em;"></i><span> 文字风景</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="smithfont smith-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于我</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="smithfont smith-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/love/"><i class="smithfont smith-icon-heart faa-tada" style="font-size: 0.9em;"></i><span> 爱情</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="smithfont smith-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button only-home" id="travellings_button" title="随机前往一个开往项目网站"><a class="site-page" data-pjax-state="external" href="javascript:void(0);" onclick="smith.totraveling()" rel="external nofollow" title="随机前往一个开往项目网站"><i class="smithfont smith-icon-train"></i></a></div><div class="nav-button" id="randomPost_button"><a class="site-page" href="javascript:void(0);" onclick="toRandomPost()" title="随机前往一个文章"><i class="smithfont smith-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a accesskey="s" class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍"><i class="smithfont smith-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" onclick="smith.switchConsole();" title="中控台"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg" target="_blank"><img alt="wechat" class="post-qr-code-img" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg" onerror='this.onerror=null,this.src="/img/404.jpg"' src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg" target="_blank"><img alt="alipay" class="post-qr-code-img" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg" onerror='this.onerror=null,this.src="/img/404.jpg"' src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Android-Studio/" style="font-size: 1.05rem;">Android Studio<sup>1</sup></a><a href="/tags/App/" style="font-size: 1.05rem;">App<sup>1</sup></a><a href="/tags/Butterfly/" style="font-size: 1.05rem;">Butterfly<sup>1</sup></a><a href="/tags/C/" style="font-size: 1.05rem;">C++<sup>3</sup></a><a href="/tags/CSS/" style="font-size: 1.05rem;">CSS<sup>1</sup></a><a href="/tags/Cisco-Packet-Tracer/" style="font-size: 1.05rem;">Cisco Packet Tracer<sup>1</sup></a><a href="/tags/Docker/" style="font-size: 1.05rem;">Docker<sup>2</sup></a><a href="/tags/Easypan/" style="font-size: 1.05rem;">Easypan<sup>2</sup></a><a href="/tags/FurtherMathematics/" style="font-size: 1.05rem;">FurtherMathematics<sup>1</sup></a><a href="/tags/GPT/" style="font-size: 1.05rem;">GPT<sup>1</sup></a><a href="/tags/Git2/" style="font-size: 1.05rem;">Git2<sup>1</sup></a><a href="/tags/HTML/" style="font-size: 1.05rem;">HTML<sup>1</sup></a><a href="/tags/Hexo/" style="font-size: 1.05rem;">Hexo<sup>1</sup></a><a href="/tags/Java/" style="font-size: 1.05rem;">Java<sup>67</sup></a><a href="/tags/JavaScript/" style="font-size: 1.05rem;">JavaScript<sup>1</sup></a><a href="/tags/Jrebel/" style="font-size: 1.05rem;">Jrebel<sup>1</sup></a><a href="/tags/LeetCode/" style="font-size: 1.05rem;">LeetCode<sup>1</sup></a><a href="/tags/Linux/" style="font-size: 1.05rem;">Linux<sup>3</sup></a><a href="/tags/Markdown/" style="font-size: 1.05rem;">Markdown<sup>2</sup></a><a href="/tags/Maven/" style="font-size: 1.05rem;">Maven<sup>2</sup></a><a href="/tags/MyBatis/" style="font-size: 1.05rem;">MyBatis<sup>1</sup></a><a href="/tags/MyBatis-Plus/" style="font-size: 1.05rem;">MyBatis-Plus<sup>1</sup></a><a href="/tags/Mysql/" style="font-size: 1.05rem;">Mysql<sup>1</sup></a><a href="/tags/Navicat/" style="font-size: 1.05rem;">Navicat<sup>1</sup></a><a href="/tags/NoSql/" style="font-size: 1.05rem;">NoSql<sup>1</sup></a><a href="/tags/Nodejs/" style="font-size: 1.05rem;">Nodejs<sup>2</sup></a><a href="/tags/Python/" style="font-size: 1.05rem;">Python<sup>4</sup></a><a href="/tags/Spring/" style="font-size: 1.05rem;">Spring<sup>2</sup></a><a href="/tags/VMware/" style="font-size: 1.05rem;">VMware<sup>2</sup></a><a href="/tags/WeChat/" style="font-size: 1.05rem;">WeChat<sup>1</sup></a><a href="/tags/YouHou/" style="font-size: 1.05rem;">YouHou<sup>1</sup></a><a href="/tags/books/" style="font-size: 1.05rem;">books<sup>1</sup></a><a href="/tags/butterfly/" style="font-size: 1.05rem;">butterfly<sup>1</sup></a><a href="/tags/clash/" style="font-size: 1.05rem;">clash<sup>1</sup></a><a href="/tags/error/" style="font-size: 1.05rem;">error<sup>1</sup></a><a href="/tags/project/" style="font-size: 1.05rem;">project<sup>4</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 1.05rem;">前端<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6/" style="font-size: 1.05rem;">开发框架<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" style="font-size: 1.05rem;">开发环境<sup>1</sup></a><a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="font-size: 1.05rem;">软件工程<sup>1</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="smithfont smith-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="smithfont smith-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+<i class="smithfont smith-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/05/"><span class="card-archive-list-date">五月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">16</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/04/"><span class="card-archive-list-date">四月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">31</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/03/"><span class="card-archive-list-date">三月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">75</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/02/"><span class="card-archive-list-date">二月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">7</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/11/"><span class="card-archive-list-date">十一月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">3</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/10/"><span class="card-archive-list-date">十月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/09/"><span class="card-archive-list-date">九月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">5</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/07/"><span class="card-archive-list-date">七月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" href="javascript:void(0);" title="显示模式切换"><i class="smithfont smith-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="smith.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="smithfont smith-icon-arrows-left-right"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="smith.musicToggle()" title="音乐开关"><a class="music-switch"><i class="smithfont smith-icon-music"></i></a></div></div><div class="console-mask" href="javascript:void(0);" onclick="smith.hideConsole()"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="smithfont smith-icon-arrow-up"></i><span id="percent" onclick="smith.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="smithfont smith-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><i class="smithfont smith-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/AI%E5%B7%A5%E7%A8%8B/" itemprop="url">AI工程</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/AI%20Agent/" itemprop="url" tabindex="-1"><span><i class="smithfont smith-icon-hashtag"></i>AI Agent</span></a><a class="article-meta__tags" href="/tags/%E6%95%99%E7%A8%8B/" itemprop="url" tabindex="-1"><span><i class="smithfont smith-icon-hashtag"></i>教程</span></a><a class="article-meta__tags" href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/" itemprop="url" tabindex="-1"><span><i class="smithfont smith-icon-hashtag"></i>大模型</span></a></span></div></div><h1 class="post-title">Text-to-SQL 评测体系建设</h1><div id="post-meta"><div class="meta-secondline"><span class="post-meta-date"><i class="smithfont smith-icon-calendar-days post-meta-icon"></i><span class="article-meta-label">发表于</span><time datetime="2026-07-31T10:17:00.000Z" time="2026-07-31 10:17:00" title="发表于 2026-07-31 10:17:00">2026-07-31</time></span><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="smithfont smith-icon-file-word post-meta-icon"></i><span class="word-count">约 4365 字</span></span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" preserveaspectratio="none" shape-rendering="auto" viewbox="0 24 150 28" xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"><defs><path d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z" id="gentle-wave"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="/img/ai-agent-tutorial/covers/ai-agent-11-text-to-sql-evaluation.png"/></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><div class="post-ai-description"><div class="ai-title"><i class="smithfont smith-icon-bilibili"></i><div class="ai-title-text">AI-摘要</div><i class="smithfont smith-icon-arrow-rotate-right"></i><i class="smithfont smith-icon-circle-dot" title="朗读摘要"></i><div id="ai-tag">Smith GPT</div></div><div class="ai-explanation">AI初始化中...</div><div class="ai-btn-box"><div class="ai-btn-item">介绍自己 🙈</div><div class="ai-btn-item">生成本文简介 👋</div><div class="ai-btn-item">推荐相关文章 📖</div><div class="ai-btn-item">前往主页 🏠</div><div class="ai-btn-item" id="go-api-link">了解更多</div></div><script data-pjax="" src="/js/smith/ai_abstract.js"></script></div><article class="post-content" id="article-container" itemscope="" itemtype="https://smithhs.cn/2026/07/31/2026-07-31-ai-agent-11-text-to-sql-evaluation/"><header><a class="post-meta-categories" href="/categories/AI%E5%B7%A5%E7%A8%8B/" itemprop="url">AI工程</a><a href="/tags/AI%20Agent/" itemprop="url" tabindex="-1">AI Agent</a><a href="/tags/%E6%95%99%E7%A8%8B/" itemprop="url" tabindex="-1">教程</a><a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/" itemprop="url" tabindex="-1">大模型</a><h1 id="CrawlerTitle">Text-to-SQL 评测体系建设</h1></header><blockquote class="ai-series-intro"><p><strong>AI Agent 工程实践教程 · 第 11 章</strong></p><p>围绕 SQL 正确性、执行结果、用例集和指标，建立 Text-to-SQL 的评测闭环。</p><p><a href="/ai-agent-tutorial/">返回系列目录</a></p></blockquote><h1 id="text-to-sql">第十一天：Text-to-SQL 评测体系建设</h1>
+<p>前面几天我们已经把 Text-to-SQL 主流程跑起来了。</p>
+<p>用户输入一个自然语言问题，系统会经过：</p>
+<pre><code class="language-text">问题路由
+  ↓
+业务识别和业务 Skill 加载
+  ↓
+指标检索和表结构检索
+  ↓
+SQL 生成
+  ↓
+SQL 安全校验和执行
+  ↓
+结果分析
+</code></pre>
+<p>这条链路跑通以后，系统已经从 Demo 进入了“可用”的阶段。</p>
+<p>但真实项目里，“可用”还不够。我们还要继续回答几个更难的问题：</p>
+<pre><code class="language-text">这次改 Prompt 以后，效果有没有变好？
+这次改业务 Skill 以后，原来正确的问题有没有被改错？
+这次新增表结构以后，模型会不会误选表？
+这次澄清逻辑调整以后，模型是更谨慎了，还是更容易过度追问？
+这次最终回答看起来差不多，语义上到底算不算正确？
+</code></pre>
+<p>这些问题不能靠感觉回答，也不能靠开发同学手动问两三个问题回答。</p>
+<p>我们需要一套可以长期沉淀、重复执行、自动对比的机制。</p>
+<p>这就是今天要建设的内容：<strong>Text-to-SQL 评测体系</strong>。</p>
+<p><img alt="Text-to-SQL 评测闭环" src="/img/ai-agent-tutorial/11/day11_eval_loop.svg"/></p>
+<hr/>
+<h2 id="1-text-to-sql">1. 为什么 Text-to-SQL 必须做评测</h2>
+<p>普通后台接口大多是确定性的。</p>
+<pre><code class="language-text">固定输入
+  ↓
+固定代码逻辑
+  ↓
+固定输出
+</code></pre>
+<p>但 Text-to-SQL 不是这样。</p>
+<p>Text-to-SQL 中间有大模型参与，模型会做很多判断：</p>
+<table>
+<thead>
+<tr>
+<th>判断环节</th>
+<th>可能出错的地方</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>问题路由</td>
+<td>没识别成数据查询，或者把普通问答误判成查询</td>
+</tr>
+<tr>
+<td>业务识别</td>
+<td>订单问题识别成学生问题</td>
+</tr>
+<tr>
+<td>Skill 使用</td>
+<td>没遵守业务里的统计口径</td>
+</tr>
+<tr>
+<td>表结构检索</td>
+<td>找到了 <code>prepay_order</code>，但实际应该用 <code>order_payment</code></td>
+</tr>
+<tr>
+<td>SQL 生成</td>
+<td>字段、条件、聚合、时间范围写错</td>
+</tr>
+<tr>
+<td>SQL 执行</td>
+<td>SQL 语法错误，或者查询慢、超时</td>
+</tr>
+<tr>
+<td>澄清判断</td>
+<td>信息不足时没有追问，或者不该追问时过度追问</td>
+</tr>
+<tr>
+<td>结果分析</td>
+<td>SQL 查对了，但最终解释说错</td>
+</tr>
+</tbody>
+</table>
+<p>例如用户问：</p>
+<pre><code class="language-text">统计上个月订单状态的分类占比
+</code></pre>
+<p>这句话看起来很简单，但系统需要判断：</p>
+<pre><code class="language-text">订单指的是支付订单还是预支付订单？
+上个月用 created_at 还是 pay_success_time？
+分类占比按 order_status 还是 status？
+是否需要先澄清？
+如果不澄清，应该选择哪张表？
+</code></pre>
+<p>所以评测不能只看：</p>
+<pre><code class="language-text">SQL 能不能执行？
+</code></pre>
+<p>更应该看：</p>
+<pre><code class="language-text">整条 Text-to-SQL 链路中的关键判断是否符合预期？
+</code></pre>
+<hr/>
+<h2 id="2">2. 当前项目的评测总览</h2>
+<p>当前项目的评测体系已经不再是“写一个 JSON 去比对 State”的简单版本，而是拆成了几层：</p>
+<table>
+<thead>
+<tr>
+<th>模块</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>运行记录</td>
+<td>保存真实运行、评测运行、最终 State、SQL、回答、步骤记录</td>
+</tr>
+<tr>
+<td>人工反馈</td>
+<td>把真实问题中的错误沉淀成候选样本</td>
+</tr>
+<tr>
+<td>评测样本</td>
+<td>保存可复用的问题、业务、目标、场景和判断标准</td>
+</tr>
+<tr>
+<td>判断标准</td>
+<td>每条样本可以配置多条断言规则</td>
+</tr>
+<tr>
+<td>评测任务</td>
+<td>选择正式样本，异步批量运行完整 Text-to-SQL graph</td>
+</tr>
+<tr>
+<td>评测结果</td>
+<td>保存每条样本的实际 State、SQL、回答和通过情况</td>
+</tr>
+<tr>
+<td>断言结果</td>
+<td>保存每条判断标准的实际值、得分、原因和是否通过</td>
+</tr>
+<tr>
+<td>评测报告</td>
+<td>展示通过率、失败样本、失败原因分布</td>
+</tr>
+</tbody>
+</table>
+<p>整体架构是：</p>
+<p><img alt="当前评测架构" src="/img/ai-agent-tutorial/11/day11_current_eval_architecture.svg"/></p>
+<p>现在的核心思想是：</p>
+<pre><code class="language-text">样本只负责描述“要测什么”
+断言负责描述“怎么判定”
+评测任务负责“真实跑一遍”
+评测结果负责“留下证据”
+</code></pre>
+<hr/>
+<h2 id="3">3. 从真实运行到评测样本</h2>
+<p>评测样本最好不要完全靠拍脑袋录入。</p>
+<p>真实项目里，最有价值的样本通常来自这几类场景：</p>
+<table>
+<thead>
+<tr>
+<th>来源</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>MANUAL</code></td>
+<td>人工设计的典型问题</td>
+</tr>
+<tr>
+<td><code>RUN_HISTORY</code></td>
+<td>从真实运行记录中加入样本</td>
+</tr>
+<tr>
+<td><code>FEEDBACK</code></td>
+<td>从用户反馈或测试反馈中沉淀样本</td>
+</tr>
+</tbody>
+</table>
+<p>一条真实运行记录里有：</p>
+<pre><code class="language-text">原始问题
+最终 State
+生成 SQL
+执行 SQL
+最终回答
+每一步 graph 状态
+</code></pre>
+<p>如果人工发现这次结果有问题，比如：</p>
+<pre><code class="language-text">应该查 order_payment，不应该查 prepay_order。
+</code></pre>
+<p>就可以把它加入评测样本，变成以后每次都能复跑的回归用例。</p>
+<p><img alt="样本沉淀流程" src="/img/ai-agent-tutorial/11/day11_sample_from_run.svg"/></p>
+<p>样本状态分为：</p>
+<table>
+<thead>
+<tr>
+<th>状态</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DRAFT</code></td>
+<td>草稿样本，还在整理，不参与评测</td>
+</tr>
+<tr>
+<td><code>ACTIVE</code></td>
+<td>正式样本，可以被评测任务选择</td>
+</tr>
+<tr>
+<td><code>DISABLED</code></td>
+<td>暂停使用</td>
+</tr>
+</tbody>
+</table>
+<p>只有 <code>ACTIVE</code> 样本会进入评测任务。</p>
+<hr/>
+<h2 id="4">4. 评测样本应该保存什么</h2>
+<p>一条评测样本不是简单保存一个问题。</p>
+<p>它至少要回答四件事：</p>
+<pre><code class="language-text">测什么问题？
+属于哪个业务？
+主要测哪段能力？
+怎么判断通过？
+</code></pre>
+<p>当前样本主表是 <code>text_to_sql_eval_question</code>，重点字段如下：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>question</code></td>
+<td>评测问题</td>
+</tr>
+<tr>
+<td><code>business_id</code></td>
+<td>业务标识，例如 <code>order</code></td>
+</tr>
+<tr>
+<td><code>business_name</code></td>
+<td>业务名称</td>
+</tr>
+<tr>
+<td><code>eval_target</code></td>
+<td>评测目标</td>
+</tr>
+<tr>
+<td><code>sample_category</code></td>
+<td>样本场景</td>
+</tr>
+<tr>
+<td><code>source_type</code></td>
+<td>样本来源</td>
+</tr>
+<tr>
+<td><code>source_run_id</code></td>
+<td>来源运行记录 ID</td>
+</tr>
+<tr>
+<td><code>source_conversation_id</code></td>
+<td>来源会话 ID</td>
+</tr>
+<tr>
+<td><code>generated_sql</code></td>
+<td>来源运行生成 SQL</td>
+</tr>
+<tr>
+<td><code>executed_sql</code></td>
+<td>来源运行执行 SQL</td>
+</tr>
+<tr>
+<td><code>final_answer</code></td>
+<td>来源运行最终回答</td>
+</tr>
+<tr>
+<td><code>feedback_result</code></td>
+<td>来源反馈结果</td>
+</tr>
+<tr>
+<td><code>feedback_error_type</code></td>
+<td>来源反馈错误类型</td>
+</tr>
+<tr>
+<td><code>feedback_comment</code></td>
+<td>来源反馈说明</td>
+</tr>
+<tr>
+<td><code>judge_note</code></td>
+<td>人工判断说明</td>
+</tr>
+<tr>
+<td><code>remark</code></td>
+<td>备注</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td>样本状态</td>
+</tr>
+</tbody>
+</table>
+<p>这里要注意一个变化：</p>
+<pre><code class="language-text">新版已经不再使用 expected_state_json 作为主要判断方式。
+</code></pre>
+<p>原因是 <code>expected_state_json</code> 虽然灵活，但对页面不友好，用户要手写 JSON，不适合长期维护。</p>
+<p>新版改成了“表格化判断标准”：</p>
+<pre><code class="language-text">期望 Key
+判断方式
+期望 Value
+失败原因
+是否必过
+语义判断参考答案
+关键要点
+禁止内容
+最低分
+</code></pre>
+<p>这样业务人员和测试人员不需要写 JSON，也能维护评测标准。</p>
+<hr/>
+<h2 id="5">5. 评测目标和样本场景</h2>
+<p>不是所有样本都测端到端。</p>
+<p>同一个问题可以用于验证不同能力：</p>
+<table>
+<thead>
+<tr>
+<th>评测目标</th>
+<th>重点检查</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>END_TO_END</code></td>
+<td>整条链路最终是否可用</td>
+</tr>
+<tr>
+<td><code>ROUTING</code></td>
+<td>是否识别为正确的问题类型</td>
+</tr>
+<tr>
+<td><code>BUSINESS_SKILL</code></td>
+<td>是否命中正确业务和业务规则</td>
+</tr>
+<tr>
+<td><code>METRIC_RETRIEVAL</code></td>
+<td>是否找到正确指标口径</td>
+</tr>
+<tr>
+<td><code>TABLE_SCHEMA_RETRIEVAL</code></td>
+<td>是否选到正确表结构</td>
+</tr>
+<tr>
+<td><code>SQL_GENERATION</code></td>
+<td>是否生成正确 SQL</td>
+</tr>
+<tr>
+<td><code>CLARIFICATION</code></td>
+<td>是否在信息不足时正确澄清</td>
+</tr>
+<tr>
+<td><code>RESULT_ANALYSIS</code></td>
+<td>是否正确解释查询结果</td>
+</tr>
+</tbody>
+</table>
+<p>样本场景用于标记这条样本属于哪类测试：</p>
+<table>
+<thead>
+<tr>
+<th>样本场景</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>NORMAL</code></td>
+<td>正常样本</td>
+</tr>
+<tr>
+<td><code>BOUNDARY</code></td>
+<td>边界样本</td>
+</tr>
+<tr>
+<td><code>REGRESSION</code></td>
+<td>回归问题</td>
+</tr>
+<tr>
+<td><code>AMBIGUOUS</code></td>
+<td>歧义澄清</td>
+</tr>
+<tr>
+<td><code>NEGATIVE</code></td>
+<td>负向样本</td>
+</tr>
+</tbody>
+</table>
+<p>这些选项不建议写死在前端。</p>
+<p>当前项目把它们放在动态配置里：</p>
+<pre><code class="language-text">text.to.sql.eval.metadata
+</code></pre>
+<p>前端通过接口读取配置，用于渲染：</p>
+<pre><code class="language-text">评测目标
+样本场景
+判断方式
+失败类型
+</code></pre>
+<p>这样后续新增一个评测目标或失败类型，不需要改前端代码。</p>
+<hr/>
+<h2 id="6-json">6. 判断标准：从 JSON 改成断言规则</h2>
+<p>新版评测判断标准使用独立表：</p>
+<pre><code class="language-text">text_to_sql_eval_assertion
+</code></pre>
+<p>一条样本可以有多条判断标准。</p>
+<p>例如问题：</p>
+<pre><code class="language-text">统计上个月每天支付成功的订单数量
+</code></pre>
+<p>可以配置两条标准：</p>
+<table>
+<thead>
+<tr>
+<th>期望 Key</th>
+<th>判断方式</th>
+<th>期望 Value</th>
+<th>失败原因</th>
+<th>必过</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>used_tables</code></td>
+<td>包含</td>
+<td><code>order_payment</code></td>
+<td>表选择错误</td>
+<td>是</td>
+</tr>
+<tr>
+<td><code>final_answer</code></td>
+<td>语义判断</td>
+<td>-</td>
+<td>回答质量错误</td>
+<td>是</td>
+</tr>
+</tbody>
+</table>
+<p>其中第一条是客观判断：</p>
+<pre><code class="language-text">实际 state.used_tables 必须包含 order_payment。
+</code></pre>
+<p>第二条是主观判断：</p>
+<pre><code class="language-text">最终回答不要求逐字一致，但要语义上覆盖参考答案和关键要点。
+</code></pre>
+<p>断言表关键字段：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>eval_question_id</code></td>
+<td>属于哪条评测样本</td>
+</tr>
+<tr>
+<td><code>actual_key</code></td>
+<td>从实际 State 里取哪个字段</td>
+</tr>
+<tr>
+<td><code>operator</code></td>
+<td>判断方式</td>
+</tr>
+<tr>
+<td><code>expected_value</code></td>
+<td>客观判断的期望值</td>
+</tr>
+<tr>
+<td><code>required</code></td>
+<td>是否必过</td>
+</tr>
+<tr>
+<td><code>failure_type</code></td>
+<td>失败后归类到哪种错误</td>
+</tr>
+<tr>
+<td><code>reference_answer</code></td>
+<td>语义判断参考答案</td>
+</tr>
+<tr>
+<td><code>key_points</code></td>
+<td>语义判断必须覆盖的要点，按行分隔</td>
+</tr>
+<tr>
+<td><code>forbidden_points</code></td>
+<td>语义判断禁止出现的内容，按行分隔</td>
+</tr>
+<tr>
+<td><code>min_score</code></td>
+<td>语义判断最低通过分</td>
+</tr>
+<tr>
+<td><code>remark</code></td>
+<td>备注</td>
+</tr>
+</tbody>
+</table>
+<p>支持的判断方式：</p>
+<table>
+<thead>
+<tr>
+<th>判断方式</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>EQ</code></td>
+<td>实际值等于期望值</td>
+</tr>
+<tr>
+<td><code>CONTAINS</code></td>
+<td>实际数组或文本包含期望值</td>
+</tr>
+<tr>
+<td><code>NOT_CONTAINS</code></td>
+<td>实际数组或文本不包含期望值</td>
+</tr>
+<tr>
+<td><code>EXISTS</code></td>
+<td>字段存在</td>
+</tr>
+<tr>
+<td><code>NOT_EMPTY</code></td>
+<td>字段不为空</td>
+</tr>
+<tr>
+<td><code>REGEX</code></td>
+<td>正则匹配</td>
+</tr>
+<tr>
+<td><code>SEMANTIC</code></td>
+<td>调用大模型做语义评分</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="断言判断流程" src="/img/ai-agent-tutorial/11/day11_assertion_judge_flow.svg"/></p>
+<hr/>
+<h2 id="7">7. 客观判断：每条规则都要有结果</h2>
+<p>早期实现容易犯一个错误：</p>
+<pre><code class="language-text">遇到第一条失败规则就直接返回。
+</code></pre>
+<p>这样虽然能判断这条样本失败，但排查体验很差。</p>
+<p>因为用户看不到：</p>
+<pre><code class="language-text">其他规则到底有没有过？
+是只错了表？
+还是业务、动作、SQL、回答都错了？
+</code></pre>
+<p>所以当前实现是：</p>
+<pre><code class="language-text">所有判断标准都会执行
+所有判断结果都会保存
+最终样本是否通过，由必过规则决定
+</code></pre>
+<p>判定逻辑可以理解为：</p>
+<pre><code class="language-text">for 每条断言规则:
+    从 actual_state_json 里按 actual_key 取值
+    按 operator 判断
+    保存一条 assertion_result
+
+如果存在 required = true 且未通过的规则:
+    样本失败
+    失败类型取第一条必过失败规则
+否则:
+    样本通过
+</code></pre>
+<p>这样做的好处是：</p>
+<table>
+<thead>
+<tr>
+<th>好处</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>排查完整</td>
+<td>每条规则都有实际值和结果</td>
+</tr>
+<tr>
+<td>报告更准</td>
+<td>可以统计哪类规则最容易失败</td>
+</tr>
+<tr>
+<td>适合调参</td>
+<td>改 Prompt 后能看每个环节的变化</td>
+</tr>
+<tr>
+<td>支持非必过规则</td>
+<td>可以观察但不阻断通过</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h2 id="8">8. 主观判断：用大模型评估回答质量</h2>
+<p>有些结果不能用“完全相等”判断。</p>
+<p>尤其是最终回答：</p>
+<pre><code class="language-text">数据覆盖 9 个有订单的日期，累计支付成功订单 21 单。
+6 月 25 日达到峰值 8 单，其余交易日集中在 1 至 3 单，整体呈零星分布态势。
+</code></pre>
+<p>这类回答只要意思对，就不应该要求 100% 字符串一致。</p>
+<p>所以新增了 <code>SEMANTIC</code> 判断方式。</p>
+<p>语义判断会把下面这些内容发给 Python 服务：</p>
+<table>
+<thead>
+<tr>
+<th>输入</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>question</code></td>
+<td>原始问题</td>
+</tr>
+<tr>
+<td><code>actual_answer</code></td>
+<td>本次实际回答</td>
+</tr>
+<tr>
+<td><code>expected_value</code></td>
+<td>可选的额外期望</td>
+</tr>
+<tr>
+<td><code>reference_answer</code></td>
+<td>参考答案</td>
+</tr>
+<tr>
+<td><code>key_points</code></td>
+<td>必须覆盖的关键要点</td>
+</tr>
+<tr>
+<td><code>forbidden_points</code></td>
+<td>禁止出现的内容</td>
+</tr>
+<tr>
+<td><code>min_score</code></td>
+<td>最低通过分</td>
+</tr>
+</tbody>
+</table>
+<p>Python 服务调用大模型，返回：</p>
+<pre><code class="language-json">{
+  "passed": true,
+  "score": 95,
+  "reason": "实际回答准确涵盖了所有关键统计数据，与参考答案语义一致。",
+  "coveredPoints": ["主要的数据要正确"],
+  "missedPoints": [],
+  "forbiddenHits": []
+}
+</code></pre>
+<p>Java 后端会保存：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>score</code></td>
+<td>本次语义评分</td>
+</tr>
+<tr>
+<td><code>failure_reason</code></td>
+<td>判断原因。通过时也保存原因，失败时保存失败原因</td>
+</tr>
+<tr>
+<td><code>actual_value_json</code></td>
+<td>本次实际回答</td>
+</tr>
+<tr>
+<td><code>passed</code></td>
+<td>该条语义规则是否通过</td>
+</tr>
+</tbody>
+</table>
+<p><img alt="语义评测流程" src="/img/ai-agent-tutorial/11/day11_semantic_judge_flow.svg"/></p>
+<p>这里要注意：</p>
+<pre><code class="language-text">SEMANTIC 不需要展示期望 Value。
+</code></pre>
+<p>因为它的标准不是一个简单值，而是：</p>
+<pre><code class="language-text">参考答案 + 关键要点 + 禁止内容 + 最低分
+</code></pre>
+<hr/>
+<h2 id="9">9. 评测任务：异步批量运行正式样本</h2>
+<p>有了正式样本以后，就可以创建评测任务。</p>
+<p>评测任务页面负责：</p>
+<pre><code class="language-text">选择一批 ACTIVE 样本
+  ↓
+点击开始评测
+  ↓
+后端创建任务
+  ↓
+接口立即返回
+  ↓
+后台异步逐条运行完整 graph
+  ↓
+保存每条结果和每条断言结果
+  ↓
+汇总通过率和失败原因
+</code></pre>
+<p><img alt="异步评测任务流程" src="/img/ai-agent-tutorial/11/day11_async_eval_task.svg"/></p>
+<p>为什么必须异步？</p>
+<p>因为每条样本都是真实跑一遍 Text-to-SQL graph：</p>
+<pre><code class="language-text">模型路由
+业务 Skill
+检索
+SQL 生成
+SQL 执行
+结果分析
+自动判定
+</code></pre>
+<p>如果评测任务有几十条样本，同步接口会等待很久，页面体验很差，也容易超时。</p>
+<p>现在的设计是：</p>
+<ol>
+<li>点击“开始评测”。</li>
+<li>后端创建 <code>text_to_sql_eval_run</code>，状态为 <code>RUNNING</code>。</li>
+<li>接口立即返回任务 ID。</li>
+<li>后台线程逐条执行样本。</li>
+<li>前端轮询任务状态和结果列表。</li>
+<li>所有样本结束后刷新通过率、失败数和失败原因分布。</li>
+</ol>
+<p>任务状态：</p>
+<table>
+<thead>
+<tr>
+<th>状态</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>RUNNING</code></td>
+<td>正在后台运行</td>
+</tr>
+<tr>
+<td><code>COMPLETED</code></td>
+<td>已完成，没有待澄清样本</td>
+</tr>
+<tr>
+<td><code>WAITING_CLARIFICATION</code></td>
+<td>有样本进入澄清态，需要人工补充</td>
+</tr>
+<tr>
+<td><code>FAILED</code></td>
+<td>任务级异常</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h2 id="10-eval">10. 评测运行记录为什么要标记 EVAL</h2>
+<p>评测不是模拟判断。</p>
+<p>每条评测样本都会真实调用当前 Text-to-SQL 流程。</p>
+<p>所以评测也会产生运行记录：</p>
+<pre><code class="language-text">text_to_sql_run.source_type = EVAL
+</code></pre>
+<p>真实用户提问则是：</p>
+<pre><code class="language-text">text_to_sql_run.source_type = USER
+</code></pre>
+<p>为什么要区分？</p>
+<p>如果不区分，评测任务跑几十条样本，就会把运行记录页面刷满，影响日常排查真实用户问题。</p>
+<p>当前设计是：</p>
+<table>
+<thead>
+<tr>
+<th>来源</th>
+<th>页面行为</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>USER</code></td>
+<td>运行记录页面默认展示</td>
+</tr>
+<tr>
+<td><code>EVAL</code></td>
+<td>默认过滤掉，需要排查评测失败时再筛选</td>
+</tr>
+</tbody>
+</table>
+<p>评测结果里保存 <code>conversation_id</code>。</p>
+<p>如果某条样本失败，可以这样排查：</p>
+<pre><code class="language-text">评测结果
+  ↓ conversation_id
+EVAL 运行记录
+  ↓ run_id
+运行步骤 State History
+</code></pre>
+<p><img alt="评测结果追踪" src="/img/ai-agent-tutorial/11/day11_result_traceability.svg"/></p>
+<hr/>
+<h2 id="11">11. 评测结果：保存样本级结果</h2>
+<p>每条样本运行后，会保存一条：</p>
+<pre><code class="language-text">text_to_sql_eval_run_result
+</code></pre>
+<p>它保存的是“这条样本这次整体跑得怎么样”。</p>
+<p>关键字段：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>eval_run_id</code></td>
+<td>属于哪次评测任务</td>
+</tr>
+<tr>
+<td><code>eval_question_id</code></td>
+<td>对应哪条评测样本</td>
+</tr>
+<tr>
+<td><code>question</code></td>
+<td>本次评测问题</td>
+</tr>
+<tr>
+<td><code>business_id</code></td>
+<td>业务标识</td>
+</tr>
+<tr>
+<td><code>eval_target</code></td>
+<td>评测目标</td>
+</tr>
+<tr>
+<td><code>sample_category</code></td>
+<td>样本场景</td>
+</tr>
+<tr>
+<td><code>conversation_id</code></td>
+<td>本次 graph 会话 ID</td>
+</tr>
+<tr>
+<td><code>passed</code></td>
+<td>样本是否通过</td>
+</tr>
+<tr>
+<td><code>failure_type</code></td>
+<td>样本失败类型</td>
+</tr>
+<tr>
+<td><code>failure_reason</code></td>
+<td>样本失败原因</td>
+</tr>
+<tr>
+<td><code>actual_state_json</code></td>
+<td>本次实际 State</td>
+</tr>
+<tr>
+<td><code>actual_sql</code></td>
+<td>本次实际 SQL</td>
+</tr>
+<tr>
+<td><code>actual_answer</code></td>
+<td>本次实际回答</td>
+</tr>
+<tr>
+<td><code>execution_error</code></td>
+<td>执行错误</td>
+</tr>
+<tr>
+<td><code>duration_ms</code></td>
+<td>耗时</td>
+</tr>
+</tbody>
+</table>
+<p>这里的 <code>actual_state_json</code> 是统一后的实际 State。</p>
+<p>也就是说，评测会尽量把 Python 服务返回值和 Java <code>RouteRes</code> 中常用字段整理成统一 Key，例如：</p>
+<pre><code class="language-text">question_type
+business_id
+business_name
+action
+sql
+executed_sql
+used_tables
+used_fields
+missing_info
+interrupted
+final_answer
+</code></pre>
+<p>这样前端填写断言时就可以直接写：</p>
+<pre><code class="language-text">business_id
+used_tables
+action
+final_answer
+</code></pre>
+<p>不需要用户关心 Python 内部字段到底叫 <code>sql_action</code> 还是 Java 里映射成 <code>action</code>。</p>
+<hr/>
+<h2 id="12">12. 断言结果：保存每条规则的证据</h2>
+<p>样本级结果只能告诉我们：</p>
+<pre><code class="language-text">这条样本通过还是失败。
+</code></pre>
+<p>但排查时我们更想知道：</p>
+<pre><code class="language-text">哪条规则过了？
+哪条规则没过？
+实际值是什么？
+语义判断得了多少分？
+大模型为什么给这个分？
+</code></pre>
+<p>所以新增：</p>
+<pre><code class="language-text">text_to_sql_eval_run_assertion_result
+</code></pre>
+<p>关键字段：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>eval_run_id</code></td>
+<td>评测任务 ID</td>
+</tr>
+<tr>
+<td><code>eval_run_result_id</code></td>
+<td>样本级结果 ID</td>
+</tr>
+<tr>
+<td><code>eval_question_id</code></td>
+<td>样本 ID</td>
+</tr>
+<tr>
+<td><code>eval_assertion_id</code></td>
+<td>判断标准 ID</td>
+</tr>
+<tr>
+<td><code>actual_key</code></td>
+<td>判断字段</td>
+</tr>
+<tr>
+<td><code>operator</code></td>
+<td>判断方式</td>
+</tr>
+<tr>
+<td><code>expected_value</code></td>
+<td>期望值</td>
+</tr>
+<tr>
+<td><code>actual_value_json</code></td>
+<td>实际值</td>
+</tr>
+<tr>
+<td><code>required</code></td>
+<td>是否必过</td>
+</tr>
+<tr>
+<td><code>passed</code></td>
+<td>该规则是否通过</td>
+</tr>
+<tr>
+<td><code>failure_type</code></td>
+<td>失败类型</td>
+</tr>
+<tr>
+<td><code>failure_reason</code></td>
+<td>判断原因，通过和失败都会保存</td>
+</tr>
+<tr>
+<td><code>score</code></td>
+<td>语义判断得分</td>
+</tr>
+</tbody>
+</table>
+<p>页面上“规则”弹框会把两部分放在一起：</p>
+<pre><code class="language-text">样本定义的规则
+  +
+本次运行的实际回答、实际值、评分、判断原因
+</code></pre>
+<p>这样看主观题时，不需要在“规则”和“详情”之间来回切。</p>
+<p><img alt="评测数据模型" src="/img/ai-agent-tutorial/11/day11_eval_data_model.svg"/></p>
+<hr/>
+<h2 id="13">13. 澄清样本怎么评测</h2>
+<p>Text-to-SQL 里有一类很重要的场景：<strong>需要澄清</strong>。</p>
+<p>例如：</p>
+<pre><code class="language-text">统计上个月订单状态占比
+</code></pre>
+<p>如果业务里同时有预支付订单和支付订单，这句话可能信息不足。</p>
+<p>系统应该先追问：</p>
+<pre><code class="language-text">请问要统计预支付订单，还是支付订单？
+</code></pre>
+<p>这种样本不能简单判定为失败。</p>
+<p>它应该进入：</p>
+<pre><code class="language-text">WAITING_CLARIFICATION
+</code></pre>
+<p>当前设计是：</p>
+<ol>
+<li>第一轮评测运行问题。</li>
+<li>如果 graph 返回需要澄清。</li>
+<li>当前结果标记为 <code>CLARIFICATION_REQUIRED</code>。</li>
+<li>任务状态变成 <code>WAITING_CLARIFICATION</code>。</li>
+<li>页面上对这条结果显示“补充澄清”。</li>
+<li>人工输入这条样本的补充回答。</li>
+<li>后端立即把该结果标记为 <code>CLARIFICATION_RUNNING</code> 并返回。</li>
+<li>后台异步用这条结果自己的 <code>conversation_id</code> 调用 continue。</li>
+<li>更新这条结果的实际 State、SQL、回答和断言结果。</li>
+<li>所有待澄清结果处理完后，任务变成 <code>COMPLETED</code>。</li>
+</ol>
+<p><img alt="澄清继续评测流程" src="/img/ai-agent-tutorial/11/day11_clarification_continue.svg"/></p>
+<p>为什么要一条一条澄清？</p>
+<p>因为每条样本都有自己的 graph thread：</p>
+<pre><code class="language-text">样本 A -&gt; conversationId A -&gt; 补充回答 A -&gt; continue A
+样本 B -&gt; conversationId B -&gt; 补充回答 B -&gt; continue B
+样本 C -&gt; conversationId C -&gt; 补充回答 C -&gt; continue C
+</code></pre>
+<p>不同样本缺的信息不同，会话上下文也不同。</p>
+<p>所以不能把所有澄清答案一起发送。</p>
+<hr/>
+<h2 id="14">14. 页面使用流程</h2>
+<p>当前后台主要有三个相关页面。</p>
+<p><img alt="页面使用流程" src="/img/ai-agent-tutorial/11/day11_page_workflow.svg"/></p>
+<h3 id="141">14.1 评测样本页面</h3>
+<p>评测样本页面负责维护样本。</p>
+<p>常用操作：</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>录入样本</td>
+<td>手动新增一个问题</td>
+</tr>
+<tr>
+<td>从运行记录加入</td>
+<td>把真实运行记录转成候选样本</td>
+</tr>
+<tr>
+<td>整理样本</td>
+<td>修改问题、业务、目标、场景</td>
+</tr>
+<tr>
+<td>维护判断标准</td>
+<td>添加客观规则和语义规则</td>
+</tr>
+<tr>
+<td>查看来源</td>
+<td>查看来源 SQL、回答、反馈说明</td>
+</tr>
+<tr>
+<td>启用样本</td>
+<td>把 <code>DRAFT</code> 改成 <code>ACTIVE</code></td>
+</tr>
+</tbody>
+</table>
+<p>这个页面回答的是：</p>
+<pre><code class="language-text">哪些问题可以用来评测？
+每个问题应该怎么判断？
+</code></pre>
+<h3 id="142">14.2 评测任务页面</h3>
+<p>评测任务页面负责真正跑评测。</p>
+<p>常用操作：</p>
+<table>
+<thead>
+<tr>
+<th>操作</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>新建评测任务</td>
+<td>选择一批正式样本</td>
+</tr>
+<tr>
+<td>开始评测</td>
+<td>后端异步运行</td>
+</tr>
+<tr>
+<td>查看通过率</td>
+<td>看样本数、通过数、失败数</td>
+</tr>
+<tr>
+<td>查看失败分布</td>
+<td>看哪类错误最多</td>
+</tr>
+<tr>
+<td>查看结果详情</td>
+<td>看实际 State、SQL、回答</td>
+</tr>
+<tr>
+<td>查看规则</td>
+<td>看样本规则和本次断言结果</td>
+</tr>
+<tr>
+<td>补充澄清</td>
+<td>对 <code>CLARIFICATION_REQUIRED</code> 结果继续评测</td>
+</tr>
+<tr>
+<td>跳转样本</td>
+<td>从结果回到样本定义</td>
+</tr>
+</tbody>
+</table>
+<p>这个页面回答的是：</p>
+<pre><code class="language-text">这次系统整体表现怎么样？
+具体失败在哪里？
+</code></pre>
+<h3 id="143">14.3 运行记录页面</h3>
+<p>运行记录页面默认看真实用户提问，也就是：</p>
+<pre><code class="language-text">source_type = USER
+</code></pre>
+<p>如果要排查评测失败，可以筛选：</p>
+<pre><code class="language-text">source_type = EVAL
+</code></pre>
+<p>然后根据评测结果里的 <code>conversation_id</code> 找到完整运行步骤。</p>
+<hr/>
+<h2 id="15">15. 一个完整例子</h2>
+<p>假设我们有一条样本：</p>
+<pre><code class="language-text">统计上个月每天支付成功的订单数量
+</code></pre>
+<p>这条样本期望使用支付订单表，并且最终回答要说清楚主要统计结果。</p>
+<p>可以配置两条判断标准：</p>
+<table>
+<thead>
+<tr>
+<th>期望 Key</th>
+<th>判断方式</th>
+<th>期望 Value</th>
+<th>必过</th>
+<th>失败类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>used_tables</code></td>
+<td>包含</td>
+<td><code>order_payment</code></td>
+<td>是</td>
+<td>表选择错误</td>
+</tr>
+<tr>
+<td><code>final_answer</code></td>
+<td>语义判断</td>
+<td>-</td>
+<td>是</td>
+<td>回答质量错误</td>
+</tr>
+</tbody>
+</table>
+<p>语义判断里再配置：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>参考答案</td>
+<td>数据覆盖 9 个有订单的日期，累计支付成功订单 21 单，其中 6 月 25 日达到峰值 8 单</td>
+</tr>
+<tr>
+<td>关键要点</td>
+<td>主要的数据要正确</td>
+</tr>
+<tr>
+<td>禁止内容</td>
+<td>不能编造不存在的状态</td>
+</tr>
+<tr>
+<td>最低分</td>
+<td>80</td>
+</tr>
+</tbody>
+</table>
+<p>评测运行后，可能得到：</p>
+<pre><code class="language-text">used_tables = ["order_payment"]
+final_answer = "数据共覆盖 9 个有订单的日期，累计支付成功订单 21 单..."
+</code></pre>
+<p>断言结果：</p>
+<table>
+<thead>
+<tr>
+<th>规则</th>
+<th>结果</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>used_tables contains order_payment</code></td>
+<td>通过</td>
+<td>实际 used_tables 包含 order_payment</td>
+</tr>
+<tr>
+<td><code>final_answer semantic</code></td>
+<td>通过</td>
+<td>得分 95，覆盖关键要点，语义与参考答案一致</td>
+</tr>
+</tbody>
+</table>
+<p>样本通过。</p>
+<p>如果实际用了 <code>prepay_order</code>：</p>
+<pre><code class="language-text">used_tables = ["prepay_order"]
+</code></pre>
+<p>第一条规则失败：</p>
+<pre><code class="language-text">failure_type = TABLE_SELECTION_ERROR
+failure_reason = used_tables CONTAINS 期望 order_payment，实际 ["prepay_order"]
+</code></pre>
+<p>样本失败。</p>
+<hr/>
+<h2 id="16">16. 课程练习</h2>
+<p>今天的练习建议按这个顺序做：</p>
+<ol>
+<li>在“数据分析”页面提出一个订单统计问题。</li>
+<li>查看“运行记录”，观察最终 State 和每步 State History。</li>
+<li>把这条运行记录加入“评测样本”。</li>
+<li>在“评测样本”页面整理：
+   - 评测目标
+   - 样本场景
+   - 判断标准
+   - 判断说明</li>
+<li>添加一条客观规则，例如：
+   - <code>used_tables</code>
+   - 包含
+   - <code>order_payment</code></li>
+<li>添加一条语义规则，例如：
+   - <code>final_answer</code>
+   - 语义判断
+   - 参考答案
+   - 关键要点
+   - 最低分</li>
+<li>把样本状态改成 <code>ACTIVE</code>。</li>
+<li>在“评测任务”页面新建任务，选择这条正式样本。</li>
+<li>开始评测，查看结果。</li>
+<li>打开“规则”弹框，查看每条规则的实际值、得分和原因。</li>
+<li>如果进入待澄清，补充澄清答案继续评测。</li>
+<li>到“运行记录”页面筛选 <code>EVAL</code>，查看评测产生的完整 graph 记录。</li>
+</ol>
+<hr/>
+<h2 id="17">17. 小结</h2>
+<p>今天这节课的重点不是某张表，也不是某个按钮。</p>
+<p>重点是建立一套 AI 应用的工程闭环：</p>
+<pre><code class="language-text">真实问题
+  ↓
+运行记录
+  ↓
+人工反馈
+  ↓
+评测样本
+  ↓
+判断标准
+  ↓
+异步评测任务
+  ↓
+客观判断 + 语义判断
+  ↓
+断言结果明细
+  ↓
+澄清继续评测
+  ↓
+失败分析和回归优化
+</code></pre>
+<p>有了这套机制以后，每次改 Prompt、改 Skill、改表结构、改澄清策略，都可以通过评测任务验证。</p>
+<p>Text-to-SQL 也就从：</p>
+<pre><code class="language-text">能跑通
+</code></pre>
+<p>升级为：</p>
+<pre><code class="language-text">能验证、能回归、能持续优化。
+</code></pre></article><div class="post-copyright"><div class="copyright-cc-box"><i class="smithfont smith-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img alt="头像" class="post-copyright__author_img_back" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d20f536c64d06e5fcf4bfe2ec5dc25d.jpg" onerror='this.onerror=null,this.src="/img/404.jpg"' src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" title="头像"/><img alt="头像" class="post-copyright__author_img_front" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d20f536c64d06e5fcf4bfe2ec5dc25d.jpg" onerror='this.onerror=null,this.src="/img/404.jpg"' src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" title="头像"/></a><div class="post-copyright__author_name">Smith</div><div class="post-copyright__author_desc">人生太短，要干的事太多，我要争分夺秒</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" href="https://smithhs.cn/2026/05/06/2026-05-06-SpringCloud01/" title="该文章为原创文章，注意版权协议">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://smithhs.cn/2026/05/06/2026-05-06-SpringCloud01/')">SpringCloud01</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="smith.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="smithfont smith-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg" target="_blank"><img alt="wechat" class="post-qr-code-img" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg" onerror='this.onerror=null,this.src="/img/404.jpg"' src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg" target="_blank"><img alt="alipay" class="post-qr-code-img" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg" onerror='this.onerror=null,this.src="/img/404.jpg"' src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"/></a><div class="post-qr-code-desc">alipay</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="smith.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="smithfont smith-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://smithhs.cn/2026/05/06/2026-05-06-SpringCloud01/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" href="https://service.weibo.com/share/share.php?title=SpringCloud01&amp;url=https://smithhs.cn/2026/05/06/2026-05-06-SpringCloud01/&amp;pic=https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1682044144301.png" rel="external nofollow noreferrer noopener" target="_blank"><i class="smithfont smith-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" onclick="copyCurrentPageUrl()" title="复制链接"><i class="smithfont smith-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://smithhs.cn" target="_blank">Smith</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/%E5%90%8E%E7%AB%AF/"><span class="tags-punctuation"> <i class="smithfont smith-icon-tag"></i></span>后端<span class="tagsPageCount">49</span></a><a class="post-meta__box__tags" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"><span class="tags-punctuation"> <i class="smithfont smith-icon-tag"></i></span>微服务<span class="tagsPageCount">10</span></a><a class="post-meta__box__tags" href="/tags/SpringCloud/"><span class="tags-punctuation"> <i class="smithfont smith-icon-tag"></i></span>SpringCloud<span class="tagsPageCount">10</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1681455691814.png" data-sites="wechat,weibo,qq"></div><link href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'" rel="stylesheet"><script defer="defer" src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js"></script></link></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2026/07/30/2026-07-30-ai-agent-10-text-to-sql-project/"><img alt="cover" class="cover" data-lazy-src="/img/ai-agent-tutorial/covers/ai-agent-10-text-to-sql-project.png" onerror="onerror=null;src='/img/404.jpg'" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"/><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Text-to-SQL 项目落地实战</div></div></a></div><div class="next-post pull-right"><a href="/2026/08/01/2026-08-01-ai-agent-12-interview-review/"><img alt="cover" class="cover" data-lazy-src="/img/ai-agent-tutorial/covers/ai-agent-12-interview-review.png" onerror="onerror=null;src='/img/404.jpg'" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"/><div class="pagination-info"><div class="label">下一篇</div><div class="prev_info">面试复盘功能设计</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><span>AI Agent 系列推荐</span></div><div class="relatedPosts-list"><div><a href="/2026/07/29/2026-07-29-ai-agent-09-text-to-sql-langgraph/" title="Text-to-SQL 业务介绍与 LangGraph 流程"><img alt="cover" class="cover" data-lazy-src="/img/ai-agent-tutorial/covers/ai-agent-09-text-to-sql-langgraph.png" onerror="this.onerror=null,this.src='/img/404.jpg'" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"/><div class="content is-center"><div class="date">2026-07-29</div><div class="title">Text-to-SQL 业务介绍与 LangGraph 流程</div></div></a></div><div><a href="/2026/07/30/2026-07-30-ai-agent-10-text-to-sql-project/" title="Text-to-SQL 项目落地实战"><img alt="cover" class="cover" data-lazy-src="/img/ai-agent-tutorial/covers/ai-agent-10-text-to-sql-project.png" onerror="this.onerror=null,this.src='/img/404.jpg'" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"/><div class="content is-center"><div class="date">2026-07-30</div><div class="title">Text-to-SQL 项目落地实战</div></div></a></div><div><a href="/2026/08/01/2026-08-01-ai-agent-12-interview-review/" title="面试复盘功能设计"><img alt="cover" class="cover" data-lazy-src="/img/ai-agent-tutorial/covers/ai-agent-12-interview-review.png" onerror="this.onerror=null,this.src='/img/404.jpg'" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"/><div class="content is-center"><div class="date">2026-08-01</div><div class="title">面试复盘功能设计</div></div></a></div><div><a href="/2026/08/02/2026-08-02-ai-agent-13-realtime-voice-interview/" title="模拟面试实时语音流程"><img alt="cover" class="cover" data-lazy-src="/img/ai-agent-tutorial/covers/ai-agent-13-realtime-voice-interview.png" onerror="this.onerror=null,this.src='/img/404.jpg'" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"/><div class="content is-center"><div class="date">2026-08-02</div><div class="title">模拟面试实时语音流程</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="smithfont smith-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SpringCloud01"><span class="toc-number">1.</span> <span class="toc-text">SpringCloud01</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%BE%AE%E6%9C%8D%E5%8A%A1"><span class="toc-number">2.</span> <span class="toc-text">一、微服务</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84"><span class="toc-number">2.1.</span> <span class="toc-text">1.1单体架构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-%E5%BE%AE%E6%9C%8D%E5%8A%A1"><span class="toc-number">2.2.</span> <span class="toc-text">1.2 微服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9A%84%E9%87%8D%E8%A6%81%E6%80%A7"><span class="toc-number">2.3.</span> <span class="toc-text">1.3微服务的重要性</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81SpringCloud"><span class="toc-number">3.</span> <span class="toc-text">二、SpringCloud</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1%E8%AE%A4%E8%AF%86SpringCloud"><span class="toc-number">3.1.</span> <span class="toc-text">2.1认识SpringCloud</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87"><span class="toc-number">3.2.</span> <span class="toc-text">2.2 环境准备</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-1%E6%90%AD%E5%BB%BASpringCloud%E7%8E%AF%E5%A2%83"><span class="toc-number">3.2.1.</span> <span class="toc-text">2.2.1搭建SpringCloud环境</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%AE%9E%E7%8E%B0%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8"><span class="toc-number">4.</span> <span class="toc-text">三、实现远程调用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-%E6%9C%8D%E5%8A%A1%E5%87%86%E5%A4%87"><span class="toc-number">4.1.</span> <span class="toc-text">3.1 服务准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-%E8%B0%83%E7%94%A8%E6%B5%81%E7%A8%8B"><span class="toc-number">4.2.</span> <span class="toc-text">3.2 调用流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-RestTemplete%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">4.3.</span> <span class="toc-text">3.3 RestTemplete的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4-%E6%8F%90%E4%BE%9B%E8%80%85%E4%B8%8E%E6%B6%88%E8%B4%B9%E8%80%85"><span class="toc-number">4.4.</span> <span class="toc-text">3.4.提供者与消费者</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B%E3%80%81Feign%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8"><span class="toc-number">5.</span> <span class="toc-text">四、Feign远程调用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1Feign-%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">5.1.</span> <span class="toc-text">5.1Feign 是什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9-Feign"><span class="toc-number">5.2.</span> <span class="toc-text">5.2为什么选择 Feign</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-3Feign%E6%9B%BF%E4%BB%A3RestTemplate"><span class="toc-number">5.3.</span> <span class="toc-text">5.3Feign替代RestTemplate</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%95%E5%85%A5%E4%BE%9D%E8%B5%96"><span class="toc-number">5.3.1.</span> <span class="toc-text">引入依赖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E6%B3%A8%E8%A7%A3"><span class="toc-number">5.3.2.</span> <span class="toc-text">添加注解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E5%86%99Feign%E7%9A%84%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="toc-number">5.3.3.</span> <span class="toc-text">编写Feign的客户端</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95"><span class="toc-number">5.3.4.</span> <span class="toc-text">测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">5.3.5.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%BD%E5%8F%96api"><span class="toc-number">5.3.6.</span> <span class="toc-text">抽取api</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OpenFeign%E7%9A%84%E8%B6%85%E6%97%B6%E6%8E%A7%E5%88%B6"><span class="toc-number">5.3.7.</span> <span class="toc-text">OpenFeign的超时控制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Openfeign%E6%97%A5%E5%BF%97%E6%89%93%E5%8D%B0%E5%8A%9F%E8%83%BD"><span class="toc-number">5.3.8.</span> <span class="toc-text">Openfeign日志打印功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E6%96%B9%E5%BC%8F-%E2%80%93-springboot3-3-4-%E5%AF%B9%E5%BA%94%E7%9A%84openFeign%E7%89%88%E6%9C%AC"><span class="toc-number">5.3.9.</span> <span class="toc-text">配置文件方式  – springboot3.3.4 对应的openFeign版本</span></a></li></ol></li></ol></li></ol></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">©2022 - 2026 By <a class="footer-bar-link" href="/" target="_blank" title="Smith">Smith</a></div></div><div id="footer-type-tips"></div><div class="js-pjax"><script>function subtitleType () {
+  fetch('https://v1.hitokoto.cn')
+    .then(response => response.json())
+    .then(data => {
+      if (true) {
+        const from = '出自 ' + data.from
+        const sub = []
+        sub.unshift(data.hitokoto, from)
+        window.typed = new Typed('#footer-type-tips', {
+          strings: sub,
+          startDelay: 300,
+          typeSpeed: 150,
+          loop: true,
+          backSpeed: 50,
+        })
+      } else {
+        document.getElementById('footer-type-tips').innerHTML = data.hitokoto
+      }
+    })
+}
+
+if (true) {
+  if (typeof Typed === 'function') {
+    subtitleType()
+  } else {
+    getScript('https://cdn.jsdelivr.net/npm/typed.js@2.0.12/dist/typed.min.js').then(subtitleType)
+  }
+} else {
+  subtitleType()
+}
+</script></div></div><div class="footer-bar-right"><a class="footer-bar-link" href="https://github.com/Smithhss/smithhs.github.io.git" rel="noopener" target="_blank" title="Hexo">Hexo</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">199</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">69</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">3</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="smithfont smith-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://smithhs.cn/" title="博客"><img alt="博客" class="back-menu-item-icon" data-lazy-src="/img/favicon.png" onerror='this.onerror=null,this.src="/img/404.jpg"' src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"><span class="back-menu-item-text">博客</span></img></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" href="https://github.com/Smithhss" rel="noopener" target="_blank" title="Github"><img alt="Github" class="back-menu-item-icon" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/GitHub.png" onerror='this.onerror=null,this.src="/img/404.jpg"' src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"><span class="back-menu-item-text">Github</span></img></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="smithfont smith-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="smithfont smith-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="smithfont smith-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="smithfont smith-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="smithfont smith-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="smithfont smith-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/dailyPhoto/"><i class="smithfont smith-icon-camera faa-tada" style="font-size: 0.9em;"></i><span> 每日照片</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wallpaper/"><i class="smithfont smith-icon-image faa-tada" style="font-size: 0.9em;"></i><span> 壁纸</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wordScenery/"><i class="smithfont smith-icon-font faa-tada" style="font-size: 0.9em;"></i><span> 文字风景</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="smithfont smith-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于我</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="smithfont smith-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/love/"><i class="smithfont smith-icon-heart faa-tada" style="font-size: 0.9em;"></i><span> 爱情</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="smithfont smith-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Android-Studio/" style="font-size: 0.88rem;">Android Studio<sup>1</sup></a><a href="/tags/App/" style="font-size: 0.88rem;">App<sup>1</sup></a><a href="/tags/Butterfly/" style="font-size: 0.88rem;">Butterfly<sup>1</sup></a><a href="/tags/C/" style="font-size: 0.88rem;">C++<sup>3</sup></a><a href="/tags/CSS/" style="font-size: 0.88rem;">CSS<sup>1</sup></a><a href="/tags/Cisco-Packet-Tracer/" style="font-size: 0.88rem;">Cisco Packet Tracer<sup>1</sup></a><a href="/tags/Docker/" style="font-size: 0.88rem;">Docker<sup>2</sup></a><a href="/tags/Easypan/" style="font-size: 0.88rem;">Easypan<sup>2</sup></a><a href="/tags/FurtherMathematics/" style="font-size: 0.88rem;">FurtherMathematics<sup>1</sup></a><a href="/tags/GPT/" style="font-size: 0.88rem;">GPT<sup>1</sup></a><a href="/tags/Git2/" style="font-size: 0.88rem;">Git2<sup>1</sup></a><a href="/tags/HTML/" style="font-size: 0.88rem;">HTML<sup>1</sup></a><a href="/tags/Hexo/" style="font-size: 0.88rem;">Hexo<sup>1</sup></a><a href="/tags/Java/" style="font-size: 0.88rem;">Java<sup>67</sup></a><a href="/tags/JavaScript/" style="font-size: 0.88rem;">JavaScript<sup>1</sup></a><a href="/tags/Jrebel/" style="font-size: 0.88rem;">Jrebel<sup>1</sup></a><a href="/tags/LeetCode/" style="font-size: 0.88rem;">LeetCode<sup>1</sup></a><a href="/tags/Linux/" style="font-size: 0.88rem;">Linux<sup>3</sup></a><a href="/tags/Markdown/" style="font-size: 0.88rem;">Markdown<sup>2</sup></a><a href="/tags/Maven/" style="font-size: 0.88rem;">Maven<sup>2</sup></a><a href="/tags/MyBatis/" style="font-size: 0.88rem;">MyBatis<sup>1</sup></a><a href="/tags/MyBatis-Plus/" style="font-size: 0.88rem;">MyBatis-Plus<sup>1</sup></a><a href="/tags/Mysql/" style="font-size: 0.88rem;">Mysql<sup>1</sup></a><a href="/tags/Navicat/" style="font-size: 0.88rem;">Navicat<sup>1</sup></a><a href="/tags/NoSql/" style="font-size: 0.88rem;">NoSql<sup>1</sup></a><a href="/tags/Nodejs/" style="font-size: 0.88rem;">Nodejs<sup>2</sup></a><a href="/tags/Python/" style="font-size: 0.88rem;">Python<sup>4</sup></a><a href="/tags/Spring/" style="font-size: 0.88rem;">Spring<sup>2</sup></a><a href="/tags/VMware/" style="font-size: 0.88rem;">VMware<sup>2</sup></a><a href="/tags/WeChat/" style="font-size: 0.88rem;">WeChat<sup>1</sup></a><a href="/tags/YouHou/" style="font-size: 0.88rem;">YouHou<sup>1</sup></a><a href="/tags/books/" style="font-size: 0.88rem;">books<sup>1</sup></a><a href="/tags/butterfly/" style="font-size: 0.88rem;">butterfly<sup>1</sup></a><a href="/tags/clash/" style="font-size: 0.88rem;">clash<sup>1</sup></a><a href="/tags/error/" style="font-size: 0.88rem;">error<sup>1</sup></a><a href="/tags/project/" style="font-size: 0.88rem;">project<sup>4</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 0.88rem;">前端<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6/" style="font-size: 0.88rem;">开发框架<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" style="font-size: 0.88rem;">开发环境<sup>1</sup></a><a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="font-size: 0.88rem;">软件工程<sup>1</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" title="阅读模式" type="button"><i class="smithfont smith-icon-book-open"></i></button><button id="translateLink" title="简繁转换" type="button">繁</button><button id="darkmode" title="浅色和深色模式转换" type="button"><i class="smithfont smith-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" title="单栏和双栏切换" type="button"><i class="smithfont smith-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" title="设置" type="button"><i class="smithfont smith-icon-gear"></i></button><button class="close" id="mobile-toc-button" title="目录" type="button"><i class="smithfont smith-icon-list-ul"></i></button><button id="go-up" title="回到顶部" type="button"><i class="smithfont smith-icon-arrow-up"></i></button></div></div><div id="nav-music"><a accesskey="m" id="nav-music-hoverTips" onclick="smith.musicToggle()">播放音乐</a><div id="console-music-bg"></div><meting-js data-lrctype="0" id="8805965276" mutex="true" order="random" preload="none" server="netease" theme="var(--smith-main)" type="playlist" volume="0.7"></meting-js></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="smithfont smith-icon-xmark"></i></button></nav><div class="is-center" id="loading-database"><i class="smithfont smith-icon-spinner smith-pulse-icon"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr><div id="local-search-results"></div></hr></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="smithfont smith-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="smithfont smith-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="smithfont smith-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="smithfont smith-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="smithfont smith-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="smithfont smith-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="smithfont smith-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="smithfont smith-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="smithfont smith-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="smithfont smith-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="smithfont smith-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="smithfont smith-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="smithfont smith-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="smithfont smith-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="smithfont smith-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="smithfont smith-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="smithfont smith-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick='window.open("https://music.163.com/#/my/m/music/playlist?id=464586318", "_blank");' style="display: none;"><i class="smithfont smith-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="smithfont smith-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="smithfont smith-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="smithfont smith-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="smithfont smith-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" href="javascript:void(0);" id="menu-copy"><i class="smithfont smith-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" href="javascript:void(0);" id="menu-commentBarrage"><i class="smithfont smith-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" href="javascript:void(0);" id="menu-darkmode"><i class="smithfont smith-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" href="javascript:void(0);" id="menu-translate"><i class="smithfont smith-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn1.tianli0.top/npm/js-heo@1.0.6/translate/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@6.1.6/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.3.1/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.js"></script><script>var meting_api = "https://api.injahow.cn/meting/?server=:server&type=:type&id=:id&auth=:auth&r=:r";
+</script><canvas id="universe"></canvas><script async="" src="https://npm.elemecdn.com/smith-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("07/01/2022 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用史先森!`,
+    `生活明朗, 万物可爱`,
+    `
+
+      ███████╗███╗   ███╗██╗████████╗██╗  ██╗
+      ██╔════╝████╗ ████║██║╚══██╔══╝██║  ██║
+      ███████╗██╔████╔██║██║   ██║   ███████║
+      ╚════██║██║╚██╔╝██║██║   ██║   ██╔══██║
+      ███████║██║ ╚═╝ ██║██║   ██║   ██║  ██║
+      ╚══════╝╚═╝     ╚═╝╚═╝   ╚═╝   ╚═╝  ╚═╝
+
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2022 By 史先森 V1.0.0",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/smith-blog@1.0.0/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 史先森 %c 你正在访问 Smith 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async="" src="/smith/random.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><input id="page-type" name="page-type" type="hidden" value="post"/></div><script async="" data-pjax="" src="https://npm.elemecdn.com/smith-theme-static@1.0.0/bubble/bubble.js"></script><script>var visitorMail = "visitor@smithhs.cn";
+</script><script async="" data-pjax="" src="https://cdn.jsdelivr.net/npm/waterfall.js@1.1.0/dist/waterfall.min.js"></script><script src="https://cdn.cbd.int/qrcodejs@1.0.0/qrcode.min.js"></script><script src="/js/smith/right_click_menu.js"></script><link href="https://cdn.cbd.int/smith-theme-static@1.0.2/icon/ali_iconfont_css.css" rel="stylesheet"/><script color="0,0,255" count="99" defer="defer" id="canvas_nest" mobile="false" opacity="0.7" src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/dist/canvas-nest.min.js" zindex="-1"></script><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><link href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css" media="print" onload="this.media='all'" rel="stylesheet"/><script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script><script>AOS.init({
+  duration: 800,
+  easing: 'ease-out-cubic',
+  once: true,
+  offset: 50
+});
+</script><script src="https://lib.baomitu.com/pjax/0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll
+  smith.removeGlobalFnEvent('pjax')
+  smith.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async="" data-pjax="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script charset="UTF-8" src="https://cdn.cbd.int/smith-theme-static@1.0.2/accesskey/accesskey.js"></script><div id="live2d-container"><canvas id="live2d-canvas"></canvas><button class="live2d-toggle" title="切换看板娘">🎭</button></div><script data-pjax="" src="/js/smith/live2d.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="smithfont smith-icon-arrow-circle-right"></i></div></div></div></link></body></html>

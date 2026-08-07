@@ -1,0 +1,28 @@
+<svg width="1280" height="620" viewBox="0 0 1280 620" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1280" height="620" fill="#f8fafc"/>
+  <g font-family="Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+    <text x="640" y="58" text-anchor="middle" font-size="34" font-weight="700" fill="#111827">召回和精准：检索结果的两个方向</text>
+    <text x="640" y="96" text-anchor="middle" font-size="20" fill="#64748b">召回怕漏，精准怕乱</text>
+
+    <rect x="110" y="155" width="460" height="340" rx="10" fill="#ffffff" stroke="#cbd5e1"/>
+    <text x="340" y="210" text-anchor="middle" font-size="30" font-weight="700" fill="#1d4ed8">召回</text>
+    <text x="340" y="260" text-anchor="middle" font-size="22" fill="#334155">尽量不要漏掉相关资料</text>
+    <circle cx="250" cy="345" r="24" fill="#2563eb"/>
+    <circle cx="315" cy="345" r="24" fill="#2563eb"/>
+    <circle cx="380" cy="345" r="24" fill="#2563eb"/>
+    <circle cx="445" cy="345" r="24" fill="#f97316"/>
+    <text x="340" y="415" text-anchor="middle" font-size="20" fill="#475569">相关资料拿得多</text>
+    <text x="340" y="455" text-anchor="middle" font-size="20" fill="#475569">但可能混入无关资料</text>
+
+    <rect x="710" y="155" width="460" height="340" rx="10" fill="#ffffff" stroke="#cbd5e1"/>
+    <text x="940" y="210" text-anchor="middle" font-size="30" font-weight="700" fill="#15803d">精准</text>
+    <text x="940" y="260" text-anchor="middle" font-size="22" fill="#334155">拿到的内容尽量都相关</text>
+    <circle cx="875" cy="345" r="24" fill="#16a34a"/>
+    <circle cx="940" cy="345" r="24" fill="#16a34a"/>
+    <text x="940" y="415" text-anchor="middle" font-size="20" fill="#475569">结果更干净</text>
+    <text x="940" y="455" text-anchor="middle" font-size="20" fill="#475569">但可能漏掉部分资料</text>
+
+    <rect x="215" y="545" width="850" height="44" rx="8" fill="#ecfeff" stroke="#a5f3fc"/>
+    <text x="640" y="573" text-anchor="middle" font-size="20" font-weight="700" fill="#155e75">RAG 常见做法：先保证别漏，再用 rerank 和去重筛掉干扰</text>
+  </g>
+</svg>

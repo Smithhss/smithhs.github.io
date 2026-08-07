@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="340" viewBox="0 0 980 340">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#334155"/></marker>
+    <style>
+      .title{font:700 20px Arial,'Microsoft YaHei',sans-serif;fill:#0f172a}
+      .box{fill:#fff;stroke:#cbd5e1;stroke-width:1.5;rx:10}
+      .blue{fill:#eff6ff;stroke:#93c5fd}
+      .green{fill:#f0fdf4;stroke:#86efac}
+      .h{font:700 15px Arial,'Microsoft YaHei',sans-serif;fill:#172033}
+      .t{font:13px Arial,'Microsoft YaHei',sans-serif;fill:#475569}
+      .line{stroke:#334155;stroke-width:2;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <text x="35" y="38" class="title">评测失败排查链路</text>
+  <rect x="60" y="90" width="210" height="85" class="box"/>
+  <text x="82" y="124" class="h">评测结果</text>
+  <text x="82" y="150" class="t">失败类型 / 实际 SQL / 回答</text>
+  <rect x="355" y="90" width="230" height="85" class="box blue"/>
+  <text x="377" y="124" class="h">EVAL 运行记录</text>
+  <text x="377" y="150" class="t">source_type = EVAL</text>
+  <rect x="670" y="90" width="230" height="85" class="box green"/>
+  <text x="692" y="124" class="h">State History</text>
+  <text x="692" y="150" class="t">每个 graph node 的状态变化</text>
+  <path d="M270 132 H345" class="line"/>
+  <text x="285" y="118" class="t">conversation_id</text>
+  <path d="M585 132 H660" class="line"/>
+  <text x="610" y="118" class="t">run_id</text>
+  <rect x="260" y="235" width="460" height="58" class="box"/>
+  <text x="285" y="270" class="h">运行记录页面默认过滤 EVAL，排查评测失败时再筛选查看</text>
+</svg>

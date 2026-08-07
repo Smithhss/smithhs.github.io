@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="520" viewBox="0 0 1080 520">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#334155"/></marker>
+    <style>
+      .title{font:700 20px Arial,'Microsoft YaHei',sans-serif;fill:#0f172a}
+      .lane{fill:#f8fafc;stroke:#e2e8f0;stroke-width:1.5;rx:14}
+      .box{fill:#fff;stroke:#bfdbfe;stroke-width:1.5;rx:10}
+      .box2{fill:#fff7ed;stroke:#fdba74;stroke-width:1.5;rx:10}
+      .box3{fill:#f5f3ff;stroke:#c4b5fd;stroke-width:1.5;rx:10}
+      .h{font:700 15px Arial,'Microsoft YaHei',sans-serif;fill:#172033}
+      .t{font:13px Arial,'Microsoft YaHei',sans-serif;fill:#475569}
+      .line{stroke:#334155;stroke-width:2;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <text x="40" y="38" class="title">当前 Text-to-SQL 评测整体架构</text>
+  <rect x="35" y="70" width="300" height="390" class="lane"/>
+  <text x="60" y="102" class="h">样本建设</text>
+  <rect x="70" y="130" width="220" height="65" class="box"/>
+  <text x="92" y="158" class="h">运行记录 / 人工反馈</text>
+  <text x="92" y="180" class="t">真实问题沉淀为候选样本</text>
+  <rect x="70" y="240" width="220" height="75" class="box"/>
+  <text x="92" y="270" class="h">评测样本</text>
+  <text x="92" y="292" class="t">问题、业务、目标、场景</text>
+  <rect x="70" y="355" width="220" height="75" class="box"/>
+  <text x="92" y="385" class="h">判断标准</text>
+  <text x="92" y="407" class="t">客观断言 + 语义规则</text>
+
+  <rect x="390" y="70" width="300" height="390" class="lane"/>
+  <text x="415" y="102" class="h">评测执行</text>
+  <rect x="425" y="130" width="220" height="65" class="box2"/>
+  <text x="447" y="158" class="h">评测任务</text>
+  <text x="447" y="180" class="t">选择 ACTIVE 样本，异步运行</text>
+  <rect x="425" y="240" width="220" height="75" class="box2"/>
+  <text x="447" y="270" class="h">完整 Graph</text>
+  <text x="447" y="292" class="t">真实跑 Text-to-SQL 流程</text>
+  <rect x="425" y="355" width="220" height="75" class="box2"/>
+  <text x="447" y="385" class="h">EVAL 运行记录</text>
+  <text x="447" y="407" class="t">保留 conversation_id 和步骤</text>
+
+  <rect x="745" y="70" width="300" height="390" class="lane"/>
+  <text x="770" y="102" class="h">结果分析</text>
+  <rect x="780" y="130" width="220" height="65" class="box3"/>
+  <text x="802" y="158" class="h">样本级结果</text>
+  <text x="802" y="180" class="t">通过率、失败类型、实际 SQL</text>
+  <rect x="780" y="240" width="220" height="75" class="box3"/>
+  <text x="802" y="270" class="h">断言结果明细</text>
+  <text x="802" y="292" class="t">实际值、得分、判断原因</text>
+  <rect x="780" y="355" width="220" height="75" class="box3"/>
+  <text x="802" y="385" class="h">报告和回归</text>
+  <text x="802" y="407" class="t">失败分布，指导优化</text>
+
+  <path d="M180 195 V230" class="line"/>
+  <path d="M180 315 V345" class="line"/>
+  <path d="M290 276 H415" class="line"/>
+  <path d="M535 195 V230" class="line"/>
+  <path d="M535 315 V345" class="line"/>
+  <path d="M645 276 H770" class="line"/>
+  <path d="M890 195 V230" class="line"/>
+  <path d="M890 315 V345" class="line"/>
+</svg>

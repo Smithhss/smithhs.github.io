@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="420" viewBox="0 0 980 420">
+  <defs>
+    <style>
+      .title{font:700 28px Arial,"Microsoft YaHei",sans-serif;fill:#172033}
+      .label{font:700 18px Arial,"Microsoft YaHei",sans-serif;fill:#172033}
+      .text{font:15px Arial,"Microsoft YaHei",sans-serif;fill:#344054}
+      .small{font:13px Arial,"Microsoft YaHei",sans-serif;fill:#667085}
+      .box{fill:#fff;stroke:#b8c2cc;stroke-width:2;rx:10}
+      .blue{fill:#eaf4ff;stroke:#4f8fd9}
+      .green{fill:#eaf8f0;stroke:#46a36c}
+      .orange{fill:#fff5e6;stroke:#d98a22}
+      .purple{fill:#f4efff;stroke:#8b6bd9}
+      .arrow{stroke:#62748a;stroke-width:2.5;fill:none;marker-end:url(#arrow)}
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#62748a"/>
+    </marker>
+  </defs>
+  <rect width="980" height="420" fill="#f7f9fb"/>
+  <text x="40" y="48" class="title">LangChain 在学生端 AI 服务里的位置</text>
+  <text x="40" y="78" class="text">它不是替代大模型、知识库或 Java 业务系统，而是负责把这些能力组织成清晰的执行流程。</text>
+
+  <rect x="42" y="130" width="150" height="92" class="box blue"/>
+  <text x="78" y="165" class="label">学生前端</text>
+  <text x="66" y="195" class="text">输入问题</text>
+
+  <rect x="245" y="130" width="160" height="92" class="box green"/>
+  <text x="290" y="165" class="label">Java 后端</text>
+  <text x="278" y="195" class="text">鉴权、落库</text>
+
+  <rect x="465" y="104" width="236" height="144" class="box purple"/>
+  <text x="505" y="145" class="label">Python AI 服务</text>
+  <text x="492" y="176" class="text">LangChain 组织流程</text>
+  <text x="492" y="202" class="small">Prompt / Model / Parser</text>
+  <text x="492" y="224" class="small">Runnable / RAG / Tool</text>
+
+  <rect x="770" y="80" width="160" height="72" class="box orange"/>
+  <text x="812" y="110" class="label">大模型</text>
+  <text x="803" y="136" class="text">生成回答</text>
+
+  <rect x="770" y="180" width="160" height="72" class="box orange"/>
+  <text x="790" y="210" class="label">LlamaIndex</text>
+  <text x="798" y="236" class="text">知识库检索</text>
+
+  <rect x="770" y="280" width="160" height="72" class="box orange"/>
+  <text x="805" y="310" class="label">业务工具</text>
+  <text x="790" y="336" class="text">课表 / 值日等</text>
+
+  <path d="M192 176 H245" class="arrow"/>
+  <path d="M405 176 H465" class="arrow"/>
+  <path d="M701 142 C725 124 740 116 770 116" class="arrow"/>
+  <path d="M701 186 C728 194 742 208 770 216" class="arrow"/>
+  <path d="M701 220 C735 255 742 300 770 316" class="arrow"/>
+  <path d="M465 232 C370 312 250 312 160 222" class="arrow"/>
+  <text x="305" y="324" class="small">流式结果返回前端，Java 继续负责保存完整回答</text>
+</svg>

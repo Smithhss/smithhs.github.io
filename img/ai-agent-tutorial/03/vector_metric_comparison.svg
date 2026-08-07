@@ -1,0 +1,59 @@
+<svg width="1280" height="760" viewBox="0 0 1280 760" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1280" height="760" fill="#f8fafc"/>
+  <defs>
+    <marker id="arrow-blue" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrow-green" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#16a34a"/>
+    </marker>
+    <marker id="arrow-red" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#dc2626"/>
+    </marker>
+  </defs>
+  <g font-family="Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+    <text x="640" y="58" text-anchor="middle" font-size="34" font-weight="700" fill="#111827">三种相似度方法看的是不同东西</text>
+    <text x="640" y="96" text-anchor="middle" font-size="20" fill="#64748b">余弦看方向，点积看方向加长度，欧氏距离看空间远近</text>
+
+    <rect x="55" y="145" width="360" height="485" rx="10" fill="#ffffff" stroke="#cbd5e1"/>
+    <text x="235" y="190" text-anchor="middle" font-size="27" font-weight="700" fill="#1d4ed8">余弦相似度</text>
+    <text x="235" y="224" text-anchor="middle" font-size="19" fill="#475569">重点：方向像不像</text>
+    <line x1="110" y1="500" x2="350" y2="500" stroke="#94a3b8" stroke-width="3"/>
+    <line x1="110" y1="500" x2="110" y2="285" stroke="#94a3b8" stroke-width="3"/>
+    <line x1="110" y1="500" x2="265" y2="330" stroke="#2563eb" stroke-width="7" marker-end="url(#arrow-blue)"/>
+    <line x1="110" y1="500" x2="285" y2="310" stroke="#16a34a" stroke-width="7" marker-end="url(#arrow-green)"/>
+    <line x1="110" y1="500" x2="320" y2="462" stroke="#dc2626" stroke-width="7" marker-end="url(#arrow-red)"/>
+    <text x="128" y="555" font-size="18" fill="#334155">方向接近：语义更可能接近</text>
+    <text x="128" y="588" font-size="18" fill="#334155">常用于文本语义检索</text>
+
+    <rect x="460" y="145" width="360" height="485" rx="10" fill="#ffffff" stroke="#cbd5e1"/>
+    <text x="640" y="190" text-anchor="middle" font-size="27" font-weight="700" fill="#15803d">点积</text>
+    <text x="640" y="224" text-anchor="middle" font-size="19" fill="#475569">重点：方向和长度一起打分</text>
+    <rect x="515" y="285" width="250" height="70" rx="8" fill="#f0fdf4" stroke="#bbf7d0"/>
+    <text x="640" y="328" text-anchor="middle" font-size="20" font-weight="700" fill="#166534">问题向量 · 资料向量</text>
+    <text x="640" y="395" text-anchor="middle" font-size="48" font-weight="700" fill="#16a34a">分数</text>
+    <text x="640" y="435" text-anchor="middle" font-size="21" fill="#334155">分数越高，整体匹配越强</text>
+    <text x="515" y="520" font-size="18" fill="#334155">常见于：</text>
+    <text x="515" y="552" font-size="18" fill="#334155">模型推荐用 inner product</text>
+    <text x="515" y="585" font-size="18" fill="#334155">需要让向量长度参与排序</text>
+
+    <rect x="865" y="145" width="360" height="485" rx="10" fill="#ffffff" stroke="#cbd5e1"/>
+    <text x="1045" y="190" text-anchor="middle" font-size="27" font-weight="700" fill="#c2410c">欧氏距离</text>
+    <text x="1045" y="224" text-anchor="middle" font-size="19" fill="#475569">重点：两个点离多远</text>
+    <line x1="930" y1="500" x2="1168" y2="500" stroke="#94a3b8" stroke-width="3"/>
+    <line x1="930" y1="500" x2="930" y2="285" stroke="#94a3b8" stroke-width="3"/>
+    <circle cx="1000" cy="360" r="14" fill="#2563eb"/>
+    <circle cx="1038" cy="388" r="14" fill="#16a34a"/>
+    <circle cx="1138" cy="468" r="14" fill="#dc2626"/>
+    <line x1="1000" y1="360" x2="1038" y2="388" stroke="#16a34a" stroke-width="4" stroke-dasharray="8 8"/>
+    <line x1="1000" y1="360" x2="1138" y2="468" stroke="#dc2626" stroke-width="4" stroke-dasharray="8 8"/>
+    <text x="965" y="335" font-size="18" fill="#1d4ed8">问题</text>
+    <text x="1055" y="390" font-size="18" fill="#15803d">近</text>
+    <text x="1145" y="466" font-size="18" fill="#b91c1c">远</text>
+    <text x="930" y="555" font-size="18" fill="#334155">距离越小，越相似</text>
+    <text x="930" y="588" font-size="18" fill="#334155">更像几何里的直线距离</text>
+
+    <rect x="150" y="670" width="980" height="58" rx="8" fill="#eef2ff" stroke="#c7d2fe"/>
+    <text x="640" y="706" text-anchor="middle" font-size="22" font-weight="700" fill="#3730a3">实际项目里优先看 Embedding 模型和向量数据库推荐使用哪一种</text>
+  </g>
+</svg>

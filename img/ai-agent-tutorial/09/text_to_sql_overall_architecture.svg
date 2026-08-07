@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="720" viewBox="0 0 1400 720" role="img" aria-labelledby="title desc">
+  <title id="title">企业级 Text-to-SQL 全局流程图</title><desc id="desc">从用户问题到 Router、RAG、查询规划、数据仓库、SQL Guard 和结果展示的完整架构。</desc>
+  <rect width="1400" height="720" fill="#ffffff"/>
+  <text x="55" y="58" font-family="Arial, PingFang SC, Microsoft YaHei" font-size="31" font-weight="700" fill="#182230">企业级 Text-to-SQL 全局流程：从自然语言到可信的数据答案</text>
+  <g font-family="Arial, PingFang SC, Microsoft YaHei" font-size="19" text-anchor="middle">
+    <rect x="65" y="145" width="180" height="82" rx="11" fill="#e8f0ff" stroke="#94b7f5" stroke-width="2"/><text x="155" y="184" fill="#245aa7">用户自然语言问题</text><text x="155" y="210" font-size="15" fill="#4c6280">“最近 7 天交易额？”</text>
+    <rect x="315" y="145" width="175" height="82" rx="11" fill="#f4ebff" stroke="#c3a3ed" stroke-width="2"/><text x="402" y="184" fill="#6d3caf">Router</text><text x="402" y="210" font-size="15" fill="#705d87">数据查询？普通问答？</text>
+    <rect x="560" y="145" width="235" height="82" rx="11" fill="#e6f8f2" stroke="#8ccdaf" stroke-width="2"/><text x="678" y="180" fill="#147a4b">RAG 候选资料</text><text x="678" y="207" font-size="15" fill="#477a60">指标库 + 数仓 Schema 目录</text>
+    <rect x="865" y="145" width="235" height="82" rx="11" fill="#fff5df" stroke="#e4be69" stroke-width="2"/><text x="982" y="180" fill="#ad6a00">查询规划模型</text><text x="982" y="207" font-size="15" fill="#775d27">选指标、表、关系、条件</text>
+    <rect x="1170" y="145" width="175" height="82" rx="11" fill="#ffecee" stroke="#e6a2ad" stroke-width="2"/><text x="1257" y="184" fill="#b03b4c">澄清对话</text><text x="1257" y="210" font-size="15" fill="#81515a">信息不足才提问</text>
+    <rect x="545" y="345" width="270" height="96" rx="12" fill="#edf4f8" stroke="#9bbbc9" stroke-width="2"/><text x="680" y="383" fill="#286274">已校验查询计划</text><text x="680" y="411" font-size="15" fill="#57747d">指标 + 详细 Schema + 关联路径</text>
+    <rect x="890" y="345" width="220" height="96" rx="12" fill="#f3f8ff" stroke="#a6c5ee" stroke-width="2"/><text x="1000" y="383" fill="#245aa7">SQL 生成模型</text><text x="1000" y="411" font-size="15" fill="#4c6280">固定别名，生成 SQL</text>
+    <rect x="890" y="525" width="220" height="94" rx="12" fill="#fff3e4" stroke="#e5b774" stroke-width="2"/><text x="1000" y="561" fill="#a55d00">SQL Guard + EXPLAIN</text><text x="1000" y="590" font-size="15" fill="#75562c">程序校验、安全与执行计划</text>
+    <rect x="570" y="525" width="220" height="94" rx="12" fill="#e6f8f2" stroke="#8ccdaf" stroke-width="2"/><text x="680" y="561" fill="#147a4b">analytics_dw 数仓</text><text x="680" y="590" font-size="15" fill="#477a60">分析表、宽表、聚合表</text>
+    <rect x="250" y="525" width="220" height="94" rx="12" fill="#e8f0ff" stroke="#94b7f5" stroke-width="2"/><text x="360" y="561" fill="#245aa7">结果后处理</text><text x="360" y="590" font-size="15" fill="#4c6280">格式、图表、可信总结</text>
+    <rect x="65" y="525" width="115" height="94" rx="12" fill="#f4ebff" stroke="#c3a3ed" stroke-width="2"/><text x="122" y="561" fill="#6d3caf">最终回答</text><text x="122" y="590" font-size="15" fill="#705d87">卡片 / 表格 / 图表</text>
+  </g>
+  <g stroke="#6f8092" stroke-width="3" fill="none" marker-end="url(#arrow)">
+    <path d="M248 186H309"/><path d="M493 186H554"/><path d="M798 186H859"/><path d="M1103 186H1164"/>
+    <path d="M982 230V290H680V339"/><path d="M1257 230V290H1120"/>
+    <path d="M818 393H884"/><path d="M1000 444V519"/><path d="M887 572H796"/><path d="M567 572H476"/><path d="M247 572H186"/>
+  </g>
+  <text x="65" y="682" font-family="Arial, PingFang SC, Microsoft YaHei" font-size="17" fill="#536475">关键边界：模型负责理解、规划、生成与解释；程序负责校验、权限、执行计划与最终放行；数据仓库提供统一分析数据。</text>
+  <defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#6f8092"/></marker></defs>
+</svg>

@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="660" viewBox="0 0 1200 660">
+  <rect width="1200" height="660" fill="#f8fafc"/>
+  <text x="600" y="56" text-anchor="middle" font-family="Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="32" font-weight="700" fill="#1f2937">AI 应用开发就业与面试能力地图</text>
+  <text x="600" y="92" text-anchor="middle" font-family="Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" fill="#64748b">面试不只看会不会调用模型，更看项目闭环、工程能力和问题定位能力</text>
+
+  <g font-family="Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+    <rect x="65" y="145" width="235" height="170" rx="16" fill="#eff6ff" stroke="#60a5fa" stroke-width="2"/>
+    <text x="183" y="185" text-anchor="middle" font-size="22" font-weight="700" fill="#1d4ed8">岗位方向</text>
+    <text x="183" y="225" text-anchor="middle" font-size="16" fill="#334155">AI 应用开发</text>
+    <text x="183" y="253" text-anchor="middle" font-size="16" fill="#334155">RAG / 知识库工程</text>
+    <text x="183" y="281" text-anchor="middle" font-size="16" fill="#334155">Agent / 智能体开发</text>
+
+    <rect x="345" y="145" width="235" height="170" rx="16" fill="#f0fdf4" stroke="#4ade80" stroke-width="2"/>
+    <text x="463" y="185" text-anchor="middle" font-size="22" font-weight="700" fill="#15803d">基础能力</text>
+    <text x="463" y="225" text-anchor="middle" font-size="16" fill="#334155">API 调用与参数</text>
+    <text x="463" y="253" text-anchor="middle" font-size="16" fill="#334155">Prompt 与结构化输出</text>
+    <text x="463" y="281" text-anchor="middle" font-size="16" fill="#334155">Token / 上下文 / 成本</text>
+
+    <rect x="625" y="145" width="235" height="170" rx="16" fill="#fff7ed" stroke="#fb923c" stroke-width="2"/>
+    <text x="743" y="185" text-anchor="middle" font-size="22" font-weight="700" fill="#c2410c">核心项目</text>
+    <text x="743" y="225" text-anchor="middle" font-size="16" fill="#334155">企业知识库问答</text>
+    <text x="743" y="253" text-anchor="middle" font-size="16" fill="#334155">文档分析助手</text>
+    <text x="743" y="281" text-anchor="middle" font-size="16" fill="#334155">工具调用 Agent</text>
+
+    <rect x="905" y="145" width="235" height="170" rx="16" fill="#fdf2f8" stroke="#f472b6" stroke-width="2"/>
+    <text x="1023" y="185" text-anchor="middle" font-size="22" font-weight="700" fill="#be185d">工程落地</text>
+    <text x="1023" y="225" text-anchor="middle" font-size="16" fill="#334155">权限与安全边界</text>
+    <text x="1023" y="253" text-anchor="middle" font-size="16" fill="#334155">日志、评测、监控</text>
+    <text x="1023" y="281" text-anchor="middle" font-size="16" fill="#334155">部署、成本、稳定性</text>
+
+    <rect x="140" y="390" width="920" height="96" rx="16" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <text x="600" y="426" text-anchor="middle" font-size="22" font-weight="700" fill="#1f2937">面试表达重点</text>
+    <text x="600" y="460" text-anchor="middle" font-size="17" fill="#475569">能讲清楚：业务问题 → 技术方案 → 关键实现 → 效果验证 → 风险与优化</text>
+  </g>
+</svg>

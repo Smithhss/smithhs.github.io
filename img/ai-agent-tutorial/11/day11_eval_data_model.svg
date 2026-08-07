@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="520" viewBox="0 0 1100 520">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#475569"/>
+    </marker>
+    <style>
+      .title{font:700 20px Arial,'Microsoft YaHei',sans-serif;fill:#0f172a}
+      .box{fill:#fff;stroke:#cbd5e1;stroke-width:1.5;rx:10}
+      .head{fill:#eff6ff;stroke:#cbd5e1;stroke-width:1.5}
+      .h{font:700 15px Arial,'Microsoft YaHei',sans-serif;fill:#172033}
+      .t{font:13px Arial,'Microsoft YaHei',sans-serif;fill:#334155}
+      .note{font:12px Arial,'Microsoft YaHei',sans-serif;fill:#64748b}
+      .line{stroke:#475569;stroke-width:2;fill:none;marker-end:url(#arrow)}
+      .dashed{stroke-dasharray:6 5}
+    </style>
+  </defs>
+  <text x="40" y="36" class="title">Text-to-SQL 评测数据模型</text>
+
+  <rect x="40" y="70" width="215" height="250" class="box"/>
+  <rect x="40" y="70" width="215" height="40" class="head"/>
+  <text x="60" y="96" class="h">text_to_sql_run</text>
+  <text x="60" y="134" class="t">id</text>
+  <text x="60" y="156" class="t">conversation_id</text>
+  <text x="60" y="178" class="t">source_type: USER / EVAL</text>
+  <text x="60" y="200" class="t">original_question</text>
+  <text x="60" y="222" class="t">state_snapshot_json</text>
+  <text x="60" y="244" class="t">generated_sql / executed_sql</text>
+  <text x="60" y="266" class="t">final_answer</text>
+  <text x="60" y="288" class="t">status</text>
+
+  <rect x="315" y="70" width="230" height="250" class="box"/>
+  <rect x="315" y="70" width="230" height="40" class="head"/>
+  <text x="335" y="96" class="h">text_to_sql_eval_question</text>
+  <text x="335" y="134" class="t">id</text>
+  <text x="335" y="156" class="t">question</text>
+  <text x="335" y="178" class="t">business_id / business_name</text>
+  <text x="335" y="200" class="t">eval_target</text>
+  <text x="335" y="222" class="t">sample_category</text>
+  <text x="335" y="244" class="t">source_run_id</text>
+  <text x="335" y="266" class="t">judge_note</text>
+  <text x="335" y="288" class="t">status: DRAFT / ACTIVE</text>
+
+  <rect x="610" y="70" width="210" height="250" class="box"/>
+  <rect x="610" y="70" width="210" height="40" class="head"/>
+  <text x="630" y="96" class="h">text_to_sql_eval_assertion</text>
+  <text x="630" y="134" class="t">eval_question_id</text>
+  <text x="630" y="156" class="t">actual_key</text>
+  <text x="630" y="178" class="t">operator</text>
+  <text x="630" y="200" class="t">expected_value</text>
+  <text x="630" y="222" class="t">required / failure_type</text>
+  <text x="630" y="244" class="t">reference_answer</text>
+  <text x="630" y="266" class="t">key_points / forbidden_points</text>
+  <text x="630" y="288" class="t">min_score</text>
+
+  <rect x="865" y="70" width="195" height="175" class="box"/>
+  <rect x="865" y="70" width="195" height="40" class="head"/>
+  <text x="885" y="96" class="h">text_to_sql_eval_run</text>
+  <text x="885" y="134" class="t">id / name</text>
+  <text x="885" y="156" class="t">status</text>
+  <text x="885" y="178" class="t">sample_count</text>
+  <text x="885" y="200" class="t">pass_count / fail_count</text>
+  <text x="885" y="222" class="t">summary_json / pass_rate</text>
+
+  <rect x="610" y="365" width="210" height="120" class="box"/>
+  <rect x="610" y="365" width="210" height="40" class="head"/>
+  <text x="630" y="391" class="h">eval_run_result</text>
+  <text x="630" y="429" class="t">eval_run_id / eval_question_id</text>
+  <text x="630" y="451" class="t">conversation_id</text>
+  <text x="630" y="473" class="t">actual_state_json / SQL / answer</text>
+
+  <rect x="865" y="335" width="195" height="150" class="box"/>
+  <rect x="865" y="335" width="195" height="40" class="head"/>
+  <text x="885" y="361" class="h">assertion_result</text>
+  <text x="885" y="399" class="t">eval_run_result_id</text>
+  <text x="885" y="421" class="t">eval_assertion_id</text>
+  <text x="885" y="443" class="t">actual_value_json</text>
+  <text x="885" y="465" class="t">passed / score / reason</text>
+
+  <path d="M255 245 H305" class="line"/>
+  <text x="258" y="232" class="note">沉淀样本</text>
+  <path d="M545 178 H600" class="line"/>
+  <text x="552" y="164" class="note">配置规则</text>
+  <path d="M545 286 C590 340 640 350 700 365" class="line"/>
+  <path d="M820 425 H855" class="line"/>
+  <path d="M865 190 C840 260 780 315 735 365" class="line"/>
+  <text x="822" y="292" class="note">任务生成结果</text>
+  <path d="M610 450 C425 500 185 430 150 320" class="line dashed"/>
+  <text x="260" y="475" class="note">conversation_id 回查 EVAL 运行记录和 State History</text>
+</svg>

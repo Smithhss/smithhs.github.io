@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <rect width="1280" height="720" fill="#f8fafc"/>
+  <text x="640" y="72" text-anchor="middle" font-family="Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="38" font-weight="700" fill="#111827">三种常见学习方式</text>
+  <text x="640" y="114" text-anchor="middle" font-family="Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="22" fill="#64748b">区别在于：训练数据里有没有答案，模型靠什么反馈改进</text>
+
+  <defs>
+    <filter id="shadow" x="-8%" y="-10%" width="116%" height="130%">
+      <feDropShadow dx="0" dy="8" stdDeviation="10" flood-color="#cbd5e1" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+
+  <g font-family="Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+    <rect x="70" y="168" width="350" height="410" rx="20" fill="#eef2ff" stroke="#818cf8" stroke-width="3" filter="url(#shadow)"/>
+    <text x="245" y="220" text-anchor="middle" font-size="30" font-weight="700" fill="#3730a3">监督学习</text>
+    <text x="245" y="266" text-anchor="middle" font-size="21" font-weight="700" fill="#334155">输入 + 标准答案</text>
+    <rect x="112" y="304" width="266" height="82" rx="14" fill="#ffffff" stroke="#c7d2fe" stroke-width="2"/>
+    <text x="245" y="337" text-anchor="middle" font-size="19" fill="#334155">面积 → 房价</text>
+    <text x="245" y="367" text-anchor="middle" font-size="19" fill="#334155">图片 → 猫 / 狗</text>
+    <rect x="112" y="424" width="266" height="88" rx="14" fill="#ffffff" stroke="#c7d2fe" stroke-width="2"/>
+    <text x="245" y="456" text-anchor="middle" font-size="19" fill="#475569">模型对照答案</text>
+    <text x="245" y="486" text-anchor="middle" font-size="19" fill="#475569">计算损失并调整参数</text>
+
+    <rect x="465" y="168" width="350" height="410" rx="20" fill="#ecfeff" stroke="#22d3ee" stroke-width="3" filter="url(#shadow)"/>
+    <text x="640" y="220" text-anchor="middle" font-size="30" font-weight="700" fill="#0e7490">无监督学习</text>
+    <text x="640" y="266" text-anchor="middle" font-size="21" font-weight="700" fill="#334155">只有数据，没有明确答案</text>
+    <rect x="507" y="304" width="266" height="82" rx="14" fill="#ffffff" stroke="#a5f3fc" stroke-width="2"/>
+    <text x="640" y="337" text-anchor="middle" font-size="19" fill="#334155">大量文本</text>
+    <text x="640" y="367" text-anchor="middle" font-size="19" fill="#334155">大量用户行为</text>
+    <rect x="507" y="424" width="266" height="88" rx="14" fill="#ffffff" stroke="#a5f3fc" stroke-width="2"/>
+    <text x="640" y="456" text-anchor="middle" font-size="19" fill="#475569">模型自己找规律</text>
+    <text x="640" y="486" text-anchor="middle" font-size="19" fill="#475569">比如相似内容聚在一起</text>
+
+    <rect x="860" y="168" width="350" height="410" rx="20" fill="#f0fdf4" stroke="#22c55e" stroke-width="3" filter="url(#shadow)"/>
+    <text x="1035" y="220" text-anchor="middle" font-size="30" font-weight="700" fill="#15803d">强化学习</text>
+    <text x="1035" y="266" text-anchor="middle" font-size="21" font-weight="700" fill="#334155">行动 + 反馈奖励</text>
+    <rect x="902" y="304" width="266" height="82" rx="14" fill="#ffffff" stroke="#bbf7d0" stroke-width="2"/>
+    <text x="1035" y="337" text-anchor="middle" font-size="19" fill="#334155">回答问题</text>
+    <text x="1035" y="367" text-anchor="middle" font-size="19" fill="#334155">玩游戏 / 控制机器人</text>
+    <rect x="902" y="424" width="266" height="88" rx="14" fill="#ffffff" stroke="#bbf7d0" stroke-width="2"/>
+    <text x="1035" y="456" text-anchor="middle" font-size="19" fill="#475569">做得好给奖励</text>
+    <text x="1035" y="486" text-anchor="middle" font-size="19" fill="#475569">做得差给惩罚</text>
+
+    <rect x="210" y="624" width="860" height="50" rx="14" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <text x="640" y="656" text-anchor="middle" font-size="20" font-weight="700" fill="#334155">第四章讲“怎么调参数”，第五章讲“模型从什么样的数据和反馈里学习”</text>
+  </g>
+</svg>

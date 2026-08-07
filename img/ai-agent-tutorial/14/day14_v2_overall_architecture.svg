@@ -1,0 +1,103 @@
+<svg width="1280" height="760" viewBox="0 0 1280 760" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">模拟面试 V2 自控语音链路总体架构</title>
+  <desc id="desc">前端、Java、YanQue-AI、火山 ASR、火山 TTS 和 MySQL 的关系。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#243447"/>
+    </marker>
+    <style>
+      .title{font:700 32px Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#111827}
+      .sub{font:16px Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#667085}
+      .box{fill:#fff;stroke:#d7e0ea;stroke-width:2}
+      .front{fill:#eaf4ff;stroke:#3577c4;stroke-width:2}
+      .java{fill:#ecfdf3;stroke:#2e8b57;stroke-width:2}
+      .ai{fill:#f4efff;stroke:#7857c8;stroke-width:2}
+      .volc{fill:#fff7e8;stroke:#ce8a22;stroke-width:2}
+      .db{fill:#fef2f2;stroke:#d45b5b;stroke-width:2}
+      .head{font:700 22px Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#1f2937;text-anchor:middle}
+      .txt{font:16px Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#344054;text-anchor:middle}
+      .small{font:14px Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#667085;text-anchor:middle}
+      .line{stroke:#243447;stroke-width:2.5;fill:none;marker-end:url(#arrow)}
+      .dash{stroke:#667085;stroke-width:2.3;fill:none;stroke-dasharray:8 7;marker-end:url(#arrow)}
+      .label{font:700 14px Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#243447;text-anchor:middle}
+    </style>
+  </defs>
+  <rect width="1280" height="760" fill="#fbfcff"/>
+  <text x="60" y="58" class="title">模拟面试 V2：自控 ASR / LLM / TTS 语音链路</text>
+  <text x="60" y="88" class="sub">第十三天是火山 Realtime 端到端；第十四天改成 Java 控主线，ASR、LLM、TTS 拆开。</text>
+
+  <rect x="52" y="138" width="250" height="410" rx="18" class="box"/>
+  <rect x="86" y="186" width="182" height="78" rx="12" class="front"/>
+  <text x="177" y="218" class="head">学生前端</text>
+  <text x="177" y="244" class="small">VoiceV2Page.tsx</text>
+  <rect x="86" y="310" width="182" height="74" rx="12" class="front"/>
+  <text x="177" y="340" class="txt">采集麦克风</text>
+  <text x="177" y="364" class="small">16k PCM</text>
+  <rect x="86" y="424" width="182" height="74" rx="12" class="front"/>
+  <text x="177" y="454" class="txt">播放 AI 声音</text>
+  <text x="177" y="478" class="small">24k PCM</text>
+
+  <rect x="382" y="120" width="270" height="475" rx="18" class="box"/>
+  <rect x="416" y="168" width="202" height="74" rx="12" class="java"/>
+  <text x="517" y="198" class="head">Java 网关</text>
+  <text x="517" y="222" class="small">MockInterviewVoiceV2WebSocketHandler</text>
+  <rect x="416" y="278" width="202" height="74" rx="12" class="java"/>
+  <text x="517" y="308" class="txt">火山 ASR Client</text>
+  <text x="517" y="332" class="small">每轮回答临时打开</text>
+  <rect x="416" y="388" width="202" height="74" rx="12" class="java"/>
+  <text x="517" y="418" class="txt">火山 TTS Client</text>
+  <text x="517" y="442" class="small">AI 文本分段合成</text>
+  <rect x="416" y="498" width="202" height="60" rx="12" class="java"/>
+  <text x="517" y="532" class="txt">消息入库 / 会话结束</text>
+
+  <rect x="736" y="152" width="210" height="126" rx="18" class="ai"/>
+  <text x="841" y="190" class="head">YanQue-AI</text>
+  <text x="841" y="218" class="txt">LangChain 流式生成</text>
+  <text x="841" y="246" class="small">/api/mock-interview/interviewer/next-message/stream</text>
+
+  <rect x="1014" y="120" width="214" height="158" rx="18" class="volc"/>
+  <text x="1121" y="160" class="head">火山流式 ASR</text>
+  <text x="1121" y="190" class="txt">WebSocket</text>
+  <text x="1121" y="218" class="small">pcm_s16le / 16000Hz</text>
+  <text x="1121" y="246" class="small">ASR_FINAL 后关闭</text>
+
+  <rect x="1014" y="366" width="214" height="158" rx="18" class="volc"/>
+  <text x="1121" y="406" class="head">火山流式 TTS</text>
+  <text x="1121" y="436" class="txt">WebSocket</text>
+  <text x="1121" y="464" class="small">pcm_s16le / 24000Hz</text>
+  <text x="1121" y="492" class="small">BinaryMessage 回前端</text>
+
+  <rect x="736" y="430" width="210" height="128" rx="18" class="db"/>
+  <text x="841" y="470" class="head">MySQL</text>
+  <text x="841" y="500" class="txt">mock_interview_message</text>
+  <text x="841" y="528" class="small">STUDENT / ASSISTANT</text>
+
+  <path d="M268 224 H416" class="line"/>
+  <text x="342" y="204" class="label">Java WS JSON</text>
+  <path d="M268 350 H416" class="line"/>
+  <text x="342" y="332" class="label">Binary PCM</text>
+  <path d="M416 460 H268" class="dash"/>
+  <text x="342" y="442" class="label">TTS PCM</text>
+
+  <path d="M618 312 C760 300 860 206 1014 196" class="line"/>
+  <text x="804" y="280" class="label">每轮回答打开 ASR</text>
+  <path d="M1014 238 C860 260 756 334 618 342" class="dash"/>
+  <text x="824" y="336" class="label">ASR text/final</text>
+
+  <path d="M618 206 H736" class="line"/>
+  <text x="676" y="186" class="label">SSE 文本流</text>
+  <path d="M736 234 H618" class="dash"/>
+  <text x="676" y="256" class="label">chunk / done</text>
+
+  <path d="M618 426 C740 420 864 440 1014 444" class="line"/>
+  <text x="818" y="410" class="label">文本分段送 TTS</text>
+  <path d="M1014 484 C858 508 728 482 618 452" class="dash"/>
+  <text x="816" y="526" class="label">PCM 音频块</text>
+
+  <path d="M618 528 H736" class="line"/>
+  <text x="676" y="508" class="label">保存对话</text>
+
+  <rect x="230" y="642" width="820" height="58" rx="14" fill="#eef6ff" stroke="#bcd5f2" stroke-width="2"/>
+  <text x="640" y="666" class="txt">核心变化：不再让火山端到端决定面试流程，Java 以后可以接题库状态机。</text>
+  <text x="640" y="690" class="small">当前版本已完成语音闭环；题库驱动状态机还没有接入。</text>
+</svg>

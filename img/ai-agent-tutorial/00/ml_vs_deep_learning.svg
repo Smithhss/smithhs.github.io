@@ -1,0 +1,47 @@
+<svg width="1180" height="560" viewBox="0 0 1180 560" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1180" height="560" rx="24" fill="#F8FAFC"/>
+  <text x="590" y="58" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="34" font-weight="700" fill="#172033">机器学习 vs 深度学习</text>
+  <text x="590" y="94" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="18" fill="#64748B">以商品质检为例：特征主要由人提炼，还是由神经网络自动学习</text>
+
+  <defs>
+    <marker id="ml-dl-arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M2 2L10 6L2 10" fill="#475569"/>
+    </marker>
+    <filter id="ml-dl-shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#0F172A" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#ml-dl-shadow)">
+    <rect x="70" y="150" width="500" height="300" rx="22" fill="#FFFFFF" stroke="#CBD5E1"/>
+    <text x="320" y="196" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="28" font-weight="700" fill="#1D4ED8">传统机器学习</text>
+    <rect x="115" y="238" width="110" height="52" rx="12" fill="#DBEAFE"/>
+    <text x="170" y="270" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="17" fill="#1E40AF">产品图片</text>
+    <line x1="225" y1="264" x2="278" y2="264" stroke="#475569" stroke-width="4" marker-end="url(#ml-dl-arrow)"/>
+    <rect x="288" y="238" width="130" height="52" rx="12" fill="#FEF3C7"/>
+    <text x="353" y="260" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="16" fill="#92400E">人工提特征</text>
+    <text x="353" y="282" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="14" fill="#92400E">颜色/边缘/纹理</text>
+    <line x1="418" y1="264" x2="471" y2="264" stroke="#475569" stroke-width="4" marker-end="url(#ml-dl-arrow)"/>
+    <rect x="481" y="238" width="64" height="52" rx="12" fill="#DCFCE7"/>
+    <text x="513" y="270" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="16" fill="#166534">判断</text>
+    <text x="320" y="344" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="18" font-weight="700" fill="#334155">先人工设计特征，再让模型判断是否有瑕疵</text>
+    <text x="320" y="382" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="16" fill="#64748B">人先告诉模型“看什么”：黑点、裂纹、边缘、纹理</text>
+
+    <rect x="610" y="150" width="500" height="300" rx="22" fill="#FFFFFF" stroke="#CBD5E1"/>
+    <text x="860" y="196" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="28" font-weight="700" fill="#BE185D">深度学习</text>
+    <rect x="655" y="238" width="110" height="52" rx="12" fill="#FCE7F3"/>
+    <text x="710" y="270" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="17" fill="#9D174D">产品图片</text>
+    <line x1="765" y1="264" x2="818" y2="264" stroke="#475569" stroke-width="4" marker-end="url(#ml-dl-arrow)"/>
+    <rect x="828" y="226" width="150" height="76" rx="14" fill="#FFE4E6"/>
+    <text x="903" y="254" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="17" fill="#BE123C">神经网络</text>
+    <text x="903" y="278" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="14" fill="#BE123C">自动学习特征</text>
+    <line x1="978" y1="264" x2="1031" y2="264" stroke="#475569" stroke-width="4" marker-end="url(#ml-dl-arrow)"/>
+    <rect x="1041" y="238" width="44" height="52" rx="12" fill="#DCFCE7"/>
+    <text x="1063" y="270" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="16" fill="#166534">判断</text>
+    <text x="860" y="344" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="18" font-weight="700" fill="#334155">直接用大量正常/瑕疵图片训练神经网络</text>
+    <text x="860" y="382" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="16" fill="#64748B">模型自己学习“看什么”：划痕、裂纹、污点、局部形状</text>
+  </g>
+
+  <rect x="220" y="486" width="740" height="46" rx="13" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+  <text x="590" y="516" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="19" font-weight="700" fill="#334155">一句话：深度学习是机器学习的一种，只是更依赖神经网络自动学习复杂特征</text>
+</svg>

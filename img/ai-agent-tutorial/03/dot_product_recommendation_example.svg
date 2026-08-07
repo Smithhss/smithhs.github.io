@@ -1,0 +1,51 @@
+<svg width="1280" height="640" viewBox="0 0 1280 640" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1280" height="640" fill="#f8fafc"/>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#2563eb"/>
+    </marker>
+  </defs>
+  <g font-family="Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+    <text x="640" y="58" text-anchor="middle" font-size="34" font-weight="700" fill="#111827">点积可以用来算“匹配分”</text>
+    <text x="640" y="96" text-anchor="middle" font-size="20" fill="#64748b">用户兴趣和课程特征逐项相乘，再加起来</text>
+
+    <rect x="70" y="145" width="310" height="330" rx="10" fill="#ffffff" stroke="#cbd5e1"/>
+    <text x="225" y="190" text-anchor="middle" font-size="25" font-weight="700" fill="#1d4ed8">用户兴趣</text>
+    <text x="120" y="250" font-size="21" fill="#334155">Python</text>
+    <text x="300" y="250" text-anchor="middle" font-size="24" font-weight="700" fill="#1d4ed8">1</text>
+    <text x="120" y="305" font-size="21" fill="#334155">AI</text>
+    <text x="300" y="305" text-anchor="middle" font-size="24" font-weight="700" fill="#1d4ed8">1</text>
+    <text x="120" y="360" font-size="21" fill="#334155">项目实战</text>
+    <text x="300" y="360" text-anchor="middle" font-size="24" font-weight="700" fill="#1d4ed8">1</text>
+    <text x="120" y="415" font-size="21" fill="#334155">前端</text>
+    <text x="300" y="415" text-anchor="middle" font-size="24" font-weight="700" fill="#1d4ed8">0</text>
+
+    <line x1="405" y1="310" x2="500" y2="310" stroke="#2563eb" stroke-width="5" marker-end="url(#arrow)"/>
+
+    <rect x="520" y="135" width="310" height="165" rx="10" fill="#f0fdf4" stroke="#bbf7d0"/>
+    <text x="675" y="178" text-anchor="middle" font-size="24" font-weight="700" fill="#15803d">课程 A</text>
+    <text x="565" y="225" font-size="19" fill="#334155">[1, 1, 1, 0]</text>
+    <text x="565" y="263" font-size="19" fill="#166534">Python + AI + 项目</text>
+
+    <rect x="520" y="345" width="310" height="165" rx="10" fill="#fff7ed" stroke="#fed7aa"/>
+    <text x="675" y="388" text-anchor="middle" font-size="24" font-weight="700" fill="#c2410c">课程 B</text>
+    <text x="565" y="435" font-size="19" fill="#334155">[0, 0, 0, 1]</text>
+    <text x="565" y="473" font-size="19" fill="#9a3412">前端</text>
+
+    <line x1="850" y1="220" x2="940" y2="220" stroke="#16a34a" stroke-width="5" marker-end="url(#arrow)"/>
+    <line x1="850" y1="430" x2="940" y2="430" stroke="#f97316" stroke-width="5" marker-end="url(#arrow)"/>
+
+    <rect x="960" y="135" width="260" height="165" rx="10" fill="#ffffff" stroke="#bbf7d0"/>
+    <text x="1090" y="180" text-anchor="middle" font-size="21" font-weight="700" fill="#15803d">匹配分</text>
+    <text x="1090" y="232" text-anchor="middle" font-size="28" font-weight="700" fill="#15803d">3</text>
+    <text x="1090" y="270" text-anchor="middle" font-size="18" fill="#166534">更适合推荐</text>
+
+    <rect x="960" y="345" width="260" height="165" rx="10" fill="#ffffff" stroke="#fed7aa"/>
+    <text x="1090" y="390" text-anchor="middle" font-size="21" font-weight="700" fill="#c2410c">匹配分</text>
+    <text x="1090" y="442" text-anchor="middle" font-size="28" font-weight="700" fill="#c2410c">0</text>
+    <text x="1090" y="480" text-anchor="middle" font-size="18" fill="#9a3412">不太匹配</text>
+
+    <rect x="210" y="555" width="860" height="50" rx="8" fill="#eef2ff" stroke="#c7d2fe"/>
+    <text x="640" y="587" text-anchor="middle" font-size="21" font-weight="700" fill="#3730a3">点积的直觉：匹配项越多、越强，分数越高</text>
+  </g>
+</svg>

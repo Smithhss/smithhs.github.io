@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="520" viewBox="0 0 1200 520" role="img" aria-labelledby="title desc">
+  <title id="title">数据仓库是 Text-to-SQL 的统一分析入口</title><desc id="desc">订单支付用户商品等业务数据同步到数仓，Text-to-SQL 查询数仓。</desc>
+  <rect width="1200" height="520" fill="#ffffff"/>
+  <text x="55" y="58" font-family="Arial, PingFang SC, Microsoft YaHei" font-size="30" font-weight="700" fill="#182230">多业务数据先进入数仓，Text-to-SQL 只查询分析库</text>
+  <g font-family="Arial, PingFang SC, Microsoft YaHei" font-size="20" text-anchor="middle">
+    <rect x="75" y="130" width="165" height="58" rx="9" fill="#e8f0ff" stroke="#94b7f5"/><text x="158" y="166" fill="#245aa7">订单业务库</text>
+    <rect x="75" y="220" width="165" height="58" rx="9" fill="#f4ebff" stroke="#c3a3ed"/><text x="158" y="256" fill="#6d3caf">支付业务库</text>
+    <rect x="75" y="310" width="165" height="58" rx="9" fill="#e6f8f2" stroke="#8ccdaf"/><text x="158" y="346" fill="#147a4b">用户 / 商品库</text>
+    <rect x="405" y="190" width="240" height="115" rx="12" fill="#fff5df" stroke="#e4be69"/><text x="525" y="235" fill="#ad6a00">数据同步</text><text x="525" y="267" font-size="16" fill="#775d27">ETL / CDC / 主题建模</text>
+    <rect x="800" y="145" width="270" height="210" rx="14" fill="#edf4f8" stroke="#9bbbc9" stroke-width="2"/><text x="935" y="190" fill="#286274">analytics_dw 数据仓库</text><text x="935" y="230" font-size="17" fill="#57747d">订单支付退款宽表</text><text x="935" y="260" font-size="17" fill="#57747d">指标表 / 维度表 / 聚合表</text><text x="935" y="310" font-size="17" fill="#57747d">统一 Schema 和指标口径</text>
+    <rect x="800" y="405" width="270" height="60" rx="10" fill="#ffecee" stroke="#e6a2ad"/><text x="935" y="442" fill="#b03b4c">Text-to-SQL 查询</text>
+  </g>
+  <g stroke="#6f8092" stroke-width="3" fill="none" marker-end="url(#arr)"><path d="M245 159H395"/><path d="M245 249H395"/><path d="M245 339H395"/><path d="M650 247H790"/><path d="M935 360V396"/></g>
+  <defs><marker id="arr" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#6f8092"/></marker></defs>
+</svg>

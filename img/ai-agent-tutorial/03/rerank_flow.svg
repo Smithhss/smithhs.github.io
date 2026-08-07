@@ -1,0 +1,62 @@
+<svg width="1100" height="560" viewBox="0 0 1100 560" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1100" height="560" rx="18" fill="#F7FAFC"/>
+  <text x="550" y="58" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="32" font-weight="700" fill="#172033">Rerank 在 RAG 里的位置</text>
+  <text x="550" y="92" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="18" fill="#607089">先多找一些可能相关的资料，再精细排序</text>
+
+  <rect x="58" y="146" width="180" height="88" rx="14" fill="#EAF2FF" stroke="#8BB7FF" stroke-width="2"/>
+  <text x="148" y="180" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="22" font-weight="700" fill="#1B4D9B">用户问题</text>
+  <text x="148" y="210" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="17" fill="#375A86">请假后怎么补课？</text>
+
+  <path d="M248 190H314" stroke="#8CA0B8" stroke-width="3" stroke-linecap="round"/>
+  <path d="M314 190L302 181V199L314 190Z" fill="#8CA0B8"/>
+
+  <rect x="330" y="116" width="230" height="148" rx="16" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+  <text x="445" y="150" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="23" font-weight="700" fill="#172033">第一轮检索</text>
+  <text x="445" y="183" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="18" fill="#475569">快速召回 top 20</text>
+  <text x="445" y="214" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="18" fill="#475569">先保证别漏掉</text>
+  <text x="445" y="242" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="15" fill="#64748B">可能混入一些“沾边”的内容</text>
+
+  <path d="M570 190H636" stroke="#8CA0B8" stroke-width="3" stroke-linecap="round"/>
+  <path d="M636 190L624 181V199L636 190Z" fill="#8CA0B8"/>
+
+  <rect x="652" y="116" width="230" height="148" rx="16" fill="#FFF7ED" stroke="#FDBA74" stroke-width="2"/>
+  <text x="767" y="150" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="23" font-weight="700" fill="#9A3412">Rerank 重排</text>
+  <text x="767" y="183" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="18" fill="#7C2D12">逐条对比问题和资料</text>
+  <text x="767" y="214" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="18" fill="#7C2D12">重新打相关性分数</text>
+  <text x="767" y="242" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="15" fill="#9A3412">更像“精读后排序”</text>
+
+  <path d="M892 190H958" stroke="#8CA0B8" stroke-width="3" stroke-linecap="round"/>
+  <path d="M958 190L946 181V199L958 190Z" fill="#8CA0B8"/>
+
+  <rect x="974" y="146" width="86" height="88" rx="14" fill="#ECFDF5" stroke="#86EFAC" stroke-width="2"/>
+  <text x="1017" y="181" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="22" font-weight="700" fill="#166534">前 3</text>
+  <text x="1017" y="211" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="17" fill="#166534">进 Prompt</text>
+
+  <rect x="86" y="326" width="420" height="158" rx="16" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+  <text x="116" y="362" font-family="Arial, 'PingFang SC', sans-serif" font-size="22" font-weight="700" fill="#172033">第一轮可能这样排</text>
+  <circle cx="122" cy="398" r="14" fill="#DBEAFE"/>
+  <text x="122" y="405" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#1D4ED8">1</text>
+  <text x="150" y="405" font-family="Arial, 'PingFang SC', sans-serif" font-size="18" fill="#334155">请假规则：提前联系老师</text>
+  <circle cx="122" cy="433" r="14" fill="#DBEAFE"/>
+  <text x="122" y="440" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#1D4ED8">2</text>
+  <text x="150" y="440" font-family="Arial, 'PingFang SC', sans-serif" font-size="18" fill="#334155">作业规则：请假当天作业补交</text>
+  <circle cx="122" cy="468" r="14" fill="#DBEAFE"/>
+  <text x="122" y="475" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#1D4ED8">3</text>
+  <text x="150" y="475" font-family="Arial, 'PingFang SC', sans-serif" font-size="18" font-weight="700" fill="#0F766E">补课规则：一周内安排补课</text>
+
+  <rect x="594" y="326" width="420" height="158" rx="16" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+  <text x="624" y="362" font-family="Arial, 'PingFang SC', sans-serif" font-size="22" font-weight="700" fill="#172033">Rerank 后更合理</text>
+  <circle cx="630" cy="398" r="14" fill="#DCFCE7"/>
+  <text x="630" y="405" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#15803D">1</text>
+  <text x="658" y="405" font-family="Arial, 'PingFang SC', sans-serif" font-size="18" font-weight="700" fill="#0F766E">补课规则：一周内安排补课</text>
+  <circle cx="630" cy="433" r="14" fill="#FEF3C7"/>
+  <text x="630" y="440" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#B45309">2</text>
+  <text x="658" y="440" font-family="Arial, 'PingFang SC', sans-serif" font-size="18" fill="#334155">请假规则：提前联系老师</text>
+  <circle cx="630" cy="468" r="14" fill="#FEE2E2"/>
+  <text x="630" y="475" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#B91C1C">3</text>
+  <text x="658" y="475" font-family="Arial, 'PingFang SC', sans-serif" font-size="18" fill="#334155">考勤规则：缺勤记录</text>
+
+  <path d="M520 404H576" stroke="#F59E0B" stroke-width="3" stroke-linecap="round"/>
+  <path d="M576 404L564 395V413L576 404Z" fill="#F59E0B"/>
+  <text x="548" y="390" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="16" font-weight="700" fill="#B45309">重排</text>
+</svg>

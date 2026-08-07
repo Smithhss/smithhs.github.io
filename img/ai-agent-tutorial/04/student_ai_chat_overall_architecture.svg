@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="520" viewBox="0 0 1120 520">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#2f5d8c"/>
+    </marker>
+    <style>
+      .title{font:700 30px Arial,"Microsoft YaHei",sans-serif;fill:#1f2937}
+      .box{fill:#ffffff;stroke:#2f5d8c;stroke-width:2;rx:10}
+      .soft{fill:#eef6ff;stroke:#8db9e8;stroke-width:2;rx:10}
+      .db{fill:#fff7e8;stroke:#d99b36;stroke-width:2;rx:10}
+      .text{font:600 20px Arial,"Microsoft YaHei",sans-serif;fill:#1f2937}
+      .small{font:16px Arial,"Microsoft YaHei",sans-serif;fill:#4b5563}
+      .arrow{stroke:#2f5d8c;stroke-width:2.4;fill:none;marker-end:url(#arrow)}
+      .lane{font:700 18px Arial,"Microsoft YaHei",sans-serif;fill:#6b7280}
+    </style>
+  </defs>
+  <rect width="1120" height="520" fill="#fbfdff"/>
+  <text x="40" y="48" class="title">学生端 AI 知识库问答总体架构</text>
+  <text x="54" y="95" class="lane">业务访问层</text>
+  <rect x="50" y="120" width="190" height="105" class="box"/>
+  <text x="145" y="160" text-anchor="middle" class="text">学生端页面</text>
+  <text x="145" y="190" text-anchor="middle" class="small">发送问题</text>
+  <text x="145" y="212" text-anchor="middle" class="small">接收 SSE chunk</text>
+  <rect x="310" y="120" width="220" height="105" class="box"/>
+  <text x="420" y="158" text-anchor="middle" class="text">Java 后端</text>
+  <text x="420" y="188" text-anchor="middle" class="small">鉴权 / 会话 / 落库</text>
+  <text x="420" y="210" text-anchor="middle" class="small">转发 Python SSE</text>
+  <text x="604" y="95" class="lane">AI 能力层</text>
+  <rect x="600" y="120" width="220" height="105" class="soft"/>
+  <text x="710" y="158" text-anchor="middle" class="text">Python FastAPI</text>
+  <text x="710" y="188" text-anchor="middle" class="small">RAG 编排</text>
+  <text x="710" y="210" text-anchor="middle" class="small">模型流式输出</text>
+  <rect x="890" y="120" width="180" height="105" class="soft"/>
+  <text x="980" y="158" text-anchor="middle" class="text">大模型</text>
+  <text x="980" y="188" text-anchor="middle" class="small">基于 messages</text>
+  <text x="980" y="210" text-anchor="middle" class="small">生成回答</text>
+  <text x="54" y="290" class="lane">知识库层</text>
+  <rect x="210" y="320" width="210" height="105" class="db"/>
+  <text x="315" y="358" text-anchor="middle" class="text">课程资料</text>
+  <text x="315" y="388" text-anchor="middle" class="small">Markdown / 文档</text>
+  <rect x="505" y="320" width="230" height="105" class="db"/>
+  <text x="620" y="358" text-anchor="middle" class="text">LlamaIndex</text>
+  <text x="620" y="388" text-anchor="middle" class="small">切分 / 向量化 / 检索</text>
+  <rect x="820" y="320" width="210" height="105" class="db"/>
+  <text x="925" y="358" text-anchor="middle" class="text">Milvus</text>
+  <text x="925" y="388" text-anchor="middle" class="small">保存向量和 metadata</text>
+  <path d="M240 172 L310 172" class="arrow"/>
+  <path d="M530 172 L600 172" class="arrow"/>
+  <path d="M820 172 L890 172" class="arrow"/>
+  <path d="M890 197 L820 197" class="arrow"/>
+  <path d="M600 197 L530 197" class="arrow"/>
+  <path d="M310 197 L240 197" class="arrow"/>
+  <path d="M420 225 C450 290 500 320 560 338" class="arrow"/>
+  <path d="M420 372 L505 372" class="arrow"/>
+  <path d="M735 372 L820 372" class="arrow"/>
+  <path d="M820 392 L735 392" class="arrow"/>
+  <path d="M735 338 C770 290 755 245 725 225" class="arrow"/>
+  <text x="270" y="156" class="small">HTTP/SSE</text>
+  <text x="546" y="156" class="small">内网 HTTP</text>
+  <text x="842" y="156" class="small">Provider</text>
+  <text x="440" y="350" class="small">入库</text>
+  <text x="760" y="350" class="small">写入</text>
+  <text x="760" y="410" class="small">检索</text>
+</svg>

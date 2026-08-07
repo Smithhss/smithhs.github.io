@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="570" viewBox="0 0 1120 570">
+  <defs>
+    <style>
+      .title{font-family:Arial,'Microsoft YaHei',sans-serif;font-size:30px;font-weight:700;fill:#222}
+      .text{font-family:Arial,'Microsoft YaHei',sans-serif;font-size:20px;fill:#333}
+      .small{font-family:Arial,'Microsoft YaHei',sans-serif;font-size:16px;fill:#555}
+      .code{font-family:Menlo,Consolas,monospace;font-size:16px;fill:#253042}
+      .box{fill:#fff;stroke:#ccd5e0;stroke-width:2;rx:10}
+      .blue{fill:#eef6ff;stroke:#4d92d9}
+      .green{fill:#f4fbf3;stroke:#62a765}
+      .orange{fill:#fff7ea;stroke:#df9b3f}
+      .purple{fill:#f7f5ff;stroke:#7a68d8}
+      .red{fill:#fff1f1;stroke:#d46666}
+      .arrow{stroke:#53616f;stroke-width:2.5;fill:none;marker-end:url(#arrow)}
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#53616f"/>
+    </marker>
+  </defs>
+  <rect width="1120" height="570" fill="#fbfcfe"/>
+  <text x="48" y="58" class="title">把提示词放进数据库：方便管理、发布和回滚</text>
+  <text x="48" y="92" class="small">当提示词会频繁调整时，它就不适合一直写死在代码里。</text>
+
+  <rect x="56" y="145" width="250" height="135" class="box blue"/>
+  <text x="82" y="184" class="text" font-weight="700">prompt_template</text>
+  <text x="82" y="218" class="small">保存提示词的业务身份</text>
+  <text x="82" y="245" class="code">code = ai_chat_system</text>
+
+  <rect x="432" y="145" width="290" height="135" class="box green"/>
+  <text x="460" y="184" class="text" font-weight="700">prompt_template_version</text>
+  <text x="460" y="218" class="small">每次修改生成一个新版本</text>
+  <text x="460" y="245" class="code">version = 3</text>
+
+  <rect x="842" y="145" width="220" height="135" class="box orange"/>
+  <text x="870" y="184" class="text" font-weight="700">active_version</text>
+  <text x="870" y="218" class="small">当前线上使用哪一版</text>
+  <text x="870" y="245" class="code">v3 生效</text>
+
+  <rect x="432" y="360" width="290" height="135" class="box red"/>
+  <text x="460" y="399" class="text" font-weight="700">rollback</text>
+  <text x="460" y="433" class="small">新版本效果不好时</text>
+  <text x="460" y="460" class="code">active_version: v3 -> v2</text>
+
+  <path d="M306 212 L432 212" class="arrow"/>
+  <path d="M722 212 L842 212" class="arrow"/>
+  <path d="M952 280 C952 330 610 320 585 360" class="arrow"/>
+</svg>

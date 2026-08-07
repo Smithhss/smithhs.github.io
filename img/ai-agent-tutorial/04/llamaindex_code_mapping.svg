@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="600" viewBox="0 0 1120 600">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#0f766e"/>
+    </marker>
+    <style>
+      .title{font:700 30px Arial,"Microsoft YaHei",sans-serif;fill:#1f2937}
+      .obj{fill:#ecfeff;stroke:#0f766e;stroke-width:2;rx:12}
+      .code{fill:#ffffff;stroke:#94a3b8;stroke-width:2;rx:12}
+      .text{font:700 20px Arial,"Microsoft YaHei",sans-serif;fill:#111827}
+      .small{font:16px Arial,"Microsoft YaHei",sans-serif;fill:#4b5563}
+      .mono{font:15px Menlo,Consolas,monospace;fill:#374151}
+      .arrow{stroke:#0f766e;stroke-width:2.4;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1120" height="600" fill="#fcfffe"/>
+  <text x="40" y="50" class="title">LlamaIndex 对象和项目代码的对应关系</text>
+  <rect x="70" y="100" width="230" height="75" class="obj"/>
+  <text x="185" y="130" text-anchor="middle" class="text">Document</text>
+  <text x="185" y="158" text-anchor="middle" class="small">一整份 Markdown</text>
+  <rect x="70" y="210" width="230" height="75" class="obj"/>
+  <text x="185" y="240" text-anchor="middle" class="text">MarkdownNodeParser</text>
+  <text x="185" y="268" text-anchor="middle" class="small">按标题切分</text>
+  <rect x="70" y="320" width="230" height="75" class="obj"/>
+  <text x="185" y="350" text-anchor="middle" class="text">SentenceSplitter</text>
+  <text x="185" y="378" text-anchor="middle" class="small">长段落二次切分</text>
+  <rect x="70" y="430" width="230" height="75" class="obj"/>
+  <text x="185" y="460" text-anchor="middle" class="text">Node</text>
+  <text x="185" y="488" text-anchor="middle" class="small">最终入库片段</text>
+  <rect x="440" y="100" width="250" height="75" class="obj"/>
+  <text x="565" y="130" text-anchor="middle" class="text">MilvusVectorStore</text>
+  <text x="565" y="158" text-anchor="middle" class="small">连接 Milvus</text>
+  <rect x="440" y="210" width="250" height="75" class="obj"/>
+  <text x="565" y="240" text-anchor="middle" class="text">StorageContext</text>
+  <text x="565" y="268" text-anchor="middle" class="small">指定存储位置</text>
+  <rect x="440" y="320" width="250" height="75" class="obj"/>
+  <text x="565" y="350" text-anchor="middle" class="text">VectorStoreIndex</text>
+  <text x="565" y="378" text-anchor="middle" class="small">入库 / 构建检索入口</text>
+  <rect x="440" y="430" width="250" height="75" class="obj"/>
+  <text x="565" y="460" text-anchor="middle" class="text">Retriever</text>
+  <text x="565" y="488" text-anchor="middle" class="small">执行相似度检索</text>
+  <rect x="790" y="100" width="280" height="405" class="code"/>
+  <text x="930" y="135" text-anchor="middle" class="text">代码位置</text>
+  <text x="815" y="180" class="mono">knowledge/chunker.py</text>
+  <text x="815" y="210" class="small">Document / NodeParser</text>
+  <text x="815" y="250" class="mono">knowledge/vector_store.py</text>
+  <text x="815" y="280" class="small">MilvusVectorStore</text>
+  <text x="815" y="310" class="small">StorageContext</text>
+  <text x="815" y="340" class="small">VectorStoreIndex</text>
+  <text x="815" y="370" class="small">Retriever</text>
+  <text x="815" y="420" class="mono">chat/rag_service.py</text>
+  <text x="815" y="450" class="small">调用 KnowledgeService</text>
+  <path d="M185 175 L185 210" class="arrow"/>
+  <path d="M185 285 L185 320" class="arrow"/>
+  <path d="M185 395 L185 430" class="arrow"/>
+  <path d="M300 468 C360 455 390 380 440 360" class="arrow"/>
+  <path d="M565 175 L565 210" class="arrow"/>
+  <path d="M565 285 L565 320" class="arrow"/>
+  <path d="M565 395 L565 430" class="arrow"/>
+  <path d="M690 138 L790 250" class="arrow"/>
+  <path d="M690 468 L790 430" class="arrow"/>
+</svg>

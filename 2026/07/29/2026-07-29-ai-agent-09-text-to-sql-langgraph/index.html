@@ -1,0 +1,4074 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="zh-CN"><head><meta charset="utf-8"/><meta content="IE=edge" http-equiv="X-UA-Compatible"/><meta content="width=device-width, initial-scale=1.0, user-scalable=no" name="viewport"/><title>Text-to-SQL 业务介绍与 LangGraph 流程 | Smith</title><meta content="AI Agent,大模型,教程,RAG,LangChain,Text-to-SQL" name="keywords"/><meta content="Smith" name="author"/><meta content="Smith" name="copyright"/><meta content="telephone=no" name="format-detection"/><meta content="#fafaf8" name="theme-color"/><meta content="yes" name="mobile-web-app-capable"/><meta content="yes" name="apple-touch-fullscreen"/><meta content="Text-to-SQL 业务介绍与 LangGraph 流程" name="apple-mobile-web-app-title"/><meta content="Text-to-SQL 业务介绍与 LangGraph 流程" name="application-name"/><meta content="yes" name="apple-mobile-web-app-capable"/><meta content="#fafaf8" name="apple-mobile-web-app-status-bar-style"/><meta content="article" property="og:type"/><meta content="Text-to-SQL 业务介绍与 LangGraph 流程" property="og:title"/><meta content="https://smithhs.cn/2026/07/29/2026-07-29-ai-agent-09-text-to-sql-langgraph/index.html" property="og:url"/><meta content="Smith" property="og:site_name"/><meta content="从业务问题、LangGraph 状态流转和 SQL 生成链路理解 Text-to-SQL。" property="og:description"/><meta content="zh-CN" property="og:locale"/><meta content="/img/ai-agent-tutorial/covers/ai-agent-09-text-to-sql-langgraph.png" property="og:image"/><meta content="Smith" property="article:author"/><meta property="article:tag"/><meta content="summary" name="twitter:card"/><meta content="/img/ai-agent-tutorial/covers/ai-agent-09-text-to-sql-langgraph.png" name="twitter:image"/><meta content="从业务问题、LangGraph 状态流转和 SQL 生成链路理解 Text-to-SQL。" name="description"/><link href="/favicon.ico" rel="shortcut icon"/><link href="https://smithhs.cn/2026/07/29/2026-07-29-ai-agent-09-text-to-sql-langgraph/" rel="canonical"/><link href="//cdn.cbd.int" rel="preconnect"><link href="//busuanzi.ibruce.info" rel="preconnect"><link href="/manifest.json" rel="manifest"/><meta content="var(--smith-main)" name="msapplication-TileColor"><link color="#5bbad5" href="/img/siteicon/apple-icon-180.png" rel="mask-icon"/><link href="/img/siteicon/apple-icon-180.png" rel="apple-touch-icon" sizes="180x180"/><link href="/img/siteicon/apple-icon-180.png" rel="apple-touch-icon-precomposed" sizes="180x180"/><link href="/img/siteicon/32.png" rel="icon" sizes="32x32" type="image/png"/><link href="/img/siteicon/16.png" rel="icon" sizes="16x16" type="image/png"/><link href="/img/siteicon/apple-icon-180.png" rel="bookmark"/><link href="/img/siteicon/apple-splash-2048-2732.jpg" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-2732-2048.jpg" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-1668-2388.jpg" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-2388-1668.jpg" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-1536-2048.jpg" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-2048-1536.jpg" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-1668-2224.jpg" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-2224-1668.jpg" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-1620-2160.jpg" media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-2160-1620.jpg" media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-1290-2796.jpg" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-2796-1290.jpg" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-1179-2556.jpg" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-2556-1179.jpg" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-1284-2778.jpg" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-2778-1284.jpg" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-1170-2532.jpg" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-2532-1170.jpg" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-1125-2436.jpg" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-2436-1125.jpg" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-1242-2688.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-2688-1242.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-828-1792.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-1792-828.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-1242-2208.jpg" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-2208-1242.jpg" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-750-1334.jpg" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-1334-750.jpg" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-640-1136.jpg" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-1136-640.jpg" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/css/index.css" rel="stylesheet"/><link href="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'" rel="stylesheet"/><link href="https://cdn.cbd.int/@fancyapps/ui@6.1.6/dist/fancybox/fancybox.css" media="print" onload="this.media='all'" rel="stylesheet"/><link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet"/><link href="https://npm.elemecdn.com/smith-theme-static@1.0.2/swiper/swiper.min.css" media="print" onload="this.media='all'" rel="stylesheet"/><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: undefined,
+  postHeadAiDescription: {"enable":true,"gptName":"Smith","mode":"api","switchBtn":false,"btnLink":"https://aicos.ink","randomNum":3,"basicWordCount":1000,"key":"","Referer":"https://aicos.ink"},
+  diytitle: {"enable":true,"leaveTitle":"再看看嘛🌈！","backTitle":"欢迎回来✌️！"},
+  LA51: undefined,
+  greetingBox: {"enable":true,"default":"晚上好👋","list":[{"greeting":"晚安😴","startTime":0,"endTime":5},{"greeting":"早上好鸭👋, 祝你一天好心情！","startTime":6,"endTime":9},{"greeting":"上午好👋, 状态很好，鼓励一下～","startTime":10,"endTime":10},{"greeting":"11点多啦, 在坚持一下就吃饭啦～","startTime":11,"endTime":11},{"greeting":"午安👋, 宝贝","startTime":12,"endTime":14},{"greeting":"🌈充实的一天辛苦啦！","startTime":14,"endTime":18},{"greeting":"19点喽, 奖励一顿丰盛的大餐吧🍔。","startTime":19,"endTime":19},{"greeting":"晚上好👋, 在属于自己的时间好好放松😌~","startTime":20,"endTime":24}]},
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  music_page_default: "nav_music",
+  home_banner: {"enable":true,"interval":5000,"count":5},
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: true,
+  mainTone: undefined,
+  authorStatus: {"skills":["💻 后端开发 Java / Spring Cloud","🌐 前端探索 React / TypeScript","🤖 AI 工具深度用户","🏠 智能家居折腾达人","🔨 从设计到部署一条龙","📝 偶尔写写博客记录生活","🎵 听歌写代码双线并行","🚀 脚踏实地行动派"]},
+  algolia: undefined,
+  localSearch: {"path":"/search.json","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":240},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: Smith","link":"链接: ","source":"来源: Smith","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#4f7cff","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.2.0/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.2.0/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: 'Smith',
+  title: 'SpringCloud01',
+  postAI: '',
+  pageFillDescription: 'SpringCloud01, 一、微服务, 1.1单体架构, 1.2 微服务, 1.3微服务的重要性, 二、SpringCloud, 2.1认识SpringCloud, 2.2 环境准备, 2.2.1搭建SpringCloud环境, 三、实现远程调用, 3.1 服务准备, 3.2 调用流程, 3.3 RestTemplete的使用, 3.4.提供者与消费者, 四、Feign远程调用, 5.1Feign 是什么, 5.2为什么选择 Feign, 5.3Feign替代RestTemplate, 引入依赖, 添加注解, 编写Feign的客户端, 测试, 总结, 抽取api, OpenFeign的超时控制, Openfeign日志打印功能, 配置文件方式  – springboot3.3.4 对应的openFeign版本一微服务随着互联网行业的发展对服务的要求也越来越高服务架构也从单体架构逐渐演变为现在流行的微服务架构这些架构之间有怎样的差别呢单体架构单体架构将业务的所有功能集中在一个项目中开发打成一个包部署单体架构的优缺点如下优点架构简单部署成本低缺点耦合度高维护困难升级困难微服务分布式架构根据业务功能对系统做拆分每个业务功能模块作为独立项目开发称为一个服务并且各个服务之间可以相互调用优点拆分粒度更小服务更独立耦合度更低缺点服务调用关系错综复杂提升部署难度微服务这种方案需要技术框架来落地全球的互联网公司都在积极尝试自己的微服务落地技术在国内最知名的就是和微服务的重要性二认识是目前国内使用最广泛的微服务框架官网地址集成了各种微服务功能组件并基于实现了这些组件的自动装配从而提供了良好的开箱即用体验其中常见的组件包括功能组件服务注册和发现服务远程调用统一配置管理服务链路监控统一网关路由流控降级保护微服务技术对比兼容版本底层是依赖于的并且有版本的兼容关系如下环境准备搭建环境创建订单表参考之前整合代码整合环境完成订单表的增删改查功能创建用户表完成用户表的增删改查略搭建用户服务和订单服务略版本三实现远程调用服务准备目前程序中我们可以通过订单查询到订单服务订单对象中只存在用户并没有用户的具体信息成功铲车莆田接下来我们需要做的是搭建用户服务并且通过订单服务调用用户服务得到用户完整信息调用流程我们需要在中向发起一个的请求调用这个接口大概的步骤是这样的修改服务中的方法根据对象中的查询将查询的填充到对象一起返回的使用是提供的用于访问服务的客户端它提供了很多可以方便访问远程服务的方法这些方法可以帮助开发人员减少编写客户端代码的工作量导入依赖编写配置类注入完成服务代码补充注意在调用过程中需要使用到进行对象转换提供者与消费者在服务调用关系中会有两个不同的角色服务提供者一次业务中被其它微服务调用的服务提供接口给其它微服务服务消费者一次业务中调用其它微服务的服务调用其它微服务提供的接口但是服务提供者与服务消费者的角色并不是绝对的而是相对于业务而言如果服务调用了服务而服务又调用了服务服务的角色是什么对于调用的业务而言是服务消费者是服务提供者对于调用的业务而言是服务消费者是服务提供者因此服务既可以是服务提供者也可以是服务消费者四远程调用是什么是一个请求调用的轻量级框架可以以接口注解的方式调用请求当实际调用的时候传入参数根据参数再应用到请求上进而转化成真正的请求封装了调用流程为什么选择如果不使用框架那么调用服务需要走的话无论是使用自带的还是使用工具包的亦或是都需要自行配置请求然后才能发起请求获得响应体后还需解析等操作十分繁琐而只需要定义一个接口并且通过注解的形式定义好请求模板就可以项使用本地接口一样使用请求看我们以前利用发起远程调用的代码存在下面的问题代码可读性差编程体验不统一参数复杂难以维护替代的使用步骤如下引入依赖我们在服务的文件中引入的依赖负载均衡添加注解在的启动类添加注解开启的功能编写的客户端在中新建一个接口内容如下这个客户端主要是基于的注解来声明远程调用的信息比如服务名称服务提供者的名称请求方式请求路径请求参数返回值类型注意如果是请求一定要在参数前面加上注解否则会转为请求去标签体中寻找参数先启动提供者再启动消费者测试使用客户端代替这样就可以帮助我们发送请求无需自己使用来发送了总结使用的步骤引入依赖添加注解编写接口使用中定义的方法代替抽取对于公共部分的实体类以及接口统一抽取到模块中的超时控制通过配置可以控制与远程服务器建立连接和读取响应的超时时间参数指定了连接超时时间默认时间为秒也就是在尝试建立连接时如果在指定时间内无法建立连接就会抛出异常参数指定了读取响应超时时间默认时间为秒也就是在发送请求后如果在指定时间内没有接收到响应就会抛出异常在服务中加入断点后服务两秒内没有收到响应则会报错日志打印功能提供了日志打印功能我们可以通过配置来调整日志级别从而了解中请求的细节也就是说对接口的调用情况进行日志输出而日志的级别分为四种不记录任何日志信息这是默认值仅记录请求的方法以及响应状态码和执行时间在的基础上额外记录了请求和响应的头信息记录所有请求和响应的明细包括头信息请求体元数据配置文件方式对应的版本自己的接口包路径表示全局配置对所有客户端生效连接超时时间单位毫秒默认秒建议根据业务调整读取响应超时时间单位毫秒默认秒建议根据业务调整可选配置日志级别方便调试级别',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2026-06-02 11:22:08',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fafaf8')
+        }
+      }
+      const t = saveToLocal.get('theme')
+
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link href="https://npm.elemecdn.com/lxgw-wenkai-screen-webfont@1.1.0/style.css" media="print" onload="this.media='all'" rel="stylesheet"/><meta content="Hexo 7.3.0" name="generator"/></meta></link></link><style>.ai-series-intro{border-left:4px solid var(--smith-main,#49b1f5);background:rgba(73,177,245,.08);border-radius:12px;padding:1rem 1.2rem}.ai-series-index{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin:1.2rem 0}.ai-series-index a{display:block;border:1px solid rgba(127,127,127,.18);border-radius:16px;padding:14px 16px;background:rgba(255,255,255,.65);box-shadow:0 8px 24px rgba(15,23,42,.06)}.ai-series-index .no{font-weight:700;color:var(--smith-main,#49b1f5);font-size:.9rem}.ai-series-index .ttl{font-weight:700;margin:.3rem 0}#article-container img{border-radius:12px;box-shadow:0 8px 28px rgba(15,23,42,.08)}#article-container table{display:block;overflow:auto}</style></head><body data-type="smith"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick='document.getElementById("loading-box").classList.add("loaded")'><div class="loading-bg"><img alt="加载头像" class="loading-img nolazyload" src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d20f536c64d06e5fcf4bfe2ec5dc25d.jpg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link href="https://cdn.cbd.int/smith-theme-static@1.0.2/progress_bar/progress_bar.css" rel="stylesheet"><script async="async" data-pace-options='{ "restartOnRequestAfter":false,"eventLag":false}' src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="smithfont smith-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://smithhs.cn/" title="博客"><img alt="博客" class="back-menu-item-icon" data-lazy-src="/img/favicon.png" onerror='this.onerror=null,this.src="/img/404.jpg"' src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" href="https://github.com/Smithhss" rel="noopener" target="_blank" title="Github"><img alt="Github" class="back-menu-item-icon" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/GitHub.png" onerror='this.onerror=null,this.src="/img/404.jpg"' src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"/><span class="back-menu-item-text">Github</span></a></div></div></div></div><a accesskey="h" href="/" id="site-name"><div class="title">Smith</div><i class="smithfont smith-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a href="javascript:smith.scrollToDest(0, 500)" id="page-name">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="smithfont smith-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="smithfont smith-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="smithfont smith-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="smithfont smith-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="smithfont smith-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="smithfont smith-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/dailyPhoto/"><i class="smithfont smith-icon-camera faa-tada" style="font-size: 0.9em;"></i><span> 每日照片</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wallpaper/"><i class="smithfont smith-icon-image faa-tada" style="font-size: 0.9em;"></i><span> 壁纸</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wordScenery/"><i class="smithfont smith-icon-font faa-tada" style="font-size: 0.9em;"></i><span> 文字风景</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="smithfont smith-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于我</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="smithfont smith-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/love/"><i class="smithfont smith-icon-heart faa-tada" style="font-size: 0.9em;"></i><span> 爱情</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="smithfont smith-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button only-home" id="travellings_button" title="随机前往一个开往项目网站"><a class="site-page" data-pjax-state="external" href="javascript:void(0);" onclick="smith.totraveling()" rel="external nofollow" title="随机前往一个开往项目网站"><i class="smithfont smith-icon-train"></i></a></div><div class="nav-button" id="randomPost_button"><a class="site-page" href="javascript:void(0);" onclick="toRandomPost()" title="随机前往一个文章"><i class="smithfont smith-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a accesskey="s" class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍"><i class="smithfont smith-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" onclick="smith.switchConsole();" title="中控台"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg" target="_blank"><img alt="wechat" class="post-qr-code-img" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg" onerror='this.onerror=null,this.src="/img/404.jpg"' src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg" target="_blank"><img alt="alipay" class="post-qr-code-img" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg" onerror='this.onerror=null,this.src="/img/404.jpg"' src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Android-Studio/" style="font-size: 1.05rem;">Android Studio<sup>1</sup></a><a href="/tags/App/" style="font-size: 1.05rem;">App<sup>1</sup></a><a href="/tags/Butterfly/" style="font-size: 1.05rem;">Butterfly<sup>1</sup></a><a href="/tags/C/" style="font-size: 1.05rem;">C++<sup>3</sup></a><a href="/tags/CSS/" style="font-size: 1.05rem;">CSS<sup>1</sup></a><a href="/tags/Cisco-Packet-Tracer/" style="font-size: 1.05rem;">Cisco Packet Tracer<sup>1</sup></a><a href="/tags/Docker/" style="font-size: 1.05rem;">Docker<sup>2</sup></a><a href="/tags/Easypan/" style="font-size: 1.05rem;">Easypan<sup>2</sup></a><a href="/tags/FurtherMathematics/" style="font-size: 1.05rem;">FurtherMathematics<sup>1</sup></a><a href="/tags/GPT/" style="font-size: 1.05rem;">GPT<sup>1</sup></a><a href="/tags/Git2/" style="font-size: 1.05rem;">Git2<sup>1</sup></a><a href="/tags/HTML/" style="font-size: 1.05rem;">HTML<sup>1</sup></a><a href="/tags/Hexo/" style="font-size: 1.05rem;">Hexo<sup>1</sup></a><a href="/tags/Java/" style="font-size: 1.05rem;">Java<sup>67</sup></a><a href="/tags/JavaScript/" style="font-size: 1.05rem;">JavaScript<sup>1</sup></a><a href="/tags/Jrebel/" style="font-size: 1.05rem;">Jrebel<sup>1</sup></a><a href="/tags/LeetCode/" style="font-size: 1.05rem;">LeetCode<sup>1</sup></a><a href="/tags/Linux/" style="font-size: 1.05rem;">Linux<sup>3</sup></a><a href="/tags/Markdown/" style="font-size: 1.05rem;">Markdown<sup>2</sup></a><a href="/tags/Maven/" style="font-size: 1.05rem;">Maven<sup>2</sup></a><a href="/tags/MyBatis/" style="font-size: 1.05rem;">MyBatis<sup>1</sup></a><a href="/tags/MyBatis-Plus/" style="font-size: 1.05rem;">MyBatis-Plus<sup>1</sup></a><a href="/tags/Mysql/" style="font-size: 1.05rem;">Mysql<sup>1</sup></a><a href="/tags/Navicat/" style="font-size: 1.05rem;">Navicat<sup>1</sup></a><a href="/tags/NoSql/" style="font-size: 1.05rem;">NoSql<sup>1</sup></a><a href="/tags/Nodejs/" style="font-size: 1.05rem;">Nodejs<sup>2</sup></a><a href="/tags/Python/" style="font-size: 1.05rem;">Python<sup>4</sup></a><a href="/tags/Spring/" style="font-size: 1.05rem;">Spring<sup>2</sup></a><a href="/tags/VMware/" style="font-size: 1.05rem;">VMware<sup>2</sup></a><a href="/tags/WeChat/" style="font-size: 1.05rem;">WeChat<sup>1</sup></a><a href="/tags/YouHou/" style="font-size: 1.05rem;">YouHou<sup>1</sup></a><a href="/tags/books/" style="font-size: 1.05rem;">books<sup>1</sup></a><a href="/tags/butterfly/" style="font-size: 1.05rem;">butterfly<sup>1</sup></a><a href="/tags/clash/" style="font-size: 1.05rem;">clash<sup>1</sup></a><a href="/tags/error/" style="font-size: 1.05rem;">error<sup>1</sup></a><a href="/tags/project/" style="font-size: 1.05rem;">project<sup>4</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 1.05rem;">前端<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6/" style="font-size: 1.05rem;">开发框架<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" style="font-size: 1.05rem;">开发环境<sup>1</sup></a><a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="font-size: 1.05rem;">软件工程<sup>1</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="smithfont smith-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="smithfont smith-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+<i class="smithfont smith-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/05/"><span class="card-archive-list-date">五月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">16</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/04/"><span class="card-archive-list-date">四月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">31</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/03/"><span class="card-archive-list-date">三月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">75</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/02/"><span class="card-archive-list-date">二月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">7</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/11/"><span class="card-archive-list-date">十一月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">3</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/10/"><span class="card-archive-list-date">十月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/09/"><span class="card-archive-list-date">九月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">5</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/07/"><span class="card-archive-list-date">七月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" href="javascript:void(0);" title="显示模式切换"><i class="smithfont smith-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="smith.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="smithfont smith-icon-arrows-left-right"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="smith.musicToggle()" title="音乐开关"><a class="music-switch"><i class="smithfont smith-icon-music"></i></a></div></div><div class="console-mask" href="javascript:void(0);" onclick="smith.hideConsole()"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="smithfont smith-icon-arrow-up"></i><span id="percent" onclick="smith.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="smithfont smith-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><i class="smithfont smith-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/AI%E5%B7%A5%E7%A8%8B/" itemprop="url">AI工程</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/AI%20Agent/" itemprop="url" tabindex="-1"><span><i class="smithfont smith-icon-hashtag"></i>AI Agent</span></a><a class="article-meta__tags" href="/tags/%E6%95%99%E7%A8%8B/" itemprop="url" tabindex="-1"><span><i class="smithfont smith-icon-hashtag"></i>教程</span></a><a class="article-meta__tags" href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/" itemprop="url" tabindex="-1"><span><i class="smithfont smith-icon-hashtag"></i>大模型</span></a></span></div></div><h1 class="post-title">Text-to-SQL 业务介绍与 LangGraph 流程</h1><div id="post-meta"><div class="meta-secondline"><span class="post-meta-date"><i class="smithfont smith-icon-calendar-days post-meta-icon"></i><span class="article-meta-label">发表于</span><time datetime="2026-07-29T10:03:00.000Z" time="2026-07-29 10:03:00" title="发表于 2026-07-29 10:03:00">2026-07-29</time></span><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="smithfont smith-icon-file-word post-meta-icon"></i><span class="word-count">约 4497 字</span></span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" preserveaspectratio="none" shape-rendering="auto" viewbox="0 24 150 28" xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"><defs><path d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z" id="gentle-wave"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="/img/ai-agent-tutorial/covers/ai-agent-09-text-to-sql-langgraph.png"/></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><div class="post-ai-description"><div class="ai-title"><i class="smithfont smith-icon-bilibili"></i><div class="ai-title-text">AI-摘要</div><i class="smithfont smith-icon-arrow-rotate-right"></i><i class="smithfont smith-icon-circle-dot" title="朗读摘要"></i><div id="ai-tag">Smith GPT</div></div><div class="ai-explanation">AI初始化中...</div><div class="ai-btn-box"><div class="ai-btn-item">介绍自己 🙈</div><div class="ai-btn-item">生成本文简介 👋</div><div class="ai-btn-item">推荐相关文章 📖</div><div class="ai-btn-item">前往主页 🏠</div><div class="ai-btn-item" id="go-api-link">了解更多</div></div><script data-pjax="" src="/js/smith/ai_abstract.js"></script></div><article class="post-content" id="article-container" itemscope="" itemtype="https://smithhs.cn/2026/07/29/2026-07-29-ai-agent-09-text-to-sql-langgraph/"><header><a class="post-meta-categories" href="/categories/AI%E5%B7%A5%E7%A8%8B/" itemprop="url">AI工程</a><a href="/tags/AI%20Agent/" itemprop="url" tabindex="-1">AI Agent</a><a href="/tags/%E6%95%99%E7%A8%8B/" itemprop="url" tabindex="-1">教程</a><a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/" itemprop="url" tabindex="-1">大模型</a><h1 id="CrawlerTitle">Text-to-SQL 业务介绍与 LangGraph 流程</h1></header><blockquote class="ai-series-intro"><p><strong>AI Agent 工程实践教程 · 第 09 章</strong></p><p>从业务问题、LangGraph 状态流转和 SQL 生成链路理解 Text-to-SQL。</p><p><a href="/ai-agent-tutorial/">返回系列目录</a></p></blockquote><h2 id="_text-to-sql">第九天_Text-to-SQL业务介绍</h2>
+<h1 id="text-to-sql">第九天：Text-to-SQL 业务介绍与系统设计</h1>
+<p>在真实项目里，业务人员经常会提出数据问题：</p>
+<pre><code class="language-text">查询最近 7 天未支付订单。
+统计昨天各地区的订单数量。
+查看本月退款金额最高的产品。
+</code></pre>
+<p>这些问题本身并不复杂，但如果每出现一个新问题，都要走一遍产品、前端、后端、测试和上线流程，数据查询就会变得很慢。</p>
+<p>今天学习的 <strong>Text-to-SQL</strong>，就是为了解决这件事。</p>
+<blockquote>
+<p><strong>Text-to-SQL：把用户的自然语言问题转换成 SQL，查询数据库后，再把结果返回给用户。</strong></p>
+</blockquote>
+<p>订单查询只是今天贯穿使用的一个例子。今天真正要理解的主体是：Text-to-SQL 为什么需要、怎么工作、能带来什么价值。</p>
+<p><img alt="传统查询与 Text-to-SQL 对比" src="/img/ai-agent-tutorial/09/text_to_sql_traditional_vs_nlq.svg"/></p>
+<hr/>
+<h2 id="1">1. 传统数据查询方式有什么问题</h2>
+<p>假设运营同学提出一个新需求：</p>
+<pre><code class="language-text">帮我看一下最近 7 天未支付的订单有哪些。
+</code></pre>
+<p>传统开发方式通常是这样的：</p>
+<pre><code class="language-text">业务提出需求
+  ↓
+产品梳理查询条件和页面原型
+  ↓
+前端开发查询页面、筛选项和表格
+  ↓
+后端开发查询接口
+  ↓
+开发人员编写 SQL
+  ↓
+前后端联调、测试
+  ↓
+上线后，业务人员才能看到数据
+</code></pre>
+<p>这个流程适合高频、固定、必须长期使用的核心页面，例如订单管理页、商品管理页和学生管理页。</p>
+<p>但它不适合大量临时、变化快、组合多的数据问题。</p>
+<h3 id="11">1.1 一个新问题，往往就要重新开发一次</h3>
+<p>今天业务要查：</p>
+<pre><code class="language-text">最近 7 天未支付订单。
+</code></pre>
+<p>下周又会问：</p>
+<pre><code class="language-text">最近 30 天，线上产品的未支付订单有多少？
+</code></pre>
+<p>再过两天还可能问：</p>
+<pre><code class="language-text">昨天支付成功但之后申请退款的订单有哪些？
+</code></pre>
+<p>这些问题都和订单有关，但筛选条件、统计维度和展示方式不同。</p>
+<p>如果每一个问题都开发一个页面，会遇到几个问题：</p>
+<table>
+<thead>
+<tr>
+<th>问题</th>
+<th>表现</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>周期长</td>
+<td>业务提问后，需要排期、开发、测试、上线</td>
+</tr>
+<tr>
+<td>成本高</td>
+<td>前端、后端、测试都要投入时间</td>
+</tr>
+<tr>
+<td>灵活性差</td>
+<td>页面只能支持开发时预先想到的筛选条件</td>
+</tr>
+<tr>
+<td>页面膨胀</td>
+<td>查询需求越多，后台页面和接口越多</td>
+</tr>
+<tr>
+<td>依赖开发</td>
+<td>业务人员无法自己探索数据</td>
+</tr>
+</tbody>
+</table>
+<p>本质上，传统方式是：</p>
+<blockquote>
+<p><strong>先把可能的问题预测出来，再提前把查询能力做成页面。</strong></p>
+</blockquote>
+<p>但业务问题往往无法被提前穷尽。</p>
+<hr/>
+<h2 id="2-text-to-sql">2. 为什么需要 Text-to-SQL</h2>
+<p>数据库本来就保存着业务数据，也具备很强的筛选、统计、分组和排序能力。</p>
+<p>问题在于：数据库听不懂自然语言，它只认识 SQL。</p>
+<p>例如，业务人员说：</p>
+<pre><code class="language-text">查询最近 7 天未支付订单。
+</code></pre>
+<p>数据库不能直接执行这句话，而是需要一段结构化查询语句，例如：</p>
+<pre><code class="language-sql">SELECT order_no, student_name, order_amount, created_at
+FROM order_payment
+WHERE status IN ('INIT', 'PROCESSING')
+  AND created_at &gt;= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+ORDER BY created_at DESC;
+</code></pre>
+<p>传统情况下，这段 SQL 要由开发人员理解需求后编写。</p>
+<p>Text-to-SQL 把中间的翻译工作交给 AI：</p>
+<pre><code class="language-text">业务人员提出自然语言问题
+  ↓
+Text-to-SQL 理解问题含义
+  ↓
+生成数据库可执行的 SQL
+  ↓
+查询数据库
+  ↓
+返回结果
+</code></pre>
+<p>有了 Text-to-SQL 后，业务人员不需要学习 SQL，也不需要为每个临时查询需求等待一个新页面。</p>
+<p>这并不表示以后不需要后台页面。</p>
+<p>更准确的分工是：</p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>更适合的方式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>高频、固定、流程化操作</td>
+<td>专门的业务页面</td>
+</tr>
+<tr>
+<td>临时、探索性、组合多的数据问题</td>
+<td>Text-to-SQL</td>
+</tr>
+<tr>
+<td>修改、删除、审批等业务操作</td>
+<td>明确的业务页面和权限流程</td>
+</tr>
+</tbody>
+</table>
+<p>Text-to-SQL 的目标不是替代所有系统页面，而是让“问数据”这件事更直接。</p>
+<hr/>
+<h2 id="3-text-to-sql">3. Text-to-SQL 的核心能力</h2>
+<p>Text-to-SQL 做的不是简单的关键词替换，而是完成一条从“人话”到“数据结果”的链路。</p>
+<p>用户输入：</p>
+<pre><code class="language-text">统计昨天各地区的订单数量。
+</code></pre>
+<p>系统需要理解：</p>
+<table>
+<thead>
+<tr>
+<th>用户表达</th>
+<th>系统需要理解的内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>昨天</td>
+<td>一个具体的日期范围</td>
+</tr>
+<tr>
+<td>各地区</td>
+<td>需要按地区字段分组</td>
+</tr>
+<tr>
+<td>订单数量</td>
+<td>需要统计订单记录数量</td>
+</tr>
+<tr>
+<td>订单</td>
+<td>需要找到对应订单表</td>
+</tr>
+</tbody>
+</table>
+<p>最后，系统生成 SQL、执行查询，并把结果组织成用户看得懂的内容。</p>
+<p>因此可以把 Text-to-SQL 概括为：</p>
+<pre><code class="language-text">自然语言问题
+  + 数据库 Schema
+  + 业务规则
+  ↓
+SQL
+  ↓
+查询结果
+  ↓
+自然语言回答或图表
+</code></pre>
+<p><img alt="Text-to-SQL 从问题到结果的完整流程" src="/img/ai-agent-tutorial/09/text_to_sql_end_to_end_flow.svg"/></p>
+<p>这里的三个输入缺一不可：</p>
+<table>
+<thead>
+<tr>
+<th>输入</th>
+<th>为什么需要</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>自然语言问题</td>
+<td>告诉系统用户想查什么</td>
+</tr>
+<tr>
+<td>数据库 Schema</td>
+<td>告诉系统有哪些表、字段和关联关系</td>
+</tr>
+<tr>
+<td>业务规则</td>
+<td>告诉系统“交易量”“未支付”“退款额”等概念如何定义</td>
+</tr>
+</tbody>
+</table>
+<p>模型即使很会写 SQL，如果不知道项目中的表和字段，也无法生成正确查询。</p>
+<hr/>
+<h2 id="4-text-to-sql">4. Text-to-SQL 的基础工作流程</h2>
+<p>下面用“查询最近 7 天未支付订单”贯穿整个流程。</p>
+<h3 id="41">4.1 第一步：用户输入自然语言问题</h3>
+<p>用户不需要知道表名和字段名，只需要描述自己想看的数据：</p>
+<pre><code class="language-text">查询最近 7 天未支付订单。
+</code></pre>
+<p>用户说的是业务语言：</p>
+<ul>
+<li>最近 7 天</li>
+<li>未支付</li>
+<li>订单</li>
+</ul>
+<p>这些词还不能直接交给数据库执行。</p>
+<h3 id="42">4.2 第二步：理解用户意图</h3>
+<p>系统需要从问题里提取查询意图。</p>
+<table>
+<thead>
+<tr>
+<th>项目</th>
+<th>识别结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>查询对象</td>
+<td>订单</td>
+</tr>
+<tr>
+<td>时间范围</td>
+<td>最近 7 天</td>
+</tr>
+<tr>
+<td>筛选条件</td>
+<td>未支付</td>
+</tr>
+<tr>
+<td>返回内容</td>
+<td>订单明细</td>
+</tr>
+</tbody>
+</table>
+<p>对于“未支付”，系统还需要知道它在当前项目中的业务定义。</p>
+<p>在订单业务中，支付订单的状态可能包括：</p>
+<table>
+<thead>
+<tr>
+<th>状态</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>INIT</code></td>
+<td>已创建支付订单，尚未开始支付</td>
+</tr>
+<tr>
+<td><code>PROCESSING</code></td>
+<td>正在支付中</td>
+</tr>
+<tr>
+<td><code>SUCCESS</code></td>
+<td>支付成功</td>
+</tr>
+<tr>
+<td><code>FAIL</code></td>
+<td>支付失败</td>
+</tr>
+<tr>
+<td><code>TIMEOUT</code></td>
+<td>支付超时</td>
+</tr>
+</tbody>
+</table>
+<p>“未支付”不能只简单理解为 <code>status != 'SUCCESS'</code>。是否把支付失败和支付超时算作“未支付”，要由业务口径决定。</p>
+<p>这一步说明：Text-to-SQL 不只是识别词语，还要把词语映射成业务规则。</p>
+<h3 id="43-schema">4.3 第三步：读取数据库 Schema 和业务资料</h3>
+<p>模型并不知道项目里有什么表、字段和状态值。因此系统需要给它提供必要上下文。</p>
+<p>对于订单查询示例，模型至少需要知道：</p>
+<pre><code class="language-text">表：order_payment，支付订单表
+
+关键字段：
+- order_no：支付订单号
+- student_name：学生姓名
+- product_id：购买的产品 ID
+- order_amount：订单支付金额
+- status：支付订单状态
+- pay_success_time：支付成功时间
+- created_at：支付订单创建时间
+</code></pre>
+<p>同时还需要业务说明：</p>
+<pre><code class="language-text">- SUCCESS 表示支付成功。
+- INIT 和 PROCESSING 表示尚未支付完成。
+- 订单创建时间使用 created_at。
+- 支付成功时间使用 pay_success_time。
+</code></pre>
+<p>这类“表、字段、字段含义、状态说明、表关联关系”的资料，统称为 <strong>Schema 和业务上下文</strong>。</p>
+<p>没有这些上下文，模型可能会猜出不存在的表名或字段名。</p>
+<h3 id="44-sql">4.4 第四步：生成 SQL</h3>
+<p>模型结合用户问题、Schema 和业务规则后，生成 SQL。</p>
+<p>例如：</p>
+<pre><code class="language-sql">SELECT
+    order_no,
+    student_name,
+    order_amount,
+    status,
+    created_at
+FROM order_payment
+WHERE status IN ('INIT', 'PROCESSING')
+  AND created_at &gt;= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+ORDER BY created_at DESC
+LIMIT 50;
+</code></pre>
+<p>这里不要求业务人员理解每一行 SQL，但系统必须确保它的含义和问题一致：</p>
+<ul>
+<li>查的是支付订单表；</li>
+<li>筛选的是尚未完成支付的状态；</li>
+<li>时间使用订单创建时间；</li>
+<li>明细结果限制最多 50 条。</li>
+</ul>
+<h3 id="45-sql">4.5 第五步：校验并执行 SQL</h3>
+<p>模型生成 SQL 后，不能不加检查就直接执行。</p>
+<p>系统至少要做这些保护：</p>
+<table>
+<thead>
+<tr>
+<th>校验项</th>
+<th>目的</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>只允许 <code>SELECT</code> 查询</td>
+<td>禁止修改或删除业务数据</td>
+</tr>
+<tr>
+<td>表和字段白名单</td>
+<td>防止查询无关或敏感表</td>
+</tr>
+<tr>
+<td>用户权限控制</td>
+<td>不同角色可查看的数据范围不同</td>
+</tr>
+<tr>
+<td>行数限制</td>
+<td>避免一次返回大量明细</td>
+</tr>
+<tr>
+<td>查询超时</td>
+<td>避免复杂 SQL 长时间占用数据库</td>
+</tr>
+<tr>
+<td>敏感数据保护</td>
+<td>手机号、姓名等字段按权限脱敏或不返回</td>
+</tr>
+</tbody>
+</table>
+<p>校验通过后，系统才使用只读数据库账号执行 SQL。</p>
+<pre><code class="language-text">模型生成 SQL
+  ↓
+程序校验 SQL 是否安全、是否符合权限
+  ↓
+只读数据库执行查询
+</code></pre>
+<p>模型负责理解和生成，程序负责控制边界。</p>
+<h3 id="46">4.6 第六步：返回查询结果</h3>
+<p>数据库返回的通常是结构化记录：</p>
+<pre><code class="language-text">订单号 | 学生 | 金额 | 状态 | 创建时间
+</code></pre>
+<p>系统可以按问题类型选择合适的展示方式：</p>
+<table>
+<thead>
+<tr>
+<th>问题类型</th>
+<th>合适的结果形式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>查订单明细</td>
+<td>表格</td>
+</tr>
+<tr>
+<td>查总数、总金额</td>
+<td>数字和简短结论</td>
+</tr>
+<tr>
+<td>比较每天趋势</td>
+<td>折线图或柱状图</td>
+</tr>
+<tr>
+<td>看地区、产品分布</td>
+<td>分组表格或柱状图</td>
+</tr>
+</tbody>
+</table>
+<p>例如对刚才的问题，最终可以直接回答：</p>
+<pre><code class="language-text">最近 7 天共有 18 笔尚未完成支付的订单。
+已按创建时间从新到旧展示前 50 条明细。
+</code></pre>
+<p>用户看到的是结果，不需要阅读 SQL。</p>
+<hr/>
+<h2 id="5-metric">5. 先理解指标（Metric）：用户到底想查什么</h2>
+<p>后面会频繁出现“指标”这个词。</p>
+<p>指标不是一个普通字段名，也不是数据库里现成的一列数据。它是对一类业务事实的统一定义：<strong>统计什么对象、按什么条件筛选、用什么方式计算。</strong></p>
+<p>例如，支付订单表中的 <code>order_amount</code> 只是一个字段；而“支付成功订单金额”才是一个指标。</p>
+<p>它的完整含义是：</p>
+<pre><code class="language-text">统计对象：支付订单
+筛选条件：支付状态为 SUCCESS
+计算方式：对 order_amount 求和
+时间口径：通常按 pay_success_time 统计
+</code></pre>
+<p>所以，指标可以理解成：</p>
+<blockquote>
+<p><strong>把原始业务数据转换为可稳定复用的业务数字的规则。</strong></p>
+</blockquote>
+<p><img alt="完整查询由指标、时间、筛选、维度等共同组成" src="/img/ai-agent-tutorial/09/metric_query_anatomy.svg"/></p>
+<h3 id="51-text-to-sql">5.1 为什么 Text-to-SQL 必须先识别指标</h3>
+<p>用户通常不会说字段名，而会说业务语言：</p>
+<pre><code class="language-text">昨天交易额是多少？
+最近 7 天订单完成率怎么样？
+本月客单价比上月增长了吗？
+</code></pre>
+<p>这三句话里都没有直接写出表名、字段名和计算公式。</p>
+<p>系统需要先识别：用户想看的到底是哪个指标，再决定查什么表、使用什么状态、怎样聚合。</p>
+<p>如果跳过指标识别，直接让模型生成 SQL，常见结果是：</p>
+<table>
+<thead>
+<tr>
+<th>用户说法</th>
+<th>可能出现的错误理解</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>交易额</td>
+<td>把创建订单金额当成支付成功金额</td>
+</tr>
+<tr>
+<td>订单完成率</td>
+<td>不清楚分母是创建订单、支付订单还是支付中的订单</td>
+</tr>
+<tr>
+<td>客单价</td>
+<td>用订单数做分母，还是用支付成功用户数做分母不明确</td>
+</tr>
+<tr>
+<td>环比增长率</td>
+<td>没有确定对比周期和计算公式</td>
+</tr>
+</tbody>
+</table>
+<p>SQL 即使能成功执行，得到的也可能不是用户真正想要的数字。</p>
+<h3 id="52">5.2 基础业务指标示例</h3>
+<p>下面用订单业务说明几个最基础的指标。</p>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>业务含义</th>
+<th>统计对象与计算方式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>支付成功订单量</td>
+<td>成功完成了多少笔支付</td>
+<td><code>order_payment</code> 中 <code>status = 'SUCCESS'</code> 的订单数</td>
+</tr>
+<tr>
+<td>支付成功订单金额</td>
+<td>成功支付了多少钱</td>
+<td>对成功支付订单的 <code>order_amount</code> 求和</td>
+</tr>
+<tr>
+<td>退款成功订单量</td>
+<td>成功完成了多少笔退款</td>
+<td><code>order_refund</code> 中 <code>status = 'SUCCESS'</code> 的退款单数</td>
+</tr>
+<tr>
+<td>退款成功金额</td>
+<td>成功退回了多少钱</td>
+<td>对成功退款订单的 <code>refund_amount</code> 求和</td>
+</tr>
+<tr>
+<td>未支付订单量</td>
+<td>尚未完成支付的订单数</td>
+<td>按业务规则统计 <code>INIT</code>、<code>PROCESSING</code> 等状态订单</td>
+</tr>
+</tbody>
+</table>
+<p>以“支付成功订单金额”为例，它不是简单的：</p>
+<pre><code class="language-text">SUM(order_amount)
+</code></pre>
+<p>还包含两个关键限制：</p>
+<pre><code class="language-text">只统计支付成功订单
+按支付成功时间归属到对应日期
+</code></pre>
+<p>这就是为什么指标必须沉淀成业务定义，而不能只在 SQL 里临时拼接。</p>
+<h3 id="53">5.3 分析指标：在基础指标上继续计算</h3>
+<p>有些指标可以直接从一张表汇总得到；另一些指标是在基础指标之上继续计算出来的分析指标。</p>
+<table>
+<thead>
+<tr>
+<th>分析指标</th>
+<th>常见计算方式</th>
+<th>需要先确认的问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>环比增长率</td>
+<td><code>(本期值 - 上期值) / 上期值</code></td>
+<td>本期和上期分别是哪些日期范围</td>
+</tr>
+<tr>
+<td>同比增长率</td>
+<td><code>(本期值 - 去年同期值) / 去年同期值</code></td>
+<td>是否按自然日、自然周或自然月对比</td>
+</tr>
+<tr>
+<td>订单完成率</td>
+<td><code>完成订单数 / 订单总数</code></td>
+<td>“完成”和“总数”分别包含哪些状态</td>
+</tr>
+<tr>
+<td>客单价</td>
+<td><code>支付成功金额 / 付费客户数</code></td>
+<td>分母按去重客户数还是支付成功订单数</td>
+</tr>
+<tr>
+<td>退款率</td>
+<td><code>退款成功金额 / 支付成功金额</code>，或按单量计算</td>
+<td>分子分母按金额还是按订单数，统计周期是否一致</td>
+</tr>
+</tbody>
+</table>
+<p>例如，用户问：</p>
+<pre><code class="language-text">本月客单价是多少？
+</code></pre>
+<p>系统不能只查 <code>order_amount</code> 的平均值就结束。</p>
+<p>如果业务定义的客单价是“每位付费学生的平均支付金额”，它应当是：</p>
+<pre><code class="language-text">本月支付成功订单金额
+÷
+本月支付成功学生手机号去重数
+</code></pre>
+<p>如果业务定义的是“平均每笔支付金额”，分母又会变成支付成功订单数。两个结果都可能有意义，但不是同一个指标。</p>
+<h3 id="54">5.4 一个完整查询，不只有指标</h3>
+<p>指标回答的是“算什么”；一个完整的数据查询通常还要补齐其他信息。</p>
+<table>
+<thead>
+<tr>
+<th>查询组成部分</th>
+<th>它回答的问题</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>指标</td>
+<td>算什么</td>
+<td>支付成功订单金额</td>
+</tr>
+<tr>
+<td>时间范围</td>
+<td>算哪段时间</td>
+<td>最近 7 天、昨天、本月</td>
+</tr>
+<tr>
+<td>筛选条件</td>
+<td>只看哪些数据</td>
+<td>线上课程、北京地区、未支付订单</td>
+</tr>
+<tr>
+<td>维度</td>
+<td>从哪个角度看</td>
+<td>产品、地区、日期、老师</td>
+</tr>
+<tr>
+<td>分组</td>
+<td>如何拆分结果</td>
+<td>按产品分组、按天分组</td>
+</tr>
+<tr>
+<td>排序</td>
+<td>结果如何排列</td>
+<td>按交易额倒序</td>
+</tr>
+<tr>
+<td>数量限制</td>
+<td>返回多少条</td>
+<td>取前 10 名、明细最多 50 条</td>
+</tr>
+<tr>
+<td>展示形式</td>
+<td>用户如何查看</td>
+<td>数字、表格、趋势图、柱状图</td>
+</tr>
+</tbody>
+</table>
+<p>例如：</p>
+<pre><code class="language-text">查询最近 7 天线上课程按产品分组的支付成功订单金额，按金额倒序取前 10 名。
+</code></pre>
+<p>可以拆成：</p>
+<table>
+<thead>
+<tr>
+<th>组成部分</th>
+<th>对应内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>指标</td>
+<td>支付成功订单金额</td>
+</tr>
+<tr>
+<td>时间范围</td>
+<td>最近 7 天</td>
+</tr>
+<tr>
+<td>筛选条件</td>
+<td>线上课程、支付成功</td>
+</tr>
+<tr>
+<td>维度和分组</td>
+<td>产品</td>
+</tr>
+<tr>
+<td>排序</td>
+<td>金额倒序</td>
+</tr>
+<tr>
+<td>数量限制</td>
+<td>前 10 名</td>
+</tr>
+<tr>
+<td>展示形式</td>
+<td>排名表格或柱状图</td>
+</tr>
+</tbody>
+</table>
+<p>这比“请生成一条 SQL”更接近系统真正需要理解的查询任务。</p>
+<h3 id="55">5.5 指标识别为后续模块提供什么</h3>
+<p>当系统已经识别出指标，后续模块才有明确方向：</p>
+<pre><code class="language-text">指标：支付成功订单金额
+  ↓
+知道需要 order_payment.order_amount
+  ↓
+知道需要 status = SUCCESS
+  ↓
+知道时间通常使用 pay_success_time
+  ↓
+再结合时间、筛选、分组等条件生成 SQL
+</code></pre>
+<p>因此，Text-to-SQL 的查询理解并不是直接从一句话跳到 SQL，而是先形成一个结构化查询描述：</p>
+<pre><code class="language-text">指标 + 时间范围 + 筛选条件 + 维度/分组 + 排序/限制 + 展示形式
+</code></pre>
+<p>下一节介绍的 Router、澄清和 Schema 检索，都是为了让这份结构化查询描述足够正确、完整和安全。</p>
+<h3 id="56">5.6 指标不清晰时，先补指标还是先问用户</h3>
+<p>这里要区分两类问题：<strong>指标口径缺失</strong> 和 <strong>本次查询参数缺失</strong>。</p>
+<table>
+<thead>
+<tr>
+<th>情况</th>
+<th>应该由谁解决</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>指标已有统一定义</td>
+<td>指标层直接补全</td>
+<td>“交易额”默认是支付成功金额之和，按支付成功时间统计</td>
+</tr>
+<tr>
+<td>指标没有定义</td>
+<td>业务负责人补充指标定义</td>
+<td>系统里从未定义过“有效订单”是什么意思</td>
+</tr>
+<tr>
+<td>一个词对应多个已存在指标</td>
+<td>向用户澄清</td>
+<td>“订单量”可能是创建订单量，也可能是支付成功订单量</td>
+</tr>
+<tr>
+<td>指标已明确，但查询参数缺失</td>
+<td>向用户澄清或使用安全默认值</td>
+<td>“交易额”缺少时间范围；明细查询缺少返回条数</td>
+</tr>
+</tbody>
+</table>
+<p>因此，下面这句话：</p>
+<pre><code class="language-text">昨天交易额是多少？
+</code></pre>
+<p>如果指标语义层已经规定：</p>
+<pre><code class="language-text">交易额 = 支付成功订单的 order_amount 之和，按 pay_success_time 统计
+</code></pre>
+<p>系统就不应该再问“按创建时间还是支付成功时间”。它应直接把指标口径补齐，再根据“昨天”生成查询。</p>
+<p>真正需要澄清的是这种情况：</p>
+<pre><code class="language-text">昨天订单量是多少？
+</code></pre>
+<p>如果系统中同时维护了“创建订单量”和“支付成功订单量”，但“订单量”没有默认指向其中一个，才应问用户：</p>
+<pre><code class="language-text">你想看昨天创建的订单数，还是昨天支付成功的订单数？
+</code></pre>
+<p>这背后有一个很重要的设计原则：</p>
+<blockquote>
+<p><strong>能被指标口径统一解决的问题，不要重复追问每一个用户；只有指标无法唯一确定，或本次查询条件确实缺失时，才向用户澄清。</strong></p>
+</blockquote>
+<p>这样既能保证统计结果一致，也能避免 Text-to-SQL 变成一个不停追问的系统。</p>
+<hr/>
+<h2 id="6-text-to-sql-sql">6. 企业级 Text-to-SQL：为什么不能直接生成 SQL</h2>
+<p>上面的流程描述了 Text-to-SQL 的主链路，但真实系统不能把每一句用户输入都直接交给模型生成 SQL。</p>
+<p><img alt="企业级 Text-to-SQL 全局流程图" src="/img/ai-agent-tutorial/09/text_to_sql_overall_architecture.svg"/></p>
+<p>更可靠的设计应当是：先判断问题能不能查、信息够不够、需要哪些上下文，再决定是否生成 SQL。</p>
+<pre><code class="language-text">用户问题
+  ↓
+Router：这是不是数据查询？
+  ├─ 普通问答 -&gt; 交给普通问答能力
+  ├─ 操作请求 -&gt; 拒绝直接执行，引导到业务页面
+  ├─ 无法判断 -&gt; 只澄清“想查数据还是想了解业务规则”
+  └─ 是
+       ↓
+RAG 检索：候选指标定义 + 候选表目录 + 表关联关系
+       ↓
+大模型做查询规划：选择真实指标、需要的表和关联路径
+  ├─ 指标无法唯一确定 -&gt; 澄清或补充指标定义
+  ├─ 查询条件缺失 -&gt; 澄清或使用安全默认值
+  └─ 查询计划完整
+       ↓
+取得已选表的详细 Schema、已选指标口径和关联路径
+  ↓
+生成 SQL
+  ↓
+SQL 安全校验、权限改写和执行
+  ↓
+结果解释；失败时有限次数修复或明确反馈
+</code></pre>
+<p>这不是把流程故意做复杂，而是为了避免模型在错误的问题、错误的上下文或错误的权限范围内生成一条“看起来很合理”的 SQL。</p>
+<p><img alt="企业级 Text-to-SQL 请求处理流水线" src="/img/ai-agent-tutorial/09/text_to_sql_request_pipeline.svg"/></p>
+<h3 id="61-router">6.1 Router：先判断是不是数据查询</h3>
+<p>用户在同一个对话框里可能问任何事情：</p>
+<pre><code class="language-text">你好。
+帮我解释一下退款流程。
+查一下最近 7 天未支付订单。
+把这些订单全部取消。
+</code></pre>
+<p>只有第三句是可以进入 Text-to-SQL 的只读数据查询。</p>
+<p>如果没有 Router，系统很容易出现两个问题：</p>
+<table>
+<thead>
+<tr>
+<th>问题</th>
+<th>后果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>普通聊天也尝试生成 SQL</td>
+<td>产生无意义 SQL，浪费模型和数据库资源</td>
+</tr>
+<tr>
+<td>操作性请求也进入查询链路</td>
+<td>用户可能以为系统能执行取消订单、修改金额等危险操作</td>
+</tr>
+</tbody>
+</table>
+<p>Router 可以由规则、轻量模型，或两者组合完成。它的任务不是生成 SQL，而是输出一个小而稳定的分类结果：</p>
+<table>
+<thead>
+<tr>
+<th>分类</th>
+<th>后续动作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DATA_QUERY</code></td>
+<td>进入 Text-to-SQL 查询链路</td>
+</tr>
+<tr>
+<td><code>GENERAL_CHAT</code></td>
+<td>使用普通问答能力回答</td>
+</tr>
+<tr>
+<td><code>DATA_OPERATION</code></td>
+<td>明确说明不能通过自然语言直接修改业务数据，引导用户到业务页面操作</td>
+</tr>
+<tr>
+<td><code>OUT_OF_SCOPE</code></td>
+<td>说明当前能力范围</td>
+</tr>
+<tr>
+<td><code>AMBIGUOUS</code></td>
+<td>只澄清用户想查询数据，还是想了解业务规则</td>
+</tr>
+</tbody>
+</table>
+<p>例如：</p>
+<pre><code class="language-text">“最近 7 天未支付订单有多少？” -&gt; DATA_QUERY
+“退款为什么失败？” -&gt; GENERAL_CHAT
+“把昨天超时订单改成成功” -&gt; DATA_OPERATION
+</code></pre>
+<p>通常会优先使用轻量模型或规则做 Router，因为这一步只需要分类，不需要昂贵模型进行复杂推理。它能降低成本和响应时间，也把高风险的操作请求提前挡在 SQL 生成之前。</p>
+<p>Router 的澄清只处理“请求类型无法判断”的极少数情况，不负责确认指标、时间范围、表和字段。这些事情进入 Text-to-SQL 查询链路后，再由查询规划模块处理。</p>
+<h3 id="62-rag">6.2 RAG 检索：先提供候选资料，不直接决定查询答案</h3>
+<p>Router 确认是 <code>DATA_QUERY</code> 后，系统先从两类知识库中检索候选资料：指标库和 Schema 目录。</p>
+<table>
+<thead>
+<tr>
+<th>检索来源</th>
+<th>一条资料应包含什么</th>
+<th>解决的问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>指标库</td>
+<td>指标名称、同义词、业务定义、计算方式、核心表、状态与时间口径</td>
+<td>“交易额”“退款率”等业务词到底是什么意思</td>
+</tr>
+<tr>
+<td>Schema 目录</td>
+<td>表简要说明、关键业务键、常用字段、表关联关系</td>
+<td>当前问题可能涉及哪些表，以及如何关联</td>
+</tr>
+</tbody>
+</table>
+<p>例如用户问：</p>
+<pre><code class="language-text">线上课程退款额是多少？
+</code></pre>
+<p>RAG 可以召回：</p>
+<pre><code class="language-text">候选指标：退款成功金额
+指标定义：SUCCESS 退款订单的 refund_amount 求和，按 refund_success_time 统计
+核心表：order_refund
+
+候选表资料：
+- order_refund：退款订单
+- order_payment：支付订单
+- order_product：产品及 teaching_mode
+
+关联关系：
+order_refund.payment_order_no -&gt; order_payment.order_no
+order_payment.product_id -&gt; order_product.id
+</code></pre>
+<p>这里的 RAG 结果只是候选资料，不是最终答案。它负责把“可能相关的信息”找回来，避免模型凭空猜测；真正选择哪个指标、哪些表、哪条关联路径，仍由下一步的查询规划模型根据用户问题决定。</p>
+<p>对于表较少的系统，Schema 目录可以直接作为轻量上下文提供给检索或规划模型；对于表很多的系统，可以先做向量检索、关键词检索或规则召回，再把少量候选表交给模型。</p>
+<h3 id="63">6.3 查询规划与要素检查：不是每个数据问题都能立刻查</h3>
+<p>RAG 返回候选指标和候选表后，查询规划模型仍然不能马上生成 SQL。它需要结合用户问题，从候选资料中选择真实对应的指标、表和关联路径，并判断查询信息是否足够明确。</p>
+<p>查询规划阶段最好输出结构化结果，例如：</p>
+<pre><code class="language-text">selected_metrics：退款成功金额
+selected_tables：order_refund、order_payment、order_product
+join_path：order_refund -&gt; order_payment -&gt; order_product
+time_range：本月
+filters：teaching_mode = ONLINE，refund_status = SUCCESS
+group_by：无
+sort：无
+needs_clarification：false
+</code></pre>
+<p>如果 <code>needs_clarification</code> 为 <code>true</code>，系统先向用户提问，不进入 SQL 生成阶段。</p>
+<h3 id="631">6.3.1 查询计划必须是可校验的契约</h3>
+<p>查询规划不能只返回一段自然语言，例如：</p>
+<pre><code class="language-text">我认为应该查询退款表、支付表和产品表。
+</code></pre>
+<p>这段话人能看懂，程序却很难可靠地继续处理。</p>
+<p>更好的做法是让模型按固定 JSON Schema 输出查询计划，程序再校验它：</p>
+<pre><code class="language-json">{
+  "status": "READY",
+  "selected_metric": "退款成功金额",
+  "selected_tables": ["order_refund", "order_payment", "order_product"],
+  "join_path": [
+    "order_refund.payment_order_no = order_payment.order_no",
+    "order_payment.product_id = order_product.id"
+  ],
+  "time_range": {
+    "type": "MONTH_TO_DATE"
+  },
+  "filters": [
+    {"field": "order_product.teaching_mode", "operator": "=", "value": "ONLINE"}
+  ],
+  "group_by": [],
+  "order_by": [],
+  "limit": 1,
+  "result_columns": [
+    {"alias": "refund_amount", "role": "MEASURE", "unit": "元"}
+  ],
+  "needs_clarification": false
+}
+</code></pre>
+<p>程序至少要校验：</p>
+<table>
+<thead>
+<tr>
+<th>校验项</th>
+<th>不通过时怎么处理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>指标是否来自 RAG 召回的候选指标</td>
+<td>拒绝计划，要求模型重新选择或向用户澄清</td>
+</tr>
+<tr>
+<td>表和关联路径是否来自候选 Schema</td>
+<td>拒绝模型臆造的表、字段和关联</td>
+</tr>
+<tr>
+<td>时间、筛选、分组等字段是否符合约定格式</td>
+<td>要求模型重试或进入澄清</td>
+</tr>
+<tr>
+<td><code>result_columns</code> 是否有唯一别名和明确角色</td>
+<td>不进入 SQL 生成，避免结果处理阶段猜字段语义</td>
+</tr>
+<tr>
+<td>计划状态是否为 <code>READY</code></td>
+<td><code>NEEDS_CLARIFICATION</code> 时只提问，不生成 SQL</td>
+</tr>
+</tbody>
+</table>
+<p>SQL 生成模型收到这份已校验计划后，必须使用约定别名，例如：</p>
+<pre><code class="language-sql">SELECT SUM(r.refund_amount) AS refund_amount
+...
+</code></pre>
+<p>这样执行后的结果处理模块知道 <code>refund_amount</code> 是一个金额指标，而不需要从任意 SQL 的列名里猜测语义。</p>
+<p>这份查询计划就是模块之间的契约：规划模型负责选择什么，SQL 模型负责如何查询，程序负责校验和执行，结果模块负责按约定展示。没有这个契约，后续每一步都会依赖模型的自由文本，系统很难稳定。</p>
+<p>一次查询通常由下面几个要素组成：</p>
+<table>
+<thead>
+<tr>
+<th>要素</th>
+<th>例子</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>查询对象或指标</td>
+<td>订单、交易额、退款率、学生数</td>
+</tr>
+<tr>
+<td>时间范围</td>
+<td>昨天、最近 7 天、2026 年 7 月</td>
+</tr>
+<tr>
+<td>筛选条件</td>
+<td>未支付、线上课程、北京地区</td>
+</tr>
+<tr>
+<td>计算方式</td>
+<td>明细、数量、金额求和、平均值、占比</td>
+</tr>
+<tr>
+<td>分组维度</td>
+<td>按地区、产品、日期、老师分组</td>
+</tr>
+<tr>
+<td>排序和数量</td>
+<td>取前 10 名、按金额倒序</td>
+</tr>
+</tbody>
+</table>
+<p>不是每个问题都必须包含全部要素。例如“当前未支付订单有多少”不一定需要时间范围；但“哪个地区订单最多”通常需要明确时间范围，也需要明确“订单”是创建订单、支付成功订单还是全部订单。</p>
+<p>下面几个问题就存在关键歧义：</p>
+<table>
+<thead>
+<tr>
+<th>用户问题</th>
+<th>缺少或模糊的信息</th>
+<th>系统应该怎么做</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>昨天订单量是多少？</td>
+<td>创建量还是支付成功量</td>
+<td>追问订单量的口径</td>
+</tr>
+<tr>
+<td>退款率是多少？</td>
+<td>指标未配置时，分子、分母和时间范围不明确</td>
+<td>先查指标库；没有定义时再追问按订单数还是金额计算，统计哪段时间</td>
+</tr>
+<tr>
+<td>哪个地区订单最多？</td>
+<td>时间范围、订单状态</td>
+<td>追问统计周期和订单口径</td>
+</tr>
+<tr>
+<td>看一下订单情况</td>
+<td>指标、时间、筛选、展示形式都不明确</td>
+<td>请用户说明想看明细、数量还是金额，以及时间范围</td>
+</tr>
+</tbody>
+</table>
+<p>如果没有这个模块，模型会在“指标未定义”和“查询参数缺失”之间混为一谈：要么自行猜测口径，要么对本可直接执行的问题反复追问。SQL 可能可以执行，但回答的是另一个问题，这比直接报错更危险。</p>
+<h3 id="64">6.4 澄清对话：让系统问最少、最关键的问题</h3>
+<p>发现信息不完整后，系统不应把全部字段都抛给用户选择，也不应连续问很多问题。</p>
+<p>更好的做法是：每次只追问一个对结果影响最大的缺口。</p>
+<p>例如：</p>
+<pre><code class="language-text">用户：昨天订单量是多少？
+
+系统：你想统计昨天创建的订单数，还是昨天支付成功的订单数？
+</code></pre>
+<p>用户回答后，系统把答案保存在本次会话上下文中，再继续补齐后续条件。</p>
+<p>澄清模块解决的是“自然语言天然不完整”的问题。它的目标不是让用户填一张复杂表单，而是通过简短对话把模糊问题变成可执行的查询任务。</p>
+<p>设计上还需要设置边界：</p>
+<ul>
+<li>连续澄清超过限定次数仍无法明确时，给出可选问题示例或转人工；</li>
+<li>有安全默认值的项目可以自动补齐，例如明细默认最多返回 50 条；</li>
+<li>指标口径缺失时，不能由模型擅自补齐；应补充指标定义，或让用户在多个候选指标中确认。</li>
+</ul>
+<h3 id="641">6.4.1 多轮追问：保存查询上下文，不只是保存聊天记录</h3>
+<p>Text-to-SQL 常见的使用方式不是一次提问后结束，而是基于上一轮结果继续追问：</p>
+<pre><code class="language-text">用户：最近 7 天每天的交易额趋势怎么样？
+系统：返回按天的交易额趋势。
+
+用户：那只看线上课程。
+用户：那退款额呢？
+</code></pre>
+<p>如果系统只保存原始聊天文本，模型需要每次重新猜测上一轮选了什么指标、哪些表、时间范围是什么，很容易漏掉条件或错误继承条件。</p>
+<p>因此，每轮成功查询后，程序应保存结构化 <code>QueryContext</code>：</p>
+<pre><code class="language-text">selected_metric：支付成功订单金额
+selected_tables：order_payment、order_product
+time_range：最近 7 天
+filters：teaching_mode = ONLINE
+group_by：按天
+order_by：日期升序
+result_columns：pay_date、paid_amount
+</code></pre>
+<p>下一轮追问到来后，查询规划模块先判断它与上一轮的关系。</p>
+<table>
+<thead>
+<tr>
+<th>用户追问</th>
+<th>可以继承什么</th>
+<th>必须重新处理什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>“那只看线上课程。”</td>
+<td>指标、时间范围、按天分组</td>
+<td>增加产品筛选，重新选择是否需要产品表</td>
+</tr>
+<tr>
+<td>“改成最近 30 天。”</td>
+<td>指标、筛选、分组</td>
+<td>替换时间范围，重新生成 SQL</td>
+</tr>
+<tr>
+<td>“那退款额呢？”</td>
+<td>时间范围、线上课程筛选、按天分组</td>
+<td>更换指标，重新检索退款表及关联路径</td>
+</tr>
+<tr>
+<td>“查一下学生作业情况。”</td>
+<td>通常不继承订单查询条件</td>
+<td>视为新问题，重新经过 Router 和查询规划</td>
+</tr>
+</tbody>
+</table>
+<p>这里有一个原则：</p>
+<blockquote>
+<p><strong>可以继承用户没有要求改变的查询条件，但不能直接复用上一轮 SQL。</strong></p>
+</blockquote>
+<p>指标、表和关联关系一旦变化，就必须重新规划、重新校验并重新生成 SQL。这样既能让追问自然，又不会把上一轮错误的表关系或权限范围带到下一轮。</p>
+<p><img alt="多轮追问如何继承和重置查询上下文" src="/img/ai-agent-tutorial/09/multi_turn_query_context.svg"/></p>
+<h3 id="65-schema">6.5 Schema 检索与选表：先让模型知道“有哪些表”，再决定“用哪些表”</h3>
+<p>真实数据库可能有几十上百张表、成千上万个字段。</p>
+<p>这不代表模型一开始就什么都不知道。更合理的做法是，把所有表的<strong>简要介绍</strong>和<strong>表关联关系</strong>整理成一份轻量级的表目录，交给“选表”模块使用。</p>
+<p>例如，表目录不需要包含每个表的全部字段，而可以先提供：</p>
+<table>
+<thead>
+<tr>
+<th>表</th>
+<th>简要业务说明</th>
+<th>关键业务键</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>order_payment</code></td>
+<td>学生发起支付后的支付订单，记录支付状态、金额和支付成功时间</td>
+<td><code>order_no</code>、<code>product_id</code></td>
+</tr>
+<tr>
+<td><code>order_refund</code></td>
+<td>针对原支付订单的退款申请和退款结果</td>
+<td><code>payment_order_no</code></td>
+</tr>
+<tr>
+<td><code>order_product</code></td>
+<td>可售卖产品，记录课程内容、价格和授课方式</td>
+<td><code>id</code></td>
+</tr>
+<tr>
+<td><code>prepay_order</code></td>
+<td>学生准备支付时创建的预支付订单</td>
+<td><code>order_no</code>、<code>product_id</code></td>
+</tr>
+</tbody>
+</table>
+<p>同时提供表之间的关联关系：</p>
+<pre><code class="language-text">order_refund.payment_order_no -&gt; order_payment.order_no
+order_payment.product_id -&gt; order_product.id
+order_payment.prepay_order_no -&gt; prepay_order.order_no
+</code></pre>
+<p>这份表目录既是 6.2 中 Schema RAG 的资料来源，也是查询规划模型选表时使用的候选上下文。它的作用是：让模型在理解问题后，先选择可能需要的表，而不是让它凭记忆猜表名。</p>
+<h3 id="651">6.5.1 指标也要告诉模型核心来源表</h3>
+<p>指标定义不只包含计算公式，也应包含它通常依赖的核心表和字段。</p>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>核心表</th>
+<th>核心字段和规则</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>支付成功订单量</td>
+<td><code>order_payment</code></td>
+<td><code>status = 'SUCCESS'</code>，统计订单数</td>
+</tr>
+<tr>
+<td>支付成功订单金额</td>
+<td><code>order_payment</code></td>
+<td><code>order_amount</code> 求和，按 <code>pay_success_time</code> 统计</td>
+</tr>
+<tr>
+<td>退款成功订单量</td>
+<td><code>order_refund</code></td>
+<td><code>status = 'SUCCESS'</code>，统计退款单数</td>
+</tr>
+<tr>
+<td>退款成功金额</td>
+<td><code>order_refund</code></td>
+<td><code>refund_amount</code> 求和，按 <code>refund_success_time</code> 统计</td>
+</tr>
+</tbody>
+</table>
+<p>指标可以直接确定“核心事实表”，但不一定能决定所有表。</p>
+<p>例如“退款成功金额”本身只需要 <code>order_refund</code>；如果用户继续要求“线上课程的退款成功金额”，就还需要通过支付订单和产品表补上“线上课程”这个维度：</p>
+<pre><code class="language-text">指标：退款成功金额
+  核心表：order_refund
+
+筛选条件：线上课程
+  需要补充关系：
+  order_refund -&gt; order_payment -&gt; order_product
+</code></pre>
+<h3 id="652-sql">6.5.2 两阶段：先选表，再生成 SQL</h3>
+<p>因此，推荐把 Schema 使用拆成两个阶段：</p>
+<pre><code class="language-text">第一阶段：选表
+用户问题 + RAG 召回的候选指标 + 候选表目录 + 表关联关系
+  ↓
+模型输出：需要哪些表、为什么需要、表如何关联
+
+第二阶段：生成 SQL
+用户问题 + 已选表的完整字段说明 + 已选关联关系 + 指标口径
+  ↓
+模型输出：SQL
+</code></pre>
+<p>对于“最近 7 天未支付订单有哪些”：</p>
+<pre><code class="language-text">选表结果：
+- order_payment
+- 原因：包含订单状态、创建时间和订单明细
+
+生成 SQL 时提供：
+- order_payment 的完整字段说明
+- 未支付状态的业务定义
+- 最近 7 天的时间条件
+</code></pre>
+<p>对于“线上课程退款额是多少”：</p>
+<pre><code class="language-text">选表结果：
+- order_refund：提供退款成功金额和退款成功时间
+- order_payment：把退款订单关联回原支付订单
+- order_product：提供产品的 teaching_mode
+
+关联路径：
+order_refund.payment_order_no
+  -&gt; order_payment.order_no
+  -&gt; order_product.id（通过 order_payment.product_id）
+</code></pre>
+<p>第二个问题需要三张表，不是因为模型要“多找资料”，而是因为业务条件分散在不同表中。</p>
+<p><img alt="Schema 两阶段使用：先选表，再提供详细字段" src="/img/ai-agent-tutorial/09/schema_selection_two_stage.svg"/></p>
+<h3 id="653-sql">6.5.3 为什么不把所有完整字段都交给 SQL 生成模型</h3>
+<p>如果直接把所有表、所有字段和所有规则放进 SQL 生成提示词，会造成：</p>
+<table>
+<thead>
+<tr>
+<th>问题</th>
+<th>后果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>上下文太长</td>
+<td>成本更高、速度更慢</td>
+</tr>
+<tr>
+<td>无关字段太多</td>
+<td>模型更容易选错字段或拼出错误关联</td>
+</tr>
+<tr>
+<td>业务规则被淹没</td>
+<td>关键状态和指标口径反而不突出</td>
+</tr>
+<tr>
+<td>Schema 频繁变化</td>
+<td>维护整份超长提示词很困难</td>
+</tr>
+</tbody>
+</table>
+<p>表目录可以相对简短，并覆盖所有表；SQL 生成阶段只接收选中的少量表的详细 Schema。</p>
+<p>对于表不多的小型系统，可以直接把完整表目录交给选表模型。对于表很多的大型系统，可以先用关键词、向量检索或规则从目录中召回候选表，再让模型在候选表中做最终选择。</p>
+<p>这就是 Schema 检索模块的价值：<strong>不是让模型拥有一份越长越好的数据库说明，而是在正确时机把正确的表、关系和字段交给正确的模型。</strong></p>
+<h3 id="66">6.6 多数据源的第一种落地方式：统一进入数据仓库</h3>
+<p>微服务系统中，订单、支付、用户、商品等业务通常各自拥有数据库。经营分析如果每次都直接跨这些业务库查询，关联复杂、性能不可控，也容易影响线上服务。</p>
+<p>第一个、也是最常见的落地方式是：</p>
+<blockquote>
+<p><strong>把需要分析的业务数据同步到统一数据仓库，Text-to-SQL 只查询数据仓库。</strong></p>
+</blockquote>
+<pre><code class="language-text">订单库 ─┐
+支付库 ─┼─ 数据同步/ETL/CDC ─&gt; 数据仓库
+用户库 ─┤                         ↓
+商品库 ─┘                   Text-to-SQL 查询
+</code></pre>
+<p>业务库仍然负责线上交易和服务；数据仓库负责跨业务域的统计和分析。这样用户问：</p>
+<pre><code class="language-text">上个月购买线上课程的用户中，有多少人在 7 天内申请退款？
+</code></pre>
+<p>Text-to-SQL 不需要同时连订单库、支付库、退款库和产品库，而是直接查询数仓中已经整理好的分析表、宽表或聚合表。</p>
+<p><img alt="业务数据统一进入数据仓库后再由 Text-to-SQL 查询" src="/img/ai-agent-tutorial/09/data_warehouse_text_to_sql.svg"/></p>
+<h3 id="661">6.6.1 数据仓库中应该准备什么</h3>
+<p>数据仓库不是简单复制所有业务表。它需要把经营分析常用的业务键和关系提前整理好。</p>
+<p>例如，可以沉淀一张订单支付退款分析宽表：</p>
+<table>
+<thead>
+<tr>
+<th>字段类型</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>订单维度</td>
+<td>订单号、产品 ID、产品名称、授课方式</td>
+</tr>
+<tr>
+<td>用户维度</td>
+<td>用户 ID、注册来源、地区等脱敏后的分析字段</td>
+</tr>
+<tr>
+<td>支付事实</td>
+<td>支付状态、支付金额、支付成功时间</td>
+</tr>
+<tr>
+<td>退款事实</td>
+<td>退款状态、退款金额、退款成功时间</td>
+</tr>
+<tr>
+<td>时间维度</td>
+<td>下单日期、支付日期、退款日期、月份、周次</td>
+</tr>
+</tbody>
+</table>
+<p>这样“线上课程退款额”“按地区统计交易额”“支付后 7 天退款率”等跨域问题，都可以在统一分析表或主题表中完成，而不需要让模型临时设计跨库 Join。</p>
+<h3 id="662-text-to-sql-schema">6.6.2 Text-to-SQL 如何使用数据仓库 Schema</h3>
+<p>在这个方案里，Schema 目录和指标库都围绕数据仓库维护：</p>
+<pre><code class="language-text">数据源：analytics_dw
+表：dwd_order_payment_refund
+说明：订单、支付、退款和产品维度的经营分析宽表
+适用指标：交易量、交易额、退款量、退款额、退款率
+可用维度：日期、产品、授课方式、地区
+</code></pre>
+<p>RAG 检索到指标和 Schema 后，查询规划模型只需要选择：</p>
+<pre><code class="language-text">使用哪张数仓表
+使用哪个指标口径
+按什么时间、维度和筛选条件统计
+</code></pre>
+<p>例如：</p>
+<pre><code class="language-text">问题：最近 30 天线上课程按产品的退款额 Top 10
+
+查询规划：
+- 数据源：analytics_dw
+- 表：dwd_order_payment_refund
+- 指标：退款成功金额
+- 筛选：授课方式 = ONLINE，退款状态 = SUCCESS
+- 时间：最近 30 天，按退款成功日期过滤
+- 分组：产品
+- 排序：退款额倒序
+- 限制：前 10 名
+</code></pre>
+<p>SQL 生成模型随后只拿到这张数仓表的详细字段、指标口径和查询计划生成 SQL。</p>
+<h3 id="663-text-to-sql">6.6.3 为什么优先让 Text-to-SQL 查询数据仓库</h3>
+<table>
+<thead>
+<tr>
+<th>好处</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>查询边界清晰</td>
+<td>Text-to-SQL 只访问分析库，不直接压业务主库</td>
+</tr>
+<tr>
+<td>跨域分析简单</td>
+<td>订单、支付、退款、用户等关系已在数仓层整理</td>
+</tr>
+<tr>
+<td>Schema 更适合 AI</td>
+<td>分析表字段和指标口径更稳定，不必暴露大量业务内部表</td>
+</tr>
+<tr>
+<td>性能更可控</td>
+<td>宽表、聚合表和分析索引可针对统计场景优化</td>
+</tr>
+<tr>
+<td>权限更集中</td>
+<td>可以统一控制分析字段、脱敏规则和数据范围</td>
+</tr>
+</tbody>
+</table>
+<h3 id="664">6.6.4 这对查询规划意味着什么</h3>
+<p>采用统一数据仓库后，查询规划不再需要为每次问题选择跨库执行策略，而是固定为：</p>
+<pre><code class="language-text">数据源：analytics_dw
+  ↓
+RAG 召回：数仓表目录、指标定义和维度说明
+  ↓
+大模型选择：分析表、指标、时间、筛选、分组和排序
+  ↓
+生成面向数据仓库的 SQL
+</code></pre>
+<p>这能让学生先把 Text-to-SQL 的核心流程做稳：指标识别、Schema 检索、查询规划、SQL 安全和结果处理。其他跨源方案后面再作为架构扩展讨论。</p>
+<h3 id="67">6.7 指标语义层：让“交易额”只有一个可追溯定义</h3>
+<p>表结构说明只能告诉模型字段在哪里，不能保证模型知道业务指标是什么意思。</p>
+<p>例如“交易额”在不同团队口中，可能是：</p>
+<ul>
+<li>创建订单金额；</li>
+<li>支付成功金额；</li>
+<li>支付成功金额减退款成功金额；</li>
+<li>某个产品的标价乘以订单数。</li>
+</ul>
+<p>因此需要把常用指标沉淀成可复用的语义资料：</p>
+<table>
+<thead>
+<tr>
+<th>指标</th>
+<th>推荐定义</th>
+<th>表和字段</th>
+<th>状态与时间条件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>交易量</td>
+<td>支付成功订单数</td>
+<td><code>order_payment</code></td>
+<td><code>SUCCESS</code> + <code>pay_success_time</code></td>
+</tr>
+<tr>
+<td>交易额</td>
+<td>支付成功订单金额之和</td>
+<td><code>order_payment.order_amount</code></td>
+<td><code>SUCCESS</code> + <code>pay_success_time</code></td>
+</tr>
+<tr>
+<td>退款量</td>
+<td>退款成功订单数</td>
+<td><code>order_refund</code></td>
+<td><code>SUCCESS</code> + <code>refund_success_time</code></td>
+</tr>
+<tr>
+<td>退款额</td>
+<td>退款成功金额之和</td>
+<td><code>order_refund.refund_amount</code></td>
+<td><code>SUCCESS</code> + <code>refund_success_time</code></td>
+</tr>
+</tbody>
+</table>
+<p>这层资料有两个好处：</p>
+<ol>
+<li>业务人员、开发人员和模型使用同一套指标语言。</li>
+<li>指标口径变化时，修改定义即可，不需要在每一个提示词里手工替换。</li>
+</ol>
+<p>没有语义层时，同一个问题在不同日期、不同模型或不同开发人员手里，可能得到不同 SQL 和不同结果。</p>
+<h3 id="68-sql-guard-sql-sql">6.8 SQL Guard 与执行计划检查：SQL 能执行，不代表 SQL 可以执行</h3>
+<p>模型生成 SQL 后，需要由程序中的 SQL Guard 做独立检查。这里不是让大模型自己审核自己生成的 SQL，而是让程序和数据库共同决定这条 SQL 能否执行。</p>
+<p>第一层是静态检查和权限检查：</p>
+<p><img alt="SQL Guard 与 EXPLAIN 的程序放行流程" src="/img/ai-agent-tutorial/09/sql_guard_explain_flow.svg"/></p>
+<table>
+<thead>
+<tr>
+<th>检查内容</th>
+<th>解决的问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>只允许单条 <code>SELECT</code></td>
+<td>防止 <code>UPDATE</code>、<code>DELETE</code>、多语句注入</td>
+</tr>
+<tr>
+<td>允许表和字段白名单</td>
+<td>防止越过业务范围查敏感数据</td>
+</tr>
+<tr>
+<td>结果行数限制</td>
+<td>防止明细查询一次返回大量记录</td>
+</tr>
+<tr>
+<td>用户数据范围注入</td>
+<td>让查询自动带上租户、组织或角色范围</td>
+</tr>
+<tr>
+<td>敏感字段脱敏</td>
+<td>避免手机号、姓名等原始数据被直接展示</td>
+</tr>
+</tbody>
+</table>
+<p>这些规则必须由程序确定性执行。例如：程序解析 SQL 后发现不是单条 <code>SELECT</code>，就直接拒绝；发现用户没有查看手机号的权限，就拒绝该字段或改为脱敏结果。大模型不能拥有放行权。</p>
+<h3 id="681-explain">6.8.1 <code>EXPLAIN</code>：执行前检查数据库准备怎样查询</h3>
+<p>SQL 语法正确、表字段也都合法，仍然可能非常慢。</p>
+<p>例如，模型生成：</p>
+<pre><code class="language-sql">SELECT order_no, student_name, order_amount, created_at
+FROM order_payment
+WHERE status IN ('INIT', 'PROCESSING')
+  AND created_at &gt;= DATE_SUB(CURDATE(), INTERVAL 7 DAY)
+ORDER BY created_at DESC
+LIMIT 50;
+</code></pre>
+<p>这条 SQL 看起来没有问题，但系统仍然需要关心：</p>
+<pre><code class="language-text">数据库会使用哪个索引？
+预计要扫描多少行？
+是否会创建临时表？
+是否要做额外排序？
+多表关联时，关联字段是否有索引？
+</code></pre>
+<p>程序可以先执行：</p>
+<pre><code class="language-sql">EXPLAIN SELECT ...
+</code></pre>
+<p><code>EXPLAIN</code> 不会真正查询出业务结果，而是让 MySQL 返回优化器计划使用的访问方式。程序可以读取其中的关键信息：</p>
+<table>
+<thead>
+<tr>
+<th>执行计划信息</th>
+<th>它说明什么</th>
+<th>风险判断示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>key</code></td>
+<td>优化器计划使用的索引</td>
+<td>为空不一定有问题，但大表查询要重点检查</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td>表的访问方式</td>
+<td>大表出现 <code>ALL</code> 往往表示全表扫描，需要警惕</td>
+</tr>
+<tr>
+<td><code>rows</code></td>
+<td>预估扫描行数</td>
+<td>远大于查询结果量时，可能成本过高</td>
+</tr>
+<tr>
+<td><code>Extra</code></td>
+<td>额外执行动作</td>
+<td><code>Using temporary</code>、<code>Using filesort</code> 在大数据量下需要关注</td>
+</tr>
+</tbody>
+</table>
+<p>注意：<strong>是否走索引不是一个绝对的是非题。</strong></p>
+<p>小表只有几十行时，全表扫描通常完全可以接受；但百万级订单表扫描几十万行，再做多表关联和排序，就可能拖慢业务库。系统应该根据表规模、预估扫描行数、查询超时和当前负载设置风险阈值，而不是机械规定“没有索引就一律拒绝”。</p>
+<h3 id="682">6.8.2 从真实订单查询理解索引设计</h3>
+<p>当前项目的 <code>order_payment</code> 已有这些索引：</p>
+<pre><code class="language-text">uk_order_no(order_no)
+idx_student_phone(student_phone)
+idx_prepay_order_no(prepay_order_no)
+idx_status(status)
+</code></pre>
+<p>对于刚才“最近 7 天未支付订单”的查询，条件同时使用了：</p>
+<pre><code class="language-text">status
+created_at
+ORDER BY created_at DESC
+</code></pre>
+<p>现有的 <code>idx_status</code> 可能帮助先筛选订单状态，但 <code>created_at</code> 目前没有对应索引。随着订单数据增长，数据库可能仍要在符合状态的记录中扫描和排序。</p>
+<p>如果这类查询是高频需求，开发人员或 DBA 应基于真实 <code>EXPLAIN</code> 结果、数据量和线上负载评估是否增加组合索引，例如：</p>
+<pre><code class="language-text">(status, created_at)
+</code></pre>
+<p>组合索引不是看到两个筛选字段就立刻创建。还要考虑：</p>
+<ul>
+<li>这个查询是否高频；</li>
+<li><code>status</code> 的区分度是否足够；</li>
+<li>查询是否还需要按其他字段分组或排序；</li>
+<li>新索引会增加写入成本和存储空间；</li>
+<li>线上真实执行计划是否确实改善。</li>
+</ul>
+<p>索引设计是开发和数据库治理的长期工作，不应该由 Text-to-SQL 在每次请求时自动创建索引。Text-to-SQL 需要做的是：发现高风险计划后拒绝、降级或提示，并把高频慢查询记录下来，交给后续优化。</p>
+<h3 id="683">6.8.3 程序如何决定放行、降级或拒绝</h3>
+<p>执行前可以形成下面的程序决策链：</p>
+<pre><code class="language-text">模型生成 SQL
+  ↓
+程序解析 SQL：只读、单语句、表字段白名单、权限范围
+  ↓
+程序补充 LIMIT、数据范围和脱敏规则
+  ↓
+程序执行 EXPLAIN，读取索引和预估扫描行数
+  ├─ 风险可接受 -&gt; 使用只读账号执行查询
+  ├─ 风险偏高 -&gt; 缩小时间范围、要求增加筛选条件，或提示用户改查汇总
+  └─ 风险过高 -&gt; 拒绝执行，并记录慢查询风险
+</code></pre>
+<p>运行时还需要数据库和连接层的兜底：</p>
+<table>
+<thead>
+<tr>
+<th>保护措施</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>只读数据库账号</td>
+<td>即使 SQL Guard 漏检，也不能修改数据</td>
+</tr>
+<tr>
+<td>查询超时</td>
+<td>超过限定时间自动中断，避免长期占用连接</td>
+</tr>
+<tr>
+<td>连接池并发限制</td>
+<td>避免大量 AI 查询同时冲击业务库</td>
+</tr>
+<tr>
+<td>最大返回行数</td>
+<td>防止把大量明细传给模型和前端</td>
+</tr>
+<tr>
+<td>审计日志</td>
+<td>记录 SQL、执行计划摘要、耗时、扫描行数和用户身份</td>
+</tr>
+</tbody>
+</table>
+<p>这里的职责边界非常清晰：</p>
+<table>
+<thead>
+<tr>
+<th>事情</th>
+<th>负责方</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>提出查询方案、根据错误修复 SQL</td>
+<td>大模型</td>
+</tr>
+<tr>
+<td>解析 SQL、检查白名单和权限、执行 <code>EXPLAIN</code>、决定是否放行</td>
+<td>程序</td>
+</tr>
+<tr>
+<td>选择索引、生成执行计划、执行 SQL</td>
+<td>数据库优化器</td>
+</tr>
+<tr>
+<td>设计和维护长期索引</td>
+<td>开发人员和 DBA</td>
+</tr>
+</tbody>
+</table>
+<p>这里有一个关键设计原则：</p>
+<blockquote>
+<p><strong>模型可以提出查询方案，但程序必须拥有最终执行权。</strong></p>
+</blockquote>
+<p>即使前面做过 Router 和 Schema 检索，SQL Guard 仍然不能省略。因为模型输出始终是不可信的外部输入。</p>
+<h3 id="69">6.9 查询结果后处理：原始数据不等于用户答案</h3>
+<p>SQL 执行完成后，数据库返回的只是原始结果集，例如：</p>
+<pre><code class="language-text">pay_date    | paid_amount
+2026-07-01  | 12800.00
+2026-07-02  | 15600.00
+2026-07-03  | 9800.00
+</code></pre>
+<p>这份结果对数据库来说已经正确，但对业务人员来说仍然不够友好：</p>
+<ul>
+<li>不知道 <code>paid_amount</code> 是交易额、退款额还是其他金额；</li>
+<li>不容易一眼看出每天的趋势；</li>
+<li>不知道数据是否为空、是否有异常波动；</li>
+<li>不知道应该看表格、图表还是一句结论；</li>
+<li>不能要求业务人员自己解释聚合结果。</li>
+</ul>
+<p>因此，Text-to-SQL 在执行 SQL 后还需要一个<strong>结果后处理模块</strong>。它的任务不是重新计算或篡改数据，而是把已经得到的可信结果转换成用户容易理解和使用的分析结果。</p>
+<pre><code class="language-text">数据库原始结果
+  ↓
+程序识别列名、数据类型、行数和查询计划
+  ↓
+生成标准化结果数据与图表配置
+  ↓
+模型严格基于结果生成自然语言总结
+  ↓
+前端展示：指标卡、表格、图表和文字结论
+</code></pre>
+<p><img alt="查询结果如何变成表格、图表和可信总结" src="/img/ai-agent-tutorial/09/result_postprocessing_flow.svg"/></p>
+<h3 id="691">6.9.1 先理解结果结构，而不是直接把行数据交给模型</h3>
+<p>程序需要先把数据库结果整理成带有语义的结构化数据。</p>
+<p>例如，查询计划已经说明：</p>
+<pre><code class="language-text">指标：支付成功订单金额
+时间范围：最近 7 天
+分组维度：按天
+</code></pre>
+<p>结合 SQL 返回列，程序可以形成：</p>
+<pre><code class="language-json">{
+  "metric": "支付成功订单金额",
+  "unit": "元",
+  "time_range": "最近 7 天",
+  "dimensions": ["pay_date"],
+  "measures": ["paid_amount"],
+  "rows": [
+    {"pay_date": "2026-07-01", "paid_amount": 12800.00},
+    {"pay_date": "2026-07-02", "paid_amount": 15600.00}
+  ]
+}
+</code></pre>
+<p>这一步通常由程序完成，因为列类型转换、金额格式、日期格式、空值处理和字段脱敏都应该是确定性的。</p>
+<table>
+<thead>
+<tr>
+<th>后处理内容</th>
+<th>为什么需要</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>日期、金额和百分比格式化</td>
+<td>避免 <code>2026-07-01 00:00:00</code>、<code>12800.000000</code> 直接暴露给用户</td>
+</tr>
+<tr>
+<td>空值和除零处理</td>
+<td>避免指标计算或图表出现错误值</td>
+</tr>
+<tr>
+<td>字段别名与单位补充</td>
+<td>把 <code>paid_amount</code> 转成“交易额（元）”</td>
+</tr>
+<tr>
+<td>敏感字段脱敏</td>
+<td>查询结果阶段仍要保护手机号、姓名等数据</td>
+</tr>
+<tr>
+<td>行数与列数控制</td>
+<td>防止把过长明细直接塞给模型或前端</td>
+</tr>
+<tr>
+<td>结果一致性检查</td>
+<td>确认返回列与查询计划中的指标、维度相匹配</td>
+</tr>
+</tbody>
+</table>
+<p>如果结果列与查询计划不一致，例如计划要查“交易额”，结果却没有金额字段，系统不应该直接让模型编写总结，而应将其标记为异常结果并进入修复或失败处理。</p>
+<h3 id="692">6.9.2 图表推荐：根据数据形态选择，不是随便画图</h3>
+<p>图表的作用是帮助用户更快发现趋势、差异和结构；它不是给结果套一个好看的外壳。</p>
+<p>程序可以根据查询计划和结果结构生成推荐图表类型：</p>
+<table>
+<thead>
+<tr>
+<th>数据形态</th>
+<th>推荐展示</th>
+<th>为什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>单个指标、单个值</td>
+<td>指标卡</td>
+<td>直接突出总交易额、订单数、同比等核心数字</td>
+</tr>
+<tr>
+<td>少量明细记录</td>
+<td>表格</td>
+<td>用户需要查看订单号、状态、时间等逐条信息</td>
+</tr>
+<tr>
+<td>时间 + 一个或多个指标</td>
+<td>折线图</td>
+<td>最适合观察按天、周、月的趋势变化</td>
+</tr>
+<tr>
+<td>分类维度 + 数值指标</td>
+<td>柱状图</td>
+<td>适合比较不同产品、地区、课程的金额或数量</td>
+</tr>
+<tr>
+<td>Top N 排名</td>
+<td>横向柱状图或排名表</td>
+<td>更容易比较前几名差异</td>
+</tr>
+<tr>
+<td>少量分类的占比</td>
+<td>饼图或环形图</td>
+<td>用于展示组成结构，不适合分类过多</td>
+</tr>
+<tr>
+<td>两个数值指标的关系</td>
+<td>散点图</td>
+<td>用于分析相关性，例如价格与退款率</td>
+</tr>
+</tbody>
+</table>
+<p>例如：</p>
+<pre><code class="language-text">问题：最近 7 天每天的交易额趋势
+结果结构：日期 + 交易额
+推荐：折线图
+
+问题：本月各产品交易额 Top 10
+结果结构：产品名称 + 交易额 + 排名
+推荐：横向柱状图，同时展示排名表
+
+问题：查询最近 7 天未支付订单有哪些
+结果结构：订单号、学生、金额、状态、创建时间
+推荐：表格，不建议画图
+</code></pre>
+<p>图表推荐可以使用规则优先、模型辅助的方式：</p>
+<ul>
+<li>程序根据维度类型、指标数量、行数和查询意图先给出安全的默认图表；</li>
+<li>模型可以在规则允许的范围内推荐更适合业务表达的展示方式；</li>
+<li>前端最终只渲染受支持的图表配置，不能让模型输出任意脚本或图表代码。</li>
+</ul>
+<p>这能避免把几十个分类硬塞进饼图，或把本该查看明细的订单数据错误地画成趋势图。</p>
+<h3 id="693">6.9.3 自然语言总结：模型负责解释，不负责编造</h3>
+<p>结果后处理模块还需要把数据交给模型生成面向业务人员的回答。</p>
+<p>此时模型收到的内容应当是：</p>
+<pre><code class="language-text">用户问题
+已确认的指标口径
+时间范围和筛选条件
+标准化后的查询结果
+图表推荐或关键统计值
+</code></pre>
+<p>模型可以生成：</p>
+<pre><code class="language-text">最近 7 天交易额整体呈上升趋势。
+7 月 2 日交易额最高，为 15,600 元；7 月 3 日回落至 9,800 元。
+</code></pre>
+<p>但提示词必须明确约束：</p>
+<pre><code class="language-text">只能依据给定结果回答。
+不能补造数据库中没有的原因、比例或业务结论。
+结果为空时，明确说明没有查到符合条件的数据。
+金额、数量和日期必须与结果一致。
+</code></pre>
+<p>模型擅长把结构化数字组织成人话，但它不应该替代数据计算。同比、环比、Top N、异常值等需要计算的结论，应优先由程序或经过确认的指标公式计算后，再交给模型解释。</p>
+<h3 id="694">6.9.4 面向用户的最终返回结构</h3>
+<p>前端最终不应该只接收一段模型文本，而应接收可组合展示的结构化结果：</p>
+<pre><code class="language-text">query_summary：用户问题和已确认口径
+metric_cards：核心指标卡，例如交易额、订单量
+table_data：明细或分组结果表
+chart_config：受支持的图表类型、维度和指标数据
+natural_language_answer：基于结果的文字总结
+warnings：数据为空、结果被截断、时间范围较大等提醒
+</code></pre>
+<p>这样同一份查询结果可以在不同终端以不同方式展示：</p>
+<ul>
+<li>管理后台显示表格和图表；</li>
+<li>对话框优先显示简短结论和关键指标；</li>
+<li>导出功能使用标准化表格数据；</li>
+<li>审计页面保留查询计划、SQL 和执行摘要。</li>
+</ul>
+<p>结果后处理的价值在于：数据库负责返回事实，程序负责保证结构和展示安全，模型负责帮助用户理解数据。三者分工清楚，才能让 Text-to-SQL 从“能查到数据”走到“能帮助业务分析数据”。</p>
+<h3 id="610">6.10 执行失败与结果为空：不要无限重试</h3>
+<p>即使上下文完整，SQL 仍可能失败：字段名拼错、数据库版本差异、权限不足、Schema 刚变更，都会导致执行异常。</p>
+<p>合理的处理方式是：</p>
+<pre><code class="language-text">执行 SQL
+  ├─ 成功且有结果 -&gt; 解释结果
+  ├─ 成功但无结果 -&gt; 如实说明未查到符合条件的数据
+  └─ 失败 -&gt; 把安全的错误信息交给模型修正一次或两次
+</code></pre>
+<p>重试次数必须受限。无限重试只会不断消耗模型与数据库资源，还可能让用户一直等待。</p>
+<p>如果多次修复后仍失败，系统应当明确反馈，例如：</p>
+<pre><code class="language-text">当前无法确定“订单量”的统计口径。请说明需要统计创建订单数还是支付成功订单数。
+</code></pre>
+<p>比起生成一条错误 SQL 后假装成功，清楚地告诉用户缺少什么信息更可靠。</p>
+<h3 id="611">6.11 评测与观测：系统上线后如何知道它是否可靠</h3>
+<p>Text-to-SQL 不能只用“能跑出一条 SQL”来判断好坏。</p>
+<p>应该为高频和高风险问题准备评测集，例如：</p>
+<ul>
+<li>单表明细查询；</li>
+<li>聚合、分组、排序查询；</li>
+<li>多表关联查询；</li>
+<li>模糊时间表达；</li>
+<li>指标口径歧义；</li>
+<li>无权限和敏感字段请求；</li>
+<li>非数据查询和数据修改请求。</li>
+</ul>
+<p>每次执行还应该记录：用户问题、Router 分类、澄清次数、检索到的 Schema、生成 SQL、校验结果、执行耗时、错误类型和最终回答。</p>
+<p>这些记录用于发现三类问题：模型理解错了、业务口径资料不完整、数据库结构发生了变化。没有评测和观测，系统很难长期稳定迭代。</p>
+<hr/>
+<h2 id="7">7. 用一个订单查询例子串起全流程</h2>
+<p>再看一遍完整过程：</p>
+<pre><code class="language-text">用户：查询最近 7 天未支付订单
+  ↓
+系统理解：订单明细 + 最近 7 天 + 未支付状态
+  ↓
+系统读取：order_payment 表、status 字段、created_at 字段和状态字典
+  ↓
+模型生成：只查询未完成支付订单的 SQL
+  ↓
+系统校验：只读、表字段合法、结果数量受限、用户有订单查看权限
+  ↓
+数据库执行：返回订单明细
+  ↓
+前端展示：表格、统计数量和自然语言总结
+</code></pre>
+<p>订单只是示例。把查询对象换成学生、课程、考试、作业、退款、直播数据，Text-to-SQL 的基本过程仍然一样。</p>
+<p>变化的只是：</p>
+<ul>
+<li>要提供给模型的表和字段；</li>
+<li>业务指标的定义；</li>
+<li>不同角色允许查询的数据范围。</li>
+</ul>
+<hr/>
+<h2 id="8-text-to-sql">8. Text-to-SQL 常见应用场景</h2>
+<p>Text-to-SQL 的价值，在于让业务人员提出以前没有预设过的问题。</p>
+<table>
+<thead>
+<tr>
+<th>场景</th>
+<th>用户可以怎么问</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>订单运营</td>
+<td>最近 7 天未支付订单有多少？</td>
+</tr>
+<tr>
+<td>支付分析</td>
+<td>昨天支付成功的交易额是多少？</td>
+</tr>
+<tr>
+<td>退款分析</td>
+<td>本月退款金额最高的产品是什么？</td>
+</tr>
+<tr>
+<td>学生运营</td>
+<td>最近 30 天新报名学生有多少？</td>
+</tr>
+<tr>
+<td>教学运营</td>
+<td>哪些课程的作业提交率最低？</td>
+</tr>
+<tr>
+<td>考试分析</td>
+<td>哪道题的错误率最高？</td>
+</tr>
+</tbody>
+</table>
+<p>这里最重要的不是“系统预置了多少个问题”，而是业务人员可以自己组合时间、范围、维度和指标：</p>
+<pre><code class="language-text">昨天
+  + 线上课程
+  + 支付成功
+  + 按产品分组
+  + 统计交易额
+</code></pre>
+<p>传统页面通常很难提前覆盖所有组合；Text-to-SQL 正好补足了这种探索式查询能力。</p>
+<hr/>
+<h2 id="9-text-to-sql-sql">9. Text-to-SQL 并不是“模型随便写 SQL”</h2>
+<p>一个可靠的 Text-to-SQL 系统，至少要处理三类问题。</p>
+<h3 id="91-schema">9.1 Schema 问题</h3>
+<p>模型需要知道真实数据库结构。</p>
+<p>如果项目中表叫 <code>order_payment</code>，模型却猜成 <code>orders</code>；字段叫 <code>order_amount</code>，模型却猜成 <code>amount</code>，SQL 就无法执行。</p>
+<p>因此，系统需要持续维护：</p>
+<ul>
+<li>表说明；</li>
+<li>字段说明；</li>
+<li>主外键或业务关联关系；</li>
+<li>枚举状态和状态含义；</li>
+<li>常用指标口径。</li>
+</ul>
+<h3 id="92">9.2 业务口径问题</h3>
+<p>模型生成的 SQL 语法正确，不代表查询结果符合业务含义。</p>
+<p>例如：</p>
+<pre><code class="language-text">交易额
+</code></pre>
+<p>至少可能有三种不同理解：</p>
+<table>
+<thead>
+<tr>
+<th>口径</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>支付成功交易额</td>
+<td>支付成功订单金额之和</td>
+</tr>
+<tr>
+<td>创建订单金额</td>
+<td>当天创建支付订单金额之和，可能包含未支付订单</td>
+</tr>
+<tr>
+<td>净收款</td>
+<td>支付成功金额减去退款成功金额</td>
+</tr>
+</tbody>
+</table>
+<p>在当前订单业务里，若没有额外说明，“交易额”建议使用支付成功订单的 <code>order_amount</code> 之和，并按 <code>pay_success_time</code> 过滤时间。</p>
+<h3 id="93">9.3 安全与权限问题</h3>
+<p>数据库里不仅有统计数据，也可能有手机号、姓名、订单号等敏感信息。</p>
+<p>因此，Text-to-SQL 不能因为用户问了一句“把所有学生手机号给我”就直接返回数据。</p>
+<p>系统需要同时判断：</p>
+<pre><code class="language-text">这个人有没有权限看这些表？
+这个人有没有权限看这些字段？
+这条 SQL 是否只是查询？
+这次结果是否应该脱敏或限制条数？
+</code></pre>
+<p>Text-to-SQL 的目标是降低查询门槛，不是绕过系统权限。</p>
+<hr/>
+<h2 id="10-text-to-sql">10. Text-to-SQL 带来的价值</h2>
+<p>Text-to-SQL 最终改变的是数据访问方式：</p>
+<pre><code class="language-text">过去：先开发一个查询页面，再查询数据
+现在：先提出一个数据问题，再即时得到查询结果
+</code></pre>
+<p>它带来的价值包括：</p>
+<table>
+<thead>
+<tr>
+<th>价值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>无需重复开发查询页面</td>
+<td>临时或长尾问题不必每次新增页面和接口</td>
+</tr>
+<tr>
+<td>无需手写 SQL</td>
+<td>业务人员可直接描述需求</td>
+</tr>
+<tr>
+<td>响应更快</td>
+<td>从提问到结果的链路更短</td>
+</tr>
+<tr>
+<td>降低开发成本</td>
+<td>开发人员从大量一次性查询需求中解放出来</td>
+</tr>
+<tr>
+<td>提升业务自助能力</td>
+<td>业务人员能快速验证想法、探索数据</td>
+</tr>
+<tr>
+<td>更灵活的数据分析</td>
+<td>支持时间、条件、维度和指标的自由组合</td>
+</tr>
+<tr>
+<td>自然语言即查询</td>
+<td>用户用熟悉的业务语言访问数据</td>
+</tr>
+</tbody>
+</table>
+<p>当然，Text-to-SQL 不应该替代所有固定报表和核心管理页面。</p>
+<p>高频、标准化、操作型的工作仍然适合专门页面；Text-to-SQL 更适合回答那些“现在突然想知道”的数据问题。</p>
+<hr/>
+<h2 id="11_1">11. 本节总结</h2>
+<p>今天先建立了 Text-to-SQL 的基本认识：</p>
+<pre><code class="language-text">传统方式：业务提需求 -&gt; 开发页面和接口 -&gt; 查询数据
+
+Text-to-SQL：业务提问题 -&gt; AI 理解问题 -&gt; 生成 SQL -&gt; 查询数据 -&gt; 返回结果
+</code></pre>
+<p>一个可用于真实业务的 Text-to-SQL 系统，完整链路应当是：</p>
+<pre><code class="language-text">用户输入自然语言问题
+  ↓
+Router 判断：数据查询、普通问答还是操作请求
+  ↓
+RAG 召回候选指标定义、候选表目录和关联关系
+  ↓
+查询规划：选择真实指标、需要的表和关联路径
+  ↓
+查询要素检查：补齐时间、筛选、维度、分组和排序；必要时澄清
+  ↓
+跨业务域数据统一同步到数据仓库，Text-to-SQL 只查询分析库
+  ↓
+取得已选数仓表的详细 Schema、已选指标口径和关联路径
+  ↓
+生成 SQL
+  ↓
+SQL Guard 校验只读性、权限、敏感字段，并通过 EXPLAIN 检查执行计划风险
+  ↓
+只读数据库执行；失败时有限次数修复
+  ↓
+结果后处理：标准化数据、选择表格或图表、生成可信文字总结
+  ↓
+返回指标卡、表格、图表和自然语言回答
+</code></pre>
+<p>最后记住六件事：</p>
+<ol>
+<li><strong>Text-to-SQL 的价值，是让业务人员用自然语言直接访问数据。</strong></li>
+<li><strong>不是所有输入都该生成 SQL，Router 要先把普通问答和操作请求拦在查询链路外。</strong></li>
+<li><strong>指标决定“算什么”；完整查询还要补齐时间、筛选、维度、分组和排序。</strong></li>
+<li><strong>SQL 执行结果还要经过结构化后处理和结果解释，模型只能基于真实结果总结，不能编造分析结论。</strong></li>
+<li><strong>跨业务域的分析数据优先统一进入数据仓库，Text-to-SQL 不直接对多个业务库做跨库 Join。</strong></li>
+<li><strong>Text-to-SQL 必须经过程序安全校验、执行计划检查、权限控制、评测与观测，不能让模型直接拥有数据库的全部能力。</strong></li>
+</ol>
+<h2 id="_langgraphtext-to-sql">第九天_LangGraph基础与Text-to-SQL流程</h2>
+<h1 id="langgraph">第九天：LangGraph 基础与流程编排</h1>
+<p>前面已经学过 Chain 和 Agent。</p>
+<p>Chain 适合把固定步骤串起来。</p>
+<p>Agent 适合让模型自己判断要不要调用工具。</p>
+<p>但是很多真实 AI 业务不是一条简单直线，也不能完全交给模型自由决定。</p>
+<p>例如：</p>
+<pre><code class="language-text">用户问题
+  ↓
+判断请求类型
+  ↓
+理解问题
+  ↓
+调用模型或工具
+  ↓
+根据结果决定下一步
+  ↓
+必要时重试、暂停、人工确认、保存状态
+  ↓
+返回最终结果
+</code></pre>
+<p>这种流程需要程序清楚地管理每一步。</p>
+<p>这一节学习的 <strong>LangGraph</strong>，就是用来组织这种复杂 AI 流程的。</p>
+<hr/>
+<h2 id="1-langgraph">1. 为什么需要 LangGraph</h2>
+<p>如果流程很简单，用 Chain 就够了。</p>
+<p>比如：</p>
+<pre><code class="language-text">Prompt -&gt; Model -&gt; Parser
+</code></pre>
+<p>或者：</p>
+<pre><code class="language-text">用户问题 -&gt; 检索资料 -&gt; 拼接 Prompt -&gt; 模型回答
+</code></pre>
+<p>这种流程的特点是：</p>
+<pre><code class="language-text">每一步都固定。
+第一步做完，一定进入第二步。
+第二步做完，一定进入第三步。
+</code></pre>
+<p>但真实项目里，经常会遇到这些情况：</p>
+<pre><code class="language-text">有些输入要走 A 流程，有些输入要走 B 流程；
+某一步失败后要重试；
+某一步结果不安全，要拒绝继续执行；
+某一步需要人工确认；
+流程跑到一半，需要保存状态；
+后面要回看中间状态，排查到底哪一步错了。
+</code></pre>
+<p>这时流程就不再是一条直线，而是一张图。</p>
+<pre><code class="language-text">开始
+  ↓
+判断类型
+  ├─ 普通问答 -&gt; 直接回答
+  ├─ 工具任务 -&gt; 调用工具 -&gt; 解释结果
+  └─ 高风险任务 -&gt; 人工确认 -&gt; 继续或拒绝
+</code></pre>
+<p>LangGraph 的作用就是：</p>
+<blockquote>
+<p>把复杂 AI 流程拆成节点、边、状态和分支，让程序知道每一步应该怎么继续。</p>
+</blockquote>
+<hr/>
+<h2 id="2-chainagent-langgraph">2. Chain、Agent 和 LangGraph 的区别</h2>
+<p><img alt="Chain、Agent 和 LangGraph 的区别" src="/img/ai-agent-tutorial/09/chain_agent_langgraph_compare.svg"/></p>
+<p>可以先这样记：</p>
+<table>
+<thead>
+<tr>
+<th>能力</th>
+<th>主要解决什么问题</th>
+<th>适合场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Chain</td>
+<td>固定步骤串联</td>
+<td>Prompt -&gt; Model -&gt; Parser</td>
+</tr>
+<tr>
+<td>Agent</td>
+<td>让模型选择工具</td>
+<td>课程查询、知识问答、工具问答</td>
+</tr>
+<tr>
+<td>LangGraph</td>
+<td>管理复杂流程、分支和状态</td>
+<td>审批辅助、复杂 Agent、需要状态管理的 AI 流程</td>
+</tr>
+</tbody>
+</table>
+<p>换一种更直白的说法：</p>
+<pre><code class="language-text">Chain：程序规定好固定顺序。
+Agent：模型决定下一步要不要调用工具。
+LangGraph：程序把流程图设计好，节点之间按条件流转。
+</code></pre>
+<p>这三者不是互相替代。</p>
+<p>在真实项目里，它们经常一起使用。</p>
+<p>例如：</p>
+<pre><code class="language-text">LangGraph 负责整个流程。
+某个节点里面可以调用 Chain。
+某个节点里面也可以调用模型或工具。
+</code></pre>
+<hr/>
+<h2 id="3-langgraph">3. LangGraph 核心概念</h2>
+<p><img alt="LangGraph 核心概念" src="/img/ai-agent-tutorial/09/langgraph_core_concepts.svg"/></p>
+<p>学习 LangGraph 时，先记住 5 个词。</p>
+<table>
+<thead>
+<tr>
+<th>概念</th>
+<th>先怎么理解</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>State</td>
+<td>流程运行时携带的数据</td>
+</tr>
+<tr>
+<td>Node</td>
+<td>一个处理步骤</td>
+</tr>
+<tr>
+<td>Edge</td>
+<td>节点之间的连接线</td>
+</tr>
+<tr>
+<td>Conditional Edge</td>
+<td>根据结果选择下一步</td>
+</tr>
+<tr>
+<td>Checkpoint</td>
+<td>把某一刻的 State 保存下来</td>
+</tr>
+</tbody>
+</table>
+<h3 id="31-state">3.1 State：流程运行时的数据</h3>
+<p>State 就是这张图运行时手里拿着的数据。</p>
+<p>例如：</p>
+<pre><code class="language-python">class DemoState(TypedDict, total=False):
+    question: str
+    cleaned_question: str
+    answer: str
+</code></pre>
+<p>可以理解成：</p>
+<pre><code class="language-text">question：用户原始问题
+cleaned_question：清理后的问题
+answer：最终回答
+</code></pre>
+<p>节点可以读取 State，也可以返回新字段写回 State。</p>
+<h3 id="32-node">3.2 Node：一个处理步骤</h3>
+<p>Node 就是流程里的一个处理步骤。</p>
+<p>例如：</p>
+<pre><code class="language-text">清理问题
+提取关键词
+生成回答
+校验结果
+调用工具
+</code></pre>
+<p>节点函数一般长这样：</p>
+<pre><code class="language-python">def clean_question_node(state: DemoState) -&gt; DemoState:
+    return {
+        "cleaned_question": state["question"].strip()
+    }
+</code></pre>
+<p>返回的字典会合并回 State。</p>
+<h3 id="33-edge">3.3 Edge：下一步去哪里</h3>
+<p>Edge 用来连接节点。</p>
+<pre><code class="language-python">graph_builder.add_edge("clean_question", "answer")
+</code></pre>
+<p>意思是：</p>
+<pre><code class="language-text">clean_question 执行完，下一步进入 answer。
+</code></pre>
+<h3 id="34-conditional-edge">3.4 Conditional Edge：根据结果走分支</h3>
+<p>有些流程不是固定下一步。</p>
+<p>例如：</p>
+<pre><code class="language-text">分数 &gt;= 60 -&gt; pass
+分数 &lt; 60 -&gt; retry
+</code></pre>
+<p>这时就用条件边。</p>
+<pre><code class="language-python">graph_builder.add_conditional_edges(
+    "grade",
+    choose_next_node,
+    {
+        "pass": "pass_node",
+        "retry": "retry_node",
+    },
+)
+</code></pre>
+<h3 id="35-checkpoint">3.5 Checkpoint：保存流程状态</h3>
+<p><img alt="State 和 Checkpoint 的关系" src="/img/ai-agent-tutorial/09/state_checkpoint_relation.svg"/></p>
+<p>State 是流程正在使用的数据。</p>
+<p>Checkpoint 是把某一刻的 State 保存成进度记录。</p>
+<p>可以这样理解：</p>
+<pre><code class="language-text">State：现在手里的草稿纸。
+Checkpoint：点了一下保存，留下来的存档。
+</code></pre>
+<p>有了 checkpoint，后面才能做这些事情：</p>
+<pre><code class="language-text">保存同一段对话的状态；
+从暂停点继续执行；
+回看历史 State；
+从中间某一步分叉重跑。
+</code></pre>
+<hr/>
+<h2 id="4-langgraph">4. LangGraph 基础代码怎么写</h2>
+<p>最小代码通常按 6 步写。</p>
+<pre><code class="language-text">1. 定义 State
+2. 写节点函数
+3. 创建 StateGraph
+4. 注册节点
+5. 连接边
+6. compile 后运行
+</code></pre>
+<p>完整示例：</p>
+<pre><code class="language-python">from typing import TypedDict
+
+from langgraph.graph import END, START, StateGraph
+
+
+class DemoState(TypedDict, total=False):
+    question: str
+    cleaned_question: str
+    answer: str
+
+
+def clean_question_node(state: DemoState) -&gt; DemoState:
+    return {
+        "cleaned_question": state["question"].strip()
+    }
+
+
+def answer_node(state: DemoState) -&gt; DemoState:
+    return {
+        "answer": f"收到问题：{state['cleaned_question']}"
+    }
+
+
+graph_builder = StateGraph(DemoState)
+graph_builder.add_node("clean_question", clean_question_node)
+graph_builder.add_node("answer", answer_node)
+
+graph_builder.add_edge(START, "clean_question")
+graph_builder.add_edge("clean_question", "answer")
+graph_builder.add_edge("answer", END)
+
+graph = graph_builder.compile()
+
+result = graph.invoke({
+    "question": "  什么是 LangGraph？  "
+})
+
+print(result)
+</code></pre>
+<p>运行后最终 State 里会有：</p>
+<pre><code class="language-text">question
+cleaned_question
+answer
+</code></pre>
+<p>对应 demo：</p>
+<pre><code class="language-bash">uv run python test/langgraph_demo/01_create_graph_demo.py
+</code></pre>
+<hr/>
+<h2 id="5">5. 常见流程控制</h2>
+<p>这一节只掌握常见写法。</p>
+<p>不要一开始就背所有 API。</p>
+<h3 id="51">5.1 条件分支</h3>
+<p>条件分支适合这种场景：</p>
+<pre><code class="language-text">通过 -&gt; 结束
+不通过 -&gt; 重试
+</code></pre>
+<p>对应 demo：</p>
+<pre><code class="language-bash">uv run python test/langgraph_demo/04_conditional_edge_demo.py
+</code></pre>
+<h3 id="52_1">5.2 循环重试</h3>
+<p>循环本质上就是条件边回到前面的节点。</p>
+<pre><code class="language-text">生成草稿
+  ↓
+检查质量
+  ├─ 合格 -&gt; 结束
+  └─ 不合格 -&gt; 回到生成草稿
+</code></pre>
+<p>对应 demo：</p>
+<pre><code class="language-bash">uv run python test/langgraph_demo/05_loop_retry_demo.py
+</code></pre>
+<h3 id="53_1">5.3 多节点汇总</h3>
+<p>一个节点后面可以同时跑多个节点。</p>
+<p>例如：</p>
+<pre><code class="language-text">输入主题
+  ├─ 总结优点
+  ├─ 总结风险
+  └─ 总结建议
+       ↓
+    汇总结果
+</code></pre>
+<p>如果多个节点都写同一个字段，要告诉 LangGraph 怎么合并。</p>
+<p>对应 demo：</p>
+<pre><code class="language-bash">uv run python test/langgraph_demo/06_parallel_summary_demo.py
+</code></pre>
+<h3 id="54-checkpoint">5.4 Checkpoint 保存状态</h3>
+<p>使用 checkpoint 需要两步。</p>
+<p>第一，compile 时传入 checkpointer：</p>
+<pre><code class="language-python">from langgraph.checkpoint.memory import InMemorySaver
+
+checkpointer = InMemorySaver()
+graph = graph_builder.compile(checkpointer=checkpointer)
+</code></pre>
+<p>第二，运行时传入 <code>thread_id</code>：</p>
+<pre><code class="language-python">config = {
+    "configurable": {
+        "thread_id": "student-1001"
+    }
+}
+
+result = graph.invoke(input_state, config=config)
+</code></pre>
+<p><code>thread_id</code> 可以理解成这段流程或这段对话的编号。</p>
+<p>取当前最新 checkpoint：</p>
+<pre><code class="language-python">saved_checkpoint = graph.get_state(config)
+print(saved_checkpoint.values)
+</code></pre>
+<p>这里要注意：</p>
+<pre><code class="language-text">saved_checkpoint 不是普通 dict。
+saved_checkpoint.values 才是保存下来的 State。
+</code></pre>
+<p>对应 demo：</p>
+<pre><code class="language-bash">uv run python test/langgraph_demo/07_checkpoint_state_demo.py
+uv run python test/langgraph_demo/10_multiple_checkpoint_records_demo.py
+</code></pre>
+<h3 id="55-stream">5.5 stream 观察每一步输出</h3>
+<p><img alt="invoke 和 stream 的区别" src="/img/ai-agent-tutorial/09/langgraph_stream_vs_invoke.svg"/></p>
+<p><code>invoke</code> 会等整张图跑完，再返回最终 State。</p>
+<p><code>stream</code> 可以在图运行过程中，看到每一步输出。</p>
+<table>
+<thead>
+<tr>
+<th>调用方式</th>
+<th>返回内容</th>
+<th>适合场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>invoke</code></td>
+<td>最终 State</td>
+<td>只关心最终结果</td>
+</tr>
+<tr>
+<td><code>stream</code></td>
+<td>每一步节点输出</td>
+<td>调试流程、前端展示进度</td>
+</tr>
+</tbody>
+</table>
+<p>默认 <code>stream</code> 输出每个节点本次写入的内容。</p>
+<pre><code class="language-python">for event in graph.stream(input_state):
+    print(event)
+</code></pre>
+<p>这等价于常用的 <code>updates</code> 模式。</p>
+<p>例如输出：</p>
+<pre><code class="language-text">{'clean_question': {'cleaned_question': 'LangGraph 的 stream 有什么用？'}}
+{'extract_keyword': {'keyword': 'LangGraph'}}
+{'answer': {'answer': '你问的是 LangGraph。'}}
+</code></pre>
+<p>它的意思是：</p>
+<pre><code class="language-text">clean_question 节点这一步写入了 cleaned_question；
+extract_keyword 节点这一步写入了 keyword；
+answer 节点这一步写入了 answer。
+</code></pre>
+<p>所以默认 stream 不是每次都返回完整 State。</p>
+<p>它更像是在告诉你：</p>
+<pre><code class="language-text">这一小步刚刚更新了什么。
+</code></pre>
+<p>如果想每一步都看到完整 State：</p>
+<pre><code class="language-python">for state in graph.stream(input_state, stream_mode="values"):
+    print(state)
+</code></pre>
+<p><code>values</code> 模式会输出每一步执行后的完整 State。</p>
+<p>例如：</p>
+<pre><code class="language-text">{'question': '  LangGraph 的 stream 有什么用？  '}
+{'question': '  LangGraph 的 stream 有什么用？  ', 'cleaned_question': 'LangGraph 的 stream 有什么用？'}
+{'question': '  LangGraph 的 stream 有什么用？  ', 'cleaned_question': 'LangGraph 的 stream 有什么用？', 'keyword': 'LangGraph'}
+{'question': '  LangGraph 的 stream 有什么用？  ', 'cleaned_question': 'LangGraph 的 stream 有什么用？', 'keyword': 'LangGraph', 'answer': '你问的是 LangGraph。'}
+</code></pre>
+<p>课堂里先掌握两个就够：</p>
+<table>
+<thead>
+<tr>
+<th>stream_mode</th>
+<th>看到什么</th>
+<th>适合什么时候用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>updates</code></td>
+<td>每个节点本次写入了什么</td>
+<td>看节点输出，最常用</td>
+</tr>
+<tr>
+<td><code>values</code></td>
+<td>每一步完整 State</td>
+<td>教学演示、观察 State 怎么变完整</td>
+</tr>
+</tbody>
+</table>
+<p>当前 LangGraph 还支持这些模式：</p>
+<table>
+<thead>
+<tr>
+<th>stream_mode</th>
+<th>简单理解</th>
+<th>课堂建议</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>checkpoints</code></td>
+<td>输出 checkpoint 相关事件</td>
+<td>后面调试持久化时再看</td>
+</tr>
+<tr>
+<td><code>tasks</code></td>
+<td>输出任务执行相关事件</td>
+<td>后面看复杂图时再看</td>
+</tr>
+<tr>
+<td><code>debug</code></td>
+<td>输出更详细的调试事件</td>
+<td>排查问题时用，信息较多</td>
+</tr>
+<tr>
+<td><code>messages</code></td>
+<td>输出模型消息流</td>
+<td>节点里接真实 LLM 流式输出时用</td>
+</tr>
+<tr>
+<td><code>custom</code></td>
+<td>输出自定义事件</td>
+<td>高级用法，初学先不用</td>
+</tr>
+</tbody>
+</table>
+<p>如果只是课堂演示：</p>
+<pre><code class="language-text">先用 updates 看节点更新；
+再用 values 看完整 State；
+其他模式知道名字即可。
+</code></pre>
+<p>对应 demo：</p>
+<pre><code class="language-bash">uv run python test/langgraph_demo/11_stream_output_demo.py
+</code></pre>
+<hr/>
+<h2 id="6">6. 真实业务里常用的进阶能力</h2>
+<p>基础节点和边解决的是：</p>
+<pre><code class="language-text">流程怎么走。
+</code></pre>
+<p>下面这些能力解决的是：</p>
+<pre><code class="language-text">流程怎么在真实项目里稳定、安全、可追踪地运行。
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>能力</th>
+<th>解决的问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Store</td>
+<td>跨对话保存长期记忆</td>
+</tr>
+<tr>
+<td>Runtime / context</td>
+<td>把用户、租户、权限等上下文传进节点</td>
+</tr>
+<tr>
+<td>Interrupt</td>
+<td>暂停流程，等待人工确认</td>
+</tr>
+<tr>
+<td>Time Travel</td>
+<td>回看历史状态，从中间分叉重跑</td>
+</tr>
+<tr>
+<td>Fault tolerance</td>
+<td>失败重试和降级处理</td>
+</tr>
+</tbody>
+</table>
+<h3 id="61-store">6.1 Store：长期记忆</h3>
+<p><img alt="Store namespace 和长期记忆" src="/img/ai-agent-tutorial/09/langgraph_store_namespace.svg"/></p>
+<p><code>checkpointer</code> 保存的是某个 <code>thread_id</code> 里的流程状态。</p>
+<p><code>store</code> 保存的是跨 <code>thread_id</code> 都能读取的长期数据。</p>
+<p>可以这样记：</p>
+<pre><code class="language-text">checkpointer：保存当前对话或当前流程的状态。
+store：保存长期记忆或长期业务数据。
+</code></pre>
+<p>典型写法：</p>
+<pre><code class="language-python">from langgraph.store.memory import InMemoryStore
+
+store = InMemoryStore()
+graph = graph_builder.compile(store=store)
+</code></pre>
+<p>写入记忆时，需要 namespace。</p>
+<pre><code class="language-python">namespace = ("student-1001", "memories")
+
+runtime.store.put(
+    namespace,
+    "example_language_preference",
+    {
+        "memory": "用户希望以后尽量用 Java 举例。"
+    },
+)
+</code></pre>
+<p>这里有三个东西要分清楚：</p>
+<pre><code class="language-text">namespace：记忆放在哪个分组。
+key：这个分组里的哪一条记忆。
+value：真正保存的记忆内容。
+</code></pre>
+<p>在上面的代码里：</p>
+<table>
+<thead>
+<tr>
+<th>位置</th>
+<th>例子</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>namespace</td>
+<td><code>("student-1001", "memories")</code></td>
+<td>student-1001 用户的 memories 分组</td>
+</tr>
+<tr>
+<td>key</td>
+<td><code>"example_language_preference"</code></td>
+<td>这条记忆的名字</td>
+</tr>
+<tr>
+<td>value</td>
+<td><code>{"memory": "用户希望以后尽量用 Java 举例。"}</code></td>
+<td>这条记忆的内容</td>
+</tr>
+</tbody>
+</table>
+<p><code>("student-1001", "memories")</code> 是 Python 里的 tuple。</p>
+<p>tuple 可以先理解成：</p>
+<pre><code class="language-text">用小括号包起来的一组值。
+</code></pre>
+<p>它里面有两个值：</p>
+<pre><code class="language-text">第一个值：student-1001
+第二个值：memories
+</code></pre>
+<p>在 Store 里，这个 tuple 表示分组路径。</p>
+<p>可以理解成：</p>
+<pre><code class="language-text">student-1001 / memories
+</code></pre>
+<p>namespace 可以多级：</p>
+<pre><code class="language-python">("tenant-001", "student-1001", "memories")
+("tenant-001", "student-1001", "preferences")
+("tenant-001", "student-1001", "text_to_sql", "query_preferences")
+</code></pre>
+<p>可以理解成：</p>
+<pre><code class="language-text">tenant-001 / student-1001 / memories
+tenant-001 / student-1001 / preferences
+tenant-001 / student-1001 / text_to_sql / query_preferences
+</code></pre>
+<p>tuple 和 list 有点像，都能放多个值。</p>
+<p>简单区别是：</p>
+<table>
+<thead>
+<tr>
+<th>写法</th>
+<th>名称</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>("student-1001", "memories")</code></td>
+<td>tuple</td>
+<td>创建后一般不修改，适合表示固定路径</td>
+</tr>
+<tr>
+<td><code>["student-1001", "memories"]</code></td>
+<td>list</td>
+<td>可以继续增删改，适合表示可变列表</td>
+</tr>
+</tbody>
+</table>
+<p>LangGraph Store 的 namespace 要求用 tuple。</p>
+<p>所以这里写：</p>
+<pre><code class="language-python">namespace = ("student-1001", "memories")
+</code></pre>
+<p>不要写成：</p>
+<pre><code class="language-python">namespace = ["student-1001", "memories"]
+</code></pre>
+<p>读取记忆：</p>
+<pre><code class="language-python">memories = runtime.store.search(namespace, limit=10)
+</code></pre>
+<p>这里的 <code>memories</code> 是查出来的结果列表。</p>
+<p>这行代码可以翻译成：</p>
+<pre><code class="language-text">去 student-1001 / memories 这个分组下面，
+最多查询 10 条记忆，
+然后把查出来的结果放到 memories 变量里。
+</code></pre>
+<p>所以：</p>
+<pre><code class="language-text">namespace 是“去哪里找”；
+memories 是“找出来的结果”。
+</code></pre>
+<p>注意：</p>
+<pre><code class="language-text">InMemoryStore 只存在当前 Python 进程内。
+程序停止后，数据就没有了。
+</code></pre>
+<p>对应 demo：</p>
+<pre><code class="language-bash">uv run python test/langgraph_demo/12_store_long_term_memory_demo.py
+</code></pre>
+<h3 id="62-runtime-context">6.2 Runtime / context：运行时上下文</h3>
+<p><img alt="State 和 runtime.context 的区别" src="/img/ai-agent-tutorial/09/langgraph_runtime_context.svg"/></p>
+<p>State 里放流程正在加工的数据。</p>
+<p>context 里放这次运行时的外部条件。</p>
+<p>例如：</p>
+<table>
+<thead>
+<tr>
+<th>放在哪里</th>
+<th>适合保存什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>State</td>
+<td>question、selected_tables、sql、answer</td>
+</tr>
+<tr>
+<td>context</td>
+<td>user_id、tenant_id、allowed_tables、权限范围</td>
+</tr>
+</tbody>
+</table>
+<p>节点可以读取 <code>runtime.context</code>：</p>
+<pre><code class="language-python">def select_schema_node(
+    state: QueryState,
+    runtime: Runtime[RequestContext],
+) -&gt; QueryState:
+    user_id = runtime.context.user_id
+    allowed_tables = runtime.context.allowed_tables
+</code></pre>
+<p>这里的 <code>runtime</code> 是 LangGraph 执行节点时自动传进来的。</p>
+<p>你不需要自己创建它。</p>
+<p>它里面常用的内容有：</p>
+<pre><code class="language-text">runtime.context：本次运行传进来的业务上下文。
+runtime.store：如果 compile 时传了 store，可以在节点里读写长期记忆。
+</code></pre>
+<p>节点返回时，只返回要写回 State 的内容。</p>
+<pre><code class="language-python">return {
+    "selected_tables": selected_tables
+}
+</code></pre>
+<p>不需要把 runtime 返回出去。</p>
+<pre><code class="language-text">runtime 是给节点读取外部上下文的。
+State 才是节点返回值要更新的数据。
+</code></pre>
+<p>也就是说，不要这样写：</p>
+<pre><code class="language-python">return {
+    "runtime": runtime,
+    "selected_tables": selected_tables
+}
+</code></pre>
+<p>应该只返回 State 需要更新的字段：</p>
+<pre><code class="language-python">return {
+    "selected_tables": selected_tables
+}
+</code></pre>
+<p>创建图时，要声明 context 的结构：</p>
+<pre><code class="language-python">graph_builder = StateGraph(
+    QueryState,
+    context_schema=RequestContext,
+)
+</code></pre>
+<p>运行图时，把 context 传进去：</p>
+<pre><code class="language-python">graph.invoke(
+    {
+        "question": "帮我查一下订单和学生数据。"
+    },
+    context=RequestContext(
+        user_id="student-1001",
+        tenant_id="yanque-school",
+        allowed_tables=["order"],
+    ),
+)
+</code></pre>
+<p>这个例子里，用户问题里提到了“订单”和“学生”。</p>
+<p>但 <code>allowed_tables</code> 只有 <code>order</code>。</p>
+<p>所以节点只能选 <code>order</code>，不能选 <code>student</code>。</p>
+<p>这就是 context 的价值：</p>
+<pre><code class="language-text">模型或节点可以处理问题，
+但权限边界由程序传入的 context 控制。
+</code></pre>
+<p>对应 demo：</p>
+<pre><code class="language-bash">uv run python test/langgraph_demo/13_runtime_context_demo.py
+</code></pre>
+<h3 id="63-interrupt">6.3 Interrupt：人工确认</h3>
+<p><img alt="Interrupt 和 Command resume" src="/img/ai-agent-tutorial/09/langgraph_interrupt_resume.svg"/></p>
+<p>有些流程不能自动往下走。</p>
+<p>比如：</p>
+<pre><code class="language-text">生成了高风险操作
+  ↓
+暂停
+  ↓
+等待人工确认
+  ↓
+同意：继续
+拒绝：结束
+</code></pre>
+<p>节点里可以用 <code>interrupt</code> 暂停：</p>
+<pre><code class="language-python">from langgraph.types import interrupt
+
+review_result = interrupt({
+    "message": "请审核这次操作",
+    "detail": state["detail"],
+})
+</code></pre>
+<p>执行到 <code>interrupt(...)</code> 时，图会暂停。</p>
+<p>第一次 <code>graph.invoke(...)</code> 会返回类似：</p>
+<pre><code class="language-python">{
+    "__interrupt__": [
+        Interrupt(
+            value={
+                "message": "请审核这次操作",
+                "detail": "..."
+            }
+        )
+    ]
+}
+</code></pre>
+<p>这表示：</p>
+<pre><code class="language-text">流程已经停在这里了，等外部把审核结果传回来。
+</code></pre>
+<p>恢复时用 <code>Command(resume=...)</code>：</p>
+<pre><code class="language-python">from langgraph.types import Command
+
+graph.invoke(
+    Command(resume={
+        "approved": False,
+        "reason": "这次操作风险太高"
+    }),
+    config=config,
+)
+</code></pre>
+<p><code>resume</code> 传什么，<code>interrupt(...)</code> 那一行就收到什么。</p>
+<p>可以传：</p>
+<pre><code class="language-text">bool
+str
+dict
+list
+数字
+</code></pre>
+<p>例如传 bool：</p>
+<pre><code class="language-python">approved = interrupt({"message": "是否放行？"})
+
+graph.invoke(
+    Command(resume=False),
+    config=config,
+)
+</code></pre>
+<p>继续执行时：</p>
+<pre><code class="language-python">approved = False
+</code></pre>
+<p>例如传字符串：</p>
+<pre><code class="language-python">decision = interrupt({"message": "approve / reject / rewrite"})
+
+graph.invoke(
+    Command(resume="rewrite"),
+    config=config,
+)
+</code></pre>
+<p>继续执行时：</p>
+<pre><code class="language-python">decision = "rewrite"
+</code></pre>
+<p>例如传字典：</p>
+<pre><code class="language-python">review_result = interrupt({"message": "请审核操作"})
+
+graph.invoke(
+    Command(resume={
+        "approved": False,
+        "reason": "风险太高",
+        "suggestion": "改成只读查询"
+    }),
+    config=config,
+)
+</code></pre>
+<p>继续执行时：</p>
+<pre><code class="language-python">review_result = {
+    "approved": False,
+    "reason": "风险太高",
+    "suggestion": "改成只读查询"
+}
+</code></pre>
+<p>为什么还要传 <code>config=config</code>？</p>
+<p>因为 <code>config</code> 里有 <code>thread_id</code>。</p>
+<p>LangGraph 要靠它找到刚才暂停的那份 checkpoint。</p>
+<pre><code class="language-text">Command(resume=...)：把人工结果传回暂停点。
+config=config：告诉 LangGraph 恢复哪一次暂停的流程。
+</code></pre>
+<p>这里的 <code>Command</code> 可以理解成：</p>
+<pre><code class="language-text">告诉 LangGraph 接下来怎么继续执行的一条控制指令。
+</code></pre>
+<p>平时 <code>graph.invoke(input_state)</code> 是从输入开始跑。</p>
+<p>暂停后 <code>graph.invoke(Command(resume=...), config=config)</code> 是恢复旧流程。</p>
+<p>这两个不是一回事。</p>
+<p>对应 demo：</p>
+<pre><code class="language-bash">uv run python test/langgraph_demo/14_interrupt_human_in_loop_demo.py
+</code></pre>
+<h3 id="64-time-travel">6.4 Time Travel：回看并分叉</h3>
+<p><img alt="Time Travel 回看和分叉" src="/img/ai-agent-tutorial/09/langgraph_time_travel_fork.svg"/></p>
+<p>Time Travel 可以先理解成：</p>
+<pre><code class="language-text">回到某一次流程执行过程中的中间状态，看一眼，必要时从那里重新跑。
+</code></pre>
+<p>先取历史快照：</p>
+<pre><code class="language-python">history = list(graph.get_state_history(config))
+</code></pre>
+<p>它返回的是这个 <code>thread_id</code> 下保存过的历史 <code>StateSnapshot</code>。</p>
+<p>可以理解成：</p>
+<pre><code class="language-text">这条流程运行过程中，LangGraph 保存过的一组 checkpoint 快照。
+</code></pre>
+<p>它不是直接返回“节点列表”。</p>
+<p>它返回的是一组历史状态。</p>
+<p>常看的字段：</p>
+<pre><code class="language-python">snapshot.values  # 当时保存的 State
+snapshot.next    # 从这里继续时，下一步要执行的节点
+snapshot.config  # 这份 checkpoint 的定位信息
+</code></pre>
+<p>其中 <code>snapshot.config</code> 里通常有：</p>
+<pre><code class="language-text">thread_id：哪一条流程。
+checkpoint_ns：checkpoint 命名空间，简单 demo 里通常是空字符串。
+checkpoint_id：这一份 checkpoint 快照的唯一编号。
+</code></pre>
+<p>可以这样理解：</p>
+<pre><code class="language-text">thread_id 决定是哪条流程；
+checkpoint_id 决定是这条流程里的哪一个历史快照。
+</code></pre>
+<p>如果想从某个历史点分叉，可以先找到那个 checkpoint：</p>
+<pre><code class="language-python">before_generate_sql = next(
+    snapshot for snapshot in history
+    if snapshot.next == ("generate_sql",)
+)
+</code></pre>
+<p>这里的 <code>("generate_sql",)</code> 是单元素 tuple。</p>
+<p>它表示：</p>
+<pre><code class="language-text">从这个 checkpoint 继续时，下一步是 generate_sql。
+</code></pre>
+<p>注意逗号：</p>
+<pre><code class="language-python">("generate_sql",)  # 这是 tuple
+("generate_sql")   # 这只是字符串
+</code></pre>
+<p>然后基于它创建新分叉：</p>
+<pre><code class="language-python">fork_config = graph.update_state(
+    before_generate_sql.config,
+    values={
+        "plan": "统计订单数量"
+    },
+)
+</code></pre>
+<p>这句话的意思是：</p>
+<pre><code class="language-text">找到 before_generate_sql.config 指向的历史 checkpoint，
+基于它创建一份新的 checkpoint，
+并把 plan 改成“统计订单数量”。
+</code></pre>
+<p>这里为什么要传 <code>before_generate_sql.config</code>？</p>
+<p>因为历史里有很多 checkpoint。</p>
+<p>LangGraph 需要知道：</p>
+<pre><code class="language-text">你到底想基于哪一个历史 checkpoint 来改 State。
+</code></pre>
+<p><code>before_generate_sql.config</code> 就是那份历史 checkpoint 的地址。</p>
+<p><code>values={...}</code> 是你想覆盖或新增的 State 字段。</p>
+<p><code>fork_config</code> 不是 State 本身。</p>
+<p>它是新 checkpoint 的地址。</p>
+<p>里面通常只有：</p>
+<pre><code class="language-text">thread_id
+checkpoint_ns
+checkpoint_id
+</code></pre>
+<p>真正的 State 保存在 checkpointer 里。</p>
+<p>可以把它类比成数据库主键：</p>
+<pre><code class="language-text">fork_config 里只有 checkpoint_id 等定位信息；
+真正的数据在 checkpointer 里；
+LangGraph 根据这个地址把数据取出来继续跑。
+</code></pre>
+<p>继续执行：</p>
+<pre><code class="language-python">fork_result = graph.invoke(None, config=fork_config)
+</code></pre>
+<p>这里传 <code>None</code> 是因为不需要新的输入。</p>
+<p>LangGraph 会根据 <code>fork_config</code> 找到那份新 checkpoint，然后从它的 <code>next</code> 节点继续往后跑。</p>
+<p>比如这份 checkpoint 的 <code>next</code> 是：</p>
+<pre><code class="language-python">("generate_sql",)
+</code></pre>
+<p>那它就会从 <code>generate_sql</code> 开始往后跑：</p>
+<pre><code class="language-text">generate_sql -&gt; answer -&gt; END
+</code></pre>
+<p>它不会再重新执行前面的节点。</p>
+<p>如果你选中的 checkpoint 的 <code>next</code> 是：</p>
+<pre><code class="language-python">("answer",)
+</code></pre>
+<p>那就只会从 <code>answer</code> 往后跑。</p>
+<p>一句话：</p>
+<pre><code class="language-text">fork_config 是存档地址。
+graph.invoke(None, config=fork_config) 是从这个存档继续执行。
+</code></pre>
+<p>对应 demo：</p>
+<pre><code class="language-bash">uv run python test/langgraph_demo/15_time_travel_demo.py
+</code></pre>
+<h3 id="65-fault-tolerance">6.5 Fault tolerance：失败重试和降级</h3>
+<p><img alt="Fault tolerance 重试和降级" src="/img/ai-agent-tutorial/09/langgraph_fault_tolerance.svg"/></p>
+<p>真实流程里，节点可能失败。</p>
+<p>例如：</p>
+<pre><code class="language-text">模型接口超时；
+数据库连接失败；
+外部服务返回 500；
+工具调用不稳定。
+</code></pre>
+<p>LangGraph 可以给节点配置失败处理。</p>
+<p>常见两层：</p>
+<pre><code class="language-text">retry_policy：失败后自动重试。
+error_handler：重试耗尽后，进入降级或补偿流程。
+</code></pre>
+<p>示例：</p>
+<pre><code class="language-python">from langgraph.types import RetryPolicy
+
+graph_builder.add_node(
+    "call_data_service",
+    call_data_service_node,
+    retry_policy=RetryPolicy(
+        max_attempts=3,
+        retry_on=ConnectionError,
+    ),
+    error_handler=data_service_error_handler,
+)
+</code></pre>
+<p><code>retry_policy</code> 负责“再试几次”。</p>
+<p><code>error_handler</code> 负责“还是失败时怎么收场”。</p>
+<p>上面这个配置可以拆开看：</p>
+<pre><code class="language-python">RetryPolicy(
+    max_attempts=3,
+    retry_on=ConnectionError,
+)
+</code></pre>
+<p>意思是：</p>
+<pre><code class="language-text">如果节点抛出 ConnectionError，最多尝试 3 次。
+</code></pre>
+<p>如果 3 次都失败，就进入 <code>error_handler</code>。</p>
+<p><code>error_handler</code> 里可以返回普通 State 更新，也可以返回 <code>Command</code> 控制下一步。</p>
+<p>例如：</p>
+<pre><code class="language-python">from langgraph.types import Command
+
+
+def data_service_error_handler(state, error):
+    return Command(
+        update={
+            "data": "降级数据：外部服务暂时不可用"
+        },
+        goto="answer",
+    )
+</code></pre>
+<p>这里的意思是：</p>
+<pre><code class="language-text">把 data 更新成一段降级数据；
+然后直接跳到 answer 节点继续。
+</code></pre>
+<p>所以 Fault tolerance 不是简单地“报错就结束”。</p>
+<p>它更像是给流程准备一条兜底路线：</p>
+<pre><code class="language-text">先重试；
+重试还失败；
+进入降级节点；
+返回一个可解释的结果。
+</code></pre>
+<p>对应 demo：</p>
+<pre><code class="language-bash">uv run python test/langgraph_demo/16_fault_tolerance_demo.py
+</code></pre>
+<hr/>
+<h2 id="7-demo">7. 课堂 demo 顺序</h2>
+<p>建议按下面顺序跑：</p>
+<pre><code class="language-text">01_create_graph_demo.py             创建最小 LangGraph 流程
+02_state_update_demo.py             State 如何被节点读写
+03_simple_edge_demo.py              Edge 顺序执行
+04_conditional_edge_demo.py         条件边
+05_loop_retry_demo.py               循环重试
+06_parallel_summary_demo.py         多节点汇总
+07_checkpoint_state_demo.py         Checkpoint 和 State
+08_student_task_graph_demo.py       综合练习：学生任务处理流程
+10_multiple_checkpoint_records_demo.py  一个 Checkpointer 保存多份记录
+11_stream_output_demo.py            stream 观察节点输出
+12_store_long_term_memory_demo.py   Store 长期记忆
+13_runtime_context_demo.py          Runtime/context
+14_interrupt_human_in_loop_demo.py  Interrupt 人工确认
+15_time_travel_demo.py              Time Travel 回看和分叉
+16_fault_tolerance_demo.py          失败重试和降级
+</code></pre>
+<p>运行方式：</p>
+<pre><code class="language-bash">uv run python test/langgraph_demo/01_create_graph_demo.py
+</code></pre>
+<hr/>
+<h2 id="8">8. 本节总结</h2>
+<p>今天先掌握 LangGraph 的基础认识。</p>
+<p>不用一开始就记很多 API。</p>
+<p>先记住这些结论：</p>
+<pre><code class="language-text">1. LangGraph 是用“图”的方式组织 AI 流程的框架。
+2. Chain 适合固定顺序，Agent 适合工具选择，LangGraph 适合复杂流程控制。
+3. State 保存流程中间数据。
+4. Node 表示一个处理步骤。
+5. Edge 表示下一步怎么走。
+6. Conditional Edge 用来根据节点结果决定分支。
+7. Checkpoint 可以保存流程状态和对话状态。
+8. stream 可以观察每个节点的输出，让流程不再是黑盒。
+9. Store 可以保存跨对话、跨 thread 的长期记忆。
+10. Runtime/context 适合传入用户、租户、权限等业务上下文。
+11. Interrupt 可以让危险操作暂停，等待人工确认后继续。
+12. Time Travel 可以回看历史状态，也可以从某一步分叉重跑。
+13. Fault tolerance 可以处理失败重试、超时和降级流程。
+14. LangGraph 的价值，是让复杂 AI 业务流程更清楚、更可控、更容易调试。
+</code></pre>
+<p>最后用一句话总结：</p>
+<p><strong>LangGraph 不是让模型更自由，而是让复杂 AI 流程更有结构：每一步做什么、什么时候分支、状态保存在哪里、失败后怎么办，都可以被程序清楚地管理起来。</strong></p>
+<h2 id="_text-to-sql_1">第九天_Text-to-SQL全流程图与讲解</h2>
+<p>﻿# Text-to-SQL 全流程图与讲解</p>
+<blockquote>
+<p>本文根据《第九天：Text-to-SQL 业务介绍与系统设计》整理，重点解释原教程结尾的端到端流程，并将原来的文本流程重绘为 Mermaid 流程图。</p>
+<p>原教程：<a href="./第九天_Text-to-SQL业务介绍.md">第九天_Text-to-SQL业务介绍.md</a></p>
+</blockquote>
+<hr/>
+<h2 id="1_1">1. 核心结论</h2>
+<p>真实项目中的 Text-to-SQL 不是：</p>
+<pre><code class="language-text">用户提问 → 大模型生成 SQL → 数据库执行
+</code></pre>
+<p>而是：</p>
+<pre><code class="language-text">先判断能不能查
+→ 再确认到底查什么
+→ 只加载必要的指标和 Schema
+→ 生成 SQL
+→ 由程序和数据库决定是否允许执行
+→ 将真实结果加工成用户能理解的答案
+</code></pre>
+<p>整套系统可以分为四个阶段：</p>
+<ol>
+<li><strong>入口分流</strong>：判断请求是不是只读数据查询。</li>
+<li><strong>语义规划</strong>：确定指标、时间、筛选、维度、表和关联路径。</li>
+<li><strong>安全执行</strong>：生成 SQL，经过 SQL Guard 和 <code>EXPLAIN</code> 后，用只读账号执行。</li>
+<li><strong>结果产品化</strong>：将原始结果转换成指标卡、表格、图表和可信文字总结。</li>
+</ol>
+<p>此外，数据仓库、指标语义层和 Schema 目录属于整条流程的<strong>后台数据基础</strong>，并不是每次用户提问后才临时构建。</p>
+<hr/>
+<h2 id="2-text-to-sql_1">2. Text-to-SQL 端到端流程图（重绘版）</h2>
+<pre><code class="language-mermaid">flowchart TB
+    subgraph DATA["A. 数据准备层｜后台持续运行"]
+        SRC["订单库｜支付库｜用户库｜商品库"]
+        SYNC["ETL / CDC&lt;br/&gt;清洗、同步、统一业务键"]
+        DW["分析数据仓库&lt;br/&gt;宽表、主题表、聚合表"]
+        CATALOG["Schema 目录&lt;br/&gt;表说明、关键业务键、关联关系"]
+        METRIC["指标语义层&lt;br/&gt;名称、同义词、公式、状态与时间口径"]
+
+        SRC --&gt; SYNC --&gt; DW
+        DW --&gt; CATALOG
+    end
+
+    subgraph ENTRY["B. 入口分流｜先判断能不能查"]
+        USER["用户输入自然语言问题"]
+        ROUTER{"Router：请求属于哪一类？"}
+        CHAT["普通问答&lt;br/&gt;GENERAL_CHAT"]
+        OP["操作请求&lt;br/&gt;拒绝直接改库，引导业务页面"]
+        OUT["超出范围&lt;br/&gt;说明能力边界"]
+        ROUTE_CLARIFY["澄清请求类型&lt;br/&gt;想查数据还是了解规则？"]
+
+        USER --&gt; ROUTER
+        ROUTER --&gt;|普通问答| CHAT
+        ROUTER --&gt;|修改或删除数据| OP
+        ROUTER --&gt;|超出能力范围| OUT
+        ROUTER --&gt;|无法判断| ROUTE_CLARIFY
+        ROUTE_CLARIFY --&gt; ROUTER
+    end
+
+    subgraph PLAN["C. 语义规划｜先确定查什么"]
+        RAG["RAG 召回候选资料&lt;br/&gt;指标定义、候选表目录、关联关系"]
+        QUERY_PLAN["生成结构化 QueryPlan&lt;br/&gt;指标、表、Join、时间、筛选、分组、排序、Limit"]
+        PLAN_GATE{"QueryPlan 完整且可校验？"}
+        CLARIFY["每次澄清一个最关键缺口"]
+        KNOWLEDGE_GAP["补充指标或 Schema 资料&lt;br/&gt;或明确当前无法查询"]
+        DETAIL["加载已选表详细 Schema&lt;br/&gt;+ 已选指标口径 + 已选关联路径"]
+
+        RAG --&gt; QUERY_PLAN --&gt; PLAN_GATE
+        PLAN_GATE --&gt;|关键要素缺失| CLARIFY
+        CLARIFY --&gt; QUERY_PLAN
+        PLAN_GATE --&gt;|候选知识不足或计划越界| KNOWLEDGE_GAP
+        PLAN_GATE --&gt;|READY| DETAIL
+    end
+
+    subgraph EXEC["D. 安全执行｜模型提方案，程序掌握执行权"]
+        SQL_GEN["生成 SQL"]
+        GUARD["SQL Guard&lt;br/&gt;单条 SELECT、白名单、权限、数据范围、脱敏、LIMIT"]
+        EXPLAIN["执行 EXPLAIN&lt;br/&gt;检查索引、扫描行数、临时表和排序风险"]
+        RISK_GATE{"执行风险是否可接受？"}
+        REPAIR["携带结构化错误修复 SQL&lt;br/&gt;受最大重试次数限制"]
+        NARROW["要求缩小时间范围、增加筛选&lt;br/&gt;或改查汇总结果"]
+        DENY["拒绝执行并记录审计信息"]
+        DB_EXEC["只读账号执行&lt;br/&gt;查询超时、并发限制、最大返回行数"]
+        EXEC_GATE{"执行结果"}
+        FAIL["明确失败原因或缺少的信息"]
+
+        SQL_GEN --&gt; GUARD --&gt; EXPLAIN --&gt; RISK_GATE
+        RISK_GATE --&gt;|可接受| DB_EXEC
+        RISK_GATE --&gt;|SQL 可修复且未超限| REPAIR
+        REPAIR --&gt; SQL_GEN
+        RISK_GATE --&gt;|风险偏高| NARROW
+        NARROW --&gt; CLARIFY
+        RISK_GATE --&gt;|越权或危险或风险过高| DENY
+        DB_EXEC --&gt; EXEC_GATE
+        EXEC_GATE --&gt;|失败可修复且未超限| REPAIR
+        EXEC_GATE --&gt;|失败不可修复或已超限| FAIL
+    end
+
+    subgraph RESULT["E. 结果产品化｜把数据库事实变成用户答案"]
+        EMPTY["成功但结果为空&lt;br/&gt;如实生成空结果提醒"]
+        NORMALIZE["程序标准化结果&lt;br/&gt;类型、格式、别名、单位、空值、脱敏、一致性"]
+        VIZ["规则优先选择展示方式&lt;br/&gt;指标卡、表格、折线图、柱状图等"]
+        SUMMARY["模型仅依据真实结果总结&lt;br/&gt;不编造原因、比例或结论"]
+        PACKAGE["结构化返回&lt;br/&gt;query_summary、metric_cards、table_data、chart_config、answer、warnings"]
+        UI["前端展示&lt;br/&gt;指标卡｜表格｜图表｜自然语言回答"]
+
+        EMPTY --&gt; PACKAGE
+        NORMALIZE --&gt; VIZ --&gt; SUMMARY --&gt; PACKAGE --&gt; UI
+    end
+
+    ROUTER --&gt;|DATA_QUERY| RAG
+    CATALOG -.提供候选 Schema.-&gt; RAG
+    METRIC -.提供候选指标.-&gt; RAG
+    DETAIL --&gt; SQL_GEN
+    DW -.提供已选表 Schema.-&gt; DETAIL
+    DW -.只读查询.-&gt; DB_EXEC
+    EXEC_GATE --&gt;|成功且有数据| NORMALIZE
+    EXEC_GATE --&gt;|成功但无数据| EMPTY
+
+    classDef data fill:#f3e8ff,stroke:#7c3aed,color:#2e1065,stroke-width:1.5px;
+    classDef entry fill:#e0f2fe,stroke:#0284c7,color:#082f49,stroke-width:1.5px;
+    classDef plan fill:#fff7ed,stroke:#ea580c,color:#431407,stroke-width:1.5px;
+    classDef exec fill:#fef2f2,stroke:#dc2626,color:#450a0a,stroke-width:1.5px;
+    classDef result fill:#ecfdf5,stroke:#059669,color:#022c22,stroke-width:1.5px;
+    classDef gate fill:#ffffff,stroke:#475569,color:#0f172a,stroke-width:2px;
+
+    class SRC,SYNC,DW,CATALOG,METRIC data;
+    class USER,CHAT,OP,OUT,ROUTE_CLARIFY entry;
+    class RAG,QUERY_PLAN,CLARIFY,KNOWLEDGE_GAP,DETAIL plan;
+    class SQL_GEN,GUARD,EXPLAIN,REPAIR,NARROW,DENY,DB_EXEC,FAIL exec;
+    class EMPTY,NORMALIZE,VIZ,SUMMARY,PACKAGE,UI result;
+    class ROUTER,PLAN_GATE,RISK_GATE,EXEC_GATE gate;
+</code></pre>
+<h3 id="_1">读图方式</h3>
+<ul>
+<li><strong>紫色区域</strong>：后台数据基础，不是每次请求都重新执行。</li>
+<li><strong>蓝色区域</strong>：入口分流，决定请求是否进入数据库查询。</li>
+<li><strong>橙色区域</strong>：语义规划，把模糊问题变成可校验的查询合同。</li>
+<li><strong>红色区域</strong>：SQL 安全、性能检查和只读执行。</li>
+<li><strong>绿色区域</strong>：将数据库原始结果转换成面向用户的答案。</li>
+<li><strong>菱形节点</strong>：条件判断，会产生分支或循环。</li>
+<li><strong>虚线</strong>：数据或知识供给关系，不代表普通的串行调用顺序。</li>
+</ul>
+<hr/>
+<h2 id="3">3. 各阶段详细讲解</h2>
+<h3 id="31">3.1 数据准备层：为查询提前准备稳定的数据基础</h3>
+<p>微服务系统的订单、支付、用户、商品等数据通常分散在不同业务库。如果每次用户提问后再临时跨库查询，会产生以下问题：</p>
+<ul>
+<li>跨库关联复杂；</li>
+<li>查询性能不可控；</li>
+<li>容易影响线上交易系统；</li>
+<li>权限和敏感字段难以集中治理；</li>
+<li>业务表结构变化会直接影响模型。</li>
+</ul>
+<p>因此，常见方案是通过 ETL 或 CDC，把需要分析的数据持续同步到统一的数据仓库：</p>
+<pre><code class="language-text">业务库负责在线交易
+数据仓库负责统计分析
+Text-to-SQL 只查询分析库
+</code></pre>
+<p>数仓中可以提前整理订单、支付、退款、产品和用户维度，形成宽表、主题表或聚合表。指标语义层和 Schema 目录也围绕数仓维护。</p>
+<p>需要特别注意：<strong>数据同步是后台持续运行的基础设施，不是用户每提问一次就重新同步一次。</strong></p>
+<hr/>
+<h3 id="32-router">3.2 Router：先判断请求是否应该查询数据库</h3>
+<p>用户可能在同一个对话框中提出完全不同的请求：</p>
+<table>
+<thead>
+<tr>
+<th>用户输入</th>
+<th>Router 分类</th>
+<th>后续动作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>最近 7 天未支付订单有多少？</td>
+<td><code>DATA_QUERY</code></td>
+<td>进入 Text-to-SQL</td>
+</tr>
+<tr>
+<td>退款为什么失败？</td>
+<td><code>GENERAL_CHAT</code></td>
+<td>使用普通问答能力</td>
+</tr>
+<tr>
+<td>把昨天的订单全部取消</td>
+<td><code>DATA_OPERATION</code></td>
+<td>拒绝直接修改，引导到业务页面</td>
+</tr>
+<tr>
+<td>帮我看看订单</td>
+<td><code>AMBIGUOUS</code></td>
+<td>澄清是查询数据还是了解业务规则</td>
+</tr>
+<tr>
+<td>帮我写一首诗</td>
+<td><code>OUT_OF_SCOPE</code></td>
+<td>说明当前能力边界</td>
+</tr>
+</tbody>
+</table>
+<p>Router 只负责稳定分类，不负责生成 SQL，也不负责确认指标口径。它可以由规则、轻量模型或二者组合实现。</p>
+<p>这一层的核心价值是：</p>
+<blockquote>
+<p>不是所有自然语言请求都应该变成 SQL，尤其不能让操作请求进入只读查询链路。</p>
+</blockquote>
+<hr/>
+<h3 id="33-rag">3.3 RAG：检索候选资料，而不是替系统做最终决定</h3>
+<p>Router 确认请求为 <code>DATA_QUERY</code> 后，RAG 从两类知识库中召回资料：</p>
+<table>
+<thead>
+<tr>
+<th>知识来源</th>
+<th>主要内容</th>
+<th>解决的问题</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>指标语义层</td>
+<td>名称、同义词、公式、状态条件、时间口径、核心表</td>
+<td>“交易额”“退款率”究竟怎么算</td>
+</tr>
+<tr>
+<td>Schema 目录</td>
+<td>表说明、业务键、常用字段、表关联关系</td>
+<td>可能需要哪些表以及如何关联</td>
+</tr>
+</tbody>
+</table>
+<p>例如用户问“线上课程退款额是多少”，RAG 可能召回：</p>
+<pre><code class="language-text">候选指标：退款成功金额
+计算规则：SUCCESS 退款单的 refund_amount 求和
+时间字段：refund_success_time
+核心表：order_refund
+
+候选表：
+- order_refund
+- order_payment
+- order_product
+
+候选关联：
+order_refund.payment_order_no -&gt; order_payment.order_no
+order_payment.product_id -&gt; order_product.id
+</code></pre>
+<p>RAG 只负责找回“可能相关”的资料。真正使用哪个指标、哪些表和哪条关联路径，由下一步查询规划决定。</p>
+<hr/>
+<h3 id="34-queryplan">3.4 QueryPlan：把模糊问题转换成可校验的查询合同</h3>
+<p>查询规划阶段应输出结构化 QueryPlan，而不是一段自由文本。典型字段包括：</p>
+<pre><code class="language-text">selected_metric：查询指标
+selected_tables：需要的表
+join_path：表关联路径
+time_range：时间范围
+filters：筛选条件
+group_by：分组维度
+order_by：排序规则
+limit：返回数量
+result_columns：结果列的别名、角色和单位
+status：READY 或 NEEDS_CLARIFICATION
+</code></pre>
+<p>程序应验证：</p>
+<ul>
+<li>指标是否来自候选指标；</li>
+<li>表和关联关系是否来自候选 Schema；</li>
+<li>时间、筛选、分组和排序是否合法；</li>
+<li>结果列是否具有唯一别名和明确语义；</li>
+<li>当前计划是否已经达到 <code>READY</code> 状态。</li>
+</ul>
+<p>这份 QueryPlan 是模块之间的合同：</p>
+<ul>
+<li>规划模型负责决定“查什么”；</li>
+<li>SQL 模型负责决定“怎么查”；</li>
+<li>程序负责校验和执行；</li>
+<li>结果模块负责按既定语义展示。</li>
+</ul>
+<hr/>
+<h3 id="35">3.5 查询要素检查与澄清循环</h3>
+<p>一次数据查询通常包含六类要素：</p>
+<ol>
+<li>查询对象或指标；</li>
+<li>时间范围；</li>
+<li>筛选条件；</li>
+<li>计算方式；</li>
+<li>分组维度；</li>
+<li>排序和返回数量。</li>
+</ol>
+<p>例如“昨天订单量是多少”存在关键歧义：</p>
+<ul>
+<li>昨天创建的订单数；</li>
+<li>昨天支付成功的订单数。</li>
+</ul>
+<p>系统不能擅自猜测，应追问：</p>
+<blockquote>
+<p>你想统计昨天创建的订单数，还是昨天支付成功的订单数？</p>
+</blockquote>
+<p>用户回答后，系统更新 QueryPlan，再进行校验。每次只问一个最影响结果的问题，并设置最大澄清次数。</p>
+<hr/>
+<h3 id="36-schema">3.6 两阶段 Schema：先选表，再加载详细字段</h3>
+<p>真实系统可能有数百张表和成千上万个字段。把所有完整 Schema 一次性塞给模型，会导致：</p>
+<ul>
+<li>上下文过长；</li>
+<li>成本更高、响应更慢；</li>
+<li>无关字段干扰模型；</li>
+<li>更容易选错同名字段；</li>
+<li>关键业务口径被淹没。</li>
+</ul>
+<p>因此推荐分两阶段：</p>
+<pre><code class="language-text">第一阶段：
+用户问题 + 候选指标 + 轻量表目录 + 关联关系
+→ 选择需要的表
+
+第二阶段：
+已选表的完整字段 + 已选指标口径 + 已选关联路径 + QueryPlan
+→ 生成 SQL
+</code></pre>
+<p>可以把它理解为：<strong>先看图书目录决定借哪几本书，再取出这些书的具体内容。</strong></p>
+<hr/>
+<h3 id="37-sql-sql">3.7 SQL 生成：只负责把已确认计划翻译成 SQL</h3>
+<p>到了 SQL 生成阶段，模型收到的是已经确认的：</p>
+<ol>
+<li>QueryPlan；</li>
+<li>已选表的详细 Schema；</li>
+<li>指标口径；</li>
+<li>表关联路径；</li>
+<li>数据库方言和输出约束。</li>
+</ol>
+<p>例如：</p>
+<pre><code class="language-sql">SELECT
+    product_name,
+    SUM(refund_amount) AS refund_amount
+FROM dwd_order_payment_refund
+WHERE refund_status = 'SUCCESS'
+  AND teaching_mode = 'ONLINE'
+  AND refund_success_date &gt;= CURRENT_DATE - INTERVAL 30 DAY
+GROUP BY product_id, product_name
+ORDER BY refund_amount DESC
+LIMIT 10;
+</code></pre>
+<p>此时模型只解决“如何查询”，不应该重新决定“退款额是什么意思”。</p>
+<hr/>
+<h3 id="38-sql-guard">3.8 SQL Guard：模型可以提方案，但程序拥有最终执行权</h3>
+<p>SQL Guard 不能依赖模型自己审核自己，而应由程序和数据库确定性执行。</p>
+<h4 id="_2">静态与权限检查</h4>
+<ul>
+<li>只允许单条 <code>SELECT</code>；</li>
+<li>禁止写入和结构变更语句；</li>
+<li>校验库、表、字段白名单；</li>
+<li>拒绝多语句和越权查询；</li>
+<li>注入租户、组织或角色的数据范围；</li>
+<li>对敏感字段进行拒绝或脱敏；</li>
+<li>添加最大返回行数和 <code>LIMIT</code>。</li>
+</ul>
+<h4 id="explain">使用 <code>EXPLAIN</code> 检查执行风险</h4>
+<p>程序在真正查询前执行：</p>
+<pre><code class="language-sql">EXPLAIN SELECT ...
+</code></pre>
+<p>重点关注：</p>
+<ul>
+<li><code>key</code>：计划使用的索引；</li>
+<li><code>type</code>：访问方式，大表出现 <code>ALL</code> 需要警惕；</li>
+<li><code>rows</code>：预计扫描行数；</li>
+<li><code>Extra</code>：是否出现临时表或额外排序；</li>
+<li>多表 Join 的关联字段是否有索引。</li>
+</ul>
+<p>程序可以做三类决策：</p>
+<pre><code class="language-text">风险可接受 → 放行
+风险偏高   → 缩小时间范围、增加筛选或改查汇总
+风险过高   → 拒绝执行并记录审计信息
+</code></pre>
+<p>核心原则：</p>
+<blockquote>
+<p><strong>模型可以提出查询方案，但程序必须拥有最终执行权。</strong></p>
+</blockquote>
+<hr/>
+<h3 id="39">3.9 只读执行与有限重试</h3>
+<p>SQL Guard 通过以后，还需要数据库层兜底：</p>
+<ul>
+<li>使用只读数据库账号；</li>
+<li>设置查询超时；</li>
+<li>限制连接池并发；</li>
+<li>设置最大返回行数；</li>
+<li>记录用户身份、SQL、执行计划摘要、耗时和扫描行数。</li>
+</ul>
+<p>执行结果分为三类：</p>
+<table>
+<thead>
+<tr>
+<th>结果</th>
+<th>处理方式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>成功且有数据</td>
+<td>进入结果后处理</td>
+</tr>
+<tr>
+<td>成功但无数据</td>
+<td>如实说明没有符合条件的数据，不盲目重试</td>
+</tr>
+<tr>
+<td>执行失败</td>
+<td>对可修复错误携带结构化反馈重试一到两次</td>
+</tr>
+</tbody>
+</table>
+<p>权限不足、指标口径不清和风险过高，不能靠反复生成 SQL 碰运气。超过重试上限后，系统应明确说明失败原因或缺少的信息。</p>
+<hr/>
+<h3 id="310">3.10 结果后处理：数据库原始结果还不是用户答案</h3>
+<p>数据库可能只返回：</p>
+<pre><code class="language-text">product_name | refund_amount
+课程 A        | 15600.00
+课程 B        | 9800.00
+</code></pre>
+<p>程序还需要完成：</p>
+<ul>
+<li>日期、金额和百分比格式化；</li>
+<li>空值与除零处理；</li>
+<li>字段别名和单位补充；</li>
+<li>敏感字段脱敏；</li>
+<li>行数和列数控制；</li>
+<li>校验结果列是否与 QueryPlan 一致。</li>
+</ul>
+<p>然后根据数据形态选择展示方式：</p>
+<table>
+<thead>
+<tr>
+<th>数据形态</th>
+<th>推荐展示</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>单个指标、单个值</td>
+<td>指标卡</td>
+</tr>
+<tr>
+<td>少量明细</td>
+<td>表格</td>
+</tr>
+<tr>
+<td>时间 + 指标</td>
+<td>折线图</td>
+</tr>
+<tr>
+<td>分类维度 + 数值</td>
+<td>柱状图</td>
+</tr>
+<tr>
+<td>Top N 排名</td>
+<td>横向柱状图或排名表</td>
+</tr>
+<tr>
+<td>少量分类占比</td>
+<td>饼图或环形图</td>
+</tr>
+</tbody>
+</table>
+<p>模型最后只能基于真实结果生成文字总结，不能补造数据库中没有的原因、比例或业务结论。</p>
+<hr/>
+<h3 id="311">3.11 结构化返回</h3>
+<p>最终接口不应只返回一段模型文字，而应返回可组合展示的结构：</p>
+<pre><code class="language-text">query_summary：用户问题和已确认口径
+metric_cards：核心指标卡
+table_data：明细或分组结果
+chart_config：受支持的图表配置
+natural_language_answer：基于真实结果的总结
+warnings：空结果、截断、范围过大等提示
+</code></pre>
+<p>同一份结果可以分别用于：</p>
+<ul>
+<li>管理后台的表格和图表；</li>
+<li>对话框中的简短结论；</li>
+<li>标准化数据导出；</li>
+<li>审计页面中的 SQL 和执行摘要。</li>
+</ul>
+<hr/>
+<h2 id="4">4. 用一个问题贯穿整条流程</h2>
+<p>用户问题：</p>
+<blockquote>
+<p>最近 30 天线上课程按产品统计退款额 Top 10。</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>处理结果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Router</td>
+<td>判定为 <code>DATA_QUERY</code></td>
+</tr>
+<tr>
+<td>RAG</td>
+<td>召回“退款成功金额”、数仓分析表、产品维度和退款时间口径</td>
+</tr>
+<tr>
+<td>QueryPlan</td>
+<td>指标为退款成功金额；最近 30 天；线上课程；按产品分组；金额倒序；Limit 10</td>
+</tr>
+<tr>
+<td>要素检查</td>
+<td>信息完整，状态为 <code>READY</code></td>
+</tr>
+<tr>
+<td>Schema 加载</td>
+<td>只加载目标数仓表的退款金额、状态、成功时间、授课方式、产品字段</td>
+</tr>
+<tr>
+<td>SQL 生成</td>
+<td>生成分组、求和、排序和限制条数的 SQL</td>
+</tr>
+<tr>
+<td>SQL Guard</td>
+<td>确认单条只读查询、字段合法、权限范围正确，并执行 <code>EXPLAIN</code></td>
+</tr>
+<tr>
+<td>数据库执行</td>
+<td>使用只读账号执行，受超时和行数限制</td>
+</tr>
+<tr>
+<td>后处理</td>
+<td>金额格式化，生成排名表和横向柱状图</td>
+</tr>
+<tr>
+<td>最终返回</td>
+<td>指标卡、Top 10 表格、图表、可信文字总结和必要提醒</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h2 id="5_1">5. 三个关键闭环</h2>
+<h3 id="51_1">5.1 澄清闭环</h3>
+<pre><code class="language-text">查询计划不完整
+→ 询问用户一个关键问题
+→ 更新 QueryPlan
+→ 再次校验
+</code></pre>
+<p>解决的是自然语言歧义。</p>
+<h3 id="52-sql">5.2 SQL 修复闭环</h3>
+<pre><code class="language-text">生成 SQL
+→ SQL Guard 或执行失败
+→ 携带安全、结构化的错误反馈
+→ 有限次数修复
+→ 再次完整校验
+</code></pre>
+<p>解决的是模型可能生成错误 SQL，但必须设置最大重试次数。</p>
+<h3 id="53_2">5.3 结果可信闭环</h3>
+<pre><code class="language-text">数据库真实结果
+→ 程序标准化与一致性检查
+→ 模型严格依据结果解释
+→ 结构化展示
+</code></pre>
+<p>保证模型只能解释事实，不能创造数据。</p>
+<hr/>
+<h2 id="6-langgraph">6. 映射到 LangGraph</h2>
+<p>如果使用 LangGraph 实现，每个流程框都可以映射为图中的组件：</p>
+<table>
+<thead>
+<tr>
+<th>LangGraph 概念</th>
+<th>在本流程中的作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>State</td>
+<td>保存用户问题、路由结果、候选资料、QueryPlan、Schema、SQL、校验结果、重试次数和查询结果</td>
+</tr>
+<tr>
+<td>Node</td>
+<td>Router、RAG、Planner、Clarifier、Schema Loader、SQL Generator、SQL Guard、Executor、Postprocessor</td>
+</tr>
+<tr>
+<td>Edge</td>
+<td>表示正常的固定执行顺序</td>
+</tr>
+<tr>
+<td>Conditional Edge</td>
+<td>根据路由分类、计划状态、Guard 结果和执行结果选择下一节点</td>
+</tr>
+<tr>
+<td>Checkpoint</td>
+<td>保存澄清前后、生成前后和执行前后的状态，支持恢复、审计和人工介入</td>
+</tr>
+</tbody>
+</table>
+<p>推荐保存的核心 State 示例：</p>
+<pre><code class="language-text">user_question
+route_type
+retrieved_metrics
+candidate_tables
+query_plan
+selected_schema
+generated_sql
+guard_result
+explain_summary
+retry_count
+query_result
+response_payload
+</code></pre>
+<p>主要循环包括：</p>
+<ol>
+<li><code>Planner → Clarifier → Planner</code>；</li>
+<li><code>SQL Generator → SQL Guard → SQL Generator</code>；</li>
+<li><code>Executor → SQL Repair → SQL Guard → Executor</code>。</li>
+</ol>
+<p>每个循环都必须具备明确的进入条件、最大次数和退出策略。</p>
+<hr/>
+<h2 id="7_1">7. 职责边界</h2>
+<table>
+<thead>
+<tr>
+<th>参与者</th>
+<th>应负责的事情</th>
+<th>不应负责的事情</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>大模型</td>
+<td>理解问题、选择候选方案、生成 SQL、依据结果解释</td>
+<td>自己决定是否放行 SQL、修改数据库、编造数据原因</td>
+</tr>
+<tr>
+<td>程序</td>
+<td>校验 QueryPlan、解析 SQL、权限控制、脱敏、限制、结果标准化</td>
+<td>用模糊规则代替业务指标定义</td>
+</tr>
+<tr>
+<td>数据库</td>
+<td>生成执行计划、使用索引、执行查询</td>
+<td>理解自然语言业务意图</td>
+</tr>
+<tr>
+<td>开发人员与 DBA</td>
+<td>维护指标、Schema、权限、索引和风险阈值</td>
+<td>让系统在运行时自动创建索引</td>
+</tr>
+<tr>
+<td>前端</td>
+<td>渲染受支持的指标卡、表格、图表和提醒</td>
+<td>执行模型生成的任意脚本或图表代码</td>
+</tr>
+</tbody>
+</table>
+<hr/>
+<h2 id="8_1">8. 最终记忆</h2>
+<p>可以用一句话记住整套流程：</p>
+<blockquote>
+<p><strong>大模型负责理解、规划、生成和解释；程序负责校验、权限、执行控制和结果标准化；数据库只通过受限、只读的方式提供事实。</strong></p>
+</blockquote>
+<p>再压缩成五个关键词：</p>
+<pre><code class="language-text">分流 → 规划 → 护栏 → 执行 → 展示
+</code></pre></article><div class="post-copyright"><div class="copyright-cc-box"><i class="smithfont smith-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img alt="头像" class="post-copyright__author_img_back" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d20f536c64d06e5fcf4bfe2ec5dc25d.jpg" onerror='this.onerror=null,this.src="/img/404.jpg"' src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" title="头像"/><img alt="头像" class="post-copyright__author_img_front" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d20f536c64d06e5fcf4bfe2ec5dc25d.jpg" onerror='this.onerror=null,this.src="/img/404.jpg"' src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" title="头像"/></a><div class="post-copyright__author_name">Smith</div><div class="post-copyright__author_desc">人生太短，要干的事太多，我要争分夺秒</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" href="https://smithhs.cn/2026/05/06/2026-05-06-SpringCloud01/" title="该文章为原创文章，注意版权协议">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://smithhs.cn/2026/05/06/2026-05-06-SpringCloud01/')">SpringCloud01</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="smith.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="smithfont smith-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg" target="_blank"><img alt="wechat" class="post-qr-code-img" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg" onerror='this.onerror=null,this.src="/img/404.jpg"' src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg" target="_blank"><img alt="alipay" class="post-qr-code-img" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg" onerror='this.onerror=null,this.src="/img/404.jpg"' src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"/></a><div class="post-qr-code-desc">alipay</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="smith.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="smithfont smith-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://smithhs.cn/2026/05/06/2026-05-06-SpringCloud01/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" href="https://service.weibo.com/share/share.php?title=SpringCloud01&amp;url=https://smithhs.cn/2026/05/06/2026-05-06-SpringCloud01/&amp;pic=https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1682044144301.png" rel="external nofollow noreferrer noopener" target="_blank"><i class="smithfont smith-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" onclick="copyCurrentPageUrl()" title="复制链接"><i class="smithfont smith-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://smithhs.cn" target="_blank">Smith</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/%E5%90%8E%E7%AB%AF/"><span class="tags-punctuation"> <i class="smithfont smith-icon-tag"></i></span>后端<span class="tagsPageCount">49</span></a><a class="post-meta__box__tags" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"><span class="tags-punctuation"> <i class="smithfont smith-icon-tag"></i></span>微服务<span class="tagsPageCount">10</span></a><a class="post-meta__box__tags" href="/tags/SpringCloud/"><span class="tags-punctuation"> <i class="smithfont smith-icon-tag"></i></span>SpringCloud<span class="tagsPageCount">10</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1681455691814.png" data-sites="wechat,weibo,qq"></div><link href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'" rel="stylesheet"><script defer="defer" src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js"></script></link></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2026/07/28/2026-07-28-ai-agent-08-langchain-agent-context-compression/"><img alt="cover" class="cover" data-lazy-src="/img/ai-agent-tutorial/covers/ai-agent-08-langchain-agent-context-compression.png" onerror="onerror=null;src='/img/404.jpg'" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"/><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">LangChain Agent 入门与上下文压缩</div></div></a></div><div class="next-post pull-right"><a href="/2026/07/30/2026-07-30-ai-agent-10-text-to-sql-project/"><img alt="cover" class="cover" data-lazy-src="/img/ai-agent-tutorial/covers/ai-agent-10-text-to-sql-project.png" onerror="onerror=null;src='/img/404.jpg'" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"/><div class="pagination-info"><div class="label">下一篇</div><div class="prev_info">Text-to-SQL 项目落地实战</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><span>AI Agent 系列推荐</span></div><div class="relatedPosts-list"><div><a href="/2026/07/27/2026-07-27-ai-agent-07-langchain-practice/" title="LangChain 框架实战"><img alt="cover" class="cover" data-lazy-src="/img/ai-agent-tutorial/covers/ai-agent-07-langchain-practice.png" onerror="this.onerror=null,this.src='/img/404.jpg'" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"/><div class="content is-center"><div class="date">2026-07-27</div><div class="title">LangChain 框架实战</div></div></a></div><div><a href="/2026/07/28/2026-07-28-ai-agent-08-langchain-agent-context-compression/" title="LangChain Agent 入门与上下文压缩"><img alt="cover" class="cover" data-lazy-src="/img/ai-agent-tutorial/covers/ai-agent-08-langchain-agent-context-compression.png" onerror="this.onerror=null,this.src='/img/404.jpg'" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"/><div class="content is-center"><div class="date">2026-07-28</div><div class="title">LangChain Agent 入门与上下文压缩</div></div></a></div><div><a href="/2026/07/30/2026-07-30-ai-agent-10-text-to-sql-project/" title="Text-to-SQL 项目落地实战"><img alt="cover" class="cover" data-lazy-src="/img/ai-agent-tutorial/covers/ai-agent-10-text-to-sql-project.png" onerror="this.onerror=null,this.src='/img/404.jpg'" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"/><div class="content is-center"><div class="date">2026-07-30</div><div class="title">Text-to-SQL 项目落地实战</div></div></a></div><div><a href="/2026/07/31/2026-07-31-ai-agent-11-text-to-sql-evaluation/" title="Text-to-SQL 评测体系建设"><img alt="cover" class="cover" data-lazy-src="/img/ai-agent-tutorial/covers/ai-agent-11-text-to-sql-evaluation.png" onerror="this.onerror=null,this.src='/img/404.jpg'" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"/><div class="content is-center"><div class="date">2026-07-31</div><div class="title">Text-to-SQL 评测体系建设</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="smithfont smith-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SpringCloud01"><span class="toc-number">1.</span> <span class="toc-text">SpringCloud01</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%BE%AE%E6%9C%8D%E5%8A%A1"><span class="toc-number">2.</span> <span class="toc-text">一、微服务</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84"><span class="toc-number">2.1.</span> <span class="toc-text">1.1单体架构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-%E5%BE%AE%E6%9C%8D%E5%8A%A1"><span class="toc-number">2.2.</span> <span class="toc-text">1.2 微服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9A%84%E9%87%8D%E8%A6%81%E6%80%A7"><span class="toc-number">2.3.</span> <span class="toc-text">1.3微服务的重要性</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81SpringCloud"><span class="toc-number">3.</span> <span class="toc-text">二、SpringCloud</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1%E8%AE%A4%E8%AF%86SpringCloud"><span class="toc-number">3.1.</span> <span class="toc-text">2.1认识SpringCloud</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87"><span class="toc-number">3.2.</span> <span class="toc-text">2.2 环境准备</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-1%E6%90%AD%E5%BB%BASpringCloud%E7%8E%AF%E5%A2%83"><span class="toc-number">3.2.1.</span> <span class="toc-text">2.2.1搭建SpringCloud环境</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%AE%9E%E7%8E%B0%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8"><span class="toc-number">4.</span> <span class="toc-text">三、实现远程调用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-%E6%9C%8D%E5%8A%A1%E5%87%86%E5%A4%87"><span class="toc-number">4.1.</span> <span class="toc-text">3.1 服务准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-%E8%B0%83%E7%94%A8%E6%B5%81%E7%A8%8B"><span class="toc-number">4.2.</span> <span class="toc-text">3.2 调用流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-RestTemplete%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">4.3.</span> <span class="toc-text">3.3 RestTemplete的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4-%E6%8F%90%E4%BE%9B%E8%80%85%E4%B8%8E%E6%B6%88%E8%B4%B9%E8%80%85"><span class="toc-number">4.4.</span> <span class="toc-text">3.4.提供者与消费者</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B%E3%80%81Feign%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8"><span class="toc-number">5.</span> <span class="toc-text">四、Feign远程调用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1Feign-%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">5.1.</span> <span class="toc-text">5.1Feign 是什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9-Feign"><span class="toc-number">5.2.</span> <span class="toc-text">5.2为什么选择 Feign</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-3Feign%E6%9B%BF%E4%BB%A3RestTemplate"><span class="toc-number">5.3.</span> <span class="toc-text">5.3Feign替代RestTemplate</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%95%E5%85%A5%E4%BE%9D%E8%B5%96"><span class="toc-number">5.3.1.</span> <span class="toc-text">引入依赖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E6%B3%A8%E8%A7%A3"><span class="toc-number">5.3.2.</span> <span class="toc-text">添加注解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E5%86%99Feign%E7%9A%84%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="toc-number">5.3.3.</span> <span class="toc-text">编写Feign的客户端</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95"><span class="toc-number">5.3.4.</span> <span class="toc-text">测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">5.3.5.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%BD%E5%8F%96api"><span class="toc-number">5.3.6.</span> <span class="toc-text">抽取api</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OpenFeign%E7%9A%84%E8%B6%85%E6%97%B6%E6%8E%A7%E5%88%B6"><span class="toc-number">5.3.7.</span> <span class="toc-text">OpenFeign的超时控制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Openfeign%E6%97%A5%E5%BF%97%E6%89%93%E5%8D%B0%E5%8A%9F%E8%83%BD"><span class="toc-number">5.3.8.</span> <span class="toc-text">Openfeign日志打印功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E6%96%B9%E5%BC%8F-%E2%80%93-springboot3-3-4-%E5%AF%B9%E5%BA%94%E7%9A%84openFeign%E7%89%88%E6%9C%AC"><span class="toc-number">5.3.9.</span> <span class="toc-text">配置文件方式  – springboot3.3.4 对应的openFeign版本</span></a></li></ol></li></ol></li></ol></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">©2022 - 2026 By <a class="footer-bar-link" href="/" target="_blank" title="Smith">Smith</a></div></div><div id="footer-type-tips"></div><div class="js-pjax"><script>function subtitleType () {
+  fetch('https://v1.hitokoto.cn')
+    .then(response => response.json())
+    .then(data => {
+      if (true) {
+        const from = '出自 ' + data.from
+        const sub = []
+        sub.unshift(data.hitokoto, from)
+        window.typed = new Typed('#footer-type-tips', {
+          strings: sub,
+          startDelay: 300,
+          typeSpeed: 150,
+          loop: true,
+          backSpeed: 50,
+        })
+      } else {
+        document.getElementById('footer-type-tips').innerHTML = data.hitokoto
+      }
+    })
+}
+
+if (true) {
+  if (typeof Typed === 'function') {
+    subtitleType()
+  } else {
+    getScript('https://cdn.jsdelivr.net/npm/typed.js@2.0.12/dist/typed.min.js').then(subtitleType)
+  }
+} else {
+  subtitleType()
+}
+</script></div></div><div class="footer-bar-right"><a class="footer-bar-link" href="https://github.com/Smithhss/smithhs.github.io.git" rel="noopener" target="_blank" title="Hexo">Hexo</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">199</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">69</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">3</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="smithfont smith-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://smithhs.cn/" title="博客"><img alt="博客" class="back-menu-item-icon" data-lazy-src="/img/favicon.png" onerror='this.onerror=null,this.src="/img/404.jpg"' src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"><span class="back-menu-item-text">博客</span></img></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" href="https://github.com/Smithhss" rel="noopener" target="_blank" title="Github"><img alt="Github" class="back-menu-item-icon" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/GitHub.png" onerror='this.onerror=null,this.src="/img/404.jpg"' src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"><span class="back-menu-item-text">Github</span></img></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="smithfont smith-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="smithfont smith-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="smithfont smith-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="smithfont smith-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="smithfont smith-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="smithfont smith-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/dailyPhoto/"><i class="smithfont smith-icon-camera faa-tada" style="font-size: 0.9em;"></i><span> 每日照片</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wallpaper/"><i class="smithfont smith-icon-image faa-tada" style="font-size: 0.9em;"></i><span> 壁纸</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wordScenery/"><i class="smithfont smith-icon-font faa-tada" style="font-size: 0.9em;"></i><span> 文字风景</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="smithfont smith-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于我</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="smithfont smith-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/love/"><i class="smithfont smith-icon-heart faa-tada" style="font-size: 0.9em;"></i><span> 爱情</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="smithfont smith-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Android-Studio/" style="font-size: 0.88rem;">Android Studio<sup>1</sup></a><a href="/tags/App/" style="font-size: 0.88rem;">App<sup>1</sup></a><a href="/tags/Butterfly/" style="font-size: 0.88rem;">Butterfly<sup>1</sup></a><a href="/tags/C/" style="font-size: 0.88rem;">C++<sup>3</sup></a><a href="/tags/CSS/" style="font-size: 0.88rem;">CSS<sup>1</sup></a><a href="/tags/Cisco-Packet-Tracer/" style="font-size: 0.88rem;">Cisco Packet Tracer<sup>1</sup></a><a href="/tags/Docker/" style="font-size: 0.88rem;">Docker<sup>2</sup></a><a href="/tags/Easypan/" style="font-size: 0.88rem;">Easypan<sup>2</sup></a><a href="/tags/FurtherMathematics/" style="font-size: 0.88rem;">FurtherMathematics<sup>1</sup></a><a href="/tags/GPT/" style="font-size: 0.88rem;">GPT<sup>1</sup></a><a href="/tags/Git2/" style="font-size: 0.88rem;">Git2<sup>1</sup></a><a href="/tags/HTML/" style="font-size: 0.88rem;">HTML<sup>1</sup></a><a href="/tags/Hexo/" style="font-size: 0.88rem;">Hexo<sup>1</sup></a><a href="/tags/Java/" style="font-size: 0.88rem;">Java<sup>67</sup></a><a href="/tags/JavaScript/" style="font-size: 0.88rem;">JavaScript<sup>1</sup></a><a href="/tags/Jrebel/" style="font-size: 0.88rem;">Jrebel<sup>1</sup></a><a href="/tags/LeetCode/" style="font-size: 0.88rem;">LeetCode<sup>1</sup></a><a href="/tags/Linux/" style="font-size: 0.88rem;">Linux<sup>3</sup></a><a href="/tags/Markdown/" style="font-size: 0.88rem;">Markdown<sup>2</sup></a><a href="/tags/Maven/" style="font-size: 0.88rem;">Maven<sup>2</sup></a><a href="/tags/MyBatis/" style="font-size: 0.88rem;">MyBatis<sup>1</sup></a><a href="/tags/MyBatis-Plus/" style="font-size: 0.88rem;">MyBatis-Plus<sup>1</sup></a><a href="/tags/Mysql/" style="font-size: 0.88rem;">Mysql<sup>1</sup></a><a href="/tags/Navicat/" style="font-size: 0.88rem;">Navicat<sup>1</sup></a><a href="/tags/NoSql/" style="font-size: 0.88rem;">NoSql<sup>1</sup></a><a href="/tags/Nodejs/" style="font-size: 0.88rem;">Nodejs<sup>2</sup></a><a href="/tags/Python/" style="font-size: 0.88rem;">Python<sup>4</sup></a><a href="/tags/Spring/" style="font-size: 0.88rem;">Spring<sup>2</sup></a><a href="/tags/VMware/" style="font-size: 0.88rem;">VMware<sup>2</sup></a><a href="/tags/WeChat/" style="font-size: 0.88rem;">WeChat<sup>1</sup></a><a href="/tags/YouHou/" style="font-size: 0.88rem;">YouHou<sup>1</sup></a><a href="/tags/books/" style="font-size: 0.88rem;">books<sup>1</sup></a><a href="/tags/butterfly/" style="font-size: 0.88rem;">butterfly<sup>1</sup></a><a href="/tags/clash/" style="font-size: 0.88rem;">clash<sup>1</sup></a><a href="/tags/error/" style="font-size: 0.88rem;">error<sup>1</sup></a><a href="/tags/project/" style="font-size: 0.88rem;">project<sup>4</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 0.88rem;">前端<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6/" style="font-size: 0.88rem;">开发框架<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" style="font-size: 0.88rem;">开发环境<sup>1</sup></a><a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="font-size: 0.88rem;">软件工程<sup>1</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" title="阅读模式" type="button"><i class="smithfont smith-icon-book-open"></i></button><button id="translateLink" title="简繁转换" type="button">繁</button><button id="darkmode" title="浅色和深色模式转换" type="button"><i class="smithfont smith-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" title="单栏和双栏切换" type="button"><i class="smithfont smith-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" title="设置" type="button"><i class="smithfont smith-icon-gear"></i></button><button class="close" id="mobile-toc-button" title="目录" type="button"><i class="smithfont smith-icon-list-ul"></i></button><button id="go-up" title="回到顶部" type="button"><i class="smithfont smith-icon-arrow-up"></i></button></div></div><div id="nav-music"><a accesskey="m" id="nav-music-hoverTips" onclick="smith.musicToggle()">播放音乐</a><div id="console-music-bg"></div><meting-js data-lrctype="0" id="8805965276" mutex="true" order="random" preload="none" server="netease" theme="var(--smith-main)" type="playlist" volume="0.7"></meting-js></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="smithfont smith-icon-xmark"></i></button></nav><div class="is-center" id="loading-database"><i class="smithfont smith-icon-spinner smith-pulse-icon"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr><div id="local-search-results"></div></hr></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="smithfont smith-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="smithfont smith-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="smithfont smith-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="smithfont smith-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="smithfont smith-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="smithfont smith-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="smithfont smith-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="smithfont smith-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="smithfont smith-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="smithfont smith-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="smithfont smith-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="smithfont smith-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="smithfont smith-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="smithfont smith-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="smithfont smith-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="smithfont smith-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="smithfont smith-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick='window.open("https://music.163.com/#/my/m/music/playlist?id=464586318", "_blank");' style="display: none;"><i class="smithfont smith-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="smithfont smith-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="smithfont smith-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="smithfont smith-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="smithfont smith-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" href="javascript:void(0);" id="menu-copy"><i class="smithfont smith-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" href="javascript:void(0);" id="menu-commentBarrage"><i class="smithfont smith-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" href="javascript:void(0);" id="menu-darkmode"><i class="smithfont smith-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" href="javascript:void(0);" id="menu-translate"><i class="smithfont smith-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn1.tianli0.top/npm/js-heo@1.0.6/translate/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@6.1.6/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.3.1/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.js"></script><script>var meting_api = "https://api.injahow.cn/meting/?server=:server&type=:type&id=:id&auth=:auth&r=:r";
+</script><canvas id="universe"></canvas><script async="" src="https://npm.elemecdn.com/smith-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("07/01/2022 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用史先森!`,
+    `生活明朗, 万物可爱`,
+    `
+
+      ███████╗███╗   ███╗██╗████████╗██╗  ██╗
+      ██╔════╝████╗ ████║██║╚══██╔══╝██║  ██║
+      ███████╗██╔████╔██║██║   ██║   ███████║
+      ╚════██║██║╚██╔╝██║██║   ██║   ██╔══██║
+      ███████║██║ ╚═╝ ██║██║   ██║   ██║  ██║
+      ╚══════╝╚═╝     ╚═╝╚═╝   ╚═╝   ╚═╝  ╚═╝
+
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2022 By 史先森 V1.0.0",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/smith-blog@1.0.0/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 史先森 %c 你正在访问 Smith 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async="" src="/smith/random.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><input id="page-type" name="page-type" type="hidden" value="post"/></div><script async="" data-pjax="" src="https://npm.elemecdn.com/smith-theme-static@1.0.0/bubble/bubble.js"></script><script>var visitorMail = "visitor@smithhs.cn";
+</script><script async="" data-pjax="" src="https://cdn.jsdelivr.net/npm/waterfall.js@1.1.0/dist/waterfall.min.js"></script><script src="https://cdn.cbd.int/qrcodejs@1.0.0/qrcode.min.js"></script><script src="/js/smith/right_click_menu.js"></script><link href="https://cdn.cbd.int/smith-theme-static@1.0.2/icon/ali_iconfont_css.css" rel="stylesheet"/><script color="0,0,255" count="99" defer="defer" id="canvas_nest" mobile="false" opacity="0.7" src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/dist/canvas-nest.min.js" zindex="-1"></script><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><link href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css" media="print" onload="this.media='all'" rel="stylesheet"/><script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script><script>AOS.init({
+  duration: 800,
+  easing: 'ease-out-cubic',
+  once: true,
+  offset: 50
+});
+</script><script src="https://lib.baomitu.com/pjax/0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll
+  smith.removeGlobalFnEvent('pjax')
+  smith.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async="" data-pjax="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script charset="UTF-8" src="https://cdn.cbd.int/smith-theme-static@1.0.2/accesskey/accesskey.js"></script><div id="live2d-container"><canvas id="live2d-canvas"></canvas><button class="live2d-toggle" title="切换看板娘">🎭</button></div><script data-pjax="" src="/js/smith/live2d.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="smithfont smith-icon-arrow-circle-right"></i></div></div></div></link></body></html>

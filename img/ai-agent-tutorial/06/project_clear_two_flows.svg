@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="760" viewBox="0 0 1280 760">
+  <defs>
+    <style>
+      .bg{fill:#f7f9fb}
+      .title{font:700 32px Arial,"Microsoft YaHei",sans-serif;fill:#172033}
+      .sub{font:15px Arial,"Microsoft YaHei",sans-serif;fill:#667085}
+      .lane{fill:#fff;stroke:#cad5df;stroke-width:2;rx:14}
+      .laneTitle{font:700 22px Arial,"Microsoft YaHei",sans-serif;fill:#172033}
+      .step{fill:#fff;stroke:#aebccc;stroke-width:2;rx:10}
+      .prepare{fill:#eaf4ff;stroke:#4f8fd9}
+      .runtime{fill:#f4efff;stroke:#8b6bd9}
+      .store{fill:#fff6ea;stroke:#d98a22}
+      .num{font:700 15px Arial,"Microsoft YaHei",sans-serif;fill:#fff}
+      .numCircle{fill:#50677f}
+      .label{font:700 16px Arial,"Microsoft YaHei",sans-serif;fill:#172033}
+      .text{font:13px Arial,"Microsoft YaHei",sans-serif;fill:#344054}
+      .small{font:12px Arial,"Microsoft YaHei",sans-serif;fill:#667085}
+      .arrow{stroke:#617083;stroke-width:2.2;fill:none;marker-end:url(#arrow)}
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#617083"/>
+    </marker>
+  </defs>
+  <rect width="1280" height="760" class="bg"/>
+  <text x="40" y="52" class="title">AI 问答项目先分成两条线</text>
+  <text x="40" y="82" class="sub">第一条线是管理端把资料和提示词准备好；第二条线是学生端发问题时，系统按这些配置完成一次 AI 问答。</text>
+
+  <rect x="45" y="120" width="1190" height="270" class="lane"/>
+  <text x="75" y="158" class="laneTitle">A. 管理端准备线：先把 AI 可以参考的资料和规则准备好</text>
+
+  <rect x="80" y="202" width="180" height="82" class="step prepare"/>
+  <circle cx="104" cy="226" r="15" class="numCircle"/><text x="100" y="231" class="num">1</text>
+  <text x="130" y="226" class="label">维护知识库</text>
+  <text x="104" y="254" class="text">新增知识库、上传文档</text>
+
+  <rect x="315" y="202" width="180" height="82" class="step prepare"/>
+  <circle cx="339" cy="226" r="15" class="numCircle"/><text x="335" y="231" class="num">2</text>
+  <text x="365" y="226" class="label">文档入库</text>
+  <text x="338" y="254" class="text">Java 调 Python 切块向量化</text>
+
+  <rect x="550" y="202" width="180" height="82" class="step store"/>
+  <circle cx="574" cy="226" r="15" class="numCircle"/><text x="570" y="231" class="num">3</text>
+  <text x="600" y="226" class="label">写入 Milvus</text>
+  <text x="574" y="254" class="text">保存 chunk、向量、来源</text>
+
+  <rect x="785" y="202" width="180" height="82" class="step prepare"/>
+  <circle cx="809" cy="226" r="15" class="numCircle"/><text x="805" y="231" class="num">4</text>
+  <text x="835" y="226" class="label">维护提示词</text>
+  <text x="809" y="254" class="text">系统提示词、路由提示词</text>
+
+  <rect x="1020" y="202" width="180" height="82" class="step prepare"/>
+  <circle cx="1044" cy="226" r="15" class="numCircle"/><text x="1036" y="231" class="num">5</text>
+  <text x="1070" y="226" class="label">发布版本</text>
+  <text x="1044" y="254" class="text">activeVersion 生效</text>
+
+  <path d="M260 243 H315" class="arrow"/>
+  <path d="M495 243 H550" class="arrow"/>
+  <path d="M730 243 H785" class="arrow"/>
+  <path d="M965 243 H1020" class="arrow"/>
+  <text x="80" y="335" class="small">这一条线发生在后台管理端。它决定 AI 问答能查到哪些资料、遵守哪些规则。</text>
+
+  <rect x="45" y="430" width="1190" height="270" class="lane"/>
+  <text x="75" y="468" class="laneTitle">B. 学生端运行线：学生问一句话，系统完成一次流式 AI 回答</text>
+
+  <rect x="80" y="512" width="155" height="82" class="step runtime"/>
+  <circle cx="104" cy="536" r="15" class="numCircle"/><text x="100" y="541" class="num">1</text>
+  <text x="130" y="536" class="label">学生提问</text>
+  <text x="104" y="564" class="text">前端发起 stream</text>
+
+  <rect x="275" y="512" width="155" height="82" class="step runtime"/>
+  <circle cx="299" cy="536" r="15" class="numCircle"/><text x="295" y="541" class="num">2</text>
+  <text x="325" y="536" class="label">Java 处理</text>
+  <text x="299" y="564" class="text">鉴权、历史、落库</text>
+
+  <rect x="470" y="512" width="155" height="82" class="step runtime"/>
+  <circle cx="494" cy="536" r="15" class="numCircle"/><text x="490" y="541" class="num">3</text>
+  <text x="520" y="536" class="label">Python 编排</text>
+  <text x="494" y="564" class="text">RAG、Prompt、Tool</text>
+
+  <rect x="665" y="512" width="155" height="82" class="step store"/>
+  <circle cx="689" cy="536" r="15" class="numCircle"/><text x="685" y="541" class="num">4</text>
+  <text x="715" y="536" class="label">查资料/工具</text>
+  <text x="689" y="564" class="text">Milvus 或 Java 内部接口</text>
+
+  <rect x="860" y="512" width="155" height="82" class="step runtime"/>
+  <circle cx="884" cy="536" r="15" class="numCircle"/><text x="880" y="541" class="num">5</text>
+  <text x="910" y="536" class="label">模型回答</text>
+  <text x="884" y="564" class="text">百炼流式生成</text>
+
+  <rect x="1055" y="512" width="155" height="82" class="step runtime"/>
+  <circle cx="1079" cy="536" r="15" class="numCircle"/><text x="1071" y="541" class="num">6</text>
+  <text x="1105" y="536" class="label">返回并保存</text>
+  <text x="1079" y="564" class="text">SSE 到前端，Java 落库</text>
+
+  <path d="M235 553 H275" class="arrow"/>
+  <path d="M430 553 H470" class="arrow"/>
+  <path d="M625 553 H665" class="arrow"/>
+  <path d="M820 553 H860" class="arrow"/>
+  <path d="M1015 553 H1055" class="arrow"/>
+  <text x="80" y="645" class="small">这一条线发生在学生提问时。它用管理端准备好的知识库和提示词，完成一次实时问答。</text>
+</svg>

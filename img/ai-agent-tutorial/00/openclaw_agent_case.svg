@@ -1,0 +1,49 @@
+<svg width="1180" height="520" viewBox="0 0 1180 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1180" height="520" rx="24" fill="#F8FAFC"/>
+  <text x="590" y="56" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="34" font-weight="700" fill="#172033">OpenClaw 与 Agent 工作方式</text>
+  <text x="590" y="92" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="18" fill="#617086">从聊天入口到真实工具执行</text>
+
+  <defs>
+    <marker id="arrow-openclaw" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M2 2L10 6L2 10" fill="#475569"/>
+    </marker>
+    <filter id="softShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="6" stdDeviation="10" flood-color="#0F172A" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <rect x="70" y="162" width="170" height="132" rx="18" fill="#FFFFFF" stroke="#DBE4F0" filter="url(#softShadow)"/>
+  <circle cx="155" cy="196" r="24" fill="#E0F2FE" stroke="#38BDF8" stroke-width="3"/>
+  <text x="155" y="204" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="24" font-weight="700" fill="#0369A1">1</text>
+  <text x="155" y="244" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="22" font-weight="700" fill="#172033">消息入口</text>
+  <text x="155" y="272" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="16" fill="#64748B">聊天下达任务</text>
+
+  <rect x="305" y="138" width="210" height="180" rx="20" fill="#FFF7ED" stroke="#FDBA74" stroke-width="2" filter="url(#softShadow)"/>
+  <path d="M386 190C386 168 404 152 427 152C455 152 475 172 475 198C475 224 453 242 424 242H392L366 268V232C354 223 348 211 348 198C348 177 364 160 386 154" stroke="#EA580C" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="410" y="278" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="24" font-weight="700" fill="#172033">OpenClaw Agent</text>
+  <text x="410" y="305" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="16" fill="#9A3412">理解意图 / 拆解任务 / 调度工具</text>
+
+  <rect x="585" y="162" width="170" height="132" rx="18" fill="#FFFFFF" stroke="#DBE4F0" filter="url(#softShadow)"/>
+  <circle cx="670" cy="196" r="24" fill="#ECFDF5" stroke="#22C55E" stroke-width="3"/>
+  <text x="670" y="204" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="24" font-weight="700" fill="#15803D">3</text>
+  <text x="670" y="244" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="22" font-weight="700" fill="#172033">Skills</text>
+  <text x="670" y="272" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="16" fill="#64748B">扩展任务能力</text>
+
+  <rect x="840" y="120" width="250" height="260" rx="20" fill="#FFFFFF" stroke="#DBE4F0" filter="url(#softShadow)"/>
+  <text x="965" y="160" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="24" font-weight="700" fill="#172033">真实工具与系统</text>
+  <rect x="880" y="190" width="170" height="40" rx="10" fill="#EEF2FF"/>
+  <text x="965" y="216" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="17" fill="#3730A3">网页 / 搜索</text>
+  <rect x="880" y="244" width="170" height="40" rx="10" fill="#F0FDF4"/>
+  <text x="965" y="270" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="17" fill="#166534">文件 / 数据</text>
+  <rect x="880" y="298" width="170" height="40" rx="10" fill="#FEF3C7"/>
+  <text x="965" y="324" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="17" fill="#92400E">邮件 / 日程</text>
+  <rect x="880" y="352" width="170" height="40" rx="10" fill="#FCE7F3"/>
+  <text x="965" y="378" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="17" fill="#9D174D">脚本 / API</text>
+
+  <line x1="240" y1="228" x2="298" y2="228" stroke="#475569" stroke-width="4" marker-end="url(#arrow-openclaw)"/>
+  <line x1="516" y1="228" x2="578" y2="228" stroke="#475569" stroke-width="4" marker-end="url(#arrow-openclaw)"/>
+  <line x1="756" y1="228" x2="833" y2="228" stroke="#475569" stroke-width="4" marker-end="url(#arrow-openclaw)"/>
+
+  <rect x="210" y="418" width="760" height="56" rx="14" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+  <text x="590" y="454" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="20" font-weight="700" fill="#334155">课程重点：会用模型，更要会让模型安全地调用工具、执行任务</text>
+</svg>

@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1320" height="760" viewBox="0 0 1320 760" role="img" aria-labelledby="title desc">
+  <title id="title">当前 Text-to-SQL 代码架构图</title>
+  <desc id="desc">展示前端、Java 管理端、Python AI 服务、Java 内部执行接口和业务数据库之间的职责边界。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#475569"/>
+    </marker>
+    <style>
+      .title{font-family:Arial,"PingFang SC","Microsoft YaHei",sans-serif;font-size:32px;font-weight:700;fill:#172033}
+      .sub{font-family:Arial,"PingFang SC","Microsoft YaHei",sans-serif;font-size:16px;fill:#5b677a}
+      .box-title{font-family:Arial,"PingFang SC","Microsoft YaHei",sans-serif;font-size:21px;font-weight:700;fill:#172033}
+      .item{font-family:Arial,"PingFang SC","Microsoft YaHei",sans-serif;font-size:15px;fill:#334155}
+      .note{font-family:Arial,"PingFang SC","Microsoft YaHei",sans-serif;font-size:14px;fill:#64748b}
+      .arrow{stroke:#475569;stroke-width:2.2;fill:none;marker-end:url(#arrow)}
+      .label{font-family:Arial,"PingFang SC","Microsoft YaHei",sans-serif;font-size:14px;font-weight:700;fill:#475569}
+    </style>
+  </defs>
+
+  <rect width="1320" height="760" fill="#f8fafc"/>
+  <text x="60" y="58" class="title">当前 Text-to-SQL 代码架构：模型生成建议，程序控制边界</text>
+  <text x="60" y="88" class="sub">前端负责交互，Java 负责业务入口和数据库边界，Python 负责 LangGraph 编排和模型调用。</text>
+
+  <rect x="55" y="145" width="255" height="500" rx="12" fill="#eff6ff" stroke="#93c5fd" stroke-width="2"/>
+  <text x="82" y="188" class="box-title">管理端前端</text>
+  <text x="82" y="225" class="item">TextToSqlPage.tsx</text>
+  <text x="82" y="253" class="item">system.ts / textToSqlApi</text>
+  <text x="82" y="281" class="item">types/system.ts</text>
+  <line x1="82" y1="306" x2="280" y2="306" stroke="#bfdbfe"/>
+  <text x="82" y="337" class="item">输入自然语言问题</text>
+  <text x="82" y="365" class="item">展示 interrupted 追问</text>
+  <text x="82" y="393" class="item">展示摘要、图表、表格</text>
+  <text x="82" y="421" class="item">展示 SQL 调试信息</text>
+  <text x="82" y="576" class="note">不生成 SQL</text>
+  <text x="82" y="602" class="note">不直接访问数据库</text>
+
+  <rect x="390" y="125" width="300" height="540" rx="12" fill="#ecfdf5" stroke="#86efac" stroke-width="2"/>
+  <text x="418" y="168" class="box-title">Java 管理端</text>
+  <text x="418" y="205" class="item">TextToSqlController</text>
+  <text x="418" y="233" class="item">TextToSqlBizImpl</text>
+  <text x="418" y="261" class="item">PythonTextToSqlClient</text>
+  <text x="418" y="289" class="item">TextToSqlRouteDto</text>
+  <line x1="418" y1="316" x2="660" y2="316" stroke="#bbf7d0"/>
+  <text x="418" y="347" class="item">对前端暴露 /api/textToSql</text>
+  <text x="418" y="375" class="item">维护统一 ApiResponse</text>
+  <text x="418" y="403" class="item">调用 Python AI 服务</text>
+  <text x="418" y="431" class="item">读取 text-to-sql 配置</text>
+  <text x="418" y="575" class="note">业务系统入口</text>
+  <text x="418" y="601" class="note">保留鉴权、权限、配置边界</text>
+
+  <rect x="790" y="125" width="330" height="540" rx="12" fill="#fff7ed" stroke="#fdba74" stroke-width="2"/>
+  <text x="820" y="168" class="box-title">Python AI 服务</text>
+  <text x="820" y="205" class="item">text_to_sql_api.py</text>
+  <text x="820" y="233" class="item">TextToSqlService</text>
+  <text x="820" y="261" class="item">graph.py / route_nodes.py</text>
+  <text x="820" y="289" class="item">state.py</text>
+  <line x1="820" y1="316" x2="1090" y2="316" stroke="#fed7aa"/>
+  <text x="820" y="347" class="item">问题分类</text>
+  <text x="820" y="375" class="item">指标检索 + rerank</text>
+  <text x="820" y="403" class="item">表路由 + 表详情加载</text>
+  <text x="820" y="431" class="item">SQL 判断与生成</text>
+  <text x="820" y="459" class="item">结果分析和图表结构</text>
+  <text x="820" y="575" class="note">不直接连接业务库</text>
+  <text x="820" y="601" class="note">只通过 Java 内部接口执行查询</text>
+
+  <rect x="760" y="520" width="330" height="110" rx="12" fill="#fefce8" stroke="#fde047" stroke-width="2"/>
+  <text x="790" y="560" class="box-title">Java 内部执行接口</text>
+  <text x="790" y="592" class="item">InternalTextToSqlController</text>
+  <text x="790" y="620" class="item">TextToSqlQueryServiceImpl</text>
+
+  <rect x="1140" y="235" width="140" height="265" rx="12" fill="#f1f5f9" stroke="#94a3b8" stroke-width="2"/>
+  <text x="1165" y="274" class="box-title">业务数据库</text>
+  <text x="1165" y="315" class="item">MySQL</text>
+  <text x="1165" y="343" class="item">订单</text>
+  <text x="1165" y="371" class="item">学生</text>
+  <text x="1165" y="399" class="item">课程</text>
+  <text x="1165" y="427" class="item">退款</text>
+
+  <path class="arrow" d="M310 285 C345 285 352 285 390 285"/>
+  <text x="324" y="264" class="label">/api/textToSql/route</text>
+
+  <path class="arrow" d="M690 285 C738 285 742 285 790 285"/>
+  <text x="704" y="264" class="label">/api/text-to-sql/route</text>
+
+  <path class="arrow" d="M955 520 C955 495 955 490 955 468"/>
+  <text x="970" y="500" class="label">执行结果回 Python</text>
+
+  <path class="arrow" d="M955 468 C955 492 955 497 955 520"/>
+  <text x="970" y="484" class="label">/internal/ai/text-to-sql/execute</text>
+
+  <path class="arrow" d="M1090 575 C1130 575 1170 520 1205 500"/>
+  <text x="1115" y="602" class="label">只读 SQL + LIMIT + timeout</text>
+
+  <path class="arrow" d="M1140 360 C1120 360 1115 360 1090 360"/>
+  <text x="1110" y="338" class="label">rows / columns</text>
+
+  <path class="arrow" d="M790 610 C670 705 430 705 310 610"/>
+  <text x="430" y="725" class="label">响应：finalAnswer / analysis.chart / rows / executedSql</text>
+</svg>

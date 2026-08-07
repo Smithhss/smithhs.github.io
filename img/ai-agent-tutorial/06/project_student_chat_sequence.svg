@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="980" viewBox="0 0 1280 980">
+  <defs>
+    <style>
+      .bg{fill:#f7f9fb}
+      .title{font:700 30px Arial,"Microsoft YaHei",sans-serif;fill:#172033}
+      .lane{fill:#fff;stroke:#c9d3df;stroke-width:2;rx:12}
+      .head{font:700 17px Arial,"Microsoft YaHei",sans-serif;fill:#172033}
+      .small{font:12px Arial,"Microsoft YaHei",sans-serif;fill:#667085}
+      .step{fill:#fff;stroke:#aebccc;stroke-width:2;rx:9}
+      .front{fill:#eaf4ff;stroke:#4f8fd9}
+      .java{fill:#eaf8f0;stroke:#46a36c}
+      .python{fill:#f4efff;stroke:#8b6bd9}
+      .store{fill:#fff6ea;stroke:#d98a22}
+      .text{font:14px Arial,"Microsoft YaHei",sans-serif;fill:#344054}
+      .num{font:700 13px Arial,"Microsoft YaHei",sans-serif;fill:#fff}
+      .dot{fill:#60748a}
+      .arrow{stroke:#617083;stroke-width:2;fill:none;marker-end:url(#arrow)}
+      .dash{stroke:#617083;stroke-width:2;fill:none;stroke-dasharray:7 6;marker-end:url(#arrow)}
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#617083"/>
+    </marker>
+  </defs>
+  <rect class="bg" width="1280" height="980"/>
+  <text x="40" y="48" class="title">学生发送一条 AI 消息的完整时序</text>
+
+  <rect x="35" y="86" width="220" height="830" class="lane"/>
+  <text x="72" y="118" class="head">学生前端</text>
+  <text x="64" y="140" class="small">StudentAiChatPage / studentApi</text>
+  <rect x="58" y="186" width="174" height="58" class="step front"/>
+  <text x="78" y="211" class="text">输入问题并点击发送</text>
+  <text x="77" y="232" class="small">生成临时 user/assistant 消息</text>
+  <rect x="58" y="756" width="174" height="58" class="step front"/>
+  <text x="78" y="781" class="text">逐段追加 AI 文本</text>
+  <text x="77" y="802" class="small">chunk 更新页面</text>
+  <rect x="58" y="842" width="174" height="58" class="step front"/>
+  <text x="84" y="867" class="text">done 后刷新消息</text>
+  <text x="78" y="888" class="small">重新加载数据库消息</text>
+
+  <rect x="295" y="86" width="260" height="830" class="lane"/>
+  <text x="365" y="118" class="head">Java Controller/Biz</text>
+  <text x="346" y="140" class="small">StudentAiChatController / Biz</text>
+  <rect x="322" y="186" width="206" height="58" class="step java"/>
+  <text x="354" y="211" class="text">接收 stream 请求</text>
+  <text x="348" y="232" class="small">/messages/stream</text>
+  <rect x="322" y="274" width="206" height="58" class="step java"/>
+  <text x="348" y="299" class="text">取当前学生 ID</text>
+  <text x="340" y="320" class="small">StudentThreadLocal</text>
+  <rect x="322" y="362" width="206" height="58" class="step java"/>
+  <text x="344" y="387" class="text">构造 Python 请求</text>
+  <text x="336" y="408" class="small">studentId/sessionId/message/history</text>
+  <rect x="322" y="450" width="206" height="58" class="step java"/>
+  <text x="345" y="475" class="text">先保存 user 消息</text>
+  <text x="352" y="496" class="small">ai_chat_message</text>
+  <rect x="322" y="538" width="206" height="58" class="step java"/>
+  <text x="344" y="563" class="text">异步调用 Python</text>
+  <text x="338" y="584" class="small">PythonAiChatClient.streamChat</text>
+  <rect x="322" y="756" width="206" height="58" class="step java"/>
+  <text x="336" y="781" class="text">转发 SSE chunk</text>
+  <text x="338" y="802" class="small">SseEmitter.event().name(...)</text>
+  <rect x="322" y="842" width="206" height="58" class="step java"/>
+  <text x="338" y="867" class="text">保存 assistant 消息</text>
+  <text x="340" y="888" class="small">content/model/tokens</text>
+
+  <rect x="595" y="86" width="245" height="830" class="lane"/>
+  <text x="654" y="118" class="head">Python AI 服务</text>
+  <text x="650" y="140" class="small">chat_api / ChatService</text>
+  <rect x="620" y="538" width="196" height="58" class="step python"/>
+  <text x="640" y="563" class="text">接收 /api/ai-chat/stream</text>
+  <text x="655" y="584" class="small">返回 text/event-stream</text>
+  <rect x="620" y="626" width="196" height="58" class="step python"/>
+  <text x="650" y="651" class="text">执行 AI 编排</text>
+  <text x="640" y="672" class="small">RAG / prompt / tool / model</text>
+  <rect x="620" y="714" width="196" height="58" class="step python"/>
+  <text x="648" y="739" class="text">持续产生 SSE</text>
+  <text x="650" y="760" class="small">message_start/chunk/done</text>
+
+  <rect x="880" y="86" width="170" height="830" class="lane"/>
+  <text x="923" y="118" class="head">数据库</text>
+  <text x="906" y="140" class="small">MySQL</text>
+  <rect x="900" y="362" width="130" height="58" class="step store"/>
+  <text x="922" y="387" class="text">查历史消息</text>
+  <text x="918" y="408" class="small">latest N 条</text>
+  <rect x="900" y="450" width="130" height="58" class="step store"/>
+  <text x="917" y="475" class="text">插入用户消息</text>
+  <text x="916" y="496" class="small">role=user</text>
+  <rect x="900" y="842" width="130" height="58" class="step store"/>
+  <text x="913" y="867" class="text">插入 AI 消息</text>
+  <text x="910" y="888" class="small">role=assistant</text>
+
+  <rect x="1090" y="86" width="155" height="830" class="lane"/>
+  <text x="1126" y="118" class="head">模型/工具</text>
+  <text x="1116" y="140" class="small">百炼 / Java 内部接口</text>
+  <rect x="1108" y="626" width="118" height="58" class="step store"/>
+  <text x="1129" y="651" class="text">知识库/工具</text>
+  <text x="1134" y="672" class="small">可选分支</text>
+  <rect x="1108" y="714" width="118" height="58" class="step store"/>
+  <text x="1136" y="739" class="text">大模型</text>
+  <text x="1127" y="760" class="small">流式生成</text>
+
+  <path d="M232 215 H322" class="arrow"/>
+  <path d="M425 244 V274" class="arrow"/>
+  <path d="M425 332 V362" class="arrow"/>
+  <path d="M528 391 H900" class="dash"/>
+  <path d="M425 420 V450" class="arrow"/>
+  <path d="M528 479 H900" class="dash"/>
+  <path d="M425 508 V538" class="arrow"/>
+  <path d="M528 567 H620" class="arrow"/>
+  <path d="M718 596 V626" class="arrow"/>
+  <path d="M816 655 H1108" class="dash"/>
+  <path d="M816 743 H1108" class="dash"/>
+  <path d="M620 743 H528" class="dash"/>
+  <path d="M322 785 H232" class="arrow"/>
+  <path d="M425 814 V842" class="arrow"/>
+  <path d="M528 871 H900" class="dash"/>
+  <path d="M322 871 H232" class="dash"/>
+</svg>

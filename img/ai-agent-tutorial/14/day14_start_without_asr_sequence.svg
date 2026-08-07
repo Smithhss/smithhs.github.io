@@ -1,0 +1,48 @@
+<svg width="1280" height="720" viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">开始面试时不创建 ASR WebSocket</title>
+  <desc id="desc">开始面试只连接 Java WebSocket，AI 先说开场白，播放完成后才允许学生开始回答。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="11" markerHeight="11" refX="9" refY="5.5" orient="auto"><path d="M1,1 L9,5.5 L1,10 Z" fill="#1f2937"/></marker>
+    <style>
+      .title{font:700 32px Arial,"PingFang SC","Microsoft YaHei";fill:#111827}
+      .sub{font:16px Arial,"PingFang SC","Microsoft YaHei";fill:#667085}
+      .role{font:700 18px Arial,"PingFang SC","Microsoft YaHei";fill:#1f2937;text-anchor:middle}
+      .small{font:14px Arial,"PingFang SC","Microsoft YaHei";fill:#667085;text-anchor:middle}
+      .line{stroke:#cbd5e1;stroke-width:2}
+      .msg{stroke:#1f2937;stroke-width:2.4;fill:none;marker-end:url(#arrow)}
+      .dash{stroke:#64748b;stroke-width:2.2;fill:none;stroke-dasharray:8 7;marker-end:url(#arrow)}
+      .label{font:16px Arial,"PingFang SC","Microsoft YaHei";fill:#243447;text-anchor:middle}
+      .note{fill:#fff7ed;stroke:#fdba74;stroke-width:2}
+      .noteText{font:700 18px Arial,"PingFang SC","Microsoft YaHei";fill:#9a3412;text-anchor:middle}
+    </style>
+  </defs>
+  <rect width="1280" height="720" fill="#fbfcff"/>
+  <text x="60" y="58" class="title">开始面试：只连 Java，不提前打开 ASR</text>
+  <text x="60" y="88" class="sub">避免火山 ASR 建好后 8 秒没有音频，报 Timeout waiting next packet。</text>
+
+  <text x="160" y="138" class="role">前端 V2 页面</text>
+  <text x="390" y="138" class="role">Java WS Handler</text>
+  <text x="650" y="138" class="role">YanQue-AI</text>
+  <text x="900" y="138" class="role">火山 TTS</text>
+  <text x="1120" y="138" class="role">火山 ASR</text>
+  <line x1="160" y1="160" x2="160" y2="650" class="line"/>
+  <line x1="390" y1="160" x2="390" y2="650" class="line"/>
+  <line x1="650" y1="160" x2="650" y2="650" class="line"/>
+  <line x1="900" y1="160" x2="900" y2="650" class="line"/>
+  <line x1="1120" y1="160" x2="1120" y2="650" class="line"/>
+
+  <path d="M160 202 H390" class="msg"/><text x="275" y="192" class="label">建立 Java WebSocket</text>
+  <path d="M390 248 H160" class="dash"/><text x="275" y="238" class="label">VOICE_V2_WS_READY</text>
+  <path d="M390 296 H650" class="msg"/><text x="520" y="286" class="label">生成开场白 SSE</text>
+  <path d="M650 342 H390" class="dash"/><text x="520" y="332" class="label">AI_TEXT_CHUNK / DONE</text>
+  <path d="M390 388 H900" class="msg"/><text x="645" y="378" class="label">文本分段送 TTS</text>
+  <path d="M900 434 H390" class="dash"/><text x="645" y="424" class="label">PCM 音频块</text>
+  <path d="M390 480 H160" class="dash"/><text x="275" y="470" class="label">BinaryMessage 音频</text>
+  <path d="M160 526 H160" class="msg"/><text x="228" y="518" class="label">前端播放 AI 声音</text>
+  <path d="M160 574 H160" class="dash"/><text x="255" y="566" class="label">播放完，按钮解锁为“开始回答”</text>
+
+  <rect x="990" y="260" width="260" height="124" rx="14" class="note"/>
+  <text x="1120" y="305" class="noteText">这里不创建 ASR WS</text>
+  <text x="1120" y="336" class="small">等用户点“开始回答”</text>
+  <text x="1120" y="360" class="small">再通知 Java 准备 ASR</text>
+</svg>

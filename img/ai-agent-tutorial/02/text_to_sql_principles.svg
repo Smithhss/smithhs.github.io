@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="620" viewBox="0 0 1200 620">
+  <rect width="1200" height="620" fill="#f8fafc"/>
+  <text x="600" y="56" text-anchor="middle" font-family="Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="34" font-weight="700" fill="#172033">一句话生成 SQL 背后的三步</text>
+  <text x="600" y="92" text-anchor="middle" font-family="Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" fill="#64748b">先把文字变成模型能计算的形式，再结合上下文生成结果</text>
+
+  <defs>
+    <marker id="arrow-simple" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#475569"/>
+    </marker>
+  </defs>
+
+  <g font-family="Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+    <rect x="90" y="145" width="1020" height="68" rx="12" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+    <text x="600" y="187" text-anchor="middle" font-size="21" font-weight="700" fill="#334155">帮我查一下最近 7 天每个课程的报名人数</text>
+
+    <rect x="90" y="275" width="260" height="135" rx="12" fill="#ede9fe" stroke="#a78bfa" stroke-width="2"/>
+    <text x="220" y="318" text-anchor="middle" font-size="22" font-weight="700" fill="#6d28d9">1. 处理文字</text>
+    <text x="220" y="354" text-anchor="middle" font-size="16" fill="#475569">切成 Token</text>
+    <text x="220" y="382" text-anchor="middle" font-size="16" fill="#475569">变成 Embedding 向量</text>
+
+    <rect x="470" y="275" width="260" height="135" rx="12" fill="#eff6ff" stroke="#60a5fa" stroke-width="2"/>
+    <text x="600" y="318" text-anchor="middle" font-size="22" font-weight="700" fill="#1d4ed8">2. 判断意图</text>
+    <text x="600" y="354" text-anchor="middle" font-size="16" fill="#475569">理解时间、课程、人数</text>
+    <text x="600" y="382" text-anchor="middle" font-size="16" fill="#475569">依靠训练得到的参数</text>
+
+    <rect x="850" y="275" width="260" height="135" rx="12" fill="#ecfdf5" stroke="#34d399" stroke-width="2"/>
+    <text x="980" y="318" text-anchor="middle" font-size="22" font-weight="700" fill="#047857">3. 结合上下文</text>
+    <text x="980" y="354" text-anchor="middle" font-size="16" fill="#475569">参考表结构和要求</text>
+    <text x="980" y="382" text-anchor="middle" font-size="16" fill="#475569">生成 SQL</text>
+
+    <line x1="355" y1="342" x2="455" y2="342" stroke="#475569" stroke-width="3" marker-end="url(#arrow-simple)"/>
+    <line x1="735" y1="342" x2="835" y2="342" stroke="#475569" stroke-width="3" marker-end="url(#arrow-simple)"/>
+
+    <rect x="220" y="485" width="760" height="68" rx="12" fill="#fff7ed" stroke="#fb923c" stroke-width="2"/>
+    <text x="600" y="514" text-anchor="middle" font-size="20" font-weight="700" fill="#c2410c">生成后还要校验</text>
+    <text x="600" y="542" text-anchor="middle" font-size="16" fill="#475569">检查字段、权限、安全限制，避免错误 SQL 或危险操作</text>
+  </g>
+</svg>

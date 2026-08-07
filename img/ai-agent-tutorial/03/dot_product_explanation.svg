@@ -1,0 +1,54 @@
+<svg width="1280" height="660" viewBox="0 0 1280 660" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1280" height="660" fill="#f8fafc"/>
+  <defs>
+    <marker id="arrow-blue" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrow-green" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#16a34a"/>
+    </marker>
+    <marker id="arrow-orange" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#f97316"/>
+    </marker>
+  </defs>
+  <g font-family="Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+    <text x="640" y="58" text-anchor="middle" font-size="34" font-weight="700" fill="#111827">点积：方向接近，还会看向量长度</text>
+    <text x="640" y="96" text-anchor="middle" font-size="20" fill="#64748b">点积分数高，表示两个向量整体匹配更强</text>
+
+    <rect x="70" y="135" width="540" height="420" rx="10" fill="#ffffff" stroke="#cbd5e1"/>
+    <text x="340" y="178" text-anchor="middle" font-size="25" font-weight="700" fill="#111827">两个资料方向都接近问题</text>
+    <line x1="150" y1="480" x2="525" y2="480" stroke="#94a3b8" stroke-width="3"/>
+    <line x1="150" y1="480" x2="150" y2="235" stroke="#94a3b8" stroke-width="3"/>
+
+    <line x1="150" y1="480" x2="365" y2="280" stroke="#2563eb" stroke-width="7" marker-end="url(#arrow-blue)"/>
+    <text x="372" y="276" font-size="20" font-weight="700" fill="#1d4ed8">问题</text>
+
+    <line x1="150" y1="480" x2="455" y2="230" stroke="#16a34a" stroke-width="9" marker-end="url(#arrow-green)"/>
+    <text x="463" y="228" font-size="20" font-weight="700" fill="#15803d">资料 A</text>
+    <text x="463" y="256" font-size="17" fill="#15803d">方向接近，向量更长</text>
+
+    <line x1="150" y1="480" x2="315" y2="325" stroke="#f97316" stroke-width="6" marker-end="url(#arrow-orange)"/>
+    <text x="323" y="324" font-size="20" font-weight="700" fill="#c2410c">资料 B</text>
+    <text x="323" y="352" font-size="17" fill="#c2410c">方向也接近，但更短</text>
+
+    <rect x="680" y="135" width="530" height="420" rx="10" fill="#ffffff" stroke="#cbd5e1"/>
+    <text x="945" y="178" text-anchor="middle" font-size="25" font-weight="700" fill="#111827">点积会把长度算进分数</text>
+
+    <rect x="735" y="235" width="420" height="70" rx="8" fill="#f0fdf4" stroke="#bbf7d0"/>
+    <text x="760" y="278" font-size="21" font-weight="700" fill="#166534">资料 A：</text>
+    <text x="850" y="278" font-size="21" fill="#166534">方向接近 + 向量更长</text>
+    <text x="1115" y="278" text-anchor="end" font-size="22" font-weight="700" fill="#15803d">分数高</text>
+
+    <rect x="735" y="330" width="420" height="70" rx="8" fill="#fff7ed" stroke="#fed7aa"/>
+    <text x="760" y="373" font-size="21" font-weight="700" fill="#9a3412">资料 B：</text>
+    <text x="850" y="373" font-size="21" fill="#9a3412">方向接近 + 向量较短</text>
+    <text x="1115" y="373" text-anchor="end" font-size="22" font-weight="700" fill="#c2410c">分数较低</text>
+
+    <text x="735" y="458" font-size="21" fill="#334155">所以点积适合：</text>
+    <text x="735" y="496" font-size="20" fill="#334155">模型或向量库希望用 inner product 排序</text>
+    <text x="735" y="530" font-size="20" fill="#334155">或者向量长度本身也代表某种强度</text>
+
+    <rect x="205" y="590" width="870" height="48" rx="8" fill="#eef2ff" stroke="#c7d2fe"/>
+    <text x="640" y="621" text-anchor="middle" font-size="21" font-weight="700" fill="#3730a3">如果只想直观理解“语义方向像不像”，余弦相似度通常更容易讲清楚</text>
+  </g>
+</svg>

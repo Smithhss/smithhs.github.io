@@ -1,0 +1,33 @@
+<svg width="1280" height="720" viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">SQL Guard 与执行前校验</title>
+  <desc id="desc">SQL 生成后先经过安全、权限、白名单、LIMIT 和 EXPLAIN 检查，再决定是否执行。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M2,2 L10,6 L2,10 Z" fill="#26364a"/></marker>
+    <style>
+      .title{font:700 30px Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#172033}
+      .sql{fill:#eef4ff;stroke:#3867b7;stroke-width:2}
+      .guard{fill:#fff7e8;stroke:#d18b22;stroke-width:2}
+      .safe{fill:#ecfdf3;stroke:#2b8a55;stroke-width:2}
+      .reject{fill:#ffecef;stroke:#c2475b;stroke-width:2}
+      .text{font:18px Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#1f2d3d;text-anchor:middle}
+      .small{font:14px Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#526173;text-anchor:middle}
+      .line{stroke:#26364a;stroke-width:2.5;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1280" height="720" fill="#fbfcff"/>
+  <text x="60" y="58" class="title">SQL Guard：执行前就要拦住风险</text>
+  <rect class="sql" x="80" y="295" width="220" height="92" rx="10"/><text class="text" x="190" y="332">生成 SQL</text><text class="small" x="190" y="360">模型或程序生成</text>
+  <rect class="guard" x="390" y="110" width="230" height="82" rx="10"/><text class="text" x="505" y="143">只允许 SELECT</text><text class="small" x="505" y="168">拒绝写操作</text>
+  <rect class="guard" x="390" y="220" width="230" height="82" rx="10"/><text class="text" x="505" y="253">危险关键词</text><text class="small" x="505" y="278">DROP / DELETE / ALTER</text>
+  <rect class="guard" x="390" y="330" width="230" height="82" rx="10"/><text class="text" x="505" y="363">表字段白名单</text><text class="small" x="505" y="388">只查允许开放字段</text>
+  <rect class="guard" x="390" y="440" width="230" height="82" rx="10"/><text class="text" x="505" y="473">LIMIT 和权限</text><text class="small" x="505" y="498">机构、角色、数据范围</text>
+  <rect class="guard" x="390" y="550" width="230" height="82" rx="10"/><text class="text" x="505" y="583">EXPLAIN 检查</text><text class="small" x="505" y="608">索引和扫描行数</text>
+  <path class="line" d="M300,341 H370"/>
+  <path class="line" d="M620,151 H755"/><path class="line" d="M620,261 H755"/><path class="line" d="M620,371 H755"/><path class="line" d="M620,481 H755"/><path class="line" d="M620,591 H755"/>
+  <rect class="safe" x="790" y="235" width="230" height="92" rx="10"/><text class="text" x="905" y="272">全部通过</text><text class="small" x="905" y="300">允许执行 SQL</text>
+  <rect class="reject" x="790" y="390" width="230" height="92" rx="10"/><text class="text" x="905" y="427">任一失败</text><text class="small" x="905" y="455">拒绝执行并返回原因</text>
+  <path class="line" d="M755,371 H780"/>
+  <path class="line" d="M1020,281 H1120"/>
+  <rect class="safe" x="1120" y="235" width="120" height="92" rx="10"/><text class="text" x="1180" y="272">数据库</text><text class="small" x="1180" y="300">只读查询</text>
+  <text class="small" x="640" y="675">索引、权限、危险 SQL、LIMIT，最好都在真正执行前完成检查。</text>
+</svg>

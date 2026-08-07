@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="560" viewBox="0 0 1120 560">
+  <defs>
+    <style>
+      .title{font:700 30px Arial,"Microsoft YaHei",sans-serif;fill:#1f2937}
+      .layer{fill:#ffffff;stroke:#4f7cac;stroke-width:2;rx:12}
+      .api{fill:#eaf4ff}.chat{fill:#eefbf1}.knowledge{fill:#fff7e8}.provider{fill:#f4efff}.config{fill:#f3f4f6}
+      .text{font:700 21px Arial,"Microsoft YaHei",sans-serif;fill:#111827}
+      .small{font:16px Arial,"Microsoft YaHei",sans-serif;fill:#4b5563}
+      .code{font:15px Menlo,Consolas,monospace;fill:#374151}
+    </style>
+  </defs>
+  <rect width="1120" height="560" fill="#fcfdff"/>
+  <text x="40" y="48" class="title">Python 服务分层：让 API、问答、知识库、模型各做各的事</text>
+  <rect x="60" y="90" width="1000" height="70" class="layer api"/>
+  <text x="90" y="128" class="text">api</text>
+  <text x="210" y="120" class="code">chat_api.py</text>
+  <text x="430" y="120" class="code">knowledge_api.py</text>
+  <text x="700" y="120" class="small">只负责 HTTP 请求和响应</text>
+  <rect x="60" y="180" width="1000" height="90" class="layer chat"/>
+  <text x="90" y="228" class="text">chat</text>
+  <text x="210" y="210" class="code">service.py</text>
+  <text x="360" y="210" class="code">rag_service.py</text>
+  <text x="560" y="210" class="code">knowledge_router.py</text>
+  <text x="805" y="210" class="code">prompt_builder.py</text>
+  <text x="210" y="244" class="small">组织一次问答：路由、检索、拼 Prompt、流式输出</text>
+  <rect x="60" y="290" width="1000" height="90" class="layer knowledge"/>
+  <text x="90" y="338" class="text">knowledge</text>
+  <text x="230" y="320" class="code">service.py</text>
+  <text x="390" y="320" class="code">document_loader.py</text>
+  <text x="635" y="320" class="code">chunker.py</text>
+  <text x="800" y="320" class="code">vector_store.py</text>
+  <text x="230" y="354" class="small">负责文档加载、LlamaIndex 切分、向量写入和检索</text>
+  <rect x="60" y="400" width="480" height="80" class="layer provider"/>
+  <text x="90" y="445" class="text">providers</text>
+  <text x="230" y="430" class="code">llm_provider.py</text>
+  <text x="230" y="462" class="small">屏蔽不同模型供应商差异</text>
+  <rect x="580" y="400" width="480" height="80" class="layer config"/>
+  <text x="610" y="445" class="text">core / schemas</text>
+  <text x="800" y="430" class="code">config.py</text>
+  <text x="800" y="462" class="small">配置、请求对象、响应对象</text>
+</svg>

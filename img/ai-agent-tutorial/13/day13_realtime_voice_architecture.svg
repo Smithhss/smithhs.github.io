@@ -1,0 +1,76 @@
+<svg width="1280" height="720" viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">模拟面试实时语音总体架构</title>
+  <desc id="desc">学生浏览器、Java 后端和火山 Realtime 之间的两条 WebSocket 链路。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#2b3a4b"/>
+    </marker>
+    <style>
+      .title{font:700 32px Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#172033}
+      .sub{font:16px Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#667085}
+      .panel{fill:#fff;stroke:#d0dae7;stroke-width:2}
+      .front{fill:#eaf4ff;stroke:#3f7fc7;stroke-width:2}
+      .java{fill:#ecfdf3;stroke:#329261;stroke-width:2}
+      .volc{fill:#f4efff;stroke:#7a5bc8;stroke-width:2}
+      .store{fill:#fff7e8;stroke:#d18b22;stroke-width:2}
+      .head{font:700 22px Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#1f2d3d;text-anchor:middle}
+      .text{font:17px Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#344054;text-anchor:middle}
+      .small{font:14px Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#667085;text-anchor:middle}
+      .line{stroke:#2b3a4b;stroke-width:2.6;fill:none;marker-end:url(#arrow)}
+      .dash{stroke:#667085;stroke-width:2.2;fill:none;stroke-dasharray:8 7;marker-end:url(#arrow)}
+      .label{font:700 15px Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#26364a;text-anchor:middle}
+    </style>
+  </defs>
+  <rect width="1280" height="720" fill="#fbfcff"/>
+  <text x="56" y="58" class="title">模拟面试实时语音总体架构</text>
+  <text x="56" y="88" class="sub">前端只连接 Java；Java 统一负责业务鉴权、会话管理和火山 Realtime 转发。</text>
+
+  <rect x="58" y="135" width="300" height="430" rx="18" class="panel"/>
+  <rect x="96" y="188" width="224" height="92" rx="12" class="front"/>
+  <text x="208" y="226" class="head">学生浏览器</text>
+  <text x="208" y="253" class="small">VoicePage.tsx</text>
+  <rect x="96" y="328" width="224" height="68" rx="10" class="front"/>
+  <text x="208" y="356" class="text">采集麦克风 PCM</text>
+  <text x="208" y="378" class="small">16k pcm_s16le</text>
+  <rect x="96" y="430" width="224" height="68" rx="10" class="front"/>
+  <text x="208" y="458" class="text">播放面试官语音</text>
+  <text x="208" y="480" class="small">24k pcm_s16le</text>
+
+  <rect x="490" y="135" width="300" height="430" rx="18" class="panel"/>
+  <rect x="528" y="188" width="224" height="92" rx="12" class="java"/>
+  <text x="640" y="226" class="head">Java 后端</text>
+  <text x="640" y="253" class="small">Spring WebSocket 网关</text>
+  <rect x="528" y="328" width="224" height="68" rx="10" class="java"/>
+  <text x="640" y="356" class="text">前端 WebSocket</text>
+  <text x="640" y="378" class="small">VoiceWebSocketHandler</text>
+  <rect x="528" y="430" width="224" height="68" rx="10" class="java"/>
+  <text x="640" y="458" class="text">火山 WebSocket</text>
+  <text x="640" y="480" class="small">RealtimeVoiceClient</text>
+
+  <rect x="922" y="135" width="300" height="430" rx="18" class="panel"/>
+  <rect x="960" y="188" width="224" height="92" rx="12" class="volc"/>
+  <text x="1072" y="226" class="head">火山 Realtime</text>
+  <text x="1072" y="253" class="small">端到端语音对话模型</text>
+  <rect x="960" y="328" width="224" height="68" rx="10" class="volc"/>
+  <text x="1072" y="356" class="text">ASR + 对话理解</text>
+  <text x="1072" y="378" class="small">识别学生回答并追问</text>
+  <rect x="960" y="430" width="224" height="68" rx="10" class="volc"/>
+  <text x="1072" y="458" class="text">TTS 合成</text>
+  <text x="1072" y="480" class="small">返回面试官 PCM</text>
+
+  <path d="M320 362 H528" class="line"/>
+  <text x="424" y="342" class="label">WebSocket Binary</text>
+  <text x="424" y="384" class="small">学生音频 / AUDIO_COMMIT</text>
+  <path d="M528 464 H320" class="dash"/>
+  <text x="424" y="446" class="label">JSON + Binary</text>
+
+  <path d="M752 362 H960" class="line"/>
+  <text x="856" y="342" class="label">AudioFrame</text>
+  <text x="856" y="384" class="small">StartSession 后持续上传</text>
+  <path d="M960 464 H752" class="dash"/>
+  <text x="856" y="446" class="label">ASR / Chat / TTS</text>
+
+  <rect x="282" y="600" width="716" height="58" rx="12" class="store"/>
+  <text x="640" y="625" class="text">关键设计：Java 用 voiceSessionId 绑定两条 WebSocket</text>
+  <text x="640" y="647" class="small">浏览器负责交互，火山负责模型能力。</text>
+</svg>

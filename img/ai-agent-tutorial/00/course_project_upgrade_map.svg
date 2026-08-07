@@ -1,0 +1,53 @@
+<svg width="1180" height="620" viewBox="0 0 1180 620" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1180" height="620" rx="24" fill="#F8FAFC"/>
+  <text x="590" y="58" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="34" font-weight="700" fill="#172033">课程项目升级路线</text>
+  <text x="590" y="94" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="18" fill="#64748B">从最小 Demo，到企业级 AI 应用和 Agent 工程</text>
+
+  <defs>
+    <marker id="arrow-project" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M2 2L10 6L2 10" fill="#475569"/>
+    </marker>
+    <filter id="shadow-project" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#0F172A" flood-opacity="0.08"/>
+    </filter>
+  </defs>
+
+  <g filter="url(#shadow-project)">
+    <rect x="58" y="154" width="200" height="170" rx="18" fill="#FFFFFF" stroke="#CBD5E1"/>
+    <circle cx="158" cy="196" r="25" fill="#DBEAFE" stroke="#3B82F6" stroke-width="3"/>
+    <text x="158" y="205" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="23" font-weight="700" fill="#1D4ED8">1</text>
+    <text x="158" y="246" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="23" font-weight="700" fill="#172033">AI 对话程序</text>
+    <text x="158" y="278" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="16" fill="#64748B">API 调用</text>
+    <text x="158" y="302" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="16" fill="#64748B">Prompt / 多轮对话</text>
+
+    <rect x="330" y="154" width="200" height="170" rx="18" fill="#FFFFFF" stroke="#CBD5E1"/>
+    <circle cx="430" cy="196" r="25" fill="#DCFCE7" stroke="#22C55E" stroke-width="3"/>
+    <text x="430" y="205" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="23" font-weight="700" fill="#15803D">2</text>
+    <text x="430" y="246" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="23" font-weight="700" fill="#172033">企业知识库</text>
+    <text x="430" y="278" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="16" fill="#64748B">RAG / LlamaIndex</text>
+    <text x="430" y="302" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="16" fill="#64748B">向量库 / 引用来源</text>
+
+    <rect x="602" y="154" width="200" height="170" rx="18" fill="#FFFFFF" stroke="#CBD5E1"/>
+    <circle cx="702" cy="196" r="25" fill="#FEF3C7" stroke="#F59E0B" stroke-width="3"/>
+    <text x="702" y="205" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="23" font-weight="700" fill="#B45309">3</text>
+    <text x="702" y="246" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="23" font-weight="700" fill="#172033">业务系统接入</text>
+    <text x="702" y="278" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="16" fill="#64748B">燕雀 + AI</text>
+    <text x="702" y="302" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="16" fill="#64748B">数据分析 / 教务助手</text>
+
+    <rect x="874" y="154" width="240" height="170" rx="18" fill="#FFFFFF" stroke="#CBD5E1"/>
+    <circle cx="994" cy="196" r="25" fill="#FCE7F3" stroke="#EC4899" stroke-width="3"/>
+    <text x="994" y="205" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="23" font-weight="700" fill="#BE185D">4</text>
+    <text x="994" y="246" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="23" font-weight="700" fill="#172033">Agent / MCP 中台</text>
+    <text x="994" y="278" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="16" fill="#64748B">工具调用 / 权限控制</text>
+    <text x="994" y="302" text-anchor="middle" font-family="Arial, 'PingFang SC', sans-serif" font-size="16" fill="#64748B">任务流 / 审计 / 监控</text>
+  </g>
+
+  <line x1="258" y1="239" x2="323" y2="239" stroke="#475569" stroke-width="4" marker-end="url(#arrow-project)"/>
+  <line x1="530" y1="239" x2="595" y2="239" stroke="#475569" stroke-width="4" marker-end="url(#arrow-project)"/>
+  <line x1="802" y1="239" x2="867" y2="239" stroke="#475569" stroke-width="4" marker-end="url(#arrow-project)"/>
+
+  <rect x="90" y="398" width="1000" height="120" rx="18" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="2"/>
+  <text x="155" y="440" font-family="Arial, 'PingFang SC', sans-serif" font-size="22" font-weight="700" fill="#1E293B">最终项目能力</text>
+  <text x="155" y="474" font-family="Arial, 'PingFang SC', sans-serif" font-size="18" fill="#475569">能接模型、能接文档、能接业务系统、能接工具、能部署、能监控、能讲清楚方案取舍</text>
+  <text x="155" y="504" font-family="Arial, 'PingFang SC', sans-serif" font-size="18" fill="#475569">面试表达重点：业务问题 → 技术方案 → 核心实现 → 效果验证 → 风险控制</text>
+</svg>

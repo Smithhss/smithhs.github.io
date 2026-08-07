@@ -1,0 +1,54 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1300" height="640" viewBox="0 0 1300 640" role="img" aria-labelledby="title desc">
+  <title id="title">LangGraph 核心概念</title>
+  <desc id="desc">展示 State、Node、Edge、Conditional Edge 和 Checkpoint 之间的关系。</desc>
+  <rect width="1300" height="640" fill="#ffffff"/>
+  <text x="55" y="58" font-family="Arial, PingFang SC, Microsoft YaHei" font-size="31" font-weight="700" fill="#182230">LangGraph 可以先记住这几个概念</text>
+
+  <g font-family="Arial, PingFang SC, Microsoft YaHei" text-anchor="middle">
+    <rect x="500" y="230" width="300" height="140" rx="14" fill="#e8f0ff" stroke="#94b7f5" stroke-width="2"/>
+    <text x="650" y="284" font-size="26" font-weight="700" fill="#245aa7">State</text>
+    <text x="650" y="318" font-size="18" fill="#4c6280">流程当前手里拿着的数据</text>
+
+    <rect x="95" y="145" width="230" height="88" rx="12" fill="#e6f8f2" stroke="#8ccdaf" stroke-width="2"/>
+    <text x="210" y="181" font-size="23" font-weight="700" fill="#147a4b">Node</text>
+    <text x="210" y="210" font-size="17" fill="#477a60">一个处理步骤</text>
+
+    <rect x="95" y="390" width="230" height="88" rx="12" fill="#fff5df" stroke="#e4be69" stroke-width="2"/>
+    <text x="210" y="426" font-size="23" font-weight="700" fill="#ad6a00">Edge</text>
+    <text x="210" y="455" font-size="17" fill="#775d27">下一步去哪里</text>
+
+    <rect x="975" y="145" width="230" height="88" rx="12" fill="#f4ebff" stroke="#c3a3ed" stroke-width="2"/>
+    <text x="1090" y="181" font-size="23" font-weight="700" fill="#6d3caf">条件边</text>
+    <text x="1090" y="210" font-size="17" fill="#705d87">根据结果走分支</text>
+
+    <rect x="975" y="390" width="230" height="88" rx="12" fill="#ffecee" stroke="#e6a2ad" stroke-width="2"/>
+    <text x="1090" y="426" font-size="23" font-weight="700" fill="#b03b4c">Checkpoint</text>
+    <text x="1090" y="455" font-size="17" fill="#81515a">把 State 保存成进度</text>
+
+    <rect x="470" y="485" width="360" height="72" rx="12" fill="#edf4f8" stroke="#9bbbc9" stroke-width="2"/>
+    <text x="650" y="515" font-size="20" fill="#286274">Text-to-SQL 流程</text>
+    <text x="650" y="541" font-size="16" fill="#57747d">分类、理解、检索、生成、校验、执行</text>
+  </g>
+
+  <g stroke="#6f8092" stroke-width="3" fill="none" marker-end="url(#arrow)">
+    <path d="M330 188C410 205 459 238 496 265"/>
+    <path d="M330 432C416 399 463 361 497 332"/>
+    <path d="M970 188C889 205 840 238 804 265"/>
+    <path d="M970 432C884 399 837 361 803 332"/>
+    <path d="M650 374V479"/>
+  </g>
+
+  <g font-family="Arial, PingFang SC, Microsoft YaHei" font-size="16" fill="#536475">
+    <text x="355" y="172">节点读取并更新 State</text>
+    <text x="350" y="475">边连接节点</text>
+    <text x="805" y="172">条件边决定分支</text>
+    <text x="805" y="475">Checkpoint 保存 State</text>
+  </g>
+
+  <text x="65" y="600" font-family="Arial, PingFang SC, Microsoft YaHei" font-size="18" fill="#536475">理解顺序：先有 State 记录数据，再由 Node 处理，Edge 连接节点，条件边决定分支，Checkpoint 保存进度。</text>
+  <defs>
+    <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto">
+      <path d="M0 0L8 4L0 8Z" fill="#6f8092"/>
+    </marker>
+  </defs>
+</svg>

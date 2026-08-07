@@ -1,0 +1,71 @@
+<svg width="1280" height="640" viewBox="0 0 1280 640" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">后端模块拆分</title>
+  <desc id="desc">展示学生端接口、后台接口、转写服务、豆包 ASR 服务、定时任务和数据库之间的关系。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M2,2 L10,6 L2,10 Z" fill="#344054"/></marker>
+    <style>
+      .bg{fill:#f7f9fc}
+      .title{font:700 30px Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#172033}
+      .sub{font:16px Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#667085}
+      .group{fill:#fff;stroke:#d6dee8;stroke-width:2}
+      .controller{fill:#eaf4ff;stroke:#4388d6;stroke-width:2}
+      .service{fill:#ecfdf3;stroke:#2f9e62;stroke-width:2}
+      .external{fill:#fff7e8;stroke:#d18b22;stroke-width:2}
+      .data{fill:#f3efff;stroke:#7a5bc8;stroke-width:2}
+      .job{fill:#fef2f2;stroke:#d92d20;stroke-width:2}
+      .label{font:700 17px Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#172033;text-anchor:middle}
+      .small{font:13px Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#526173;text-anchor:middle}
+      .line{stroke:#344054;stroke-width:2.3;fill:none;marker-end:url(#arrow)}
+      .dash{stroke:#667085;stroke-width:2.1;fill:none;stroke-dasharray:7 6;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect class="bg" width="1280" height="640"/>
+  <text x="56" y="58" class="title">后端代码模块：接口层轻，转写能力集中到 Service</text>
+  <text x="56" y="88" class="sub">学生端和后台都可以触发转写；定时任务只负责捞 PROCESSING 记录并查询结果。</text>
+
+  <rect x="50" y="135" width="265" height="360" rx="16" class="group"/>
+  <rect x="82" y="185" width="200" height="74" rx="12" class="controller"/>
+  <text x="182" y="216" class="label">学生端 Controller</text>
+  <text x="182" y="240" class="small">studentFront/interview</text>
+  <rect x="82" y="315" width="200" height="74" rx="12" class="controller"/>
+  <text x="182" y="346" class="label">后台 Controller</text>
+  <text x="182" y="370" class="small">/api/interviewReviews</text>
+
+  <rect x="380" y="135" width="285" height="360" rx="16" class="group"/>
+  <rect x="422" y="185" width="200" height="74" rx="12" class="service"/>
+  <text x="522" y="216" class="label">记录 Service</text>
+  <text x="522" y="240" class="small">列表 / 上传 / 权限</text>
+  <rect x="422" y="315" width="200" height="74" rx="12" class="service"/>
+  <text x="522" y="346" class="label">转写 Service</text>
+  <text x="522" y="370" class="small">submit / query / 落库</text>
+
+  <rect x="735" y="135" width="235" height="360" rx="16" class="group"/>
+  <rect x="770" y="185" width="165" height="74" rx="12" class="external"/>
+  <text x="853" y="216" class="label">UploadService</text>
+  <text x="853" y="240" class="small">生成下载 URL</text>
+  <rect x="770" y="315" width="165" height="74" rx="12" class="external"/>
+  <text x="853" y="346" class="label">DoubaoAsrService</text>
+  <text x="853" y="370" class="small">submit / query</text>
+
+  <rect x="1030" y="135" width="190" height="360" rx="16" class="group"/>
+  <rect x="1058" y="185" width="135" height="74" rx="12" class="data"/>
+  <text x="1126" y="216" class="label">Mapper</text>
+  <text x="1126" y="240" class="small">MyBatis XML</text>
+  <rect x="1058" y="315" width="135" height="74" rx="12" class="external"/>
+  <text x="1126" y="346" class="label">豆包 ASR</text>
+  <text x="1126" y="370" class="small">外部服务</text>
+
+  <rect x="422" y="530" width="200" height="66" rx="12" class="job"/>
+  <text x="522" y="558" class="label">定时任务 Job</text>
+  <text x="522" y="580" class="small">@EnableScheduling</text>
+
+  <path d="M282 222 H412" class="line"/>
+  <path d="M282 352 H412" class="line"/>
+  <path d="M522 259 V305" class="line"/>
+  <path d="M622 352 H760" class="line"/>
+  <path d="M622 222 H760" class="dash"/>
+  <path d="M935 352 H1048" class="line"/>
+  <path d="M622 352 C760 460 990 450 1126 270" class="line"/>
+  <path d="M522 530 V400" class="dash"/>
+  <path d="M622 352 C775 250 930 222 1048 222" class="dash"/>
+</svg>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="510" viewBox="0 0 1200 510" role="img" aria-labelledby="title desc">
+  <title id="title">多轮查询上下文</title><desc id="desc">后续追问继承未改变的条件，改变指标后重新规划。</desc>
+  <rect width="1200" height="510" fill="#ffffff"/>
+  <text x="55" y="58" font-family="Arial, PingFang SC, Microsoft YaHei" font-size="30" font-weight="700" fill="#182230">多轮追问：继承查询条件，但不能直接复用上一轮 SQL</text>
+  <g font-family="Arial, PingFang SC, Microsoft YaHei">
+    <rect x="65" y="115" width="315" height="285" rx="14" fill="#f3f8ff" stroke="#a6c5ee" stroke-width="2"/><text x="95" y="158" font-size="23" font-weight="700" fill="#245aa7">上一轮 QueryContext</text>
+    <text x="95" y="205" font-size="18" fill="#3e5570">指标：支付成功订单金额</text><text x="95" y="240" font-size="18" fill="#3e5570">时间：最近 7 天</text><text x="95" y="275" font-size="18" fill="#3e5570">筛选：线上课程</text><text x="95" y="310" font-size="18" fill="#3e5570">分组：按天</text><text x="95" y="345" font-size="18" fill="#3e5570">表：支付表 + 产品表</text>
+    <rect x="445" y="125" width="310" height="80" rx="10" fill="#fff5df" stroke="#e4be69"/><text x="475" y="174" font-size="20" fill="#ad6a00">“改成最近 30 天”</text>
+    <rect x="445" y="255" width="310" height="80" rx="10" fill="#f4ebff" stroke="#c3a3ed"/><text x="475" y="304" font-size="20" fill="#6d3caf">“那退款额呢？”</text>
+    <rect x="830" y="125" width="305" height="80" rx="10" fill="#e6f8f2" stroke="#8ccdaf"/><text x="860" y="162" font-size="19" fill="#147a4b">继承指标、筛选、分组</text><text x="860" y="187" font-size="16" fill="#477a60">只替换时间，重新生成 SQL</text>
+    <rect x="830" y="255" width="305" height="80" rx="10" fill="#ffecee" stroke="#e6a2ad"/><text x="860" y="292" font-size="19" fill="#b03b4c">继承时间和筛选</text><text x="860" y="317" font-size="16" fill="#81515a">更换指标，重新检索表和关系</text>
+  </g>
+  <g stroke="#6f8092" stroke-width="3" fill="none" marker-end="url(#z)"><path d="M383 255H435V165"/><path d="M383 255H435V295"/><path d="M758 165H820"/><path d="M758 295H820"/></g>
+  <text x="65" y="460" font-family="Arial, PingFang SC, Microsoft YaHei" font-size="18" fill="#536475">上下文保存的是结构化查询计划，而不是只保存聊天文字。</text>
+  <defs><marker id="z" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0 0L8 4L0 8Z" fill="#6f8092"/></marker></defs>
+</svg>

@@ -1,0 +1,30 @@
+<svg width="1280" height="720" viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">缺信息处理分支</title>
+  <desc id="desc">当信息不足以生成 SQL 时，根据缺失类型分流到用户澄清、指标检索、Schema RAG 或工具调用。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M2,2 L10,6 L2,10 Z" fill="#26364a"/></marker>
+    <style>
+      .title{font:700 30px Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#172033}
+      .diamond{fill:#fff7e8;stroke:#d18b22;stroke-width:2}
+      .user{fill:#f3efff;stroke:#7a5bc8;stroke-width:2}
+      .rag{fill:#ecfdf3;stroke:#2b8a55;stroke-width:2}
+      .tool{fill:#eef4ff;stroke:#3867b7;stroke-width:2}
+      .text{font:18px Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#1f2d3d;text-anchor:middle}
+      .small{font:14px Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#526173;text-anchor:middle}
+      .line{stroke:#26364a;stroke-width:2.5;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1280" height="720" fill="#fbfcff"/>
+  <text x="60" y="58" class="title">不能生成 SQL 时，不是失败，而是先补信息</text>
+  <path class="diamond" d="M640 115 L825 220 L640 325 L455 220 Z"/>
+  <text class="text" x="640" y="210">还缺什么东西？</text><text class="small" x="640" y="238">根据缺失类型分流</text>
+  <rect class="user" x="85" y="430" width="245" height="105" rx="12"/><text class="text" x="208" y="470">用户补充</text><text class="small" x="208" y="500">缺业务目标 / 时间范围</text><text class="small" x="208" y="525">例如：看数量还是明细？</text>
+  <rect class="rag" x="375" y="430" width="245" height="105" rx="12"/><text class="text" x="498" y="470">指标库检索</text><text class="small" x="498" y="500">缺指标口径</text><text class="small" x="498" y="525">退款率、客单价怎么算</text>
+  <rect class="rag" x="665" y="430" width="245" height="105" rx="12"/><text class="text" x="788" y="470">Schema RAG</text><text class="small" x="788" y="500">缺表结构 / 字段关系</text><text class="small" x="788" y="525">继续查 DDL 和字段说明</text>
+  <rect class="tool" x="955" y="430" width="245" height="105" rx="12"/><text class="text" x="1078" y="470">调用工具</text><text class="small" x="1078" y="500">缺权限 / 配置 / 外部信息</text><text class="small" x="1078" y="525">查询业务服务</text>
+  <path class="line" d="M520,285 C380,340 270,370 208,420"/><text class="small" x="345" y="360">缺业务条件</text>
+  <path class="line" d="M610,325 C575,360 535,390 498,420"/><text class="small" x="535" y="380">缺指标口径</text>
+  <path class="line" d="M670,325 C705,360 750,390 788,420"/><text class="small" x="750" y="380">缺字段关系</text>
+  <path class="line" d="M760,285 C900,340 1010,370 1078,420"/><text class="small" x="955" y="360">缺外部信息</text>
+  <text class="small" x="640" y="640">补齐信息后，当前代码会回到 query_parallel_start 重新检索，再进入 SQL 判断与生成节点。</text>
+</svg>

@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="620" viewBox="0 0 1120 620">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L9,3 z" fill="#475569"/>
+    </marker>
+    <style>
+      .title{font:700 30px Arial,"Microsoft YaHei",sans-serif;fill:#1f2937}
+      .head{fill:#eaf4ff;stroke:#4f7cac;stroke-width:2;rx:10}
+      .line{stroke:#cbd5e1;stroke-width:2;stroke-dasharray:6 6}
+      .msg{stroke:#475569;stroke-width:2.2;fill:none;marker-end:url(#arrow)}
+      .return{stroke:#0f766e;stroke-width:2.2;fill:none;marker-end:url(#arrow)}
+      .text{font:700 18px Arial,"Microsoft YaHei",sans-serif;fill:#111827}
+      .small{font:15px Arial,"Microsoft YaHei",sans-serif;fill:#374151}
+    </style>
+  </defs>
+  <rect width="1120" height="620" fill="#fbfdff"/>
+  <text x="40" y="50" class="title">一次学生提问的核心时序</text>
+  <rect x="60" y="85" width="150" height="56" class="head"/>
+  <text x="135" y="120" text-anchor="middle" class="text">前端</text>
+  <rect x="270" y="85" width="150" height="56" class="head"/>
+  <text x="345" y="120" text-anchor="middle" class="text">Java</text>
+  <rect x="480" y="85" width="150" height="56" class="head"/>
+  <text x="555" y="120" text-anchor="middle" class="text">Python</text>
+  <rect x="690" y="85" width="150" height="56" class="head"/>
+  <text x="765" y="120" text-anchor="middle" class="text">Milvus</text>
+  <rect x="900" y="85" width="150" height="56" class="head"/>
+  <text x="975" y="120" text-anchor="middle" class="text">大模型</text>
+  <path d="M135 141 L135 570" class="line"/>
+  <path d="M345 141 L345 570" class="line"/>
+  <path d="M555 141 L555 570" class="line"/>
+  <path d="M765 141 L765 570" class="line"/>
+  <path d="M975 141 L975 570" class="line"/>
+  <path d="M135 175 L345 175" class="msg"/>
+  <text x="160" y="165" class="small">发送问题 / stream</text>
+  <path d="M345 225 L555 225" class="msg"/>
+  <text x="365" y="215" class="small">组装 history + message</text>
+  <path d="M555 275 L765 275" class="msg"/>
+  <text x="575" y="265" class="small">Retriever 查相关 chunk</text>
+  <path d="M765 315 L555 315" class="return"/>
+  <text x="590" y="305" class="small">返回命中 Node</text>
+  <path d="M555 365 L975 365" class="msg"/>
+  <text x="575" y="355" class="small">系统提示词 + 知识库资料 + 历史消息 + 问题</text>
+  <path d="M975 410 L555 410" class="return"/>
+  <text x="700" y="400" class="small">流式 token / usage</text>
+  <path d="M555 455 L345 455" class="return"/>
+  <text x="370" y="445" class="small">SSE: message_start / chunk / done</text>
+  <path d="M345 505 L135 505" class="return"/>
+  <text x="150" y="495" class="small">继续转发 SSE chunk</text>
+  <text x="365" y="548" class="small">Java 累加完整回答，done 时保存 assistant 消息</text>
+</svg>

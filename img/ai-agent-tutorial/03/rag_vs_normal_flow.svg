@@ -1,0 +1,38 @@
+<svg width="1280" height="650" viewBox="0 0 1280 650" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1280" height="650" fill="#f8fafc"/>
+  <defs>
+    <marker id="arrow-blue" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrow-green" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#16a34a"/>
+    </marker>
+  </defs>
+  <g font-family="Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+    <text x="640" y="64" text-anchor="middle" font-size="34" font-weight="700" fill="#111827">普通问答和 RAG 问答的区别</text>
+
+    <text x="330" y="125" text-anchor="middle" font-size="26" font-weight="700" fill="#1d4ed8">普通问答</text>
+    <rect x="140" y="160" width="380" height="70" rx="8" fill="#ffffff" stroke="#bfdbfe"/>
+    <text x="330" y="204" text-anchor="middle" font-size="22" fill="#334155">用户问题</text>
+    <line x1="330" y1="235" x2="330" y2="285" stroke="#2563eb" stroke-width="4" marker-end="url(#arrow-blue)"/>
+    <rect x="140" y="295" width="380" height="70" rx="8" fill="#ffffff" stroke="#bfdbfe"/>
+    <text x="330" y="339" text-anchor="middle" font-size="22" fill="#334155">大模型直接回答</text>
+    <line x1="330" y1="370" x2="330" y2="420" stroke="#2563eb" stroke-width="4" marker-end="url(#arrow-blue)"/>
+    <rect x="140" y="430" width="380" height="90" rx="8" fill="#fff7ed" stroke="#fed7aa"/>
+    <text x="330" y="467" text-anchor="middle" font-size="20" fill="#9a3412">如果缺少资料</text>
+    <text x="330" y="497" text-anchor="middle" font-size="20" fill="#9a3412">回答可能没有依据</text>
+
+    <text x="950" y="125" text-anchor="middle" font-size="26" font-weight="700" fill="#15803d">RAG 问答</text>
+    <rect x="760" y="145" width="380" height="60" rx="8" fill="#ffffff" stroke="#bbf7d0"/>
+    <text x="950" y="184" text-anchor="middle" font-size="21" fill="#334155">用户问题</text>
+    <line x1="950" y1="210" x2="950" y2="250" stroke="#16a34a" stroke-width="4" marker-end="url(#arrow-green)"/>
+    <rect x="760" y="260" width="380" height="60" rx="8" fill="#ffffff" stroke="#bbf7d0"/>
+    <text x="950" y="299" text-anchor="middle" font-size="21" fill="#334155">检索相关资料</text>
+    <line x1="950" y1="325" x2="950" y2="365" stroke="#16a34a" stroke-width="4" marker-end="url(#arrow-green)"/>
+    <rect x="760" y="375" width="380" height="60" rx="8" fill="#ffffff" stroke="#bbf7d0"/>
+    <text x="950" y="414" text-anchor="middle" font-size="21" fill="#334155">资料 + 问题 放进 Prompt</text>
+    <line x1="950" y1="440" x2="950" y2="480" stroke="#16a34a" stroke-width="4" marker-end="url(#arrow-green)"/>
+    <rect x="760" y="490" width="380" height="70" rx="8" fill="#f0fdf4" stroke="#86efac"/>
+    <text x="950" y="532" text-anchor="middle" font-size="21" font-weight="700" fill="#166534">模型基于资料回答</text>
+  </g>
+</svg>

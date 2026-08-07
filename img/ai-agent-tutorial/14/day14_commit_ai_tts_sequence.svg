@@ -1,0 +1,50 @@
+<svg width="1280" height="760" viewBox="0 0 1280 760" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">说完了后从 ASR_FINAL 到 AI TTS 的完整时序</title>
+  <desc id="desc">前端提交本轮音频，Java 发最后一包，保存学生文本，调用 YanQue-AI，再调用火山 TTS 并回传 PCM。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="11" markerHeight="11" refX="9" refY="5.5" orient="auto"><path d="M1,1 L9,5.5 L1,10 Z" fill="#1f2937"/></marker>
+    <style>
+      .title{font:700 32px Arial,"PingFang SC","Microsoft YaHei";fill:#111827}
+      .sub{font:16px Arial,"PingFang SC","Microsoft YaHei";fill:#667085}
+      .role{font:700 17px Arial,"PingFang SC","Microsoft YaHei";fill:#1f2937;text-anchor:middle}
+      .line{stroke:#cbd5e1;stroke-width:2}
+      .msg{stroke:#1f2937;stroke-width:2.3;fill:none;marker-end:url(#arrow)}
+      .dash{stroke:#64748b;stroke-width:2.1;fill:none;stroke-dasharray:8 7;marker-end:url(#arrow)}
+      .label{font:15px Arial,"PingFang SC","Microsoft YaHei";fill:#243447;text-anchor:middle}
+      .note{fill:#f0f9ff;stroke:#93c5fd;stroke-width:2}
+      .noteText{font:700 16px Arial,"PingFang SC","Microsoft YaHei";fill:#1e3a8a;text-anchor:middle}
+    </style>
+  </defs>
+  <rect width="1280" height="760" fill="#fbfcff"/>
+  <text x="60" y="58" class="title">“说完了”：ASR_FINAL 后立即进入 AI + TTS</text>
+  <text x="60" y="88" class="sub">当前版本已经能把学生最终识别文本入库，再把 AI 面试官回复流式转成语音。</text>
+
+  <text x="120" y="138" class="role">前端</text>
+  <text x="310" y="138" class="role">Java Handler</text>
+  <text x="510" y="138" class="role">火山 ASR</text>
+  <text x="700" y="138" class="role">MySQL</text>
+  <text x="900" y="138" class="role">YanQue-AI</text>
+  <text x="1110" y="138" class="role">火山 TTS</text>
+  <line x1="120" y1="160" x2="120" y2="700" class="line"/>
+  <line x1="310" y1="160" x2="310" y2="700" class="line"/>
+  <line x1="510" y1="160" x2="510" y2="700" class="line"/>
+  <line x1="700" y1="160" x2="700" y2="700" class="line"/>
+  <line x1="900" y1="160" x2="900" y2="700" class="line"/>
+  <line x1="1110" y1="160" x2="1110" y2="700" class="line"/>
+
+  <path d="M120 200 H310" class="msg"/><text x="215" y="190" class="label">AUDIO_COMMIT</text>
+  <path d="M310 248 H510" class="msg"/><text x="410" y="238" class="label">finishAudio：负 sequence 最后一包</text>
+  <path d="M510 296 H310" class="dash"/><text x="410" y="286" class="label">ASR_FINAL text</text>
+  <path d="M310 344 H700" class="msg"/><text x="505" y="334" class="label">保存 STUDENT 消息</text>
+  <path d="M310 392 H510" class="dash"/><text x="410" y="382" class="label">close 当前 ASR WS</text>
+  <path d="M310 440 H900" class="msg"/><text x="605" y="430" class="label">带最近 8 条消息调用 AI SSE</text>
+  <path d="M900 488 H310" class="dash"/><text x="605" y="478" class="label">AI_TEXT_CHUNK</text>
+  <path d="M310 536 H1110" class="msg"/><text x="710" y="526" class="label">按标点/长度分段送 TTS</text>
+  <path d="M1110 584 H310" class="dash"/><text x="710" y="574" class="label">PCM binary chunks</text>
+  <path d="M310 632 H120" class="dash"/><text x="215" y="622" class="label">BinaryMessage 播放</text>
+  <path d="M310 680 H700" class="msg"/><text x="505" y="670" class="label">保存 ASSISTANT 消息</text>
+
+  <rect x="780" y="612" width="390" height="72" rx="14" class="note"/>
+  <text x="975" y="640" class="noteText">下一轮不会自动开 ASR</text>
+  <text x="975" y="666" class="label">AI 播放完后，用户点“开始回答”才重新打开。</text>
+</svg>

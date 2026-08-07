@@ -1,0 +1,26 @@
+<svg width="1280" height="720" viewBox="0 0 1280 720" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1280" height="720" fill="#f8fafc"/>
+  <g font-family="Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+    <text x="640" y="62" text-anchor="middle" font-size="34" font-weight="700" fill="#111827">chunk_size、overlap 和自然边界</text>
+    <text x="640" y="100" text-anchor="middle" font-size="20" fill="#64748b">长度控制负责“不太长”，自然边界负责“不切坏”</text>
+
+    <text x="120" y="175" font-size="24" font-weight="700" fill="#1d4ed8">原始资料</text>
+    <rect x="120" y="205" width="1040" height="80" rx="8" fill="#ffffff" stroke="#cbd5e1"/>
+    <text x="640" y="255" text-anchor="middle" font-size="21" fill="#334155">请假后如果需要补课，应在一周内联系授课老师。补课时间由老师根据班级进度统一安排。</text>
+
+    <text x="120" y="350" font-size="24" font-weight="700" fill="#b91c1c">硬按长度切：可能破坏句子</text>
+    <rect x="120" y="380" width="500" height="75" rx="8" fill="#fff1f2" stroke="#fecdd3"/>
+    <text x="370" y="425" text-anchor="middle" font-size="19" fill="#7f1d1d">请假后如果需要补课，应在一周内联系授课老师，补课时间</text>
+    <rect x="660" y="380" width="500" height="75" rx="8" fill="#fff1f2" stroke="#fecdd3"/>
+    <text x="910" y="425" text-anchor="middle" font-size="19" fill="#7f1d1d">由老师根据班级进度统一安排。</text>
+
+    <text x="120" y="525" font-size="24" font-weight="700" fill="#15803d">接近长度上限时找自然边界</text>
+    <rect x="120" y="555" width="500" height="75" rx="8" fill="#f0fdf4" stroke="#86efac"/>
+    <text x="370" y="600" text-anchor="middle" font-size="19" fill="#14532d">请假后如果需要补课，应在一周内联系授课老师。</text>
+    <rect x="660" y="555" width="500" height="75" rx="8" fill="#f0fdf4" stroke="#86efac"/>
+    <text x="910" y="600" text-anchor="middle" font-size="19" fill="#14532d">补课时间由老师根据班级进度统一安排。</text>
+
+    <rect x="265" y="655" width="750" height="45" rx="8" fill="#eff6ff" stroke="#bfdbfe"/>
+    <text x="640" y="684" text-anchor="middle" font-size="20" font-weight="700" fill="#1e3a8a">chunk_size 是上限，分隔符决定尽量在哪里切，overlap 保护边界上下文</text>
+  </g>
+</svg>

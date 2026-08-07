@@ -1,0 +1,76 @@
+<svg width="1280" height="620" viewBox="0 0 1280 620" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">面试复盘总链路</title>
+  <desc id="desc">学生上传简历和录音，后端提交 ASR 转写，定时任务拿到说话人对话，再生成复盘报告。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M2,2 L10,6 L2,10 Z" fill="#344054"/></marker>
+    <style>
+      .bg{fill:#f7f9fc}
+      .title{font:700 30px Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#172033}
+      .sub{font:16px Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#667085}
+      .group{fill:#fff;stroke:#d6dee8;stroke-width:2}
+      .front{fill:#eaf4ff;stroke:#4388d6;stroke-width:2}
+      .java{fill:#ecfdf3;stroke:#2f9e62;stroke-width:2}
+      .asr{fill:#fff7e8;stroke:#d18b22;stroke-width:2}
+      .ai{fill:#f3efff;stroke:#7a5bc8;stroke-width:2}
+      .store{fill:#f9fafb;stroke:#98a2b3;stroke-width:2}
+      .label{font:700 18px Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#172033;text-anchor:middle}
+      .small{font:14px Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#5c6b7c;text-anchor:middle}
+      .leftLabel{font:700 18px Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#172033}
+      .leftSmall{font:14px Arial,"PingFang SC","Microsoft YaHei",sans-serif;fill:#5c6b7c}
+      .line{stroke:#344054;stroke-width:2.5;fill:none;marker-end:url(#arrow)}
+      .dash{stroke:#667085;stroke-width:2.2;fill:none;stroke-dasharray:7 6;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect class="bg" width="1280" height="620"/>
+  <text x="54" y="58" class="title">面试复盘：从录音到可复盘报告</text>
+  <text x="54" y="88" class="sub">第一版只做学生自助上传，后台查看；转写由按钮触发，结果由 Spring Boot 定时任务轮询。</text>
+
+  <rect x="50" y="140" width="210" height="330" rx="16" class="group"/>
+  <text x="76" y="178" class="leftLabel">学生端</text>
+  <text x="76" y="204" class="leftSmall">YanQue-Student-Web</text>
+  <rect x="82" y="238" width="146" height="64" rx="12" class="front"/>
+  <text x="155" y="266" class="label">上传简历</text>
+  <text x="155" y="288" class="small">学生资料</text>
+  <rect x="82" y="334" width="146" height="64" rx="12" class="front"/>
+  <text x="155" y="362" class="label">上传录音</text>
+  <text x="155" y="384" class="small">面试复盘页</text>
+
+  <rect x="330" y="140" width="260" height="330" rx="16" class="group"/>
+  <text x="356" y="178" class="leftLabel">Java 后端</text>
+  <text x="356" y="204" class="leftSmall">Spring Boot</text>
+  <rect x="368" y="238" width="184" height="64" rx="12" class="java"/>
+  <text x="460" y="266" class="label">保存记录</text>
+  <text x="460" y="288" class="small">PENDING</text>
+  <rect x="368" y="334" width="184" height="64" rx="12" class="java"/>
+  <text x="460" y="362" class="label">开始转写</text>
+  <text x="460" y="384" class="small">submit + taskId</text>
+
+  <rect x="660" y="140" width="250" height="330" rx="16" class="group"/>
+  <text x="686" y="178" class="leftLabel">对象存储和 ASR</text>
+  <text x="686" y="204" class="leftSmall">TOS + 豆包录音识别</text>
+  <rect x="698" y="238" width="174" height="64" rx="12" class="store"/>
+  <text x="785" y="266" class="label">预签名 URL</text>
+  <text x="785" y="288" class="small">临时下载地址</text>
+  <rect x="698" y="334" width="174" height="64" rx="12" class="asr"/>
+  <text x="785" y="362" class="label">ASR 转写</text>
+  <text x="785" y="384" class="small">speaker + text</text>
+
+  <rect x="980" y="140" width="230" height="330" rx="16" class="group"/>
+  <text x="1006" y="178" class="leftLabel">复盘结果</text>
+  <text x="1006" y="204" class="leftSmall">学生和老师查看</text>
+  <rect x="1018" y="238" width="154" height="64" rx="12" class="ai"/>
+  <text x="1095" y="266" class="label">对话稿</text>
+  <text x="1095" y="288" class="small">说话人分组</text>
+  <rect x="1018" y="334" width="154" height="64" rx="12" class="ai"/>
+  <text x="1095" y="362" class="label">复盘报告</text>
+  <text x="1095" y="384" class="small">问题和建议</text>
+
+  <path d="M228 270 H358" class="line"/>
+  <path d="M552 366 H688" class="line"/>
+  <path d="M872 366 H1008" class="line"/>
+  <path d="M460 302 C460 320 460 318 460 330" class="line"/>
+  <path d="M785 302 C785 320 785 318 785 330" class="line"/>
+  <path d="M1095 302 C1095 320 1095 318 1095 330" class="line"/>
+  <path d="M785 398 C785 512 460 520 460 404" class="dash"/>
+  <text x="610" y="520" class="sub">定时任务轮询 query，完成后写回 interview_review_record</text>
+</svg>

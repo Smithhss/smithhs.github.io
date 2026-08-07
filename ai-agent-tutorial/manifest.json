@@ -1,0 +1,126 @@
+{
+  "generated_at": "2026-08-07T14:55:34",
+  "series_url": "/ai-agent-tutorial/",
+  "posts": [
+    {
+      "no": "00",
+      "title": "AI 学习总览",
+      "date": "2026-07-20 09:00:00",
+      "url": "/2026/07/20/2026-07-20-ai-agent-00-overview/",
+      "path": "F:\\develop\\project\\Blog\\2026\\07\\20\\2026-07-20-ai-agent-00-overview\\index.html",
+      "cover": "/img/ai-agent-tutorial/covers/ai-agent-00-overview.png"
+    },
+    {
+      "no": "01",
+      "title": "Python AI 项目：uv 与阿里云百炼",
+      "date": "2026-07-21 09:07:00",
+      "url": "/2026/07/21/2026-07-21-ai-agent-01-python-uv-bailian/",
+      "path": "F:\\develop\\project\\Blog\\2026\\07\\21\\2026-07-21-ai-agent-01-python-uv-bailian\\index.html",
+      "cover": "/img/ai-agent-tutorial/covers/ai-agent-01-python-uv-bailian.png"
+    },
+    {
+      "no": "02",
+      "title": "从 AIGC 到大模型：神经网络与必要原理",
+      "date": "2026-07-22 09:14:00",
+      "url": "/2026/07/22/2026-07-22-ai-agent-02-aigc-llm-neural-network/",
+      "path": "F:\\develop\\project\\Blog\\2026\\07\\22\\2026-07-22-ai-agent-02-aigc-llm-neural-network\\index.html",
+      "cover": "/img/ai-agent-tutorial/covers/ai-agent-02-aigc-llm-neural-network.png"
+    },
+    {
+      "no": "03",
+      "title": "RAG 与 Milvus 向量数据库入门",
+      "date": "2026-07-23 09:21:00",
+      "url": "/2026/07/23/2026-07-23-ai-agent-03-rag-milvus/",
+      "path": "F:\\develop\\project\\Blog\\2026\\07\\23\\2026-07-23-ai-agent-03-rag-milvus\\index.html",
+      "cover": "/img/ai-agent-tutorial/covers/ai-agent-03-rag-milvus.png"
+    },
+    {
+      "no": "04",
+      "title": "LlamaIndex 知识库问答入门",
+      "date": "2026-07-24 09:28:00",
+      "url": "/2026/07/24/2026-07-24-ai-agent-04-llamaindex-rag/",
+      "path": "F:\\develop\\project\\Blog\\2026\\07\\24\\2026-07-24-ai-agent-04-llamaindex-rag\\index.html",
+      "cover": "/img/ai-agent-tutorial/covers/ai-agent-04-llamaindex-rag.png"
+    },
+    {
+      "no": "05",
+      "title": "提示词工程与工具调用入门",
+      "date": "2026-07-25 09:35:00",
+      "url": "/2026/07/25/2026-07-25-ai-agent-05-prompt-tool-calling/",
+      "path": "F:\\develop\\project\\Blog\\2026\\07\\25\\2026-07-25-ai-agent-05-prompt-tool-calling\\index.html",
+      "cover": "/img/ai-agent-tutorial/covers/ai-agent-05-prompt-tool-calling.png"
+    },
+    {
+      "no": "06",
+      "title": "项目整体流程图",
+      "date": "2026-07-26 09:42:00",
+      "url": "/2026/07/26/2026-07-26-ai-agent-06-project-flow/",
+      "path": "F:\\develop\\project\\Blog\\2026\\07\\26\\2026-07-26-ai-agent-06-project-flow\\index.html",
+      "cover": "/img/ai-agent-tutorial/covers/ai-agent-06-project-flow.png"
+    },
+    {
+      "no": "07",
+      "title": "LangChain 框架实战",
+      "date": "2026-07-27 09:49:00",
+      "url": "/2026/07/27/2026-07-27-ai-agent-07-langchain-practice/",
+      "path": "F:\\develop\\project\\Blog\\2026\\07\\27\\2026-07-27-ai-agent-07-langchain-practice\\index.html",
+      "cover": "/img/ai-agent-tutorial/covers/ai-agent-07-langchain-practice.png"
+    },
+    {
+      "no": "08",
+      "title": "LangChain Agent 入门与上下文压缩",
+      "date": "2026-07-28 09:56:00",
+      "url": "/2026/07/28/2026-07-28-ai-agent-08-langchain-agent-context-compression/",
+      "path": "F:\\develop\\project\\Blog\\2026\\07\\28\\2026-07-28-ai-agent-08-langchain-agent-context-compression\\index.html",
+      "cover": "/img/ai-agent-tutorial/covers/ai-agent-08-langchain-agent-context-compression.png"
+    },
+    {
+      "no": "09",
+      "title": "Text-to-SQL 业务介绍与 LangGraph 流程",
+      "date": "2026-07-29 10:03:00",
+      "url": "/2026/07/29/2026-07-29-ai-agent-09-text-to-sql-langgraph/",
+      "path": "F:\\develop\\project\\Blog\\2026\\07\\29\\2026-07-29-ai-agent-09-text-to-sql-langgraph\\index.html",
+      "cover": "/img/ai-agent-tutorial/covers/ai-agent-09-text-to-sql-langgraph.png"
+    },
+    {
+      "no": "10",
+      "title": "Text-to-SQL 项目落地实战",
+      "date": "2026-07-30 10:10:00",
+      "url": "/2026/07/30/2026-07-30-ai-agent-10-text-to-sql-project/",
+      "path": "F:\\develop\\project\\Blog\\2026\\07\\30\\2026-07-30-ai-agent-10-text-to-sql-project\\index.html",
+      "cover": "/img/ai-agent-tutorial/covers/ai-agent-10-text-to-sql-project.png"
+    },
+    {
+      "no": "11",
+      "title": "Text-to-SQL 评测体系建设",
+      "date": "2026-07-31 10:17:00",
+      "url": "/2026/07/31/2026-07-31-ai-agent-11-text-to-sql-evaluation/",
+      "path": "F:\\develop\\project\\Blog\\2026\\07\\31\\2026-07-31-ai-agent-11-text-to-sql-evaluation\\index.html",
+      "cover": "/img/ai-agent-tutorial/covers/ai-agent-11-text-to-sql-evaluation.png"
+    },
+    {
+      "no": "12",
+      "title": "面试复盘功能设计",
+      "date": "2026-08-01 10:24:00",
+      "url": "/2026/08/01/2026-08-01-ai-agent-12-interview-review/",
+      "path": "F:\\develop\\project\\Blog\\2026\\08\\01\\2026-08-01-ai-agent-12-interview-review\\index.html",
+      "cover": "/img/ai-agent-tutorial/covers/ai-agent-12-interview-review.png"
+    },
+    {
+      "no": "13",
+      "title": "模拟面试实时语音流程",
+      "date": "2026-08-02 10:31:00",
+      "url": "/2026/08/02/2026-08-02-ai-agent-13-realtime-voice-interview/",
+      "path": "F:\\develop\\project\\Blog\\2026\\08\\02\\2026-08-02-ai-agent-13-realtime-voice-interview\\index.html",
+      "cover": "/img/ai-agent-tutorial/covers/ai-agent-13-realtime-voice-interview.png"
+    },
+    {
+      "no": "14",
+      "title": "模拟面试 V2 自控语音链路",
+      "date": "2026-08-03 10:38:00",
+      "url": "/2026/08/03/2026-08-03-ai-agent-14-voice-interview-v2/",
+      "path": "F:\\develop\\project\\Blog\\2026\\08\\03\\2026-08-03-ai-agent-14-voice-interview-v2\\index.html",
+      "cover": "/img/ai-agent-tutorial/covers/ai-agent-14-voice-interview-v2.png"
+    }
+  ]
+}

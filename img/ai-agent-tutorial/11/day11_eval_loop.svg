@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="360" viewBox="0 0 980 360">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L0,6 L9,3 z" fill="#475569"/>
+    </marker>
+    <style>
+      .box{fill:#f8fafc;stroke:#94a3b8;stroke-width:1.5;rx:10}
+      .title{font:700 18px Arial,'Microsoft YaHei',sans-serif;fill:#0f172a}
+      .text{font:14px Arial,'Microsoft YaHei',sans-serif;fill:#334155}
+      .small{font:12px Arial,'Microsoft YaHei',sans-serif;fill:#64748b}
+      .arrow{stroke:#475569;stroke-width:2;fill:none;marker-end:url(#arrow)}
+      .accent{fill:#e0f2fe;stroke:#0284c7}
+      .warn{fill:#fff7ed;stroke:#f97316}
+      .ok{fill:#ecfdf5;stroke:#10b981}
+    </style>
+  </defs>
+  <text x="32" y="34" class="title">Text-to-SQL 评测闭环</text>
+  <rect x="35" y="70" width="150" height="78" class="box accent"/>
+  <text x="60" y="104" class="title">真实问题</text>
+  <text x="58" y="128" class="text">用户自然语言提问</text>
+  <rect x="230" y="70" width="150" height="78" class="box"/>
+  <text x="254" y="104" class="title">运行记录</text>
+  <text x="252" y="128" class="text">State / SQL / 步骤</text>
+  <rect x="425" y="70" width="150" height="78" class="box warn"/>
+  <text x="449" y="104" class="title">人工反馈</text>
+  <text x="448" y="128" class="text">正确 / 有问题</text>
+  <rect x="620" y="70" width="150" height="78" class="box"/>
+  <text x="644" y="104" class="title">评测样本</text>
+  <text x="637" y="128" class="text">expected_state_json</text>
+  <rect x="815" y="70" width="130" height="78" class="box ok"/>
+  <text x="842" y="104" class="title">评测任务</text>
+  <text x="836" y="128" class="text">异步批量运行</text>
+  <rect x="230" y="230" width="150" height="78" class="box"/>
+  <text x="254" y="264" class="title">自动判定</text>
+  <text x="246" y="288" class="text">期望 State vs 实际 State</text>
+  <rect x="425" y="230" width="150" height="78" class="box"/>
+  <text x="449" y="264" class="title">失败分析</text>
+  <text x="445" y="288" class="text">路由 / 表 / SQL / 澄清</text>
+  <rect x="620" y="230" width="150" height="78" class="box accent"/>
+  <text x="653" y="264" class="title">持续优化</text>
+  <text x="647" y="288" class="text">Prompt / Skill / Schema</text>
+  <path d="M185 109 H220" class="arrow"/>
+  <path d="M380 109 H415" class="arrow"/>
+  <path d="M575 109 H610" class="arrow"/>
+  <path d="M770 109 H805" class="arrow"/>
+  <path d="M880 148 C880 205 780 269 585 269" class="arrow"/>
+  <path d="M425 269 H390" class="arrow"/>
+  <path d="M575 269 H610" class="arrow"/>
+  <path d="M695 230 C695 180 595 156 500 156" class="arrow"/>
+  <text x="744" y="196" class="small">跑评测</text>
+  <text x="513" y="196" class="small">改动后回归</text>
+</svg>

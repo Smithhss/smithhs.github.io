@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1040" height="390" viewBox="0 0 1040 390">
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth"><path d="M0,0 L0,6 L9,3 z" fill="#334155"/></marker>
+    <style>
+      .title{font:700 20px Arial,'Microsoft YaHei',sans-serif;fill:#0f172a}
+      .box{fill:#fff;stroke:#cbd5e1;stroke-width:1.5;rx:10}
+      .py{fill:#f5f3ff;stroke:#c4b5fd}
+      .java{fill:#eff6ff;stroke:#93c5fd}
+      .db{fill:#f0fdf4;stroke:#86efac}
+      .h{font:700 15px Arial,'Microsoft YaHei',sans-serif;fill:#172033}
+      .t{font:13px Arial,'Microsoft YaHei',sans-serif;fill:#475569}
+      .line{stroke:#334155;stroke-width:2;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <text x="35" y="38" class="title">SEMANTIC 主观判断流程</text>
+  <rect x="60" y="85" width="210" height="120" class="java"/>
+  <text x="82" y="118" class="h">Java 评测 Biz</text>
+  <text x="82" y="144" class="t">question</text>
+  <text x="82" y="166" class="t">actual_answer</text>
+  <text x="82" y="188" class="t">参考答案 / 要点 / 最低分</text>
+  <rect x="330" y="85" width="230" height="120" class="py"/>
+  <text x="352" y="118" class="h">Python 语义评测服务</text>
+  <text x="352" y="144" class="t">/api/text-to-sql/eval/semantic-judge</text>
+  <text x="352" y="166" class="t">调用评测模型</text>
+  <text x="352" y="188" class="t">输出结构化 JSON</text>
+  <rect x="620" y="85" width="220" height="120" class="box"/>
+  <text x="642" y="118" class="h">语义评分结果</text>
+  <text x="642" y="144" class="t">passed</text>
+  <text x="642" y="166" class="t">score</text>
+  <text x="642" y="188" class="t">reason / covered / missed</text>
+  <rect x="395" y="265" width="260" height="80" class="db"/>
+  <text x="417" y="298" class="h">保存 assertion_result</text>
+  <text x="417" y="322" class="t">通过和失败都会保存 score 和 reason</text>
+  <path d="M270 145 H320" class="line"/>
+  <path d="M560 145 H610" class="line"/>
+  <path d="M730 205 C690 245 620 255 535 265" class="line"/>
+  <path d="M525 265 C435 245 325 220 190 205" class="line"/>
+  <text x="735" y="282" class="t">前端规则弹框展示本次得分和原因</text>
+</svg>

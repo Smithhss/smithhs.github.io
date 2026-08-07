@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="560" viewBox="0 0 1120 560">
+  <defs>
+    <style>
+      .title{font-family:Arial,'Microsoft YaHei',sans-serif;font-size:30px;font-weight:700;fill:#222}
+      .text{font-family:Arial,'Microsoft YaHei',sans-serif;font-size:20px;fill:#333}
+      .small{font-family:Arial,'Microsoft YaHei',sans-serif;font-size:16px;fill:#555}
+      .box{fill:#fff;stroke:#d5dde7;stroke-width:2;rx:10}
+      .a{fill:#eef6ff;stroke:#4d92d9}
+      .b{fill:#f4fbf3;stroke:#62a765}
+      .c{fill:#fff7ea;stroke:#df9b3f}
+      .d{fill:#f7f5ff;stroke:#7a68d8}
+      .e{fill:#fff1f1;stroke:#d46666}
+      .f{fill:#f1fbfb;stroke:#4aa3a3}
+      .arrow{stroke:#53616f;stroke-width:2.5;fill:none;marker-end:url(#arrow)}
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#53616f"/>
+    </marker>
+  </defs>
+  <rect width="1120" height="560" fill="#fbfcfe"/>
+  <text x="48" y="58" class="title">一个好提示词的基本结构</text>
+  <text x="48" y="92" class="small">写 Prompt 不是把话写长，而是把任务、边界和输出要求说清楚。</text>
+
+  <rect x="54" y="140" width="300" height="120" class="box a"/>
+  <text x="82" y="178" class="text" font-weight="700">1. 角色</text>
+  <text x="82" y="212" class="small">模型现在要扮演什么身份</text>
+  <text x="82" y="238" class="small">例如：AI 课程助教</text>
+
+  <rect x="410" y="140" width="300" height="120" class="box b"/>
+  <text x="438" y="178" class="text" font-weight="700">2. 任务</text>
+  <text x="438" y="212" class="small">本次要完成什么事情</text>
+  <text x="438" y="238" class="small">例如：解释概念、判断分类</text>
+
+  <rect x="766" y="140" width="300" height="120" class="box c"/>
+  <text x="794" y="178" class="text" font-weight="700">3. 上下文</text>
+  <text x="794" y="212" class="small">把必要资料放进去</text>
+  <text x="794" y="238" class="small">例如：知识库片段、历史消息</text>
+
+  <rect x="54" y="330" width="300" height="120" class="box d"/>
+  <text x="82" y="368" class="text" font-weight="700">4. 规则</text>
+  <text x="82" y="402" class="small">说明能做什么、不能做什么</text>
+  <text x="82" y="428" class="small">例如：资料没有提到要说明</text>
+
+  <rect x="410" y="330" width="300" height="120" class="box e"/>
+  <text x="438" y="368" class="text" font-weight="700">5. 输出格式</text>
+  <text x="438" y="402" class="small">回答用自然语言还是 JSON</text>
+  <text x="438" y="428" class="small">例如：只输出 JSON</text>
+
+  <rect x="766" y="330" width="300" height="120" class="box f"/>
+  <text x="794" y="368" class="text" font-weight="700">6. 示例</text>
+  <text x="794" y="402" class="small">复杂任务可以给一两个样例</text>
+  <text x="794" y="428" class="small">让模型更容易对齐要求</text>
+
+  <path d="M354 200 L410 200" class="arrow"/>
+  <path d="M710 200 L766 200" class="arrow"/>
+  <path d="M916 260 C916 300 205 288 205 330" class="arrow"/>
+  <path d="M354 390 L410 390" class="arrow"/>
+  <path d="M710 390 L766 390" class="arrow"/>
+</svg>

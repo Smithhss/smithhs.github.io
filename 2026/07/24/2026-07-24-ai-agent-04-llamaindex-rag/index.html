@@ -1,0 +1,2497 @@
+<!DOCTYPE html>
+<html data-theme="light" lang="zh-CN"><head><meta charset="utf-8"/><meta content="IE=edge" http-equiv="X-UA-Compatible"/><meta content="width=device-width, initial-scale=1.0, user-scalable=no" name="viewport"/><title>LlamaIndex 知识库问答入门 | Smith</title><meta content="AI Agent,大模型,教程,RAG,LangChain,Text-to-SQL" name="keywords"/><meta content="Smith" name="author"/><meta content="Smith" name="copyright"/><meta content="telephone=no" name="format-detection"/><meta content="#fafaf8" name="theme-color"/><meta content="yes" name="mobile-web-app-capable"/><meta content="yes" name="apple-touch-fullscreen"/><meta content="LlamaIndex 知识库问答入门" name="apple-mobile-web-app-title"/><meta content="LlamaIndex 知识库问答入门" name="application-name"/><meta content="yes" name="apple-mobile-web-app-capable"/><meta content="#fafaf8" name="apple-mobile-web-app-status-bar-style"/><meta content="article" property="og:type"/><meta content="LlamaIndex 知识库问答入门" property="og:title"/><meta content="https://smithhs.cn/2026/07/24/2026-07-24-ai-agent-04-llamaindex-rag/index.html" property="og:url"/><meta content="Smith" property="og:site_name"/><meta content="用 LlamaIndex 组织索引、检索和问答链路，并结合学生端代码理解落地结构。" property="og:description"/><meta content="zh-CN" property="og:locale"/><meta content="/img/ai-agent-tutorial/covers/ai-agent-04-llamaindex-rag.png" property="og:image"/><meta content="Smith" property="article:author"/><meta property="article:tag"/><meta content="summary" name="twitter:card"/><meta content="/img/ai-agent-tutorial/covers/ai-agent-04-llamaindex-rag.png" name="twitter:image"/><meta content="用 LlamaIndex 组织索引、检索和问答链路，并结合学生端代码理解落地结构。" name="description"/><link href="/favicon.ico" rel="shortcut icon"/><link href="https://smithhs.cn/2026/07/24/2026-07-24-ai-agent-04-llamaindex-rag/" rel="canonical"/><link href="//cdn.cbd.int" rel="preconnect"><link href="//busuanzi.ibruce.info" rel="preconnect"><link href="/manifest.json" rel="manifest"/><meta content="var(--smith-main)" name="msapplication-TileColor"><link color="#5bbad5" href="/img/siteicon/apple-icon-180.png" rel="mask-icon"/><link href="/img/siteicon/apple-icon-180.png" rel="apple-touch-icon" sizes="180x180"/><link href="/img/siteicon/apple-icon-180.png" rel="apple-touch-icon-precomposed" sizes="180x180"/><link href="/img/siteicon/32.png" rel="icon" sizes="32x32" type="image/png"/><link href="/img/siteicon/16.png" rel="icon" sizes="16x16" type="image/png"/><link href="/img/siteicon/apple-icon-180.png" rel="bookmark"/><link href="/img/siteicon/apple-splash-2048-2732.jpg" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-2732-2048.jpg" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-1668-2388.jpg" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-2388-1668.jpg" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-1536-2048.jpg" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-2048-1536.jpg" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-1668-2224.jpg" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-2224-1668.jpg" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-1620-2160.jpg" media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-2160-1620.jpg" media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-1290-2796.jpg" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-2796-1290.jpg" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-1179-2556.jpg" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-2556-1179.jpg" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-1284-2778.jpg" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-2778-1284.jpg" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-1170-2532.jpg" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-2532-1170.jpg" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-1125-2436.jpg" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-2436-1125.jpg" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-1242-2688.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-2688-1242.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-828-1792.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-1792-828.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-1242-2208.jpg" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-2208-1242.jpg" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-750-1334.jpg" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-1334-750.jpg" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-640-1136.jpg" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-1136-640.jpg" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/css/index.css" rel="stylesheet"/><link href="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'" rel="stylesheet"/><link href="https://cdn.cbd.int/@fancyapps/ui@6.1.6/dist/fancybox/fancybox.css" media="print" onload="this.media='all'" rel="stylesheet"/><link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet"/><link href="https://npm.elemecdn.com/smith-theme-static@1.0.2/swiper/swiper.min.css" media="print" onload="this.media='all'" rel="stylesheet"/><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: undefined,
+  postHeadAiDescription: {"enable":true,"gptName":"Smith","mode":"api","switchBtn":false,"btnLink":"https://aicos.ink","randomNum":3,"basicWordCount":1000,"key":"","Referer":"https://aicos.ink"},
+  diytitle: {"enable":true,"leaveTitle":"再看看嘛🌈！","backTitle":"欢迎回来✌️！"},
+  LA51: undefined,
+  greetingBox: {"enable":true,"default":"晚上好👋","list":[{"greeting":"晚安😴","startTime":0,"endTime":5},{"greeting":"早上好鸭👋, 祝你一天好心情！","startTime":6,"endTime":9},{"greeting":"上午好👋, 状态很好，鼓励一下～","startTime":10,"endTime":10},{"greeting":"11点多啦, 在坚持一下就吃饭啦～","startTime":11,"endTime":11},{"greeting":"午安👋, 宝贝","startTime":12,"endTime":14},{"greeting":"🌈充实的一天辛苦啦！","startTime":14,"endTime":18},{"greeting":"19点喽, 奖励一顿丰盛的大餐吧🍔。","startTime":19,"endTime":19},{"greeting":"晚上好👋, 在属于自己的时间好好放松😌~","startTime":20,"endTime":24}]},
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  music_page_default: "nav_music",
+  home_banner: {"enable":true,"interval":5000,"count":5},
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: true,
+  mainTone: undefined,
+  authorStatus: {"skills":["💻 后端开发 Java / Spring Cloud","🌐 前端探索 React / TypeScript","🤖 AI 工具深度用户","🏠 智能家居折腾达人","🔨 从设计到部署一条龙","📝 偶尔写写博客记录生活","🎵 听歌写代码双线并行","🚀 脚踏实地行动派"]},
+  algolia: undefined,
+  localSearch: {"path":"/search.json","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":240},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: Smith","link":"链接: ","source":"来源: Smith","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#4f7cff","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.2.0/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.2.0/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: 'Smith',
+  title: 'SpringCloud01',
+  postAI: '',
+  pageFillDescription: 'SpringCloud01, 一、微服务, 1.1单体架构, 1.2 微服务, 1.3微服务的重要性, 二、SpringCloud, 2.1认识SpringCloud, 2.2 环境准备, 2.2.1搭建SpringCloud环境, 三、实现远程调用, 3.1 服务准备, 3.2 调用流程, 3.3 RestTemplete的使用, 3.4.提供者与消费者, 四、Feign远程调用, 5.1Feign 是什么, 5.2为什么选择 Feign, 5.3Feign替代RestTemplate, 引入依赖, 添加注解, 编写Feign的客户端, 测试, 总结, 抽取api, OpenFeign的超时控制, Openfeign日志打印功能, 配置文件方式  – springboot3.3.4 对应的openFeign版本一微服务随着互联网行业的发展对服务的要求也越来越高服务架构也从单体架构逐渐演变为现在流行的微服务架构这些架构之间有怎样的差别呢单体架构单体架构将业务的所有功能集中在一个项目中开发打成一个包部署单体架构的优缺点如下优点架构简单部署成本低缺点耦合度高维护困难升级困难微服务分布式架构根据业务功能对系统做拆分每个业务功能模块作为独立项目开发称为一个服务并且各个服务之间可以相互调用优点拆分粒度更小服务更独立耦合度更低缺点服务调用关系错综复杂提升部署难度微服务这种方案需要技术框架来落地全球的互联网公司都在积极尝试自己的微服务落地技术在国内最知名的就是和微服务的重要性二认识是目前国内使用最广泛的微服务框架官网地址集成了各种微服务功能组件并基于实现了这些组件的自动装配从而提供了良好的开箱即用体验其中常见的组件包括功能组件服务注册和发现服务远程调用统一配置管理服务链路监控统一网关路由流控降级保护微服务技术对比兼容版本底层是依赖于的并且有版本的兼容关系如下环境准备搭建环境创建订单表参考之前整合代码整合环境完成订单表的增删改查功能创建用户表完成用户表的增删改查略搭建用户服务和订单服务略版本三实现远程调用服务准备目前程序中我们可以通过订单查询到订单服务订单对象中只存在用户并没有用户的具体信息成功铲车莆田接下来我们需要做的是搭建用户服务并且通过订单服务调用用户服务得到用户完整信息调用流程我们需要在中向发起一个的请求调用这个接口大概的步骤是这样的修改服务中的方法根据对象中的查询将查询的填充到对象一起返回的使用是提供的用于访问服务的客户端它提供了很多可以方便访问远程服务的方法这些方法可以帮助开发人员减少编写客户端代码的工作量导入依赖编写配置类注入完成服务代码补充注意在调用过程中需要使用到进行对象转换提供者与消费者在服务调用关系中会有两个不同的角色服务提供者一次业务中被其它微服务调用的服务提供接口给其它微服务服务消费者一次业务中调用其它微服务的服务调用其它微服务提供的接口但是服务提供者与服务消费者的角色并不是绝对的而是相对于业务而言如果服务调用了服务而服务又调用了服务服务的角色是什么对于调用的业务而言是服务消费者是服务提供者对于调用的业务而言是服务消费者是服务提供者因此服务既可以是服务提供者也可以是服务消费者四远程调用是什么是一个请求调用的轻量级框架可以以接口注解的方式调用请求当实际调用的时候传入参数根据参数再应用到请求上进而转化成真正的请求封装了调用流程为什么选择如果不使用框架那么调用服务需要走的话无论是使用自带的还是使用工具包的亦或是都需要自行配置请求然后才能发起请求获得响应体后还需解析等操作十分繁琐而只需要定义一个接口并且通过注解的形式定义好请求模板就可以项使用本地接口一样使用请求看我们以前利用发起远程调用的代码存在下面的问题代码可读性差编程体验不统一参数复杂难以维护替代的使用步骤如下引入依赖我们在服务的文件中引入的依赖负载均衡添加注解在的启动类添加注解开启的功能编写的客户端在中新建一个接口内容如下这个客户端主要是基于的注解来声明远程调用的信息比如服务名称服务提供者的名称请求方式请求路径请求参数返回值类型注意如果是请求一定要在参数前面加上注解否则会转为请求去标签体中寻找参数先启动提供者再启动消费者测试使用客户端代替这样就可以帮助我们发送请求无需自己使用来发送了总结使用的步骤引入依赖添加注解编写接口使用中定义的方法代替抽取对于公共部分的实体类以及接口统一抽取到模块中的超时控制通过配置可以控制与远程服务器建立连接和读取响应的超时时间参数指定了连接超时时间默认时间为秒也就是在尝试建立连接时如果在指定时间内无法建立连接就会抛出异常参数指定了读取响应超时时间默认时间为秒也就是在发送请求后如果在指定时间内没有接收到响应就会抛出异常在服务中加入断点后服务两秒内没有收到响应则会报错日志打印功能提供了日志打印功能我们可以通过配置来调整日志级别从而了解中请求的细节也就是说对接口的调用情况进行日志输出而日志的级别分为四种不记录任何日志信息这是默认值仅记录请求的方法以及响应状态码和执行时间在的基础上额外记录了请求和响应的头信息记录所有请求和响应的明细包括头信息请求体元数据配置文件方式对应的版本自己的接口包路径表示全局配置对所有客户端生效连接超时时间单位毫秒默认秒建议根据业务调整读取响应超时时间单位毫秒默认秒建议根据业务调整可选配置日志级别方便调试级别',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2026-06-02 11:22:08',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fafaf8')
+        }
+      }
+      const t = saveToLocal.get('theme')
+
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link href="https://npm.elemecdn.com/lxgw-wenkai-screen-webfont@1.1.0/style.css" media="print" onload="this.media='all'" rel="stylesheet"/><meta content="Hexo 7.3.0" name="generator"/></meta></link></link><style>.ai-series-intro{border-left:4px solid var(--smith-main,#49b1f5);background:rgba(73,177,245,.08);border-radius:12px;padding:1rem 1.2rem}.ai-series-index{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin:1.2rem 0}.ai-series-index a{display:block;border:1px solid rgba(127,127,127,.18);border-radius:16px;padding:14px 16px;background:rgba(255,255,255,.65);box-shadow:0 8px 24px rgba(15,23,42,.06)}.ai-series-index .no{font-weight:700;color:var(--smith-main,#49b1f5);font-size:.9rem}.ai-series-index .ttl{font-weight:700;margin:.3rem 0}#article-container img{border-radius:12px;box-shadow:0 8px 28px rgba(15,23,42,.08)}#article-container table{display:block;overflow:auto}</style></head><body data-type="smith"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick='document.getElementById("loading-box").classList.add("loaded")'><div class="loading-bg"><img alt="加载头像" class="loading-img nolazyload" src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d20f536c64d06e5fcf4bfe2ec5dc25d.jpg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link href="https://cdn.cbd.int/smith-theme-static@1.0.2/progress_bar/progress_bar.css" rel="stylesheet"><script async="async" data-pace-options='{ "restartOnRequestAfter":false,"eventLag":false}' src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="smithfont smith-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://smithhs.cn/" title="博客"><img alt="博客" class="back-menu-item-icon" data-lazy-src="/img/favicon.png" onerror='this.onerror=null,this.src="/img/404.jpg"' src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" href="https://github.com/Smithhss" rel="noopener" target="_blank" title="Github"><img alt="Github" class="back-menu-item-icon" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/GitHub.png" onerror='this.onerror=null,this.src="/img/404.jpg"' src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"/><span class="back-menu-item-text">Github</span></a></div></div></div></div><a accesskey="h" href="/" id="site-name"><div class="title">Smith</div><i class="smithfont smith-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a href="javascript:smith.scrollToDest(0, 500)" id="page-name">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="smithfont smith-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="smithfont smith-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="smithfont smith-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="smithfont smith-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="smithfont smith-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="smithfont smith-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/dailyPhoto/"><i class="smithfont smith-icon-camera faa-tada" style="font-size: 0.9em;"></i><span> 每日照片</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wallpaper/"><i class="smithfont smith-icon-image faa-tada" style="font-size: 0.9em;"></i><span> 壁纸</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wordScenery/"><i class="smithfont smith-icon-font faa-tada" style="font-size: 0.9em;"></i><span> 文字风景</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="smithfont smith-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于我</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="smithfont smith-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/love/"><i class="smithfont smith-icon-heart faa-tada" style="font-size: 0.9em;"></i><span> 爱情</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="smithfont smith-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button only-home" id="travellings_button" title="随机前往一个开往项目网站"><a class="site-page" data-pjax-state="external" href="javascript:void(0);" onclick="smith.totraveling()" rel="external nofollow" title="随机前往一个开往项目网站"><i class="smithfont smith-icon-train"></i></a></div><div class="nav-button" id="randomPost_button"><a class="site-page" href="javascript:void(0);" onclick="toRandomPost()" title="随机前往一个文章"><i class="smithfont smith-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a accesskey="s" class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍"><i class="smithfont smith-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" onclick="smith.switchConsole();" title="中控台"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg" target="_blank"><img alt="wechat" class="post-qr-code-img" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg" onerror='this.onerror=null,this.src="/img/404.jpg"' src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg" target="_blank"><img alt="alipay" class="post-qr-code-img" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg" onerror='this.onerror=null,this.src="/img/404.jpg"' src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Android-Studio/" style="font-size: 1.05rem;">Android Studio<sup>1</sup></a><a href="/tags/App/" style="font-size: 1.05rem;">App<sup>1</sup></a><a href="/tags/Butterfly/" style="font-size: 1.05rem;">Butterfly<sup>1</sup></a><a href="/tags/C/" style="font-size: 1.05rem;">C++<sup>3</sup></a><a href="/tags/CSS/" style="font-size: 1.05rem;">CSS<sup>1</sup></a><a href="/tags/Cisco-Packet-Tracer/" style="font-size: 1.05rem;">Cisco Packet Tracer<sup>1</sup></a><a href="/tags/Docker/" style="font-size: 1.05rem;">Docker<sup>2</sup></a><a href="/tags/Easypan/" style="font-size: 1.05rem;">Easypan<sup>2</sup></a><a href="/tags/FurtherMathematics/" style="font-size: 1.05rem;">FurtherMathematics<sup>1</sup></a><a href="/tags/GPT/" style="font-size: 1.05rem;">GPT<sup>1</sup></a><a href="/tags/Git2/" style="font-size: 1.05rem;">Git2<sup>1</sup></a><a href="/tags/HTML/" style="font-size: 1.05rem;">HTML<sup>1</sup></a><a href="/tags/Hexo/" style="font-size: 1.05rem;">Hexo<sup>1</sup></a><a href="/tags/Java/" style="font-size: 1.05rem;">Java<sup>67</sup></a><a href="/tags/JavaScript/" style="font-size: 1.05rem;">JavaScript<sup>1</sup></a><a href="/tags/Jrebel/" style="font-size: 1.05rem;">Jrebel<sup>1</sup></a><a href="/tags/LeetCode/" style="font-size: 1.05rem;">LeetCode<sup>1</sup></a><a href="/tags/Linux/" style="font-size: 1.05rem;">Linux<sup>3</sup></a><a href="/tags/Markdown/" style="font-size: 1.05rem;">Markdown<sup>2</sup></a><a href="/tags/Maven/" style="font-size: 1.05rem;">Maven<sup>2</sup></a><a href="/tags/MyBatis/" style="font-size: 1.05rem;">MyBatis<sup>1</sup></a><a href="/tags/MyBatis-Plus/" style="font-size: 1.05rem;">MyBatis-Plus<sup>1</sup></a><a href="/tags/Mysql/" style="font-size: 1.05rem;">Mysql<sup>1</sup></a><a href="/tags/Navicat/" style="font-size: 1.05rem;">Navicat<sup>1</sup></a><a href="/tags/NoSql/" style="font-size: 1.05rem;">NoSql<sup>1</sup></a><a href="/tags/Nodejs/" style="font-size: 1.05rem;">Nodejs<sup>2</sup></a><a href="/tags/Python/" style="font-size: 1.05rem;">Python<sup>4</sup></a><a href="/tags/Spring/" style="font-size: 1.05rem;">Spring<sup>2</sup></a><a href="/tags/VMware/" style="font-size: 1.05rem;">VMware<sup>2</sup></a><a href="/tags/WeChat/" style="font-size: 1.05rem;">WeChat<sup>1</sup></a><a href="/tags/YouHou/" style="font-size: 1.05rem;">YouHou<sup>1</sup></a><a href="/tags/books/" style="font-size: 1.05rem;">books<sup>1</sup></a><a href="/tags/butterfly/" style="font-size: 1.05rem;">butterfly<sup>1</sup></a><a href="/tags/clash/" style="font-size: 1.05rem;">clash<sup>1</sup></a><a href="/tags/error/" style="font-size: 1.05rem;">error<sup>1</sup></a><a href="/tags/project/" style="font-size: 1.05rem;">project<sup>4</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 1.05rem;">前端<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6/" style="font-size: 1.05rem;">开发框架<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" style="font-size: 1.05rem;">开发环境<sup>1</sup></a><a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="font-size: 1.05rem;">软件工程<sup>1</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="smithfont smith-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="smithfont smith-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+<i class="smithfont smith-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/05/"><span class="card-archive-list-date">五月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">16</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/04/"><span class="card-archive-list-date">四月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">31</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/03/"><span class="card-archive-list-date">三月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">75</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/02/"><span class="card-archive-list-date">二月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">7</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/11/"><span class="card-archive-list-date">十一月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">3</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/10/"><span class="card-archive-list-date">十月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/09/"><span class="card-archive-list-date">九月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">5</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/07/"><span class="card-archive-list-date">七月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" href="javascript:void(0);" title="显示模式切换"><i class="smithfont smith-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="smith.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="smithfont smith-icon-arrows-left-right"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="smith.musicToggle()" title="音乐开关"><a class="music-switch"><i class="smithfont smith-icon-music"></i></a></div></div><div class="console-mask" href="javascript:void(0);" onclick="smith.hideConsole()"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="smithfont smith-icon-arrow-up"></i><span id="percent" onclick="smith.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="smithfont smith-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><i class="smithfont smith-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/AI%E5%B7%A5%E7%A8%8B/" itemprop="url">AI工程</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/AI%20Agent/" itemprop="url" tabindex="-1"><span><i class="smithfont smith-icon-hashtag"></i>AI Agent</span></a><a class="article-meta__tags" href="/tags/%E6%95%99%E7%A8%8B/" itemprop="url" tabindex="-1"><span><i class="smithfont smith-icon-hashtag"></i>教程</span></a><a class="article-meta__tags" href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/" itemprop="url" tabindex="-1"><span><i class="smithfont smith-icon-hashtag"></i>大模型</span></a></span></div></div><h1 class="post-title">LlamaIndex 知识库问答入门</h1><div id="post-meta"><div class="meta-secondline"><span class="post-meta-date"><i class="smithfont smith-icon-calendar-days post-meta-icon"></i><span class="article-meta-label">发表于</span><time datetime="2026-07-24T09:28:00.000Z" time="2026-07-24 09:28:00" title="发表于 2026-07-24 09:28:00">2026-07-24</time></span><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="smithfont smith-icon-file-word post-meta-icon"></i><span class="word-count">约 4468 字</span></span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" preserveaspectratio="none" shape-rendering="auto" viewbox="0 24 150 28" xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"><defs><path d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z" id="gentle-wave"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="/img/ai-agent-tutorial/covers/ai-agent-04-llamaindex-rag.png"/></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><div class="post-ai-description"><div class="ai-title"><i class="smithfont smith-icon-bilibili"></i><div class="ai-title-text">AI-摘要</div><i class="smithfont smith-icon-arrow-rotate-right"></i><i class="smithfont smith-icon-circle-dot" title="朗读摘要"></i><div id="ai-tag">Smith GPT</div></div><div class="ai-explanation">AI初始化中...</div><div class="ai-btn-box"><div class="ai-btn-item">介绍自己 🙈</div><div class="ai-btn-item">生成本文简介 👋</div><div class="ai-btn-item">推荐相关文章 📖</div><div class="ai-btn-item">前往主页 🏠</div><div class="ai-btn-item" id="go-api-link">了解更多</div></div><script data-pjax="" src="/js/smith/ai_abstract.js"></script></div><article class="post-content" id="article-container" itemscope="" itemtype="https://smithhs.cn/2026/07/24/2026-07-24-ai-agent-04-llamaindex-rag/"><header><a class="post-meta-categories" href="/categories/AI%E5%B7%A5%E7%A8%8B/" itemprop="url">AI工程</a><a href="/tags/AI%20Agent/" itemprop="url" tabindex="-1">AI Agent</a><a href="/tags/%E6%95%99%E7%A8%8B/" itemprop="url" tabindex="-1">教程</a><a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/" itemprop="url" tabindex="-1">大模型</a><h1 id="CrawlerTitle">LlamaIndex 知识库问答入门</h1></header><blockquote class="ai-series-intro"><p><strong>AI Agent 工程实践教程 · 第 04 章</strong></p><p>用 LlamaIndex 组织索引、检索和问答链路，并结合学生端代码理解落地结构。</p><p><a href="/ai-agent-tutorial/">返回系列目录</a></p></blockquote><h2 id="_llamaindex">第四天_LlamaIndex知识库问答入门</h2>
+<h1 id="llamaindex">第四天：LlamaIndex 知识库问答入门</h1>
+<p>前三天我们已经知道：</p>
+<ul>
+<li>大模型本身不一定知道我们的业务资料。</li>
+<li>想让大模型回答业务问题，需要把外部资料检索出来，再交给大模型。</li>
+<li>这个流程通常叫 RAG。</li>
+</ul>
+<p>第四天要解决的问题是：</p>
+<p><strong>真实项目里，RAG 不应该每一步都手写。</strong></p>
+<p>我们要学习 LlamaIndex，用它把“读取资料、切分资料、生成向量、写入向量库、检索资料、组织 Prompt、调用大模型”这些流程组织起来。</p>
+<p>这一节课学完以后，学生要能说清楚：</p>
+<ul>
+<li>LlamaIndex 是干什么的。</li>
+<li>Document、Node、VectorStore、StorageContext、VectorStoreIndex 分别是什么。</li>
+<li>LlamaIndex 怎么接入 Milvus。</li>
+<li><code>VectorStoreIndex(...)</code> 这行代码到底做了什么。</li>
+<li>在燕雀管理平台里，前端、Java、Python、Milvus 各自负责什么。</li>
+</ul>
+<hr/>
+<h2 id="1-rag-llamaindex">1. 为什么学完 RAG 还要学 LlamaIndex</h2>
+<p>上一节我们已经手写过一个简单 RAG。</p>
+<p>流程大概是这样：</p>
+<p><img alt="为什么学完 RAG 还要学 LlamaIndex" src="/img/ai-agent-tutorial/04/why_llamaindex_after_rag.svg"/></p>
+<p>手写 RAG 的好处是容易理解原理：</p>
+<ol>
+<li>准备资料。</li>
+<li>把资料切成小段。</li>
+<li>把每个小段转成向量。</li>
+<li>把向量保存到 Milvus。</li>
+<li>用户提问时，再把问题转成向量。</li>
+<li>去 Milvus 里查相似内容。</li>
+<li>把查到的内容和问题一起交给大模型。</li>
+<li>大模型生成回答。</li>
+</ol>
+<p>但是到了真实项目，这样写会越来越乱。</p>
+<p>比如燕雀管理平台要做知识库管理：</p>
+<ul>
+<li>一个平台里会有多个知识库。</li>
+<li>每个知识库里会有很多文档。</li>
+<li>文档要上传、入库、重新入库、删除。</li>
+<li>每个文档要切成多个 chunk。</li>
+<li>每个 chunk 要保存原始文本、文档 ID、知识库 ID、版本号、来源地址。</li>
+<li>查询时要先检索，再把资料组织进 Prompt。</li>
+</ul>
+<p>如果这些都自己手写，代码很快就会变成一堆流程代码。</p>
+<p>所以我们需要一个框架来帮我们组织 RAG。</p>
+<p>这个框架就是 LlamaIndex。</p>
+<hr/>
+<h2 id="2-llamaindex">2. LlamaIndex 是什么</h2>
+<p>一句话：</p>
+<p><strong>LlamaIndex 是一个用来搭建知识库问答和 RAG 应用的框架。</strong></p>
+<p>它不是大模型。</p>
+<p>它也不是向量数据库。</p>
+<p>它更像是一个“资料到大模型之间的组织层”。</p>
+<p>大模型负责生成回答。</p>
+<p>Milvus 负责保存向量和相似度检索。</p>
+<p>LlamaIndex 负责把中间流程串起来：</p>
+<pre><code class="language-text">业务资料
+  ↓
+读取资料
+  ↓
+切分资料
+  ↓
+生成向量
+  ↓
+写入向量库
+  ↓
+根据问题检索相关资料
+  ↓
+组织 Prompt
+  ↓
+调用大模型生成回答
+</code></pre>
+<p>可以把 LlamaIndex 理解成：</p>
+<pre><code class="language-text">LlamaIndex = 帮我们组织 RAG 流程的框架
+</code></pre>
+<p>它解决的不是“向量怎么存”，而是：</p>
+<p><strong>一份业务资料从上传到被大模型使用，中间应该怎么被组织。</strong></p>
+<hr/>
+<h2 id="3-llamaindex">3. LlamaIndex 里的核心对象</h2>
+<p>先把几个核心对象讲清楚，后面看代码就不会乱。</p>
+<p><img alt="LlamaIndex 核心概念" src="/img/ai-agent-tutorial/04/llamaindex_core_concepts.svg"/></p>
+<h3 id="31-document">3.1 Document：一整份资料</h3>
+<p><code>Document</code> 表示一份原始资料。</p>
+<p>比如：</p>
+<ul>
+<li>一篇 Markdown 文档。</li>
+<li>一个 PDF 文件。</li>
+<li>一段从数据库查出来的说明。</li>
+<li>一篇产品介绍。</li>
+</ul>
+<p>在代码里可以这样创建：</p>
+<pre><code class="language-python">from llama_index.core import Document
+
+document = Document(
+    text="这里是一整份 Markdown 文档的内容",
+    id_="doc_001",
+    metadata={
+        "knowledge_base_id": "kb_001",
+        "document_id": "doc_001",
+        "document_name": "课程介绍.md",
+    },
+)
+</code></pre>
+<p>这里要注意：</p>
+<ul>
+<li><code>text</code> 是文档正文。</li>
+<li><code>id_</code> 是 LlamaIndex 里这份文档的 ID。</li>
+<li><code>metadata</code> 是业务信息，比如知识库 ID、文档 ID、文件名、版本号。</li>
+</ul>
+<p><code>metadata</code> 很重要。</p>
+<p>因为向量库查回来的不是“一个孤立的向量”，而是“某个文档里的某个片段”。</p>
+<p>如果没有 metadata，我们就不知道这个片段来自哪个知识库、哪份文档。</p>
+<h3 id="32-node">3.2 Node：切分后的资料片段</h3>
+<p>一份文档通常很长，不能整篇都塞给大模型。</p>
+<p>所以 LlamaIndex 会把 <code>Document</code> 切成多个 <code>Node</code>。</p>
+<p>可以这样理解：</p>
+<pre><code class="language-text">Document：一整篇文档
+Node：文档切开之后的一小段
+</code></pre>
+<p>例如：</p>
+<pre><code class="language-text">课程介绍.md
+  ↓
+Node 0：课程目标...
+Node 1：课程安排...
+Node 2：项目实战...
+</code></pre>
+<p>在 RAG 里，真正被向量化、被检索的通常是 Node。</p>
+<p>因为用户提问时，我们要找的是最相关的几个片段，而不是整篇文档。</p>
+<p>源码里能看到很多种 Node。</p>
+<p>大概关系可以这样理解：</p>
+<pre><code class="language-text">BaseNode
+  ├─ Node
+  │   └─ Document
+  │       └─ ImageDocument
+  ├─ TextNode
+  │   ├─ ImageNode
+  │   └─ IndexNode
+</code></pre>
+<p>常见类型：</p>
+<table>
+<thead>
+<tr>
+<th>类型</th>
+<th>通俗理解</th>
+<th>什么时候会见到</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>BaseNode</code></td>
+<td>所有 Node 的基础抽象</td>
+<td>看源码、类型标注时会看到</td>
+</tr>
+<tr>
+<td><code>Document</code></td>
+<td>一整份原始文档</td>
+<td>刚读取 Markdown、PDF、网页时</td>
+</tr>
+<tr>
+<td><code>TextNode</code></td>
+<td>一段可检索的文本片段</td>
+<td>文档切分以后最常见</td>
+</tr>
+<tr>
+<td><code>ImageNode</code></td>
+<td>带图片信息的节点</td>
+<td>多模态、图片检索场景</td>
+</tr>
+<tr>
+<td><code>ImageDocument</code></td>
+<td>图片文档</td>
+<td>把图片作为一份文档处理时</td>
+</tr>
+<tr>
+<td><code>IndexNode</code></td>
+<td>可以指向另一个索引或对象的节点</td>
+<td>高级索引、组合索引场景</td>
+</tr>
+</tbody>
+</table>
+<p>这节课主要关注两个：</p>
+<pre><code class="language-text">Document：入库前的一整份 Markdown
+TextNode：切分后真正写入向量库的文本片段
+</code></pre>
+<p>平时我们口头说的 <code>Node</code>，大多数时候就是在说这些被切出来、准备向量化和检索的文本片段。</p>
+<h3 id="33-nodeparser-document-node">3.3 NodeParser：把 Document 切成 Node</h3>
+<p>LlamaIndex 里负责“把 Document 切成 Node”的组件，通常叫 <code>NodeParser</code>。</p>
+<p>可以把它理解成：</p>
+<pre><code class="language-text">NodeParser = 文档切分器的统一抽象
+</code></pre>
+<p>它下面有很多具体实现。</p>
+<p>大概的继承关系可以这样看：</p>
+<pre><code class="language-text">NodeParser
+  ├─ TextSplitter
+  │   ├─ MetadataAwareTextSplitter
+  │   │   ├─ SentenceSplitter
+  │   │   └─ TokenTextSplitter
+  │   ├─ CodeSplitter
+  │   └─ LangchainNodeParser
+  ├─ MarkdownNodeParser
+  ├─ HTMLNodeParser
+  ├─ JSONNodeParser
+  ├─ SentenceWindowNodeParser
+  ├─ SemanticSplitterNodeParser
+  └─ HierarchicalNodeParser
+</code></pre>
+<p>也就是说：</p>
+<ul>
+<li><code>NodeParser</code> 是最上层的统一抽象。</li>
+<li><code>TextSplitter</code> 是专门处理文本切分的一类 <code>NodeParser</code>。</li>
+<li><code>SentenceSplitter</code>、<code>TokenTextSplitter</code>、<code>CodeSplitter</code> 是更具体的切分方式。</li>
+<li><code>MarkdownNodeParser</code>、<code>HTMLNodeParser</code>、<code>JSONNodeParser</code> 这类更偏“按文件结构解析”。</li>
+</ul>
+<p>常见的有：</p>
+<table>
+<thead>
+<tr>
+<th>类</th>
+<th>适合处理什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>SentenceSplitter</code></td>
+<td>普通文本、Markdown 正文，按句子和段落尽量自然切分</td>
+</tr>
+<tr>
+<td><code>TokenTextSplitter</code></td>
+<td>按 token 数量控制长度，适合严格控制上下文大小</td>
+</tr>
+<tr>
+<td><code>CodeSplitter</code></td>
+<td>代码文件，尽量按代码结构切分</td>
+</tr>
+<tr>
+<td><code>MarkdownNodeParser</code></td>
+<td>Markdown 文档，按 Markdown 标题结构切分</td>
+</tr>
+<tr>
+<td><code>HTMLNodeParser</code></td>
+<td>HTML 页面</td>
+</tr>
+<tr>
+<td><code>JSONNodeParser</code></td>
+<td>JSON 数据</td>
+</tr>
+<tr>
+<td><code>SentenceWindowNodeParser</code></td>
+<td>保留句子前后窗口，适合需要上下文的检索</td>
+</tr>
+<tr>
+<td><code>SemanticSplitterNodeParser</code></td>
+<td>按语义相似度切分，效果更智能，但成本更高</td>
+</tr>
+</tbody>
+</table>
+<p>所以 <code>SentenceSplitter</code> 只是其中一种。</p>
+<p>它不是唯一的切分器。</p>
+<p>不过我们现在的知识库只支持 Markdown。</p>
+<p>所以更合理的策略是：</p>
+<pre><code class="language-text">先用 MarkdownNodeParser 按 Markdown 标题结构切
+  ↓
+如果某个 Node 还是太长
+  ↓
+再用 SentenceSplitter 二次切分
+</code></pre>
+<p>这样做有两个好处：</p>
+<ul>
+<li>能保留 Markdown 的标题结构，比如一级标题、二级标题。</li>
+<li>又能避免某个标题下面内容太长，导致单个 Node 太大。</li>
+</ul>
+<p>代码可以这样写：</p>
+<pre><code class="language-python">from llama_index.core import Document
+from llama_index.core.node_parser import MarkdownNodeParser, SentenceSplitter
+
+
+markdown_parser = MarkdownNodeParser()
+
+sentence_splitter = SentenceSplitter(
+    chunk_size=800,
+    chunk_overlap=120,
+)
+
+
+def split_markdown_document(document: Document):
+    markdown_nodes = markdown_parser.get_nodes_from_documents([document])
+
+    final_nodes = []
+    for node in markdown_nodes:
+        content = node.get_content(metadata_mode="none")
+
+        if len(content) &lt;= 800:
+            final_nodes.append(node)
+            continue
+
+        temp_document = Document(
+            text=content,
+            id_=node.id_,
+            metadata=dict(node.metadata or {}),
+        )
+        final_nodes.extend(
+            sentence_splitter.get_nodes_from_documents([temp_document])
+        )
+
+    return final_nodes
+
+
+nodes = split_markdown_document(document)
+</code></pre>
+<p>这里面两个 parser 的分工很清楚：</p>
+<table>
+<thead>
+<tr>
+<th>组件</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>MarkdownNodeParser</code></td>
+<td>先按 Markdown 标题结构切分</td>
+</tr>
+<tr>
+<td><code>SentenceSplitter</code></td>
+<td>只处理太长的 Node，把长段落继续切小</td>
+</tr>
+</tbody>
+</table>
+<p><code>SentenceSplitter</code> 的两个常见参数：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>chunk_size</code></td>
+<td>每个片段大概多长</td>
+</tr>
+<tr>
+<td><code>chunk_overlap</code></td>
+<td>相邻片段之间重叠多少内容</td>
+</tr>
+</tbody>
+</table>
+<p>为什么需要重叠？</p>
+<p>因为一句话的上下文可能跨越两个片段。</p>
+<p>如果完全不重叠，检索出来的内容可能缺前半句或者缺后半句。</p>
+<h3 id="34-vectorstore">3.4 VectorStore：向量存储抽象</h3>
+<p><code>VectorStore</code> 是 LlamaIndex 对“向量数据库”的抽象。</p>
+<p>它不一定是 Milvus，也可以是别的向量库。</p>
+<p>它负责的事情很明确：</p>
+<pre><code class="language-text">保存向量
+保存文本片段
+保存 metadata
+根据问题向量查相似片段
+</code></pre>
+<p>所以 VectorStore 是一个接口概念。</p>
+<p>Milvus 是其中一种具体实现。</p>
+<h3 id="35-milvusvectorstore-milvus">3.5 MilvusVectorStore：连接 Milvus 的适配器</h3>
+<p><code>MilvusVectorStore</code> 是 LlamaIndex 提供的 Milvus 适配器。</p>
+<p>也就是说，LlamaIndex 通过它来操作 Milvus。</p>
+<pre><code class="language-python">from llama_index.vector_stores.milvus import MilvusVectorStore
+
+vector_store = MilvusVectorStore(
+    uri="http://localhost:19530",
+    token="your_milvus_token",
+    collection_name="yanque_knowledge",
+    dim=1024,
+)
+</code></pre>
+<p>这段代码的意思是：</p>
+<pre><code class="language-text">LlamaIndex
+  ↓
+MilvusVectorStore
+  ↓
+Milvus
+</code></pre>
+<p>常见参数：</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>uri</code></td>
+<td>Milvus 服务地址</td>
+</tr>
+<tr>
+<td><code>token</code></td>
+<td>Milvus 认证信息</td>
+</tr>
+<tr>
+<td><code>collection_name</code></td>
+<td>要写入的 Milvus Collection</td>
+</tr>
+<tr>
+<td><code>dim</code></td>
+<td>向量维度，必须和 Embedding 模型输出维度一致</td>
+</tr>
+<tr>
+<td><code>overwrite</code></td>
+<td>是否覆盖已有 Collection，生产环境一般不要随便开</td>
+</tr>
+</tbody>
+</table>
+<p>默认情况下，<code>MilvusVectorStore</code> 会建这些基础字段：</p>
+<pre><code class="language-text">id
+doc_id
+text
+embedding
+</code></pre>
+<p>这些字段也可以部分自定义。</p>
+<p>比如我们项目里希望 Milvus 字段更像业务系统，就可以这样配置：</p>
+<pre><code class="language-python">vector_store = MilvusVectorStore(
+    uri=settings.milvus_uri,
+    token=settings.milvus_token or "",
+    collection_name=collection_name,
+    dim=vector_dim,
+    doc_id_field="document_id",
+    text_key="text",
+    embedding_field="vector",
+)
+</code></pre>
+<p>这样新建出来的 Collection 会更接近：</p>
+<pre><code class="language-text">id
+document_id
+text
+vector
+</code></pre>
+<p>这里有一个坑：</p>
+<p><code>text_key</code> 理论上能传参数，但当前 LlamaIndex 写入时会从 <code>TextNode</code> 里取 <code>node.dict()[text_key]</code>。</p>
+<p>而 <code>TextNode</code> 的正文键默认就是 <code>text</code>。</p>
+<p>所以项目里先不要把 <code>text_key</code> 改成 <code>content</code>。</p>
+<p>如果真的想把正文列叫 <code>content</code>，就要自己封装一层 VectorStore 或改写写入逻辑。</p>
+<p><code>MilvusVectorStore</code> 自己也提供了一些常见方法。</p>
+<p>这些方法大多数情况下不需要我们直接频繁调用，因为 <code>VectorStoreIndex</code>、<code>Retriever</code> 会帮我们间接调用。</p>
+<p>但是做真实项目时，至少要知道它们的含义。</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>作用</th>
+<th>常见场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>add(nodes)</code></td>
+<td>把已经带有 embedding 的 Node 写入 Milvus</td>
+<td><code>VectorStoreIndex</code> 入库时底层会调用</td>
+</tr>
+<tr>
+<td><code>query(query)</code></td>
+<td>根据查询向量去 Milvus 检索相似 Node</td>
+<td><code>Retriever</code> 检索时底层会调用</td>
+</tr>
+<tr>
+<td><code>delete(ref_doc_id=...)</code></td>
+<td>按文档 ID 删除这份文档对应的 Node</td>
+<td>文档重新入库前，先删旧 chunk</td>
+</tr>
+<tr>
+<td><code>delete_nodes(node_ids=...)</code></td>
+<td>按 Node ID 删除指定 Node</td>
+<td>精确删除某几个 chunk</td>
+</tr>
+<tr>
+<td><code>get_nodes(...)</code></td>
+<td>根据 Node ID 或 metadata 过滤条件取回 Node</td>
+<td>调试、排查、后台管理</td>
+</tr>
+<tr>
+<td><code>clear()</code></td>
+<td>删除整个 Collection</td>
+<td>测试环境清空数据，生产环境慎用</td>
+</tr>
+<tr>
+<td><code>async_add(...)</code> / <code>adelete(...)</code></td>
+<td>异步版本方法</td>
+<td>异步服务中使用</td>
+</tr>
+</tbody>
+</table>
+<p>比如我们项目里重新入库一份文档时，会先删旧 chunk：</p>
+<pre><code class="language-python">vector_store.delete(
+    ref_doc_id=request.document_id
+)
+</code></pre>
+<p>这里的 <code>ref_doc_id</code> 可以理解成：</p>
+<pre><code class="language-text">这批 Node 属于哪一份原始文档
+</code></pre>
+<p>它不是随便去我们自己写的 <code>metadata["document_id"]</code> 里匹配。</p>
+<p>LlamaIndex 在把 Node 写入向量库时，会根据 <code>node.ref_doc_id</code> 自动生成一些字段：</p>
+<pre><code class="language-text">doc_id
+document_id
+ref_doc_id
+</code></pre>
+<p><code>MilvusVectorStore.delete(ref_doc_id=...)</code> 默认匹配的是其中的 <code>doc_id</code> 字段。</p>
+<p>所以如果希望下面这行代码能删掉整份文档的旧 chunk：</p>
+<pre><code class="language-python">vector_store.delete(ref_doc_id=request.document_id)
+</code></pre>
+<p>就要保证这些 Node 的 <code>ref_doc_id</code> 都指向同一个原始文档 ID。</p>
+<p>在我们的项目里，原始 <code>Document</code> 是这样创建的：</p>
+<pre><code class="language-python">Document(
+    text_resource=MediaResource(text=markdown),
+    id_=request.document_id,
+    metadata={...},
+)
+</code></pre>
+<p>后面无论用 <code>MarkdownNodeParser</code> 切，还是长段落再用 <code>SentenceSplitter</code> 二次切，都要保留这个原始 <code>document_id</code>。</p>
+<p>删除旧 chunk 以后，再用 <code>VectorStoreIndex(nodes, ...)</code> 写入新 chunk。</p>
+<p>这样同一份文档重新上传后，Milvus 里不会同时存在旧版本和新版本的内容。</p>
+<p>学生最容易误会的一点是：</p>
+<p><strong>MilvusVectorStore 不是向量，它是连接 Milvus 的工具。</strong></p>
+<h3 id="36-storagecontext-llamaindex">3.6 StorageContext：告诉 LlamaIndex 数据存在哪里</h3>
+<p><code>StorageContext</code> 可以理解成 LlamaIndex 的“存储配置对象”。</p>
+<p>它告诉 LlamaIndex：</p>
+<pre><code class="language-text">你生成出来的向量，不要存在默认地方，要存到这个 vector_store 里。
+</code></pre>
+<p>代码：</p>
+<pre><code class="language-python">from llama_index.core import StorageContext
+
+storage_context = StorageContext.from_defaults(
+    vector_store=vector_store
+)
+</code></pre>
+<p>这里的 <code>vector_store</code> 就是上面的 <code>MilvusVectorStore</code>。</p>
+<p>所以这段代码的意思是：</p>
+<pre><code class="language-text">LlamaIndex 的存储上下文
+  ↓
+使用 MilvusVectorStore
+  ↓
+最终写入 Milvus
+</code></pre>
+<h3 id="37-vectorstoreindex">3.7 VectorStoreIndex：组织入库和查询的核心对象</h3>
+<p><code>VectorStoreIndex</code> 是这节课最重要的对象。</p>
+<p>它不是一个向量。</p>
+<p>它也不是 Milvus 里的索引。</p>
+<p>它是 LlamaIndex 里用来组织“向量化、入库、检索”的结构。</p>
+<p><img alt="LlamaIndex Index 是什么" src="/img/ai-agent-tutorial/04/what_is_llamaindex_index.svg"/></p>
+<p>常见写法：</p>
+<pre><code class="language-python">from llama_index.core import VectorStoreIndex
+
+index = VectorStoreIndex(
+    nodes,
+    storage_context=storage_context,
+    embed_model=embed_model,
+)
+</code></pre>
+<p>这行代码会做几件事：</p>
+<ol>
+<li>遍历每个 Node。</li>
+<li>用 <code>embed_model</code> 把 Node 文本转成向量。</li>
+<li>把向量、文本、metadata 交给 <code>storage_context</code>。</li>
+<li><code>storage_context</code> 再交给 <code>MilvusVectorStore</code>。</li>
+<li>最终写入 Milvus。</li>
+</ol>
+<p>所以：</p>
+<pre><code class="language-text">VectorStoreIndex(nodes, ...)
+</code></pre>
+<p>不是只创建了一个 Python 对象。</p>
+<p>它会触发向量化和入库。</p>
+<p>如果文档已经入过库，只想基于已有 Milvus Collection 查询，一般会用：</p>
+<pre><code class="language-python">index = VectorStoreIndex.from_vector_store(
+    vector_store=vector_store,
+    embed_model=embed_model,
+)
+</code></pre>
+<p>两种写法的区别：</p>
+<table>
+<thead>
+<tr>
+<th>写法</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>VectorStoreIndex(nodes, ...)</code></td>
+<td>有新资料，要向量化并写入向量库</td>
+</tr>
+<tr>
+<td><code>VectorStoreIndex.from_vector_store(...)</code></td>
+<td>资料已经在向量库里，只构建查询入口</td>
+</tr>
+</tbody>
+</table>
+<h3 id="38-retriever">3.8 Retriever：只负责检索</h3>
+<p><code>Retriever</code> 只做一件事：</p>
+<p><strong>根据用户问题，从向量库里找相似资料。</strong></p>
+<pre><code class="language-python">retriever = index.as_retriever(similarity_top_k=3)
+nodes = retriever.retrieve("LlamaIndex 是什么？")
+</code></pre>
+<p>它返回的是相关的 Node。</p>
+<p>它不会调用大模型生成最终答案。</p>
+<p>也就是说，Retriever 的职责更像是：</p>
+<pre><code class="language-text">用户问题
+  -&gt; 生成问题向量
+  -&gt; 去向量库里做相似度搜索
+  -&gt; 返回最相关的几个 Node
+</code></pre>
+<p>这里的 <code>similarity_top_k=3</code> 表示：</p>
+<pre><code class="language-text">最多取回 3 个最相似的片段
+</code></pre>
+<p>如果写成项目里的形式：</p>
+<pre><code class="language-python">retriever = index.as_retriever(
+    similarity_top_k=request.limit,
+)
+</code></pre>
+<p>意思就是：</p>
+<pre><code class="language-text">前端或接口传入 limit
+后端用 request.limit 控制最多返回几个相关片段
+</code></pre>
+<p>比如：</p>
+<pre><code class="language-text">request.limit = 3
+</code></pre>
+<p>就代表最多取回 3 个 chunk。</p>
+<p>这个参数会影响检索结果：</p>
+<table>
+<thead>
+<tr>
+<th>参数值</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>similarity_top_k=1</code></td>
+<td>只取最相似的 1 个片段，结果少，速度快，但可能漏信息</td>
+</tr>
+<tr>
+<td><code>similarity_top_k=3</code></td>
+<td>常见设置，能取回几个相关片段，适合普通问答</td>
+</tr>
+<tr>
+<td><code>similarity_top_k=10</code></td>
+<td>取回更多片段，召回更充分，但后续给大模型的上下文会更多</td>
+</tr>
+</tbody>
+</table>
+<p>不过 <code>as_retriever(...)</code> 里面不是只能传 <code>similarity_top_k</code> 一个参数。</p>
+<p><code>similarity_top_k</code> 只是最常用的参数。</p>
+<p>后面项目复杂以后，还可以加入 metadata 过滤。</p>
+<p>比如只检索某一个知识库里的内容：</p>
+<pre><code class="language-python">from llama_index.core.vector_stores import MetadataFilter, MetadataFilters
+
+retriever = index.as_retriever(
+    similarity_top_k=request.limit,
+    filters=MetadataFilters(
+        filters=[
+            MetadataFilter(
+                key="knowledge_base_id",
+                value=request.knowledge_base_id,
+            )
+        ]
+    ),
+)
+</code></pre>
+<p>也可以只检索某一篇文档：</p>
+<pre><code class="language-python">from llama_index.core.vector_stores import MetadataFilter, MetadataFilters
+
+retriever = index.as_retriever(
+    similarity_top_k=request.limit,
+    filters=MetadataFilters(
+        filters=[
+            MetadataFilter(
+                key="document_id",
+                value=request.document_id,
+            )
+        ]
+    ),
+)
+</code></pre>
+<p>所以可以这样理解：</p>
+<pre><code class="language-text">similarity_top_k：控制取回多少个相似片段
+filters：控制从哪些数据里检索
+</code></pre>
+<p>在真实项目里，通常不会直接从整个向量库里乱查。</p>
+<p>更常见的做法是：</p>
+<pre><code class="language-text">先用 metadata 限定范围
+再用 similarity_top_k 控制返回数量
+</code></pre>
+<p>比如在我们的知识库项目里，查询时至少应该考虑这些条件：</p>
+<pre><code class="language-text">knowledge_base_id：查哪个知识库
+document_id：是否只查某篇文档
+limit：最多返回几个 chunk
+</code></pre>
+<p>最后再强调一次：</p>
+<p><strong>Retriever 只负责把资料找出来。</strong></p>
+<p>至于后面怎么组装 Prompt、怎么调用大模型、怎么生成最终答案，那是下一层问答流程要做的事情。</p>
+<hr/>
+<h2 id="4-index">4. 不要把三个 Index 混在一起</h2>
+<p>这里一定要讲清楚。</p>
+<p>学生很容易把“向量”“LlamaIndex 的 Index”“Milvus 的索引”混成一个东西。</p>
+<p>它们不是一回事。</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>是什么</th>
+<th>举例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>向量</td>
+<td>一段文本经过 Embedding 模型得到的一串数字</td>
+<td><code>[0.12, -0.08, ...]</code></td>
+</tr>
+<tr>
+<td>LlamaIndex 的 <code>VectorStoreIndex</code></td>
+<td>LlamaIndex 用来组织入库和查询的结构</td>
+<td><code>VectorStoreIndex(nodes, ...)</code></td>
+</tr>
+<tr>
+<td>Milvus 的索引</td>
+<td>Milvus 为了加速向量检索建立的底层检索结构</td>
+<td><code>HNSW</code>、<code>IVF_FLAT</code></td>
+</tr>
+</tbody>
+</table>
+<p>更通俗一点：</p>
+<pre><code class="language-text">向量：文本变成的数字
+VectorStoreIndex：LlamaIndex 的流程组织者
+Milvus 索引：Milvus 内部为了查得更快建的结构
+</code></pre>
+<p><code>VectorStoreIndex</code> 不是 Milvus 的索引。</p>
+<p>它的重点不是“数据库底层怎么加速”，而是“资料如何被 LlamaIndex 组织成可检索的数据”。</p>
+<hr/>
+<h2 id="5-llamaindex-milvus">5. LlamaIndex 怎么接入 Milvus</h2>
+<p>LlamaIndex 可以直接接入 Milvus。</p>
+<p>用的就是：</p>
+<pre><code class="language-python">MilvusVectorStore
+</code></pre>
+<p>整体关系如下：</p>
+<p><img alt="LlamaIndex 接入 Milvus" src="/img/ai-agent-tutorial/04/llamaindex_milvus_integration.svg"/></p>
+<p>入库流程：</p>
+<pre><code class="language-text">Markdown 文档
+  ↓
+Document
+  ↓
+Node
+  ↓
+Embedding 模型生成向量
+  ↓
+MilvusVectorStore
+  ↓
+Milvus Collection
+</code></pre>
+<p>查询流程：</p>
+<pre><code class="language-text">用户问题
+  ↓
+Embedding 模型生成问题向量
+  ↓
+MilvusVectorStore 去 Milvus 检索
+  ↓
+返回相关 Node
+  ↓
+QueryEngine 组织 Prompt
+  ↓
+大模型生成回答
+</code></pre>
+<h3 id="51-milvus">5.1 为什么不直接用 Milvus</h3>
+<p>Milvus 本身很强，但它主要负责向量数据库能力。</p>
+<p><img alt="为什么不只用 Milvus" src="/img/ai-agent-tutorial/04/why_not_only_milvus.svg"/></p>
+<p>Milvus 擅长做：</p>
+<ul>
+<li>保存向量。</li>
+<li>保存字段。</li>
+<li>根据向量相似度查询。</li>
+<li>返回相似数据。</li>
+</ul>
+<p>但是一个完整知识库问答系统还需要：</p>
+<ul>
+<li>读取文档。</li>
+<li>切分文档。</li>
+<li>生成向量。</li>
+<li>保存 metadata。</li>
+<li>查询时拿回相关 Node。</li>
+<li>把 Node 组织进 Prompt。</li>
+<li>调用大模型生成回答。</li>
+</ul>
+<p>这些上层流程就是 LlamaIndex 要组织的。</p>
+<p>所以可以这样理解：</p>
+<pre><code class="language-text">Milvus 是向量数据库
+LlamaIndex 是 RAG 流程框架
+MilvusVectorStore 是两者之间的连接器
+</code></pre>
+<h3 id="52-collection">5.2 Collection 怎么设计</h3>
+<p>在课程 Demo 里，可以先用一个固定 Collection：</p>
+<pre><code class="language-text">yanque_knowledge
+</code></pre>
+<p>这样最容易理解。</p>
+<p>在真实燕雀管理平台里，更推荐：</p>
+<pre><code class="language-text">一个知识库一个 Collection
+</code></pre>
+<p>例如：</p>
+<pre><code class="language-text">knowledge_base_id = kb_001
+collection_name = yanque_knowledge_kb_001
+</code></pre>
+<p>这样做的好处是：</p>
+<ul>
+<li>不同知识库之间天然隔离。</li>
+<li>删除一个知识库时更简单。</li>
+<li>查询某个知识库时不用再额外过滤 <code>knowledge_base_id</code>。</li>
+</ul>
+<p>但是也要注意：</p>
+<ul>
+<li>Collection 太多会增加 Milvus 管理成本。</li>
+<li>向量维度一旦创建，后面不能随便改。</li>
+<li>同一个 Collection 里必须使用同一种 Embedding 维度。</li>
+</ul>
+<h3 id="53-metadata">5.3 metadata 里应该放什么</h3>
+<p>向量库里不能只存向量。</p>
+<p>还要存这个向量对应的业务信息。</p>
+<p>常见 metadata：</p>
+<pre><code class="language-python">metadata = {
+    "knowledge_base_id": "kb_001",
+    "document_id": "doc_001",
+    "document_name": "LlamaIndex入门.md",
+    "chunk_index": 0,
+    "version": "v1",
+    "source": "tos-presigned-url-or-object-key",
+}
+</code></pre>
+<p>这些字段的作用是：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>knowledge_base_id</code></td>
+<td>知道属于哪个知识库</td>
+</tr>
+<tr>
+<td><code>document_id</code></td>
+<td>知道来自哪份文档</td>
+</tr>
+<tr>
+<td><code>document_name</code></td>
+<td>前端展示来源</td>
+</tr>
+<tr>
+<td><code>chunk_index</code></td>
+<td>知道是文档里的第几个片段</td>
+</tr>
+<tr>
+<td><code>version</code></td>
+<td>重新入库时区分版本</td>
+</tr>
+<tr>
+<td><code>source</code></td>
+<td>追踪原始文件来源</td>
+</tr>
+</tbody>
+</table>
+<p>在 LlamaIndex 里推荐传 <code>metadata</code>。</p>
+<p>旧版本里也能看到 <code>extra_info</code>，但它已经是兼容旧版本的写法。</p>
+<p>现在直接写 <code>metadata</code> 更清楚。</p>
+<hr/>
+<h2 id="6-llamaindex-milvus-demo">6. 第一个 LlamaIndex + Milvus Demo</h2>
+<p>这一节先跑通最小 Demo。</p>
+<p>目标：</p>
+<pre><code class="language-text">读取 Markdown
+  ↓
+写入 Milvus
+  ↓
+提问
+  ↓
+返回基于资料的回答
+</code></pre>
+<h3 id="61">6.1 安装依赖</h3>
+<pre><code class="language-bash">uv add llama-index llama-index-embeddings-openai llama-index-vector-stores-milvus pymilvus
+</code></pre>
+<p>如果不是 <code>uv</code> 项目，也可以用：</p>
+<pre><code class="language-bash">pip install llama-index llama-index-embeddings-openai llama-index-vector-stores-milvus pymilvus
+</code></pre>
+<h3 id="62-env">6.2 准备 .env</h3>
+<p>示例配置：</p>
+<pre><code class="language-env">BAILIAN_API_KEY=你的百炼或者兼容 OpenAI 的 API Key
+BAILIAN_BASE_URL=your_placeholder
+BAILIAN_LLM_MODEL=your_placeholder
+BAILIAN_EMBEDDING_MODEL=your_placeholder
+BAILIAN_EMBEDDING_BATCH_SIZE=10
+
+MILVUS_URI=http://localhost:19530
+MILVUS_TOKEN=your_milvus_token
+MILVUS_COLLECTION=yanque_knowledge
+KNOWLEDGE_VECTOR_DIM=1024
+</code></pre>
+<p>这里的 <code>KNOWLEDGE_VECTOR_DIM=1024</code> 要和 Embedding 模型输出维度一致。</p>
+<p>如果换了 Embedding 模型，维度也可能要跟着换。</p>
+<h3 id="63">6.3 准备资料目录</h3>
+<p>创建目录：</p>
+<pre><code class="language-text">data/
+  llamaindex_intro.md
+</code></pre>
+<p>示例内容：</p>
+<pre><code class="language-markdown"># LlamaIndex 简介
+
+LlamaIndex 是一个用于构建 RAG 应用的框架。
+它可以帮助开发者读取资料、切分资料、生成向量、连接向量数据库，并基于资料进行问答。
+</code></pre>
+<h3 id="64">6.4 编写代码</h3>
+<p>新建 <code>demo_llamaindex_milvus.py</code>：</p>
+<pre><code class="language-python">import os
+
+from dotenv import load_dotenv
+from llama_index.core import Document, Settings, SimpleDirectoryReader, StorageContext, VectorStoreIndex
+from llama_index.core.node_parser import MarkdownNodeParser, SentenceSplitter
+from llama_index.embeddings.openai import OpenAIEmbedding
+from llama_index.llms.openai import OpenAI
+from llama_index.vector_stores.milvus import MilvusVectorStore
+
+
+load_dotenv()
+
+
+# 1. 配置大模型。
+# QueryEngine 最后生成答案时，会使用这个模型。
+Settings.llm = OpenAI(
+    model=os.getenv("BAILIAN_LLM_MODEL", "qwen-plus"),
+    api_key=your_placeholder"BAILIAN_API_KEY"),
+    api_base=your_placeholder"BAILIAN_BASE_URL"),
+)
+
+
+# 2. 配置 Embedding 模型。
+# 文档入库时，Node 会用它转成向量。
+# 用户提问时，问题也会用它转成向量。
+embed_model = OpenAIEmbedding(
+    # 百炼的 text-embedding-v4 不是 OpenAIEmbedding 内置枚举值。
+    # 用 model_name 可以把模型名原样传给 OpenAI compatible 接口。
+    model_name=os.getenv("BAILIAN_EMBEDDING_MODEL", "text-embedding-v4"),
+    # 百炼 Embedding 接口限制单次最多 20 条文本。
+    # 这里设置成 10，避免 LlamaIndex 默认 batch size 过大。
+    embed_batch_size=int(os.getenv("BAILIAN_EMBEDDING_BATCH_SIZE", "10")),
+    api_key=your_placeholder"BAILIAN_API_KEY"),
+    api_base=your_placeholder"BAILIAN_BASE_URL"),
+)
+
+Settings.embed_model = embed_model
+
+
+# 3. 配置 Markdown 切分器。
+# 当前知识库只支持 md，所以先用 MarkdownNodeParser 按标题结构切。
+markdown_parser = MarkdownNodeParser()
+
+
+# 4. 配置长段落兜底切分器。
+# 如果某个 Markdown 标题下面内容太长，再用 SentenceSplitter 二次切小。
+sentence_splitter = SentenceSplitter(
+    chunk_size=800,
+    chunk_overlap=120,
+)
+
+
+def split_markdown_documents(documents: list[Document]):
+    nodes = []
+
+    for document in documents:
+        # 第一步：按 Markdown 标题结构切分。
+        markdown_nodes = markdown_parser.get_nodes_from_documents([document])
+
+        for node in markdown_nodes:
+            content = node.get_content(metadata_mode="none")
+
+            # 第二步：短 Node 直接保留。
+            if len(content) &lt;= 800:
+                nodes.append(node)
+                continue
+
+            # 第三步：长 Node 再交给 SentenceSplitter 二次切分。
+            # 这里把长 Node 重新包装成临时 Document，是为了继续复用 LlamaIndex 的切分入口。
+            temp_document = Document(
+                text=content,
+                id_=node.id_,
+                metadata=dict(node.metadata or {}),
+            )
+            nodes.extend(
+                sentence_splitter.get_nodes_from_documents([temp_document])
+            )
+
+    return nodes
+
+
+# 5. 创建 MilvusVectorStore。
+# 它不是向量，也不是 Milvus 的底层索引。
+# 它是 LlamaIndex 连接 Milvus 的适配器。
+vector_store = MilvusVectorStore(
+    uri=os.getenv("MILVUS_URI", "http://localhost:19530"),
+    token=os.getenv("MILVUS_TOKEN", "your_milvus_token"),
+    collection_name=os.getenv("MILVUS_COLLECTION", "yanque_knowledge"),
+    dim=int(os.getenv("KNOWLEDGE_VECTOR_DIM", "1024")),
+    overwrite=False,
+)
+
+
+# 6. 创建 StorageContext。
+# 这一步是在告诉 LlamaIndex：
+# 后面生成的向量，要通过 vector_store 写入 Milvus。
+storage_context = StorageContext.from_defaults(
+    vector_store=vector_store
+)
+
+
+# 7. 读取 data 目录下的 Markdown 文档。
+# SimpleDirectoryReader 会把文件读成 LlamaIndex 的 Document。
+documents = SimpleDirectoryReader(
+    input_dir="data",
+    required_exts=[".md"],
+).load_data()
+
+
+# 8. 把 Document 切成 Node。
+# 这里使用“MarkdownNodeParser + SentenceSplitter”的组合策略：
+# 先按 Markdown 标题切，如果某一段太长，再按句子继续切。
+nodes = split_markdown_documents(documents)
+
+
+# 9. 构建 VectorStoreIndex。
+# 这一步会触发：
+# Node -&gt; Embedding -&gt; MilvusVectorStore -&gt; Milvus
+index = VectorStoreIndex(
+    nodes,
+    storage_context=storage_context,
+    embed_model=embed_model,
+)
+
+
+# 10. 创建 QueryEngine。
+# QueryEngine 会先检索相关 Node，再调用大模型生成答案。
+query_engine = index.as_query_engine(
+    similarity_top_k=3
+)
+
+
+answer = query_engine.query("LlamaIndex 是干什么的？")
+print(answer)
+</code></pre>
+<h3 id="65">6.5 运行</h3>
+<pre><code class="language-bash">uv run python demo_llamaindex_milvus.py
+</code></pre>
+<p>如果运行成功，说明：</p>
+<ul>
+<li>Markdown 被读成了 Document。</li>
+<li>Document 被切成了 Node。</li>
+<li>Node 被向量化。</li>
+<li>向量和文本被写入了 Milvus。</li>
+<li>问题被转换成向量。</li>
+<li>Milvus 返回了相似 Node。</li>
+<li>大模型基于 Node 生成了回答。</li>
+</ul>
+<hr/>
+<h2 id="7">7. 代码背后到底发生了什么</h2>
+<p>最后把代码拆开讲一遍。</p>
+<p>这一章的目标不是再写新代码，而是让学生真正理解每一行在干什么。</p>
+<h3 id="71-simpledirectoryreader">7.1 <code>SimpleDirectoryReader</code>：读取资料</h3>
+<pre><code class="language-python">documents = SimpleDirectoryReader(
+    input_dir="data",
+    required_exts=[".md"],
+).load_data()
+</code></pre>
+<p>这一步会把 Markdown 文件读成 <code>Document</code>。</p>
+<p>可以理解成：</p>
+<pre><code class="language-text">data/llamaindex_intro.md
+  ↓
+Document(text=文件内容, metadata=文件信息)
+</code></pre>
+<h3 id="72-milvusvectorstore-milvus">7.2 <code>MilvusVectorStore</code>：指定向量存到 Milvus</h3>
+<pre><code class="language-python">vector_store = MilvusVectorStore(
+    uri="http://localhost:19530",
+    token="your_milvus_token",
+    collection_name="yanque_knowledge",
+    dim=1024,
+)
+</code></pre>
+<p>这一步只是创建连接 Milvus 的适配器。</p>
+<p>它不会自己读取文档，也不会自己生成答案。</p>
+<p>它主要负责：</p>
+<ul>
+<li>写入向量。</li>
+<li>写入文本。</li>
+<li>写入 metadata。</li>
+<li>查询相似向量。</li>
+</ul>
+<h3 id="73-storagecontext-llamaindex">7.3 <code>StorageContext</code>：把存储位置交给 LlamaIndex</h3>
+<pre><code class="language-python">storage_context = StorageContext.from_defaults(
+    vector_store=vector_store
+)
+</code></pre>
+<p>这一步的意思是：</p>
+<pre><code class="language-text">后面 LlamaIndex 生成的向量，都交给这个 vector_store 保存。
+</code></pre>
+<p>如果没有这一步，LlamaIndex 不知道我们要把向量写到 Milvus。</p>
+<h3 id="74-node-vectorstoreindex">7.4 先切成 Node，再交给 <code>VectorStoreIndex</code></h3>
+<pre><code class="language-python">nodes = split_markdown_documents(documents)
+
+index = VectorStoreIndex(
+    nodes,
+    storage_context=storage_context,
+    embed_model=embed_model,
+)
+</code></pre>
+<p>这是入库的核心。</p>
+<p>这里分成了两步。</p>
+<p>第一步，我们自己控制切分策略：</p>
+<pre><code class="language-text">Document
+  ↓
+MarkdownNodeParser 按标题结构切
+  ↓
+如果某个 Node 太长
+  ↓
+SentenceSplitter 二次切分
+  ↓
+得到最终 nodes
+</code></pre>
+<p>第二步，把最终的 <code>nodes</code> 交给 <code>VectorStoreIndex</code>：</p>
+<pre><code class="language-text">nodes
+  ↓
+每个 Node 文本交给 Embedding 模型
+  ↓
+得到向量
+  ↓
+向量 + 文本 + metadata
+  ↓
+MilvusVectorStore
+  ↓
+Milvus
+</code></pre>
+<p>所以这行代码：</p>
+<pre><code class="language-python">VectorStoreIndex(nodes, storage_context=storage_context, embed_model=embed_model)
+</code></pre>
+<p>不会再负责“怎么切文档”。</p>
+<p>因为文档已经被我们切成了 Node。</p>
+<p>它负责的是：</p>
+<ul>
+<li>遍历 Node。</li>
+<li>调用 Embedding 模型生成向量。</li>
+<li>通过 StorageContext 找到 MilvusVectorStore。</li>
+<li>把向量、文本、metadata 写入 Milvus。</li>
+</ul>
+<h3 id="75-as_query_engine">7.5 <code>as_query_engine</code>：把检索和回答串起来</h3>
+<pre><code class="language-python">query_engine = index.as_query_engine(
+    similarity_top_k=3
+)
+</code></pre>
+<p>这一步会创建一个问答入口。</p>
+<p><code>similarity_top_k=3</code> 表示：</p>
+<pre><code class="language-text">每次提问，先从 Milvus 找最相关的 3 个片段。
+</code></pre>
+<p>然后 QueryEngine 会把这 3 个片段组织进 Prompt，再交给大模型回答。</p>
+<h3 id="76">7.6 燕雀管理平台里的真实流程</h3>
+<p>课程 Demo 是最小版本。</p>
+<p>真实燕雀管理平台里，流程会更完整：</p>
+<pre><code class="language-mermaid">flowchart LR
+    A["前端上传 Markdown"] --&gt; B["火山引擎 TOS"]
+    A --&gt; C["Java 保存知识库和文档记录"]
+    C --&gt; D["Java 生成预签名 fileUrl"]
+    D --&gt; E["Python 下载 Markdown"]
+    E --&gt; F["LlamaIndex 读取并切分文档"]
+    F --&gt; G["Embedding 模型生成向量"]
+    G --&gt; H["MilvusVectorStore"]
+    H --&gt; I["Milvus Collection"]
+</code></pre>
+<p>各层分工：</p>
+<table>
+<thead>
+<tr>
+<th>层</th>
+<th>负责什么</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>前端</td>
+<td>上传 Markdown，展示知识库和文档状态</td>
+</tr>
+<tr>
+<td>Java</td>
+<td>保存知识库、文档记录，生成 TOS 预签名地址，调用 Python</td>
+</tr>
+<tr>
+<td>Python</td>
+<td>下载 Markdown，使用 LlamaIndex 切分、向量化、入库</td>
+</tr>
+<tr>
+<td>Milvus</td>
+<td>保存向量、文本和 metadata，提供相似度检索</td>
+</tr>
+<tr>
+<td>大模型</td>
+<td>根据检索到的资料生成最终回答</td>
+</tr>
+</tbody>
+</table>
+<p>这个流程里，Python 不需要知道 TOS 的 AK/SK。</p>
+<p>Java 生成一个短时间有效的预签名 URL 给 Python。</p>
+<p>Python 只需要在入库这一刻下载 Markdown 内容，然后交给 LlamaIndex 处理。</p>
+<h3 id="77">7.7 本节课最后要记住的结论</h3>
+<p>这一节最重要的不是背 API，而是建立正确理解。</p>
+<pre><code class="language-text">Document 是一整份资料
+Node 是切分后的资料片段
+MilvusVectorStore 是 LlamaIndex 连接 Milvus 的适配器
+StorageContext 告诉 LlamaIndex 向量存在哪里
+VectorStoreIndex 组织向量化、入库和检索
+Retriever 只负责检索
+QueryEngine 负责检索 + 调用大模型回答
+</code></pre>
+<p>再简单一点：</p>
+<pre><code class="language-text">Milvus 负责存和查向量
+LlamaIndex 负责组织 RAG 流程
+</code></pre>
+<p>这就是第四天课程的主线。</p>
+<h2 id="_ai">第四天_学生端AI知识库问答代码讲解</h2>
+<h1 id="ai">第四天补充：学生端 AI 知识库问答代码讲解</h1>
+<p>前面已经讲完了 LlamaIndex、Milvus、Document、Node、VectorStoreIndex 和 Retriever。</p>
+<p>这一篇不再重复概念，而是回到我们自己的项目代码，看这套学生端 AI 知识库问答是怎么设计出来的。</p>
+<p>这节课重点看四件事：</p>
+<ol>
+<li>Java 和 Python 为什么这样分工。</li>
+<li>LlamaIndex 在代码里到底出现在哪里。</li>
+<li>一次知识库入库和一次学生提问分别怎么流转。</li>
+<li>大模型调用为什么要抽象成基类，后面怎么扩展别的模型。</li>
+</ol>
+<p>前端部分只简单说明流式事件的接收方式，页面样式和交互细节留到前端课程里讲。</p>
+<h2 id="1">1. 项目总体架构</h2>
+<p>这套问答功能不只是“前端调用大模型接口”。</p>
+<p>它实际分成了四层：</p>
+<p><img alt="学生端 AI 问答总体架构" src="/img/ai-agent-tutorial/04/student_ai_chat_overall_architecture.svg"/></p>
+<p>从职责上看：</p>
+<p>Java 后端负责业务系统。</p>
+<p>Python 服务负责 AI 能力。</p>
+<p>Milvus 负责向量存储和相似度检索。</p>
+<p>大模型负责根据 Prompt 生成回答。</p>
+<p>为什么前端不直接调用 Python？</p>
+<p>因为学生登录、签名鉴权、会话归属、消息落库都在 Java 体系里。Python 服务在这里作为内部 AI 能力，由 Java 后端统一调用。</p>
+<p>为什么 RAG 和 LlamaIndex 放在 Python 侧？</p>
+<p>因为 LlamaIndex、Embedding、模型 SDK、向量库生态主要在 Python 侧更成熟。Java 继续做业务编排，Python 专注 AI 能力，边界会更清楚。</p>
+<h2 id="2">2. 业务表结构</h2>
+<p>这套功能里有两类数据：</p>
+<p>一类存在 MySQL 里，负责业务管理。</p>
+<p>一类存在 Milvus 里，负责向量检索。</p>
+<p>MySQL 里主要有四张表：</p>
+<p><img alt="知识库和问答表结构关系" src="/img/ai-agent-tutorial/04/knowledge_chat_table_schema.svg"/></p>
+<h3 id="knowledge_base">知识库表：<code>knowledge_base</code></h3>
+<p>这张表保存“一个知识库”的主信息。</p>
+<p>建表 SQL 在：</p>
+<pre><code class="language-text">YanQue-Admin/src/main/resources/sql/knowledge_base.sql
+</code></pre>
+<p>主要字段：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>知识库 ID</td>
+</tr>
+<tr>
+<td><code>knowledge_base_name</code></td>
+<td>知识库名称</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>知识库描述</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td>状态，<code>ACTIVE</code> 或 <code>INACTIVE</code></td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td>创建时间</td>
+</tr>
+<tr>
+<td><code>updated_at</code></td>
+<td>更新时间</td>
+</tr>
+</tbody>
+</table>
+<p>这里有一个唯一索引：</p>
+<pre><code class="language-sql">unique key uk_knowledge_base_name (knowledge_base_name)
+</code></pre>
+<p>也就是说，知识库名称不能重复。</p>
+<h3 id="knowledge_document">知识库文档表：<code>knowledge_document</code></h3>
+<p>这张表保存“知识库下面的一份文档”。</p>
+<p>主要字段：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>文档 ID</td>
+</tr>
+<tr>
+<td><code>knowledge_base_id</code></td>
+<td>所属知识库 ID</td>
+</tr>
+<tr>
+<td><code>document_name</code></td>
+<td>文档名称</td>
+</tr>
+<tr>
+<td><code>object_key</code></td>
+<td>TOS 对象存储 Key</td>
+</tr>
+<tr>
+<td><code>file_size</code></td>
+<td>文件大小</td>
+</tr>
+<tr>
+<td><code>version</code></td>
+<td>文档版本号</td>
+</tr>
+<tr>
+<td><code>index_status</code></td>
+<td>入库状态：<code>PENDING</code>、<code>INDEXING</code>、<code>INDEXED</code>、<code>FAILED</code></td>
+</tr>
+<tr>
+<td><code>chunk_count</code></td>
+<td>Python 入库后返回的切片数量</td>
+</tr>
+<tr>
+<td><code>vector_dim</code></td>
+<td>向量维度</td>
+</tr>
+<tr>
+<td><code>error_message</code></td>
+<td>入库失败原因</td>
+</tr>
+<tr>
+<td><code>indexed_at</code></td>
+<td>入库完成时间</td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td>创建时间</td>
+</tr>
+<tr>
+<td><code>updated_at</code></td>
+<td>更新时间</td>
+</tr>
+</tbody>
+</table>
+<p>这张表只保存文档业务信息，不保存每个 chunk 的正文和向量。</p>
+<p>chunk 正文、向量、metadata 会写入 Milvus。</p>
+<p>也就是说：</p>
+<p>MySQL 记录“有哪些知识库、有哪些文档、文档是否已经入库成功”。</p>
+<p>Milvus 知道“每个文档切成了哪些向量片段，以及这些片段如何相似检索”。</p>
+<h3 id="ai_chat_session">问答会话表：<code>ai_chat_session</code></h3>
+<p>这张表保存学生的一次 AI 问答会话。</p>
+<p>建表 SQL 在：</p>
+<pre><code class="language-text">YanQue-Admin/src/main/resources/sql/ai_chat.sql
+</code></pre>
+<p>主要字段：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>会话 ID</td>
+</tr>
+<tr>
+<td><code>student_id</code></td>
+<td>学生 ID</td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td>会话标题</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td>状态：<code>ACTIVE</code> 正常，<code>DELETED</code> 删除</td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td>创建时间</td>
+</tr>
+<tr>
+<td><code>updated_at</code></td>
+<td>更新时间</td>
+</tr>
+</tbody>
+</table>
+<p>这里有一个索引：</p>
+<pre><code class="language-sql">key idx_student_status_updated (student_id, status, updated_at)
+</code></pre>
+<p>它服务于学生端“查询我的会话列表”。</p>
+<h3 id="ai_chat_message">问答消息表：<code>ai_chat_message</code></h3>
+<p>这张表保存会话里的每一条消息。</p>
+<p>主要字段：</p>
+<table>
+<thead>
+<tr>
+<th>字段</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>消息 ID</td>
+</tr>
+<tr>
+<td><code>session_id</code></td>
+<td>所属会话 ID</td>
+</tr>
+<tr>
+<td><code>role</code></td>
+<td>消息角色：<code>user</code> 或 <code>assistant</code></td>
+</tr>
+<tr>
+<td><code>content</code></td>
+<td>消息内容</td>
+</tr>
+<tr>
+<td><code>model</code></td>
+<td>AI 回复使用的模型名称</td>
+</tr>
+<tr>
+<td><code>tokens</code></td>
+<td>本次 AI 回复消耗的 token 数</td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td>创建时间</td>
+</tr>
+</tbody>
+</table>
+<p>用户消息和 AI 消息都存在这张表。</p>
+<p>区别是：</p>
+<p>用户消息的 <code>role</code> 是 <code>user</code>，一般没有 <code>model</code> 和 <code>tokens</code>。</p>
+<p>AI 消息的 <code>role</code> 是 <code>assistant</code>，会保存模型名称和 token 消耗。</p>
+<h3 id="mysql-milvus">MySQL 和 Milvus 分别存什么</h3>
+<p>这里需要区分两类数据。</p>
+<p>MySQL 保存业务数据。</p>
+<p>Milvus 保存向量数据。</p>
+<p><code>knowledge_document.chunk_count</code> 只记录这份文档切出了多少个片段，chunk 正文和向量本身不放在 MySQL。</p>
+<p>真正参与语义检索的是 Milvus 里的向量记录。</p>
+<p>所以问答时大概是：</p>
+<p>Java 从 MySQL 查会话和历史消息。</p>
+<p>Python 从 Milvus 查知识库 chunk。</p>
+<p>大模型根据历史消息和知识库 chunk 生成回答。</p>
+<h2 id="3-python">3. Python 项目分层</h2>
+<p>先看 Python 服务目录：</p>
+<pre><code class="language-text">YanQue-AI/src/yanque_ai
+├── api
+│   ├── chat_api.py
+│   └── knowledge_api.py
+├── chat
+│   ├── service.py
+│   ├── rag_service.py
+│   ├── knowledge_router.py
+│   └── prompt_builder.py
+├── knowledge
+│   ├── service.py
+│   ├── document_loader.py
+│   ├── chunker.py
+│   └── vector_store.py
+├── providers
+│   └── llm_provider.py
+├── schemas
+│   ├── chat.py
+│   └── knowledge.py
+└── core
+    └── config.py
+</code></pre>
+<p>对应关系可以看这张图：</p>
+<p><img alt="Python 服务分层" src="/img/ai-agent-tutorial/04/python_service_layers.svg"/></p>
+<p>这套结构的重点不是增加文件数量，而是让每一层职责更清楚：</p>
+<p><code>api</code> 只接 HTTP 请求。</p>
+<p><code>chat</code> 负责一次问答怎么组织。</p>
+<p><code>knowledge</code> 负责知识库入库、切分、向量化和检索。</p>
+<p><code>providers</code> 负责对接具体大模型。</p>
+<p><code>schemas</code> 负责请求、响应和消息对象。</p>
+<p><code>core/config.py</code> 负责统一读取环境变量。</p>
+<p>如果把所有逻辑都写进 <code>chat_api.py</code>，代码也可以运行，但后面扩展模型、替换向量库、调整 RAG 流程都会变得不清晰。现在拆成多个模块，是为了让大家更容易看懂项目结构。</p>
+<h2 id="4">4. 知识库入库入口</h2>
+<p>知识库入库接口在：</p>
+<pre><code class="language-text">YanQue-AI/src/yanque_ai/api/knowledge_api.py
+</code></pre>
+<p>核心代码：</p>
+<pre><code class="language-python">@router.post("/documents/index", response_model=KnowledgeDocumentIndexResponse)
+def index_document(request: KnowledgeDocumentIndexRequest):
+    knowledge_service = get_knowledge_service()
+    return knowledge_service.index_markdown_document(request)
+</code></pre>
+<p>这个接口一般不是学生直接调用，而是 Java 后台管理端在上传知识库文档后调用。</p>
+<p>Java 负责保存知识库记录、文档记录、文件路径、文档状态。</p>
+<p>Python 负责把文档内容变成向量数据，写进 Milvus。</p>
+<h2 id="5">5. 一次知识库入库的完整流程</h2>
+<p>知识库入库主流程在：</p>
+<pre><code class="language-text">YanQue-AI/src/yanque_ai/knowledge/service.py
+</code></pre>
+<p>核心三行：</p>
+<pre><code class="language-python">markdown_text = self._loader.load_markdown(request)
+nodes = self._chunker.split_markdown(request, markdown_text)
+self._vector_store.replace_document(request, nodes)
+</code></pre>
+<p>它背后的流程是：</p>
+<p><img alt="知识库入库流程" src="/img/ai-agent-tutorial/04/knowledge_index_flow.svg"/></p>
+<p>这三行分别对应：</p>
+<p>第一步，读取 Markdown。</p>
+<p>第二步，使用 LlamaIndex 把 Markdown 切成 Node。</p>
+<p>第三步，使用 LlamaIndex + Embedding 模型 + MilvusVectorStore 写入 Milvus。</p>
+<p>这里 <code>KnowledgeService</code> 只做编排，不自己处理所有细节：</p>
+<p><code>KnowledgeDocumentLoader</code> 负责加载文档。</p>
+<p><code>KnowledgeChunker</code> 负责把文档切成 Node。</p>
+<p><code>KnowledgeVectorStore</code> 负责向量化、写入、检索和查看 chunk。</p>
+<h2 id="6-llamaindex">6. LlamaIndex 在代码里的位置</h2>
+<p>这一部分用来把第四天讲过的 LlamaIndex 概念和真实代码对应起来。</p>
+<p>项目里主要用了这些 LlamaIndex 对象：</p>
+<p><img alt="LlamaIndex 对象和项目代码关系" src="/img/ai-agent-tutorial/04/llamaindex_code_mapping.svg"/></p>
+<h3 id="61-document">6.1 Document：一整份资料</h3>
+<p>代码位置：</p>
+<pre><code class="language-text">YanQue-AI/src/yanque_ai/knowledge/chunker.py
+</code></pre>
+<p>构建 Document 的代码：</p>
+<pre><code class="language-python">return Document(
+    text_resource=MediaResource(text=markdown),
+    id_=request.document_id,
+    metadata=metadata,
+)
+</code></pre>
+<p>在项目里，一份 Markdown 文档会先变成一个 LlamaIndex <code>Document</code>。</p>
+<p><code>text_resource</code> 放正文。</p>
+<p><code>id_</code> 放 Java 传来的文档 ID。</p>
+<p><code>metadata</code> 放知识库 ID、文档 ID、文档名、版本、来源等业务字段。</p>
+<h3 id="62-node">6.2 Node：切分后的资料片段</h3>
+<p>代码里先用：</p>
+<pre><code class="language-python">self._markdown_parser = MarkdownNodeParser()
+</code></pre>
+<p>再用：</p>
+<pre><code class="language-python">self._sentence_splitter = SentenceSplitter(
+    chunk_size=settings.knowledge_chunk_size,
+    chunk_overlap=settings.knowledge_chunk_overlap,
+)
+</code></pre>
+<p>这里的设计是两层切分：</p>
+<p>先按 Markdown 标题切。</p>
+<p>如果标题下面内容太长，再按句子做二次切分。</p>
+<p>这样既能保留课程文档的章节结构，又能避免单个 chunk 太长。</p>
+<h3 id="63-milvusvectorstore-milvus">6.3 MilvusVectorStore：连接 Milvus 的适配器</h3>
+<p>代码位置：</p>
+<pre><code class="language-text">YanQue-AI/src/yanque_ai/knowledge/vector_store.py
+</code></pre>
+<p>核心代码：</p>
+<pre><code class="language-python">return MilvusVectorStore(
+    uri=self._settings.milvus_uri,
+    token=self._settings.milvus_token or "",
+    collection_name=collection_name,
+    dim=vector_dim,
+    doc_id_field=self._settings.knowledge_doc_id_field,
+    text_key=self._settings.knowledge_text_field,
+    embedding_field=self._settings.knowledge_embedding_field,
+    overwrite=False,
+    similarity_metric="COSINE",
+    output_fields=["knowledge_base_id", "document_id", "document_name", "chunk_index", "version", "source"],
+    use_async_client=False,
+)
+</code></pre>
+<p>这段代码说明：项目没有把 <code>pymilvus</code> 操作写在各个业务方法里，而是通过 LlamaIndex 的 <code>MilvusVectorStore</code> 适配器统一连接 Milvus。</p>
+<h3 id="64-storagecontext-llamaindex">6.4 StorageContext：告诉 LlamaIndex 向量写到哪里</h3>
+<p>代码：</p>
+<pre><code class="language-python">storage_context = StorageContext.from_defaults(vector_store=vector_store)
+</code></pre>
+<p><code>StorageContext</code> 的作用是告诉 LlamaIndex：</p>
+<p>后面生成的向量，会通过这个 <code>vector_store</code> 写入 Milvus。</p>
+<h3 id="65-vectorstoreindex">6.5 VectorStoreIndex：触发入库和构建检索入口</h3>
+<p>入库时：</p>
+<pre><code class="language-python">VectorStoreIndex(
+    nodes,
+    storage_context=storage_context,
+    embed_model=self._embed_model,
+)
+</code></pre>
+<p>这里会触发：</p>
+<pre><code class="language-text">Node 正文
+  ↓
+Embedding 模型
+  ↓
+向量
+  ↓
+MilvusVectorStore
+  ↓
+Milvus Collection
+</code></pre>
+<p>检索时：</p>
+<pre><code class="language-python">index = VectorStoreIndex.from_vector_store(
+    vector_store=vector_store,
+    embed_model=self._embed_model,
+)
+</code></pre>
+<p>这表示从已有 Milvus 向量库构建一个 LlamaIndex 检索入口。</p>
+<h3 id="66-retriever">6.6 Retriever：真正执行相似度检索</h3>
+<p>检索代码：</p>
+<pre><code class="language-python">retriever = index.as_retriever(
+    similarity_top_k=request.limit,
+    filters=self._build_search_filters(request),
+)
+retrieved_nodes = retriever.retrieve(request.question)
+</code></pre>
+<p><code>Retriever</code> 做的事情是：</p>
+<p>把用户问题转成向量。</p>
+<p>去 Milvus 找相似的 Node。</p>
+<p>返回命中的 Node 和相似度分数。</p>
+<p>所以学生问答里说“查知识库”，在代码层面就是 <code>Retriever.retrieve(question)</code>。</p>
+<h2 id="7-metadata">7. 为什么要保存 metadata</h2>
+<p>构建 Document 时会放入 metadata：</p>
+<pre><code class="language-python">metadata = {
+    **request.metadata,
+    "knowledge_base_id": request.knowledge_base_id,
+    "document_id": request.document_id,
+    "document_name": request.document_name,
+    "version": request.version or "",
+    "source": self._resolve_source(request),
+}
+</code></pre>
+<p>这些字段不是为了让模型直接阅读，而是为了工程能力：</p>
+<p>可以知道命中的资料属于哪个知识库。</p>
+<p>可以知道命中的 chunk 来自哪份文档。</p>
+<p>可以在前端或日志里展示来源。</p>
+<p>可以按 <code>knowledge_base_id</code> 和 <code>document_id</code> 控制检索范围。</p>
+<p>可以在文档更新时按 <code>document_id</code> 删除旧 chunk。</p>
+<p>在 RAG 项目里，metadata 是连接“业务文档”和“向量片段”的关键。保存好 metadata，系统才能说明“这个答案参考了哪份资料”。</p>
+<h2 id="8-chunk">8. 为什么重新入库要先删除旧 chunk</h2>
+<p>入库代码里有这一段：</p>
+<pre><code class="language-python">if self._collection_exists(vector_store, collection_name):
+    vector_store.delete(ref_doc_id=request.document_id)
+</code></pre>
+<p>意思是同一份文档重新入库时，先删旧 chunk，再写新 chunk。</p>
+<p>为什么要这样做？</p>
+<p>因为课程资料会更新。</p>
+<p>如果旧 chunk 不删除，Milvus 里会同时存在旧版本和新版本。学生提问时，Retriever 可能命中过期资料，模型就可能基于旧内容回答。</p>
+<p>所以知识库项目除了“新增文档”，还要考虑“更新文档”和“重建索引”。</p>
+<h2 id="9">9. 学生问答入口</h2>
+<p>学生问答的 Python 入口在：</p>
+<pre><code class="language-text">YanQue-AI/src/yanque_ai/api/chat_api.py
+</code></pre>
+<p>流式接口：</p>
+<pre><code class="language-python">@ai_chat_router.post("/ai-chat/stream")
+def stream_chat(request: ChatStreamRequest):
+</code></pre>
+<p>它返回：</p>
+<pre><code class="language-python">StreamingResponse(
+    event_stream(),
+    media_type="text/event-stream",
+)
+</code></pre>
+<p>也就是 SSE 流式响应。</p>
+<p>Python 会依次返回这些事件：</p>
+<pre><code class="language-text">message_start
+chunk
+done
+error
+</code></pre>
+<p><code>message_start</code> 表示模型开始回答。</p>
+<p><code>chunk</code> 表示一段增量文本。</p>
+<p><code>done</code> 表示回答结束，里面会带 token、是否使用知识库、资料引用等信息。</p>
+<p><code>error</code> 表示出错。</p>
+<h2 id="10">10. 一次学生提问的核心时序</h2>
+<p>这张图比单纯列步骤更好理解：</p>
+<p><img alt="一次学生提问的时序" src="/img/ai-agent-tutorial/04/chat_rag_sequence.svg"/></p>
+<p>Java 负责学生身份、会话和消息保存。</p>
+<p>Python 负责 RAG 和模型调用。</p>
+<p>Milvus 只负责检索相似 chunk。</p>
+<p>大模型只根据最终拼好的 messages 生成回答。</p>
+<h2 id="11-chatservice">11. ChatService：问答流程总入口</h2>
+<p>问答主流程在：</p>
+<pre><code class="language-text">YanQue-AI/src/yanque_ai/chat/service.py
+</code></pre>
+<p>核心方法：</p>
+<pre><code class="language-python">def stream_chat(self, request: ChatStreamRequest) -&gt; Iterator[str | ChatDonePayload]:
+    tokens: int | None = None
+    rag_result = self._retrieve_rag_context(request)
+    messages = self._prompt_builder.build(request.history, request.message, rag_result.hits)
+
+    for content, usage_tokens in self._llm_provider.stream_chat(messages):
+        ...
+</code></pre>
+<p>这几行串起了问答主流程：</p>
+<p>先调用 <code>_retrieve_rag_context()</code>，判断并检索知识库。</p>
+<p>再调用 <code>PromptBuilder</code>，把系统提示词、知识库资料、历史消息、本次问题拼成 messages。</p>
+<p>最后调用 <code>LlmProvider.stream_chat()</code>，让模型流式生成回答。</p>
+<p>所以 <code>ChatService</code> 可以理解为问答流程的编排层，不只是一个调用模型的工具类。</p>
+<h2 id="12">12. 知识库路由：判断本次问题是否需要查资料</h2>
+<p>知识库路由在：</p>
+<pre><code class="language-text">YanQue-AI/src/yanque_ai/chat/knowledge_router.py
+</code></pre>
+<p>入口：</p>
+<pre><code class="language-python">use_knowledge, route_reason = self._router.should_use_knowledge(request.message)
+</code></pre>
+<p>当前有三层判断：</p>
+<p>第一层，看配置是否强制使用知识库。</p>
+<pre><code class="language-text">AI_CHAT_FORCE_KNOWLEDGE_BASE=true
+AI_CHAT_FORCE_KNOWLEDGE_BASE=false
+</code></pre>
+<p>第二层，关键词判断。</p>
+<p>比如问题里有这些词：</p>
+<pre><code class="language-text">课程、课件、讲义、作业、提交、老师、班级、第几天、上节课
+</code></pre>
+<p>就优先认为需要查知识库。</p>
+<p>第三层，调用一个更轻量的路由模型判断。</p>
+<p>这个路由模型只回答一件事：本次问题是否需要检索内部知识库。</p>
+<p>如果路由模型异常，代码会保守地走知识库：</p>
+<pre><code class="language-python">return True, "知识库路由判断失败，保守使用知识库"
+</code></pre>
+<p>这个设计的目的，是减少模型在缺少资料时生成无依据回答。</p>
+<p>如果学生问“第四天讲的 LlamaIndex 怎么接 Milvus”，这类问题明显依赖课程资料，就应该优先检索知识库，再让模型结合资料回答。</p>
+<h2 id="13-chatragservice">13. ChatRagService：检索资料并整理引用</h2>
+<p>RAG 检索逻辑在：</p>
+<pre><code class="language-text">YanQue-AI/src/yanque_ai/chat/rag_service.py
+</code></pre>
+<p>核心代码：</p>
+<pre><code class="language-python">hits = self._search_knowledge(request, knowledge_base_id)
+return ChatRagResult(
+    hits=hits,
+    route_reason=route_reason,
+    references=self._build_references(hits),
+)
+</code></pre>
+<p><code>hits</code> 是给 Prompt 用的完整检索结果。</p>
+<p><code>references</code> 是给 done 事件返回的资料引用。</p>
+<p>为什么要分开？</p>
+<p>因为 Prompt 需要尽量完整的上下文，而引用展示只需要文档名、chunk 序号、相似度和一小段摘要。</p>
+<p>这样既能给模型提供足够的参考资料，也能让前端拿到更简洁的引用信息。</p>
+<h2 id="14-promptbuilder-messages">14. PromptBuilder：把资料变成模型能读的 messages</h2>
+<p>Prompt 拼接在：</p>
+<pre><code class="language-text">YanQue-AI/src/yanque_ai/chat/prompt_builder.py
+</code></pre>
+<p>核心顺序：</p>
+<pre><code class="language-python">messages = [
+    ChatMessage(role="system", content=self._settings.ai_chat_system_prompt),
+]
+if knowledge_hits:
+    messages.append(ChatMessage(role="system", content=self._build_knowledge_prompt(knowledge_hits)))
+messages.extend(history)
+messages.append(ChatMessage(role="user", content=question))
+</code></pre>
+<p>最终 messages 是：</p>
+<pre><code class="language-text">系统人设
+  ↓
+知识库参考资料
+  ↓
+历史对话
+  ↓
+本次学生问题
+</code></pre>
+<p>知识库资料会被拼成：</p>
+<pre><code class="language-text">[资料1] 文档：xxx，片段：1，相似度：0.82
+这里是资料正文
+
+[资料2] 文档：xxx，片段：2，相似度：0.76
+这里是资料正文
+</code></pre>
+<p>并且会明确告诉模型：</p>
+<p>资料没有提到的内容，要说明“知识库资料里没有明确说明”，不要自己补充没有依据的内容。</p>
+<p>这就是 RAG 的关键点：</p>
+<p>不只是把资料查出来，还要让模型知道它应该优先依据这些资料回答。</p>
+<h2 id="15-rag">15. 为什么要限制 RAG 上下文长度</h2>
+<p>配置里有：</p>
+<pre><code class="language-python">ai_chat_rag_max_chars_per_chunk: int = int(os.getenv("AI_CHAT_RAG_MAX_CHARS_PER_CHUNK", "900"))
+ai_chat_rag_max_total_chars: int = int(os.getenv("AI_CHAT_RAG_MAX_TOTAL_CHARS", "3500"))
+</code></pre>
+<p>对应 <code>PromptBuilder</code> 里的截断逻辑。</p>
+<p>为什么要限制？</p>
+<p>因为模型上下文有长度限制。</p>
+<p>检索出来的 chunk 越多，Prompt 越长，速度越慢，成本越高。</p>
+<p>而且内容太多时，真正关键的资料反而会被淹没。</p>
+<p>所以 RAG 不是“查到多少就全部放进去”，而是查到之后还要筛选、截断、排序和控制长度。</p>
+<h2 id="16-provider">16. 大模型 Provider 抽象</h2>
+<p>这一块是理解后续模型扩展的重点。</p>
+<p>模型调用代码在：</p>
+<pre><code class="language-text">YanQue-AI/src/yanque_ai/providers/llm_provider.py
+</code></pre>
+<p>里面先定义了一个基类：</p>
+<pre><code class="language-python">class LlmProvider:
+    def chat(self, messages: list[ChatMessage]) -&gt; str:
+        raise NotImplementedError
+
+    def chat_with_model(self, model: str, messages: list[ChatMessage]) -&gt; str:
+        raise NotImplementedError
+
+    def stream_chat(self, messages: list[ChatMessage]) -&gt; Iterator[tuple[str, int | None]]:
+        raise NotImplementedError
+</code></pre>
+<p>这就是模型供应商抽象。</p>
+<p><code>ChatService</code> 不和某一个具体模型平台绑定，也不需要直接操作 OpenAI SDK。</p>
+<p>它只依赖 <code>LlmProvider</code> 这组方法。</p>
+<p>模型扩展关系可以看这张图：</p>
+<p><img alt="模型 Provider 扩展设计" src="/img/ai-agent-tutorial/04/llm_provider_extension.svg"/></p>
+<p>现在已经有两个实现：</p>
+<p><code>BailianLlmProvider</code>：真实调用百炼兼容 OpenAI 的接口。</p>
+<p><code>MockLlmProvider</code>：本地联调时模拟流式输出。</p>
+<h2 id="17">17. 为什么要这样设计模型层</h2>
+<p>如果 <code>ChatService</code> 里直接写：</p>
+<pre><code class="language-python">client = OpenAI(...)
+client.chat.completions.create(...)
+</code></pre>
+<p>代码可以运行，但后续会遇到几个不方便的地方。</p>
+<p>第一，后面换模型要改问答主流程。</p>
+<p>第二，路由模型、聊天模型、Mock 模型的职责不够清楚。</p>
+<p>第三，本地联调需要依赖真实 API Key。</p>
+<p>第四，单元测试和流式链路测试不好做。</p>
+<p>现在抽象成 <code>LlmProvider</code> 后，问答流程只关心三件事：</p>
+<p>普通回答：<code>chat()</code></p>
+<p>指定模型回答：<code>chat_with_model()</code></p>
+<p>流式回答：<code>stream_chat()</code></p>
+<p>至于底层是百炼、OpenAI、豆包、智谱，还是本地 Ollama，都可以放到不同 Provider 里实现。</p>
+<h2 id="18-provider">18. 当前百炼 Provider 做了什么</h2>
+<p>真实模型实现是：</p>
+<pre><code class="language-python">class BailianLlmProvider(LlmProvider):
+</code></pre>
+<p>初始化时：</p>
+<pre><code class="language-python">self._client = OpenAI(
+    api_key=your_placeholder
+    base_url=settings.bailian_base_url,
+)
+</code></pre>
+<p>这里用的是 OpenAI SDK，但实际调用的是百炼的 OpenAI 兼容接口。</p>
+<p>百炼提供了兼容 OpenAI 调用格式的服务，所以代码里可以用 OpenAI SDK，并传入百炼的 <code>base_url</code>。</p>
+<p>流式调用时：</p>
+<pre><code class="language-python">stream = self._client.chat.completions.create(
+    model=self._model,
+    messages=[message.model_dump() for message in messages],
+    stream=True,
+    stream_options={"include_usage": True},
+)
+</code></pre>
+<p>这里有一个细节：</p>
+<p><code>stream_options={"include_usage": True}</code> 用来让最后的流式响应带 token 统计。</p>
+<p>代码里如果某个 chunk 没有 choices，就会尝试读取 usage：</p>
+<pre><code class="language-python">if not chunk.choices:
+    usage = getattr(chunk, "usage", None)
+    tokens = getattr(usage, "total_tokens", None) if usage else None
+    if tokens is not None:
+        yield "", tokens
+    continue
+</code></pre>
+<p>所以 <code>stream_chat()</code> 返回的不是纯字符串，而是：</p>
+<pre><code class="language-python">Iterator[tuple[str, int | None]]
+</code></pre>
+<p>第一个值是文本增量。</p>
+<p>第二个值是 token 数，通常只在最后出现。</p>
+<h2 id="19-mock-provider">19. Mock Provider 的作用</h2>
+<p>代码里还有：</p>
+<pre><code class="language-python">class MockLlmProvider(LlmProvider):
+</code></pre>
+<p>它的作用是本地联调。</p>
+<p>打开配置：</p>
+<pre><code class="language-text">AI_CHAT_MOCK_ENABLED=true
+</code></pre>
+<p>就可以不依赖真实 API Key，也能看到连续 chunk 输出。</p>
+<p>这对调试 Java SSE、前端流式接收、接口事件格式都很有用。</p>
+<p>因为有时候我们只是想验证链路是否通畅，不一定需要真实调用模型。</p>
+<h2 id="20-provider-chatservice">20. Provider 是怎么被装配进 ChatService 的</h2>
+<p>装配逻辑在：</p>
+<pre><code class="language-text">YanQue-AI/src/yanque_ai/services/dependencies.py
+</code></pre>
+<p>核心代码：</p>
+<pre><code class="language-python">settings = get_settings()
+llm_provider = build_llm_provider(settings)
+...
+return ChatService(
+    settings=settings,
+    llm_provider=llm_provider,
+    prompt_builder=ChatPromptBuilder(settings),
+    rag_service=rag_service,
+)
+</code></pre>
+<p><code>build_llm_provider()</code> 在 <code>llm_provider.py</code> 里：</p>
+<pre><code class="language-python">def build_llm_provider(settings: Settings) -&gt; LlmProvider:
+    if settings.ai_chat_mock_enabled:
+        return MockLlmProvider()
+    return BailianLlmProvider(settings)
+</code></pre>
+<p>也就是说，模型选择集中在一个地方。</p>
+<p>API 层不用判断。</p>
+<p>ChatService 不用判断。</p>
+<p>RAG 逻辑不用判断。</p>
+<p>后面要接入新的模型供应商，可以新增一个 Provider，并调整 <code>build_llm_provider()</code> 的选择逻辑。</p>
+<h2 id="21">21. 后续怎么扩展别的模型</h2>
+<p>比如以后要接入一个新的模型供应商，可以新增：</p>
+<pre><code class="language-python">class DoubaoLlmProvider(LlmProvider):
+    def chat(self, messages: list[ChatMessage]) -&gt; str:
+        ...
+
+    def chat_with_model(self, model: str, messages: list[ChatMessage]) -&gt; str:
+        ...
+
+    def stream_chat(self, messages: list[ChatMessage]) -&gt; Iterator[tuple[str, int | None]]:
+        ...
+</code></pre>
+<p>然后在配置里加：</p>
+<pre><code class="language-text">AI_CHAT_PROVIDER=doubao
+</code></pre>
+<p>再把构建逻辑改成类似：</p>
+<pre><code class="language-python">def build_llm_provider(settings: Settings) -&gt; LlmProvider:
+    if settings.ai_chat_mock_enabled:
+        return MockLlmProvider()
+    if settings.ai_chat_provider == "doubao":
+        return DoubaoLlmProvider(settings)
+    return BailianLlmProvider(settings)
+</code></pre>
+<p>这样新增模型时，下面这些问答主流程代码基本不用改：</p>
+<p><code>chat_api.py</code></p>
+<p><code>ChatService</code></p>
+<p><code>ChatRagService</code></p>
+<p><code>PromptBuilder</code></p>
+<p><code>KnowledgeService</code></p>
+<p>这就是抽象层的价值。</p>
+<p>业务流程不需要关心具体模型厂商，模型厂商变化也不会影响主流程。</p>
+<h2 id="22">22. 配置层的设计</h2>
+<p>配置集中在：</p>
+<pre><code class="language-text">YanQue-AI/src/yanque_ai/core/config.py
+</code></pre>
+<p>这里可以分成几类：</p>
+<p>模型配置：</p>
+<pre><code class="language-python">bailian_api_key
+bailian_base_url
+bailian_model
+ai_chat_router_model
+</code></pre>
+<p>Embedding 配置：</p>
+<pre><code class="language-python">bailian_embedding_model
+bailian_embedding_batch_size
+knowledge_vector_dim
+</code></pre>
+<p>RAG 配置：</p>
+<pre><code class="language-python">ai_chat_default_knowledge_base_id
+ai_chat_default_knowledge_document_id
+ai_chat_knowledge_top_k
+ai_chat_force_knowledge_base
+ai_chat_rag_max_chars_per_chunk
+ai_chat_rag_max_total_chars
+</code></pre>
+<p>Milvus 配置：</p>
+<pre><code class="language-python">milvus_uri
+milvus_token
+milvus_db_name
+knowledge_collection_name
+knowledge_doc_id_field
+knowledge_text_field
+knowledge_embedding_field
+</code></pre>
+<p>切分配置：</p>
+<pre><code class="language-python">knowledge_chunk_size
+knowledge_chunk_overlap
+</code></pre>
+<p>这些配置没有分散写在业务代码里，而是统一从 <code>Settings</code> 读取。</p>
+<p>好处是：</p>
+<p>部署时可以通过环境变量调整。</p>
+<p>代码里可以减少硬编码。</p>
+<p>后续换模型、换向量维度、调 top_k、调 chunk_size 都更清楚。</p>
+<h2 id="23-java">23. Java 在问答链路里的职责</h2>
+<p>Java 学生端接口在：</p>
+<pre><code class="language-text">YanQue-Admin/src/main/java/cn/yanque/studentFront/controller/StudentAiChatController.java
+</code></pre>
+<p>核心接口：</p>
+<pre><code class="language-text">POST /student/ai-chat/sessions/{sessionId}/messages/stream
+</code></pre>
+<p>Java Biz 层在：</p>
+<pre><code class="language-text">YanQue-Admin/src/main/java/cn/yanque/studentFront/biz/impl/StudentAiChatBizImpl.java
+</code></pre>
+<p>它做这些事：</p>
+<p>获取当前登录学生 ID。</p>
+<p>校验会话归属。</p>
+<p>查询最近历史消息。</p>
+<p>组装 Python 请求。</p>
+<p>保存 user 消息。</p>
+<p>异步调用 Python。</p>
+<p>把 Python 返回的 chunk 转发给前端。</p>
+<p>累加完整 assistant 内容。</p>
+<p>done 时保存 assistant 消息。</p>
+<p>注意一个细节：</p>
+<pre><code class="language-java">PythonAiChatStreamReq pythonReq = buildPythonReq(studentId, sessionId, message);
+studentAiChatService.saveUserMessage(studentId, sessionId, message);
+</code></pre>
+<p>这里先构造 Python 请求，再保存当前 user 消息。</p>
+<p>原因是 Python 请求里的 <code>history</code> 应该只包含历史消息，本次问题已经放在 <code>message</code> 字段里，不需要再重复放入历史消息。</p>
+<h2 id="24-java-python-sse">24. Java 如何转发 Python SSE</h2>
+<p>Java 调 Python 的代码在：</p>
+<pre><code class="language-text">YanQue-Admin/src/main/java/cn/yanque/studentFront/client/ai/PythonAiChatClient.java
+</code></pre>
+<p>关键代码：</p>
+<pre><code class="language-java">try (HttpResponse response = buildStreamRequest(req).executeAsync()) {
+    validateResponse(response);
+    readSse(response, handler);
+}
+</code></pre>
+<p>这里用 <code>executeAsync()</code> 是为了拿到响应流，让 Java 可以一边接收、一边处理。</p>
+<p>如果等 Python 全部回答完再处理，前端就只能看到一次性返回的结果，看不到逐段输出的效果。</p>
+<p>Java 会逐行读取 Python 的 SSE：</p>
+<pre><code class="language-java">BufferedReader reader = new BufferedReader(
+    new InputStreamReader(response.bodyStream(), StandardCharsets.UTF_8)
+)
+</code></pre>
+<p>然后根据事件名分发：</p>
+<pre><code class="language-java">case EVENT_MESSAGE_START -&gt; handler.onStart(body.getString("model"));
+case EVENT_CHUNK -&gt; handler.onChunk(body.getString("content"));
+case EVENT_DONE -&gt; handler.onDone(body.toJavaObject(PythonAiChatDone.class));
+case EVENT_ERROR -&gt; handler.onError(body.getString("message"));
+</code></pre>
+<p><code>PythonAiChatClient</code> 只负责 HTTP 和 SSE 解析。</p>
+<p>保存消息由 Biz 层做。</p>
+<p>这也体现了分层设计：客户端层负责通信，业务状态由 Biz 层处理。</p>
+<h2 id="25">25. 前端在这条链路里做什么</h2>
+<p>前端部分在这里简单带过。</p>
+<p>这节课先记住两点：</p>
+<p>第一，前端请求 Java 的流式接口，由 Java 继续调用 Python。</p>
+<p>第二，前端收到 <code>chunk</code> 事件后，把增量文本追加到当前 assistant 消息上。</p>
+<p>所以前端的职责就是：</p>
+<p>发送问题。</p>
+<p>接收 SSE。</p>
+<p>展示增量文本。</p>
+<p>结束后重新加载消息列表，保证页面和数据库一致。</p>
+<p>页面怎么布局、按钮怎么写、样式怎么调，后面讲前端时再展开。</p>
+<h2 id="26">26. 一次提问的完整数据流</h2>
+<p>把所有内容合起来，一次提问是这样走的：</p>
+<pre><code class="language-text">1. 学生发送问题
+2. 前端请求 Java 流式接口
+3. Java 校验学生身份和会话归属
+4. Java 查询历史消息，组装 Python 请求
+5. Java 保存本次 user 消息
+6. Java 通过 PythonAiChatClient 请求 Python /api/ai-chat/stream
+7. Python 的 ChatService 开始编排问答流程
+8. ChatKnowledgeRouter 判断是否需要查知识库
+9. 如果需要，ChatRagService 调 KnowledgeService 检索
+10. KnowledgeVectorStore 使用 VectorStoreIndex + Retriever 从 Milvus 查 chunk
+11. PromptBuilder 拼接系统提示词、知识库资料、历史消息和本次问题
+12. ChatService 调 LlmProvider.stream_chat()
+13. 具体 Provider 调用模型厂商接口
+14. Python 把模型输出转换成 message_start、chunk、done、error
+15. Java 解析 Python SSE，并继续用 SseEmitter 转发
+16. Java 累加完整 assistant 内容
+17. done 时 Java 保存 assistant 消息
+18. 前端持续追加 chunk，形成流式输出效果
+</code></pre>
+<p>这条链路步骤比较多，但每一层的职责是清楚的：</p>
+<p>Java 管业务。</p>
+<p>Python 管 AI。</p>
+<p>LlamaIndex 管 RAG 工程化。</p>
+<p>Milvus 管向量检索。</p>
+<p>Provider 管模型供应商差异。</p>
+<h2 id="27">27. 这套设计里最重要的几个点</h2>
+<p>第一，API 层保持简洁。</p>
+<p><code>chat_api.py</code> 和 <code>knowledge_api.py</code> 主要负责接收请求和返回响应，复杂流程放到 service 层。</p>
+<p>第二，LlamaIndex 在项目里有清楚的代码位置。</p>
+<p>项目里明确用到了 <code>Document</code>、<code>MarkdownNodeParser</code>、<code>SentenceSplitter</code>、<code>MilvusVectorStore</code>、<code>StorageContext</code>、<code>VectorStoreIndex</code> 和 <code>Retriever</code>。</p>
+<p>第三，RAG 不只是检索。</p>
+<p>它还包括知识库路由、检索范围控制、metadata、Prompt 拼接、上下文长度控制和来源返回。</p>
+<p>第四，模型调用要抽象。</p>
+<p><code>ChatService</code> 只依赖 <code>LlmProvider</code>。以后扩展别的模型，优先新增 Provider，问答主流程保持稳定。</p>
+<p>第五，流式输出是端到端的。</p>
+<p>Python 流给 Java，Java 再流给前端，中间要保持逐段读取和逐段转发。</p>
+<p>第六，本次问题不需要重复放进 history。</p>
+<p>历史消息是历史消息，本次问题是本次问题，两者要分开。</p>
+<p>第七，文档更新要清理旧 chunk。</p>
+<p>这样可以避免知识库里同时保留旧版本资料和新版本资料。</p>
+<h2 id="28">28. 学完这套代码要带走什么</h2>
+<p>这套学生端 AI 知识库问答，已经是一个完整 AI 应用的雏形。</p>
+<p>它不只是模型 API 调用。</p>
+<p>它包含：</p>
+<p>知识库入库。</p>
+<p>Markdown 切分。</p>
+<p>Embedding 向量化。</p>
+<p>Milvus 存储。</p>
+<p>LlamaIndex 检索。</p>
+<p>知识库路由。</p>
+<p>RAG Prompt 拼接。</p>
+<p>模型 Provider 抽象。</p>
+<p>流式模型调用。</p>
+<p>Java SSE 桥接。</p>
+<p>消息落库。</p>
+<p>来源返回。</p>
+<p>真正的 AI 应用开发，重点不是只会写一句模型调用代码。</p>
+<p>更重要的是把大模型能力放进真实业务系统里，并且让它可扩展、可追踪、可调试、可替换。</p></article><div class="post-copyright"><div class="copyright-cc-box"><i class="smithfont smith-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img alt="头像" class="post-copyright__author_img_back" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d20f536c64d06e5fcf4bfe2ec5dc25d.jpg" onerror='this.onerror=null,this.src="/img/404.jpg"' src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" title="头像"/><img alt="头像" class="post-copyright__author_img_front" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d20f536c64d06e5fcf4bfe2ec5dc25d.jpg" onerror='this.onerror=null,this.src="/img/404.jpg"' src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" title="头像"/></a><div class="post-copyright__author_name">Smith</div><div class="post-copyright__author_desc">人生太短，要干的事太多，我要争分夺秒</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" href="https://smithhs.cn/2026/05/06/2026-05-06-SpringCloud01/" title="该文章为原创文章，注意版权协议">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://smithhs.cn/2026/05/06/2026-05-06-SpringCloud01/')">SpringCloud01</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="smith.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="smithfont smith-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg" target="_blank"><img alt="wechat" class="post-qr-code-img" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg" onerror='this.onerror=null,this.src="/img/404.jpg"' src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg" target="_blank"><img alt="alipay" class="post-qr-code-img" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg" onerror='this.onerror=null,this.src="/img/404.jpg"' src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"/></a><div class="post-qr-code-desc">alipay</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="smith.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="smithfont smith-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://smithhs.cn/2026/05/06/2026-05-06-SpringCloud01/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" href="https://service.weibo.com/share/share.php?title=SpringCloud01&amp;url=https://smithhs.cn/2026/05/06/2026-05-06-SpringCloud01/&amp;pic=https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1682044144301.png" rel="external nofollow noreferrer noopener" target="_blank"><i class="smithfont smith-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" onclick="copyCurrentPageUrl()" title="复制链接"><i class="smithfont smith-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://smithhs.cn" target="_blank">Smith</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/%E5%90%8E%E7%AB%AF/"><span class="tags-punctuation"> <i class="smithfont smith-icon-tag"></i></span>后端<span class="tagsPageCount">49</span></a><a class="post-meta__box__tags" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"><span class="tags-punctuation"> <i class="smithfont smith-icon-tag"></i></span>微服务<span class="tagsPageCount">10</span></a><a class="post-meta__box__tags" href="/tags/SpringCloud/"><span class="tags-punctuation"> <i class="smithfont smith-icon-tag"></i></span>SpringCloud<span class="tagsPageCount">10</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1681455691814.png" data-sites="wechat,weibo,qq"></div><link href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'" rel="stylesheet"><script defer="defer" src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js"></script></link></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2026/07/23/2026-07-23-ai-agent-03-rag-milvus/"><img alt="cover" class="cover" data-lazy-src="/img/ai-agent-tutorial/covers/ai-agent-03-rag-milvus.png" onerror="onerror=null;src='/img/404.jpg'" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"/><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">RAG 与 Milvus 向量数据库入门</div></div></a></div><div class="next-post pull-right"><a href="/2026/07/25/2026-07-25-ai-agent-05-prompt-tool-calling/"><img alt="cover" class="cover" data-lazy-src="/img/ai-agent-tutorial/covers/ai-agent-05-prompt-tool-calling.png" onerror="onerror=null;src='/img/404.jpg'" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"/><div class="pagination-info"><div class="label">下一篇</div><div class="prev_info">提示词工程与工具调用入门</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><span>AI Agent 系列推荐</span></div><div class="relatedPosts-list"><div><a href="/2026/07/22/2026-07-22-ai-agent-02-aigc-llm-neural-network/" title="从 AIGC 到大模型：神经网络与必要原理"><img alt="cover" class="cover" data-lazy-src="/img/ai-agent-tutorial/covers/ai-agent-02-aigc-llm-neural-network.png" onerror="this.onerror=null,this.src='/img/404.jpg'" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"/><div class="content is-center"><div class="date">2026-07-22</div><div class="title">从 AIGC 到大模型：神经网络与必要原理</div></div></a></div><div><a href="/2026/07/23/2026-07-23-ai-agent-03-rag-milvus/" title="RAG 与 Milvus 向量数据库入门"><img alt="cover" class="cover" data-lazy-src="/img/ai-agent-tutorial/covers/ai-agent-03-rag-milvus.png" onerror="this.onerror=null,this.src='/img/404.jpg'" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"/><div class="content is-center"><div class="date">2026-07-23</div><div class="title">RAG 与 Milvus 向量数据库入门</div></div></a></div><div><a href="/2026/07/25/2026-07-25-ai-agent-05-prompt-tool-calling/" title="提示词工程与工具调用入门"><img alt="cover" class="cover" data-lazy-src="/img/ai-agent-tutorial/covers/ai-agent-05-prompt-tool-calling.png" onerror="this.onerror=null,this.src='/img/404.jpg'" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"/><div class="content is-center"><div class="date">2026-07-25</div><div class="title">提示词工程与工具调用入门</div></div></a></div><div><a href="/2026/07/26/2026-07-26-ai-agent-06-project-flow/" title="项目整体流程图"><img alt="cover" class="cover" data-lazy-src="/img/ai-agent-tutorial/covers/ai-agent-06-project-flow.png" onerror="this.onerror=null,this.src='/img/404.jpg'" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"/><div class="content is-center"><div class="date">2026-07-26</div><div class="title">项目整体流程图</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="smithfont smith-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#SpringCloud01"><span class="toc-number">1.</span> <span class="toc-text">SpringCloud01</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%BE%AE%E6%9C%8D%E5%8A%A1"><span class="toc-number">2.</span> <span class="toc-text">一、微服务</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-1%E5%8D%95%E4%BD%93%E6%9E%B6%E6%9E%84"><span class="toc-number">2.1.</span> <span class="toc-text">1.1单体架构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-2-%E5%BE%AE%E6%9C%8D%E5%8A%A1"><span class="toc-number">2.2.</span> <span class="toc-text">1.2 微服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9A%84%E9%87%8D%E8%A6%81%E6%80%A7"><span class="toc-number">2.3.</span> <span class="toc-text">1.3微服务的重要性</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81SpringCloud"><span class="toc-number">3.</span> <span class="toc-text">二、SpringCloud</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#2-1%E8%AE%A4%E8%AF%86SpringCloud"><span class="toc-number">3.1.</span> <span class="toc-text">2.1认识SpringCloud</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-2-%E7%8E%AF%E5%A2%83%E5%87%86%E5%A4%87"><span class="toc-number">3.2.</span> <span class="toc-text">2.2 环境准备</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-1%E6%90%AD%E5%BB%BASpringCloud%E7%8E%AF%E5%A2%83"><span class="toc-number">3.2.1.</span> <span class="toc-text">2.2.1搭建SpringCloud环境</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%AE%9E%E7%8E%B0%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8"><span class="toc-number">4.</span> <span class="toc-text">三、实现远程调用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-%E6%9C%8D%E5%8A%A1%E5%87%86%E5%A4%87"><span class="toc-number">4.1.</span> <span class="toc-text">3.1 服务准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-%E8%B0%83%E7%94%A8%E6%B5%81%E7%A8%8B"><span class="toc-number">4.2.</span> <span class="toc-text">3.2 调用流程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-RestTemplete%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-number">4.3.</span> <span class="toc-text">3.3 RestTemplete的使用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4-%E6%8F%90%E4%BE%9B%E8%80%85%E4%B8%8E%E6%B6%88%E8%B4%B9%E8%80%85"><span class="toc-number">4.4.</span> <span class="toc-text">3.4.提供者与消费者</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B%E3%80%81Feign%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8"><span class="toc-number">5.</span> <span class="toc-text">四、Feign远程调用</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#5-1Feign-%E6%98%AF%E4%BB%80%E4%B9%88"><span class="toc-number">5.1.</span> <span class="toc-text">5.1Feign 是什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-2%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E6%8B%A9-Feign"><span class="toc-number">5.2.</span> <span class="toc-text">5.2为什么选择 Feign</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-3Feign%E6%9B%BF%E4%BB%A3RestTemplate"><span class="toc-number">5.3.</span> <span class="toc-text">5.3Feign替代RestTemplate</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%95%E5%85%A5%E4%BE%9D%E8%B5%96"><span class="toc-number">5.3.1.</span> <span class="toc-text">引入依赖</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B7%BB%E5%8A%A0%E6%B3%A8%E8%A7%A3"><span class="toc-number">5.3.2.</span> <span class="toc-text">添加注解</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E5%86%99Feign%E7%9A%84%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="toc-number">5.3.3.</span> <span class="toc-text">编写Feign的客户端</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95"><span class="toc-number">5.3.4.</span> <span class="toc-text">测试</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">5.3.5.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%BD%E5%8F%96api"><span class="toc-number">5.3.6.</span> <span class="toc-text">抽取api</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#OpenFeign%E7%9A%84%E8%B6%85%E6%97%B6%E6%8E%A7%E5%88%B6"><span class="toc-number">5.3.7.</span> <span class="toc-text">OpenFeign的超时控制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Openfeign%E6%97%A5%E5%BF%97%E6%89%93%E5%8D%B0%E5%8A%9F%E8%83%BD"><span class="toc-number">5.3.8.</span> <span class="toc-text">Openfeign日志打印功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E6%96%B9%E5%BC%8F-%E2%80%93-springboot3-3-4-%E5%AF%B9%E5%BA%94%E7%9A%84openFeign%E7%89%88%E6%9C%AC"><span class="toc-number">5.3.9.</span> <span class="toc-text">配置文件方式  – springboot3.3.4 对应的openFeign版本</span></a></li></ol></li></ol></li></ol></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">©2022 - 2026 By <a class="footer-bar-link" href="/" target="_blank" title="Smith">Smith</a></div></div><div id="footer-type-tips"></div><div class="js-pjax"><script>function subtitleType () {
+  fetch('https://v1.hitokoto.cn')
+    .then(response => response.json())
+    .then(data => {
+      if (true) {
+        const from = '出自 ' + data.from
+        const sub = []
+        sub.unshift(data.hitokoto, from)
+        window.typed = new Typed('#footer-type-tips', {
+          strings: sub,
+          startDelay: 300,
+          typeSpeed: 150,
+          loop: true,
+          backSpeed: 50,
+        })
+      } else {
+        document.getElementById('footer-type-tips').innerHTML = data.hitokoto
+      }
+    })
+}
+
+if (true) {
+  if (typeof Typed === 'function') {
+    subtitleType()
+  } else {
+    getScript('https://cdn.jsdelivr.net/npm/typed.js@2.0.12/dist/typed.min.js').then(subtitleType)
+  }
+} else {
+  subtitleType()
+}
+</script></div></div><div class="footer-bar-right"><a class="footer-bar-link" href="https://github.com/Smithhss/smithhs.github.io.git" rel="noopener" target="_blank" title="Hexo">Hexo</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">199</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">69</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">3</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="smithfont smith-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://smithhs.cn/" title="博客"><img alt="博客" class="back-menu-item-icon" data-lazy-src="/img/favicon.png" onerror='this.onerror=null,this.src="/img/404.jpg"' src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"><span class="back-menu-item-text">博客</span></img></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" href="https://github.com/Smithhss" rel="noopener" target="_blank" title="Github"><img alt="Github" class="back-menu-item-icon" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/GitHub.png" onerror='this.onerror=null,this.src="/img/404.jpg"' src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"><span class="back-menu-item-text">Github</span></img></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="smithfont smith-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="smithfont smith-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="smithfont smith-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="smithfont smith-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="smithfont smith-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="smithfont smith-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/dailyPhoto/"><i class="smithfont smith-icon-camera faa-tada" style="font-size: 0.9em;"></i><span> 每日照片</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wallpaper/"><i class="smithfont smith-icon-image faa-tada" style="font-size: 0.9em;"></i><span> 壁纸</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wordScenery/"><i class="smithfont smith-icon-font faa-tada" style="font-size: 0.9em;"></i><span> 文字风景</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="smithfont smith-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于我</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="smithfont smith-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/love/"><i class="smithfont smith-icon-heart faa-tada" style="font-size: 0.9em;"></i><span> 爱情</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="smithfont smith-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Android-Studio/" style="font-size: 0.88rem;">Android Studio<sup>1</sup></a><a href="/tags/App/" style="font-size: 0.88rem;">App<sup>1</sup></a><a href="/tags/Butterfly/" style="font-size: 0.88rem;">Butterfly<sup>1</sup></a><a href="/tags/C/" style="font-size: 0.88rem;">C++<sup>3</sup></a><a href="/tags/CSS/" style="font-size: 0.88rem;">CSS<sup>1</sup></a><a href="/tags/Cisco-Packet-Tracer/" style="font-size: 0.88rem;">Cisco Packet Tracer<sup>1</sup></a><a href="/tags/Docker/" style="font-size: 0.88rem;">Docker<sup>2</sup></a><a href="/tags/Easypan/" style="font-size: 0.88rem;">Easypan<sup>2</sup></a><a href="/tags/FurtherMathematics/" style="font-size: 0.88rem;">FurtherMathematics<sup>1</sup></a><a href="/tags/GPT/" style="font-size: 0.88rem;">GPT<sup>1</sup></a><a href="/tags/Git2/" style="font-size: 0.88rem;">Git2<sup>1</sup></a><a href="/tags/HTML/" style="font-size: 0.88rem;">HTML<sup>1</sup></a><a href="/tags/Hexo/" style="font-size: 0.88rem;">Hexo<sup>1</sup></a><a href="/tags/Java/" style="font-size: 0.88rem;">Java<sup>67</sup></a><a href="/tags/JavaScript/" style="font-size: 0.88rem;">JavaScript<sup>1</sup></a><a href="/tags/Jrebel/" style="font-size: 0.88rem;">Jrebel<sup>1</sup></a><a href="/tags/LeetCode/" style="font-size: 0.88rem;">LeetCode<sup>1</sup></a><a href="/tags/Linux/" style="font-size: 0.88rem;">Linux<sup>3</sup></a><a href="/tags/Markdown/" style="font-size: 0.88rem;">Markdown<sup>2</sup></a><a href="/tags/Maven/" style="font-size: 0.88rem;">Maven<sup>2</sup></a><a href="/tags/MyBatis/" style="font-size: 0.88rem;">MyBatis<sup>1</sup></a><a href="/tags/MyBatis-Plus/" style="font-size: 0.88rem;">MyBatis-Plus<sup>1</sup></a><a href="/tags/Mysql/" style="font-size: 0.88rem;">Mysql<sup>1</sup></a><a href="/tags/Navicat/" style="font-size: 0.88rem;">Navicat<sup>1</sup></a><a href="/tags/NoSql/" style="font-size: 0.88rem;">NoSql<sup>1</sup></a><a href="/tags/Nodejs/" style="font-size: 0.88rem;">Nodejs<sup>2</sup></a><a href="/tags/Python/" style="font-size: 0.88rem;">Python<sup>4</sup></a><a href="/tags/Spring/" style="font-size: 0.88rem;">Spring<sup>2</sup></a><a href="/tags/VMware/" style="font-size: 0.88rem;">VMware<sup>2</sup></a><a href="/tags/WeChat/" style="font-size: 0.88rem;">WeChat<sup>1</sup></a><a href="/tags/YouHou/" style="font-size: 0.88rem;">YouHou<sup>1</sup></a><a href="/tags/books/" style="font-size: 0.88rem;">books<sup>1</sup></a><a href="/tags/butterfly/" style="font-size: 0.88rem;">butterfly<sup>1</sup></a><a href="/tags/clash/" style="font-size: 0.88rem;">clash<sup>1</sup></a><a href="/tags/error/" style="font-size: 0.88rem;">error<sup>1</sup></a><a href="/tags/project/" style="font-size: 0.88rem;">project<sup>4</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 0.88rem;">前端<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6/" style="font-size: 0.88rem;">开发框架<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" style="font-size: 0.88rem;">开发环境<sup>1</sup></a><a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="font-size: 0.88rem;">软件工程<sup>1</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" title="阅读模式" type="button"><i class="smithfont smith-icon-book-open"></i></button><button id="translateLink" title="简繁转换" type="button">繁</button><button id="darkmode" title="浅色和深色模式转换" type="button"><i class="smithfont smith-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" title="单栏和双栏切换" type="button"><i class="smithfont smith-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" title="设置" type="button"><i class="smithfont smith-icon-gear"></i></button><button class="close" id="mobile-toc-button" title="目录" type="button"><i class="smithfont smith-icon-list-ul"></i></button><button id="go-up" title="回到顶部" type="button"><i class="smithfont smith-icon-arrow-up"></i></button></div></div><div id="nav-music"><a accesskey="m" id="nav-music-hoverTips" onclick="smith.musicToggle()">播放音乐</a><div id="console-music-bg"></div><meting-js data-lrctype="0" id="8805965276" mutex="true" order="random" preload="none" server="netease" theme="var(--smith-main)" type="playlist" volume="0.7"></meting-js></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="smithfont smith-icon-xmark"></i></button></nav><div class="is-center" id="loading-database"><i class="smithfont smith-icon-spinner smith-pulse-icon"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr><div id="local-search-results"></div></hr></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="smithfont smith-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="smithfont smith-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="smithfont smith-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="smithfont smith-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="smithfont smith-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="smithfont smith-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="smithfont smith-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="smithfont smith-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="smithfont smith-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="smithfont smith-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="smithfont smith-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="smithfont smith-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="smithfont smith-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="smithfont smith-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="smithfont smith-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="smithfont smith-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="smithfont smith-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick='window.open("https://music.163.com/#/my/m/music/playlist?id=464586318", "_blank");' style="display: none;"><i class="smithfont smith-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="smithfont smith-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="smithfont smith-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="smithfont smith-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="smithfont smith-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" href="javascript:void(0);" id="menu-copy"><i class="smithfont smith-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" href="javascript:void(0);" id="menu-commentBarrage"><i class="smithfont smith-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" href="javascript:void(0);" id="menu-darkmode"><i class="smithfont smith-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" href="javascript:void(0);" id="menu-translate"><i class="smithfont smith-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn1.tianli0.top/npm/js-heo@1.0.6/translate/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@6.1.6/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.3.1/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.js"></script><script>var meting_api = "https://api.injahow.cn/meting/?server=:server&type=:type&id=:id&auth=:auth&r=:r";
+</script><canvas id="universe"></canvas><script async="" src="https://npm.elemecdn.com/smith-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("07/01/2022 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用史先森!`,
+    `生活明朗, 万物可爱`,
+    `
+
+      ███████╗███╗   ███╗██╗████████╗██╗  ██╗
+      ██╔════╝████╗ ████║██║╚══██╔══╝██║  ██║
+      ███████╗██╔████╔██║██║   ██║   ███████║
+      ╚════██║██║╚██╔╝██║██║   ██║   ██╔══██║
+      ███████║██║ ╚═╝ ██║██║   ██║   ██║  ██║
+      ╚══════╝╚═╝     ╚═╝╚═╝   ╚═╝   ╚═╝  ╚═╝
+
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2022 By 史先森 V1.0.0",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/smith-blog@1.0.0/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 史先森 %c 你正在访问 Smith 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async="" src="/smith/random.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><input id="page-type" name="page-type" type="hidden" value="post"/></div><script async="" data-pjax="" src="https://npm.elemecdn.com/smith-theme-static@1.0.0/bubble/bubble.js"></script><script>var visitorMail = "visitor@smithhs.cn";
+</script><script async="" data-pjax="" src="https://cdn.jsdelivr.net/npm/waterfall.js@1.1.0/dist/waterfall.min.js"></script><script src="https://cdn.cbd.int/qrcodejs@1.0.0/qrcode.min.js"></script><script src="/js/smith/right_click_menu.js"></script><link href="https://cdn.cbd.int/smith-theme-static@1.0.2/icon/ali_iconfont_css.css" rel="stylesheet"/><script color="0,0,255" count="99" defer="defer" id="canvas_nest" mobile="false" opacity="0.7" src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/dist/canvas-nest.min.js" zindex="-1"></script><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><link href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css" media="print" onload="this.media='all'" rel="stylesheet"/><script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script><script>AOS.init({
+  duration: 800,
+  easing: 'ease-out-cubic',
+  once: true,
+  offset: 50
+});
+</script><script src="https://lib.baomitu.com/pjax/0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll
+  smith.removeGlobalFnEvent('pjax')
+  smith.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async="" data-pjax="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script charset="UTF-8" src="https://cdn.cbd.int/smith-theme-static@1.0.2/accesskey/accesskey.js"></script><div id="live2d-container"><canvas id="live2d-canvas"></canvas><button class="live2d-toggle" title="切换看板娘">🎭</button></div><script data-pjax="" src="/js/smith/live2d.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="smithfont smith-icon-arrow-circle-right"></i></div></div></div></link></body></html>

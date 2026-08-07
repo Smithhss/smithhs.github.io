@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="360" viewBox="0 0 980 360">
+  <defs>
+    <style>
+      .title{font:700 28px Arial,"Microsoft YaHei",sans-serif;fill:#172033}
+      .label{font:700 18px Arial,"Microsoft YaHei",sans-serif;fill:#172033}
+      .text{font:15px Arial,"Microsoft YaHei",sans-serif;fill:#344054}
+      .small{font:13px Arial,"Microsoft YaHei",sans-serif;fill:#667085}
+      .box{fill:#fff;stroke:#b8c2cc;stroke-width:2;rx:10}
+      .blue{fill:#eef6ff;stroke:#4f8fd9}
+      .green{fill:#eaf8f0;stroke:#46a36c}
+      .arrow{stroke:#62748a;stroke-width:2.5;fill:none;marker-end:url(#arrow)}
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#62748a"/>
+    </marker>
+  </defs>
+  <rect width="980" height="360" fill="#f7f9fb"/>
+  <text x="40" y="50" class="title">stream：聊天页面为什么需要流式输出</text>
+  <text x="40" y="82" class="text">invoke 等完整回答生成完再返回；stream 可以边生成边显示，体验更接近真实聊天助手。</text>
+
+  <rect x="70" y="138" width="150" height="88" class="box"/>
+  <text x="104" y="172" class="label">一次请求</text>
+  <text x="104" y="198" class="small">question</text>
+
+  <rect x="285" y="138" width="150" height="88" class="box blue"/>
+  <text x="328" y="172" class="label">模型</text>
+  <text x="314" y="198" class="small">持续生成 token</text>
+
+  <rect x="500" y="98" width="130" height="56" class="box green"/>
+  <text x="536" y="132" class="label">chunk 1</text>
+  <rect x="500" y="170" width="130" height="56" class="box green"/>
+  <text x="536" y="204" class="label">chunk 2</text>
+  <rect x="500" y="242" width="130" height="56" class="box green"/>
+  <text x="536" y="276" class="label">chunk 3</text>
+
+  <rect x="735" y="138" width="165" height="88" class="box"/>
+  <text x="772" y="172" class="label">前端页面</text>
+  <text x="765" y="198" class="small">逐步显示回答</text>
+
+  <path d="M220 182 H285" class="arrow"/>
+  <path d="M435 182 C462 170 472 130 500 126" class="arrow"/>
+  <path d="M435 182 H500" class="arrow"/>
+  <path d="M435 182 C462 196 472 256 500 270" class="arrow"/>
+  <path d="M630 126 C686 130 704 170 735 178" class="arrow"/>
+  <path d="M630 198 H735" class="arrow"/>
+  <path d="M630 270 C686 260 704 210 735 194" class="arrow"/>
+</svg>

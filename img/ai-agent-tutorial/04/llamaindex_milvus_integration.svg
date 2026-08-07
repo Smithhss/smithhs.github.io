@@ -1,0 +1,83 @@
+<svg width="1180" height="650" viewBox="0 0 1180 650" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">LlamaIndex 接入 Milvus 的关系图</title>
+  <desc id="desc">展示 LlamaIndex 通过 MilvusVectorStore 接入 Milvus，入库阶段写入向量，查询阶段从 Milvus 检索相关 Node 后交给大模型回答。</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#334155"/>
+    </marker>
+    <style>
+      .bg { fill: #f8fafc; }
+      .title { font: 800 34px sans-serif; fill: #0f172a; }
+      .subtitle { font: 500 17px sans-serif; fill: #475569; }
+      .zone { fill: #ffffff; stroke: #cbd5e1; stroke-width: 2; }
+      .llama { fill: #ecfdf5; stroke: #10b981; stroke-width: 2.5; }
+      .milvus { fill: #fff7ed; stroke: #f97316; stroke-width: 2.5; }
+      .model { fill: #eef2ff; stroke: #6366f1; stroke-width: 2.5; }
+      .query { fill: #fdf2f8; stroke: #db2777; stroke-width: 2.5; }
+      .label { font: 800 20px sans-serif; fill: #111827; }
+      .small { font: 500 15px sans-serif; fill: #475569; }
+      .caption { font: 800 24px sans-serif; fill: #0f172a; }
+      .note { font: 700 18px sans-serif; fill: #334155; }
+      .line { stroke: #334155; stroke-width: 2.4; fill: none; marker-end: url(#arrow); }
+      .soft { stroke: #94a3b8; stroke-width: 2; fill: none; marker-end: url(#arrow); }
+    </style>
+  </defs>
+
+  <rect class="bg" width="1180" height="650"/>
+  <text x="590" y="48" text-anchor="middle" class="title">LlamaIndex 怎么接入 Milvus</text>
+  <text x="590" y="80" text-anchor="middle" class="subtitle">通过 MilvusVectorStore 做适配：LlamaIndex 编排流程，Milvus 保存和检索向量</text>
+
+  <rect class="zone" x="55" y="125" width="1070" height="195" rx="8"/>
+  <text x="90" y="160" class="caption">入库阶段：资料进入知识库</text>
+
+  <rect class="llama" x="105" y="210" width="150" height="58" rx="8"/>
+  <text x="180" y="235" text-anchor="middle" class="label">Document</text>
+  <text x="180" y="256" text-anchor="middle" class="small">读取资料</text>
+  <rect class="llama" x="310" y="210" width="150" height="58" rx="8"/>
+  <text x="385" y="235" text-anchor="middle" class="label">Node</text>
+  <text x="385" y="256" text-anchor="middle" class="small">切分片段</text>
+  <rect class="model" x="515" y="210" width="150" height="58" rx="8"/>
+  <text x="590" y="235" text-anchor="middle" class="label">Embedding</text>
+  <text x="590" y="256" text-anchor="middle" class="small">生成向量</text>
+  <rect class="llama" x="720" y="210" width="185" height="58" rx="8"/>
+  <text x="812" y="235" text-anchor="middle" class="label">MilvusVectorStore</text>
+  <text x="812" y="256" text-anchor="middle" class="small">LlamaIndex 适配器</text>
+  <rect class="milvus" x="960" y="210" width="125" height="58" rx="8"/>
+  <text x="1022" y="235" text-anchor="middle" class="label">Milvus</text>
+  <text x="1022" y="256" text-anchor="middle" class="small">保存向量</text>
+
+  <path class="line" d="M255 239 H300"/>
+  <path class="line" d="M460 239 H505"/>
+  <path class="line" d="M665 239 H710"/>
+  <path class="line" d="M905 239 H950"/>
+
+  <rect class="zone" x="55" y="375" width="1070" height="195" rx="8"/>
+  <text x="90" y="410" class="caption">查询阶段：用户提问并生成回答</text>
+
+  <rect class="query" x="105" y="460" width="150" height="58" rx="8"/>
+  <text x="180" y="485" text-anchor="middle" class="label">用户问题</text>
+  <text x="180" y="506" text-anchor="middle" class="small">要查什么</text>
+  <rect class="model" x="310" y="460" width="150" height="58" rx="8"/>
+  <text x="385" y="485" text-anchor="middle" class="label">Embedding</text>
+  <text x="385" y="506" text-anchor="middle" class="small">问题向量</text>
+  <rect class="milvus" x="515" y="460" width="150" height="58" rx="8"/>
+  <text x="590" y="485" text-anchor="middle" class="label">Milvus</text>
+  <text x="590" y="506" text-anchor="middle" class="small">检索相似 Node</text>
+  <rect class="llama" x="720" y="460" width="150" height="58" rx="8"/>
+  <text x="795" y="485" text-anchor="middle" class="label">QueryEngine</text>
+  <text x="795" y="506" text-anchor="middle" class="small">组织上下文</text>
+  <rect class="query" x="925" y="460" width="160" height="58" rx="8"/>
+  <text x="1005" y="485" text-anchor="middle" class="label">大模型回答</text>
+  <text x="1005" y="506" text-anchor="middle" class="small">基于资料生成</text>
+
+  <path class="line" d="M255 489 H300"/>
+  <path class="line" d="M460 489 H505"/>
+  <path class="line" d="M665 489 H710"/>
+  <path class="line" d="M870 489 H915"/>
+
+  <path class="soft" d="M1022 268 C1022 330 650 330 590 450"/>
+  <text x="835" y="345" text-anchor="middle" class="small">查询时回到同一个 Milvus Collection</text>
+
+  <rect x="260" y="600" width="660" height="36" rx="8" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+  <text x="590" y="624" text-anchor="middle" class="note">一句话：MilvusVectorStore 是 LlamaIndex 连接 Milvus 的桥</text>
+</svg>

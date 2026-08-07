@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="760" viewBox="0 0 1280 760">
+  <defs>
+    <style>
+      .bg{fill:#f7f9fb}
+      .title{font:700 30px Arial,"Microsoft YaHei",sans-serif;fill:#172033}
+      .group{fill:#fff;stroke:#c9d3df;stroke-width:2;rx:14}
+      .box{fill:#fff;stroke:#aebccc;stroke-width:2;rx:9}
+      .front{fill:#eaf4ff;stroke:#4f8fd9}
+      .java{fill:#eaf8f0;stroke:#46a36c}
+      .python{fill:#f4efff;stroke:#8b6bd9}
+      .store{fill:#fff6ea;stroke:#d98a22}
+      .external{fill:#f9eef1;stroke:#d66f86}
+      .label{font:700 16px Arial,"Microsoft YaHei",sans-serif;fill:#172033}
+      .text{font:13px Arial,"Microsoft YaHei",sans-serif;fill:#344054}
+      .small{font:12px Arial,"Microsoft YaHei",sans-serif;fill:#667085}
+      .arrow{stroke:#617083;stroke-width:2;fill:none;marker-end:url(#arrow)}
+      .dash{stroke:#617083;stroke-width:2;fill:none;stroke-dasharray:7 6;marker-end:url(#arrow)}
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#617083"/>
+    </marker>
+  </defs>
+  <rect class="bg" width="1280" height="760"/>
+  <text x="40" y="48" class="title">AI 问答相关数据和配置关系</text>
+  <text x="40" y="76" class="small">这张图适合讲“哪些东西存在 Java 数据库，哪些东西在 Python 配置，哪些东西在外部服务”。</text>
+
+  <rect x="40" y="118" width="270" height="535" class="group"/>
+  <text x="68" y="152" class="label">学生聊天数据</text>
+  <rect x="70" y="188" width="210" height="62" class="box store"/>
+  <text x="104" y="214" class="label">ai_chat_session</text>
+  <text x="94" y="236" class="small">student_id/title/status/updated_at</text>
+  <rect x="70" y="282" width="210" height="62" class="box store"/>
+  <text x="104" y="308" class="label">ai_chat_message</text>
+  <text x="90" y="330" class="small">session_id/role/content/model/tokens</text>
+  <rect x="70" y="376" width="210" height="62" class="box java"/>
+  <text x="108" y="402" class="label">历史消息查询</text>
+  <text x="102" y="424" class="small">selectLatestBySessionId(limit)</text>
+  <rect x="70" y="470" width="210" height="62" class="box java"/>
+  <text x="103" y="496" class="label">会话归属校验</text>
+  <text x="100" y="518" class="small">selectByIdAndStudentId</text>
+
+  <rect x="360" y="118" width="270" height="535" class="group"/>
+  <text x="388" y="152" class="label">知识库数据</text>
+  <rect x="390" y="188" width="210" height="62" class="box store"/>
+  <text x="425" y="214" class="label">knowledge_base</text>
+  <text x="420" y="236" class="small">知识库基础信息</text>
+  <rect x="390" y="282" width="210" height="62" class="box store"/>
+  <text x="414" y="308" class="label">knowledge_document</text>
+  <text x="404" y="330" class="small">objectKey/status/chunkCount</text>
+  <rect x="390" y="376" width="210" height="62" class="box store"/>
+  <text x="455" y="402" class="label">TOS 文件</text>
+  <text x="415" y="424" class="small">Markdown 原文下载地址</text>
+  <rect x="390" y="470" width="210" height="62" class="box store"/>
+  <text x="452" y="496" class="label">Milvus</text>
+  <text x="406" y="518" class="small">collection: knowledge_{baseId}</text>
+
+  <rect x="680" y="118" width="270" height="535" class="group"/>
+  <text x="708" y="152" class="label">提示词和运行配置</text>
+  <rect x="710" y="188" width="210" height="62" class="box store"/>
+  <text x="735" y="214" class="label">prompt_template</text>
+  <text x="735" y="236" class="small">提示词编码和名称</text>
+  <rect x="710" y="282" width="210" height="62" class="box store"/>
+  <text x="728" y="308" class="label">prompt_template_version</text>
+  <text x="740" y="330" class="small">当前生效版本内容</text>
+  <rect x="710" y="376" width="210" height="62" class="box python"/>
+  <text x="750" y="402" class="label">Python Settings</text>
+  <text x="726" y="424" class="small">model/baseUrl/topK/tools开关</text>
+  <rect x="710" y="470" width="210" height="62" class="box java"/>
+  <text x="744" y="496" class="label">Java Properties</text>
+  <text x="730" y="518" class="small">AI 服务地址/内部 token</text>
+
+  <rect x="1000" y="118" width="230" height="535" class="group"/>
+  <text x="1028" y="152" class="label">外部模型和业务工具</text>
+  <rect x="1025" y="188" width="180" height="62" class="box external"/>
+  <text x="1062" y="214" class="label">百炼 Chat</text>
+  <text x="1052" y="236" class="small">回答 / 路由 / 工具决策</text>
+  <rect x="1025" y="282" width="180" height="62" class="box external"/>
+  <text x="1050" y="308" class="label">百炼 Embedding</text>
+  <text x="1060" y="330" class="small">文档和问题向量化</text>
+  <rect x="1025" y="376" width="180" height="62" class="box java"/>
+  <text x="1045" y="402" class="label">课程/值日工具接口</text>
+  <text x="1040" y="424" class="small">/internal/ai/tools/**</text>
+  <rect x="1025" y="470" width="180" height="62" class="box store"/>
+  <text x="1052" y="496" class="label">教学业务表</text>
+  <text x="1044" y="518" class="small">学生/班级/课表/值日</text>
+
+  <path d="M280 313 H390" class="dash"/>
+  <path d="M600 501 H710" class="dash"/>
+  <path d="M920 219 H1025" class="dash"/>
+  <path d="M920 407 H1025" class="dash"/>
+  <path d="M815 344 V376" class="arrow"/>
+  <path d="M495 438 V470" class="arrow"/>
+  <path d="M1115 438 V470" class="arrow"/>
+  <path d="M175 250 V282" class="arrow"/>
+  <path d="M175 344 V376" class="arrow"/>
+</svg>

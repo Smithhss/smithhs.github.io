@@ -1,0 +1,42 @@
+<svg width="1280" height="650" viewBox="0 0 1280 650" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1280" height="650" fill="#f8fafc"/>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#2563eb"/>
+    </marker>
+  </defs>
+  <g font-family="Arial, 'PingFang SC', 'Microsoft YaHei', sans-serif">
+    <text x="640" y="62" text-anchor="middle" font-size="34" font-weight="700" fill="#111827">文档进入知识库前的整理过程</text>
+    <text x="640" y="100" text-anchor="middle" font-size="20" fill="#64748b">把乱资料整理成干净、可查询、有来源的资料</text>
+
+    <rect x="70" y="190" width="240" height="160" rx="8" fill="#ffffff" stroke="#fecaca"/>
+    <text x="190" y="232" text-anchor="middle" font-size="24" font-weight="700" fill="#b91c1c">原始资料</text>
+    <text x="190" y="275" text-anchor="middle" font-size="18" fill="#475569">PDF / Word / 网页</text>
+    <text x="190" y="310" text-anchor="middle" font-size="18" fill="#475569">页码、广告、表格</text>
+
+    <line x1="310" y1="270" x2="405" y2="270" stroke="#2563eb" stroke-width="4" marker-end="url(#arrow)"/>
+
+    <rect x="420" y="190" width="240" height="160" rx="8" fill="#ffffff" stroke="#bfdbfe"/>
+    <text x="540" y="232" text-anchor="middle" font-size="24" font-weight="700" fill="#1d4ed8">读出来</text>
+    <text x="540" y="275" text-anchor="middle" font-size="18" fill="#475569">提取正文</text>
+    <text x="540" y="310" text-anchor="middle" font-size="18" fill="#475569">保留标题和段落</text>
+
+    <line x1="660" y1="270" x2="755" y2="270" stroke="#2563eb" stroke-width="4" marker-end="url(#arrow)"/>
+
+    <rect x="770" y="190" width="240" height="160" rx="8" fill="#ffffff" stroke="#bbf7d0"/>
+    <text x="890" y="232" text-anchor="middle" font-size="24" font-weight="700" fill="#15803d">清干净</text>
+    <text x="890" y="275" text-anchor="middle" font-size="18" fill="#475569">去掉页眉页脚</text>
+    <text x="890" y="310" text-anchor="middle" font-size="18" fill="#475569">修复断行和空格</text>
+
+    <line x1="1010" y1="270" x2="1105" y2="270" stroke="#2563eb" stroke-width="4" marker-end="url(#arrow)"/>
+
+    <rect x="1120" y="190" width="120" height="160" rx="8" fill="#ffffff" stroke="#fed7aa"/>
+    <text x="1180" y="232" text-anchor="middle" font-size="22" font-weight="700" fill="#c2410c">贴标签</text>
+    <text x="1180" y="275" text-anchor="middle" font-size="16" fill="#475569">来源</text>
+    <text x="1180" y="305" text-anchor="middle" font-size="16" fill="#475569">页码</text>
+    <text x="1180" y="335" text-anchor="middle" font-size="16" fill="#475569">标题</text>
+
+    <rect x="205" y="455" width="870" height="80" rx="8" fill="#eff6ff" stroke="#bfdbfe"/>
+    <text x="640" y="505" text-anchor="middle" font-size="23" font-weight="700" fill="#1e3a8a">整理后的资料再进入切分、Embedding 和检索流程</text>
+  </g>
+</svg>
