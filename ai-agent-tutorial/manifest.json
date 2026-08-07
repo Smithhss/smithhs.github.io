@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-08-07T14:55:34",
+  "generated_at": "2026-08-07T15:18:52",
   "series_url": "/ai-agent-tutorial/",
   "posts": [
     {
@@ -121,6 +121,14 @@
       "url": "/2026/08/03/2026-08-03-ai-agent-14-voice-interview-v2/",
       "path": "F:\\develop\\project\\Blog\\2026\\08\\03\\2026-08-03-ai-agent-14-voice-interview-v2\\index.html",
       "cover": "/img/ai-agent-tutorial/covers/ai-agent-14-voice-interview-v2.png"
+    },
+    {
+      "no": "16",
+      "title": "MCP 服务开发入门",
+      "date": "2026-08-04 10:45:00",
+      "url": "/2026/08/04/2026-08-04-ai-agent-16-mcp-service-development/",
+      "path": "F:\\develop\\project\\Blog\\2026\\08\\04\\2026-08-04-ai-agent-16-mcp-service-development\\index.html",
+      "cover": "/img/ai-agent-tutorial/covers/ai-agent-16-mcp-service-development.png"
     }
   ]
 }

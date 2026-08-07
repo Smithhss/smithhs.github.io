@@ -1,0 +1,1587 @@
+<!DOCTYPE html>
+
+<html data-theme="light" lang="zh-CN"><head><meta charset="utf-8"/><meta content="IE=edge" http-equiv="X-UA-Compatible"/><meta content="width=device-width, initial-scale=1.0, user-scalable=no" name="viewport"/><title>MCP 服务开发入门 | Smith</title><meta content="AI Agent,大模型,教程,RAG,LangChain,Text-to-SQL" name="keywords"/><meta content="Smith" name="author"/><meta content="Smith" name="copyright"/><meta content="telephone=no" name="format-detection"/><meta content="#fafaf8" name="theme-color"/><meta content="yes" name="mobile-web-app-capable"/><meta content="yes" name="apple-touch-fullscreen"/><meta content="MCP 服务开发入门" name="apple-mobile-web-app-title"/><meta content="MCP 服务开发入门" name="application-name"/><meta content="yes" name="apple-mobile-web-app-capable"/><meta content="#fafaf8" name="apple-mobile-web-app-status-bar-style"/><meta content="article" property="og:type"/><meta content="MCP 服务开发入门" property="og:title"/><meta content="https://smithhs.cn/2026/08/04/2026-08-04-ai-agent-16-mcp-service-development/index.html" property="og:url"/><meta content="Smith" property="og:site_name"/><meta content="理解 MCP 如何把工具、资源和提示词统一接给 Agent，并从 Server、Tool、Resource、Prompt 和 Client 调用链路入门。" property="og:description"/><meta content="zh-CN" property="og:locale"/><meta content="/img/ai-agent-tutorial/covers/ai-agent-16-mcp-service-development.png" property="og:image"/><meta content="Smith" property="article:author"/><meta property="article:tag"/><meta content="summary" name="twitter:card"/><meta content="/img/ai-agent-tutorial/covers/ai-agent-16-mcp-service-development.png" name="twitter:image"/><meta content="理解 MCP 如何把工具、资源和提示词统一接给 Agent，并从 Server、Tool、Resource、Prompt 和 Client 调用链路入门。" name="description"/><link href="/favicon.ico" rel="shortcut icon"/><link href="https://smithhs.cn/2026/08/04/2026-08-04-ai-agent-16-mcp-service-development/" rel="canonical"/><link href="//cdn.cbd.int" rel="preconnect"/><link href="//busuanzi.ibruce.info" rel="preconnect"/><link href="/manifest.json" rel="manifest"/><meta content="var(--smith-main)" name="msapplication-TileColor"/><link color="#5bbad5" href="/img/siteicon/apple-icon-180.png" rel="mask-icon"/><link href="/img/siteicon/apple-icon-180.png" rel="apple-touch-icon" sizes="180x180"/><link href="/img/siteicon/apple-icon-180.png" rel="apple-touch-icon-precomposed" sizes="180x180"/><link href="/img/siteicon/32.png" rel="icon" sizes="32x32" type="image/png"><link href="/img/siteicon/16.png" rel="icon" sizes="16x16" type="image/png"><link href="/img/siteicon/apple-icon-180.png" rel="bookmark"/><link href="/img/siteicon/apple-splash-2048-2732.jpg" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-2732-2048.jpg" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-1668-2388.jpg" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-2388-1668.jpg" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-1536-2048.jpg" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-2048-1536.jpg" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-1668-2224.jpg" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-2224-1668.jpg" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-1620-2160.jpg" media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-2160-1620.jpg" media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-1290-2796.jpg" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-2796-1290.jpg" media="(device-width: 430px) and (device-height: 932px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-1179-2556.jpg" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-2556-1179.jpg" media="(device-width: 393px) and (device-height: 852px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-1284-2778.jpg" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-2778-1284.jpg" media="(device-width: 428px) and (device-height: 926px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-1170-2532.jpg" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-2532-1170.jpg" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-1125-2436.jpg" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-2436-1125.jpg" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-1242-2688.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-2688-1242.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-828-1792.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-1792-828.jpg" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-1242-2208.jpg" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-2208-1242.jpg" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-750-1334.jpg" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-1334-750.jpg" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-640-1136.jpg" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" rel="apple-touch-startup-image"/><link href="/img/siteicon/apple-splash-1136-640.jpg" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" rel="apple-touch-startup-image"/><link href="/css/index.css" rel="stylesheet"/><link href="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'" rel="stylesheet"/><link href="https://cdn.cbd.int/@fancyapps/ui@6.1.6/dist/fancybox/fancybox.css" media="print" onload="this.media='all'" rel="stylesheet"/><link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet"/><link href="https://npm.elemecdn.com/smith-theme-static@1.0.2/swiper/swiper.min.css" media="print" onload="this.media='all'" rel="stylesheet"/><script>const GLOBAL_CONFIG = {
+  linkPageTop: undefined,
+  peoplecanvas: undefined,
+  postHeadAiDescription: {"enable":true,"gptName":"Smith","mode":"api","switchBtn":false,"btnLink":"https://aicos.ink","randomNum":3,"basicWordCount":1000,"key":"","Referer":"https://aicos.ink"},
+  diytitle: {"enable":true,"leaveTitle":"再看看嘛🌈！","backTitle":"欢迎回来✌️！"},
+  LA51: undefined,
+  greetingBox: {"enable":true,"default":"晚上好👋","list":[{"greeting":"晚安😴","startTime":0,"endTime":5},{"greeting":"早上好鸭👋, 祝你一天好心情！","startTime":6,"endTime":9},{"greeting":"上午好👋, 状态很好，鼓励一下～","startTime":10,"endTime":10},{"greeting":"11点多啦, 在坚持一下就吃饭啦～","startTime":11,"endTime":11},{"greeting":"午安👋, 宝贝","startTime":12,"endTime":14},{"greeting":"🌈充实的一天辛苦啦！","startTime":14,"endTime":18},{"greeting":"19点喽, 奖励一顿丰盛的大餐吧🍔。","startTime":19,"endTime":19},{"greeting":"晚上好👋, 在属于自己的时间好好放松😌~","startTime":20,"endTime":24}]},
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  music_page_default: "nav_music",
+  home_banner: {"enable":true,"interval":5000,"count":5},
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: true,
+  mainTone: undefined,
+  authorStatus: {"skills":["💻 后端开发 Java / Spring Cloud","🌐 前端探索 React / TypeScript","🤖 AI 工具深度用户","🏠 智能家居折腾达人","🔨 从设计到部署一条龙","📝 偶尔写写博客记录生活","🎵 听歌写代码双线并行","🚀 脚踏实地行动派"]},
+  algolia: undefined,
+  localSearch: {"path":"/search.json","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"It has been","messageNext":"days since the last update, the content of the article may be outdated."},
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":240},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":false,"limitCount":50,"languages":{"author":"作者: Smith","link":"链接: ","source":"来源: Smith","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#4f7cff","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.2.0/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.2.0/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: 'Smith',
+  title: 'MCP 服务开发入门',
+  postAI: '',
+  pageFillDescription: '第十六天：MCP 服务开发入门 前面我们已经学习了工具调用和 Agent。 工具调用解决的是： 让模型知道：什么时候该调用工具、调用哪个工具、参数是什么。 Agent 解决的是： 自动完成“模型判断 -> 调用工具 -> 把结果交回模型 -> 生成最终回答”的流程。 但是这里还有一个问题： 如果我们有很多工具，比如： 查询课程。 查询订单。 查询学生。 读取知识库文档。 读取项目配置。 生成某类固定提示词。 这些工具应该怎么统一接给不同的 Agent 客户端？ 比如今天接 Claude Desktop，明天接 Cursor，后天接 Codex，难道每个客户端都写一套工具适配代码吗？ 这就是 MCP 要解决的问题。 一句话： MCP 是一套把工具、资源、提示词统一接给 Agent 的协议。 这里的“统一接给 Agent”要重点理解一下。 它不是说把工具、资料和提示词直接塞进大模型参数里。 它的意思是： 我们把工具、资源、提示词放到 MCP Server 里。 Agent 客户端通过 MCP 协议连接这个 Server。 连接成功后，Agent 客户端就能发现和使用这些能力。 所以 MCP 更像一个标准插座。 工具、文档、提示词不用分别为 Claude、Cursor、Codex 各写一套接入逻辑，只要按 MCP 协议暴露出来，支持 MCP 的客户端就可以连接。 1. 先用一句话理解 MCP MCP 全称是 Model Context Protocol。 可以先不用记全称，先记住这个理解： MCP = 给 Agent 插工具、插资料、插提示词的一套标准接口。 它不是大模型。 它也不是 Agent。 它更像一个中间层： Agent 客户端 | | MCP 协议 v MCP Server | v 你的工具 / 文档 / 业务系统 以前我们在 LangChain 里写工具，通常是直接把 Python 函数绑定给模型。 MCP 的思路是： 把工具放到一个独立的 MCP Server 里。 Agent 客户端通过 MCP 协议发现和调用这些工具。 这样工具就不只属于某一个 Python 程序，而是可以被支持 MCP 的客户端复用。 2. MCP Server 里能放什么 MCP Server 主要暴露三类能力。 可以先看这张图： 注意： Prompt 不是比 Tool、Resource 更高的一层。 在 MCP 里， Tools 、 Resources 、 Prompts 是 MCP Server 并列暴露给 Agent 客户端的三类能力。 它们只是用途不同： Tool 负责执行动作。 Resource 负责读取资料。 Prompt 负责提供可复用提示词模板。 2.1 Tools：工具 Tool 是让 Agent 做事的能力。 比如： query_course 查询课程 get_current_time 获取当前时间 query_order 查询订单 search_knowledge 查询知识库 Tool 通常有输入参数，也有返回结果。 例如： 工具名：query_course 参数：keyword 结果：课程列表 2.2 Resources：资源 Resource 是让 Agent 读取资料的能力。 比如： yanque://course/mcp yanque://config/chat yanque://doc/project-readme Resource 更像“可读取的数据地址”。 Agent 可以根据资源 URI 读取内容。 2.3 Prompts：提示词模板 Prompt 是预设好的提示词模板。 比如： course_study_plan code_review_prompt sql_analysis_prompt 它的作用是： 把常用提示词做成可复用模板，让 Agent 客户端可以按参数生成提示词。 3. 本节要做什么 这一节我们不直接写复杂业务。 我们先做一个最小 MCP 服务。 它包含： 1. 一个空 MCP Server。 2. 一个只包含 Tool 的 MCP Server。 3. 一个只包含 Resource 的 MCP Server。 4. 一个只包含 Prompt 的 MCP Server。 5. 一个完整 MCP Ser',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2026-08-04 10:45:00',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#fafaf8')
+        }
+      }
+      const t = saveToLocal.get('theme')
+
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 18
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link href="https://npm.elemecdn.com/lxgw-wenkai-screen-webfont@1.1.0/style.css" media="print" onload="this.media='all'" rel="stylesheet"/><meta content="Hexo 7.3.0" name="generator"/></link></link><style>.ai-series-intro{border-left:4px solid var(--smith-main,#49b1f5);background:rgba(73,177,245,.08);border-radius:12px;padding:1rem 1.2rem}.ai-series-index{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin:1.2rem 0}.ai-series-index a{display:block;border:1px solid rgba(127,127,127,.18);border-radius:16px;padding:14px 16px;background:rgba(255,255,255,.65);box-shadow:0 8px 24px rgba(15,23,42,.06)}.ai-series-index .no{font-weight:700;color:var(--smith-main,#49b1f5);font-size:.9rem}.ai-series-index .ttl{font-weight:700;margin:.3rem 0}#article-container img{border-radius:12px;box-shadow:0 8px 28px rgba(15,23,42,.08)}#article-container table{display:block;overflow:auto}</style></head><body data-type="smith"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick='document.getElementById("loading-box").classList.add("loaded")'><div class="loading-bg"><img alt="加载头像" class="loading-img nolazyload" src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d20f536c64d06e5fcf4bfe2ec5dc25d.jpg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link href="https://cdn.cbd.int/smith-theme-static@1.0.2/progress_bar/progress_bar.css" rel="stylesheet"/><script async="async" data-pace-options='{ "restartOnRequestAfter":false,"eventLag":false}' src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="smithfont smith-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://smithhs.cn/" title="博客"><img alt="博客" class="back-menu-item-icon" data-lazy-src="/img/favicon.png" onerror='this.onerror=null,this.src="/img/404.jpg"' src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" href="https://github.com/Smithhss" rel="noopener" target="_blank" title="Github"><img alt="Github" class="back-menu-item-icon" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/GitHub.png" onerror='this.onerror=null,this.src="/img/404.jpg"' src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"/><span class="back-menu-item-text">Github</span></a></div></div></div></div><a accesskey="h" href="/" id="site-name"><div class="title">Smith</div><i class="smithfont smith-icon-house-chimney"></i></a></span><div class="mask-name-container"><div id="name-container"><a href="javascript:smith.scrollToDest(0, 500)" id="page-name">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="smithfont smith-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="smithfont smith-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="smithfont smith-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="smithfont smith-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="smithfont smith-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="smithfont smith-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/dailyPhoto/"><i class="smithfont smith-icon-camera faa-tada" style="font-size: 0.9em;"></i><span> 每日照片</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wallpaper/"><i class="smithfont smith-icon-image faa-tada" style="font-size: 0.9em;"></i><span> 壁纸</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wordScenery/"><i class="smithfont smith-icon-font faa-tada" style="font-size: 0.9em;"></i><span> 文字风景</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="smithfont smith-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于我</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="smithfont smith-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/love/"><i class="smithfont smith-icon-heart faa-tada" style="font-size: 0.9em;"></i><span> 爱情</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="smithfont smith-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div></div><div id="nav-right"><div class="nav-button only-home" id="travellings_button" title="随机前往一个开往项目网站"><a class="site-page" data-pjax-state="external" href="javascript:void(0);" onclick="smith.totraveling()" rel="external nofollow" title="随机前往一个开往项目网站"><i class="smithfont smith-icon-train"></i></a></div><div class="nav-button" id="randomPost_button"><a class="site-page" href="javascript:void(0);" onclick="toRandomPost()" title="随机前往一个文章"><i class="smithfont smith-icon-dice"></i></a></div><div class="nav-button" id="search-button"><a accesskey="s" class="site-page social-icon search" href="javascript:void(0);" title="搜索🔍"><i class="smithfont smith-icon-magnifying-glass"></i><span> 搜索</span></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" onclick="smith.switchConsole();" title="中控台"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg" target="_blank"><img alt="wechat" class="post-qr-code-img" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg" onerror='this.onerror=null,this.src="/img/404.jpg"' src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg" target="_blank"><img alt="alipay" class="post-qr-code-img" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg" onerror='this.onerror=null,this.src="/img/404.jpg"' src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"/></a><div class="post-qr-code-desc">alipay</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Android-Studio/" style="font-size: 1.05rem;">Android Studio<sup>1</sup></a><a href="/tags/App/" style="font-size: 1.05rem;">App<sup>1</sup></a><a href="/tags/Butterfly/" style="font-size: 1.05rem;">Butterfly<sup>1</sup></a><a href="/tags/C/" style="font-size: 1.05rem;">C++<sup>3</sup></a><a href="/tags/CSS/" style="font-size: 1.05rem;">CSS<sup>1</sup></a><a href="/tags/Cisco-Packet-Tracer/" style="font-size: 1.05rem;">Cisco Packet Tracer<sup>1</sup></a><a href="/tags/Docker/" style="font-size: 1.05rem;">Docker<sup>2</sup></a><a href="/tags/Easypan/" style="font-size: 1.05rem;">Easypan<sup>2</sup></a><a href="/tags/FurtherMathematics/" style="font-size: 1.05rem;">FurtherMathematics<sup>1</sup></a><a href="/tags/GPT/" style="font-size: 1.05rem;">GPT<sup>1</sup></a><a href="/tags/Git2/" style="font-size: 1.05rem;">Git2<sup>1</sup></a><a href="/tags/HTML/" style="font-size: 1.05rem;">HTML<sup>1</sup></a><a href="/tags/Hexo/" style="font-size: 1.05rem;">Hexo<sup>1</sup></a><a href="/tags/Java/" style="font-size: 1.05rem;">Java<sup>67</sup></a><a href="/tags/JavaScript/" style="font-size: 1.05rem;">JavaScript<sup>1</sup></a><a href="/tags/Jrebel/" style="font-size: 1.05rem;">Jrebel<sup>1</sup></a><a href="/tags/LeetCode/" style="font-size: 1.05rem;">LeetCode<sup>1</sup></a><a href="/tags/Linux/" style="font-size: 1.05rem;">Linux<sup>3</sup></a><a href="/tags/Markdown/" style="font-size: 1.05rem;">Markdown<sup>2</sup></a><a href="/tags/Maven/" style="font-size: 1.05rem;">Maven<sup>2</sup></a><a href="/tags/MyBatis/" style="font-size: 1.05rem;">MyBatis<sup>1</sup></a><a href="/tags/MyBatis-Plus/" style="font-size: 1.05rem;">MyBatis-Plus<sup>1</sup></a><a href="/tags/Mysql/" style="font-size: 1.05rem;">Mysql<sup>1</sup></a><a href="/tags/Navicat/" style="font-size: 1.05rem;">Navicat<sup>1</sup></a><a href="/tags/NoSql/" style="font-size: 1.05rem;">NoSql<sup>1</sup></a><a href="/tags/Nodejs/" style="font-size: 1.05rem;">Nodejs<sup>2</sup></a><a href="/tags/Python/" style="font-size: 1.05rem;">Python<sup>4</sup></a><a href="/tags/Spring/" style="font-size: 1.05rem;">Spring<sup>2</sup></a><a href="/tags/VMware/" style="font-size: 1.05rem;">VMware<sup>2</sup></a><a href="/tags/WeChat/" style="font-size: 1.05rem;">WeChat<sup>1</sup></a><a href="/tags/YouHou/" style="font-size: 1.05rem;">YouHou<sup>1</sup></a><a href="/tags/books/" style="font-size: 1.05rem;">books<sup>1</sup></a><a href="/tags/butterfly/" style="font-size: 1.05rem;">butterfly<sup>1</sup></a><a href="/tags/clash/" style="font-size: 1.05rem;">clash<sup>1</sup></a><a href="/tags/error/" style="font-size: 1.05rem;">error<sup>1</sup></a><a href="/tags/project/" style="font-size: 1.05rem;">project<sup>4</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 1.05rem;">前端<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6/" style="font-size: 1.05rem;">开发框架<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" style="font-size: 1.05rem;">开发环境<sup>1</sup></a><a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="font-size: 1.05rem;">软件工程<sup>1</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="smithfont smith-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="smithfont smith-icon-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+<i class="smithfont smith-icon-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/08/"><span class="card-archive-list-date">八月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/05/"><span class="card-archive-list-date">五月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">16</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/04/"><span class="card-archive-list-date">四月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">31</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2026/03/"><span class="card-archive-list-date">三月 2026</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">75</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/02/"><span class="card-archive-list-date">二月 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">7</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/11/"><span class="card-archive-list-date">十一月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">3</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/10/"><span class="card-archive-list-date">十月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/09/"><span class="card-archive-list-date">九月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">5</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/07/"><span class="card-archive-list-date">七月 2024</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">1</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" href="javascript:void(0);" title="显示模式切换"><i class="smithfont smith-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="smith.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="smithfont smith-icon-arrows-left-right"></i></a></div><div class="console-btn-item" id="consoleMusic" onclick="smith.musicToggle()" title="音乐开关"><a class="music-switch"><i class="smithfont smith-icon-music"></i></a></div></div><div class="console-mask" href="javascript:void(0);" onclick="smith.hideConsole()"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="smithfont smith-icon-arrow-up"></i><span id="percent" onclick="smith.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="smithfont smith-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><i class="smithfont smith-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/AI%E5%B7%A5%E7%A8%8B/" itemprop="url">AI工程</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/AI%20Agent/" itemprop="url" tabindex="-1"><span><i class="smithfont smith-icon-hashtag"></i>AI Agent</span></a><a class="article-meta__tags" href="/tags/%E6%95%99%E7%A8%8B/" itemprop="url" tabindex="-1"><span><i class="smithfont smith-icon-hashtag"></i>教程</span></a><a class="article-meta__tags" href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/" itemprop="url" tabindex="-1"><span><i class="smithfont smith-icon-hashtag"></i>大模型</span></a></span></div></div><h1 class="post-title">MCP 服务开发入门</h1><div id="post-meta"><div class="meta-secondline"><span class="post-meta-date"><i class="smithfont smith-icon-calendar-days post-meta-icon"></i><span class="article-meta-label">发表于</span><time datetime="2026-08-04T10:45:00.000Z" time="2026-08-04 10:45:00" title="发表于 2026-08-04 10:45:00">2026-08-04</time></span><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="smithfont smith-icon-file-word post-meta-icon"></i><span class="word-count">约 18097 字</span></span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" preserveaspectratio="none" shape-rendering="auto" viewbox="0 24 150 28" xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg"><defs><path d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z" id="gentle-wave"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src="/img/ai-agent-tutorial/covers/ai-agent-16-mcp-service-development.png"/></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><div class="post-ai-description"><div class="ai-title"><i class="smithfont smith-icon-bilibili"></i><div class="ai-title-text">AI-摘要</div><i class="smithfont smith-icon-arrow-rotate-right"></i><i class="smithfont smith-icon-circle-dot" title="朗读摘要"></i><div id="ai-tag">Smith GPT</div></div><div class="ai-explanation">AI初始化中...</div><div class="ai-btn-box"><div class="ai-btn-item">介绍自己 🙈</div><div class="ai-btn-item">生成本文简介 👋</div><div class="ai-btn-item">推荐相关文章 📖</div><div class="ai-btn-item">前往主页 🏠</div><div class="ai-btn-item" id="go-api-link">了解更多</div></div><script data-pjax="" src="/js/smith/ai_abstract.js"></script></div><article class="post-content" id="article-container" itemscope="" itemtype="https://smithhs.cn/2026/08/04/2026-08-04-ai-agent-16-mcp-service-development/"><header><a class="post-meta-categories" href="/categories/AI%E5%B7%A5%E7%A8%8B/" itemprop="url">AI工程</a><a href="/tags/AI%20Agent/" itemprop="url" tabindex="-1">AI Agent</a><a href="/tags/%E6%95%99%E7%A8%8B/" itemprop="url" tabindex="-1">教程</a><a href="/tags/%E5%A4%A7%E6%A8%A1%E5%9E%8B/" itemprop="url" tabindex="-1">大模型</a><h1 id="CrawlerTitle">MCP 服务开发入门</h1></header><blockquote class="ai-series-intro"><p><strong>AI Agent 工程实践教程 · 第 16 章</strong></p><p>理解 MCP 如何把工具、资源和提示词统一接给 Agent，并从 Server、Tool、Resource、Prompt 和 Client 调用链路入门。</p><p><a href="/ai-agent-tutorial/">返回系列目录</a></p></blockquote><h1 id="mcp">第十六天：MCP 服务开发入门</h1>
+<p>前面我们已经学习了工具调用和 Agent。</p>
+<p>工具调用解决的是：</p>
+<pre><code class="language-text">让模型知道：什么时候该调用工具、调用哪个工具、参数是什么。
+</code></pre>
+<p>Agent 解决的是：</p>
+<pre><code class="language-text">自动完成“模型判断 -&gt; 调用工具 -&gt; 把结果交回模型 -&gt; 生成最终回答”的流程。
+</code></pre>
+<p>但是这里还有一个问题：</p>
+<p>如果我们有很多工具，比如：</p>
+<ol>
+<li>查询课程。</li>
+<li>查询订单。</li>
+<li>查询学生。</li>
+<li>读取知识库文档。</li>
+<li>读取项目配置。</li>
+<li>生成某类固定提示词。</li>
+</ol>
+<p>这些工具应该怎么统一接给不同的 Agent 客户端？</p>
+<p>比如今天接 Claude Desktop，明天接 Cursor，后天接 Codex，难道每个客户端都写一套工具适配代码吗？</p>
+<p>这就是 MCP 要解决的问题。</p>
+<p>一句话：</p>
+<p><strong>MCP 是一套把工具、资源、提示词统一接给 Agent 的协议。</strong></p>
+<p>这里的“统一接给 Agent”要重点理解一下。</p>
+<p>它不是说把工具、资料和提示词直接塞进大模型参数里。</p>
+<p>它的意思是：</p>
+<pre><code class="language-text">我们把工具、资源、提示词放到 MCP Server 里。
+Agent 客户端通过 MCP 协议连接这个 Server。
+连接成功后，Agent 客户端就能发现和使用这些能力。
+</code></pre>
+<p>所以 MCP 更像一个标准插座。</p>
+<p>工具、文档、提示词不用分别为 Claude、Cursor、Codex 各写一套接入逻辑，只要按 MCP 协议暴露出来，支持 MCP 的客户端就可以连接。</p>
+<p><img alt="MCP 把能力统一接给 Agent" class="no-lightbox" loading="lazy" src="/img/ai-agent-tutorial/16/mcp_unified_access.svg"/></p>
+<hr/>
+<h2 id="1-mcp">1. 先用一句话理解 MCP</h2>
+<p>MCP 全称是 Model Context Protocol。</p>
+<p>可以先不用记全称，先记住这个理解：</p>
+<pre><code class="language-text">MCP = 给 Agent 插工具、插资料、插提示词的一套标准接口。
+</code></pre>
+<p>它不是大模型。</p>
+<p>它也不是 Agent。</p>
+<p>它更像一个中间层：</p>
+<pre><code class="language-text">Agent 客户端
+    |
+    | MCP 协议
+    v
+MCP Server
+    |
+    v
+你的工具 / 文档 / 业务系统
+</code></pre>
+<p>以前我们在 LangChain 里写工具，通常是直接把 Python 函数绑定给模型。</p>
+<p>MCP 的思路是：</p>
+<pre><code class="language-text">把工具放到一个独立的 MCP Server 里。
+Agent 客户端通过 MCP 协议发现和调用这些工具。
+</code></pre>
+<p>这样工具就不只属于某一个 Python 程序，而是可以被支持 MCP 的客户端复用。</p>
+<hr/>
+<h2 id="2-mcp-server">2. MCP Server 里能放什么</h2>
+<p>MCP Server 主要暴露三类能力。</p>
+<p>可以先看这张图：</p>
+<p><img alt="MCP Server 的三类能力" class="no-lightbox" loading="lazy" src="/img/ai-agent-tutorial/16/mcp_three_capabilities.svg"/></p>
+<p>注意：</p>
+<p><strong>Prompt 不是比 Tool、Resource 更高的一层。</strong></p>
+<p>在 MCP 里，<code>Tools</code>、<code>Resources</code>、<code>Prompts</code> 是 MCP Server 并列暴露给 Agent 客户端的三类能力。</p>
+<p>它们只是用途不同：</p>
+<pre><code class="language-text">Tool      负责执行动作。
+Resource  负责读取资料。
+Prompt    负责提供可复用提示词模板。
+</code></pre>
+<h3 id="21-tools">2.1 Tools：工具</h3>
+<p>Tool 是让 Agent 做事的能力。</p>
+<p>比如：</p>
+<pre><code class="language-text">query_course       查询课程
+get_current_time   获取当前时间
+query_order        查询订单
+search_knowledge   查询知识库
+</code></pre>
+<p>Tool 通常有输入参数，也有返回结果。</p>
+<p>例如：</p>
+<pre><code class="language-text">工具名：query_course
+参数：keyword
+结果：课程列表
+</code></pre>
+<h3 id="22-resources">2.2 Resources：资源</h3>
+<p>Resource 是让 Agent 读取资料的能力。</p>
+<p>比如：</p>
+<pre><code class="language-text">yanque://course/mcp
+yanque://config/chat
+yanque://doc/project-readme
+</code></pre>
+<p>Resource 更像“可读取的数据地址”。</p>
+<p>Agent 可以根据资源 URI 读取内容。</p>
+<h3 id="23-prompts">2.3 Prompts：提示词模板</h3>
+<p>Prompt 是预设好的提示词模板。</p>
+<p>比如：</p>
+<pre><code class="language-text">course_study_plan
+code_review_prompt
+sql_analysis_prompt
+</code></pre>
+<p>它的作用是：</p>
+<pre><code class="language-text">把常用提示词做成可复用模板，让 Agent 客户端可以按参数生成提示词。
+</code></pre>
+<hr/>
+<h2 id="3">3. 本节要做什么</h2>
+<p>这一节我们不直接写复杂业务。</p>
+<p>我们先做一个最小 MCP 服务。</p>
+<p>它包含：</p>
+<pre><code class="language-text">1. 一个空 MCP Server。
+2. 一个只包含 Tool 的 MCP Server。
+3. 一个只包含 Resource 的 MCP Server。
+4. 一个只包含 Prompt 的 MCP Server。
+5. 一个完整 MCP Server。
+6. 一个本地 Client，用来测试完整 MCP Server。
+7. 一个接真实业务 API 的写法示例。
+</code></pre>
+<p>本节 demo 放在 AI 项目的 <code>test/mcp_demo</code> 下：</p>
+<pre><code class="language-text">YanQue-AI
+  └── test
+      └── mcp_demo
+          ├── 00_empty_server.py
+          ├── 01_tool_server.py
+          ├── 02_resource_server.py
+          ├── 03_prompt_server.py
+          ├── 04_full_server.py
+          ├── 05_stdio_client.py
+          ├── 06_business_api_style.py
+          ├── 07_streamable_http_server.py
+          ├── 08_streamable_http_client.py
+          ├── 09_load_mcp_tools.py
+          ├── 10_agent_with_mcp_tools.py
+          └── README.md
+</code></pre>
+<p>为什么要拆这么多文件？</p>
+<p>因为 MCP 初学时最容易卡在：</p>
+<pre><code class="language-text">一上来既有 Tool，又有 Resource，又有 Prompt，又有 Client。
+</code></pre>
+<p>看起来代码不多，但概念会混在一起。</p>
+<p>所以本节按下面的顺序逐步展开：</p>
+<pre><code class="language-text">00_empty_server.py        先知道 MCP Server 怎么启动
+01_tool_server.py         再知道 Tool 怎么注册
+02_resource_server.py     再知道 Resource 怎么读取
+03_prompt_server.py       再知道 Prompt 怎么生成
+04_full_server.py         最后把三类能力合在一起
+05_stdio_client.py        用 Client 测试完整调用链路
+06_business_api_style.py  看真实项目里怎么接 Java 后端 API
+07_streamable_http_server.py  看 MCP Server 如何用 HTTP 方式启动
+08_streamable_http_client.py  看 MCP Client 如何通过 URL 连接 HTTP MCP Server
+09_load_mcp_tools.py     把 MCP Tools 加载成 LangChain Tools，并直接调用
+10_agent_with_mcp_tools.py  Agent 接入 MCP Server 工具的完整示例
+</code></pre>
+<p>先不要急着接真实数据库。</p>
+<p>我们先用内存数据模拟课程。</p>
+<p>等流程跑通以后，再把内存数据替换成：</p>
+<ol>
+<li>HTTP API 调用。</li>
+<li>数据库查询。</li>
+<li>Java 后端接口。</li>
+<li>已有 Python service。</li>
+</ol>
+<hr/>
+<h2 id="4-mcp-sdk">4. 安装 MCP SDK</h2>
+<p>进入 <code>YanQue-AI</code> 目录：</p>
+<pre><code class="language-bash">cd /Users/huangjin/IdeaProjects/YanQue/YanQue-AI
+</code></pre>
+<p>安装 MCP Python SDK：</p>
+<pre><code class="language-bash">uv add mcp
+</code></pre>
+<p>安装完成后，<code>pyproject.toml</code> 里会出现类似依赖：</p>
+<pre><code class="language-toml">dependencies = [
+    "mcp&gt;=1.28.1",
+]
+</code></pre>
+<hr/>
+<h2 id="5-mcp-server">5. 第一步：创建一个空 MCP Server</h2>
+<p>先创建文件：</p>
+<pre><code class="language-text">test/mcp_demo/00_empty_server.py
+</code></pre>
+<p>写入最小代码：</p>
+<pre><code class="language-python">from mcp.server.fastmcp import FastMCP
+
+
+mcp = FastMCP("yanque-course-demo")
+
+
+if __name__ == "__main__":
+    mcp.run(transport="stdio")
+</code></pre>
+<p>这里先解释三个东西。</p>
+<h3 id="51-fastmcp">5.1 FastMCP 是什么</h3>
+<p><code>FastMCP</code> 是 Python MCP SDK 提供的快速开发工具。</p>
+<p>可以把它理解成：</p>
+<pre><code class="language-text">FastAPI 帮我们快速写 HTTP API。
+FastMCP 帮我们快速写 MCP Server。
+</code></pre>
+<p>如果不用 <code>FastMCP</code>，我们要自己处理很多底层事情：</p>
+<ol>
+<li>解析 MCP 请求。</li>
+<li>判断客户端要调用哪个工具。</li>
+<li>校验参数。</li>
+<li>返回结果。</li>
+<li>注册资源。</li>
+<li>注册提示词。</li>
+<li>处理 stdio 通信。</li>
+</ol>
+<p>用了 <code>FastMCP</code> 以后，我们只需要关心：</p>
+<pre><code class="language-text">我要暴露哪些工具、资源和提示词。
+</code></pre>
+<h3 id="52-transport">5.2 transport 是什么</h3>
+<p><code>transport</code> 可以理解成：</p>
+<pre><code class="language-text">MCP Client 和 MCP Server 之间用什么方式通信。
+</code></pre>
+<p>也就是：</p>
+<pre><code class="language-text">请求怎么发过去，结果怎么传回来。
+</code></pre>
+<p>在当前 Python MCP SDK 里，<code>mcp.run(...)</code> 常见写法有：</p>
+<pre><code class="language-python">mcp.run(transport="stdio")
+mcp.run(transport="streamable-http")
+mcp.run(transport="sse")
+</code></pre>
+<p>它们的区别不是“工具能力不同”。</p>
+<p>工具、资源、提示词还是那些。</p>
+<p>区别只是：</p>
+<pre><code class="language-text">客户端怎么连接服务端。
+</code></pre>
+<p>可以先记住这张对比表：</p>
+<pre><code class="language-text">stdio：
+    客户端启动 MCP Server 进程。
+    客户端通过标准输入输出和服务端通信。
+    适合本地开发、本地客户端、Claude Desktop、Cursor 这类 command + args 配置。
+
+streamable-http：
+    MCP Server 自己作为 HTTP 服务启动。
+    客户端通过 URL 连接它。
+    适合远程部署、团队共享、服务化接入。
+
+sse：
+    也是 HTTP 相关方式，使用 Server-Sent Events 建立消息通道。
+    一些早期 MCP 客户端或旧接入方式会看到它。
+</code></pre>
+<h3 id="53-stdio">5.3 stdio 是什么</h3>
+<p>这里的：</p>
+<pre><code class="language-python">mcp.run(transport="stdio")
+</code></pre>
+<p>表示 MCP Server 使用标准输入输出通信。</p>
+<p>它不是 Web 服务。</p>
+<p>所以它不会显示：</p>
+<pre><code class="language-text">http://localhost:8000
+</code></pre>
+<p>stdio 模式的意思是：</p>
+<pre><code class="language-text">MCP 客户端启动这个 Python 进程。
+客户端通过标准输入输出和它通信。
+</code></pre>
+<p>这也是本地 MCP Server 最常见的入门方式。</p>
+<p>我们前面的 <code>00_empty_server.py</code> 到 <code>06_business_api_style.py</code> 都使用 <code>stdio</code>。</p>
+<p>本地运行时，<code>stdio</code> 最简单：</p>
+<pre><code class="language-text">不用开端口。
+不用处理 HTTP 地址。
+客户端直接启动服务端进程。
+</code></pre>
+<p>可以先用下面的方式理解：</p>
+<pre><code class="language-text">普通命令行程序：
+    人在终端输入内容
+        -&gt; 程序从标准输入 stdin 读到内容
+    程序 print 输出内容
+        -&gt; 内容出现在终端屏幕上
+
+MCP stdio 模式：
+    MCP 客户端把请求写给 MCP Server
+        -&gt; MCP Server 从标准输入 stdin 读到请求
+    MCP Server 把结果写出来
+        -&gt; MCP 客户端从标准输出 stdout 读到结果
+</code></pre>
+<p>先记住一句话：</p>
+<pre><code class="language-text">stdio 就是不用 URL，而是用“输入通道”和“输出通道”让客户端和服务端说话。
+</code></pre>
+<p>在我们的 demo 里：</p>
+<pre><code class="language-python">async with stdio_client(server_params) as (read_stream, write_stream):
+</code></pre>
+<p>这行代码主要完成两件事：</p>
+<pre><code class="language-text">stdio_client 做了两件事：
+1. 启动 04_full_server.py 这个 MCP Server。
+2. 建立两条通道：
+   write_stream 用来发请求。
+   read_stream 用来读结果。
+</code></pre>
+<p>后面的：</p>
+<pre><code class="language-python">async with ClientSession(read_stream, write_stream) as session:
+</code></pre>
+<p>可以理解成：</p>
+<pre><code class="language-text">把这两条通道包装成 MCP 会话。
+之后就可以用 list_tools、call_tool、read_resource、get_prompt 这些方法了。
+</code></pre>
+<h3 id="54-streamable-http">5.4 streamable-http 是什么</h3>
+<p><code>stdio</code> 的特点是：</p>
+<pre><code class="language-text">客户端启动服务端进程。
+</code></pre>
+<p>而 <code>streamable-http</code> 的特点是：</p>
+<pre><code class="language-text">服务端先自己启动，监听一个 HTTP 地址。
+客户端再通过 URL 连接这个 MCP Server。
+</code></pre>
+<p>也就是说，<code>streamable-http</code> 更像我们平时写后端服务：</p>
+<pre><code class="language-text">先启动服务：
+    uv run python test/mcp_demo/07_streamable_http_server.py
+
+再访问地址：
+    http://127.0.0.1:8000/mcp
+</code></pre>
+<p>在代码里，核心区别是：</p>
+<pre><code class="language-python">mcp = FastMCP(
+    "yanque-http-demo",
+    host="127.0.0.1",
+    port=8000,
+    streamable_http_path="/mcp",
+)
+
+mcp.run(transport="streamable-http")
+</code></pre>
+<p>这个示例放在：</p>
+<pre><code class="language-text">test/mcp_demo/07_streamable_http_server.py
+</code></pre>
+<p>它和 <code>04_full_server.py</code> 暴露的能力类似，也包含：</p>
+<pre><code class="language-text">1. query_course 工具。
+2. get_current_time 工具。
+3. yanque://course/{course_id} 资源。
+4. course_study_plan 提示词。
+</code></pre>
+<p>简化代码如下：</p>
+<pre><code class="language-python">from datetime import datetime
+from typing import Any
+
+from mcp.server.fastmcp import FastMCP
+
+
+mcp = FastMCP(
+    "yanque-http-demo",
+    host="127.0.0.1",
+    port=8000,
+    streamable_http_path="/mcp",
+)
+
+
+COURSES: dict[str, dict[str, Any]] = {
+    "langchain": {
+        "id": "langchain",
+        "name": "LangChain 框架实战",
+        "teacher": "燕雀 AI 教研组",
+        "date": "2026-07-06",
+        "summary": "学习模型调用、提示词模板、工具调用和 Agent 基础流程。",
+    },
+    "mcp": {
+        "id": "mcp",
+        "name": "MCP 服务开发入门",
+        "teacher": "燕雀 AI 教研组",
+        "date": "2026-07-23",
+        "summary": "学习 MCP Server 如何把工具、资源和提示词暴露给 Agent。",
+    },
+}
+
+
+@mcp.tool()
+def query_course(keyword: str) -&gt; list[dict[str, Any]]:
+    """按课程 ID、课程名或简介关键词查询课程。"""
+    normalized_keyword = keyword.strip().lower()
+    if not normalized_keyword:
+        return []
+
+    return [
+        course
+        for course in COURSES.values()
+        if normalized_keyword in course["id"].lower()
+        or normalized_keyword in course["name"].lower()
+        or normalized_keyword in course["summary"].lower()
+    ]
+
+
+@mcp.tool()
+def get_current_time() -&gt; str:
+    """返回 MCP HTTP 服务端当前时间。"""
+    return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
+
+@mcp.resource("yanque://course/{course_id}", mime_type="application/json")
+def get_course_resource(course_id: str) -&gt; dict[str, Any]:
+    """读取指定课程的完整资料。"""
+    course = COURSES.get(course_id)
+    if course is None:
+        return {
+            "error": "COURSE_NOT_FOUND",
+            "message": f"未找到课程：{course_id}",
+        }
+    return course
+
+
+@mcp.prompt()
+def course_study_plan(course_name: str, student_level: str = "初学者") -&gt; str:
+    """生成课程学习计划提示词。"""
+    return f"请为 {student_level} 学员制定《{course_name}》学习计划。"
+
+
+if __name__ == "__main__":
+    mcp.run(transport="streamable-http")
+</code></pre>
+<p>启动服务端：</p>
+<pre><code class="language-bash">uv run python test/mcp_demo/07_streamable_http_server.py
+</code></pre>
+<p>启动后它监听的地址是：</p>
+<pre><code class="language-text">http://127.0.0.1:8000/mcp
+</code></pre>
+<p>注意：</p>
+<p>这个地址不是普通网页。</p>
+<p>它是 MCP 客户端要连接的 HTTP MCP endpoint。</p>
+<p>所以你用浏览器打开它，不一定会看到一个漂亮页面。</p>
+<p>我们再写一个 HTTP 客户端连接它：</p>
+<pre><code class="language-text">test/mcp_demo/08_streamable_http_client.py
+</code></pre>
+<p>核心代码是：</p>
+<pre><code class="language-python">import asyncio
+
+from mcp import ClientSession
+from mcp.client.streamable_http import streamable_http_client
+
+
+async def main() -&gt; None:
+    async with streamable_http_client("http://127.0.0.1:8000/mcp") as (
+        read_stream,
+        write_stream,
+        _get_session_id,
+    ):
+        async with ClientSession(read_stream, write_stream) as session:
+            await session.initialize()
+
+            tools = await session.list_tools()
+            for tool in tools.tools:
+                print(f"- {tool.name}: {tool.description}")
+
+            course_result = await session.call_tool(
+                "query_course",
+                {"keyword": "MCP"},
+            )
+            print(course_result.content)
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
+</code></pre>
+<p>这里要注意：</p>
+<pre><code class="language-text">stdio_client(...)：
+    根据 command + args 启动 MCP Server。
+
+streamable_http_client(...)：
+    不启动服务端，只连接已经启动好的 URL。
+</code></pre>
+<p>所以 HTTP 版本要开两个终端。</p>
+<p>第一个终端启动服务端：</p>
+<pre><code class="language-bash">uv run python test/mcp_demo/07_streamable_http_server.py
+</code></pre>
+<p>第二个终端启动客户端：</p>
+<pre><code class="language-bash">uv run python test/mcp_demo/08_streamable_http_client.py
+</code></pre>
+<h3 id="55-stdio-streamable-http">5.5 stdio 和 streamable-http 的区别</h3>
+<p>可以用下面这张表对比：</p>
+<pre><code class="language-text">对比项              stdio                         streamable-http
+
+谁启动服务端        客户端启动                     服务端自己先启动
+怎么连接            stdin / stdout 输入输出通道    HTTP URL
+有没有端口          没有                           有，例如 8000
+适合哪里            本地工具、本地开发、个人使用    远程部署、团队共享、正式服务
+客户端配置          command + args                 url
+是否像 Web 服务     不像                           更像
+浏览器能不能看      不能当网页看                   endpoint 也不是普通网页
+</code></pre>
+<p>初学和本地演示时，优先使用：</p>
+<pre><code class="language-python">mcp.run(transport="stdio")
+</code></pre>
+<p>原因是：</p>
+<pre><code class="language-text">配置少，最容易跑通。
+</code></pre>
+<p>如果你要把 MCP Server 部署成一个独立服务，或者让多个客户端通过网络连接，再考虑：</p>
+<pre><code class="language-python">mcp.run(transport="streamable-http")
+</code></pre>
+<p>可以这样判断：</p>
+<pre><code class="language-text">本地工具型 MCP：优先 stdio。
+远程服务型 MCP：优先 streamable-http。
+最小 demo：优先 stdio。
+YanQue 业务服务化：更适合 streamable-http。
+</code></pre>
+<hr/>
+<h2 id="6-tool">6. 第二步：添加一个 Tool</h2>
+<p>现在我们给 MCP Server 加一个工具。</p>
+<p>这一步建议单独创建文件：</p>
+<pre><code class="language-text">test/mcp_demo/01_tool_server.py
+</code></pre>
+<p>这个工具叫：</p>
+<pre><code class="language-text">query_course
+</code></pre>
+<p>作用是按关键词查询课程。</p>
+<p>完整代码变成：</p>
+<pre><code class="language-python">from typing import Any
+
+from mcp.server.fastmcp import FastMCP
+
+
+mcp = FastMCP("yanque-course-demo")
+
+
+COURSES: dict[str, dict[str, Any]] = {
+    "langchain": {
+        "id": "langchain",
+        "name": "LangChain 框架实战",
+        "teacher": "燕雀 AI 教研组",
+        "date": "2026-07-06",
+        "summary": "学习模型调用、提示词模板、工具调用和 Agent 基础流程。",
+    },
+    "mcp": {
+        "id": "mcp",
+        "name": "MCP 服务开发入门",
+        "teacher": "燕雀 AI 教研组",
+        "date": "2026-07-23",
+        "summary": "学习 MCP Server 如何把工具、资源和提示词暴露给 Agent。",
+    },
+}
+
+
+@mcp.tool()
+def query_course(keyword: str) -&gt; list[dict[str, Any]]:
+    """按课程 ID、课程名或简介关键词查询课程。"""
+    normalized_keyword = keyword.strip().lower()
+    if not normalized_keyword:
+        return []
+
+    return [
+        course
+        for course in COURSES.values()
+        if normalized_keyword in course["id"].lower()
+        or normalized_keyword in course["name"].lower()
+        or normalized_keyword in course["summary"].lower()
+    ]
+
+
+if __name__ == "__main__":
+    mcp.run(transport="stdio")
+</code></pre>
+<p>重点看这段：</p>
+<pre><code class="language-python">@mcp.tool()
+def query_course(keyword: str) -&gt; list[dict[str, Any]]:
+    ...
+</code></pre>
+<p>它的意思是：</p>
+<pre><code class="language-text">把 query_course 这个 Python 函数注册成 MCP Tool。
+</code></pre>
+<p>注册以后，Agent 客户端就能看到这个工具。</p>
+<p>函数的注释：</p>
+<pre><code class="language-python">"""按课程 ID、课程名或简介关键词查询课程。"""
+</code></pre>
+<p>也很重要。</p>
+<p>因为 Agent 会根据工具说明判断：</p>
+<pre><code class="language-text">什么时候应该调用这个工具。
+</code></pre>
+<p>所以工具说明要写清楚，不要太随意。</p>
+<hr/>
+<h2 id="7-tool">7. 第三步：再添加一个获取时间的 Tool</h2>
+<p>再加一个更简单的工具：</p>
+<pre><code class="language-python">from datetime import datetime
+
+
+@mcp.tool()
+def get_current_time() -&gt; str:
+    """返回 MCP 服务端当前时间。"""
+    return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+</code></pre>
+<p>这个工具虽然简单，但很适合说明一个概念：</p>
+<pre><code class="language-text">大模型自己并不知道程序运行机器上的真实当前时间。
+如果问题需要实时信息，就应该通过工具获取。
+</code></pre>
+<hr/>
+<h2 id="8-resource">8. 第四步：添加一个 Resource</h2>
+<p>Tool 是“执行动作”。</p>
+<p>Resource 更像“读取资料”。</p>
+<p>这一步建议单独创建文件：</p>
+<pre><code class="language-text">test/mcp_demo/02_resource_server.py
+</code></pre>
+<p>我们添加一个课程详情资源：</p>
+<pre><code class="language-python">@mcp.resource("yanque://course/{course_id}", mime_type="application/json")
+def get_course_resource(course_id: str) -&gt; dict[str, Any]:
+    """读取指定课程的完整资料。"""
+    course = COURSES.get(course_id)
+    if course is None:
+        return {
+            "error": "COURSE_NOT_FOUND",
+            "message": f"未找到课程：{course_id}",
+        }
+    return course
+</code></pre>
+<p>这里的资源地址是：</p>
+<pre><code class="language-text">yanque://course/{course_id}
+</code></pre>
+<p>如果客户端读取：</p>
+<pre><code class="language-text">yanque://course/mcp
+</code></pre>
+<p>服务端就会调用：</p>
+<pre><code class="language-python">get_course_resource(course_id="mcp")
+</code></pre>
+<p>然后返回 MCP 课程详情。</p>
+<p>Resource 适合放这些内容：</p>
+<ol>
+<li>项目说明文档。</li>
+<li>数据库表结构。</li>
+<li>课程详情。</li>
+<li>配置信息。</li>
+<li>知识库片段。</li>
+</ol>
+<hr/>
+<h2 id="9-prompt">9. 第五步：添加一个 Prompt</h2>
+<p>Prompt 是提示词模板。</p>
+<p>这一步建议单独创建文件：</p>
+<pre><code class="language-text">test/mcp_demo/03_prompt_server.py
+</code></pre>
+<p>我们添加一个生成课程学习计划的提示词：</p>
+<pre><code class="language-python">@mcp.prompt()
+def course_study_plan(course_name: str, student_level: str = "初学者") -&gt; str:
+    """生成课程学习计划提示词。"""
+    return f"""
+你是燕雀 AI 课程助教，请为 {student_level} 学员制定《{course_name}》学习计划。
+
+要求：
+1. 先用一句话说明这门课适合解决什么问题。
+2. 按课前、课中、课后三个阶段安排学习任务。
+3. 给出 3 个可实践的小练习。
+4. 最后提醒学员哪些地方容易踩坑。
+""".strip()
+</code></pre>
+<p>这个函数不是直接调用模型。</p>
+<p>它只是返回一段提示词。</p>
+<p>Agent 客户端拿到这段提示词以后，可以再交给模型使用。</p>
+<p>Prompt 适合沉淀固定任务模板。</p>
+<p>比如：</p>
+<pre><code class="language-text">生成学习计划
+代码审查
+SQL 分析
+面试复盘
+日志诊断
+</code></pre>
+<hr/>
+<h2 id="10-client">10. 第六步：写一个本地 Client 测试它</h2>
+<p>只写 MCP Server 不容易看效果。</p>
+<p>前面 <code>01_tool_server.py</code>、<code>02_resource_server.py</code>、<code>03_prompt_server.py</code> 是为了分开理解概念。</p>
+<p>真正测试完整链路时，可以把它们合成一个完整服务端：</p>
+<pre><code class="language-text">test/mcp_demo/04_full_server.py
+</code></pre>
+<p>然后再写一个客户端文件：</p>
+<pre><code class="language-text">test/mcp_demo/05_stdio_client.py
+</code></pre>
+<p>代码如下：</p>
+<pre><code class="language-python">import asyncio
+
+from mcp import ClientSession, StdioServerParameters
+from mcp.client.stdio import stdio_client
+
+
+async def main() -&gt; None:
+    server_params = StdioServerParameters(
+        command="uv",
+        args=["run", "python", "test/mcp_demo/04_full_server.py"],
+    )
+
+    async with stdio_client(server_params) as (read_stream, write_stream):
+        # stdio_client 会启动上面的命令，并拿到服务端进程的输入输出通道。
+        # write_stream：往 MCP Server 的 stdin 写请求。
+        # read_stream：从 MCP Server 的 stdout 读响应。
+        async with ClientSession(read_stream, write_stream) as session:
+            # ClientSession 把 stdin/stdout 这种底层读写，封装成 list_tools、call_tool 等方法。
+            await session.initialize()
+
+            print("1. 服务端暴露的工具：")
+            tools = await session.list_tools()
+            for tool in tools.tools:
+                print(f"- {tool.name}: {tool.description}")
+            print()
+
+            print("2. 调用工具 query_course：")
+            course_result = await session.call_tool(
+                "query_course",
+                {"keyword": "MCP"},
+            )
+            print(course_result.content)
+            print()
+
+            print("3. 调用工具 get_current_time：")
+            time_result = await session.call_tool("get_current_time", {})
+            print(time_result.content)
+            print()
+
+            print("4. 读取资源 yanque://course/mcp：")
+            resource_result = await session.read_resource("yanque://course/mcp")
+            for content in resource_result.contents:
+                print(content.text)
+            print()
+
+            print("5. 获取提示词 course_study_plan：")
+            prompt_result = await session.get_prompt(
+                "course_study_plan",
+                {
+                    "course_name": "MCP 服务开发入门",
+                    "student_level": "Java 后端工程师",
+                },
+            )
+            for message in prompt_result.messages:
+                print(message.content.text)
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
+</code></pre>
+<p>这段代码做了四件事：</p>
+<pre><code class="language-text">1. 启动 MCP Server。
+2. 查询服务端有哪些工具。
+3. 调用 query_course 工具。
+4. 调用 get_current_time 工具。
+5. 读取课程资源。
+6. 获取课程学习计划提示词。
+</code></pre>
+<p>注意这里：</p>
+<pre><code class="language-python">server_params = StdioServerParameters(
+    command="uv",
+    args=["run", "python", "test/mcp_demo/04_full_server.py"],
+)
+</code></pre>
+<p>它的意思是：</p>
+<pre><code class="language-text">客户端负责启动 MCP Server。
+</code></pre>
+<p>所以我们运行客户端时，不需要提前手动启动服务端。</p>
+<p>整个 stdio demo 的运行关系可以画成这样：</p>
+<p><img alt="stdio 模式下的 MCP Demo 调用链路" class="no-lightbox" loading="lazy" src="/img/ai-agent-tutorial/16/mcp_stdio_demo_flow.svg"/></p>
+<hr/>
+<h2 id="11-demo">11. 第七步：运行 demo</h2>
+<p>进入 AI 项目：</p>
+<pre><code class="language-bash">cd /Users/huangjin/IdeaProjects/YanQue/YanQue-AI
+</code></pre>
+<p>运行客户端：</p>
+<pre><code class="language-bash">uv run python test/mcp_demo/05_stdio_client.py
+</code></pre>
+<p>如果成功，会看到类似输出：</p>
+<pre><code class="language-text">1. 服务端暴露的工具：
+- query_course: 按课程 ID、课程名或简介关键词查询课程。
+- get_current_time: 返回 MCP 服务端当前时间。
+
+2. 调用工具 query_course：
+...
+
+3. 调用工具 get_current_time：
+...
+
+4. 读取资源 yanque://course/mcp：
+...
+
+5. 获取提示词 course_study_plan：
+...
+</code></pre>
+<p>这就说明：</p>
+<pre><code class="language-text">MCP Server 已经可以把 Tool、Resource、Prompt 暴露给 MCP Client。
+</code></pre>
+<hr/>
+<h2 id="12">12. 单独启动服务端为什么没反应</h2>
+<p>如果你运行：</p>
+<pre><code class="language-bash">uv run python test/mcp_demo/04_full_server.py
+</code></pre>
+<p>你可能会发现终端没有明显输出。</p>
+<p>这是正常的。</p>
+<p>因为它是 stdio 模式，不是 HTTP 模式。</p>
+<p>它启动后就在等待 MCP 客户端通过标准输入输出发送消息。</p>
+<p>所以学习阶段建议先运行：</p>
+<pre><code class="language-bash">uv run python test/mcp_demo/05_stdio_client.py
+</code></pre>
+<p>这样客户端会自动启动服务端，并演示完整调用过程。</p>
+<hr/>
+<h2 id="13-mcp">13. 接入 MCP 客户端时怎么配置</h2>
+<p>不同客户端配置文件位置不一样，但核心配置长得差不多。</p>
+<p>大概是：</p>
+<pre><code class="language-json">{
+  "mcpServers": {
+    "yanque-course-demo": {
+      "command": "uv",
+      "args": [
+        "run",
+        "python",
+        "test/mcp_demo/04_full_server.py"
+      ]
+    }
+  }
+}
+</code></pre>
+<p>如果客户端不是在 <code>YanQue-AI</code> 目录下启动，建议把 server 文件写成绝对路径：</p>
+<pre><code class="language-json">{
+  "mcpServers": {
+    "yanque-course-demo": {
+      "command": "uv",
+      "args": [
+        "run",
+        "python",
+        "/Users/huangjin/IdeaProjects/YanQue/YanQue-AI/test/mcp_demo/04_full_server.py"
+      ]
+    }
+  }
+}
+</code></pre>
+<hr/>
+<h2 id="14-mcp">14. MCP 和普通工具调用有什么区别</h2>
+<p>前面我们在 LangChain 里写过工具：</p>
+<pre><code class="language-python">@tool
+def get_student_day_schedule(date: str) -&gt; str:
+    ...
+</code></pre>
+<p>这种工具通常只在当前 Python 程序里使用。</p>
+<p>MCP 工具则是通过 MCP Server 暴露出去：</p>
+<pre><code class="language-python">@mcp.tool()
+def query_course(keyword: str):
+    ...
+</code></pre>
+<p>差别可以这样理解：</p>
+<pre><code class="language-text">LangChain Tool：
+    工具直接绑定在当前 Agent 程序里。
+
+MCP Tool：
+    工具放在独立 MCP Server 里。
+    支持 MCP 的 Agent 客户端都可以连接它。
+</code></pre>
+<p>所以 MCP 更适合做统一工具入口。</p>
+<p>比如公司可以做一个：</p>
+<pre><code class="language-text">yanque-business-mcp-server
+</code></pre>
+<p>里面统一放：</p>
+<ol>
+<li>查询课程工具。</li>
+<li>查询学生工具。</li>
+<li>查询订单工具。</li>
+<li>查询知识库资源。</li>
+<li>生成运营分析提示词。</li>
+</ol>
+<p>然后不同 Agent 客户端都可以接这个服务。</p>
+<hr/>
+<h2 id="15-agent-mcp-server">15. Agent 怎么接入 MCP Server</h2>
+<p>前面 <code>05_stdio_client.py</code> 只是普通 MCP Client。</p>
+<p>它能证明：</p>
+<pre><code class="language-text">MCP Client 可以连接 MCP Server，并调用工具、资源、提示词。
+</code></pre>
+<p>但真实项目里，我们更关心的是：</p>
+<pre><code class="language-text">Agent 能不能使用 MCP Server 暴露的工具？
+</code></pre>
+<p>可以。</p>
+<p>这里需要一个适配器：</p>
+<pre><code class="language-bash">uv add langchain-mcp-adapters
+</code></pre>
+<p>这个依赖的作用是：</p>
+<pre><code class="language-text">把 MCP Server 暴露的 Tools 加载成 LangChain 可以使用的 Tools。
+</code></pre>
+<p>这里会用到一个类：</p>
+<pre><code class="language-python">from langchain_mcp_adapters.client import MultiServerMCPClient
+</code></pre>
+<p><code>MultiServerMCPClient</code> 可以理解成：</p>
+<pre><code class="language-text">LangChain 连接 MCP Server 的客户端适配器。
+</code></pre>
+<p>它本身不是 Agent。</p>
+<p>它也不负责调用大模型。</p>
+<p>它主要做三件事：</p>
+<pre><code class="language-text">1. 根据配置连接一个或多个 MCP Server。
+2. 从 MCP Server 读取工具列表。
+3. 把 MCP Tool 转成 LangChain Agent 可以使用的 Tool。
+</code></pre>
+<p>名字里的 <code>MultiServer</code> 表示它可以同时连接多个 MCP Server。</p>
+<p>比如以后可以这样配置：</p>
+<pre><code class="language-python">client = MultiServerMCPClient(
+    {
+        "course_server": {
+            "url": "http://127.0.0.1:8000/mcp",
+            "transport": "streamable_http",
+        },
+        "order_server": {
+            "url": "http://127.0.0.1:8001/mcp",
+            "transport": "streamable_http",
+        },
+    }
+)
+</code></pre>
+<p>这段配置的意思是：</p>
+<pre><code class="language-text">同时连接课程 MCP Server 和订单 MCP Server。
+然后把两个服务里的工具一起加载出来。
+</code></pre>
+<p>本节 demo 只连接一个 MCP Server：</p>
+<pre><code class="language-python">client = MultiServerMCPClient(
+    {
+        "yanque_course": {
+            "url": "http://127.0.0.1:8000/mcp",
+            "transport": "streamable_http",
+        }
+    }
+)
+</code></pre>
+<p>这里的配置可以这样读：</p>
+<pre><code class="language-text">yanque_course：
+    给这个 MCP Server 起一个本地名字。
+
+url：
+    MCP Server 的 HTTP 地址。
+
+transport：
+    使用 streamable_http 方式连接。
+</code></pre>
+<p>后面的：</p>
+<pre><code class="language-python">tools = await client.get_tools()
+</code></pre>
+<p>意思是：</p>
+<pre><code class="language-text">连接 MCP Server，读取它暴露的 Tools，并转换成 LangChain Tools。
+</code></pre>
+<p>整体关系可以看这张图：</p>
+<p><img alt="Agent 接入 MCP Server 的过程" class="no-lightbox" loading="lazy" src="/img/ai-agent-tutorial/16/mcp_agent_adapter_flow.svg"/></p>
+<h3 id="151-mcp-tools">15.1 先加载 MCP Tools</h3>
+<p>先看文件：</p>
+<pre><code class="language-text">test/mcp_demo/09_load_mcp_tools.py
+</code></pre>
+<p>核心代码：</p>
+<pre><code class="language-python">import asyncio
+
+from langchain_mcp_adapters.client import MultiServerMCPClient
+
+
+async def main() -&gt; None:
+    client = MultiServerMCPClient(
+        {
+            "yanque_course": {
+                "url": "http://127.0.0.1:8000/mcp",
+                "transport": "streamable_http",
+            }
+        }
+    )
+
+    tools = await client.get_tools()
+
+    print("从 MCP Server 加载到的 LangChain 工具：")
+    for tool in tools:
+        print(f"- {tool.name}: {tool.description}")
+    print()
+
+    tool_map = {tool.name: tool for tool in tools}
+    query_course = tool_map["query_course"]
+
+    print("直接调用 MCP 工具 query_course：")
+    result = await query_course.ainvoke({"keyword": "MCP"})
+    print(result)
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
+</code></pre>
+<p>运行：</p>
+<p>先启动 HTTP MCP Server：</p>
+<pre><code class="language-bash">uv run python test/mcp_demo/07_streamable_http_server.py
+</code></pre>
+<p>再打开另一个终端运行：</p>
+<pre><code class="language-bash">uv run python test/mcp_demo/09_load_mcp_tools.py
+</code></pre>
+<p>这一步还没有创建 Agent。</p>
+<p>它只是证明：</p>
+<pre><code class="language-text">MCP Server 里的 query_course、get_current_time
+已经变成了 LangChain Tool。
+</code></pre>
+<h3 id="152-mcp-tools-agent">15.2 再把 MCP Tools 交给 Agent</h3>
+<p>再看文件：</p>
+<pre><code class="language-text">test/mcp_demo/10_agent_with_mcp_tools.py
+</code></pre>
+<p>核心流程是：</p>
+<pre><code class="language-text">1. 连接 MCP Server。
+2. 加载 MCP Tools。
+3. 创建 LangChain Agent。
+4. 把 MCP Tools 作为 tools 传给 Agent。
+5. 用户提问后，Agent 自己决定是否调用 MCP 工具。
+</code></pre>
+<p>核心代码：</p>
+<pre><code class="language-python">import asyncio
+
+from langchain.agents import create_agent
+from langchain_mcp_adapters.client import MultiServerMCPClient
+
+from test.langchain_demo.demo_model import build_demo_model
+
+
+SYSTEM_PROMPT = (
+    "你是一个燕雀课程助手。"
+    "如果用户询问课程信息，优先使用 MCP 工具查询真实课程数据。"
+    "回答要简洁、自然，适合初学者理解。"
+)
+
+
+async def main() -&gt; None:
+    client = MultiServerMCPClient(
+        {
+            "yanque_course": {
+                "url": "http://127.0.0.1:8000/mcp",
+                "transport": "streamable_http",
+            }
+        }
+    )
+
+    mcp_tools = await client.get_tools()
+
+    agent = create_agent(
+        model=build_demo_model(),
+        tools=mcp_tools,
+        system_prompt=SYSTEM_PROMPT,
+    )
+
+    result = await agent.ainvoke(
+        {
+            "messages": [
+                {
+                    "role": "user",
+                    "content": "帮我查一下 MCP 课程是什么时候上，课程主要讲什么？",
+                }
+            ]
+        }
+    )
+
+    print(result["messages"][-1].content)
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
+</code></pre>
+<p>运行：</p>
+<p>先启动 HTTP MCP Server：</p>
+<pre><code class="language-bash">uv run python test/mcp_demo/07_streamable_http_server.py
+</code></pre>
+<p>再打开另一个终端运行：</p>
+<pre><code class="language-bash">uv run python test/mcp_demo/10_agent_with_mcp_tools.py
+</code></pre>
+<p>这个文件需要 <code>.env</code> 中已经配置大模型参数。</p>
+<p>如果运行成功，会看到 Agent 先调用 MCP 工具：</p>
+<pre><code class="language-text">工具名：query_course
+参数：{"keyword": "MCP"}
+</code></pre>
+<p>然后模型根据工具结果回答：</p>
+<pre><code class="language-text">《MCP 服务开发入门》的上课时间是 2026-07-23，主要讲 MCP Server 如何把工具、资源和提示词暴露给 Agent。
+</code></pre>
+<p>到这里，完整链路就变成了：</p>
+<pre><code class="language-text">用户问题
+  |
+  v
+LangChain Agent
+  |
+  v
+MCP Tool Adapter
+  |
+  v
+MCP Server
+  |
+  v
+query_course 工具
+</code></pre>
+<p>这就是 Agent 接入 MCP Server 的核心方式。</p>
+<hr/>
+<h2 id="16-yanque">16. 真实项目里怎么接 YanQue 业务</h2>
+<p>当前 demo 使用的是内存数据：</p>
+<pre><code class="language-python">COURSES = {
+    ...
+}
+</code></pre>
+<p>真实项目里一般不会这么写。</p>
+<p>可以把工具函数改成调用后端接口。</p>
+<p>我们单独放了一个写法示例：</p>
+<pre><code class="language-text">test/mcp_demo/06_business_api_style.py
+</code></pre>
+<p>这个文件是接真实业务的写法示例，不需要直接运行。</p>
+<p>因为它依赖：</p>
+<pre><code class="language-text">1. 本地 YanQue Java 后端已经启动。
+2. 后端接口路径真实存在。
+3. 接口鉴权、签名、登录态已经处理好。
+</code></pre>
+<p>它主要说明：</p>
+<pre><code class="language-text">MCP Tool 里面不一定写死内存数据。
+MCP Tool 可以调用已有业务系统 API。
+</code></pre>
+<p>示例代码大概是：</p>
+<pre><code class="language-python">from typing import Any
+
+import httpx
+from mcp.server.fastmcp import FastMCP
+
+
+mcp = FastMCP("yanque-business-api-demo")
+
+
+YANQUE_ADMIN_BASE_URL = "http://localhost:8080"
+
+
+@mcp.tool()
+def query_course_from_admin(keyword: str) -&gt; dict[str, Any]:
+    """演示如何把 MCP Tool 改造成调用 YanQue Java 后端 API。"""
+    response = httpx.get(
+        f"{YANQUE_ADMIN_BASE_URL}/api/course/page",
+        params={"keyword": keyword},
+        timeout=10,
+    )
+    response.raise_for_status()
+    return response.json()
+</code></pre>
+<p>这段代码只是一个方向。</p>
+<p>真实落地时，不能只写一个 <code>httpx.get</code> 就完事。</p>
+<p>还要补：</p>
+<pre><code class="language-text">1. 登录态或服务端 token。
+2. 请求签名。
+3. 权限校验。
+4. 超时设置。
+5. 错误码转换。
+6. 敏感字段脱敏。
+7. 返回结构整理。
+</code></pre>
+<p>如果 YanQue 的业务逻辑主要在 Java Spring Boot 后端里，推荐方式是：</p>
+<pre><code class="language-text">MCP Server
+    |
+    | HTTP
+    v
+YanQue-Admin / YanQue 后端 API
+    |
+    v
+Service / Mapper / Database
+</code></pre>
+<p>这样 MCP Server 不需要重复写一套业务逻辑。</p>
+<p>它只是把已有后端能力包装成 Agent 可以调用的工具。</p>
+<hr/>
+<h2 id="17-mcp">17. 写 MCP 工具时要注意什么</h2>
+<p>MCP 看起来只是把函数暴露出去。</p>
+<p>但真实项目里要特别注意安全。</p>
+<h3 id="171">17.1 工具参数不要太随意</h3>
+<p>比如学生查课表工具，不建议让模型传：</p>
+<pre><code class="language-text">studentId
+classId
+</code></pre>
+<p>更合理的是只让模型传：</p>
+<pre><code class="language-text">date
+</code></pre>
+<p>当前学生是谁，应该由登录态或服务端上下文决定。</p>
+<p>这样可以避免模型传错 ID，甚至查到别人的数据。</p>
+<h3 id="172">17.2 写操作要谨慎</h3>
+<p>查询类工具风险较低。</p>
+<p>但如果工具会执行写操作，比如：</p>
+<pre><code class="language-text">创建订单
+删除课程
+修改学生信息
+发送通知
+</code></pre>
+<p>就必须增加确认和权限控制。</p>
+<p>不要让 Agent 在没有确认的情况下直接执行高风险操作。</p>
+<h3 id="173">17.3 返回结果要结构化</h3>
+<p>尽量返回清晰结构：</p>
+<pre><code class="language-json">{
+  "id": "mcp",
+  "name": "MCP 服务开发入门",
+  "date": "2026-07-23"
+}
+</code></pre>
+<p>不要只返回一大段混乱字符串。</p>
+<p>结构化结果更方便 Agent 理解，也更方便后续调试。</p>
+<h3 id="174">17.4 错误信息要明确</h3>
+<p>不要只返回：</p>
+<pre><code class="language-text">失败了
+</code></pre>
+<p>更好的错误是：</p>
+<pre><code class="language-json">{
+  "error": "COURSE_NOT_FOUND",
+  "message": "未找到课程：xxx"
+}
+</code></pre>
+<p>这样 Agent 才知道下一步该怎么处理。</p>
+<hr/>
+<h2 id="18">18. 本节小结</h2>
+<p>这一节我们学习了 MCP 的最小闭环。</p>
+<p>重点记住：</p>
+<pre><code class="language-text">MCP Server 是给 Agent 提供能力的服务。
+Tool 让 Agent 做事。
+Resource 让 Agent 读资料。
+Prompt 让 Agent 获取提示词模板。
+FastMCP 帮我们快速创建 MCP Server。
+transport 决定 MCP Client 和 MCP Server 怎么通信。
+stdio 模式适合本地 MCP 客户端启动和通信。
+streamable-http 模式适合把 MCP Server 当成独立 HTTP 服务部署。
+</code></pre>
+<p>本节最重要的一句话：</p>
+<p><strong>MCP 不是让模型变聪明，而是让 Agent 可以用标准方式连接你的业务能力。</strong></p>
+<p>下一步可以继续做两件事：</p>
+<ol>
+<li>把 <code>query_course</code> 从内存数据改成调用 YanQue 后端接口。</li>
+<li>把课程、订单、学生等查询能力整理成一个正式的 YanQue MCP Server。</li>
+</ol></article><div class="post-copyright"><div class="copyright-cc-box"><i class="smithfont smith-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img alt="头像" class="post-copyright__author_img_back" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d20f536c64d06e5fcf4bfe2ec5dc25d.jpg" onerror='this.onerror=null,this.src="/img/404.jpg"' src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" title="头像"/><img alt="头像" class="post-copyright__author_img_front" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/d20f536c64d06e5fcf4bfe2ec5dc25d.jpg" onerror='this.onerror=null,this.src="/img/404.jpg"' src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" title="头像"/></a><div class="post-copyright__author_name">Smith</div><div class="post-copyright__author_desc">人生太短，要干的事太多，我要争分夺秒</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" href="https://smithhs.cn/2026/05/06/2026-05-06-SpringCloud01/" title="该文章为原创文章，注意版权协议">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://smithhs.cn/2026/05/06/2026-05-06-SpringCloud01/')">SpringCloud01</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="smith.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="smithfont smith-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg" target="_blank"><img alt="wechat" class="post-qr-code-img" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1.jpg" onerror='this.onerror=null,this.src="/img/404.jpg"' src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"/></a><div class="post-qr-code-desc">wechat</div></li><li class="reward-item"><a href="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg" target="_blank"><img alt="alipay" class="post-qr-code-img" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/2.jpg" onerror='this.onerror=null,this.src="/img/404.jpg"' src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"/></a><div class="post-qr-code-desc">alipay</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="smith.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="smithfont smith-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://smithhs.cn/2026/05/06/2026-05-06-SpringCloud01/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" href="https://service.weibo.com/share/share.php?title=SpringCloud01&amp;url=https://smithhs.cn/2026/05/06/2026-05-06-SpringCloud01/&amp;pic=https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1682044144301.png" rel="external nofollow noreferrer noopener" target="_blank"><i class="smithfont smith-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" onclick="copyCurrentPageUrl()" title="复制链接"><i class="smithfont smith-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://smithhs.cn" target="_blank">Smith</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/%E5%90%8E%E7%AB%AF/"><span class="tags-punctuation"> <i class="smithfont smith-icon-tag"></i></span>后端<span class="tagsPageCount">49</span></a><a class="post-meta__box__tags" href="/tags/%E5%BE%AE%E6%9C%8D%E5%8A%A1/"><span class="tags-punctuation"> <i class="smithfont smith-icon-tag"></i></span>微服务<span class="tagsPageCount">10</span></a><a class="post-meta__box__tags" href="/tags/SpringCloud/"><span class="tags-punctuation"> <i class="smithfont smith-icon-tag"></i></span>SpringCloud<span class="tagsPageCount">10</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/1681455691814.png" data-sites="wechat,weibo,qq"></div><link href="https://lib.baomitu.com/social-share.js/1.0.16/css/share.min.css" media="print" onload="this.media='all'" rel="stylesheet"/><script defer="defer" src="https://lib.baomitu.com/social-share.js/1.0.16/js/social-share.min.js"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2026/08/02/2026-08-02-ai-agent-13-realtime-voice-interview/"><img alt="cover" class="cover" data-lazy-src="/img/ai-agent-tutorial/covers/ai-agent-13-realtime-voice-interview.png" onerror="onerror=null;src='/img/404.jpg'" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"/><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">模拟面试实时语音流程</div></div></a></div><div class="next-post pull-right"><a href="/ai-agent-tutorial/"><div class="pagination-info"><div class="label">下一篇</div><div class="prev_info">AI Agent 教程目录</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><span>AI Agent 系列推荐</span></div><div class="relatedPosts-list"><div><a href="/2026/08/01/2026-08-01-ai-agent-12-interview-review/" title="面试复盘功能设计"><img alt="cover" class="cover" data-lazy-src="/img/ai-agent-tutorial/covers/ai-agent-12-interview-review.png" onerror="this.onerror=null,this.src='/img/404.jpg'" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"/><div class="content is-center"><div class="date">2026-08-01</div><div class="title">面试复盘功能设计</div></div></a></div><div><a href="/2026/08/02/2026-08-02-ai-agent-13-realtime-voice-interview/" title="模拟面试实时语音流程"><img alt="cover" class="cover" data-lazy-src="/img/ai-agent-tutorial/covers/ai-agent-13-realtime-voice-interview.png" onerror="this.onerror=null,this.src='/img/404.jpg'" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"/><div class="content is-center"><div class="date">2026-08-02</div><div class="title">模拟面试实时语音流程</div></div></a></div><div><a href="/2026/07/20/2026-07-20-ai-agent-00-overview/" title="AI 学习总览"><img alt="cover" class="cover" data-lazy-src="/img/ai-agent-tutorial/covers/ai-agent-00-overview.png" onerror="this.onerror=null,this.src='/img/404.jpg'" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"/><div class="content is-center"><div class="date">2026-07-20</div><div class="title">AI 学习总览</div></div></a></div><div><a href="/2026/07/21/2026-07-21-ai-agent-01-python-uv-bailian/" title="Python AI 项目：uv 与阿里云百炼"><img alt="cover" class="cover" data-lazy-src="/img/ai-agent-tutorial/covers/ai-agent-01-python-uv-bailian.png" onerror="this.onerror=null,this.src='/img/404.jpg'" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"/><div class="content is-center"><div class="date">2026-07-21</div><div class="title">Python AI 项目：uv 与阿里云百炼</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="smithfont smith-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#mcp"><span class="toc-number">1.</span> <span class="toc-text">第十六天：MCP 服务开发入门</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-mcp"><span class="toc-number">2.</span> <span class="toc-text">1. 先用一句话理解 MCP</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-mcp-server"><span class="toc-number">3.</span> <span class="toc-text">2. MCP Server 里能放什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#21-tools"><span class="toc-number">4.</span> <span class="toc-text">2.1 Tools：工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#22-resources"><span class="toc-number">5.</span> <span class="toc-text">2.2 Resources：资源</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#23-prompts"><span class="toc-number">6.</span> <span class="toc-text">2.3 Prompts：提示词模板</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3"><span class="toc-number">7.</span> <span class="toc-text">3. 本节要做什么</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-mcp-sdk"><span class="toc-number">8.</span> <span class="toc-text">4. 安装 MCP SDK</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-mcp-server"><span class="toc-number">9.</span> <span class="toc-text">5. 第一步：创建一个空 MCP Server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#51-fastmcp"><span class="toc-number">10.</span> <span class="toc-text">5.1 FastMCP 是什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#52-transport"><span class="toc-number">11.</span> <span class="toc-text">5.2 transport 是什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#53-stdio"><span class="toc-number">12.</span> <span class="toc-text">5.3 stdio 是什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#54-streamable-http"><span class="toc-number">13.</span> <span class="toc-text">5.4 streamable-http 是什么</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#55-stdio-streamable-http"><span class="toc-number">14.</span> <span class="toc-text">5.5 stdio 和 streamable-http 的区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-tool"><span class="toc-number">15.</span> <span class="toc-text">6. 第二步：添加一个 Tool</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-tool"><span class="toc-number">16.</span> <span class="toc-text">7. 第三步：再添加一个获取时间的 Tool</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-resource"><span class="toc-number">17.</span> <span class="toc-text">8. 第四步：添加一个 Resource</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-prompt"><span class="toc-number">18.</span> <span class="toc-text">9. 第五步：添加一个 Prompt</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-client"><span class="toc-number">19.</span> <span class="toc-text">10. 第六步：写一个本地 Client 测试它</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#11-demo"><span class="toc-number">20.</span> <span class="toc-text">11. 第七步：运行 demo</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12"><span class="toc-number">21.</span> <span class="toc-text">12. 单独启动服务端为什么没反应</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#13-mcp"><span class="toc-number">22.</span> <span class="toc-text">13. 接入 MCP 客户端时怎么配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#14-mcp"><span class="toc-number">23.</span> <span class="toc-text">14. MCP 和普通工具调用有什么区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#15-agent-mcp-server"><span class="toc-number">24.</span> <span class="toc-text">15. Agent 怎么接入 MCP Server</span></a></li></ol></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">©2022 - 2026 By <a class="footer-bar-link" href="/" target="_blank" title="Smith">Smith</a></div></div><div id="footer-type-tips"></div><div class="js-pjax"><script>function subtitleType () {
+  fetch('https://v1.hitokoto.cn')
+    .then(response => response.json())
+    .then(data => {
+      if (true) {
+        const from = '出自 ' + data.from
+        const sub = []
+        sub.unshift(data.hitokoto, from)
+        window.typed = new Typed('#footer-type-tips', {
+          strings: sub,
+          startDelay: 300,
+          typeSpeed: 150,
+          loop: true,
+          backSpeed: 50,
+        })
+      } else {
+        document.getElementById('footer-type-tips').innerHTML = data.hitokoto
+      }
+    })
+}
+
+if (true) {
+  if (typeof Typed === 'function') {
+    subtitleType()
+  } else {
+    getScript('https://cdn.jsdelivr.net/npm/typed.js@2.0.12/dist/typed.min.js').then(subtitleType)
+  }
+} else {
+  subtitleType()
+}
+</script></div></div><div class="footer-bar-right"><a class="footer-bar-link" href="https://github.com/Smithhss/smithhs.github.io.git" rel="noopener" target="_blank" title="Hexo">Hexo</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">200</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">69</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">3</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="smithfont smith-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://smithhs.cn/" title="博客"><img alt="博客" class="back-menu-item-icon" data-lazy-src="/img/favicon.png" onerror='this.onerror=null,this.src="/img/404.jpg"' src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"/><span class="back-menu-item-text">博客</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">项目</div><div class="back-menu-list"><a class="back-menu-item" href="https://github.com/Smithhss" rel="noopener" target="_blank" title="Github"><img alt="Github" class="back-menu-item-icon" data-lazy-src="https://smith-1315833455.cos.ap-beijing.myqcloud.com/blog/GitHub.png" onerror='this.onerror=null,this.src="/img/404.jpg"' src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"/><span class="back-menu-item-text">Github</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 文章</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/archives/"><i class="smithfont smith-icon-box-archive faa-tada" style="font-size: 0.9em;"></i><span> 隧道</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/categories/"><i class="smithfont smith-icon-shapes faa-tada" style="font-size: 0.9em;"></i><span> 分类</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/tags/"><i class="smithfont smith-icon-tags faa-tada" style="font-size: 0.9em;"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 友链</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/link/"><i class="smithfont smith-icon-link faa-tada" style="font-size: 0.9em;"></i><span> 友人帐</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 我的</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/album/"><i class="smithfont smith-icon-images faa-tada" style="font-size: 0.9em;"></i><span> 相册集</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/music/"><i class="smithfont smith-icon-music faa-tada" style="font-size: 0.9em;"></i><span> 音乐馆</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/dailyPhoto/"><i class="smithfont smith-icon-camera faa-tada" style="font-size: 0.9em;"></i><span> 每日照片</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wallpaper/"><i class="smithfont smith-icon-image faa-tada" style="font-size: 0.9em;"></i><span> 壁纸</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/wordScenery/"><i class="smithfont smith-icon-font faa-tada" style="font-size: 0.9em;"></i><span> 文字风景</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="javascript:void(0);"><span> 关于</span></a><ul class="menus_item_child"><li><a class="site-page child faa-parent animated-hover" href="/about/"><i class="smithfont smith-icon-paper-plane faa-tada" style="font-size: 0.9em;"></i><span> 关于我</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/essay/"><i class="smithfont smith-icon-lightbulb faa-tada" style="font-size: 0.9em;"></i><span> 闲言碎语</span></a></li><li><a class="site-page child faa-parent animated-hover" href="/love/"><i class="smithfont smith-icon-heart faa-tada" style="font-size: 0.9em;"></i><span> 爱情</span></a></li><li><a class="site-page child faa-parent animated-hover" href="javascript:toRandomPost()"><i class="smithfont smith-icon-shoe-prints1 faa-tada" style="font-size: 0.9em;"></i><span> 随便逛逛</span></a></li></ul></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Android-Studio/" style="font-size: 0.88rem;">Android Studio<sup>1</sup></a><a href="/tags/App/" style="font-size: 0.88rem;">App<sup>1</sup></a><a href="/tags/Butterfly/" style="font-size: 0.88rem;">Butterfly<sup>1</sup></a><a href="/tags/C/" style="font-size: 0.88rem;">C++<sup>3</sup></a><a href="/tags/CSS/" style="font-size: 0.88rem;">CSS<sup>1</sup></a><a href="/tags/Cisco-Packet-Tracer/" style="font-size: 0.88rem;">Cisco Packet Tracer<sup>1</sup></a><a href="/tags/Docker/" style="font-size: 0.88rem;">Docker<sup>2</sup></a><a href="/tags/Easypan/" style="font-size: 0.88rem;">Easypan<sup>2</sup></a><a href="/tags/FurtherMathematics/" style="font-size: 0.88rem;">FurtherMathematics<sup>1</sup></a><a href="/tags/GPT/" style="font-size: 0.88rem;">GPT<sup>1</sup></a><a href="/tags/Git2/" style="font-size: 0.88rem;">Git2<sup>1</sup></a><a href="/tags/HTML/" style="font-size: 0.88rem;">HTML<sup>1</sup></a><a href="/tags/Hexo/" style="font-size: 0.88rem;">Hexo<sup>1</sup></a><a href="/tags/Java/" style="font-size: 0.88rem;">Java<sup>67</sup></a><a href="/tags/JavaScript/" style="font-size: 0.88rem;">JavaScript<sup>1</sup></a><a href="/tags/Jrebel/" style="font-size: 0.88rem;">Jrebel<sup>1</sup></a><a href="/tags/LeetCode/" style="font-size: 0.88rem;">LeetCode<sup>1</sup></a><a href="/tags/Linux/" style="font-size: 0.88rem;">Linux<sup>3</sup></a><a href="/tags/Markdown/" style="font-size: 0.88rem;">Markdown<sup>2</sup></a><a href="/tags/Maven/" style="font-size: 0.88rem;">Maven<sup>2</sup></a><a href="/tags/MyBatis/" style="font-size: 0.88rem;">MyBatis<sup>1</sup></a><a href="/tags/MyBatis-Plus/" style="font-size: 0.88rem;">MyBatis-Plus<sup>1</sup></a><a href="/tags/Mysql/" style="font-size: 0.88rem;">Mysql<sup>1</sup></a><a href="/tags/Navicat/" style="font-size: 0.88rem;">Navicat<sup>1</sup></a><a href="/tags/NoSql/" style="font-size: 0.88rem;">NoSql<sup>1</sup></a><a href="/tags/Nodejs/" style="font-size: 0.88rem;">Nodejs<sup>2</sup></a><a href="/tags/Python/" style="font-size: 0.88rem;">Python<sup>4</sup></a><a href="/tags/Spring/" style="font-size: 0.88rem;">Spring<sup>2</sup></a><a href="/tags/VMware/" style="font-size: 0.88rem;">VMware<sup>2</sup></a><a href="/tags/WeChat/" style="font-size: 0.88rem;">WeChat<sup>1</sup></a><a href="/tags/YouHou/" style="font-size: 0.88rem;">YouHou<sup>1</sup></a><a href="/tags/books/" style="font-size: 0.88rem;">books<sup>1</sup></a><a href="/tags/butterfly/" style="font-size: 0.88rem;">butterfly<sup>1</sup></a><a href="/tags/clash/" style="font-size: 0.88rem;">clash<sup>1</sup></a><a href="/tags/error/" style="font-size: 0.88rem;">error<sup>1</sup></a><a href="/tags/project/" style="font-size: 0.88rem;">project<sup>4</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF/" style="font-size: 0.88rem;">前端<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E6%A1%86%E6%9E%B6/" style="font-size: 0.88rem;">开发框架<sup>1</sup></a><a href="/tags/%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" style="font-size: 0.88rem;">开发环境<sup>1</sup></a><a href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" style="font-size: 0.88rem;">软件工程<sup>1</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" title="阅读模式" type="button"><i class="smithfont smith-icon-book-open"></i></button><button id="translateLink" title="简繁转换" type="button">繁</button><button id="darkmode" title="浅色和深色模式转换" type="button"><i class="smithfont smith-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" title="单栏和双栏切换" type="button"><i class="smithfont smith-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" title="设置" type="button"><i class="smithfont smith-icon-gear"></i></button><button class="close" id="mobile-toc-button" title="目录" type="button"><i class="smithfont smith-icon-list-ul"></i></button><button id="go-up" title="回到顶部" type="button"><i class="smithfont smith-icon-arrow-up"></i></button></div></div><div id="nav-music"><a accesskey="m" id="nav-music-hoverTips" onclick="smith.musicToggle()">播放音乐</a><div id="console-music-bg"></div><meting-js data-lrctype="0" id="8805965276" mutex="true" order="random" preload="none" server="netease" theme="var(--smith-main)" type="playlist" volume="0.7"></meting-js></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="smithfont smith-icon-xmark"></i></button></nav><div class="is-center" id="loading-database"><i class="smithfont smith-icon-spinner smith-pulse-icon"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="smithfont smith-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="smithfont smith-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="smithfont smith-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="smithfont smith-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="smithfont smith-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="smithfont smith-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="smithfont smith-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="smithfont smith-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="smithfont smith-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="smithfont smith-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="smithfont smith-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="smithfont smith-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="smithfont smith-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="smithfont smith-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="smithfont smith-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="smithfont smith-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="smithfont smith-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick='window.open("https://music.163.com/#/my/m/music/playlist?id=464586318", "_blank");' style="display: none;"><i class="smithfont smith-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="smithfont smith-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="smithfont smith-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="smithfont smith-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="smithfont smith-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" href="javascript:void(0);" id="menu-copy"><i class="smithfont smith-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" href="javascript:void(0);" id="menu-commentBarrage"><i class="smithfont smith-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" href="javascript:void(0);" id="menu-darkmode"><i class="smithfont smith-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" href="javascript:void(0);" id="menu-translate"><i class="smithfont smith-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn1.tianli0.top/npm/js-heo@1.0.6/translate/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@6.1.6/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@17.3.1/dist/lazyload.iife.min.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.js"></script><script>var meting_api = "https://api.injahow.cn/meting/?server=:server&type=:type&id=:id&auth=:auth&r=:r";
+</script><canvas id="universe"></canvas><script async="" src="https://npm.elemecdn.com/smith-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("07/01/2022 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用史先森!`,
+    `生活明朗, 万物可爱`,
+    `
+
+      ███████╗███╗   ███╗██╗████████╗██╗  ██╗
+      ██╔════╝████╗ ████║██║╚══██╔══╝██║  ██║
+      ███████╗██╔████╔██║██║   ██║   ███████║
+      ╚════██║██║╚██╔╝██║██║   ██║   ██╔══██║
+      ███████║██║ ╚═╝ ██║██║   ██║   ██║  ██║
+      ╚══════╝╚═╝     ╚═╝╚═╝   ╚═╝   ╚═╝  ╚═╝
+
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2022 By 史先森 V1.0.0",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/smith-blog@1.0.0/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 史先森 %c 你正在访问 Smith 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async="" src="/smith/random.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"><input id="page-type" name="page-type" type="hidden" value="post"/></div><script async="" data-pjax="" src="https://npm.elemecdn.com/smith-theme-static@1.0.0/bubble/bubble.js"></script><script>var visitorMail = "visitor@smithhs.cn";
+</script><script async="" data-pjax="" src="https://cdn.jsdelivr.net/npm/waterfall.js@1.1.0/dist/waterfall.min.js"></script><script src="https://cdn.cbd.int/qrcodejs@1.0.0/qrcode.min.js"></script><script src="/js/smith/right_click_menu.js"></script><link href="https://cdn.cbd.int/smith-theme-static@1.0.2/icon/ali_iconfont_css.css" rel="stylesheet"/><script color="0,0,255" count="99" defer="defer" id="canvas_nest" mobile="false" opacity="0.7" src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/dist/canvas-nest.min.js" zindex="-1"></script><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = false;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><link href="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.css" media="print" onload="this.media='all'" rel="stylesheet"/><script src="https://cdn.jsdelivr.net/npm/aplayer@1.10.1/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/meting@2.0.1/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script><script>AOS.init({
+  duration: 800,
+  easing: 'ease-out-cubic',
+  once: true,
+  offset: 50
+});
+</script><script src="https://lib.baomitu.com/pjax/0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll
+  smith.removeGlobalFnEvent('pjax')
+  smith.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async="" data-pjax="" src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script charset="UTF-8" src="https://cdn.cbd.int/smith-theme-static@1.0.2/accesskey/accesskey.js"></script><div id="live2d-container"><canvas id="live2d-canvas"></canvas><button class="live2d-toggle" title="切换看板娘">🎭</button></div><script data-pjax="" src="/js/smith/live2d.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="smithfont smith-icon-arrow-circle-right"></i></div></div></div></body></html>

@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="560" viewBox="0 0 1120 560">
+  <defs>
+    <style>
+      .title{font-family:Arial,'Microsoft YaHei',sans-serif;font-size:30px;font-weight:700;fill:#222}
+      .subtitle{font-family:Arial,'Microsoft YaHei',sans-serif;font-size:16px;fill:#59636f}
+      .text{font-family:Arial,'Microsoft YaHei',sans-serif;font-size:19px;fill:#2f3742}
+      .small{font-family:Arial,'Microsoft YaHei',sans-serif;font-size:15px;fill:#59636f}
+      .box{fill:#fff;stroke:#ccd5e0;stroke-width:2;rx:10}
+      .blue{fill:#eef6ff;stroke:#4d92d9}
+      .green{fill:#f4fbf3;stroke:#62a765}
+      .orange{fill:#fff7ea;stroke:#df9b3f}
+      .purple{fill:#f7f5ff;stroke:#7a68d8}
+      .gray{fill:#f7f9fb;stroke:#b8c2cc}
+      .arrow{stroke:#53616f;stroke-width:2.5;fill:none;marker-end:url(#arrow)}
+      .return{stroke:#7a68d8;stroke-width:2.5;fill:none;marker-end:url(#arrowPurple)}
+      .note{fill:#fff;stroke:#d8dee6;stroke-width:1.5;rx:8}
+    </style>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#53616f"/>
+    </marker>
+    <marker id="arrowPurple" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#7a68d8"/>
+    </marker>
+  </defs>
+  <rect width="1120" height="560" fill="#fbfcfe"/>
+  <text x="48" y="58" class="title">stdio 模式下的 MCP Demo 调用链路</text>
+  <text x="48" y="90" class="subtitle">运行客户端时，客户端会启动服务端进程，然后通过标准输入输出发送 MCP 请求。</text>
+
+  <rect x="70" y="170" width="230" height="105" class="box blue"/>
+  <text x="116" y="210" class="text" font-weight="700">05_stdio_client.py</text>
+  <text x="105" y="240" class="small">负责启动服务端并发请求</text>
+
+  <rect x="445" y="170" width="230" height="105" class="box green"/>
+  <text x="492" y="210" class="text" font-weight="700">04_full_server.py</text>
+  <text x="493" y="240" class="small">运行 FastMCP 服务</text>
+
+  <rect x="820" y="112" width="230" height="84" class="box orange"/>
+  <text x="889" y="146" class="text" font-weight="700">Tools</text>
+  <text x="864" y="173" class="small">query_course / get_time</text>
+
+  <rect x="820" y="238" width="230" height="84" class="box purple"/>
+  <text x="868" y="272" class="text" font-weight="700">Resources</text>
+  <text x="862" y="299" class="small">yanque://course/mcp</text>
+
+  <rect x="820" y="364" width="230" height="84" class="box gray"/>
+  <text x="884" y="398" class="text" font-weight="700">Prompts</text>
+  <text x="861" y="425" class="small">course_study_plan</text>
+
+  <path d="M300 205 L445 205" class="arrow"/>
+  <text x="326" y="190" class="small">启动进程</text>
+  <path d="M300 242 L445 242" class="arrow"/>
+  <text x="327" y="267" class="small">发送 MCP 请求</text>
+
+  <path d="M675 207 C730 207 748 154 820 154" class="arrow"/>
+  <path d="M675 242 C730 242 748 280 820 280" class="arrow"/>
+  <path d="M675 260 C730 260 748 406 820 406" class="arrow"/>
+
+  <path d="M445 330 C365 390 230 390 185 275" class="return"/>
+  <text x="304" y="396" class="small">返回工具结果、资源内容或提示词</text>
+
+  <rect x="120" y="455" width="880" height="48" class="note"/>
+  <text x="142" y="485" class="small">单独运行服务端通常不会显示网址，因为 stdio 服务是在等待 MCP 客户端通过输入输出通道和它对话。</text>
+</svg>
